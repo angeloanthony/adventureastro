@@ -1,0 +1,637 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const headHtml = `
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ================================================
+       TITLE TAG — 57 chars
+       ================================================ -->
+  <title>FAQ | UTV Tours in Vernal Utah | Adventure Tours Vernal</title>
+
+  <!-- ================================================
+       META DESCRIPTION — 156 chars
+       ================================================ -->
+  <meta name="description" content="Answers to common questions about guided UTV tours in Vernal, Utah. Age requirements, pricing, what to bring, weather policy, and more. Call (435) 219-9447.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="FAQ — Adventure Tours Vernal | Guided UTV Tours in Utah">
+  <meta property="og:description" content="Everything you need to know before your guided Kawasaki KRX 1000 UTV tour in Vernal, Utah. Age limits, pricing, what to bring, and more.">
+  <meta property="og:image" content="https://adventuretoursvernal.com/images/logo.webp">
+  <meta property="og:url" content="https://adventuretoursvernal.com/faq.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Adventure Tours Vernal">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FAQ — Adventure Tours Vernal | Guided UTV Tours in Utah">
+  <meta name="twitter:image" content="https://adventuretoursvernal.com/images/logo.webp">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://adventuretoursvernal.com/faq.html">
+
+  <!-- ================================================
+       FAQPAGE SCHEMA — 15 questions
+       Fixed: business name (with S), domain (with S)
+       ================================================ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I bring my own ATV machine on tours?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! Bringing your own machine allows more catered and even extreme rides. Adventure Tours Vernal provides walkie talkies and offers easier alternatives on hardcore trail sections. Please call or email to explain the type of riding you want to do. Safety is priority number 1, followed closely by enjoyment."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I bring a group for ATV tours in Vernal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely! Adventure Tours Vernal welcomes group tours of all sizes. Contact us to discuss your group needs including additional sights, restaurants, hotel accommodations, bars, nightlife, and kid-friendly activities in the Uintah Basin. Call (435) 219-9447."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What about weather on ATV tours?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal operates sunshine or rain. However, in cases of extreme weather or unforeseen circumstances, you will have the option to reschedule or receive a full refund."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I bring on an ATV tour in Vernal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Bring sunglasses, a hat, a camera, a jacket, and closed-toe shoes. Dress in layers as temperature can fluctuate. Adventure Tours Vernal provides complimentary water and a small snack, plus helmets and safety equipment. Sunscreen, bug spray, and chapstick are recommended."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When should I arrive for my ATV tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Arrive 30 minutes prior to your departure time for all tours. We will not depart until all safety training is complete. If you are not there when orientation begins, you may lose your spot on the tour, which is non-refundable."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How old do I have to be for ATV tours?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "To drive Adventure Tours Vernal's machines, you need to be at least 18 years of age. To ride as a passenger, you need to be at least 2 years of age."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the cancellation policy for ATV tours?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal has a detailed cancellation policy. Visit the cancellation policy page on adventuretoursvernal.com or call (435) 219-9447 for full details on cancellations and deposits."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much do ATV tours cost in Vernal Utah?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "ATV tour prices in Vernal vary by duration and difficulty. Adventure Tours Vernal offers three guided Kawasaki KRX 1000 tours: Scenic Half-Day (4 hours, beginner-friendly), Dinosaur Country Full-Day (8 hours, moderate), and Backcountry Extreme (6 hours, advanced). Call (435) 219-9447 for current pricing and availability."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need experience to ride an ATV in Vernal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No ATV experience is required for tours in Vernal. Adventure Tours Vernal welcomes complete beginners and provides full safety training before every tour. Experienced guides walk you through operating the Kawasaki KRX 1000 side-by-sides step-by-step. All skill levels are welcome."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you visit Dinosaur National Monument on an ATV tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Adventure Tours Vernal's Dinosaur Country Full-Day tour explores areas near Dinosaur National Monument, including fossil beds and ancient rock formations. The 8-hour moderate difficulty tour showcases the prehistoric landscapes where dinosaurs once roamed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best ATV tour company in Vernal Utah?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal is the only guided Kawasaki KRX 1000 tour company in Vernal, Utah. We offer exclusive access to hidden trails, petroglyphs, Butch Cassidy hideouts, and scenic arches. Expert local guides, professional safety equipment, and all skill levels welcome. Open daily 7am-7pm. Call (435) 219-9447."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long are ATV tours in Vernal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal offers three tour lengths: Scenic Half-Day is 4 hours (perfect for families and beginners), Dinosaur Country Full-Day is 8 hours (moderate adventure through fossil beds), and Backcountry Extreme is 6 hours (challenging terrain for thrill-seekers)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are ATV tours in Vernal family friendly?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, the Scenic Half-Day tour is perfect for families with children. It features easy trails, gentle terrain, stunning desert vistas, and photo opportunities. The 4-seater Kawasaki KRX 1000 side-by-sides accommodate families together. No experience needed - full safety training provided."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the hours for Adventure Tours Vernal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal is open daily from 7:00 AM to 7:00 PM Mountain Time, 7 days a week. Call (435) 219-9447 to book your ATV tour or visit adventuretoursvernal.com."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What tours does Adventure Tours Vernal offer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal offers three guided Kawasaki KRX 1000 tours in Vernal, Utah: Scenic Half-Day (4 hours, easy, family-friendly), Dinosaur Country Full-Day (8 hours, moderate difficulty through fossil beds), and Backcountry Extreme (6 hours, advanced terrain). All tours include safety equipment and training."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="images/logo2.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link rel="icon" type="image/webp" href="images/logo1.webp">
+`;
+const bodyHtml = `<body class="faq-page-body">
+
+
+<!-- Navigation -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="logo">
+      <img src="images/logo.webp" alt="Adventure Tours Vernal">
+    </a>
+    <ul class="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="trails.html">Trails</a></li>
+      <li class="nav-dropdown">
+        <a href="#" class="dropdown-toggle">Information ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="cancellation-policy.html">Cancellation Policy</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="faq.html" class="active">FAQ</a></li>
+          <li><a href="safety-guidelines.html">Safety Guidelines</a></li>
+          <li><a href="what-to-bring.html">What to Bring</a></li>
+        </ul>
+      </li>
+      <li><a href="tel:435-219-9447" class="nav-phone">📞 (435) 219-9447</a></li>
+      <li><a href="booking.html" class="nav-book-btn">Book Now</a></li>
+    </ul>
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ================================================
+     PAGE SUMMARY BLOCK — feeds Google AI Overviews
+     ================================================ -->
+<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+  Adventure Tours Vernal answers frequently asked questions about guided UTV tours in Vernal, Utah. Topics include pricing, age requirements, what to bring, weather policy, group tours, and tour options. Open daily 7am–7pm. Call (435) 219-9447.
+</p>
+
+<section id="faq" class="faq-section">
+  <div class="faq-watermark">INTEL</div>
+
+  <div class="container">
+    <div class="section-header">
+      <span class="status-badge">MISSION PREP</span>
+      <!-- ================================================
+           H1 — Added. Page had no H1 at all.
+           Original H2 "Frequently Asked Questions" kept
+           as H2 below for content hierarchy.
+           ================================================ -->
+      <h1 class="section-title" style="font-size:clamp(1.8rem,3.5vw,2.8rem);">UTV Tour FAQ — Adventure Tours Vernal</h1>
+      <p class="section-subtitle">Gear up with the facts before you head into the Utah backcountry.</p>
+    </div>
+
+    <!-- ================================================
+         ALL 15 FAQ ITEMS inside faq-container.
+         Items 8-15 were previously outside this div
+         which caused a structural/rendering bug.
+         ================================================ -->
+    <div class="faq-container">
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq1" class="faq-toggle">
+        <label for="faq1" class="faq-question">
+          <span class="faq-index">01</span> CAN I BRING MY OWN MACHINE?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p><strong>You better believe it!</strong> Bringing your own machine allows more catered and even extreme rides. Online scheduling is coming soon. For now, please call or email us to explain more about the type of riding you want to do.</p>
+            <p>We provide Walkie Talkies and do our best to make sure everyone is having a blast (while staying comfortable.) On the more "hardcore" sections of a trail, we are happy to offer easier alternatives. We pride ourselves on knowing these areas extremely well and the numerous ways to enjoy them!</p>
+            <p>Please communicate freely with your tour guide. If you do not feel comfortable navigating a certain part of the trail, please say so! Safety is priority number 1, followed closely by enjoyment.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq2" class="faq-toggle">
+        <label for="faq2" class="faq-question">
+          <span class="faq-index">02</span> CAN I BRING A GROUP?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Absolutely! Please contact us for your group tours. Let us know how big your group is and what you would like to see. We have many options and can discuss your needs for the group such as additional sights to stop and see, restaurants and hotel accommodations, bars, nightlife, kid-friendly activities, etc. We'd love to be a part of your group activities while you visit the beautiful Uintah Basin.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq3" class="faq-toggle">
+        <label for="faq3" class="faq-question">
+          <span class="faq-index">03</span> WHAT ABOUT THE WEATHER?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>We operate sunshine or rain. However, in cases of extreme weather or in the event that we must cancel for other unforeseen circumstances, you will have the option to reschedule or receive a full refund.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq4" class="faq-toggle">
+        <label for="faq4" class="faq-question">
+          <span class="faq-index">04</span> WHAT SHOULD I BRING?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>We will be outside for hours, please use good discretion. We do our best to keep emergency toilet paper and other essentials on hand for every tour. Nevertheless, if you think you might need it, best to bring it! Sunscreen, bugspray, and chapstick are never a bad idea.</p>
+            <p>We suggest you bring <strong>sunglasses, a hat, a camera, a jacket, and closed-toe shoes.</strong> These are not required (but better to have it and not need it, right?) You may also wish to dress in layers as the temperature can fluctuate. We provide complimentary water and a small snack. If you have any allergies we recommend you bring something specific to your dietary restrictions. There is only so much room on the back of a side-by-side, so if you aren't sure what to pack, just ask!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq5" class="faq-toggle">
+        <label for="faq5" class="faq-question">
+          <span class="faq-index">05</span> WHEN SHOULD I GET TO THE MEETING SPOT?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>For all tours please arrive <strong>30 minutes prior</strong> to your departure time. The tour reservation time is the actual departure time. We will not depart until all safety training is complete and you are familiar with your vehicle. Prior to departure, we will go over all orientation and safety measures such as waivers, gear selection, etc.</p>
+            <p>After completing your reservation, you will receive an email confirmation containing important information about your selected tour. Please follow and read carefully. If you are not here with all business complete and gear selected when orientation begins, you may lose your spot on the tour, which is non-refundable. Like catching a school bus... if you're not there at the allotted time, you will get left behind!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq6" class="faq-toggle">
+        <label for="faq6" class="faq-question">
+          <span class="faq-index">06</span> HOW OLD DO I HAVE TO BE?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>To drive our machines, you need to be at least <strong>18 years of age.</strong> To ride in our machines, you need to be at least <strong>2 years of age.</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq7" class="faq-toggle">
+        <label for="faq7" class="faq-question">
+          <span class="faq-index">07</span> CANCELLATION AND DEPOSITS?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Click <a href="cancellation-policy.html" class="faq-link">HERE</a> for the full cancellation policy.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq8" class="faq-toggle">
+        <label for="faq8" class="faq-question">
+          <span class="faq-index">08</span> HOW MUCH DO ATV TOURS COST?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>ATV tour prices in Vernal vary by duration and difficulty. We offer three guided Kawasaki KRX 1000 tours:</p>
+            <ul>
+              <li><strong>Scenic Half-Day:</strong> 4 hours, beginner-friendly</li>
+              <li><strong>Dinosaur Country Full-Day:</strong> 8 hours, moderate difficulty</li>
+              <li><strong>Backcountry Extreme:</strong> 6 hours, advanced terrain</li>
+            </ul>
+            <p><strong>Call <a href="tel:435-219-9447" class="faq-link">(435) 219-9447</a> for current pricing and availability.</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq9" class="faq-toggle">
+        <label for="faq9" class="faq-question">
+          <span class="faq-index">09</span> DO I NEED ATV EXPERIENCE?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p><strong>No ATV experience is required!</strong> Adventure Tours Vernal welcomes complete beginners and provides full safety training before every tour.</p>
+            <p>Our experienced guides walk you through operating the Kawasaki KRX 1000 side-by-sides step-by-step. We welcome all skill levels - from first-timers to experienced riders.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq10" class="faq-toggle">
+        <label for="faq10" class="faq-question">
+          <span class="faq-index">10</span> CAN WE VISIT DINOSAUR NATIONAL MONUMENT?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p><strong>Yes!</strong> Our <strong>Dinosaur Country Full-Day</strong> tour explores areas near Dinosaur National Monument, including fossil beds and ancient rock formations.</p>
+            <p>The 8-hour moderate difficulty tour showcases the prehistoric landscapes where dinosaurs once roamed. It's an incredible way to experience the area's rich paleontological history from the backcountry.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq11" class="faq-toggle">
+        <label for="faq11" class="faq-question">
+          <span class="faq-index">11</span> WHY CHOOSE ADVENTURE TOURS VERNAL?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Adventure Tours Vernal is the <strong>only guided Kawasaki KRX 1000 tour company in Vernal, Utah.</strong> We offer exclusive access to:</p>
+            <ul>
+              <li>Hidden trails known only to locals</li>
+              <li>Ancient petroglyphs and rock art</li>
+              <li>Butch Cassidy hideouts</li>
+              <li>Scenic arches and formations</li>
+            </ul>
+            <p>Expert local guides, professional safety equipment, and all skill levels welcome. <strong>Open daily 7am–7pm.</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq12" class="faq-toggle">
+        <label for="faq12" class="faq-question">
+          <span class="faq-index">12</span> HOW LONG ARE YOUR TOURS?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>We offer three different tour lengths to match your schedule and experience level:</p>
+            <ul>
+              <li><strong>Scenic Half-Day:</strong> 4 hours (perfect for families and beginners)</li>
+              <li><strong>Dinosaur Country Full-Day:</strong> 8 hours (moderate adventure through fossil beds)</li>
+              <li><strong>Backcountry Extreme:</strong> 6 hours (challenging terrain for thrill-seekers)</li>
+            </ul>
+            <p>All tours include safety equipment, training, water, and snacks.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq13" class="faq-toggle">
+        <label for="faq13" class="faq-question">
+          <span class="faq-index">13</span> ARE YOUR TOURS FAMILY-FRIENDLY?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p><strong>Absolutely!</strong> Our Scenic Half-Day tour is perfect for families with children. It features:</p>
+            <ul>
+              <li>Easy trails with gentle terrain</li>
+              <li>Stunning desert vistas</li>
+              <li>Photo opportunities</li>
+              <li>4-seater side-by-sides so families ride together</li>
+            </ul>
+            <p>No experience needed — full safety training provided. Kids must be at least 2 years old to ride as passengers.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq14" class="faq-toggle">
+        <label for="faq14" class="faq-question">
+          <span class="faq-index">14</span> WHAT ARE YOUR HOURS?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Adventure Tours Vernal is <strong>open daily from 7:00 AM to 7:00 PM</strong> Mountain Time, 7 days a week.</p>
+            <p><strong>Call <a href="tel:435-219-9447" class="faq-link">(435) 219-9447</a></strong> to book your ATV tour or visit <a href="https://adventuretoursvernal.com" class="faq-link">adventuretoursvernal.com</a>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq15" class="faq-toggle">
+        <label for="faq15" class="faq-question">
+          <span class="faq-index">15</span> WHAT TOUR OPTIONS DO YOU OFFER?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Adventure Tours Vernal offers three guided Kawasaki KRX 1000 tours:</p>
+            <ul>
+              <li><strong>Scenic Half-Day (4 hours):</strong> Easy, family-friendly desert trails with stunning vistas</li>
+              <li><strong>Dinosaur Country Full-Day (8 hours):</strong> Moderate difficulty through fossil beds near Dinosaur National Monument</li>
+              <li><strong>Backcountry Extreme (6 hours):</strong> Advanced terrain for experienced riders seeking a challenge</li>
+            </ul>
+            <p>All tours include Kawasaki KRX 1000 side-by-sides, safety equipment, training, water, and snacks.</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end .faq-container -->
+  </div>
+</section>
+
+<!-- Footer — NAP matches schema exactly -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-section">
+      <div class="footer-logo">
+        <img src="images/logo.webp" alt="Adventure Tours Vernal">
+      </div>
+      <p>Experience the adventure of a lifetime in Utah's dinosaur country.</p>
+      <div class="social-links">
+        <a href="#" class="social-link" aria-label="Facebook">📘</a>
+        <a href="#" class="social-link" aria-label="Instagram">📷</a>
+        <a href="#" class="social-link" aria-label="YouTube">🎥</a>
+      </div>
+    </div>
+    <div class="footer-section">
+      <h3>Quick Links</h3>
+      <ul class="footer-links">
+        <li><a href="index.html#tours">Our Tours</a></li>
+        <li><a href="index.html#vehicles">Our Fleet</a></li>
+        <li><a href="index.html#gallery">Photo Gallery</a></li>
+        <li><a href="booking.html">Book Now</a></li>
+      </ul>
+    </div>
+    <!-- NAP — matches schema exactly -->
+    <div class="footer-section">
+      <h4>Contact Info</h4>
+      <p>📍 1935 S 1500 E, Vernal, Utah 84078</p>
+      <p class="footer-phone-highlight">
+        <a href="tel:435-219-9447" class="footer-phone-link">
+          📞 (435) 219-9447
+        </a>
+      </p>
+      <p>✉️ info@adventuretoursvernal.com</p>
+      <p>⏰ Open Daily 7am – 7pm</p>
+    </div>
+    <div class="footer-section">
+      <h4>Information</h4>
+      <ul class="footer-links">
+        <li><a href="cancellation-policy.html">Cancellation Policy</a></li>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="safety-guidelines.html">Safety Guidelines</a></li>
+        <li><a href="what-to-bring.html">What to Bring</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; <a href="https://cozelosdata.com" target="_blank">cozelosdata.com</a> - All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Mobile Sticky CTA -->
+<div class="mobile-sticky-cta">
+  <button onclick="location.href='booking.html'">Book Your Ride Now</button>
+</div>
+
+<script is:inline>
+document.addEventListener('DOMContentLoaded', function() {
+
+  // Auto-close other FAQs when one opens
+  const faqToggles = document.querySelectorAll('.faq-toggle');
+  faqToggles.forEach(toggle => {
+    toggle.addEventListener('change', function() {
+      if (this.checked) {
+        faqToggles.forEach(otherToggle => {
+          if (otherToggle !== this && otherToggle.checked) {
+            otherToggle.checked = false;
+          }
+        });
+        setTimeout(() => {
+          this.parentElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 300);
+      }
+    });
+  });
+
+  // Keyboard navigation
+  const faqQuestions = document.querySelectorAll('.faq-question');
+  faqQuestions.forEach((question, index) => {
+    question.setAttribute('tabindex', '0');
+    question.setAttribute('role', 'button');
+    question.setAttribute('aria-expanded', 'false');
+    question.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const checkbox = this.previousElementSibling;
+        checkbox.checked = !checkbox.checked;
+        this.setAttribute('aria-expanded', checkbox.checked);
+        checkbox.dispatchEvent(new Event('change'));
+      }
+      if (e.key === 'ArrowDown') { e.preventDefault(); if (faqQuestions[index + 1]) faqQuestions[index + 1].focus(); }
+      if (e.key === 'ArrowUp') { e.preventDefault(); if (faqQuestions[index - 1]) faqQuestions[index - 1].focus(); }
+    });
+    question.addEventListener('click', function() {
+      const checkbox = this.previousElementSibling;
+      setTimeout(() => { this.setAttribute('aria-expanded', checkbox.checked); }, 10);
+    });
+  });
+
+  // URL hash linking
+  if (window.location.hash) {
+    const targetId = window.location.hash.substring(1);
+    const targetCheckbox = document.getElementById(targetId);
+    if (targetCheckbox && targetCheckbox.classList.contains('faq-toggle')) {
+      targetCheckbox.checked = true;
+      setTimeout(() => {
+        targetCheckbox.parentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 500);
+    }
+  }
+
+  // Smooth load animation
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach((item, index) => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+      item.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+      item.style.opacity = '1';
+      item.style.transform = 'translateY(0)';
+    }, 100 * index);
+  });
+});
+
+// Mobile menu toggle
+document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+  const navMenu = document.querySelector('.nav-menu');
+  if (navMenu.style.display === 'flex') {
+    navMenu.style.display = 'none';
+  } else {
+    navMenu.style.display = 'flex';
+    navMenu.style.flexDirection = 'column';
+    navMenu.style.position = 'absolute';
+    navMenu.style.top = '100%';
+    navMenu.style.left = '0';
+    navMenu.style.right = '0';
+    navMenu.style.background = 'var(--off-white)';
+    navMenu.style.padding = '20px';
+    navMenu.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+  }
+});
+
+// Navbar shadow on scroll
+window.addEventListener('scroll', () => {
+  const navbar = document.querySelector('.navbar');
+  if (window.pageYOffset > 50) {
+    navbar.style.boxShadow = '0 6px 40px rgba(0, 0, 0, 0.12), 0 2px 10px rgba(212, 118, 78, 0.08)';
+    navbar.style.borderBottomColor = 'rgba(212, 118, 78, 0.15)';
+  } else {
+    navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.08), 0 2px 10px rgba(212, 118, 78, 0.05)';
+    navbar.style.borderBottomColor = 'transparent';
+  }
+});
+
+// Mobile dropdown toggle
+document.addEventListener('DOMContentLoaded', function() {
+  const dropdownToggle = document.querySelector('.dropdown-toggle');
+  const navDropdown = document.querySelector('.nav-dropdown');
+  if (dropdownToggle && navDropdown) {
+    dropdownToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (window.innerWidth <= 768) navDropdown.classList.toggle('active');
+    });
+    document.addEventListener('click', function(e) {
+      if (window.innerWidth <= 768 && !navDropdown.contains(e.target)) navDropdown.classList.remove('active');
+    });
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768) navDropdown.classList.remove('active');
+    });
+  }
+});
+</script>
+
+
+</body>`;
+---
+<BaseLayout>
+  <Fragment slot="head" set:html={headHtml} />
+  <Fragment slot="body" set:html={bodyHtml} />
+</BaseLayout>

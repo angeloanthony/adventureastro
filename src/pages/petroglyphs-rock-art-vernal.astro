@@ -1,0 +1,315 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const headHtml = `
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Petroglyphs & Rock Art Sites Near Vernal, Utah | Adventure Tours Vernal</title>
+
+  <meta name="description" content="Discover ancient petroglyphs, rock art, and ruins near Vernal, Utah. Explore thousand-year-old Fremont and Ute sites on guided UTV tours through the Uintah Basin.">
+
+  <meta property="og:title" content="Petroglyphs & Rock Art Sites Near Vernal, Utah">
+  <meta property="og:description" content="Explore ancient petroglyphs, Fremont rock art, and ruins across the Uintah Basin on guided UTV tours with Adventure Tours Vernal.">
+  <meta property="og:image" content="https://adventuretoursvernal.com/images/20.webp">
+  <meta property="og:url" content="https://adventuretoursvernal.com/petroglyphs-rock-art-vernal.html">
+  <meta property="og:type" content="article">
+
+  <link rel="canonical" href="https://adventuretoursvernal.com/petroglyphs-rock-art-vernal.html">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Petroglyphs and Rock Art Sites Near Vernal, Utah",
+    "description": "A guide to ancient petroglyphs, Fremont rock art panels, and archaeological ruins accessible on guided UTV tours near Vernal, Utah.",
+    "author": {
+      "@type": "Organization",
+      "name": "Adventure Tours Vernal",
+      "url": "https://adventuretoursvernal.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Adventure Tours Vernal",
+      "logo": { "@type": "ImageObject", "url": "https://adventuretoursvernal.com/images/logo.webp" }
+    },
+    "datePublished": "2026-03-27",
+    "dateModified": "2026-03-27",
+    "mainEntityOfPage": "https://adventuretoursvernal.com/petroglyphs-rock-art-vernal.html"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where can I see petroglyphs near Vernal, Utah?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Uintah Basin surrounding Vernal has dozens of petroglyph and rock art sites. Major concentrations are found along the cliffs near Dry Fork Canyon, within Dinosaur National Monument, and throughout the backcountry trails accessible by UTV. Adventure Tours Vernal guides visitors to remote panels not found in most guidebooks."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How old are the petroglyphs near Vernal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most petroglyphs in the Vernal area date from roughly 1,000 to 4,000 years old. The Fremont culture, which flourished in the region from approximately 200 AD to 1300 AD, created the majority of the panels. Some images may be even older, created by Archaic period peoples who inhabited the basin before the Fremont."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I see petroglyphs on a UTV tour from Adventure Tours Vernal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Several of Adventure Tours Vernal's guided UTV trail tours pass through areas with petroglyphs, rock art, and ancient ruins. Dave and Trudy Wilson, your local guides, know the locations of remote panels that most visitors never see. Tours are $299 per machine for a 3-hour guided ride. Call (435) 219-9447 to book."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it legal to touch or take rubbings of petroglyphs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Federal law under the Archaeological Resources Protection Act prohibits touching, defacing, or removing petroglyphs and archaeological artifacts. Oils from skin contact accelerate deterioration. The best way to preserve these sites is to photograph from a respectful distance and never touch the rock surface."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="style-articles.css?v=1">
+  <link rel="icon" href="images/logo2.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link rel="icon" type="image/webp" href="images/logo1.webp">
+`;
+const bodyHtml = `<body>
+
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="images/logo.webp" alt="Adventure Tours Vernal Logo">
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="trails.html">Trails</a></li>
+        <li class="nav-dropdown">
+          <a href="#" class="dropdown-toggle">Info ▾</a>
+          <ul class="dropdown-menu">
+            <li><a href="cancellation-policy.html">Cancellation Policy</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="safety-guidelines.html">Safety Guidelines</a></li>
+            <li><a href="what-to-bring.html">What to Bring</a></li>
+          </ul>
+        </li>
+        <li><a href="tel:435-219-9447" class="nav-phone">📞 (435) 219-9447</a></li>
+        <li><a href="booking.html" class="nav-book-btn">Book Now</a></li>
+      </ul>
+      <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- AI Summary Block -->
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    This guide covers petroglyphs, rock art, and ancient ruins near Vernal, Utah. The Uintah Basin contains one of the highest concentrations of Fremont culture rock art in the American West. Adventure Tours Vernal offers guided Kawasaki KRX 1000 UTV tours that visit remote petroglyph sites inaccessible by car. Tours are $299 per machine for 3 hours. Call (435) 219-9447. Open daily 7am–7pm.
+  </p>
+
+  <!-- Article Content -->
+  <main class="article-page">
+
+    <header class="article-header">
+      <nav class="article-breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep">›</span>
+        <a href="trails.html">Trails</a>
+        <span class="sep">›</span>
+        <span>Petroglyphs &amp; Rock Art</span>
+      </nav>
+      <h1 class="article-title">Petroglyphs &amp; Rock Art Sites Near Vernal, Utah</h1>
+      <p class="article-meta">Updated March 2026 · By Adventure Tours Vernal</p>
+    </header>
+
+    <article class="article-body">
+
+      <div class="article-summary-box">
+        <strong>Quick Summary:</strong> The Uintah Basin surrounding Vernal, Utah holds one of the densest concentrations of prehistoric rock art in the American West. Fremont and Ute petroglyphs, pictographs, and ancient ruins are scattered across canyon walls and ridgelines throughout the region — many accessible only by off-road vehicle.
+      </div>
+
+      <h2>Why Vernal Is a Rock Art Destination</h2>
+
+      <p>Most visitors come to Vernal for Dinosaur National Monument — and they should. But the region's human history is just as remarkable. The Uintah Basin was continuously inhabited for thousands of years by Archaic hunter-gatherers, the Fremont culture, and later the Ute people. Each group left behind images carved and painted into the sandstone cliffs that line the canyons and ridges surrounding Vernal.</p>
+
+      <p>Unlike the heavily trafficked petroglyph sites in southern Utah, many of the rock art panels near Vernal sit on remote backcountry trails. They are not behind ropes or guardrails. You encounter them the way they were meant to be encountered — in the landscape, in context, surrounded by the same desert silence that existed when they were created.</p>
+
+      <h2>The Fremont Culture: Who Made the Rock Art?</h2>
+
+      <p>The Fremont people lived throughout what is now Utah from roughly 200 AD to 1300 AD. They were farmers, hunters, and artists who built granaries in cliff alcoves and carved elaborate panels into canyon walls. Their art is distinctive: broad-shouldered human figures, often wearing elaborate headdresses and necklaces, alongside bighorn sheep, elk, snakes, and abstract geometric designs.</p>
+
+      <p>In the Vernal area, Fremont rock art ranges from small isolated figures to sprawling panels with dozens of images. Some of the largest and most complex panels in the entire Fremont range are found within a short drive — or a guided UTV ride — from downtown Vernal.</p>
+
+      <p>The Ute people, who have lived in the Uintah Basin for centuries and whose reservation borders Vernal, also created rock art in the region. Ute panels often include mounted horsemen, reflecting their post-contact way of life, and are sometimes found near or overlapping older Fremont images.</p>
+
+      <h2>What You Will See on the Trails</h2>
+
+      <p>Several of <a href="index.html">Adventure Tours Vernal's guided UTV trail tours</a> pass through areas with petroglyphs, rock art, and structural ruins. Dave and Trudy Wilson — your local guides — know the locations of panels that most visitors never find on their own. These are not roadside pull-offs. They are remote backcountry sites reached by Kawasaki KRX 1000 side-by-side on trails that wind through the same canyons and ridges where the Fremont lived.</p>
+
+      <p>What you can expect to encounter on the trails includes petroglyphs (images pecked into rock surfaces), pictographs (images painted onto rock using mineral pigments), granary ruins tucked into cliff alcoves, and grinding stones used for processing seeds and grain. The specific sites you visit depend on the trail you choose and conditions on the day of your tour.</p>
+
+      <div class="article-tip">
+        <strong>Trail Tip:</strong> Ask Dave or Trudy about the rock art when you book. They can recommend which of the five trail systems — <a href="trails.html">Doc's Beach, Moonshine Arch, Ashley Gorge, Outlaw Trail, or Asphalt Ridge</a> — has the best petroglyph access on any given day.
+      </div>
+
+      <h2>Protecting What You Find</h2>
+
+      <p>Rock art is irreplaceable. The petroglyphs near Vernal have survived for centuries because the backcountry has kept them away from heavy foot traffic. As more people discover these sites, responsible behavior becomes essential.</p>
+
+      <p>Federal law under the Archaeological Resources Protection Act makes it illegal to touch, deface, or remove petroglyphs and archaeological artifacts from public land. Penalties include fines up to $100,000 and imprisonment. Beyond the legal consequences, even casual touching accelerates erosion — oils from skin break down the desert varnish that protects the carved surfaces.</p>
+
+      <p>The best practice is simple: photograph from a respectful distance, stay on established trails, and leave everything exactly as you found it. Your guided tour with Adventure Tours Vernal ensures you experience these sites responsibly, with a guide who knows how to approach without damaging the surroundings.</p>
+
+      <h2>Beyond Rock Art: Ruins and Archaeological Sites</h2>
+
+      <p>The Uintah Basin is not just rock art. The Fremont built semi-permanent settlements throughout the area. Structural ruins — including pit house depressions, storage granaries, and stone enclosures — are found across the backcountry. Some are visible from the trail; others require a short hike from where you park the UTV.</p>
+
+      <p>The region also preserves evidence of more recent history. The canyons around Vernal served as hideouts for Butch Cassidy and the Wild Bunch in the late 1800s. The <a href="index.html#tours">Outlaw Trail UTV tour</a> follows routes through terrain that was used as an escape corridor by outlaws moving between robbing banks in Telluride and disappearing into the remote canyon country of eastern Utah.</p>
+
+      <!-- FAQ Section -->
+      <div class="article-faq">
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+          <h3>Where can I see petroglyphs near Vernal, Utah?</h3>
+          <p>The Uintah Basin has dozens of petroglyph sites. Major concentrations are found along Dry Fork Canyon, within Dinosaur National Monument, and throughout backcountry trails accessible by UTV. Adventure Tours Vernal guides visitors to remote panels not found in most guidebooks.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>How old are the petroglyphs near Vernal?</h3>
+          <p>Most petroglyphs in the Vernal area date from roughly 1,000 to 4,000 years old. The Fremont culture created the majority of panels between 200 AD and 1300 AD. Some images may be older, made by Archaic period peoples who inhabited the basin before the Fremont.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Can I see petroglyphs on a UTV tour?</h3>
+          <p>Yes. Several of Adventure Tours Vernal's guided trail tours pass through areas with petroglyphs, rock art, and ruins. Tours use Kawasaki KRX 1000 side-by-sides and are $299 per machine for a 3-hour guided ride. Call <a href="tel:435-219-9447">(435) 219-9447</a> to book.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Is it legal to touch petroglyphs?</h3>
+          <p>No. Federal law prohibits touching, defacing, or removing petroglyphs and archaeological artifacts. Oils from skin contact accelerate deterioration. Photograph from a respectful distance and never touch the rock surface.</p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="article-cta">
+        <h3>See Ancient Rock Art Up Close</h3>
+        <p>Guided UTV tours through petroglyph sites and backcountry ruins. $299/machine, 3-hour tour, up to 2 riders.</p>
+        <a href="booking.html" class="cta-btn">📅 Book Your Tour</a>
+        <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447 · Open Daily 7am–7pm</a>
+      </div>
+
+    </article>
+
+    <!-- Related Articles -->
+    <div class="related-articles">
+      <h3>More Guides</h3>
+      <div class="related-grid">
+        <a href="best-utv-trails-vernal.html" class="related-card">
+          <h4>Best UTV Trails Near Vernal</h4>
+          <p>Five trail systems through Utah's Dinosaur Country landscape.</p>
+        </a>
+        <a href="what-to-wear-utv-tour.html" class="related-card">
+          <h4>What to Wear on a UTV Tour</h4>
+          <p>Desert clothing guide for comfort and safety on the trail.</p>
+        </a>
+        <a href="vernal-weather-guide.html" class="related-card">
+          <h4>Vernal Weather Guide</h4>
+          <p>Month-by-month conditions for planning your outdoor adventure.</p>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="footer-logo">
+          <img src="images/logo.webp" alt="Adventure Tours Vernal">
+        </div>
+        <p>Experience the adventure of a lifetime in Utah's dinosaur country.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Our Trails</h3>
+        <ul class="footer-links">
+          <li><a href="index.html#tours">Doc's Beach</a></li>
+          <li><a href="index.html#tours">Moonshine Arch</a></li>
+          <li><a href="index.html#tours">Ashley Gorge</a></li>
+          <li><a href="index.html#tours">Outlaw Trail</a></li>
+          <li><a href="index.html#tours">Asphalt Ridge</a></li>
+          <li><a href="booking.html" class="nav-book-btn">Book Now</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Info</h3>
+        <p>📍 1935 S 1500 E, Vernal, Utah 84078</p>
+        <p class="footer-phone-highlight">
+          <a href="tel:435-219-9447" class="footer-phone-link">📞 (435) 219-9447</a>
+        </p>
+        <p>✉️ info@adventuretoursvernal.com</p>
+        <p>⏰ Open Daily 7am – 7pm</p>
+      </div>
+      <div class="footer-section">
+        <h4>Information</h4>
+        <ul class="footer-links">
+          <li><a href="cancellation-policy.html">Cancellation Policy</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="safety-guidelines.html">Safety Guidelines</a></li>
+          <li><a href="what-to-bring.html">What to Bring</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <a href="https://cozelosdata.com" target="_blank">cozelosdata.com</a> - All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Mobile Sticky CTA -->
+  <div class="mobile-sticky-cta">
+    <button onclick="location.href='booking.html'">Book Your Ride Now</button>
+  </div>
+
+  <script is:inline>
+    document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+      const navMenu = document.querySelector('.nav-menu');
+      if (navMenu.style.display === 'flex') { navMenu.style.display = 'none'; }
+      else { navMenu.style.display = 'flex'; navMenu.style.flexDirection = 'column'; navMenu.style.position = 'absolute'; navMenu.style.top = '100%'; navMenu.style.left = '0'; navMenu.style.right = '0'; navMenu.style.background = 'var(--off-white)'; navMenu.style.padding = '20px'; navMenu.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)'; }
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+      const dropdownToggle = document.querySelector('.dropdown-toggle');
+      const navDropdown = document.querySelector('.nav-dropdown');
+      if (dropdownToggle && navDropdown) {
+        dropdownToggle.addEventListener('click', function(e) { e.preventDefault(); if (window.innerWidth <= 768) navDropdown.classList.toggle('active'); });
+        document.addEventListener('click', function(e) { if (window.innerWidth <= 768 && !navDropdown.contains(e.target)) navDropdown.classList.remove('active'); });
+      }
+    });
+  </script>
+
+
+</body>`;
+---
+<BaseLayout>
+  <Fragment slot="head" set:html={headHtml} />
+  <Fragment slot="body" set:html={bodyHtml} />
+</BaseLayout>

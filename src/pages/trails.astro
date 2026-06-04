@@ -1,0 +1,899 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const headHtml = `
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UTV Trail Tours in Vernal, Utah | Adventure Tours Vernal</title>
+  <meta name="description" content="Explore guided Kawasaki KRX 1000 UTV trail tours near Vernal, Utah — Doc's Beach, Moonshine Arch, Ashley Gorge, Outlaw Trail & Asphalt Ridge. Call (435) 219-9447.">
+  <meta property="og:title" content="UTV Trail Tours | Adventure Tours Vernal">
+  <meta property="og:description" content="Five guided UTV trail tours near Vernal, Utah. Eagles, petroglyphs, canyons, and breathtaking scenery. Call (435) 219-9447.">
+  <meta property="og:image" content="https://adventuretoursvernal.com/images/Docs Beach.webp">
+  <meta property="og:url" content="https://adventuretoursvernal.com/trails.html">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="bw-promo-badge.css?v=1">
+  <link rel="canonical" href="https://adventuretoursvernal.com/trails.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TouristAttraction",
+    "name": "UTV Trail Tours — Adventure Tours Vernal",
+    "description": "Guided UTV tours near Vernal, Utah. Trails include Doc's Beach, Moonshine Arch, Ashley Gorge, Outlaw Trail, and Asphalt Ridge. Petroglyphs, wildlife including golden eagles, bald eagles, deer, and cougar, and sweeping scenic overlooks.",
+    "url": "https://adventuretoursvernal.com/trails.html",
+    "image": "https://adventuretoursvernal.com/images/Docs Beach.webp",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Adventure Tours Vernal",
+      "telephone": "+1-435-219-9447",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1935 S 1500 E",
+        "addressLocality": "Vernal",
+        "addressRegion": "UT",
+        "postalCode": "84078",
+        "addressCountry": "US"
+      }
+    }
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=5">
+  <link rel="stylesheet" href="trail-styles-addition.css?v=1">
+  <link rel="icon" href="images/logo2.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link rel="icon" type="image/webp" href="images/logo1.webp">
+`;
+const bodyHtml = `<body>
+
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <img src="images/logo.webp" alt="Adventure Tours Vernal Logo">
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="trails.html" class="active">Trails</a></li>
+        <li><a href="best-restaurants-vernal-utah.html">Food</a></li>
+        <li class="nav-dropdown">
+          <a href="#" class="dropdown-toggle">Info ▾</a>
+          <ul class="dropdown-menu">
+            <li><a href="cancellation-policy.html">Cancellation Policy</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="safety-guidelines.html">Safety Guidelines</a></li>
+            <li><a href="what-to-bring.html">What to Bring</a></li>
+          </ul>
+        </li>
+        <li><a href="tel:435-219-9447" class="nav-phone">📞 (435) 219-9447</a></li>
+        <li><a href="booking.html" class="nav-book-btn">Book Now</a></li>
+      </ul>
+      <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="trail-hero">
+    <div class="trail-hero-video-bg">
+  <iframe
+  src="https://www.youtube.com/embed/YQVFzCTh4m4?autoplay=1&mute=1&loop=1&playlist=YQVFzCTh4m4&controls=0&showinfo=0&rel=0&playsinline=1"
+  frameborder="0"
+  allow="autoplay; encrypted-media"
+  allowfullscreen>
+</iframe>
+</div>
+    <div class="trail-hero-overlay"></div>
+    <div class="trail-hero-content">
+      <nav class="trail-breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span>&#8250;</span>
+        <span class="current">Trails</span>
+      </nav>
+      <div class="status-badge" style="animation:none;">Trail Guide</div>
+      <h1 class="trail-hero-title">Our Trails</h1>
+      <div class="trail-hero-meta">
+        <div class="trail-hero-meta-item"><span>&#128205;</span><span>Vernal, Utah</span></div>
+        <div class="trail-hero-meta-item"><span>&#128106;</span><span>All Ages Welcome</span></div>
+        <div class="trail-hero-meta-item"><span>&#129413;</span><span>Wildlife &amp; Petroglyphs</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="trail-main">
+
+      <!-- TIKTOK CAROUSEL -->
+    <div class="tiktok-section">
+      <h2>See the Trails in Action</h2>
+      <p>Real rides from Vernal's backcountry — no filter needed.</p>
+
+      <div class="tiktok-carousel">
+        <button class="tiktok-carousel-btn prev" aria-label="Previous video">&#8249;</button>
+
+        <div class="tiktok-carousel-track-wrap">
+          <div class="tiktok-carousel-track">
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7185054613253426474" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7380516843414359326" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7353152403803360554" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/74911750007417766866" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7498404279401581870" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7219334376604355886" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7410185650974018847" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7262956633473568046" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7419005103861959966" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7368826272526372138" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7488055149995314475" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7348204637280881962" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7485461558974532910" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7423812357752622366" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+             <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7491520116689997098" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7389039838684646687" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7435835009476463903" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7390893881992252703" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7408049400603266334" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7242700727741582635" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7260236547037891883" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7485616859979500842" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7374108427854810411" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7479740650850700587" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7476377900858592554" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7472942404199271723" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7482306418704518442" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7482192400266300715" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7482192400266300715" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7482979091331992878" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7464063798219902254" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7483313289296891178" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7386147008395939103" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7410460772746251551" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7186132362273541422" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7483552767252925738" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7408745551740685599" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7429731894083849502" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7236941835535469867" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7321074258157882667" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7508853654611430702" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7431250320195341599" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7386147008395939103" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7249205754807258411" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7229945334129118507" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7496329828065545518" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7500421013864303918" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7285430022477860142" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7256266149493542186" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7386147008395939103" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7242419583544626478" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7502299677119794475" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7253292707207204142" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7495555732029377838" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+             <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7423447067047103775" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7444063896576494891" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7461331371701701930" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7374411835463732523" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7248655946426387758" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7336070292407700778" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7321425937990454574" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7475765636602498350" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7577198304790842638" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7478234541216320811" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="tiktok-carousel-slide">
+              <div class="tiktok-portrait-frame">
+                <div class="tiktok-portrait-screen">
+                  <iframe src="https://www.tiktok.com/embed/v2/7580959908170861838" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <button class="tiktok-carousel-btn next" aria-label="Next video">&#8250;</button>
+      </div>
+
+      <div class="tiktok-carousel-dots">
+        <button class="tiktok-dot active" data-index="0"></button>
+        <button class="tiktok-dot" data-index="1"></button>
+        <button class="tiktok-dot" data-index="2"></button>
+        <button class="tiktok-dot" data-index="3"></button>
+      </div>
+    </div>
+
+    <!-- INTRO + SIDEBAR -->
+    <div class="trail-intro">
+      <div class="trail-intro-text">
+        <h2>Five Legendary Trails in Utah's Dinosaur Country</h2>
+        <div class="section-divider"></div>
+        <p>Adventure Tours Vernal offers five guided UTV trail tours through some of the most spectacular backcountry in the Uintah Basin. Whether you're chasing sweeping canyon views, ancient petroglyphs, or wildlife encounters, there's a trail for every adventurer.</p>
+        <p>All tours are guided by Dave Wilson aboard Kawasaki KRX 1000 side-by-sides — built for comfort, power, and safety. From the riverside sands of Doc's Beach to the ridge-top panoramas of Asphalt Ridge, every ride is an experience you won't forget.</p>
+        <p>Keep your eyes open for golden eagles, bald eagles, owls, osprey, falcon, deer, and even cougar along the way — Vernal's backcountry is alive with wildlife at every turn.</p>
+      </div>
+
+      <div class="trail-highlights-box">
+        <h3>Trail Highlights</h3>
+        <ul class="highlight-list">
+          <li><span class="hl-icon">&#129413;</span><span>Golden &amp; Bald Eagles</span></li>
+          <li><span class="hl-icon">&#129417;</span><span>Owls, Osprey &amp; Falcon</span></li>
+          <li><span class="hl-icon">&#129420;</span><span>Deer &amp; Cougar</span></li>
+          <li><span class="hl-icon">&#129704;</span><span>Ancient Petroglyphs</span></li>
+          <li><span class="hl-icon">&#127956;</span><span>Scenic Overlooks</span></li>
+          <li><span class="hl-icon">&#127754;</span><span>Green River Views</span></li>
+          <li><span class="hl-icon">&#128106;</span><span>Family Friendly</span></li>
+        </ul>
+        <a href="booking.html" class="tour-book-btn" style="display:block;text-align:center;margin-bottom:12px;">Book a Trail</a>
+        <a href="tel:435-219-9447" class="call-sidebar-btn">&#128222; (435) 219-9447</a>
+      </div>
+    </div>
+
+  
+
+    <!-- PROMO VIDEO — 3D FRAME -->
+    <div class="promo-video-section">
+      <h2>5 Trails. 5 Adventures. 1 Extraordinary Place.</h2>
+      <p>Get a taste of everything Vernal's backcountry has to offer.</p>
+      <div class="promo-video-3d-wrap">
+        <div class="promo-video-frame">
+          <div class="promo-video-screen">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/ugR79DX2CHE?si=8geOb3H2XYk8Q-js" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+   <!-- PHOTO GALLERY -->
+    <div class="photo-gallery-section">
+      <h2>A glimpse of the terrain, scenery, and adventure waiting for you on the trails.</h2>
+        <div class="photo-grid">
+        <div class="photo-grid-item featured">
+          <img src="images/Docs Beach.webp" alt="Doc's Beach guided UTV tour — Adventure Tours Vernal">
+        </div>
+        <div class="photo-grid-item">
+          <img src="images/Docs Beach 1.webp" alt="Doc's Beach off-road UTV trail Vernal Utah">
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="policy-cta trail-cta" style="position:relative; overflow:hidden;">
+  <div class="cta-video-bg">
+    <iframe
+      src="https://www.youtube.com/embed/U4RogvmCLFU?autoplay=1&mute=1&loop=1&playlist=U4RogvmCLFU&controls=0&showinfo=0&rel=0&playsinline=1"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+  </div>
+  <div class="cta-video-overlay"></div>
+      <span class="trail-cta-watermark">ADVENTURE AWAITS</span>
+      <h3>Ready to Hit the Trails?</h3>
+      <p>Five legendary destinations. Book your guided tour today and let Dave Wilson show you what Vernal's backcountry is all about.</p>
+      <div class="cta-buttons">
+        <a href="booking.html" class="cta-button primary">Book Your Adventure</a>
+        <a href="tel:435-219-9447" class="cta-button secondary">&#128222; (435) 219-9447</a>
+      </div>
+    </div>
+
+    <!-- ALL TRAILS -->
+<div class="other-trails-section">
+  <h2>Explore All Trails</h2>
+  <div class="other-trails-grid">
+
+    <div class="other-trail-card">
+      <div class="other-trail-img" style="background-image:url('images/48.webp');"></div>
+      <div class="other-trail-info"><h3>Doc's Beach</h3><span>All Skill Levels</span></div>
+    </div>
+
+    <div class="other-trail-card">
+      <div class="other-trail-img" style="background-image:url('images/42a.webp');"></div>
+      <div class="other-trail-info"><h3>Moonshine Arch</h3><span>Scenic &amp; Historic</span></div>
+    </div>
+
+    <div class="other-trail-card">
+      <div class="other-trail-img" style="background-image:url('images/50a.webp');"></div>
+      <div class="other-trail-info"><h3>Ashley Gorge</h3><span>Canyon Adventure</span></div>
+    </div>
+
+    <div class="other-trail-card">
+      <div class="other-trail-img" style="background-image:url('images/51a.webp');"></div>
+      <div class="other-trail-info"><h3>Outlaw Trail</h3><span>Historic Route</span></div>
+    </div>
+
+    <div class="other-trail-card">
+      <div class="other-trail-img" style="background-image:url('images/52a.webp');"></div>
+      <div class="other-trail-info"><h3>Asphalt Ridge</h3><span>Panoramic Views</span></div>
+    </div>
+
+  </div>
+</div>
+
+
+  </div><!-- end .trail-main -->
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="footer-logo"><img src="images/logo.webp" alt="Adventure Tours Vernal"></div>
+        <p>Experience the adventure of a lifetime in Utah's dinosaur country.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Facebook">&#128280;</a>
+          <a href="#" class="social-link" aria-label="Instagram">&#128247;</a>
+          <a href="#" class="social-link" aria-label="YouTube">&#127909;</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Our Trails</h4>
+        <ul class="footer-links">
+          <li><a href="trail-docs-beach.html">Doc's Beach</a></li>
+          <li><a href="trail-moonshine-arch.html">Moonshine Arch</a></li>
+          <li><a href="trail-ashley-gorge.html">Ashley Gorge</a></li>
+          <li><a href="trail-outlaw-trail.html">Outlaw Trail</a></li>
+          <li><a href="trail-asphalt-ridge.html">Asphalt Ridge</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Contact</h4>
+        <p>&#128205; 1935 S 1500 E, Vernal, Utah 84078</p>
+        <p class="footer-phone-highlight">
+          <a href="tel:435-219-9447" class="footer-phone-link">&#128222; (435) 219-9447</a>
+        </p>
+        <p>&#9993;&#65039; info@adventuretoursvernal.com</p>
+        <p>&#8987; Open Daily 7am - 7pm</p>
+      </div>
+      <div class="footer-section">
+        <h4>Information</h4>
+        <ul class="footer-links">
+          <li><a href="cancellation-policy.html">Cancellation Policy</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="safety-guidelines.html">Safety Guidelines</a></li>
+          <li><a href="what-to-bring.html">What to Bring</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <a href="https://cozelosdata.com" target="_blank">cozelosdata.com</a> - All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div class="mobile-sticky-cta">
+    <button onclick="location.href='booking.html'">Book Your Adventure Now</button>
+  </div>
+
+  <script is:inline>
+     window.addEventListener('scroll', function() {
+      var navbar = document.querySelector('.navbar');
+      navbar.style.boxShadow = window.pageYOffset > 50
+        ? '0 6px 40px rgba(0,0,0,0.12), 0 2px 10px rgba(212,118,78,0.08)'
+        : '0 4px 30px rgba(0,0,0,0.08), 0 2px 10px rgba(212,118,78,0.05)';
+    });
+
+    document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+      var navMenu = document.querySelector('.nav-menu');
+      if (navMenu.style.display === 'flex') {
+        navMenu.style.display = 'none';
+      } else {
+        navMenu.style.display = 'flex';
+        navMenu.style.flexDirection = 'column';
+        navMenu.style.position = 'absolute';
+        navMenu.style.top = '100%';
+        navMenu.style.left = '0';
+        navMenu.style.right = '0';
+        navMenu.style.background = 'var(--off-white)';
+        navMenu.style.padding = '20px';
+        navMenu.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var dropdownToggle = document.querySelector('.dropdown-toggle');
+      var navDropdown = document.querySelector('.nav-dropdown');
+      if (dropdownToggle && navDropdown) {
+        dropdownToggle.addEventListener('click', function(e) {
+          e.preventDefault();
+          if (window.innerWidth <= 768) {
+            navDropdown.classList.toggle('active');
+          }
+        });
+        document.addEventListener('click', function(e) {
+          if (window.innerWidth <= 768 && !navDropdown.contains(e.target)) {
+            navDropdown.classList.remove('active');
+          }
+        });
+        window.addEventListener('resize', function() {
+          if (window.innerWidth > 768) {
+            navDropdown.classList.remove('active');
+          }
+        });
+      }
+    });
+  </script>
+  <script is:inline>
+    // TikTok Carousel
+    (function() {
+      var track = document.querySelector('.tiktok-carousel-track');
+      var slides = document.querySelectorAll('.tiktok-carousel-slide');
+      var dots = document.querySelectorAll('.tiktok-dot');
+      var prevBtn = document.querySelector('.tiktok-carousel-btn.prev');
+      var nextBtn = document.querySelector('.tiktok-carousel-btn.next');
+      var current = 0;
+      var total = slides.length;
+
+      function goTo(index) {
+        current = (index + total) % total;
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        dots.forEach(function(d, i) {
+          d.classList.toggle('active', i === current);
+        });
+      }
+
+      prevBtn.addEventListener('click', function() { goTo(current - 1); });
+      nextBtn.addEventListener('click', function() { goTo(current + 1); });
+      dots.forEach(function(dot) {
+        dot.addEventListener('click', function() { goTo(parseInt(this.dataset.index)); });
+      });
+    })();
+  </script>
+
+
+</body>`;
+---
+<BaseLayout>
+  <Fragment slot="head" set:html={headHtml} />
+  <Fragment slot="body" set:html={bodyHtml} />
+</BaseLayout>

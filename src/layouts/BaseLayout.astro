@@ -1,0 +1,31 @@
+---
+// BaseLayout.astro — the single page shell for every migrated page.
+//
+// MIGRATION POSTURE (runbook Part 1, "migration not redesign"):
+// Investigation of the legacy site showed the header and footer are NOT
+// actually uniform — they have diverged across pages:
+//   - most pages use the standard .navbar header + standard footer
+//   - best-restaurants-*.html uses a different footer (different links,
+//     a different phone number, different copyright) and different nav IDs
+// Swapping in one canonical header/footer would therefore CHANGE visible
+// content and links on those pages — a redesign, not a migration. So this
+// layout deliberately does NOT impose a shared Header/Footer. Each page
+// keeps its own nav and footer inline, byte-for-byte. Centralizing them
+// into one component is a later, deliberate cleanup step — not migration.
+//
+// Each page also passes its original <head> through the `head` slot
+// verbatim (title, meta, canonical, OG/Twitter, page-specific JSON-LD,
+// and its own CSS link incl. the per-page ?v= cache-buster), guaranteeing
+// zero metadata/schema drift.
+//
+// What IS centralized here (the genuinely identical scaffolding):
+//   - the <html>/<head>/<body> structure and closing tags
+//   - the Cloudflare email-decode + Vimeo scripts present on every page
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <slot name="head" />
+</head>
+<slot name="body" />
+</html>

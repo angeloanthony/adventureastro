@@ -1,0 +1,31 @@
+# Adventure Tours Vernal - Robots.txt
+# Updated: March 27, 2026
+
+User-agent: *
+Allow: /
+
+# Allow AI bots (ChatGPT, Claude, Perplexity, etc.)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Block common nuisance bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+# Sitemap location
+Sitemap: https://adventuretoursvernal.com/sitemap.xml

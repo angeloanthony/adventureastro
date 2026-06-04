@@ -1,0 +1,4 @@
+# Cloudflare Pages redirects (safety net).
+# This migration preserves every URL in its original .html form, so NO
+# redirects are required. Add rules here only if you later change a URL, e.g.:
+#   /old-page.html   /new-page.html   301

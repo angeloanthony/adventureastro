@@ -1,0 +1,45 @@
+---
+// NOTE: This component is STAGED, not yet wired in. The migration
+// deliberately kept each page's own header inline to avoid
+// changing content on pages whose nav/footer had drifted (e.g.
+// best-restaurants). Use this canonical version later when you
+// deliberately consolidate the standard pages onto one component.
+// Header.astro — canonical navigation lifted VERBATIM from index.html
+// (the homepage was chosen as the source of truth for nav). The only
+// change vs. raw copy-paste: an `active` prop replaces the hard-coded
+// class="active" so each page highlights its own menu item exactly as
+// the original per-page HTML did. Markup, links, emoji and labels are
+// otherwise unchanged from the homepage nav.
+interface Props {
+  active?: string;
+}
+const { active = '' } = Astro.props;
+---
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="#" class="logo">
+      <img src="images/logo.webp" alt="Adventure Tours Vernal Logo">
+    </a>
+    <ul class="nav-menu">
+      <li><a href="index.html" class:list={[{ active: active === 'home' }]}>Home</a></li>
+      <li><a href="about.html" class:list={[{ active: active === 'about' }]}>About</a></li>
+      <li><a href="trails.html" class:list={[{ active: active === 'trails' }]}>Trails</a></li>
+      <li><a href="best-restaurants-vernal-utah.html" class:list={[{ active: active === 'food' }]}>Food</a></li>
+      <li class="nav-dropdown">
+        <a href="#" class="dropdown-toggle">Info &#9662;</a>
+        <ul class="dropdown-menu">
+          <li><a href="cancellation-policy.html">Cancellation Policy</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="safety-guidelines.html">Safety Guidelines</a></li>
+          <li><a href="what-to-bring.html">What to Bring</a></li>
+        </ul>
+      </li>
+      <li><a href="tel:435-219-9447" class="nav-phone">&#128222; (435) 219-9447</a></li>
+      <li><a href="booking.html" class="nav-book-btn">Book Now</a></li>
+    </ul>
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
