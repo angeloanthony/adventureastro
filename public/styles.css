@@ -212,13 +212,13 @@
 
 /* ===== WHY VERNAL ===== */
  #why-vernal { background: var(--off-white); position: relative; overflow: hidden; }
- .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-top: 40px; position: relative; z-index: 1; }
+ .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-top: 40px; position: relative; z-index: 1; }
  .feature-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.08); transition: var(--transition-smooth); border: 1px solid rgba(212,118,78,0.1); position: relative; }
  .feature-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(212,118,78,0.15); }
- .feature-image { height: 200px; position: relative; overflow: hidden; background-color: #000; background-size: cover; background-position: center; transition: var(--transition-smooth); }
- .feature-content { padding: 25px; text-align: center; }
- .feature-title { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; color: var(--charcoal); margin-bottom: 15px; }
- .feature-description { color: var(--charcoal); opacity: 0.8; line-height: 1.7; font-size: 0.95rem; }
+ .feature-image { height: 260px; position: relative; overflow: hidden; background-color: #000; background-size: cover; background-position: center; transition: var(--transition-smooth); }
+ .feature-content { padding: 32px; text-align: center; }
+ .feature-title { font-family: var(--font-heading); font-size: 1.55rem; font-weight: 700; color: var(--charcoal); margin-bottom: 15px; }
+ .feature-description { color: var(--charcoal); opacity: 0.8; line-height: 1.7; font-size: 1.05rem; }
 
 /* ===== VEHICLES ===== */
  #vehicles { background: linear-gradient(135deg, rgba(245,237,227,0.7) 0%, rgba(248,244,240,0.8) 100%); }
@@ -441,6 +441,10 @@
   .meet-guide-section { display: block; }
   .bw-promo-badge { width: 260px; bottom: 25px; left: 15px; }
   .hcl-promo-badge { width: 250px; right: 15px; }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
@@ -672,10 +676,14 @@
 .about-heading { font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--charcoal); margin-bottom: 30px; letter-spacing: -1px; line-height: 1.2; }
 .lead-text { font-size: 1.3rem; line-height: 1.8; color: var(--charcoal); margin-bottom: 25px; }
 .lead-text strong { color: var(--burnt-orange); font-weight: 700; }
+.video-embed-wrapper { position: relative; width: 100%; aspect-ratio: 16 / 9; margin-top: 30px; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.15); }
+.video-embed-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 .mission-card { background: linear-gradient(135deg, rgba(245,237,227,0.3), rgba(248,244,240,0.5)); border: 2px solid rgba(212,118,78,0.15); }
 .mission-content p { font-size: 1.1rem; line-height: 1.8; color: var(--charcoal); margin-bottom: 20px; }
 .highlights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 40px; }
-.highlight-item { display: flex; gap: 20px; align-items: flex-start; background: white; padding: 25px; border-radius: 20px; border: 2px solid rgba(212,118,78,0.1); transition: all 0.3s ease; }
+.highlight-item { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; background: white; padding: 25px; border-radius: 20px; border: 2px solid rgba(212,118,78,0.1); transition: all 0.3s ease; }
+.highlight-item .highlight-text { flex: 1; min-width: 0; }
+.highlight-item .video-embed-wrapper { flex-basis: 100%; margin-top: 5px; }
 .highlight-item:hover { border-color: var(--burnt-orange); transform: translateY(-5px); box-shadow: 0 15px 35px rgba(212,118,78,0.15); }
 .highlight-icon { font-size: 3rem; flex-shrink: 0; }
 .highlight-text strong { display: block; font-family: var(--font-heading); font-size: 1.3rem; color: var(--burnt-orange); margin-bottom: 8px; }
@@ -708,7 +716,7 @@
 .trail-hero { position: relative; height: 70vh; min-height: 500px; display: flex; align-items: flex-end; overflow: hidden; margin-top: 0; }
 .trail-hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transform: scale(1.05); transition: transform 8s ease; }
 .trail-hero-bg.loaded { transform: scale(1); }
-.trail-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0.75) 100%); }
+.trail-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.35) 100%); }
 .trail-hero-content { position: relative; z-index: 2; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 40px 60px; }
 .trail-breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; font-size: 0.9rem; font-weight: 600; color: rgba(255,255,255,0.8); }
 .trail-breadcrumb a { color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.3s; }
@@ -760,20 +768,20 @@
 .other-trail-info h3 { font-family: var(--font-heading); font-size: 1rem; font-weight: 700; color: var(--charcoal); margin-bottom: 4px; }
 .other-trail-info span { font-size: 0.82rem; color: var(--burnt-orange); font-weight: 600; }
 
-/* TikTok carousel */
-.tiktok-carousel { display: flex; align-items: center; gap: 20px; margin-top: 40px; }
-.tiktok-carousel-track-wrap { flex: 1; overflow: hidden; perspective: 1500px; }
-.tiktok-carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
-.tiktok-carousel-slide { min-width: 100%; display: flex; justify-content: center; padding: 20px 60px 40px; box-sizing: border-box; }
-.tiktok-carousel-btn { flex-shrink: 0; width: 56px; height: 56px; border-radius: 50%; border: none; background: linear-gradient(135deg, var(--burnt-orange), var(--rust-red)); color: white; font-size: 2rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(212,118,78,0.35); transition: all 0.3s ease; padding: 0; }
-.tiktok-carousel-btn:hover { transform: scale(1.1); box-shadow: 0 10px 30px rgba(212,118,78,0.5); }
-.tiktok-carousel-dots { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
-.tiktok-dot { width: 10px; height: 10px; border-radius: 50%; border: none; background: rgba(212,118,78,0.25); cursor: pointer; transition: all 0.3s ease; padding: 0; }
-.tiktok-dot.active { background: var(--burnt-orange); width: 28px; border-radius: 5px; }
-.tiktok-portrait-frame { position: relative; width: 100%; max-width: 340px; padding: 10px; background: linear-gradient(135deg, #D4A574 0%, #C19A6B 25%, #B8956A 50%, #A8865F 75%, #8B7355 100%); border-radius: 20px; box-shadow: 0 30px 80px rgba(0,0,0,0.4), inset 0 2px 10px rgba(255,255,255,0.3), inset 0 -10px 30px rgba(0,0,0,0.3); transform: rotateX(5deg); transition: all 0.4s cubic-bezier(0.4,0,0.2,1); border: 3px solid #8B7355; }
-.tiktok-portrait-frame:hover { transform: rotateX(0deg) scale(1.02); }
-.tiktok-portrait-screen { position: relative; width: 100%; padding-bottom: 177.78%; background: #000; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.6), inset 0 0 20px rgba(0,0,0,0.4); }
-.tiktok-portrait-screen iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 12px; }
+/* Doc's Beach carousel */
+.docs-beach-carousel { display: flex; align-items: center; gap: 20px; margin-top: 40px; }
+.docs-beach-carousel-track-wrap { flex: 1; overflow: hidden; perspective: 1500px; }
+.docs-beach-carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+.docs-beach-carousel-slide { min-width: 100%; display: flex; justify-content: center; padding: 20px 60px 40px; box-sizing: border-box; }
+.docs-beach-carousel-btn { flex-shrink: 0; width: 56px; height: 56px; border-radius: 50%; border: none; background: linear-gradient(135deg, var(--burnt-orange), var(--rust-red)); color: white; font-size: 2rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(212,118,78,0.35); transition: all 0.3s ease; padding: 0; }
+.docs-beach-carousel-btn:hover { transform: scale(1.1); box-shadow: 0 10px 30px rgba(212,118,78,0.5); }
+.docs-beach-carousel-dots { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+.docs-beach-dot { width: 10px; height: 10px; border-radius: 50%; border: none; background: rgba(212,118,78,0.25); cursor: pointer; transition: all 0.3s ease; padding: 0; }
+.docs-beach-dot.active { background: var(--burnt-orange); width: 28px; border-radius: 5px; }
+.docs-beach-portrait-frame { position: relative; width: 100%; max-width: 800px; padding: 10px; background: linear-gradient(135deg, #D4A574 0%, #C19A6B 25%, #B8956A 50%, #A8865F 75%, #8B7355 100%); border-radius: 20px; box-shadow: 0 30px 80px rgba(0,0,0,0.4), inset 0 2px 10px rgba(255,255,255,0.3), inset 0 -10px 30px rgba(0,0,0,0.3); transform: rotateX(5deg); transition: all 0.4s cubic-bezier(0.4,0,0.2,1); border: 3px solid #8B7355; }
+.docs-beach-portrait-frame:hover { transform: rotateX(0deg) scale(1.02); }
+.docs-beach-portrait-screen { position: relative; width: 100%; padding-bottom: 56.25%; background: #000; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.6), inset 0 0 20px rgba(0,0,0,0.4); }
+.docs-beach-portrait-screen iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 12px; }
 
 /* Video frames */
 .promo-video-section { max-width: 900px; margin: 0 auto 60px; padding: 0 20px; text-align: center; }
@@ -792,7 +800,7 @@
 
 /* Hero/CTA video backgrounds */
 .trail-hero-video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 0; }
-.trail-hero-video-bg iframe { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 177.78vh; height: 56.25vw; min-width: 100%; min-height: 100%; pointer-events: none; border: none; }
+.trail-hero-video-bg iframe { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 177.78vh; height: 56.25vw; min-width: 100%; min-height: 100%; pointer-events: none; border: none; filter: brightness(1.18) contrast(1.03) saturate(1.08); }
 .cta-video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 0; }
 .cta-video-bg iframe { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 177.78vh; height: 56.25vw; min-width: 100%; min-height: 100%; pointer-events: none; border: none; }
 .cta-video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.20); z-index: 1; }
@@ -803,7 +811,7 @@
 
 /* Trail page responsive */
 @media (max-width: 1024px) { .trail-intro { grid-template-columns: 1fr; } .trail-highlights-box { position: static; } .tiers-grid { grid-template-columns: 1fr; } }
-@media (max-width: 768px) { .trail-main { padding: 40px 20px 60px; } .trail-hero-content { padding: 0 20px 40px; } .trail-hero-title { font-size: 2.5rem; } .photo-grid { grid-template-columns: repeat(2, 1fr); } .photo-grid-item.featured { grid-column: span 2; } .tiktok-carousel { gap: 10px; } .tiktok-carousel-slide { padding: 15px 10px 30px; } .tiktok-carousel-btn { width: 44px; height: 44px; font-size: 1.6rem; } .promo-video-frame { padding: 18px; transform: rotateX(3deg); } .trail-video-frame { padding: 14px; transform: rotateX(3deg); } .about-hero { height: 400px; } .about-card { padding: 40px 25px; } .story-content { padding: 40px 25px; } .highlights-grid { grid-template-columns: 1fr; } .why-grid { grid-template-columns: 1fr; } .about-cta { padding: 50px 30px; } }
+@media (max-width: 768px) { .trail-main { padding: 40px 20px 60px; } .trail-hero-content { padding: 0 20px 40px; } .trail-hero-title { font-size: 2.5rem; } .photo-grid { grid-template-columns: repeat(2, 1fr); } .photo-grid-item.featured { grid-column: span 2; } .docs-beach-carousel { gap: 10px; } .docs-beach-carousel-slide { padding: 15px 10px 30px; } .docs-beach-carousel-btn { width: 44px; height: 44px; font-size: 1.6rem; } .promo-video-frame { padding: 18px; transform: rotateX(3deg); } .trail-video-frame { padding: 14px; transform: rotateX(3deg); } .about-hero { height: 400px; } .about-card { padding: 40px 25px; } .story-content { padding: 40px 25px; } .highlights-grid { grid-template-columns: 1fr; } .why-grid { grid-template-columns: 1fr; } .about-cta { padding: 50px 30px; } }
 @media (max-width: 480px) { .trail-hero { height: 60vh; min-height: 420px; } .photo-grid { grid-template-columns: 1fr; } .photo-grid-item.featured { grid-column: span 1; } .about-hero { height: 350px; } .about-card { padding: 30px 20px; } .story-content { padding: 30px 20px; } .about-heading { font-size: 1.8rem; } .promo-video-frame { padding: 12px; transform: rotateX(2deg); } .trail-video-frame { padding: 10px; transform: rotateX(2deg); } }
 
 /* Reduced motion */
