@@ -76,7 +76,7 @@ paths resolve. (Astro serves everything in `public/` from the site root.)
 ## What was centralized vs. preserved
 
 - **Centralized:** the `<html>/<head>/<body>` scaffolding, closing tags, and
-  the two scripts present on every page (Cloudflare email-decode + Vimeo).
+  the Vimeo player script present on every page.
 - **Preserved per-page (verbatim):** each page's full `<head>` (title, meta,
   canonical, OG/Twitter, JSON-LD, its own CSS link + `?v=` cache-buster), its
   own nav and footer, and its own trailing `<script>` blocks.

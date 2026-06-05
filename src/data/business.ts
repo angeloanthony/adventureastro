@@ -10,7 +10,7 @@ export const BUSINESS = {
   phoneDisplay: '(435) 219-9447',
   phoneHref: 'tel:435-219-9447',
   phoneSchema: '+1-435-219-9447',
-  email: 'info@adventuretoursvernal.com',
+  email: 'adventuretoursvernal@gmail.com',
   url: 'https://adventuretoursvernal.com',
   street: '1935 S 1500 E',
   city: 'Vernal',
