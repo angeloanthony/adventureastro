@@ -449,7 +449,7 @@
 
 @media (max-width: 768px) {
   .nav-menu { display: none; }
-  .mobile-menu-toggle { display: block; }
+  .mobile-menu-toggle { display: block; margin-left: auto; }
   .logo { left: 15px; }
   .logo img { height: 100px; }
   .nav-container { padding: 8px 20px 8px 140px; }
@@ -802,8 +802,8 @@
 .trail-hero-video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 0; }
 .trail-hero-video-bg iframe { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 177.78vh; height: 56.25vw; min-width: 100%; min-height: 100%; pointer-events: none; border: none; filter: brightness(1.18) contrast(1.03) saturate(1.08); }
 .cta-video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 0; }
-.cta-video-bg iframe { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 177.78vh; height: 56.25vw; min-width: 100%; min-height: 100%; pointer-events: none; border: none; }
-.cta-video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.20); z-index: 1; }
+.cta-video-bg iframe { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 177.78vh; height: 56.25vw; min-width: 100%; min-height: 100%; pointer-events: none; border: none; filter: brightness(1.4) saturate(1.15); }
+.cta-video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.08); z-index: 1; }
 .trail-cta h3, .trail-cta p, .trail-cta .cta-buttons { position: relative; z-index: 2; }
 .about-hero-video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 0; }
 .about-hero-video-bg iframe { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 177.78vh; height: 56.25vw; min-width: 100%; min-height: 100%; pointer-events: none; border: none; }
@@ -811,8 +811,8 @@
 
 /* Trail page responsive */
 @media (max-width: 1024px) { .trail-intro { grid-template-columns: 1fr; } .trail-highlights-box { position: static; } .tiers-grid { grid-template-columns: 1fr; } }
-@media (max-width: 768px) { .trail-main { padding: 40px 20px 60px; } .trail-hero-content { padding: 0 20px 40px; } .trail-hero-title { font-size: 2.5rem; } .photo-grid { grid-template-columns: repeat(2, 1fr); } .photo-grid-item.featured { grid-column: span 2; } .docs-beach-carousel { gap: 10px; } .docs-beach-carousel-slide { padding: 15px 10px 30px; } .docs-beach-carousel-btn { width: 44px; height: 44px; font-size: 1.6rem; } .promo-video-frame { padding: 18px; transform: rotateX(3deg); } .trail-video-frame { padding: 14px; transform: rotateX(3deg); } .about-hero { height: 400px; } .about-card { padding: 40px 25px; } .story-content { padding: 40px 25px; } .highlights-grid { grid-template-columns: 1fr; } .why-grid { grid-template-columns: 1fr; } .about-cta { padding: 50px 30px; } }
-@media (max-width: 480px) { .trail-hero { height: 60vh; min-height: 420px; } .photo-grid { grid-template-columns: 1fr; } .photo-grid-item.featured { grid-column: span 1; } .about-hero { height: 350px; } .about-card { padding: 30px 20px; } .story-content { padding: 30px 20px; } .about-heading { font-size: 1.8rem; } .promo-video-frame { padding: 12px; transform: rotateX(2deg); } .trail-video-frame { padding: 10px; transform: rotateX(2deg); } }
+@media (max-width: 768px) { .trail-main { padding: 40px 20px 60px; } .trail-hero-content { padding: 0 20px 40px; } .trail-hero-title { font-size: 2.5rem; } .photo-grid { grid-template-columns: repeat(2, 1fr); } .photo-grid-item.featured { grid-column: span 2; } .docs-beach-carousel { gap: 10px; } .docs-beach-carousel-slide { padding: 15px 10px 30px; } .docs-beach-carousel-btn { width: 44px; height: 44px; font-size: 1.6rem; } .promo-video-frame { padding: 18px; transform: rotateX(3deg); } .trail-video-frame { padding: 14px; transform: rotateX(3deg); } .about-hero { height: 400px; } .about-hero-title { font-size: 2.4rem; letter-spacing: -1px; } .about-hero-subtitle { font-size: 1.2rem; } .about-card { padding: 40px 25px; } .story-content { padding: 40px 25px; } .highlights-grid { grid-template-columns: 1fr; } .why-grid { grid-template-columns: 1fr; } .about-cta { padding: 50px 30px; } }
+@media (max-width: 480px) { .trail-hero { height: 60vh; min-height: 420px; } .photo-grid { grid-template-columns: 1fr; } .photo-grid-item.featured { grid-column: span 1; } .about-hero { height: 350px; } .about-hero-title { font-size: 1.9rem; letter-spacing: -0.5px; margin-bottom: 12px; } .about-hero-subtitle { font-size: 1.05rem; } .about-card { padding: 30px 20px; } .story-content { padding: 30px 20px; } .about-heading { font-size: 1.8rem; } .promo-video-frame { padding: 12px; transform: rotateX(2deg); } .trail-video-frame { padding: 10px; transform: rotateX(2deg); } }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
