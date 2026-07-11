@@ -1,0 +1,96 @@
+---
+// /from/salt-lake-city/ — first city landing page (Task 4). Template for
+// every future /from/[city]/ page: CityLayout scaffolding (Seo, schema,
+// breadcrumbs, QuickFacts, hub links, related guides) + a modest amount of
+// verified, non-invented body copy. TODOs mark owner-expertise/photography
+// gaps rather than inventing to fill them.
+import CityLayout from '../../layouts/CityLayout.astro';
+import FaqAccordion from '../../components/content/FaqAccordion.astro';
+import { getEntry } from 'astro:content';
+import { cityHref } from '../../lib/hubs';
+import { SITE } from '../../config/site';
+
+const cityEntry = await getEntry('cities', 'salt-lake-city');
+if (!cityEntry) throw new Error('cities/salt-lake-city.json entry not found');
+const city = cityEntry.data;
+
+const faq = [
+  {
+    q: 'How far is Vernal, Utah from Salt Lake City?',
+    a: `Vernal is about ${city.driveTimeHours} hours (${city.driveMiles} miles) east of Salt Lake City, via I-80 E to US-40 E. The route runs through Heber City, Duchesne, and Roosevelt before reaching Vernal.`,
+  },
+  {
+    q: 'What airport should I fly into for a Vernal UTV tour?',
+    a: 'Salt Lake City International Airport (SLC) is the nearest major airport with regular commercial service. From there, Vernal is a straightforward drive east on I-80 and US-40 — there is no commercial airport in Vernal itself.',
+  },
+  {
+    q: 'Can I do a Vernal UTV tour as a day trip from Salt Lake City?',
+    a: `It's possible but tight — with roughly ${city.driveTimeHours} hours of driving each way plus a 3-hour guided tour, most visitors from Salt Lake City prefer an overnight stay in Vernal to avoid a very long single day on the road.`,
+  },
+];
+---
+<CityLayout
+  title={city.title}
+  description={city.description}
+  path={cityHref('salt-lake-city')}
+  breadcrumbs={[{ label: 'Salt Lake City' }]}
+  city={city}
+  relatedLinks={[
+    {
+      title: 'Best UTV Trails Near Vernal',
+      description: 'All five guided trail systems, with terrain and difficulty for each.',
+      href: '/utv/best-utv-trails-vernal/',
+    },
+    {
+      title: 'Vernal, Utah Weather Guide',
+      description: 'Month-by-month conditions to help you pick your travel dates.',
+      href: '/guides/vernal-weather-guide/',
+    },
+    {
+      title: 'What to Bring on a UTV Tour',
+      description: 'A complete packing checklist for your tour day.',
+      href: '/guides/what-to-bring/',
+    },
+    {
+      title: 'UTV Tours Near Dinosaur National Monument',
+      description: 'Pair your tour with a visit to the Quarry Exhibit Hall.',
+      href: '/dinosaur-national-monument/',
+    },
+  ]}
+>
+  <h1>UTV Tours Near Vernal, Utah — Salt Lake City Visitor Guide</h1>
+
+  <div class="article-summary-box">
+    Driving out from Salt Lake City? Vernal sits about {city.driveTimeHours} hours east via I-80 and US-40 — a scenic drive through Heber City, Duchesne, and Roosevelt into Utah's Dinosaur Country. Adventure Tours Vernal runs guided Kawasaki KRX 1000 side-by-side tours through the backcountry surrounding Dinosaur National Monument.
+  </div>
+
+  <h2>The Drive East</h2>
+  <p>
+    From Salt Lake City, the route to Vernal follows I-80 E to Silver Creek Junction, then US-40 E through Heber City, Duchesne, and Roosevelt before arriving in Vernal. It's about {city.driveMiles} miles and {city.driveTimeHours} hours of driving, most of it through open Utah high desert and mountain scenery — a straightforward day trip east from the airport city, or the first leg of a longer Uintah Basin trip.
+  </p>
+
+  <h2>Why Salt Lake City Visitors Choose Vernal</h2>
+  <p>
+    Salt Lake City International Airport (SLC) is the closest major airport to Vernal with regular commercial service, which makes Vernal an easy add-on for visitors flying into Utah. Once you're in Vernal, Adventure Tours Vernal offers five guided trail systems — Doc's Beach, Moonshine Arch, Ashley Gorge, Outlaw Trail, and Asphalt Ridge — plus easy access to <a href="/dinosaur-national-monument/">Dinosaur National Monument</a>, just 20 minutes from town.
+  </p>
+  <p>
+    Every tour is guided by owners Dave and Trudy Wilson on Kawasaki KRX 1000 side-by-sides with FOX 2.5 PODIUM LSC shocks. No prior UTV experience is required — a full safety briefing and all safety gear are included. See the <a href="/guides/">travel guides</a> for what to wear, what to pack, and seasonal weather before you drive out.
+  </p>
+
+  <h2>Before You Head East</h2>
+  <p>
+    If Dinosaur National Monument is on your itinerary, read our <a href="/dinosaur-national-monument/visiting-dinosaur-national-monument/">Ultimate Guide to Dinosaur National Monument</a> before you leave Salt Lake City. It covers how much time to budget, the best scenic drives and petroglyph stops, and how to pair a monument visit with a guided UTV tour.
+  </p>
+
+  <div class="article-tip">
+    <strong>Planning tip:</strong> Call Dave or Trudy at <a href={SITE.phoneHrefDash}>{SITE.phoneDisplay}</a> to check trail conditions and timing before you make the drive from Salt Lake City — especially outside peak season (see the <a href="/guides/vernal-weather-guide/">Vernal Weather Guide</a>).
+  </div>
+
+  <!-- TODO (owner input): Salt-Lake-specific visitor tips (e.g. best
+       departure time to avoid I-80/US-40 traffic, recommended overnight
+       stop) and original photography of the drive route are not yet
+       available. Add once supplied — do not invent. -->
+
+  <h2>Frequently Asked Questions</h2>
+  <FaqAccordion faq={faq} />
+</CityLayout>

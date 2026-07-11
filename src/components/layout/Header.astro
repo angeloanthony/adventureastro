@@ -7,7 +7,7 @@
 // identically on nested hub/spoke routes.
 import { SITE } from '../../config/site';
 
-type ActiveKey = 'home' | 'about' | 'trails' | 'food'
+type ActiveKey = 'home' | 'about' | 'trails' | 'things-to-do' | 'dinosaur-national-monument' | 'guides' | 'food'
   | 'cancellation-policy' | 'privacy-policy' | 'faq' | 'safety-guidelines' | 'what-to-bring';
 interface Props {
   active?: ActiveKey | '';
@@ -23,6 +23,9 @@ const { active = '' } = Astro.props;
       <li><a href="/" class:list={[{ active: active === 'home' }]}>Home</a></li>
       <li><a href="/about/" class:list={[{ active: active === 'about' }]}>About</a></li>
       <li><a href="/utv/" class:list={[{ active: active === 'trails' }]}>Trails</a></li>
+      <li><a href="/things-to-do/" class:list={[{ active: active === 'things-to-do' }]}>Things to Do</a></li>
+      <li><a href="/dinosaur-national-monument/" class:list={[{ active: active === 'dinosaur-national-monument' }]}>Dinosaur Monument</a></li>
+      <li><a href="/guides/" class:list={[{ active: active === 'guides' }]}>Guides</a></li>
       <li><a href="/things-to-do/best-restaurants-vernal-utah/" class:list={[{ active: active === 'food' }]}>Food</a></li>
       <li class="nav-dropdown">
         <a href="#" class="dropdown-toggle">Info &#9662;</a>

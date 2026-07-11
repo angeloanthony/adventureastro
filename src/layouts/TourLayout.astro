@@ -1,8 +1,9 @@
 ---
 // TourLayout.astro — tour page shell, the highest-stakes template on the
 // site (Build Guide §9.2). Wires Product/Offer schema in addition to the
-// standard LocalBusiness entity; price is a required prop (never sourced
-// from SITE.pricing, which is an unresolved TODO — see site.ts).
+// standard LocalBusiness entity; price is a required prop rather than
+// sourced from SITE.pricing, since a tour page may sell a non-base-tour
+// product at a different price (see SchemaTour.astro).
 import BaseLayout from './BaseLayout.astro';
 import Seo from '../components/seo/Seo.astro';
 import SchemaLocalBusiness from '../components/seo/SchemaLocalBusiness.astro';

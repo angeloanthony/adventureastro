@@ -4,7 +4,7 @@
 // src/lib/authors.ts — the same source SchemaArticle uses, so byline and
 // Person schema can never disagree. Links route to the shared about page
 // until the dedicated /about/dave/ + /about/trudy/ pages ship in Phase 3.
-import { AUTHORS, type AuthorKey } from '../../lib/authors';
+import { AUTHORS, photoExists, type AuthorKey } from '../../lib/authors';
 
 interface Props {
   author: AuthorKey;
@@ -13,14 +13,67 @@ interface Props {
 const { author, updatedDate } = Astro.props;
 
 const info = AUTHORS[author];
+const hasPhoto = photoExists(author);
+const initials = info.name.split(' ').map((w) => w[0]).join('');
 const formattedDate = updatedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 <div class="author-byline">
   <a href={info.pagePath} class="author-byline-link">
-    <img src={info.photo} alt={info.name} class="author-byline-photo" width="48" height="48" loading="lazy" />
+    {hasPhoto
+      ? <img src={info.photo} alt={info.name} class="author-byline-photo" width="48" height="48" loading="lazy" />
+      : <span class="author-byline-photo author-byline-monogram" aria-hidden="true">{initials}</span>}
     <span class="author-byline-text">
       Written by <strong>{info.name}</strong> — {info.role}
     </span>
   </a>
   <span class="author-byline-updated">Updated {formattedDate}</span>
 </div>
+
+<style>
+  .author-byline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 16px 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+  .author-byline-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--charcoal, #333);
+  }
+  .author-byline-photo {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .author-byline-text strong { color: var(--burnt-orange, #d4764e); }
+  .author-byline-updated {
+    font-size: 0.85rem;
+    color: rgba(0, 0, 0, 0.55);
+  }
+
+  /* Initials fallback shown until the owner supplies dave.webp/trudy.webp.
+     Sized to match .author-byline-photo (48px) from styles.css. */
+  .author-byline-monogram {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--burnt-orange, #d4764e);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+  }
+</style>

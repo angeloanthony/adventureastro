@@ -1,0 +1,183 @@
+---
+// AuthorLayout.astro — dedicated author profile page shell (Build Guide
+// §1.4, §5.3 E-E-A-T). One layout renders /about/dave/ + /about/trudy/.
+//
+// Author identity is read ONLY from src/lib/authors.ts — the same source
+// AuthorByline + SchemaArticle use — so this page is the canonical author
+// record and can never disagree with the bylines that link to it.
+//
+// Emits BOTH a ProfilePage node (Google's author-page markup) whose
+// mainEntity is the stable Person (@id from authors.ts, never the page
+// URL) — so every Article's author @id resolves to a full Person here.
+//
+// Owner-input rule: nothing is invented. `description`/`sameAs`/photo are
+// emitted only when authors.ts actually holds owner-supplied data;
+// otherwise the page degrades (monogram, no schema description) and
+// validate-site reports the gap as a non-blocking TODO.
+import BaseLayout from './BaseLayout.astro';
+import Seo from '../components/seo/Seo.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
+import TourCta from '../components/content/TourCta.astro';
+import { getCollection } from 'astro:content';
+import { AUTHORS, photoExists, type AuthorKey } from '../lib/authors';
+import { HUB_SLUGS, HUBS, spokeHref, type HubSlug } from '../lib/hubs';
+import type { SpokeData } from '../content.config';
+import { SITE } from '../config/site';
+import { absoluteUrl } from '../lib/urls';
+
+interface Props {
+  author: AuthorKey;
+  title: string;
+  description: string;
+}
+const { author, title, description } = Astro.props;
+const info = AUTHORS[author];
+const hasPhoto = photoExists(author);
+const initials = info.name.split(' ').map((w) => w[0]).join('');
+const pageUrl = `${SITE.url}${info.pagePath}`;
+
+// Articles this author has written, across every hub collection. Empty
+// until Phase 3 spokes are authored — the section then populates itself.
+type Spoke = { id: string; data: SpokeData };
+const articles: { title: string; description: string; href: string }[] = [];
+for (const hub of HUB_SLUGS) {
+  const entries = ((await getCollection(hub)) as unknown as Spoke[])
+    .filter((e) => !e.data.draft && e.data.author === author);
+  for (const e of entries) {
+    articles.push({ title: e.data.title, description: e.data.description, href: spokeHref(hub as HubSlug, e.id) });
+  }
+}
+articles.sort((a, b) => a.title.localeCompare(b.title));
+
+// --- Structured data: ProfilePage → Person (stable @id). ---
+const person: Record<string, unknown> = {
+  '@type': 'Person',
+  '@id': info.id,
+  name: info.name,
+  url: pageUrl,
+  jobTitle: info.role,
+  worksFor: { '@type': 'LocalBusiness', name: SITE.name, url: SITE.url },
+  ...(info.bio ? { description: info.bio } : {}),
+  ...(hasPhoto ? { image: absoluteUrl(info.photo) } : {}),
+  ...(info.expertise.length ? { knowsAbout: info.expertise } : {}),
+  ...(info.credentials.length ? { hasCredential: info.credentials } : {}),
+  ...(info.sameAs.length ? { sameAs: info.sameAs } : {}),
+};
+const profileJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  '@id': `${pageUrl}#profilepage`,
+  url: pageUrl,
+  name: `${info.name} — ${info.role}`,
+  mainEntity: person,
+};
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo title={title} description={description} path={info.pagePath} image={hasPhoto ? info.photo : undefined} type="website" />
+    <script type="application/ld+json" set:html={JSON.stringify(profileJsonLd)} />
+  </Fragment>
+  <Fragment slot="body">
+    <Header active="about" />
+    <Breadcrumbs items={[{ label: 'About', href: '/about/' }, { label: info.name }]} />
+    <main class="author-page">
+      <article class="author-profile">
+        <header class="author-head">
+          {hasPhoto
+            ? <img src={info.photo} alt={`${info.name}, ${info.role} at ${SITE.name}`} class="author-avatar" width="128" height="128" />
+            : <span class="author-avatar author-avatar-monogram" aria-hidden="true">{initials}</span>}
+          <div class="author-head-text">
+            <h1>{info.name}</h1>
+            <p class="author-role">{info.role} · {SITE.name}</p>
+          </div>
+        </header>
+
+        <section class="author-bio">
+          {info.bio ? <p>{info.bio}</p> : <slot name="bio" />}
+        </section>
+
+        {info.expertise.length > 0 && (
+          <section class="author-expertise">
+            <h2>Areas of Expertise</h2>
+            <ul>{info.expertise.map((e) => <li>{e}</li>)}</ul>
+          </section>
+        )}
+
+        {info.credentials.length > 0 && (
+          <section class="author-credentials">
+            <h2>Credentials &amp; Experience</h2>
+            <ul>{info.credentials.map((c) => <li>{c}</li>)}</ul>
+          </section>
+        )}
+
+        <section class="author-about-business">
+          <h2>About Adventure Tours Vernal</h2>
+          <p>
+            {SITE.name} is a locally owned UTV tour company in {SITE.address.city},
+            {' '}{SITE.address.region}, founded by {SITE.owners[0]} and {SITE.owners[1]}. Tours run on a
+            fleet of {SITE.fleet.count} {SITE.fleet.vehicle} side-by-sides through the Uintah Basin
+            backcountry — from Dinosaur National Monument to Flaming Gorge.
+            {' '}<a href="/about/">Read the full story</a>.
+          </p>
+        </section>
+
+        {articles.length > 0 && (
+          <section class="author-articles" aria-label={`Articles by ${info.name}`}>
+            <h2>Articles by {info.name}</h2>
+            <ul class="author-articles-list">
+              {articles.map((a) => (
+                <li>
+                  <a href={a.href}>{a.title}</a>
+                  <p>{a.description}</p>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        <TourCta variant="generic" />
+      </article>
+    </main>
+    <Footer />
+  </Fragment>
+</BaseLayout>
+
+<style>
+  .author-page { max-width: 820px; margin: 0 auto; padding: 24px 20px 64px; }
+  .author-head { display: flex; align-items: center; gap: 24px; margin-bottom: 28px; }
+  .author-avatar {
+    width: 128px; height: 128px; border-radius: 50%; object-fit: cover;
+    flex-shrink: 0; box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+  }
+  .author-avatar-monogram {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--burnt-orange, #d4764e); color: #fff;
+    font-weight: 800; font-size: 2.6rem; letter-spacing: 1px;
+  }
+  .author-head h1 { margin: 0 0 6px; font-size: 2rem; }
+  .author-role { margin: 0; color: var(--burnt-orange, #d4764e); font-weight: 600; }
+  .author-profile section { margin: 28px 0; }
+  .author-profile h2 { font-size: 1.3rem; margin: 0 0 12px; }
+  .author-bio p { font-size: 1.08rem; line-height: 1.75; color: var(--charcoal, #333); }
+  .author-expertise ul {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-wrap: wrap; gap: 10px;
+  }
+  .author-expertise li {
+    background: rgba(212, 118, 78, 0.1); color: var(--charcoal, #333);
+    padding: 8px 14px; border-radius: 999px; font-size: 0.95rem;
+  }
+  .author-credentials ul { padding-left: 20px; line-height: 1.8; }
+  .author-articles-list { list-style: none; padding: 0; margin: 0; }
+  .author-articles-list li {
+    padding: 16px 0; border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+  .author-articles-list a { font-weight: 700; color: var(--burnt-orange, #d4764e); text-decoration: none; }
+  .author-articles-list a:hover { text-decoration: underline; }
+  .author-articles-list p { margin: 6px 0 0; color: rgba(0, 0, 0, 0.65); }
+  @media (max-width: 560px) {
+    .author-head { flex-direction: column; text-align: center; gap: 16px; }
+  }
+</style>

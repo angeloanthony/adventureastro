@@ -53,6 +53,11 @@ const datesInOrder = { message: 'updatedDate must be >= publishDate', path: ['up
 const spokeSchemaFor = (hub: HubSlug) => z.object({
   title: z.string().max(65),
   description: z.string().min(120).max(165),
+  /** Optional social-copy overrides — preserve a legacy page's distinct
+   *  og:title / og:description when it deliberately differed from the SEO
+   *  title/description (Phase 2 pattern, carried into collections). */
+  ogTitle: z.string().optional(),
+  ogDescription: z.string().optional(),
   hub: z.literal(hub).default(hub),
   tags: z.array(tag()).min(1),
   publishDate: z.date(),
@@ -99,6 +104,10 @@ const itinerarySchema = z.object({
 }).refine((d) => d.updatedDate >= d.publishDate, datesInOrder);
 
 // §3.2 — city landing page data schema, verbatim.
+// NOTE: cities/seasons/months use the JSON/YAML dataLoader, not the
+// markdown contentLoader — unlike YAML frontmatter, a JSON date is just a
+// string, so these three schemas need z.coerce.date() (spoke/itinerary
+// schemas stay z.date() since markdown frontmatter dates parse natively).
 const citySchema = z.object({
   city: z.string(),
   state: z.string(),
@@ -109,7 +118,7 @@ const citySchema = z.object({
   routeSummary: z.string(),
   nearestAirport: z.string().optional(),
   angle: z.string(),
-  updatedDate: z.date(),
+  updatedDate: z.coerce.date(),
 });
 
 // §8.2 — /seasons/ and /months/ programmatic data sources.
@@ -117,7 +126,7 @@ const seasonSchema = z.object({
   title: z.string().max(65),
   description: z.string().min(120).max(165),
   season: z.enum(['spring', 'summer', 'fall', 'winter']),
-  updatedDate: z.date(),
+  updatedDate: z.coerce.date(),
 });
 
 const monthSchema = z.object({
@@ -127,7 +136,7 @@ const monthSchema = z.object({
     'january', 'february', 'march', 'april', 'may', 'june',
     'july', 'august', 'september', 'october', 'november', 'december',
   ]),
-  updatedDate: z.date(),
+  updatedDate: z.coerce.date(),
 });
 
 /** Frontmatter shape of a spoke entry — inferred straight from the zod

@@ -4,26 +4,37 @@ import Header from '../../components/layout/Header.astro';
 import Footer from '../../components/layout/Footer.astro';
 import Seo from '../../components/seo/Seo.astro';
 import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
-// Article + FAQ structured data preserved verbatim from the legacy head.
+import HubIndex from '../../components/content/HubIndex.astro';
+// Cornerstone Article + expanded FAQ structured data. Author kept as
+// Organization to match the pillar's existing entity (per the deferred
+// schema-component Open Decision); dateModified bumped for the Phase-4
+// cornerstone rewrite. FAQPage mirrors the visible FAQ below verbatim.
 const schema = `{
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        "headline": "Things to Do in Vernal, Utah — Top Activities & Attractions",
-        "description": "A comprehensive guide to the best things to do in Vernal, Utah, including guided UTV tours, Dinosaur National Monument, petroglyphs, hiking, and outdoor adventures.",
+        "headline": "Things to Do in Vernal, Utah — The Complete Local Guide",
+        "description": "A local guide's complete plan for things to do in Vernal, Utah — Dinosaur National Monument, guided UTV tours, petroglyphs, scenic drives, state parks, restaurants, seasonal advice, and ready-made itineraries.",
         "author": {"@type": "Organization", "name": "Adventure Tours Vernal"},
         "publisher": {"@type": "Organization", "name": "Adventure Tours Vernal", "logo": {"@type": "ImageObject", "url": "https://adventuretoursvernal.com/images/logo.webp"}},
         "datePublished": "2026-04-08",
-        "dateModified": "2026-04-08",
+        "dateModified": "2026-07-10",
         "mainEntityOfPage": "https://adventuretoursvernal.com/things-to-do/"
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
-          {"@type": "Question", "name": "What are the best things to do in Vernal, Utah?", "acceptedAnswer": {"@type": "Answer", "text": "Top activities include guided UTV tours through the backcountry, visiting Dinosaur National Monument, exploring Fremont and Ute petroglyphs, hiking in Ashley National Forest, fishing the Green River, and visiting Red Fleet State Park for dinosaur trackways."}},
-          {"@type": "Question", "name": "Is Vernal, Utah worth visiting?", "acceptedAnswer": {"@type": "Answer", "text": "Absolutely. Vernal is the gateway to Dinosaur National Monument, home to some of Utah's most dramatic backcountry trails, and offers outdoor recreation without the crowds of southern Utah's national parks."}},
-          {"@type": "Question", "name": "What is Vernal, Utah known for?", "acceptedAnswer": {"@type": "Answer", "text": "Vernal is known as Dinosaur Country — it sits at the edge of Dinosaur National Monument and the Uintah Basin, surrounded by red rock canyons, ancient petroglyphs, Wild West history, and world-class outdoor recreation."}}
+          {"@type": "Question", "name": "What are the best things to do in Vernal, Utah?", "acceptedAnswer": {"@type": "Answer", "text": "The best things to do in Vernal are a guided backcountry UTV tour, visiting Dinosaur National Monument and its Wall of Bones, viewing Fremont petroglyphs at McConkie Ranch and Dry Fork Canyon, walking the dinosaur trackways at Red Fleet State Park, the Utah Field House of Natural History dinosaur garden, and fishing or boating at Steinaker, Red Fleet, and Flaming Gorge."}},
+          {"@type": "Question", "name": "How many days do you need in Vernal, Utah?", "acceptedAnswer": {"@type": "Answer", "text": "Two to three days is ideal. One day for Dinosaur National Monument and petroglyphs, one day for a guided UTV tour and the state parks, and an optional third day for Flaming Gorge, fishing, or hiking in the Uinta Mountains. A single day only allows time for the monument or one other headline activity."}},
+          {"@type": "Question", "name": "Is Vernal, Utah worth visiting?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Vernal is the gateway to Dinosaur National Monument and packs real dinosaur fossils, ancient rock art, red-rock canyons, Wild West history, and world-class outdoor recreation into a small, uncrowded radius. It offers much of what draws people to southern Utah without the crowds."}},
+          {"@type": "Question", "name": "What is the number one thing to do in Vernal?", "acceptedAnswer": {"@type": "Answer", "text": "A guided backcountry UTV tour with Adventure Tours Vernal is the single most immersive activity — it combines off-road adventure, petroglyphs, natural arches, and canyon scenery you cannot reach from a paved road into one three-hour experience. Dinosaur National Monument is the top must-see attraction."}},
+          {"@type": "Question", "name": "Is Vernal, Utah good for families with kids?", "acceptedAnswer": {"@type": "Answer", "text": "Very. Kids can touch real dinosaur fossils at Dinosaur National Monument, walk up to dinosaur trackways at Red Fleet State Park, explore the Utah Field House dinosaur garden, and ride along on a guided UTV tour as passengers from age 2 with a parent. Most highlights involve only short walks."}},
+          {"@type": "Question", "name": "What is the best time of year to visit Vernal, Utah?", "acceptedAnswer": {"@type": "Answer", "text": "Late spring (May–June) and early fall (September–October) offer the most comfortable temperatures, active wildlife, and thinner crowds. Summer is warm, fully open, and best for water activities. Winter is quiet and scenic but cold, with some seasonal facilities and roads closed."}},
+          {"@type": "Question", "name": "How far is Vernal from Salt Lake City?", "acceptedAnswer": {"@type": "Answer", "text": "Vernal is roughly a three-hour drive east of Salt Lake City on US-40, and Salt Lake City is the nearest major airport. The scenic route climbs over the Uinta Mountains and through Daniels Summit and Strawberry Reservoir country."}},
+          {"@type": "Question", "name": "What is Vernal, Utah known for?", "acceptedAnswer": {"@type": "Answer", "text": "Vernal is known as Utah's Dinosaur Country. It sits at the edge of Dinosaur National Monument in the Uintah Basin, surrounded by red-rock canyons, Fremont and Ute petroglyphs, Wild West outlaw history, and outdoor recreation on public land."}},
+          {"@type": "Question", "name": "Do you need a car to visit Vernal?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Vernal's attractions are spread across the surrounding countryside — the monument is 20 minutes east, the state parks and canyons are 5 to 60 minutes out — and there is no comprehensive public transit between them, so a personal vehicle is essential. Guided UTV tours provide transport once you are on the trail."}},
+          {"@type": "Question", "name": "Is Vernal a good alternative to Moab?", "acceptedAnswer": {"@type": "Answer", "text": "For many travelers, yes. Vernal offers red-rock canyons, off-road adventure, and dramatic scenery similar in spirit to Moab, but with far fewer crowds, plus dinosaur fossils and petroglyphs that Moab cannot match. It is a strong choice for visitors who want adventure without the congestion."}}
         ]
       }
     ]
@@ -32,7 +43,7 @@ const bodyHtml = `
 
   <!-- AI Summary Block -->
   <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
-    Things to do in Vernal, Utah include guided Kawasaki KRX 1000 UTV tours with Adventure Tours Vernal, visiting Dinosaur National Monument, exploring Fremont and Ute petroglyphs, hiking Ashley National Forest, fishing the Green River, and visiting Red Fleet State Park. Vernal is Utah's Dinosaur Country — a hub for outdoor recreation, backcountry adventure, and ancient history without the crowds of southern Utah.
+    Things to do in Vernal, Utah include visiting Dinosaur National Monument and its Wall of Bones, taking a guided Kawasaki KRX 1000 UTV tour with Adventure Tours Vernal, viewing Fremont petroglyphs at McConkie Ranch and Dry Fork Canyon, walking the dinosaur trackways at Red Fleet State Park, the Utah Field House of Natural History dinosaur garden, boating and fishing at Steinaker and Flaming Gorge, hiking Ashley National Forest and the Uinta Mountains, and exploring Wild West outlaw history. Vernal is Utah's Dinosaur Country — a gateway for outdoor recreation, backcountry adventure, and ancient history with far fewer crowds than southern Utah. Guided UTV tours run three hours at $349 per machine for up to 2 riders; call (435) 219-9447.
   </p>
 
   <main class="article-page">
@@ -41,59 +52,234 @@ const bodyHtml = `
         <a href="/">Home</a><span class="sep">›</span><span>Things to Do in Vernal</span>
       </div>
       <h1 class="article-title">Things to Do in Vernal, Utah</h1>
-      <p class="article-meta">Updated April 2026 · Adventure Tours Vernal</p>
+      <p class="article-meta">Updated July 2026 · Adventure Tours Vernal</p>
     </header>
 
     <div class="article-body">
-      <div class="article-summary-box">
-        Vernal sits at the gateway to Dinosaur National Monument and the heart of Utah's Uintah Basin. Between red rock canyons, ancient petroglyphs, Wild West outlaw history, and world-class outdoor recreation, there's more to do here than most visitors expect — and far fewer crowds than southern Utah.
+      <div class="article-summary-box"><strong>Quick Answer:</strong> Vernal, Utah is the gateway to Dinosaur National Monument and the heart of Utah's Uintah Basin — a compact adventure hub where you can touch real 149-million-year-old dinosaur fossils, ride red-rock canyons on a guided UTV tour, walk up to thousand-year-old petroglyphs, and fish alpine reservoirs, all within an hour of downtown. Give it two to three days: one for the monument and rock art, one for a backcountry UTV tour and the state parks, and an optional third for Flaming Gorge, fishing, or the high Uintas. The best months are May–June and September–October. It delivers much of what draws people to southern Utah, with a fraction of the crowds.</div>
+
+      <div class="key-takeaways">
+        <h2>Key Takeaways</h2>
+        <ul>
+          <li><strong>Dinosaur National Monument is the headline.</strong> The Quarry Exhibit Hall's Wall of Bones — roughly 1,500 fossils still in the rock — is 20 minutes east of downtown and unlike anything else in the state.</li>
+          <li><strong>The backcountry is the hidden half.</strong> The canyons, arches, and remote rock art around Vernal aren't reachable by paved road. A guided UTV tour is the fastest, most immersive way to see them.</li>
+          <li><strong>It's a genuine family destination.</strong> Kids can touch fossils, walk on dinosaur trackways, and ride along on a tour from age 2 — most highlights involve only short walks.</li>
+          <li><strong>Two to three days is the sweet spot.</strong> One day barely covers the monument; a long weekend lets you see the whole region without rushing.</li>
+          <li><strong>Come in the shoulder seasons.</strong> Late spring and early fall bring comfortable temperatures, active wildlife, and thin crowds. Summer is warm and best for water; winter is quiet but limited.</li>
+          <li><strong>You need a car.</strong> Vernal's attractions are spread across the surrounding countryside, and there's no comprehensive transit between them.</li>
+        </ul>
       </div>
 
-      <h2>Guided UTV Tours Through the Backcountry</h2>
-      <p>The Uintah Basin's backcountry is best experienced from the seat of a side-by-side. Adventure Tours Vernal runs guided Kawasaki KRX 1000 tours across five distinct trail systems — Doc's Beach, Moonshine Arch, Ashley Gorge, Outlaw Trail, and Asphalt Ridge — each offering a different landscape and experience level. Tours are three hours, cover terrain ranging from sandy desert washes to dramatic canyon corridors, and feature stops at petroglyphs, rock art, and historic Wild West sites.</p>
-      <p>Dave and Trudy Wilson guide every tour personally in their own KRX machines, which means you get local knowledge you won't find on any map. It's the single most popular activity for visitors looking for something beyond the typical Vernal itinerary.</p>
+      <h2>Why Visit Vernal, Utah</h2>
+      <p>Most travelers discover Vernal by accident — a name on the map halfway between Salt Lake City and the Colorado Rockies, or the closest town to a dinosaur monument their kids begged to see. Then they arrive, and the town quietly overdelivers. Vernal sits at the edge of the Uintah Basin, ringed by the Uinta Mountains to the north and canyon country to the south and east, at the center of a landscape that packs an improbable amount of variety into a small radius.</p>
+      <p>In a single long weekend you can stand in front of a Jurassic riverbed full of fossilized bone, trace petroglyphs that Fremont people carved into cliff faces more than a thousand years ago, ride a side-by-side through hidden red-rock canyons, catch trophy trout in a flaming-red gorge, and walk in the literal footprints of a dinosaur. That range — deep time, ancient cultures, Wild West history, and serious outdoor recreation, all stacked on top of each other — is what makes Vernal special. It's the kind of place that rewards curiosity.</p>
+      <p>And it does all of this without the crowds. While Moab, Zion, and Arches strain under record visitation, Vernal remains one of Utah's genuinely uncrowded corners. You can often have an overlook, a trailhead, or a petroglyph panel entirely to yourself. For families tired of jostling for parking, for photographers chasing empty light, and for anyone who values a little breathing room, that's not a minor perk — it's the whole appeal.</p>
+
+      <h2>What Makes Vernal Different</h2>
+      <p>Plenty of towns claim a national monument or a good trail system. What sets Vernal apart is the <em>combination</em>, and the fact that so much of it is unusually easy to reach.</p>
+      <p>First, this is <strong>Dinosaur Country</strong> in a way nowhere else can claim. The fossils here aren't casts behind glass in a distant museum — they're real bone, still embedded in the cliff where they were buried, in a spot where you're actually invited to lay a hand on one. Add the dinosaur trackways at Red Fleet, the Field House's outdoor dinosaur garden, and the Morrison Formation rock that made the region famous, and you have a destination built around one of the most captivating subjects on earth.</p>
+      <p>Second, Vernal offers a <strong>front-country and a backcountry</strong>, and knowing the difference is the key to a great trip. The front country is everything you can drive to: the monument, the state parks, the museum, downtown. The backcountry is the vast web of public land, canyons, and off-road trails that surrounds all of it — country most visitors never see because you can't get there on pavement. The town's guided UTV tours exist to bridge that gap, and they're the reason a Vernal trip can feel like an expedition rather than a drive-by.</p>
+      <p>Third, it's a <strong>real, working town</strong>, not a resort built for tourism. That means honest prices, unpretentious food, genuine local knowledge, and a Main Street that goes about its business whether you're here or not. For a certain kind of traveler, that authenticity is worth more than any amenity.</p>
+
+      <h2>The Top Things to Do in Vernal (At a Glance)</h2>
+      <p>If you're short on time and just want the shortlist, here's the region distilled. Each of these gets its own detailed section below, and our companion guide to <a href="/things-to-do/vernal-utah-attractions/">the top attractions in and around Vernal</a> ranks them with visiting logistics.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Attraction</th><th>What It Is</th><th>Distance from Vernal</th><th>Best For</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Dinosaur National Monument</td><td>1,500+ real fossils in the rock; canyon country</td><td>~20 min east</td><td>Everyone; first-timers</td></tr>
+            <tr><td>Guided UTV Tour</td><td>Backcountry canyons, arches, remote rock art</td><td>Departs Vernal</td><td>Adventure seekers, families</td></tr>
+            <tr><td>McConkie Ranch Petroglyphs</td><td>Major Fremont rock-art panels</td><td>~15–20 min north</td><td>History, photography</td></tr>
+            <tr><td>Red Fleet State Park</td><td>Dinosaur trackways + red-rock reservoir</td><td>~15 min north</td><td>Families, swimming</td></tr>
+            <tr><td>Utah Field House of Natural History</td><td>Museum + outdoor dinosaur garden</td><td>Downtown</td><td>Kids, rainy days</td></tr>
+            <tr><td>Steinaker State Park</td><td>Swimming, boating, paddling, camping</td><td>~5–10 min north</td><td>Summer, families</td></tr>
+            <tr><td>Flaming Gorge</td><td>Trophy fishing, red-canyon reservoir</td><td>~1 hr north</td><td>Anglers, scenic drives</td></tr>
+            <tr><td>Ashley National Forest / Uintas</td><td>Alpine hiking, camping, lakes</td><td>~30–60 min north</td><td>Hikers, cooler summer days</td></tr>
+          </tbody>
+        </table>
+      </div>
 
       <h2>Dinosaur National Monument</h2>
-      <p>The Quarry Exhibit Hall at Dinosaur National Monument contains over 1,500 dinosaur fossils still embedded in the rock face — one of the most complete Jurassic-era fossil displays anywhere in the world. Beyond the quarry, the monument stretches across 210,000 acres of canyon country along the Green and Yampa rivers, with scenic drives, petroglyphs, and backcountry hiking.</p>
-      <p>The monument is just 20 minutes east of downtown Vernal and open year-round, though the quarry building operates seasonally. Plan at least a half-day; a full day is better if you want to explore the canyons beyond the visitor center.</p>
+      <p>This is the reason most people first put Vernal on their map, and it earns top billing. The <strong>Quarry Exhibit Hall</strong>, about 20 minutes east near Jensen, is a climate-controlled building constructed directly over a cliff face that holds roughly 1,500 dinosaur bones — skulls, limbs, and vertebrae of animals like <em>Allosaurus</em>, <em>Stegosaurus</em>, <em>Diplodocus</em>, and <em>Apatosaurus</em> — still embedded in the rock exactly where a Jurassic river buried them about 149 million years ago. There's a spot where you're invited to touch a genuine fossil in the wall, and watching that moment land with a child (or an adult) never gets old.</p>
+      <p>Beyond the quarry, the monument sprawls across more than 200,000 acres of canyon country along the Green and Yampa rivers. The <strong>Cub Creek scenic drive</strong> (Tour of the Tilted Rocks) passes tilted rock layers, roadside petroglyphs, and the frontier homestead of Josie Bassett Morris, who lived there largely alone for about half a century. Short trails, a fossil discovery walk, and abundant wildlife round out a visit. Give it a half day at minimum; a full day if you want to add hikes and the Colorado-side canyons.</p>
+      <div class="article-tip"><strong>Plan the monument properly:</strong> hours, fees, and the seasonal quarry shuttle change through the year. Our complete, standalone <a href="/dinosaur-national-monument/visiting-dinosaur-national-monument/">guide to visiting Dinosaur National Monument</a> walks through the whole visit — what to prioritize, the best drives and hikes, season-by-season advice, and family and accessibility tips. Read it before you go, and always confirm current operations with the National Park Service.</p>
 
-      <h2>Petroglyphs, Rock Art & Ancient History</h2>
-      <p>The Vernal area holds some of the densest concentrations of rock art in the American West. Fremont culture petroglyphs and pictographs dating back over a thousand years are scattered across canyon walls throughout the basin. McConkie Ranch, Dry Fork Canyon, and sites along the backcountry trails accessible by UTV are among the best-preserved examples.</p>
-      <p>Several Adventure Tours Vernal trail routes pass directly by rock art panels and ancient ruins, giving riders access to sites most visitors never see.</p>
+      <h2>Guided UTV Adventures</h2>
+      <p>Here's the part most first-time visitors miss entirely. The monument shows you fossils and roadside overlooks, but it doesn't show you the wild backcountry that surrounds Vernal — the hidden canyons, natural arches, and remote petroglyph panels that no paved scenic drive reaches. That country is exactly where a guided UTV tour comes in, and it's the single most immersive way to experience what makes this landscape unique.</p>
+      <p>Adventure Tours Vernal runs guided <strong>Kawasaki KRX 1000</strong> tours across five distinct trail systems, each with its own character: sandy desert washes at <strong>Doc's Beach</strong>, red-rock canyon at <strong>Moonshine Arch</strong> ending at a hidden sandstone arch, dramatic corridors at <strong>Ashley Gorge</strong>, outlaw hideout country on the <strong>Outlaw Trail</strong>, and panoramic ridge views at <strong>Asphalt Ridge</strong>. Along the way you stop at Fremont and Ute petroglyphs, natural arches, and Wild West landmarks most visitors never see.</p>
+      <p>The machines are 2-seaters with a full roll cage, power steering, and FOX 2.5 PODIUM LSC suspension built for comfort over rough terrain. Tours run about three hours at <strong>$349 per machine</strong> for up to two riders, with all helmets and safety gear included, and Dave and Trudy Wilson guide every tour personally — which means local knowledge you won't find on any map. Passengers can ride along from age 2 with a parent; drivers must be 18 or older. If your group has an odd number, a ride-along option lets a third person join as a passenger with a guide.</p>
+      <div class="article-tip"><strong>Which trail should you pick?</strong> Families with younger kids tend to love Doc's Beach (wide, approachable, sandy) and Moonshine Arch (a real canyon adventure with a payoff at the end). Compare all five side by side in our <a href="/utv/">UTV tours hub</a>, then <a href="/booking/">book a tour</a> or call <strong>(435) 219-9447</strong> to match a trail to your group.</p>
 
-      <h2>Hiking, Fishing & State Parks</h2>
-      <p>Red Fleet State Park features dinosaur trackways preserved in the sandstone shoreline — actual three-toed theropod prints you can walk right up to. Steinaker State Park and Starvation State Park offer boating, fishing, and camping. The Flaming Gorge area, about an hour north, is one of Utah's premier fishing destinations for lake trout and kokanee salmon.</p>
-      <p>Ashley National Forest covers the mountains north of town with trails ranging from easy valley walks to rugged alpine routes above 10,000 feet. The Uinta Highline Trail is a bucket-list backpacking route for experienced hikers.</p>
+      <h2>Museums &amp; Indoor Attractions</h2>
+      <p>When the weather turns or the family needs a break from the sun, downtown Vernal has a genuine anchor: the <strong>Utah Field House of Natural History State Park Museum</strong>. Its outdoor <strong>Dinosaur Garden</strong> features life-size replicas you can walk among — a guaranteed hit with kids — while the indoor galleries cover the geology, paleontology, and cultural history of the Uintah Basin. Plan one to two hours; it's the region's best rainy-day option and a perfect primer before or after the monument.</p>
+      <p>Downtown also rewards a slow stroll. Vernal's Main Street carries the region's classic pink dinosaur imagery, local shops, and small galleries, and it's a comfortable place to regroup between adventures. Keep an eye out for seasonal community events and the area's western heritage displays.</p>
+      <!-- VERIFY WITH OFFICIAL SOURCE: Utah Field House hours, admission fees, and current exhibit list change seasonally — confirm on the Utah State Parks site before quoting specifics. Do not publish set hours/prices here. -->
 
-      <h2>Wild West History & Local Culture</h2>
-      <p>Vernal's backcountry is steeped in outlaw history — Butch Cassidy and the Wild Bunch used the canyons east of town as hideouts, and Josie Bassett Morris's cabin still stands in the monument. The Utah Field House of Natural History in downtown Vernal houses dinosaur exhibits, geological displays, and an outdoor dinosaur garden that's a hit with families.</p>
-      <p>Downtown Vernal itself has a growing restaurant scene, local shops, and a walkable Main Street that makes a good home base between adventures.</p>
+      <h2>Petroglyphs &amp; Ancient Rock Art</h2>
+      <p>The Vernal area holds one of the densest concentrations of rock art in the American West. The <strong>Fremont people</strong> lived and farmed across these canyons for centuries, leaving behind elaborate petroglyphs — figures, animals, and abstract designs pecked into the desert-varnished rock — and later the <strong>Ute</strong> added their own. Standing in front of a panel a thousand years old, in a quiet canyon with no one else around, is one of the region's most moving experiences.</p>
+      <p>The most accessible showcase is <strong>McConkie Ranch</strong> in Dry Fork Canyon, north of town, where large, detailed panels are visible from a maintained trail along the canyon wall — free to visit and roughly an hour to see the main figures. Inside the monument, the <strong>Cub Creek petroglyphs</strong>, including the famous lizard panel, are must-see roadside stops. Deeper still, remote panels scattered across the surrounding backcountry are reachable only on foot or by guided <a href="/utv/">UTV tour</a>.</p>
+      <p>Rock art is irreplaceable and legally protected: never touch a panel — skin oils accelerate its decay — and photograph from a respectful distance. Our dedicated guide to <a href="/dinosaur-national-monument/petroglyphs-rock-art-vernal/">petroglyphs and rock art near Vernal</a> covers the cultures, the etiquette, and where to find the best sites.</p>
 
-      <div class="article-tip">
-        <strong>Insider Tip:</strong> Most visitors come for Dinosaur National Monument and leave. The real Vernal experience is in the backcountry — the trails, canyons, and rock art that you can't reach from a paved road. A guided UTV tour is the fastest way to see what makes this place special.
+      <h2>Wild West History &amp; Local Heritage</h2>
+      <p>The human story here didn't end with the Fremont. The rugged canyons east and south of Vernal were, a century ago, some of the most effective hideout country in the American West — and they earned a genuine outlaw reputation. This is <strong>Butch Cassidy and the Wild Bunch</strong> country: the maze of remote canyons along the Outlaw Trail gave riders a place to disappear between jobs, and the terrain that made them hard to catch is the same terrain that makes the backcountry so striking to explore today.</p>
+      <p>You can still feel that frontier past. At the end of the monument's Cub Creek road stands the homestead of <strong>Josie Bassett Morris</strong>, a remarkable woman who lived largely alone in her box canyon for roughly fifty years, raising livestock and gardens far from any town — her cabin and outbuildings are among the region's quietest, most human highlights. Vernal itself grew up as a ranching and, later, an energy town, and that working western character still runs through its Main Street, its rodeo and county-fair traditions, and the unhurried friendliness you'll notice the moment you arrive.</p>
+      <p>Several of the guided <a href="/utv/">UTV tour</a> routes trace this outlaw and pioneer country directly, pairing the history with the landscape that shaped it — a reminder that in Vernal, the deep past and the recent past sit side by side, both written into the same rock.</p>
+
+      <h2>Scenic Drives</h2>
+      <p>Some of the region's best experiences happen through a windshield, and the drives around Vernal are worthy destinations in their own right. Each of these is paved and accessible in an ordinary vehicle, though mountain routes are seasonal.</p>
+      <ul>
+        <li><strong>Dinosaur National Monument's Cub Creek Road (Tour of the Tilted Rocks).</strong> Roughly ten miles of tilted rock, roadside petroglyphs, and the Josie Morris cabin, with a self-guided auto-tour booklet from the visitor center. The single best short drive in the area.</li>
+        <li><strong>Flaming Gorge – Uintas National Scenic Byway (US-191 north).</strong> One of Utah's classic drives, climbing from the desert up through Ashley National Forest to the red canyons of Flaming Gorge, with dramatic overlooks along the way. Allow a half to full day round trip.</li>
+        <li><strong>Red Cloud Loop.</strong> A backcountry mountain drive north of Vernal into the aspen and forest of the Uintas — beautiful, especially in fall, but partly unpaved and seasonal. Confirm conditions before setting out.</li>
+        <li><strong>Dry Fork Canyon.</strong> The route to the McConkie Ranch petroglyphs is a scenic short drive through ranch and canyon country in its own right.</li>
+      </ul>
+      <!-- VERIFY WITH OFFICIAL SOURCE: Red Cloud Loop pavement status and seasonal closures vary; the Flaming Gorge byway length/overlooks should be confirmed against Ashley National Forest / UDOT before adding exact mileages. -->
+      <div class="article-tip"><strong>Mountain-drive tip:</strong> High routes into the Uintas open and close with the snow and can hold ice into early summer and again by fall. If you're driving a mountain loop, top off your fuel in Vernal, carry water and layers, and check current road status first.</div>
+
+      <h2>Family Activities</h2>
+      <p>Vernal is one of Utah's most underrated family destinations, precisely because the headline attractions are things kids actually care about — dinosaurs, footprints, canyons, and boats. Where else can your children touch real fossilized bone, stand in a dinosaur's tracks, and ride through canyon country in a side-by-side, all in one weekend?</p>
+      <p>The must-dos for families: the <strong>Quarry Exhibit Hall</strong> and its free Junior Ranger program at the monument; the <strong>dinosaur trackways at Red Fleet State Park</strong>, reached by a short, mostly flat walk; the <strong>Utah Field House dinosaur garden</strong> downtown; swimming and paddling at <strong>Steinaker Reservoir</strong>; and a family-paced <strong>UTV tour</strong> with passengers riding along from age 2. Most of it involves only short walks, and the pace is entirely yours to set.</p>
+      <p>For a complete, kid-focused breakdown — including age guidance, rainy-day backups, and how to keep younger travelers happy — see our dedicated guide to <a href="/things-to-do/fun-things-to-do-vernal-utah-kids/">fun things to do in Vernal with kids</a>.</p>
+
+      <h2>Outdoor Recreation</h2>
+      <p>Strip away the dinosaurs and Vernal would still be a first-rate outdoor town. It sits between high desert canyon country and the 13,000-foot High Uintas — Utah's tallest range — which means an unusual spread of terrain and activities within easy reach.</p>
+      <p><strong>Fishing.</strong> This is serious angling country. <strong>Flaming Gorge</strong>, about an hour north, is one of the West's premier fisheries, known for trophy lake trout and kokanee salmon, while the tailwater of the <strong>Green River</strong> below the dam is a legendary trout stream. Closer to town, <strong>Steinaker</strong> and <strong>Red Fleet</strong> reservoirs offer easygoing shoreline and boat fishing, and the high Uinta lakes hold brook and cutthroat trout.</p>
+      <p><strong>Hiking and backpacking.</strong> Ashley National Forest covers the mountains north of town with everything from easy valley walks to rugged alpine routes above 10,000 feet. The <strong>Uinta Highline Trail</strong> is a bucket-list, high-country backpacking route for experienced hikers. Lower down, the monument and the canyons offer shorter desert hikes to overlooks, arches, and rock art.</p>
+      <p><strong>Water and winter.</strong> Summer brings swimming, paddleboarding, kayaking, and boating on the reservoirs; the Green and Yampa are famous for multi-day whitewater river trips through the monument's canyons. When the snow comes, the Uintas open up for snowmobiling, cross-country skiing, and ice fishing.</p>
+      <div class="article-tip"><strong>Public-land reality:</strong> much of this is remote, with no cell service, no water, and long distances between services. Carry more water than you think you need, tell someone your plan, download maps offline, and check conditions before you go — especially for anything in the high country or on unpaved roads.</div>
+
+      <h2>Where to Eat: Vernal's Restaurants</h2>
+      <p>Vernal won't pretend to be a fine-dining capital, and that's part of its charm. What it offers is honest, hearty, unpretentious food — the kind of western-town cooking that hits after a long day outside. You'll find classic American diners and steakhouses, a solid range of Mexican restaurants reflecting the region's culture, barbecue and burgers built for big appetites, and a few local coffee shops and bakeries for a morning start before you hit the trail.</p>
+      <p>Downtown Main Street is the natural place to graze, and most places are casual and family-friendly. For our current, vetted picks — with the specific restaurants, cuisines, and what each does best — see the companion guide to <a href="/things-to-do/best-restaurants-vernal-utah/">the best restaurants in Vernal, Utah</a>.</p>
+      <!-- VERIFY WITH OWNER / OFFICIAL SOURCE: do not publish specific restaurant names, hours, or menus in this cornerstone — they change. All specifics live in the maintained best-restaurants guide, which is the single source of truth for that list. -->
+
+      <h2>Hidden Gems &amp; Local Secrets</h2>
+      <p>Once you've done the headline sights, these are the quieter corners locals love — the things that turn a good trip into a memorable one.</p>
+      <ul>
+        <li><strong>Remote backcountry petroglyphs.</strong> Beyond McConkie Ranch and Cub Creek, panels hidden in the canyons around Vernal see almost no visitors. Many are reachable only on foot or by guided UTV — and standing alone in front of them is unforgettable.</li>
+        <li><strong>Moonshine Arch.</strong> A striking natural sandstone arch tucked in the red rock north of town — a genuine payoff and a favorite photo spot, and one of the UTV tour destinations.</li>
+        <li><strong>Josie Morris cabin and box canyons.</strong> At the end of the monument's Cub Creek road, this peaceful frontier homestead with its shady side canyons is skipped by hurried visitors and beloved by those who linger.</li>
+        <li><strong>Sunrise and sunset light on the tilted rocks.</strong> The monument's rock layers and the region's canyons come alive in low, raking light. Most day-trippers miss it — early risers and evening stragglers are rewarded.</li>
+        <li><strong>The high Uinta lakes.</strong> A short drive up into the mountains reaches alpine lakes and cool forest — a completely different world from the desert below, and a perfect escape on a hot summer afternoon.</li>
+      </ul>
+
+      <h2>Vernal Through the Seasons</h2>
+      <p>Vernal is a genuine four-season destination, and the right time to come depends on what you want to do. Here's how the year unfolds. For current conditions and packing specifics, pair this with our <a href="/guides/vernal-weather-guide/">Vernal weather guide</a>.</p>
+
+      <h3>Spring (April–June)</h3>
+      <p>Arguably the finest season. Temperatures are comfortable, wildflowers appear, wildlife is active, and the desert country is at its greenest before summer heat sets in. The monument and lower trails are ideal, and UTV tours are superb in the mild air. High mountain routes are still shaking off snow, so save the Uintas for later. Late spring — May into June — is a sweet spot before the summer peak.</p>
+
+      <h3>Summer (July–August)</h3>
+      <p>Peak season and peak heat, with desert daytime temperatures often in the 90s°F. Everything is open, days are long, and this is prime time for water: swimming and boating at Steinaker and Red Fleet, cooling off at Flaming Gorge, and escaping to the high Uintas where the air is refreshingly cool. Plan strenuous activity for the morning, carry plenty of water, use real sun protection, and watch for afternoon thunderstorms.</p>
+
+      <h3>Fall (September–October)</h3>
+      <p>The equal of spring, and many locals' favorite. Temperatures ease, crowds thin, the cottonwoods and aspens turn gold, and the light gets long and warm — a photographer's season. Early fall is ideal for combining the monument, a UTV tour, and a mountain scenic drive while the aspens are turning. A brilliant, uncrowded time to visit.</p>
+
+      <h3>Winter (November–March)</h3>
+      <p>Quiet, stark, and often beautiful under snow — but limited. The town, the monument's core sights, and the Field House stay accessible, but some seasonal facilities, the quarry shuttle, and high-country and unpaved roads close or run reduced hours. It's the season for solitude, snowmobiling, cross-country skiing, and ice fishing in the mountains. A winter visit can be magical; just confirm what's open before you drive, and pack for real cold.</p>
+      <!-- VERIFY WITH OFFICIAL SOURCE: seasonal date ranges above are typical, not guaranteed. Snowpack shifts mountain access by weeks year to year. UTV tour winter availability: VERIFY WITH OWNER before implying year-round operation. -->
+
+      <h2>Best Time to Visit</h2>
+      <p>If you want the short version: <strong>May–June and September–October</strong> are the best all-around windows — comfortable weather, everything open, and thin crowds. Summer is best if water and the high mountains are your priority. Winter is for solitude and snow sports. This table sums it up.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Season</th><th>Weather</th><th>Crowds</th><th>Best For</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Spring (Apr–Jun)</td><td>Mild, greening, occasional wind</td><td>Light–moderate</td><td>Monument, UTV tours, wildflowers, all-around</td></tr>
+            <tr><td>Summer (Jul–Aug)</td><td>Hot desert, cool mountains</td><td>Busiest</td><td>Water sports, high Uintas, long days</td></tr>
+            <tr><td>Fall (Sep–Oct)</td><td>Cooling, golden color, superb light</td><td>Light</td><td>Photography, scenic drives, all-around</td></tr>
+            <tr><td>Winter (Nov–Mar)</td><td>Cold, snow possible; limited access</td><td>Very light</td><td>Solitude, snow sports, ice fishing</td></tr>
+          </tbody>
+        </table>
       </div>
+
+      <h2>The Perfect Vernal Weekend (2-Day Itinerary)</h2>
+      <p>Two days is enough to hit the essentials without rushing. This plan assumes you're basing in Vernal and have a vehicle.</p>
+      <p><strong>Day 1 — Dinosaurs &amp; rock art.</strong> Start early at <strong>Dinosaur National Monument</strong>: the Quarry Exhibit Hall and Wall of Bones, then the Cub Creek scenic drive with its roadside petroglyphs and the Josie Morris cabin. Head back into Vernal for lunch on Main Street. In the afternoon, drive up to <strong>McConkie Ranch</strong> in Dry Fork Canyon for the Fremont petroglyph panels, or cool off with a swim at <strong>Steinaker</strong> or <strong>Red Fleet</strong> — where the kids can walk the dinosaur trackways. Dinner in town.</p>
+      <p><strong>Day 2 — Backcountry adventure.</strong> Spend the morning on a guided <strong>UTV tour</strong> into the canyons — hidden arches, remote rock art, and terrain you can't reach any other way. After lunch, choose your finish: the <strong>Utah Field House</strong> and its dinosaur garden for an easy afternoon, a short hike, or the start of the Flaming Gorge scenic drive for golden-hour overlooks. Celebrate a full weekend with a hearty dinner before you head out.</p>
+      <div class="article-tip"><strong>Booking order matters:</strong> reserve your UTV tour first and build the rest of the weekend around it — tour times anchor the day, and the monument and parks are flexible around them. <a href="/booking/">Check availability here</a>.</div>
+
+      <h2>A Three-Day Vernal Itinerary</h2>
+      <p>With a third day you can slow down and add the region's bigger excursions.</p>
+      <p><strong>Day 1 — Dinosaur National Monument, in full.</strong> Give the monument a proper day: the Quarry Exhibit Hall at opening, the Fossil Discovery walk, the entire Cub Creek drive with every petroglyph stop, and the Josie Morris cabin. Picnic in the park or return to town. If you have the energy, add a short Split Mountain–area hike in the late afternoon.</p>
+      <p><strong>Day 2 — UTV tour &amp; state parks.</strong> A morning guided UTV tour into the backcountry, lunch in Vernal, then an afternoon at Steinaker or Red Fleet for swimming, paddling, the dinosaur trackways, and easy shoreline time. A relaxed, active day that balances adrenaline and downtime.</p>
+      <p><strong>Day 3 — Flaming Gorge &amp; the mountains.</strong> Take the Flaming Gorge scenic byway north into Ashley National Forest and the red canyons of the gorge. Fish, boat, picnic at an overlook, or hike a stretch of the high country — and in fall, chase the aspen color. It's a full-day loop that shows you the alpine half of the region, a perfect contrast to the desert of the first two days.</p>
+      <p>Coming from further afield? Vernal is about a three-hour drive from Salt Lake City — see our <a href="/from/salt-lake-city/">Salt Lake City to Vernal travel guide</a> for the route and trip-planning details.</p>
+
+      <h2>What to Pack for Vernal</h2>
+      <p>The single biggest mistake visitors make is under-preparing for high-desert and high-elevation conditions. Vernal sits above 5,000 feet, the sun is intense, the air is dry, and temperatures swing hard between midday and night. Pack for that reality:</p>
+      <ul>
+        <li><strong>Water, and lots of it</strong> — at least a half-gallon per person for any active day, more in summer.</li>
+        <li><strong>Sun protection</strong> — wide-brim hat, sunglasses, high-SPF sunscreen, and lip balm. Shade is scarce.</li>
+        <li><strong>Layers</strong> — mornings and evenings can be cool even when afternoons are hot; a light jacket or fleece earns its place year-round, and real cold-weather gear in winter.</li>
+        <li><strong>Sturdy closed-toe shoes</strong> for rocky trails, slickrock, and the trackways.</li>
+        <li><strong>A full tank of fuel</strong> — fill up in town; services are sparse in the backcountry and mountains.</li>
+        <li><strong>Camera and binoculars</strong> for wildlife, overlooks, and petroglyph detail.</li>
+        <li><strong>Offline maps and saved info</strong> — cell service is unreliable to nonexistent across much of the region.</li>
+      </ul>
+      <p>For a season-by-season breakdown — and specific advice for a UTV tour day — see our detailed <a href="/guides/what-to-bring/">what to bring guide</a>, and check the <a href="/guides/vernal-weather-guide/">Vernal weather guide</a> before you finalize your bag.</p>
+
+      <h2>Practical Planning Tips</h2>
+      <p><strong>Getting there.</strong> Vernal is about a three-hour drive east of Salt Lake City on US-40, and Salt Lake City is the nearest major airport. The region also connects east into Colorado. A car is essential once you arrive — attractions are spread across the countryside with no comprehensive transit between them.</p>
+      <p><strong>How long to stay.</strong> Two days covers the essentials; three lets you add Flaming Gorge and the mountains without rushing. A single day only allows the monument or one other headline activity — most visitors wish they'd stayed longer.</p>
+      <p><strong>Where to base.</strong> Downtown Vernal is the practical hub — lodging, restaurants, fuel, and guide services all cluster here, and everything else is a short drive out. Camping and cabins are available at the state parks and up in Ashley National Forest for those who want to stay closer to the outdoors.</p>
+      <p><strong>Book the anchor activities first.</strong> Reserve a UTV tour and any river trips in advance, especially in summer and on weekends, then fit the flexible sights around them.</p>
+      <p><strong>Verify the details.</strong> Hours, fees, shuttle operations, and road and trail conditions all change seasonally — always confirm current operations with the National Park Service, Utah State Parks, and Ashley National Forest before you go. For a full library of planning resources, browse our <a href="/guides/">Vernal travel guides</a>.</p>
+      <div class="article-tip"><strong>The one thing I tell everyone:</strong> don't treat Vernal as a drive-through on the way to somewhere else. The visitors who give it two or three days — and who make time for the backcountry, not just the paved sights — leave understanding why those of us who live here never tire of it.</div>
 
       <!-- FAQ Section -->
       <div class="article-faq">
         <h2>Frequently Asked Questions</h2>
         <div class="faq-item">
           <h3>What are the best things to do in Vernal, Utah?</h3>
-          <p>Top activities include guided UTV tours through the backcountry, visiting Dinosaur National Monument, exploring Fremont and Ute petroglyphs, hiking in Ashley National Forest, fishing the Green River, and visiting Red Fleet State Park for dinosaur trackways.</p>
+          <p>The best things to do in Vernal are a guided backcountry UTV tour, visiting Dinosaur National Monument and its Wall of Bones, viewing Fremont petroglyphs at McConkie Ranch and Dry Fork Canyon, walking the dinosaur trackways at Red Fleet State Park, the Utah Field House of Natural History dinosaur garden, and fishing or boating at Steinaker, Red Fleet, and Flaming Gorge.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How many days do you need in Vernal, Utah?</h3>
+          <p>Two to three days is ideal. One day for Dinosaur National Monument and petroglyphs, one day for a guided UTV tour and the state parks, and an optional third day for Flaming Gorge, fishing, or hiking in the Uinta Mountains. A single day only allows time for the monument or one other headline activity.</p>
         </div>
         <div class="faq-item">
           <h3>Is Vernal, Utah worth visiting?</h3>
-          <p>Absolutely. Vernal is the gateway to Dinosaur National Monument, home to some of Utah's most dramatic backcountry trails, and offers outdoor recreation without the crowds of southern Utah's national parks.</p>
+          <p>Yes. Vernal is the gateway to Dinosaur National Monument and packs real dinosaur fossils, ancient rock art, red-rock canyons, Wild West history, and world-class outdoor recreation into a small, uncrowded radius. It offers much of what draws people to southern Utah without the crowds.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What is the number one thing to do in Vernal?</h3>
+          <p>A guided backcountry UTV tour with Adventure Tours Vernal is the single most immersive activity — it combines off-road adventure, petroglyphs, natural arches, and canyon scenery you cannot reach from a paved road into one three-hour experience. Dinosaur National Monument is the top must-see attraction.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is Vernal, Utah good for families with kids?</h3>
+          <p>Very. Kids can touch real dinosaur fossils at Dinosaur National Monument, walk up to dinosaur trackways at Red Fleet State Park, explore the Utah Field House dinosaur garden, and ride along on a guided UTV tour as passengers from age 2 with a parent. Most highlights involve only short walks.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What is the best time of year to visit Vernal, Utah?</h3>
+          <p>Late spring (May–June) and early fall (September–October) offer the most comfortable temperatures, active wildlife, and thinner crowds. Summer is warm, fully open, and best for water activities. Winter is quiet and scenic but cold, with some seasonal facilities and roads closed.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How far is Vernal from Salt Lake City?</h3>
+          <p>Vernal is roughly a three-hour drive east of Salt Lake City on US-40, and Salt Lake City is the nearest major airport. The scenic route climbs over the Uinta Mountains and through Daniels Summit and Strawberry Reservoir country.</p>
         </div>
         <div class="faq-item">
           <h3>What is Vernal, Utah known for?</h3>
-          <p>Vernal is known as Dinosaur Country — it sits at the edge of Dinosaur National Monument and the Uintah Basin, surrounded by red rock canyons, ancient petroglyphs, Wild West history, and world-class outdoor recreation.</p>
+          <p>Vernal is known as Utah's Dinosaur Country. It sits at the edge of Dinosaur National Monument in the Uintah Basin, surrounded by red-rock canyons, Fremont and Ute petroglyphs, Wild West outlaw history, and outdoor recreation on public land.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Do you need a car to visit Vernal?</h3>
+          <p>Yes. Vernal's attractions are spread across the surrounding countryside — the monument is 20 minutes east, the state parks and canyons are 5 to 60 minutes out — and there is no comprehensive public transit between them, so a personal vehicle is essential. Guided UTV tours provide transport once you are on the trail.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is Vernal a good alternative to Moab?</h3>
+          <p>For many travelers, yes. Vernal offers red-rock canyons, off-road adventure, and dramatic scenery similar in spirit to Moab, but with far fewer crowds, plus dinosaur fossils and petroglyphs that Moab cannot match. It is a strong choice for visitors who want adventure without the congestion.</p>
         </div>
       </div>
 
       <!-- CTA -->
       <div class="article-cta">
         <h3>Ready to Explore Vernal's Backcountry?</h3>
-        <p>Guided Kawasaki KRX 1000 tours — $299/machine (up to 2 riders) for 3 hours. 5 trails. 5.0 stars.</p>
+        <p>Guided Kawasaki KRX 1000 tours — $349/machine (up to 2 riders) for 3 hours. 5 trails, personally guided by Dave &amp; Trudy Wilson.</p>
         <a href="/booking/" class="cta-btn">Book a Tour</a>
         <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
       </div>
@@ -103,20 +289,20 @@ const bodyHtml = `
     <div class="related-articles">
       <h3>More Vernal Guides</h3>
       <div class="related-grid">
+        <a href="/dinosaur-national-monument/visiting-dinosaur-national-monument/" class="related-card">
+          <h4>Visiting Dinosaur National Monument</h4>
+          <p>The complete local guide to the fossils, drives, and canyons.</p>
+        </a>
         <a href="/things-to-do/vernal-utah-attractions/" class="related-card">
           <h4>Top Vernal Attractions</h4>
           <p>The best sights and places to visit in and around Vernal.</p>
-        </a>
-        <a href="/things-to-do/" class="related-card">
-          <h4>Outdoor Activities in Vernal</h4>
-          <p>Hiking, fishing, UTV tours, and more in the Uintah Basin.</p>
         </a>
         <a href="/things-to-do/fun-things-to-do-vernal-utah-kids/" class="related-card">
           <h4>Things to Do with Kids</h4>
           <p>Family-friendly activities and adventures in Vernal.</p>
         </a>
-        <a href="/utv/best-utv-trails-vernal/" class="related-card">
-          <h4>Best UTV Trails Near Vernal</h4>
+        <a href="/utv/" class="related-card">
+          <h4>Guided UTV Tours</h4>
           <p>All 5 trail systems with terrain breakdowns and trail character.</p>
         </a>
       </div>
@@ -136,8 +322,9 @@ const bodyHtml = `
     />
     <script type="application/ld+json" set:html={schema} />
   </Fragment>
-  <Header slot="body" />
+  <Header slot="body" active="things-to-do" />
   <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Things to Do in Vernal' }]} />
   <Fragment slot="body" set:html={bodyHtml} />
+  <HubIndex slot="body" collection="things-to-do" heading="All Things to Do Guides" />
   <Footer slot="body" variant="compact" />
 </BaseLayout>

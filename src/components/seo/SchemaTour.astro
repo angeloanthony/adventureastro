@@ -1,8 +1,8 @@
 ---
 // SchemaTour.astro — Product + Offer for tour pages (Build Guide §5.2).
-// Pricing is intentionally NOT defaulted from SITE.pricing — that block is
-// still a TODO pending the $349/$125 vs. $299/$100 conflict (see
-// PROJECT_STATE.md). Callers must pass an explicit, confirmed price.
+// Pricing is passed explicitly per call rather than defaulted from
+// SITE.pricing, since a tour page may sell a non-base-tour product
+// (e.g. a private or sunset tour) at a different price.
 import { SITE } from '../../config/site';
 import { absoluteUrl } from '../../lib/urls';
 

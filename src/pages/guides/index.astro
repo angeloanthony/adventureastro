@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import HubIndex from '../../components/content/HubIndex.astro';
+// New pillar copy (Phase 3, guides hub activation) — introduces the four
+// existing guides (weather, what to wear, what to bring, Moab alternative)
+// using only facts already established elsewhere on the site (SITE config,
+// the guides themselves). No invented business facts.
+const schema = `{
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "Vernal, Utah Travel Guides — Plan Your UTV Trip",
+        "description": "Trip-planning guides for Vernal, Utah: what to wear, what to bring, seasonal weather, and how Vernal compares to Moab for guided UTV tours.",
+        "author": {"@type": "Organization", "name": "Adventure Tours Vernal"},
+        "publisher": {"@type": "Organization", "name": "Adventure Tours Vernal", "logo": {"@type": "ImageObject", "url": "https://adventuretoursvernal.com/images/logo.webp"}},
+        "datePublished": "2026-07-10",
+        "dateModified": "2026-07-10",
+        "mainEntityOfPage": "https://adventuretoursvernal.com/guides/"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type": "Question", "name": "What guides does Adventure Tours Vernal offer for trip planning?", "acceptedAnswer": {"@type": "Answer", "text": "Adventure Tours Vernal publishes four trip-planning guides: a seasonal weather guide, a what-to-wear guide, a what-to-bring packing checklist, and a comparison guide for visitors coming from Moab. Each covers what you need to know before a guided Kawasaki KRX 1000 UTV tour near Vernal."}},
+          {"@type": "Question", "name": "Do I need to read these guides before booking a UTV tour?", "acceptedAnswer": {"@type": "Answer", "text": "No, but they help you prepare. Most guests only need closed-toe shoes and a valid driver's license — Adventure Tours Vernal provides helmets and safety gear. The guides cover clothing, packing, seasonal weather, and how a Vernal tour compares to Moab."}}
+        ]
+      }
+    ]
+  }`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Vernal, Utah Travel Guides | Adventure Tours Vernal"
+      description="Trip-planning guides for Vernal, Utah — what to wear, what to bring, seasonal weather, and how a guided UTV tour near Vernal compares to Moab. Plan your visit."
+      path="/guides/"
+      type="article"
+      ogTitle="Vernal, Utah Travel Guides | Adventure Tours Vernal"
+      ogDescription="Everything you need to plan a guided UTV tour near Vernal, Utah — clothing, packing, seasonal weather, and a Moab comparison."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="guides" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Guides' }]} />
+  <main class="article-page" slot="body">
+    <header class="article-header">
+      <h1 class="article-title">Vernal, Utah Travel Guides</h1>
+      <p class="article-meta">Adventure Tours Vernal</p>
+    </header>
+    <div class="article-body">
+      <div class="article-summary-box">
+        A guided Kawasaki KRX 1000 UTV tour is easy to prepare for — most guests just need a valid driver's license and closed-toe shoes. These guides cover the rest: what to wear, what to pack, how Vernal's high-desert weather changes by season, and how a Vernal tour stacks up if you're comparing it to Moab.
+      </div>
+
+      <div class="article-tip"><strong>Planning your first visit?</strong> Read the <a href="/dinosaur-national-monument/visiting-dinosaur-national-monument/">Ultimate Guide to Dinosaur National Monument</a> — a complete plan covering fossils, petroglyphs, scenic drives, hikes, and the best time of year to go.</div>
+
+      <h2>Getting Ready for Your Tour</h2>
+      <p>Before you book, it helps to know what the terrain and climate around Vernal actually feel like. The <a href="/guides/what-to-wear-utv-tour/">What to Wear on a Desert UTV Tour</a> guide covers footwear, layering, and sun protection for a three-hour ride in an open-air side-by-side. The <a href="/guides/what-to-bring/">What to Bring</a> checklist rounds out the packing list — what's required, what's provided, and what to leave at home.</p>
+
+      <h2>Timing Your Visit</h2>
+      <p>Vernal sits at 5,331 feet in Utah's high desert, where mornings and afternoons can swing 30–40°F apart. The <a href="/guides/vernal-weather-guide/">Vernal Weather Guide</a> breaks down conditions season by season so you can pick the best window for your trip — and know what to expect if you're touring in the height of summer or the edge of winter.</p>
+
+      <h2>Comparing Vernal to Moab</h2>
+      <p>If you're weighing Vernal against a Moab UTV tour, the <a href="/guides/moab-utv-tours/">Moab UTV Tours Alternative</a> guide lays out the honest comparison — trail crowds, summer temperatures, pricing, and the trails and sights (like Moonshine Arch and Dinosaur National Monument) that Vernal has and Moab doesn't.</p>
+
+      <div class="article-tip">
+        <strong>Not sure where to start?</strong> Call Dave or Trudy at <a href="tel:435-219-9447">(435) 219-9447</a> — they can walk you through what to expect based on your travel dates and group size.
+      </div>
+    </div>
+  </main>
+  <HubIndex slot="body" collection="guides" heading="All Guides" />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

@@ -29,15 +29,14 @@ export const SITE = {
 
   rating: { value: '5.0', count: '82' },
 
-  // PRICING — UNRESOLVED CONFLICT (see PROJECT_STATE.md "Open Decisions").
-  // Live pages currently show $349/machine + $125 ride-along. Build Guide
-  // §1.3 specifies $299/machine + $100 ride-along + $99/hr overage. Do not
-  // guess which is correct — confirm with the business owner, then fill
-  // these in. Nothing should read from this block until it's resolved.
+  // PRICING — CONFIRMED by owner 2026-07-10 (resolves the $349/$125 vs.
+  // $299/$100/$99 conflict noted in PROJECT_STATE.md; see "Rules"). Final:
+  // $349/machine, up to 2 riders included, 3-hour guided tour. Ride-along
+  // and overage figures match what was already live on index.astro.
   pricing: {
-    baseTour: null as number | null, // TODO: confirm — repo shows 349, guide specifies 299
-    rideAlong: null as number | null, // TODO: confirm — repo shows 125, guide specifies 100
-    overagePerHour: null as number | null, // TODO: confirm — guide specifies 99, not present in repo
+    baseTour: 349 as number,
+    rideAlong: 125 as number,
+    overagePerHour: 99 as number,
     currency: 'USD',
   },
 

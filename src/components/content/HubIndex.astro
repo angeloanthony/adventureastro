@@ -11,14 +11,16 @@ type Spoke = { id: string; data: SpokeData };
 
 interface Props {
   collection: HubSlug;
+  heading?: string;
 }
-const { collection } = Astro.props;
+const { collection, heading = 'Explore This Hub' } = Astro.props;
 
 const entries = ((await getCollection(collection)) as unknown as Spoke[]).filter((e) => !e.data.draft);
 entries.sort((a, b) => b.data.updatedDate.valueOf() - a.data.updatedDate.valueOf());
 ---
 {entries.length > 0 && (
   <section class="hub-index" aria-label="All articles in this hub">
+    <h2 class="hub-index-heading">{heading}</h2>
     <ul class="hub-index-list">
       {entries.map((entry) => (
         <li class="hub-index-item">
@@ -29,3 +31,49 @@ entries.sort((a, b) => b.data.updatedDate.valueOf() - a.data.updatedDate.valueOf
     </ul>
   </section>
 )}
+
+<style>
+  .hub-index {
+    max-width: 1000px;
+    margin: 48px auto;
+    padding: 0 20px;
+  }
+  .hub-index-heading {
+    font-size: 1.6rem;
+    margin: 0 0 20px;
+    text-align: center;
+    color: var(--charcoal, #333);
+  }
+  .hub-index-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .hub-index-item {
+    background: var(--off-white, #faf7f2);
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    border-radius: 12px;
+    padding: 20px;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .hub-index-item:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+  .hub-index-item a {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--burnt-orange, #d4764e);
+    text-decoration: none;
+  }
+  .hub-index-item a:hover { text-decoration: underline; }
+  .hub-index-item p {
+    margin: 8px 0 0;
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+</style>

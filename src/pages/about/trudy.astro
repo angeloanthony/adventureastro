@@ -1,0 +1,20 @@
+---
+// /about/trudy/ — canonical author page for Trudy Wilson. No Trudy-specific
+// bio exists on the live site yet (authors.ts.bio is empty → TODO owner
+// input), so the visible intro below is reframed VERBATIM from existing
+// owner content on /about/ (the founding story) — nothing invented — while
+// the Person schema `description` stays absent until Trudy supplies her own.
+import AuthorLayout from '../../layouts/AuthorLayout.astro';
+---
+<AuthorLayout
+  author="trudy"
+  title="Trudy Wilson — Co-Owner & Guide | Adventure Tours Vernal"
+  description="Meet Trudy Wilson, co-owner and guide at Adventure Tours Vernal, sharing guided Kawasaki KRX 1000 UTV adventures across the Uintah Basin near Vernal, Utah."
+>
+  <p slot="bio">
+    Trudy Wilson is co-owner of Adventure Tours Vernal, which she founded with her husband
+    Dave after the couple relocated to Vernal, Utah and fell in love with the Uintah Basin.
+    Alongside Dave, Trudy guides guests on Kawasaki KRX 1000 side-by-side tours, sharing the
+    natural wonders of the region — from Dinosaur National Monument to Flaming Gorge.
+  </p>
+</AuthorLayout>

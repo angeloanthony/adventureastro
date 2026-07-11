@@ -1,9 +1,9 @@
 ---
 // TourCta.astro — the booking CTA block (Build Guide §4.5, §9.1).
-// Pulls pricing from SITE config so a single edit updates every page —
-// but SITE.pricing is currently a TODO (see site.ts), so this renders a
-// "Call for pricing" fallback until the $349/$125 vs. $299/$100 conflict
-// is resolved. Never render more than 2 of these on one page.
+// Pulls pricing from SITE config so a single edit updates every page.
+// The `?? 'Call for pricing'` fallback is kept defensively in case
+// SITE.pricing.baseTour is ever unset again. Never render more than 2 of
+// these on one page.
 import { SITE } from '../../config/site';
 
 interface Props {
@@ -28,3 +28,36 @@ const priceDisplay = SITE.pricing.baseTour != null ? `$${SITE.pricing.baseTour}/
   </p>
   <a href={SITE.booking.path} class="tour-cta-button">Book Your Adventure</a>
 </div>
+
+<style>
+  .tour-cta {
+    max-width: 720px;
+    margin: 40px auto;
+    padding: 32px 24px;
+    text-align: center;
+    background: linear-gradient(135deg, var(--burnt-orange, #d4764e), #b85c38);
+    border-radius: 16px;
+    color: #fff;
+  }
+  .tour-cta-value-prop {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+  .tour-cta-details {
+    margin: 0 0 20px;
+    opacity: 0.95;
+    font-size: 1rem;
+  }
+  .tour-cta-button {
+    display: inline-block;
+    background: #fff;
+    color: var(--burnt-orange, #d4764e);
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+  .tour-cta-button:hover { transform: scale(1.04); }
+</style>

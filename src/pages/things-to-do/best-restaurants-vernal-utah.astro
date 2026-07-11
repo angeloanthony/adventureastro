@@ -115,8 +115,51 @@ const restaurantStyles = `
     }
   </style>`;
 const schema = `
-  {"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Best Restaurants in Vernal, Utah (With Exclusive Discounts for Tour Guests)","description":"A local guide to the best restaurants in Vernal, Utah — organized by cuisine, with exclusive dining discount codes for Adventure Tours Vernal guests.","author":{"@type":"Organization","name":"Adventure Tours Vernal","url":"https://adventuretoursvernal.com"},"publisher":{"@type":"Organization","name":"Adventure Tours Vernal","url":"https://adventuretoursvernal.com"},"datePublished":"2026-04-01","dateModified":"2026-04-01","mainEntityOfPage":"https://adventuretoursvernal.com/things-to-do/best-restaurants-vernal-utah/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are the best restaurants in Vernal, Utah?","acceptedAnswer":{"@type":"Answer","text":"Top Vernal restaurants include 4 Brothers Pizza for casual dining, Betty's Café for breakfast, Swain's Steakhouse for a sit-down dinner, and Plaza Mexicana for authentic Mexican food. Adventure Tours Vernal guests receive exclusive discount codes at many of these locations."}},{"@type":"Question","name":"Are there restaurants near Dinosaur National Monument?","acceptedAnswer":{"@type":"Answer","text":"Yes. Vernal is the gateway town to Dinosaur National Monument, and all the restaurants listed here are within a short drive of the monument entrance. Downtown spots like La Cabaña and Plaza Mexicana on Main Street are an easy stop on the way east toward the Quarry Visitor Center."}},{"@type":"Question","name":"How do I use the Adventure Tours dining discount codes?","acceptedAnswer":{"@type":"Answer","text":"Each participating restaurant has a unique discount code listed on this page. Tap Show to Server on your phone to display a full-screen coupon, or mention the code when ordering. Codes are valid for Adventure Tours Vernal guests with a confirmed booking."}},{"@type":"Question","name":"Where should I eat after a UTV tour in Vernal?","acceptedAnswer":{"@type":"Answer","text":"After a three-hour UTV tour, most guests head for hearty comfort food. 4 Brothers Pizza, Country Grub, and 7-11 Ranch Restaurant are all popular post-ride picks with generous portions and quick service."}},{"@type":"Question","name":"Is there fine dining in Vernal, Utah?","acceptedAnswer":{"@type":"Answer","text":"Vernal's dining scene is more casual than fine dining, but Swain's Steakhouse and Red Canyon Lodge offer upscale sit-down experiences. Red Canyon Lodge near Flaming Gorge is especially scenic and worth the drive for a special meal."}}]},{"@type":"TouristAttraction","name":"Adventure Tours Vernal","description":"Guided UTV tours through Vernal, Utah's desert canyons, petroglyphs, and rock art sites on Kawasaki KRX 1000 side-by-sides.","url":"https://adventuretoursvernal.com","address":{"@type":"PostalAddress","addressLocality":"Vernal","addressRegion":"UT","addressCountry":"US"},"telephone":"+14357905339"}]}
+  {"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Best Restaurants in Vernal, Utah (With Exclusive Discounts for Tour Guests)","description":"A local guide to the best restaurants in Vernal, Utah — organized by cuisine, with exclusive dining discount codes for Adventure Tours Vernal guests.","author":{"@type":"Organization","name":"Adventure Tours Vernal","url":"https://adventuretoursvernal.com"},"publisher":{"@type":"Organization","name":"Adventure Tours Vernal","url":"https://adventuretoursvernal.com"},"datePublished":"2026-04-01","dateModified":"2026-04-01","mainEntityOfPage":"https://adventuretoursvernal.com/things-to-do/best-restaurants-vernal-utah/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are the best restaurants in Vernal, Utah?","acceptedAnswer":{"@type":"Answer","text":"Top Vernal restaurants include 4 Brothers Pizza for casual dining, Betty's Café for breakfast, Swain's Steakhouse for a sit-down dinner, and Plaza Mexicana for authentic Mexican food. Adventure Tours Vernal guests receive exclusive discount codes at many of these locations."}},{"@type":"Question","name":"Are there restaurants near Dinosaur National Monument?","acceptedAnswer":{"@type":"Answer","text":"Yes. Vernal is the gateway town to Dinosaur National Monument, and all the restaurants listed here are within a short drive of the monument entrance. Downtown spots like La Cabaña and Plaza Mexicana on Main Street are an easy stop on the way east toward the Quarry Visitor Center."}},{"@type":"Question","name":"How do I use the Adventure Tours dining discount codes?","acceptedAnswer":{"@type":"Answer","text":"Each participating restaurant has a unique discount code listed on this page. Tap Show to Server on your phone to display a full-screen coupon, or mention the code when ordering. Codes are valid for Adventure Tours Vernal guests with a confirmed booking."}},{"@type":"Question","name":"Where should I eat after a UTV tour in Vernal?","acceptedAnswer":{"@type":"Answer","text":"After a three-hour UTV tour, most guests head for hearty comfort food. 4 Brothers Pizza, Country Grub, and 7-11 Ranch Restaurant are all popular post-ride picks with generous portions and quick service."}},{"@type":"Question","name":"Is there fine dining in Vernal, Utah?","acceptedAnswer":{"@type":"Answer","text":"Vernal's dining scene is more casual than fine dining, but Swain's Steakhouse and Red Canyon Lodge offer upscale sit-down experiences. Red Canyon Lodge near Flaming Gorge is especially scenic and worth the drive for a special meal."}}]},{"@type":"TouristAttraction","name":"Adventure Tours Vernal","description":"Guided UTV tours through Vernal, Utah's desert canyons, petroglyphs, and rock art sites on Kawasaki KRX 1000 side-by-sides.","url":"https://adventuretoursvernal.com","address":{"@type":"PostalAddress","addressLocality":"Vernal","addressRegion":"UT","addressCountry":"US"},"telephone":"+14352199447"}]}
 `;
+// Restaurant + ItemList schema (Task 2 — structured data only, editorial
+// content unchanged). Every field below is transcribed directly from the
+// visible restaurant cards further down this page — name, address,
+// telephone, cuisine badge, and website link — nothing invented (no
+// priceRange, no geo, no hours: none of those are stated on the page).
+const restaurants = [
+  { name: '4 Brothers Pizza', street: '1060 Market Dr. #5', city: 'Vernal', state: 'UT', zip: '84078', phone: '+14357892222', cuisine: 'Pizza' },
+  { name: 'Country Grub Hamburger Restaurant', street: '2416 W 1500 E', city: 'Vernal', state: 'UT', zip: '84078', phone: '+14357891414', cuisine: 'American' },
+  { name: 'Get Grilled Sandwiches', street: '1096 W Hwy 40', city: 'Vernal', state: 'UT', zip: '84078', phone: '+14357893900', cuisine: 'Sandwiches' },
+  { name: "Abby's Café", street: '73 W Main St.', city: 'Vernal', state: 'UT', zip: '84078', phone: '+14357891366', cuisine: 'Breakfast' },
+  { name: "Betty's Café", street: '416 W Main St.', city: 'Vernal', state: 'UT', zip: '84078', phone: '+14357810827', cuisine: 'American' },
+  { name: "Swain's Steakhouse", street: '29 S Vernal Ave.', city: 'Vernal', state: 'UT', zip: '84078', phone: '+14357892671', cuisine: 'Steakhouse' },
+  { name: '7-11 Ranch Restaurant', street: '77 E Main St.', city: 'Vernal', state: 'UT', zip: '84078', phone: '+14357891170', cuisine: 'American' },
+  { name: 'Red Canyon Lodge', street: '2450 Red Canyon Rd', city: 'Dutch John', state: 'UT', zip: '84023', phone: '+14358892090', cuisine: 'American', url: 'https://www.redcanyonlodge.com' },
+  { name: 'Plaza Mexicana', street: '55 E Main St.', city: 'Vernal', state: 'UT', zip: '84078', phone: '+14357893340', cuisine: 'Mexican' },
+  { name: 'Mi Hacienda', street: '2075 US-40, Suite A', city: 'Vernal', state: 'UT', zip: '84078', phone: '+14357810099', cuisine: 'Mexican' },
+  { name: 'Canton Canyon City Chinese Restaurant', street: '1175 W Hwy 40', city: 'Vernal', state: 'UT', zip: '84078', phone: '+14357891388', cuisine: 'Chinese' },
+  { name: 'La Cabaña', street: '120 E Main St', city: 'Vernal', state: 'UT', zip: '84078', phone: '+14357893151', cuisine: 'Mexican' },
+];
+const restaurantListJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Restaurants in Vernal, Utah Recommended by Adventure Tours Vernal',
+  itemListElement: restaurants.map((r, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Restaurant',
+      name: r.name,
+      servesCuisine: r.cuisine,
+      telephone: r.phone,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: r.street,
+        addressLocality: r.city,
+        addressRegion: r.state,
+        postalCode: r.zip,
+        addressCountry: 'US',
+      },
+      ...(r.url ? { url: r.url } : {}),
+    },
+  })),
+};
 const bodyHtml = `
 
   <!-- Coupon Modal -->
@@ -468,6 +511,7 @@ const bodyHtml = `
     <meta name="ai-content-summary" content="Interactive guide to the best restaurants in Vernal, Utah, with category filters, exclusive coupon codes for Adventure Tours guests, phone numbers, website links, and Google Maps links. Categories: casual/pizza, diners and breakfast, steakhouses and Western dining, Mexican and international. Each restaurant card includes an exclusive discount code with a Show to Server mobile coupon feature.">
     <Fragment set:html={restaurantStyles} />
     <script type="application/ld+json" set:html={schema} />
+    <script type="application/ld+json" set:html={JSON.stringify(restaurantListJsonLd)} />
   </Fragment>
   <Header slot="body" active="food" />
   <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Best Restaurants' }]} />

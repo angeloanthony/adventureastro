@@ -4,12 +4,13 @@ import Header from '../../components/layout/Header.astro';
 import Footer from '../../components/layout/Footer.astro';
 import Seo from '../../components/seo/Seo.astro';
 import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import HubIndex from '../../components/content/HubIndex.astro';
 const schema = `{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"UTV Tours Near Dinosaur National Monument","description":"Guided UTV tours in the backcountry surrounding Dinosaur National Monument, Vernal, Utah.","author":{"@type":"Organization","name":"Adventure Tours Vernal"},"publisher":{"@type":"Organization","name":"Adventure Tours Vernal","logo":{"@type":"ImageObject","url":"https://adventuretoursvernal.com/images/logo.webp"}},"datePublished":"2026-04-08","dateModified":"2026-04-08","mainEntityOfPage":"https://adventuretoursvernal.com/dinosaur-national-monument/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can you do UTV tours near Dinosaur National Monument?","acceptedAnswer":{"@type":"Answer","text":"Yes. Adventure Tours Vernal operates guided Kawasaki KRX 1000 tours through the backcountry surrounding the monument. While motorized vehicles aren't allowed inside the monument, the trails just outside feature the same canyon terrain, petroglyphs, and geological formations."}},{"@type":"Question","name":"How far is Adventure Tours Vernal from Dinosaur National Monument?","acceptedAnswer":{"@type":"Answer","text":"Adventure Tours Vernal is based in Vernal, Utah, approximately 20 minutes west of the monument's Quarry Exhibit Hall. Many visitors pair a UTV tour with a monument visit on the same trip."}},{"@type":"Question","name":"What's the best way to combine a UTV tour with Dinosaur National Monument?","acceptedAnswer":{"@type":"Answer","text":"Book your UTV tour for the morning and visit the monument in the afternoon, or vice versa. A 3-hour guided UTV tour plus a half-day at the monument makes a full day of canyon country adventure."}}]}]}`;
 const bodyHtml = `
 
 
   <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
-    UTV tours near Dinosaur National Monument are offered by Adventure Tours Vernal using guided Kawasaki KRX 1000 side-by-sides. Five trail systems explore the backcountry surrounding the monument with canyons, petroglyphs, natural arches, and desert terrain. Based in Vernal, Utah, 20 minutes from the monument. $299/machine for 3 hours. Call (435) 219-9447.
+    UTV tours near Dinosaur National Monument are offered by Adventure Tours Vernal using guided Kawasaki KRX 1000 side-by-sides. Five trail systems explore the backcountry surrounding the monument with canyons, petroglyphs, natural arches, and desert terrain. Based in Vernal, Utah, 20 minutes from the monument. $349/machine for 3 hours. Call (435) 219-9447.
   </p>
 
   <main class="article-page">
@@ -24,6 +25,8 @@ const bodyHtml = `
         Dinosaur National Monument draws visitors from around the world to see Jurassic-era fossils — but the backcountry surrounding the monument holds an entirely different layer of adventure. Guided UTV tours put you in the middle of canyon terrain, ancient petroglyphs, and desert landscapes that most monument visitors drive right past.
       </div>
 
+      <div class="article-tip"><strong>Start Here:</strong> New to planning a monument trip? Read our <a href="/dinosaur-national-monument/visiting-dinosaur-national-monument/">Ultimate Guide to Dinosaur National Monument</a> — the complete plan covering fossils, petroglyphs, scenic drives, hikes, and the best time to visit.</div>
+
       <h2>The Backcountry Beyond the Monument</h2>
       <p>Motorized vehicles aren't allowed inside Dinosaur National Monument, but the BLM land and backcountry surrounding the monument features the same geological formations, canyon systems, and ancient rock art — plus off-road trail access that puts you deep into terrain the monument's scenic drives can only hint at.</p>
       <p>Adventure Tours Vernal operates five trail systems through this landscape. The Outlaw Trail follows historic routes used by Butch Cassidy's Wild Bunch through remote canyon country. Moonshine Arch winds through red rock canyons to a hidden natural sandstone arch. Ashley Gorge runs through a dramatic corridor with towering walls. The terrain and geology are continuous with what you see inside the monument — you're riding through the same ancient landscape.</p>
@@ -36,7 +39,7 @@ const bodyHtml = `
       <p>For multi-day visitors, adding a UTV tour to your monument itinerary turns a standard national park trip into something much more memorable. The kids will remember the UTV ride longer than the visitor center.</p>
 
       <h2>What the Tour Includes</h2>
-      <p>Kawasaki KRX 1000 2-seater side-by-sides with FOX 2.5 PODIUM LSC suspension, helmets, safety gear, and expert guides. Dave and Trudy Wilson ride alongside your group in their own machines. Three hours, $299 per machine with up to 2 riders. All skill levels welcome — no prior off-road experience needed.</p>
+      <p>Kawasaki KRX 1000 2-seater side-by-sides with FOX 2.5 PODIUM LSC suspension, helmets, safety gear, and expert guides. Dave and Trudy Wilson ride alongside your group in their own machines. Three hours, $349 per machine with up to 2 riders. All skill levels welcome — no prior off-road experience needed.</p>
 
       <div class="article-tip">
         <strong>Timing Tip:</strong> If you're visiting the monument on a weekend or holiday, book your UTV tour for the morning — the quarry gets busy by midday. On weekdays, either order works. Call Dave at (435) 219-9447 and he'll help you plan around your monument schedule.
@@ -51,7 +54,7 @@ const bodyHtml = `
 
       <div class="article-cta">
         <h3>Add Adventure to Your Monument Trip</h3>
-        <p>Guided KRX 1000 tours · $299/machine · 20 min from the monument · 5.0 stars</p>
+        <p>Guided KRX 1000 tours · $349/machine · 20 min from the monument · 5.0 stars</p>
         <a href="/booking/" class="cta-btn">Book a Tour</a>
         <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
       </div>
@@ -81,8 +84,9 @@ const bodyHtml = `
     />
     <script type="application/ld+json" set:html={schema} />
   </Fragment>
-  <Header slot="body" />
+  <Header slot="body" active="dinosaur-national-monument" />
   <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Dinosaur Monument Tours' }]} />
   <Fragment slot="body" set:html={bodyHtml} />
+  <HubIndex slot="body" collection="dinosaur-national-monument" heading="All Dinosaur Monument Guides" />
   <Footer slot="body" variant="compact" />
 </BaseLayout>

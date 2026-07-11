@@ -172,41 +172,199 @@ Governing spec: adventure-tours-vernal-build-guide.pdf (July 2026). Read it plus
   - **Post-deploy tasks (first deploy after this ships):** verify 301s live; submit new
     sitemap in Search Console; watch Coverage for the redirected URLs.
 
+## Completed (cont.)
+
+- ✔ **Phase 3 author system (Tasks 1–2) — 2026-07-10.** Canonical author pages
+  `/about/dave/` + `/about/trudy/` via new `AuthorLayout.astro`. Each emits a
+  ProfilePage → Person node whose `@id` is the STABLE root anchor from
+  `authors.ts` (`…/#dave-wilson`, never the page URL), plus worksFor, knowsAbout
+  (areas of expertise), breadcrumbs (Home › About › Name), self-canonical, OG,
+  SEO, and an auto-populating "Articles by …" listing (empty until spokes exist).
+  - `authors.ts`: `pagePath` now points at the dedicated pages (rewires every
+    byline + Person `url` sitewide in one edit); added `expertise[]` (reused
+    verbatim from the existing `/about/` `knowsAbout` schema — not invented) and
+    `photoExists()`. Dave `bio` = the verbatim owner-published `/about/` Person
+    description; Trudy `bio` left empty (no individual bio on the live site —
+    TODO owner input); her visible intro is reframed from existing founding copy.
+  - **No invented facts:** every field traces to existing site/config copy.
+  - **Missing photos don't fail prod:** `dave.webp`/`trudy.webp` don't exist yet;
+    AuthorByline + AuthorLayout render an initials monogram instead of a broken
+    `<img>`, and `validate-site.mjs` now prints non-blocking owner-input TODOs
+    (photo, bio, sameAs) after the green line.
+  - about.astro links both author pages (reachability). Verified: `astro check`
+    0 errors; build 27 pages (25 + 2); validator green + 5 TODOs; JSON-LD parses.
+
+## Completed (cont.)
+
+- ✔ **Phase 3 UTV hub pilot (Task 3) — 2026-07-10.** Owner-approved "pilot UTV
+  first, then replicate." All 4 UTV spokes converted from legacy `.astro` →
+  content-collection `.mdx`, now rendering through `[hub]/[id].astro` +
+  SpokeLayout.
+  - **Installed `@astrojs/mdx@6.0.3`** (Astro-6 compatible; v7 needs Astro 7) and
+    wired `mdx()` in astro.config — the collection glob already expected `.mdx`;
+    this completes that setup. Legacy `.astro` spokes DELETED (avoids route
+    collision with the generic spoke route; source in git history).
+  - **Faithful reuse, no invention:** editorial copy ported verbatim; existing
+    `datePublished` reused as publish/updated dates; og:image stays `logo.webp`
+    (was the Seo default); FAQ moved to frontmatter → FaqAccordion renders it
+    visibly AND as FAQPage JSON-LD. Minor meta trims only where zod required
+    (title ≤65 / desc ≤165). **author=`dave`** chosen for all 4 (lead guide/owner
+    voice) — an editorial attribution, flagged for owner confirmation.
+  - **Schema upgrade:** Article author is now Person (`#dave-wilson`, stable @id)
+    instead of Organization — the deferred Open-Decision change, correct now that
+    author pages exist. Each spoke emits Article+FAQPage+Breadcrumb+LocalBusiness.
+  - **Framework:** SpokeLayout gained `faq`/`ogTitle`/`ogDescription`; spoke schema
+    gained optional `ogTitle`/`ogDescription`; HubIndex/TourCta/AuthorByline given
+    scoped styles (were classless). Pillar `utv/index.astro` now renders
+    `<HubIndex collection="utv">` listing all 4 spokes.
+  - **Validator:** all 4 UTV entries removed from `LEGACY_SPOKES` — they pass
+    byline/RelatedArticles/thin-content on their own. Tags interlink them (shared
+    `vernal`); each shows 3 related cards.
+  - Verified: `astro check` 0/0; build 27 pages; validator green; all 4 in live
+    sitemap; FAQ/Article(Person)/Breadcrumb schema valid; 1,574 words on the lead
+    spoke. **⚠ Gotcha reconfirmed:** must `rm -rf node_modules/.astro` after
+    adding/removing content files or stale entries persist.
+
+## Completed (cont.)
+
+- ✔ **Phase 3 Things-to-Do + DNM hubs (Tasks 4–5) — 2026-07-10.** Replicated the
+  UTV pattern (owner-approved "convert 3 now, defer restaurants").
+  - Converted to collection `.mdx`: `things-to-do/vernal-utah-attractions`,
+    `things-to-do/fun-things-to-do-vernal-utah-kids` (hub `things-to-do`), and
+    `dinosaur-national-monument/petroglyphs-rock-art-vernal` (hub `dnm`). Legacy
+    `.astro` deleted. Same faithful-reuse rules (copy/dates/FAQ verbatim, Article
+    author→Person dave, meta trimmed only to satisfy zod).
+  - **HubIndex** added to both pillars (`things-to-do/index.astro`,
+    `dinosaur-national-monument/index.astro`): Things-to-Do lists 2 spokes, DNM
+    lists 1. **DNM single-spoke RelatedArticles** solved by the shared `vernal`
+    tag → cross-hub tier-3 pulls UTV/Things-to-Do cards (4 related cards render).
+  - **Hero image compressed:** petroglyphs' `20.webp` 525KB→249KB via sharp
+    (q78) so it passes the ≤500KB gate and stays the og:image (better than the
+    logo fallback). Recompress-in-place failed on Windows (file lock) — wrote to
+    a temp name then swapped.
+  - **best-restaurants deferred** (restaurant listicle — wants Restaurant/ItemList
+    schema, not Article) but its **wrong schema phone `+14357905339` fixed in
+    place → `+14352199447`** (closes that Open Decision). Still grandfathered in
+    `LEGACY_SPOKES` alongside the 4 guides pages.
+  - Verified: `astro check` 0/0; build 27 pages; validator green; all 3 new spokes
+    in live sitemap with full Article(Person)+FAQPage+Breadcrumb+LocalBusiness
+    schema; both HubIndexes render; unique titles/descriptions.
+
+## Completed (cont.)
+
+- ✔ **Phase 3 remaining infrastructure (Tasks 1–6) — 2026-07-10.** Completes the
+  Phase 3 punch list (guides pillar, restaurant schema, nav, SLC template,
+  link audit, validation) before Phase 4 cornerstone content begins.
+  - **Guides hub activated:** all 4 guides (`vernal-weather-guide`,
+    `what-to-wear-utv-tour`, `what-to-bring`, `moab-utv-tours`) converted
+    legacy `.astro` → collection `.mdx` (copy/FAQ/dates reused verbatim
+    where they existed; `what-to-bring`/`moab-utv-tours` had no prior
+    dates — assigned by content-cluster inference, administrative
+    metadata only, not a business fact). New `src/pages/guides/index.astro`
+    pillar (Article+FAQPage schema, HubIndex, new ~450-word intro copy
+    tying the 4 guides together — no invented business facts). Guides
+    removed from validator's `PILLAR_PENDING`/`LEGACY_SPOKES`.
+  - **best-restaurants structured data upgraded:** added `Restaurant` +
+    `ItemList` JSON-LD (12 restaurants; name/address/phone/cuisine/url
+    transcribed directly from the existing visible cards — no invented
+    priceRange/geo/hours). Breadcrumbs/FAQ/canonical/OG were already
+    present from Phase 2/3 — untouched. Editorial content unchanged.
+    Page stays in `LEGACY_SPOKES` (still a hand-authored `.astro`, not a
+    collection spoke — that conversion is separate future work).
+  - **Global nav:** Header gained top-level links for Things to Do, DNM,
+    and Guides (alongside existing Trails); `ActiveKey` extended.
+    Footer's *default* `info` config (rendered by every bare `<Footer />`
+    — i.e. every collection spoke via SpokeLayout) gained an "Explore
+    Vernal" second column linking all 4 active hubs + the new SLC page;
+    index.astro's footer override updated to match. Only real/active
+    hubs are linked — atv/jeep/hiking/camping/fishing/scenic-drives stay
+    unlinked (no pillar yet).
+  - **First city page:** `/from/salt-lake-city/` — new `cities` collection
+    entry (drive time/distance/route are public, verifiable geography,
+    not invented business facts) + `CityLayout` extended with an "Explore
+    Vernal" hub-links section and an optional `relatedLinks` prop (cities
+    aren't a hub collection, so `RelatedArticles`/`HubIndex` don't apply
+    directly — this is the reusable template for future `/from/[city]/`
+    pages). Page carries an explicit in-body TODO comment for
+    owner-supplied local tips/photography — nothing invented to fill it.
+  - **Schema fix:** `citySchema`/`seasonSchema`/`monthSchema` `updatedDate`
+    changed `z.date()` → `z.coerce.date()` — the JSON/YAML dataLoader
+    doesn't auto-parse date strings the way markdown frontmatter does;
+    this broke on the first real `cities` entry and would have broken
+    seasons/months too.
+  - Verified: `astro check` 0 errors; `npm run build` → 29 pages, 0
+    validator errors (only the pre-existing 5 non-blocking author-photo/
+    bio/sameAs TODOs); manual dist spot-checks confirm Dave's author page
+    lists all 4 guides, the restaurant ItemList has 12 entries, the SLC
+    page links all 4 hubs and is itself linked from the default footer
+    (reachable, not orphaned), and Header on every page links all 4 hubs.
+
+## Completed (cont.)
+
+- ✔ **G1 pricing RESOLVED (2026-07-11, owner-confirmed final pricing: $349/machine,
+  up to 2 riders included, 3-hour guided tour).** Sitewide normalization pass —
+  every remaining `$299`/`$100`-ride-along reference (the Build Guide's superseded
+  figures) replaced with the confirmed `$349`/`$125` figures already live on
+  `index.astro`; `$99/hr` overage was already consistent everywhere and untouched.
+  - `SITE.pricing` in `site.ts` populated (`baseTour: 349, rideAlong: 125,
+    overagePerHour: 99`) — no longer `null`/TODO. `TourCta.astro`, `SchemaTour.astro`,
+    `TourLayout.astro` had their stale conflict-TODO comments removed (their logic
+    already correctly read from `SITE.pricing`/took an explicit prop — no code
+    changes needed there beyond the comment cleanup). `TourCta` now renders a live
+    `$349/machine` price instead of the "Call for pricing" fallback everywhere it's
+    used (Spoke/Pillar/Hub/Author/City layouts).
+  - Updated: `llms.txt` pricing line + Last Updated stamp, and every content
+    `.mdx`/`.astro` page that quoted `$299`/`$100` (10 UTV/Things-to-Do/DNM/ATV/Jeep
+    pages) — visible copy, hidden AI-summary blocks, and FAQ text all updated in the
+    same pass so no page is inconsistent with another.
+  - `guides/moab-utv-tours.mdx` needed a substantive fix, not just a find/replace:
+    its "Solo $299 / Couple $398" two-tier pricing card and comparison-table row
+    charged extra for a 2nd rider, contradicting the now-confirmed "up to 2 riders
+    included" model (and, on inspection, contradicting the site's own $299-era copy
+    elsewhere too — a pre-existing bug, not something the price bump created). Fixed
+    to a flat $349 for both tiers; the couple's-tour bullet changed from an
+    unverifiable "Save $200+" to a conservative, defensible "Save $60+" (true across
+    Moab's full quoted $411–$597 range). `updatedDate` bumped to reflect the edit.
+    Layout/card structure left untouched — this was a pricing-accuracy fix, not a
+    redesign.
+  - Verified: repo-wide grep for `299` after the pass returns only the historical
+    `site.ts` comment (documents the resolved conflict), `PROJECT_STATE.md`'s own
+    history log, and unrelated CSS hex colors (`#229954`) — zero live pricing
+    references to the old figures remain. `astro check` 0 errors; build 30 pages;
+    validator green.
+
 ## Pending
 
-- **Before Phase 3 content:**
-  1. Author photos (`/images/dave.webp`, `/images/trudy.webp`) + owner-supplied bios,
-     credentials, sameAs profile URLs
-  2. G1 pricing — resolve after Phase 3 content, BEFORE significant indexing of new
-     pages (llms.txt already says $299 while index shows $349 — live inconsistency)
-- **Phase 3 content tasks inherited from the merges:** fold any unique content from
+- Author photos (`/images/dave.webp`, `/images/trudy.webp`) + owner-supplied bios,
+  credentials, sameAs profile URLs (Dave/Trudy)
+- SLC city page: owner-supplied local visitor tips + original route photography
+  (marked TODO in-page, not invented)
+- Convert remaining legacy `.astro` spokes to collection content: best-restaurants
+  (wants its own Restaurant/ItemList-aware layout pass), atv-trails, jeep-trails
+  (once their hubs launch)
+- Phase 3 content tasks inherited from the merges: fold any unique content from
   the two deleted pages (git history: `src/pages/moab-alternative.astro`,
-  `src/pages/outdoor-activities-vernal-utah.astro`) into their merge destinations.
-- **Phase 3 (first permanent content), in order:** author pages at /about/dave/ +
-  /about/trudy/ (not gated on anything but photos/bios) → UTV Hub upgrade → Things to Do
-  → DNM → Guides pillar → SLC city page → nav/footer hub links → convert legacy spokes
-  to collection content (burn down the validator LEGACY_SPOKES list; compress each
-  page's oversized images while converting).
-- Phase 4: cornerstone content (History/Stories, more cities, tools, i18n).
-- Schema-component migration + visible breadcrumbs — deferred, best done with Phase 3 (see below)
+  `src/pages/outdoor-activities-vernal-utah.astro`) into their merge destinations
+- Phase 4: cornerstone content (History/Stories, more cities, tools, i18n)
+- Schema-component migration + visible breadcrumbs — deferred, best done alongside
+  the remaining legacy-spoke conversions (see above)
 
 ## Open Decisions (user)
 
-- Pricing conflict: repo pages show $349/$125 vs guide+llms.txt $299/$100/$99 overage — `SITE.pricing` in site.ts left as TODO/null pending this
+- ~~Pricing conflict~~ → RESOLVED 2026-07-11: owner confirmed $349/machine, up to 2
+  riders included, 3-hour tour. `SITE.pricing` populated; sitewide normalization
+  complete (see Completed section above). Ride-along ($125) and overage ($99/hr)
+  carried forward from what was already live on index.astro.
 - ~~URL migration approval~~ → APPROVED + EXECUTED 2026-07-10 (see G2 section above)
 - ~~Page merges~~ → APPROVED + redirected 2026-07-10; content folding is a Phase 3 task
 - Footer copyright: cozelosdata.com (14 pages) vs "Adventure Tours Vernal" (best-restaurants) — preserved as-is per page via Footer's `copyright` prop, not normalized
-- **Pricing (blocks schema componentization):** `index.astro` still shows $349/machine + $125
-  ride-along + $99/hr, while all 16 content pages AND the guide use $299. `SITE.pricing` still
-  null. Preserved as-is (not touched) in Phase 2. Confirm the correct numbers → then align
-  index, fill `SITE.pricing`, and the Tour/Offer schema components become usable.
 - **Schema components deferred (Phase 2):** existing hand-JSON-LD was preserved verbatim, NOT
   swapped to the Phase-1 `SchemaArticle/SchemaLocalBusiness/SchemaTour` components. Reason:
   faithful reproduction would change author entity (existing = Organization; component = Person),
-  publisher shape, date formats, business `@type`, and Tour/Offer needs the unresolved price —
-  i.e. it changes structured data. Recommend doing this WITH the Phase-3 collection migration
-  once pricing is resolved and author attribution (dave/trudy/org) is decided.
-- best-restaurants-vernal-utah.astro's JSON-LD still has the old wrong phone `+14357905339` (Phase 0 fixed the display format but missed this schema field) — needs a decision to fix now or bundle with next schema pass
+  publisher shape, date formats, business `@type` — i.e. it changes structured data. Pricing is
+  no longer the blocker (resolved above); still recommend doing this WITH the Phase-3 collection
+  migration once author attribution (dave/trudy/org) is decided.
+- ~~best-restaurants-vernal-utah.astro's JSON-LD wrong phone `+14357905339`~~ → FIXED 2026-07-10 → `+14352199447` (during the Things-to-Do hub activation; page kept as legacy .astro pending a Restaurant/ItemList schema pass)
 - Minor: booking.astro's "Book Now" nav button lost its `active` highlight state (Header.astro's shared nav has no concept of a "booking" active page — would need Header's `ActiveKey` type extended to restore); moab-utv-tours/moab-alternative kept a harmless duplicate navbar-shadow-on-scroll listener alongside Header's own
 
 ## Rules

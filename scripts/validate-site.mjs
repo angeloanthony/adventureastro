@@ -173,20 +173,15 @@ const mainWordCount = (html) => {
 //  - PILLAR_PENDING: hubs whose spokes moved in before the pillar is
 //    written (guides pillar is Phase 3 hub #4).
 const LEGACY_SPOKES = new Set([
-  'utv/best-utv-trails-vernal/index.html',
-  'utv/side-by-side-rentals-vernal-utah/index.html',
-  'utv/group-utv-tours-vernal/index.html',
-  'utv/backcountry-tours-vernal-utah/index.html',
-  'things-to-do/vernal-utah-attractions/index.html',
-  'things-to-do/fun-things-to-do-vernal-utah-kids/index.html',
+  // Phase 3: UTV (4), Things-to-Do (attractions, kids), DNM (petroglyphs),
+  // and Guides (weather, what-to-wear, what-to-bring, moab-utv-tours)
+  // spokes converted to collection content — removed from this list; they
+  // render via [hub]/[id].astro + SpokeLayout and pass every check.
+  // Still grandfathered: best-restaurants (deferred — restaurant listicle,
+  // wants Restaurant/ItemList schema, not Article — see Task 2).
   'things-to-do/best-restaurants-vernal-utah/index.html',
-  'dinosaur-national-monument/petroglyphs-rock-art-vernal/index.html',
-  'guides/what-to-bring/index.html',
-  'guides/what-to-wear-utv-tour/index.html',
-  'guides/vernal-weather-guide/index.html',
-  'guides/moab-utv-tours/index.html',
 ]);
-const PILLAR_PENDING = new Set(['guides']);
+const PILLAR_PENDING = new Set();
 for (const hub of HUB_SLUGS) {
   const spokes = [...pages.keys()].filter((k) => k.startsWith(`${hub}/`) && k !== `${hub}/index.html`);
   if (spokes.length === 0) continue;
@@ -205,6 +200,22 @@ for (const hub of HUB_SLUGS) {
   }
 }
 
+// --- Non-blocking owner-input TODOs (Phase 3 author system). Per the
+// brief, missing owner photos/bios must NOT fail production — they are
+// reported here as TODOs read from the actual built author pages. ---
+const todos = [];
+for (const key of ['dave', 'trudy']) {
+  const html = pages.get(`about/${key}/index.html`);
+  if (!html) continue;
+  const label = key[0].toUpperCase() + key.slice(1);
+  if (html.includes('author-avatar-monogram')) {
+    todos.push(`author photo missing for ${label} — /about/${key}/ shows an initials monogram (add public/images/${key}.webp)`);
+  }
+  const ld = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => m[1]).join(' ');
+  if (!/"description"/.test(ld)) todos.push(`author bio missing for ${label} — Person schema has no description (owner-supplied copy)`);
+  if (!/"sameAs"/.test(ld)) todos.push(`author sameAs missing for ${label} — no profile/social URLs (owner input)`);
+}
+
 if (errors.length) {
   console.error(`\nvalidate-site: ${errors.length} error(s)\n`);
   for (const e of errors) console.error(`  ✖ ${e}`);
@@ -212,3 +223,7 @@ if (errors.length) {
   process.exit(1);
 }
 console.log(`validate-site: ✔ ${pages.size} pages — links resolve, no orphans, hub structure intact.`);
+if (todos.length) {
+  console.log(`\nvalidate-site: ${todos.length} owner-input TODO(s) (non-blocking):`);
+  for (const t of todos) console.log(`  ⚠ ${t}`);
+}

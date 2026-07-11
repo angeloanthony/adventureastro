@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import mdx from '@astrojs/mdx';
 
 // Adventure Tours Vernal.
 // G2 URL DECISION (owner-approved 2026-07-10): directory URLs.
@@ -16,6 +17,9 @@ export default defineConfig({
     format: 'directory',
   },
   integrations: [
+    // MDX powers the hub/spoke content collections (src/content/**). The
+    // collection glob already expects .mdx; this completes that setup.
+    mdx(),
     sitemap(),
   ],
 });

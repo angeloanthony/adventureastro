@@ -13,6 +13,7 @@ import Footer from '../components/layout/Footer.astro';
 import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
 import AuthorByline from '../components/content/AuthorByline.astro';
 import RelatedArticles from '../components/content/RelatedArticles.astro';
+import FaqAccordion from '../components/content/FaqAccordion.astro';
 import TourCta from '../components/content/TourCta.astro';
 import type { HubSlug } from '../lib/hubs';
 
@@ -30,15 +31,19 @@ interface Props {
   tags?: string[];
   related?: string[];
   tourCta?: 'utv' | 'private' | 'sunset' | 'none';
+  faq?: { q: string; a: string }[];
+  ogTitle?: string;
+  ogDescription?: string;
 }
 const {
   title, description, path, heroImage, author, publishDate, updatedDate,
   breadcrumbs, collection, currentId, tags = [], related = [], tourCta = 'utv',
+  faq = [], ogTitle, ogDescription,
 } = Astro.props;
 ---
 <BaseLayout>
   <Fragment slot="head">
-    <Seo title={title} description={description} path={path} image={heroImage} type="article" />
+    <Seo title={title} description={description} path={path} image={heroImage} type="article" ogTitle={ogTitle} ogDescription={ogDescription} />
     <SchemaLocalBusiness />
     <SchemaArticle headline={title} description={description} path={path} image={heroImage} author={author} publishDate={publishDate} updatedDate={updatedDate} />
   </Fragment>
@@ -47,6 +52,12 @@ const {
     <Breadcrumbs items={breadcrumbs} />
     <main class="spoke-article">
       <slot />
+      {faq.length > 0 && (
+        <section class="spoke-faq">
+          <h2>Frequently Asked Questions</h2>
+          <FaqAccordion faq={faq} />
+        </section>
+      )}
       {tourCta !== 'none' && <TourCta variant={tourCta === 'private' ? 'adventure' : tourCta === 'sunset' ? 'sunset' : 'generic'} />}
       <AuthorByline author={author} updatedDate={updatedDate} />
       <RelatedArticles collection={collection} currentId={currentId} tags={tags} related={related} />
