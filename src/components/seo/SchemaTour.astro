@@ -1,0 +1,41 @@
+---
+// SchemaTour.astro — Product + Offer for tour pages (Build Guide §5.2).
+// Pricing is intentionally NOT defaulted from SITE.pricing — that block is
+// still a TODO pending the $349/$125 vs. $299/$100 conflict (see
+// PROJECT_STATE.md). Callers must pass an explicit, confirmed price.
+import { SITE } from '../../config/site';
+import { absoluteUrl } from '../../lib/urls';
+
+interface Props {
+  name: string;
+  description: string;
+  price: number;
+  path: string; // e.g. "tours/utv-tour/" or "/booking.html" — absolutized
+  reviewCount?: number;
+  ratingValue?: string;
+}
+const { name, description, price, path, reviewCount, ratingValue } = Astro.props;
+
+const jsonLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name,
+  description,
+  brand: { '@id': `${SITE.url}/#business` },
+  offers: {
+    '@type': 'Offer',
+    price: String(price),
+    priceCurrency: SITE.pricing.currency,
+    availability: 'https://schema.org/InStock',
+    url: absoluteUrl(path),
+  },
+};
+if (reviewCount) {
+  jsonLd.aggregateRating = {
+    '@type': 'AggregateRating',
+    ratingValue: ratingValue ?? SITE.rating.value,
+    reviewCount: String(reviewCount),
+  };
+}
+---
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

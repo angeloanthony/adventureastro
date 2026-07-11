@@ -1,0 +1,94 @@
+---
+// RelatedArticles.astro — the linking network (Build Guide §2.3 rule 2,
+// §4.5). Ranking follows the guide's stated order exactly:
+//   1. same hub, by shared tags (most shared tags first, then freshest)
+//   2. manual `related` frontmatter overrides ('id' or 'hub/id')
+//   3. cross-hub, by shared tags
+//   4. fallback: same hub, most recent (so early spokes still get 3-5
+//      cards before the tag network is dense enough)
+// A manual override that doesn't resolve FAILS THE BUILD — a silently
+// dropped link is how networks decay.
+import { getCollection, getEntry } from 'astro:content';
+import { HUB_SLUGS, spokeHref, type HubSlug } from '../../lib/hubs';
+import type { SpokeData } from '../../content.config';
+
+interface Card { title: string; description: string; href: string }
+
+interface Props {
+  collection: HubSlug;
+  currentId: string;
+  tags?: string[];
+  related?: string[];
+  limit?: number;
+}
+const { collection, currentId, tags = [], related = [], limit = 4 } = Astro.props;
+
+type Spoke = { id: string; data: SpokeData };
+const sharedTagCount = (entry: Spoke) => entry.data.tags.filter((t: string) => tags.includes(t)).length;
+const byRelevance = (a: Spoke, b: Spoke) =>
+  sharedTagCount(b) - sharedTagCount(a) || b.data.updatedDate.valueOf() - a.data.updatedDate.valueOf();
+
+const picked: { hub: HubSlug; entry: Spoke }[] = [];
+const seen = new Set<string>([`${collection}/${currentId}`]);
+const take = (hub: HubSlug, entry: Spoke) => {
+  const key = `${hub}/${entry.id}`;
+  if (seen.has(key) || picked.length >= limit) return;
+  seen.add(key);
+  picked.push({ hub, entry });
+};
+
+// Tier 1 — same hub by shared tags.
+const sameHub = ((await getCollection(collection)) as unknown as Spoke[])
+  .filter((e) => e.id !== currentId && !e.data.draft);
+sameHub.sort(byRelevance);
+for (const entry of sameHub) {
+  if (sharedTagCount(entry) > 0) take(collection, entry);
+}
+
+// Tier 2 — manual frontmatter overrides.
+for (const ref of related) {
+  const [hub, id] = ref.includes('/')
+    ? [ref.slice(0, ref.indexOf('/')) as HubSlug, ref.slice(ref.indexOf('/') + 1)]
+    : [collection, ref];
+  if (!HUB_SLUGS.includes(hub)) {
+    throw new Error(`RelatedArticles: unknown hub in related ref "${ref}" (page ${collection}/${currentId})`);
+  }
+  const entry = (await getEntry(hub, id)) as unknown as Spoke | undefined;
+  if (!entry) {
+    throw new Error(`RelatedArticles: related ref "${ref}" does not resolve (page ${collection}/${currentId})`);
+  }
+  if (!entry.data.draft) take(hub, entry);
+}
+
+// Tier 3 — cross-hub by shared tags.
+if (picked.length < limit && tags.length > 0) {
+  for (const hub of HUB_SLUGS) {
+    if (hub === collection) continue;
+    const entries = ((await getCollection(hub)) as unknown as Spoke[]).filter((e) => !e.data.draft);
+    const tagged = entries.filter((e) => sharedTagCount(e) > 0).sort(byRelevance);
+    for (const entry of tagged) take(hub, entry);
+  }
+}
+
+// Tier 4 — fallback: same hub, most recent.
+for (const entry of sameHub) take(collection, entry);
+
+const cards: Card[] = picked.map(({ hub, entry }) => ({
+  title: entry.data.title,
+  description: entry.data.description,
+  href: spokeHref(hub, entry.id),
+}));
+---
+{cards.length > 0 && (
+  <section class="related-articles" aria-label="Related articles">
+    <h2 class="related-articles-heading">You Might Also Like</h2>
+    <div class="related-grid">
+      {cards.map((card) => (
+        <a href={card.href} class="related-card">
+          <h3>{card.title}</h3>
+          <p>{card.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+)}

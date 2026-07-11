@@ -1,0 +1,57 @@
+---
+// PillarLayout.astro — hub pillar page shell (Build Guide §4.1,
+// 2,500-5,000 words). Adds QuickFacts + KeyTakeaways + auto-generated
+// HubIndex on top of the SpokeLayout anatomy; the pillar's own body copy
+// (TOC, core H2 sections) is supplied via the default slot.
+import BaseLayout from './BaseLayout.astro';
+import Seo from '../components/seo/Seo.astro';
+import SchemaLocalBusiness from '../components/seo/SchemaLocalBusiness.astro';
+import SchemaArticle from '../components/seo/SchemaArticle.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
+import AuthorByline from '../components/content/AuthorByline.astro';
+import QuickFacts from '../components/content/QuickFacts.astro';
+import KeyTakeaways from '../components/content/KeyTakeaways.astro';
+import HubIndex from '../components/content/HubIndex.astro';
+import TourCta from '../components/content/TourCta.astro';
+import type { HubSlug } from '../lib/hubs';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  heroImage: string;
+  author: 'dave' | 'trudy';
+  publishDate: Date;
+  updatedDate: Date;
+  breadcrumbs: { label: string; href?: string }[];
+  collection: HubSlug;
+  quickFacts?: { label: string; value: string }[];
+  keyTakeaways?: string[];
+}
+const {
+  title, description, path, heroImage, author, publishDate, updatedDate,
+  breadcrumbs, collection, quickFacts, keyTakeaways,
+} = Astro.props;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo title={title} description={description} path={path} image={heroImage} type="article" />
+    <SchemaLocalBusiness />
+    <SchemaArticle headline={title} description={description} path={path} image={heroImage} author={author} publishDate={publishDate} updatedDate={updatedDate} />
+  </Fragment>
+  <Fragment slot="body">
+    <Header />
+    <Breadcrumbs items={breadcrumbs} />
+    <main class="pillar-page">
+      {keyTakeaways && <KeyTakeaways points={keyTakeaways} />}
+      {quickFacts && <QuickFacts facts={quickFacts} />}
+      <slot />
+      <TourCta variant="generic" />
+      <HubIndex collection={collection} />
+      <AuthorByline author={author} updatedDate={updatedDate} />
+    </main>
+    <Footer />
+  </Fragment>
+</BaseLayout>

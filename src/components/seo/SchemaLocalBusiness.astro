@@ -1,0 +1,38 @@
+---
+// SchemaLocalBusiness.astro — sitewide LocalBusiness/TouristAttraction
+// entity (Build Guide §5.1). Emit once per page; other schema components
+// reference it by @id instead of repeating the business facts.
+//
+// NO aggregateRating here (Phase-gate correction #7): Google discounts
+// self-serving LocalBusiness ratings and treats them as a spam signal.
+// Ratings belong on Product schema (SchemaTour) next to real, visible
+// on-page reviews — tour pages, review pages, customer stories only.
+import { SITE } from '../../config/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': ['LocalBusiness', 'TouristAttraction'],
+  '@id': `${SITE.url}/#business`,
+  name: SITE.name,
+  url: SITE.url,
+  telephone: SITE.phoneSchema,
+  email: SITE.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: SITE.address.street,
+    addressLocality: SITE.address.city,
+    addressRegion: SITE.address.region,
+    postalCode: SITE.address.postalCode,
+    addressCountry: SITE.address.country,
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: SITE.geo.lat,
+    longitude: SITE.geo.lng,
+  },
+  priceRange: '$$',
+  areaServed: ['Vernal', 'Dinosaur National Monument', 'Flaming Gorge', 'Uintah County'],
+  founder: SITE.owners.map((name) => ({ '@type': 'Person', name })),
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

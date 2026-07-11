@@ -1,0 +1,18 @@
+---
+// SchemaFaq.astro — FAQPage JSON-LD. Rendered from the same data as
+// FaqAccordion.astro so visible content and schema never drift
+// (Build Guide §4.5, §5.4).
+interface Props { faq: { q: string; a: string }[] }
+const { faq } = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

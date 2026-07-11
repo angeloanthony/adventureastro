@@ -1,0 +1,56 @@
+---
+// SpokeLayout.astro — spoke article shell (Build Guide §4.2, 1,200-2,500
+// words). Wires Seo/LocalBusiness schema/Header/Breadcrumbs/Footer and
+// the standard end-of-article components; page content (the H1, the
+// query-cluster H2s, the field-note paragraph) is supplied via the
+// default slot — this layout carries no copy of its own.
+import BaseLayout from './BaseLayout.astro';
+import Seo from '../components/seo/Seo.astro';
+import SchemaLocalBusiness from '../components/seo/SchemaLocalBusiness.astro';
+import SchemaArticle from '../components/seo/SchemaArticle.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
+import AuthorByline from '../components/content/AuthorByline.astro';
+import RelatedArticles from '../components/content/RelatedArticles.astro';
+import TourCta from '../components/content/TourCta.astro';
+import type { HubSlug } from '../lib/hubs';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  heroImage: string;
+  author: 'dave' | 'trudy';
+  publishDate: Date;
+  updatedDate: Date;
+  breadcrumbs: { label: string; href?: string }[];
+  collection: HubSlug;
+  currentId: string;
+  tags?: string[];
+  related?: string[];
+  tourCta?: 'utv' | 'private' | 'sunset' | 'none';
+}
+const {
+  title, description, path, heroImage, author, publishDate, updatedDate,
+  breadcrumbs, collection, currentId, tags = [], related = [], tourCta = 'utv',
+} = Astro.props;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo title={title} description={description} path={path} image={heroImage} type="article" />
+    <SchemaLocalBusiness />
+    <SchemaArticle headline={title} description={description} path={path} image={heroImage} author={author} publishDate={publishDate} updatedDate={updatedDate} />
+  </Fragment>
+  <Fragment slot="body">
+    <Header />
+    <Breadcrumbs items={breadcrumbs} />
+    <main class="spoke-article">
+      <slot />
+      {tourCta !== 'none' && <TourCta variant={tourCta === 'private' ? 'adventure' : tourCta === 'sunset' ? 'sunset' : 'generic'} />}
+      <AuthorByline author={author} updatedDate={updatedDate} />
+      <RelatedArticles collection={collection} currentId={currentId} tags={tags} related={related} />
+    </main>
+    <Footer />
+  </Fragment>
+</BaseLayout>

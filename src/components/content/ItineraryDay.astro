@@ -1,0 +1,32 @@
+---
+// ItineraryDay.astro — renders one time-blocked day (Build Guide §4.4).
+// Every named place links to its own page on the site; day sidebar box
+// covers packing/backup-plan links.
+interface Block { time: 'morning' | 'lunch' | 'afternoon' | 'dinner' | 'evening'; activity: string; link?: string }
+interface Props {
+  label: string;
+  summary?: string;
+  blocks: Block[];
+  packingNote?: string;
+  backupPlanLink?: string;
+}
+const { label, summary, blocks, packingNote, backupPlanLink } = Astro.props;
+---
+<article class="itinerary-day">
+  <h3 class="itinerary-day-label">{label}</h3>
+  {summary && <p class="itinerary-day-summary">{summary}</p>}
+  <ol class="itinerary-day-blocks">
+    {blocks.map((block) => (
+      <li class={`itinerary-block itinerary-block-${block.time}`}>
+        <span class="itinerary-block-time">{block.time}</span>
+        {block.link ? <a href={block.link}>{block.activity}</a> : <span>{block.activity}</span>}
+      </li>
+    ))}
+  </ol>
+  {(packingNote || backupPlanLink) && (
+    <aside class="itinerary-day-sidebar">
+      {packingNote && <p class="itinerary-packing-note">{packingNote}</p>}
+      {backupPlanLink && <a href={backupPlanLink} class="itinerary-backup-plan">Weather backup plan &rarr;</a>}
+    </aside>
+  )}
+</article>

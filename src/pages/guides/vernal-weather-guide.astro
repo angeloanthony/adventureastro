@@ -1,0 +1,197 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+// Article + FAQ structured data preserved verbatim from the legacy head.
+const schema1 = `{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Vernal, Utah Weather Guide for Outdoor Activities",
+    "description": "A month-by-month weather guide for planning UTV tours, hiking, and outdoor activities in Vernal and the Uintah Basin.",
+    "author": { "@type": "Organization", "name": "Adventure Tours Vernal", "url": "https://adventuretoursvernal.com" },
+    "publisher": { "@type": "Organization", "name": "Adventure Tours Vernal", "logo": { "@type": "ImageObject", "url": "https://adventuretoursvernal.com/images/logo.webp" } },
+    "datePublished": "2026-03-27",
+    "dateModified": "2026-03-27",
+    "mainEntityOfPage": "https://adventuretoursvernal.com/guides/vernal-weather-guide/"
+  }`;
+const schema2 = `{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the best time of year for a UTV tour in Vernal, Utah?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The peak season for UTV tours near Vernal runs from April through October. Late spring (May–June) and early fall (September–October) offer the most comfortable temperatures and lowest precipitation. Summer tours run daily but midday heat in July and August can exceed 95°F. Adventure Tours Vernal operates year-round, weather permitting." }
+      },
+      {
+        "@type": "Question",
+        "name": "How hot does it get in Vernal, Utah in summer?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Summer highs in Vernal typically reach 90–100°F in July and August. The high desert climate means low humidity, so the heat feels less oppressive than in humid regions. Mornings start in the 55–65°F range, making early tours significantly more comfortable." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it snow in Vernal, Utah?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Vernal receives an average of 30–40 inches of snow per year, primarily from November through March. Most snow accumulates in the higher elevations around Ashley National Forest and the Uintah Mountains. Valley-floor snow in Vernal typically melts within days. Winter UTV tours may be available depending on trail conditions." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the elevation of Vernal, Utah?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Vernal sits at approximately 5,331 feet elevation. This high-desert altitude contributes to intense UV exposure, cooler nights, and rapid temperature changes. Many backcountry trails climb above 6,000 feet, where conditions can be noticeably different from town." }
+      }
+    ]
+  }`;
+const bodyHtml = `
+
+
+  <!-- AI Summary Block -->
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    Month-by-month weather guide for Vernal, Utah. Peak UTV tour season is April through October. Summer highs reach 90–100°F with low humidity. Spring and fall are the most comfortable seasons. Vernal sits at 5,331 feet elevation. Adventure Tours Vernal offers guided Kawasaki KRX 1000 tours year-round, weather permitting. $299/machine, 3 hours. Call (435) 219-9447.
+  </p>
+
+  <main class="article-page">
+
+    <header class="article-header">
+      <nav class="article-breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep">›</span>
+        <span>Vernal Weather Guide</span>
+      </nav>
+      <h1 class="article-title">Vernal, Utah Weather Guide for Outdoor Activities</h1>
+      <p class="article-meta">Updated March 2026 · By Adventure Tours Vernal</p>
+    </header>
+
+    <article class="article-body">
+
+      <div class="article-summary-box">
+        <strong>Planning your visit:</strong> Vernal sits at 5,331 feet in Utah's high desert. The best months for <a href="/">guided UTV tours</a> and outdoor activities are May through October. Expect warm, dry summers, cool spring and fall mornings, and rapid temperature swings throughout the day.
+      </div>
+
+      <h2>Understanding Vernal's High Desert Climate</h2>
+
+      <p>Vernal's climate surprises most visitors. The Uintah Basin sits at high elevation in a semi-arid zone, which produces a combination of intense sun, low humidity, large daily temperature swings, and minimal rainfall during the peak outdoor season. A typical summer day can start in the mid-50s at sunrise and reach the mid-90s by early afternoon — a 40-degree swing that catches unprepared visitors off guard.</p>
+
+      <p>The low humidity is actually an advantage for outdoor activities. A 95°F day in Vernal feels meaningfully more comfortable than 85°F in a humid climate. Sweat evaporates rapidly, and shade provides real relief. But the dry air and high altitude also mean you dehydrate faster and sunburn quicker than you expect.</p>
+
+      <h2>Season-by-Season Breakdown</h2>
+
+      <h3>Spring (March – May)</h3>
+
+      <p>Spring is one of the best seasons for UTV tours in the Uintah Basin. March starts cold — highs in the 40s and 50s, with overnight freezes common — but by May, daytime temperatures settle into a comfortable 65–80°F range. The desert comes alive with wildflowers in April and May, and the backcountry trails are at their most photogenic.</p>
+
+      <p>The main variable in spring is wind. March and April can produce gusty days that kick up dust on exposed trails. Rain is possible but infrequent — Vernal averages less than an inch of precipitation per month in spring. Dress in layers and bring a windbreaker. See the <a href="/guides/what-to-wear-utv-tour/">What to Wear on a UTV Tour</a> guide for specifics.</p>
+
+      <h3>Summer (June – August)</h3>
+
+      <p>This is peak season. Highs range from 85°F in June to 95–100°F in July and August. Rain is rare — afternoon thunderstorms occasionally form over the Uintah Mountains and drift into the basin, but they tend to be brief and localized. Mornings are the most comfortable time to ride, with temperatures in the 55–65°F range before 10 AM.</p>
+
+      <p>Summer evenings are spectacular. The sun sets late, temperatures drop quickly after sunset, and the desert light in the golden hour is the reason half the photos in our <a href="/#gallery">gallery</a> look the way they do.</p>
+
+      <div class="article-tip">
+        <strong>Summer Tip:</strong> If you are booking a July or August tour, request an early morning departure. Dave and Trudy at <a href="/about/">Adventure Tours Vernal</a> regularly schedule tours starting at 7 or 8 AM in peak summer to beat the midday heat. Call <a href="tel:435-219-9447">(435) 219-9447</a> to arrange timing.
+      </div>
+
+      <h3>Fall (September – November)</h3>
+
+      <p>Fall rivals spring as the ideal UTV touring season. September offers warm days (75–85°F) with cooler mornings, minimal rain, and brilliant clear skies. October brings the first reliable color change in the higher elevations — the aspens on the flanks of the Uintah Mountains turn gold and orange, visible from several of the ridge-top trails.</p>
+
+      <p>By late October, mornings drop into the 30s and first frost arrives. November is transitional — some years stay mild enough for comfortable touring into mid-November; other years bring early snow to the higher trails. Call ahead for current trail conditions.</p>
+
+      <h3>Winter (December – February)</h3>
+
+      <p>Vernal receives 30–40 inches of snow per year, mostly between November and March. Valley-floor snow often melts within a few days, but higher-elevation trails may be inaccessible. Winter temperatures range from lows in the single digits to highs in the 20s and 30s.</p>
+
+      <p>Adventure Tours Vernal operates year-round when trail conditions allow. Winter UTV touring is possible on some lower-elevation trails during dry periods. Call <a href="tel:435-219-9447">(435) 219-9447</a> for current availability.</p>
+
+      <h2>Elevation and UV: The Hidden Factor</h2>
+
+      <p>At 5,331 feet, Vernal sits above most of the atmosphere's UV-filtering layer. UV intensity here is approximately 20% stronger than at sea level. Many backcountry trails climb above 6,000 feet, where the effect is even more pronounced. Sunburn happens faster than visitors from lower elevations expect — especially in the open cockpit of a Kawasaki KRX 1000 with no overhead shade.</p>
+
+      <p>Sunscreen, sunglasses, and a hat are not optional. They are as essential as closed-toe shoes. See <a href="/guides/what-to-wear-utv-tour/">What to Wear on a UTV Tour</a> for the complete sun protection guide.</p>
+
+      <h2>When to Book Your Tour</h2>
+
+      <p>The sweet spots are May through June and September through mid-October. These windows give you warm days, cool mornings, minimal precipitation, and manageable UV — the best of everything Vernal's climate has to offer. Summer is busiest and hottest; early booking is recommended for July and August to secure morning time slots.</p>
+
+      <p>Adventure Tours Vernal offers <a href="/utv/">five trail systems</a> — Doc's Beach, Moonshine Arch, Ashley Gorge, Outlaw Trail, and Asphalt Ridge — each with slightly different elevation profiles and exposure. Dave and Trudy can recommend which trail best matches the conditions on your visit date.</p>
+
+      <!-- FAQ Section -->
+      <div class="article-faq">
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+          <h3>What is the best time of year for a UTV tour in Vernal?</h3>
+          <p>Peak season runs April through October. Late spring (May–June) and early fall (September–October) offer the most comfortable temperatures. Summer tours run daily but midday heat in July and August can exceed 95°F. Adventure Tours Vernal operates year-round, weather permitting.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>How hot does it get in Vernal in summer?</h3>
+          <p>Summer highs typically reach 90–100°F in July and August. Low humidity makes it feel less oppressive than humid regions. Mornings start in the 55–65°F range, making early tours significantly more comfortable.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Does it snow in Vernal, Utah?</h3>
+          <p>Yes — Vernal averages 30–40 inches per year, mostly November through March. Valley-floor snow usually melts within days. Higher-elevation trails may be inaccessible in winter. Winter UTV tours are available depending on trail conditions.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>What is the elevation of Vernal?</h3>
+          <p>Vernal sits at approximately 5,331 feet. This high-desert altitude contributes to intense UV exposure, cooler nights, and rapid temperature changes. Many backcountry trails climb above 6,000 feet.</p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="article-cta">
+        <h3>Plan Your Perfect Tour Day</h3>
+        <p>Five trail systems, daily departures, expert local guides. $299/machine, 3-hour guided tour.</p>
+        <a href="/booking/" class="cta-btn">📅 Book Your Tour</a>
+        <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447 · Open Daily 7am–7pm</a>
+      </div>
+
+    </article>
+
+    <!-- Related Articles -->
+    <div class="related-articles">
+      <h3>More Guides</h3>
+      <div class="related-grid">
+        <a href="/guides/what-to-wear-utv-tour/" class="related-card">
+          <h4>What to Wear on a UTV Tour</h4>
+          <p>Desert clothing guide for comfort and safety on the trail.</p>
+        </a>
+        <a href="/utv/best-utv-trails-vernal/" class="related-card">
+          <h4>Best UTV Trails Near Vernal</h4>
+          <p>Five trail systems through Utah's Dinosaur Country.</p>
+        </a>
+        <a href="/dinosaur-national-monument/petroglyphs-rock-art-vernal/" class="related-card">
+          <h4>Petroglyphs &amp; Rock Art</h4>
+          <p>Ancient sites hidden in the Uintah Basin backcountry.</p>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <div class="mobile-sticky-cta"><button onclick="location.href='/booking/'">Book Your Ride Now</button></div>
+
+
+`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Vernal, Utah Weather Guide for Outdoor Activities | Adventure Tours Vernal"
+      description="Month-by-month weather guide for Vernal, Utah. Plan your UTV tour, hiking, or Dinosaur National Monument visit with seasonal temperatures, conditions, and tips."
+      path="/guides/vernal-weather-guide/"
+      type="article"
+      ogTitle="Vernal, Utah Weather Guide for Outdoor Activities"
+      ogDescription="Seasonal weather breakdown for planning UTV tours and outdoor activities in Vernal and the Uintah Basin."
+    />
+    <script type="application/ld+json" set:html={schema1} />
+    <script type="application/ld+json" set:html={schema2} />
+  </Fragment>
+  <Header slot="body" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Vernal Weather Guide' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer slot="body" showSocial={false} />
+</BaseLayout>

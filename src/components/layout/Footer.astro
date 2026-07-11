@@ -1,0 +1,173 @@
+---
+// Footer.astro — reusable, configurable footer (Build Guide §3.1, §2.2).
+//
+// The 16 legacy "full" footers diverged organically across the site (each
+// page ships different link columns, contact formatting, and copyright
+// text — see PROJECT_STATE.md "Open Decisions" for the cozelosdata.com vs.
+// Adventure Tours Vernal copyright question, which remains unresolved).
+// Rather than silently normalizing that content during a foundation-only
+// phase, this component makes every one of those differences an explicit
+// prop, so each page's exact current output is reproduced through
+// configuration instead of duplicated markup. Ten "spoke" article pages
+// already share one identical compact footer — use variant="compact" for
+// those with no props needed.
+//
+// LINK CONVENTION (Phase-gate correction #1 + G2): every href this
+// component emits is ROOT-RELATIVE in the directory-URL form ('/faq/').
+// Pages that pass custom trails/info/columns links MUST do the same —
+// never relative, never .html.
+import { SITE } from '../../config/site';
+
+interface LinkItem { href: string; label: string; class?: string }
+interface FooterColumn { heading: string; links: LinkItem[] }
+interface ContactConfig {
+  heading?: string;
+  showStreet?: boolean;
+  phoneFormat?: 'dash' | 'plus';
+  emailAsLink?: boolean;
+  showHours?: boolean;
+}
+
+interface Props {
+  variant?: 'full' | 'compact';
+  showSocial?: boolean;
+  tagline?: string;
+  logoHeight?: number;
+  /** Show the phone directly in the brand column (best-restaurants style). */
+  brandPhone?: boolean;
+  /** Default two-column layout: trail links + information links. */
+  trails?: { heading: string; links: LinkItem[] };
+  contact?: ContactConfig | false;
+  info?: { heading: string; links: LinkItem[]; secondHeading?: string; secondLinks?: LinkItem[] };
+  /** Fully generic columns — overrides trails/info when provided. */
+  columns?: FooterColumn[];
+  copyright?: { prefix?: string; linkText?: string; linkHref?: string; suffix?: string };
+}
+
+const {
+  variant = 'full',
+  showSocial = true,
+  tagline = "Experience the adventure of a lifetime in Utah's dinosaur country.",
+  logoHeight,
+  brandPhone = false,
+  trails = {
+    heading: 'Our Trails',
+    links: [
+      { href: '/#tours', label: "Doc's Beach" },
+      { href: '/#tours', label: 'Moonshine Arch' },
+      { href: '/#tours', label: 'Ashley Gorge' },
+      { href: '/#tours', label: 'Outlaw Trail' },
+      { href: '/#tours', label: 'Asphalt Ridge' },
+      { href: '/booking/', label: 'Book Now', class: 'nav-book-btn' },
+    ],
+  },
+  contact = {},
+  info = {
+    heading: 'Information',
+    links: [
+      { href: '/cancellation-policy/', label: 'Cancellation Policy' },
+      { href: '/privacy-policy/', label: 'Privacy Policy' },
+      { href: '/faq/', label: 'FAQ' },
+      { href: '/safety-guidelines/', label: 'Safety Guidelines' },
+      { href: '/guides/what-to-bring/', label: 'What to Bring' },
+    ],
+  },
+  columns,
+  copyright = {},
+} = Astro.props;
+
+const copyrightConfig = {
+  prefix: '',
+  linkText: 'cozelosdata.com',
+  linkHref: 'https://cozelosdata.com',
+  suffix: ' - All rights reserved.',
+  ...copyright,
+};
+
+const contactConfig: ContactConfig | false = contact === false ? false : {
+  heading: 'Contact Info',
+  showStreet: true,
+  phoneFormat: 'dash',
+  emailAsLink: false,
+  showHours: true,
+  ...contact,
+};
+const phoneHref = contactConfig && contactConfig.phoneFormat === 'plus' ? SITE.phoneHrefPlus : SITE.phoneHrefDash;
+---
+{variant === 'compact' ? (
+  <footer style="background:var(--charcoal);color:rgba(255,255,255,0.6);text-align:center;padding:30px 20px;font-size:0.9rem;">
+    <p>&copy; 2026 {SITE.name} &middot; <a href="/privacy-policy/" style="color:var(--burnt-orange);">Privacy Policy</a> &middot; <a href="/cancellation-policy/" style="color:var(--burnt-orange);">Cancellation Policy</a></p>
+    <p style="margin-top:8px;">{`${SITE.address.street}, ${SITE.address.city}, ${SITE.address.region} ${SITE.address.postalCode}`} &middot; <a href={SITE.phoneHrefDash} style="color:var(--burnt-orange);">{SITE.phoneDisplay}</a></p>
+  </footer>
+) : (
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="footer-logo">
+          <img src="/images/logo.webp" alt={SITE.name} height={logoHeight}>
+        </div>
+        <p>{tagline}</p>
+        {brandPhone && (
+          <div class="footer-phone-highlight"><a href={SITE.phoneHrefPlus} class="footer-phone-link">&#128222; {SITE.phoneDisplay}</a></div>
+        )}
+        {showSocial && (
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Facebook">&#128280;</a>
+            <a href="#" class="social-link" aria-label="Instagram">&#128247;</a>
+            <a href="#" class="social-link" aria-label="YouTube">&#127909;</a>
+          </div>
+        )}
+      </div>
+
+      {columns ? (
+        columns.map((col) => (
+          <div class="footer-section">
+            <h4>{col.heading}</h4>
+            <ul class="footer-links">
+              {col.links.map((l) => <li><a href={l.href} class={l.class}>{l.label}</a></li>)}
+            </ul>
+          </div>
+        ))
+      ) : (
+        <div class="footer-section">
+          <h4>{trails.heading}</h4>
+          <ul class="footer-links">
+            {trails.links.map((l) => <li><a href={l.href} class={l.class}>{l.label}</a></li>)}
+          </ul>
+        </div>
+      )}
+
+      {contactConfig && (
+        <div class="footer-section">
+          <h4>{contactConfig.heading}</h4>
+          <p>&#128205; {`${contactConfig.showStreet ? `${SITE.address.street}, ` : ''}${SITE.address.city}, ${SITE.address.region === 'UT' ? 'Utah' : SITE.address.region} ${SITE.address.postalCode}`}</p>
+          <p class="footer-phone-highlight">
+            <a href={phoneHref} class="footer-phone-link">&#128222; {SITE.phoneDisplay}</a>
+          </p>
+          <p>&#9993;&#65039; {contactConfig.emailAsLink ? <a href={`mailto:${SITE.email}`}>{SITE.email}</a> : SITE.email}</p>
+          {contactConfig.showHours && <p>&#8987; {SITE.hoursDisplay}</p>}
+        </div>
+      )}
+
+      {!columns && (
+        <div class="footer-section">
+          <h4>{info.heading}</h4>
+          <ul class="footer-links">
+            {info.links.map((l) => <li><a href={l.href} class={l.class}>{l.label}</a></li>)}
+          </ul>
+          {info.secondHeading && info.secondLinks && (
+            <Fragment>
+              <h4 style="margin-top:18px;">{info.secondHeading}</h4>
+              <ul class="footer-links">
+                {info.secondLinks.map((l) => <li><a href={l.href} class={l.class}>{l.label}</a></li>)}
+              </ul>
+            </Fragment>
+          )}
+        </div>
+      )}
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; {copyrightConfig.prefix}{copyrightConfig.linkHref ? <a href={copyrightConfig.linkHref} target="_blank">{copyrightConfig.linkText}</a> : copyrightConfig.linkText}{copyrightConfig.suffix}</p>
+    </div>
+  </footer>
+)}

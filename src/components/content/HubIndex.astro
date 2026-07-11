@@ -1,0 +1,31 @@
+---
+// HubIndex.astro — reads a hub's collection at build time and lists every
+// spoke on its pillar page. Adding a new spoke automatically updates its
+// pillar; zero-maintenance internal linking (Build Guide §2.3 rule 3,
+// §4.5). URLs come from the hub registry — no per-call basePath.
+import { getCollection } from 'astro:content';
+import { spokeHref, type HubSlug } from '../../lib/hubs';
+import type { SpokeData } from '../../content.config';
+
+type Spoke = { id: string; data: SpokeData };
+
+interface Props {
+  collection: HubSlug;
+}
+const { collection } = Astro.props;
+
+const entries = ((await getCollection(collection)) as unknown as Spoke[]).filter((e) => !e.data.draft);
+entries.sort((a, b) => b.data.updatedDate.valueOf() - a.data.updatedDate.valueOf());
+---
+{entries.length > 0 && (
+  <section class="hub-index" aria-label="All articles in this hub">
+    <ul class="hub-index-list">
+      {entries.map((entry) => (
+        <li class="hub-index-item">
+          <a href={spokeHref(collection, entry.id)}>{entry.data.title}</a>
+          <p>{entry.data.description}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}

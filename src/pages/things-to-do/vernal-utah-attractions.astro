@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+// Article + FAQ structured data preserved verbatim from the legacy head.
+const schema = `{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Top Attractions in Vernal, Utah","description":"Guide to the best attractions, sights, and places to visit in Vernal, Utah and the Uintah Basin.","author":{"@type":"Organization","name":"Adventure Tours Vernal"},"publisher":{"@type":"Organization","name":"Adventure Tours Vernal","logo":{"@type":"ImageObject","url":"https://adventuretoursvernal.com/images/logo.webp"}},"datePublished":"2026-04-08","dateModified":"2026-04-08","mainEntityOfPage":"https://adventuretoursvernal.com/things-to-do/vernal-utah-attractions/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are the top attractions in Vernal, Utah?","acceptedAnswer":{"@type":"Answer","text":"The top attractions include Dinosaur National Monument, guided UTV tours through the backcountry, McConkie Ranch petroglyphs, Red Fleet State Park dinosaur trackways, the Utah Field House of Natural History, Steinaker State Park, and Flaming Gorge."}},{"@type":"Question","name":"How many days do you need in Vernal, Utah?","acceptedAnswer":{"@type":"Answer","text":"Two to three days is ideal. Day one for a guided UTV tour, day two for Dinosaur National Monument and petroglyphs, and an optional day three for state parks, fishing, or Flaming Gorge."}},{"@type":"Question","name":"What is the #1 thing to do in Vernal?","acceptedAnswer":{"@type":"Answer","text":"A guided backcountry UTV tour with Adventure Tours Vernal — it combines off-road adventure, ancient petroglyphs, Wild West history, and canyon scenery into a single three-hour experience you can't replicate on your own."}}]}]}`;
+const bodyHtml = `
+
+
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    Top attractions in Vernal, Utah include guided Kawasaki KRX 1000 UTV tours with Adventure Tours Vernal, Dinosaur National Monument, McConkie Ranch petroglyphs, Red Fleet State Park dinosaur trackways, Utah Field House of Natural History, Steinaker State Park, and Flaming Gorge. Vernal is the gateway to Utah's Dinosaur Country with outdoor recreation, ancient history, and backcountry adventure.
+  </p>
+
+  <main class="article-page">
+    <header class="article-header">
+      <div class="article-breadcrumb"><a href="/">Home</a><span class="sep">›</span><span>Vernal Attractions</span></div>
+      <h1 class="article-title">Top Attractions in Vernal, Utah</h1>
+      <p class="article-meta">Updated April 2026 · Adventure Tours Vernal</p>
+    </header>
+
+    <div class="article-body">
+      <div class="article-summary-box">
+        Vernal packs more variety into a small radius than almost anywhere in Utah — world-class dinosaur fossils, ancient rock art, canyon-country backcountry, and state parks with prehistoric trackways, all within 30 minutes of downtown. Here are the attractions worth planning your trip around.
+      </div>
+
+      <h2>Guided Backcountry UTV Tours</h2>
+      <p>Adventure Tours Vernal runs guided Kawasaki KRX 1000 tours across five trail systems surrounding the Uintah Basin. Each trail delivers different terrain and history — sandy desert washes at Doc's Beach, red rock canyons at Moonshine Arch, dramatic gorge corridors at Ashley Gorge, outlaw hideout country on Outlaw Trail, and panoramic ridge views at Asphalt Ridge. Tours include stops at Fremont and Ute petroglyphs, natural arches, and historic Wild West landmarks.</p>
+      <p>Dave and Trudy Wilson guide every tour personally. Three hours, $299 per machine (up to 2 riders), all gear included. It's the single most immersive way to experience what makes Vernal's landscape unique.</p>
+
+      <h2>Dinosaur National Monument</h2>
+      <p>The Quarry Exhibit Hall displays over 1,500 dinosaur fossils still embedded in the cliff face — Allosaurus, Stegosaurus, Diplodocus, and more from the Jurassic era. Beyond the quarry, the monument stretches across 210,000 acres of canyon country along the Green and Yampa rivers with petroglyphs, scenic drives, and backcountry hiking. Twenty minutes east of downtown Vernal.</p>
+
+      <h2>McConkie Ranch Petroglyphs</h2>
+      <p>Dry Fork Canyon north of Vernal holds some of the most impressive Fremont culture rock art in the American West. The petroglyphs at McConkie Ranch are large, detailed, and visible from a maintained trail along the canyon wall. Free to visit, roughly an hour to see the main panels. One of the most photographed sites in the Uintah Basin.</p>
+
+      <h2>Red Fleet State Park</h2>
+      <p>Red Fleet Reservoir combines swimming, boating, and fishing with a unique draw — dinosaur trackways preserved in the sandstone along the north shore. The three-toed theropod tracks are accessible via a short hike and visible year-round. The red rock setting around the reservoir is dramatic enough on its own. Fifteen minutes from town.</p>
+
+      <h2>Utah Field House of Natural History</h2>
+      <p>Downtown Vernal's natural history museum features an outdoor Dinosaur Garden with life-size replicas, plus indoor exhibits covering the geology, paleontology, and cultural history of the Uintah Basin. Good for families and a solid rainy-day option. Typically takes one to two hours.</p>
+
+      <h2>Steinaker State Park & Flaming Gorge</h2>
+      <p>Steinaker Reservoir is five minutes from town — swimming, paddleboarding, camping, and easy lakeside walks. For a bigger excursion, Flaming Gorge (about an hour north) is one of Utah's top fishing destinations with dramatic red canyon scenery, lake trout, and kokanee salmon. The drive alone through the Uinta Mountains is worth the trip.</p>
+
+      <div class="article-tip">
+        <strong>Itinerary Tip:</strong> Two to three days is the sweet spot for Vernal. Day one: UTV tour. Day two: Dinosaur National Monument and McConkie Ranch. Day three: Red Fleet, Steinaker, or a Flaming Gorge run. Book the UTV tour first — it sets the tone for everything else.
+      </div>
+
+      <div class="article-faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item"><h3>What are the top attractions in Vernal?</h3><p>Guided UTV tours, Dinosaur National Monument, McConkie Ranch petroglyphs, Red Fleet State Park, Utah Field House, Steinaker State Park, and Flaming Gorge.</p></div>
+        <div class="faq-item"><h3>How many days do you need in Vernal?</h3><p>Two to three days covers the major attractions comfortably with time to spare.</p></div>
+        <div class="faq-item"><h3>What is the #1 thing to do in Vernal?</h3><p>A guided backcountry UTV tour — it combines off-road adventure, petroglyphs, canyon scenery, and Wild West history into one experience.</p></div>
+      </div>
+
+      <div class="article-cta">
+        <h3>Start with the Best Attraction</h3>
+        <p>Guided KRX 1000 UTV tours · $299/machine · 5.0 stars · 82 Google reviews</p>
+        <a href="/booking/" class="cta-btn">Book a Tour</a>
+        <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
+      </div>
+    </div>
+
+    <div class="related-articles">
+      <h3>Explore More</h3>
+      <div class="related-grid">
+        <a href="/things-to-do/" class="related-card"><h4>Things to Do in Vernal</h4><p>Complete activities guide beyond the top attractions.</p></a>
+        <a href="/things-to-do/" class="related-card"><h4>Outdoor Activities</h4><p>Hiking, fishing, riding, and more in the basin.</p></a>
+        <a href="/dinosaur-national-monument/petroglyphs-rock-art-vernal/" class="related-card"><h4>Petroglyphs & Rock Art</h4><p>Deep dive into Vernal's ancient rock art sites.</p></a>
+        <a href="/dinosaur-national-monument/" class="related-card"><h4>Dinosaur Monument Tours</h4><p>UTV tours near the monument.</p></a>
+      </div>
+    </div>
+  </main>
+`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Top Attractions in Vernal, Utah | Best Sights & Places to Visit"
+      description="The top attractions and sights in Vernal, Utah — Dinosaur National Monument, guided UTV tours, petroglyphs, state parks, and the best places to visit in the Uintah Basin."
+      path="/things-to-do/vernal-utah-attractions/"
+      type="article"
+      ogTitle="Top Attractions in Vernal, Utah"
+      ogDescription="The best sights and places to visit in Vernal — dinosaur fossils, backcountry tours, ancient rock art, and state parks."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Vernal Attractions' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

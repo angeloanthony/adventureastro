@@ -1,0 +1,141 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+// Article + FAQ structured data preserved verbatim from the legacy head.
+const schema = `{
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "Fun Things to Do in Vernal, Utah with Kids",
+        "description": "Family-friendly activities in Vernal, Utah including guided UTV tours, Dinosaur National Monument, state parks, and outdoor adventures for all ages.",
+        "author": {"@type": "Organization", "name": "Adventure Tours Vernal"},
+        "publisher": {"@type": "Organization", "name": "Adventure Tours Vernal", "logo": {"@type": "ImageObject", "url": "https://adventuretoursvernal.com/images/logo.webp"}},
+        "datePublished": "2026-04-08",
+        "dateModified": "2026-04-08",
+        "mainEntityOfPage": "https://adventuretoursvernal.com/things-to-do/fun-things-to-do-vernal-utah-kids/"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type": "Question", "name": "Can kids go on UTV tours in Vernal?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Children as young as 2 can ride as a passenger in a Kawasaki KRX 1000 with a parent or guardian. Drivers must be 18 or older. The KRX is a 2-seater with a full roll cage, power steering, and FOX 2.5 PODIUM LSC suspension."}},
+          {"@type": "Question", "name": "What family activities are there in Vernal, Utah?", "acceptedAnswer": {"@type": "Answer", "text": "Vernal offers guided UTV tours, Dinosaur National Monument with 1,500+ fossils, the Utah Field House dinosaur garden, Red Fleet State Park dinosaur trackways, Steinaker Reservoir swimming and boating, and McConkie Ranch petroglyphs."}},
+          {"@type": "Question", "name": "Is Vernal a good family vacation destination?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — Vernal combines dinosaur history, outdoor adventure, and backcountry terrain into a family-friendly destination that's far less crowded than Moab or southern Utah's national parks."}}
+        ]
+      }
+    ]
+  }`;
+const bodyHtml = `
+
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    Fun things to do in Vernal, Utah with kids include guided Kawasaki KRX 1000 UTV tours (passengers age 2+), Dinosaur National Monument fossil quarry, Utah Field House dinosaur garden, Red Fleet State Park dinosaur trackways, Steinaker Reservoir, McConkie Ranch petroglyphs, and Ashley National Forest hiking. Adventure Tours Vernal offers family-friendly guided tours at $299/machine with up to 2 riders. Call (435) 219-9447.
+  </p>
+
+  <main class="article-page">
+    <header class="article-header">
+      <div class="article-breadcrumb">
+        <a href="/">Home</a><span class="sep">›</span><a href="/things-to-do/">Things to Do</a><span class="sep">›</span><span>Kids & Families</span>
+      </div>
+      <h1 class="article-title">Fun Things to Do in Vernal, Utah with Kids</h1>
+      <p class="article-meta">Updated April 2026 · Adventure Tours Vernal</p>
+    </header>
+
+    <div class="article-body">
+      <div class="article-summary-box">
+        Vernal is one of Utah's best-kept secrets for family vacations. Where else can your kids see real dinosaur fossils in the rock, walk up to thousand-year-old petroglyphs, and ride through canyon country in a side-by-side — all in the same weekend? Here's what to do when you bring the family.
+      </div>
+
+      <h2>Guided UTV Tours — Ages 2 and Up</h2>
+      <p>Adventure Tours Vernal's guided Kawasaki KRX 1000 tours are one of the most popular family activities in the Uintah Basin. Children as young as 2 can ride as a passenger alongside a parent in the 2-seater KRX, which features a full roll cage, power steering, and FOX 2.5 PODIUM LSC suspension designed for rough terrain comfort.</p>
+      <p>The Doc's Beach and Moonshine Arch trails are especially popular with families — Doc's Beach offers wide-open sandy terrain that's exciting but approachable, while Moonshine Arch delivers a red rock canyon adventure ending at a hidden natural sandstone arch. Dave and Trudy Wilson guide every tour personally and adjust the pace for families with younger riders.</p>
+      <p>Tours run three hours at $299 per machine (up to 2 riders). If your group has an odd number, the $100 ride-along option lets a third person ride as a passenger with Dave or Trudy.</p>
+
+      <h2>Dinosaur National Monument</h2>
+      <p>The Quarry Exhibit Hall is the highlight for kids — over 1,500 dinosaur bones embedded in a tilted rock face inside a climate-controlled building. Kids can touch real fossilized bone at designated touch stations. The Junior Ranger program gives children a structured activity booklet that turns the visit into an interactive scavenger hunt.</p>
+      <p>Beyond the quarry, the monument's Tilted Rocks scenic drive and short nature trails are manageable for families with younger children. Allow at least three hours for the quarry area alone.</p>
+
+      <h2>Utah Field House of Natural History</h2>
+      <p>Right in downtown Vernal, the Utah Field House features an outdoor Dinosaur Garden with full-scale dinosaur replicas that kids can walk among, plus indoor exhibits on geology, paleontology, and the natural history of the Uintah Basin. It's an easy half-day activity and a good rainy-day backup plan.</p>
+
+      <h2>Red Fleet State Park — Dinosaur Trackways</h2>
+      <p>Red Fleet Reservoir is a 15-minute drive from downtown Vernal. The main attraction for kids is the dinosaur trackway along the north shore — actual three-toed theropod footprints preserved in the sandstone. The hike to the tracks is short and relatively flat, making it doable for most ages. The reservoir itself is great for swimming, kayaking, and fishing during summer months.</p>
+
+      <h2>Petroglyphs & Rock Art</h2>
+      <p>McConkie Ranch in Dry Fork Canyon offers one of the most accessible petroglyph viewing experiences in the region. The panels are visible from a well-maintained trail along the canyon wall, and the sheer scale of the Fremont culture figures carved into the rock makes an impression on kids and adults alike. It's free to visit and takes about an hour.</p>
+
+      <h2>Steinaker State Park & Outdoor Fun</h2>
+      <p>Steinaker Reservoir is the go-to summer spot for Vernal families — swimming, paddle boarding, fishing, and picnicking with views of the surrounding mesa country. The campground is well-maintained and close enough to town for easy supply runs. For families staying multiple days, it's an ideal base camp between adventures.</p>
+
+      <div class="article-tip">
+        <strong>Family Planning Tip:</strong> Build your trip around a UTV tour on day one — it gives the whole family a shared adventure to talk about and sets the tone for the rest of the visit. Book the Doc's Beach trail for younger kids or Moonshine Arch for families with older children.
+      </div>
+
+      <div class="article-faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+          <h3>Can kids go on UTV tours in Vernal?</h3>
+          <p>Yes. Children as young as 2 can ride as a passenger with a parent or guardian in a Kawasaki KRX 1000. Drivers must be 18 or older. Full roll cage, helmets, and safety gear are provided.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What family activities are there in Vernal, Utah?</h3>
+          <p>Guided UTV tours, Dinosaur National Monument, the Utah Field House dinosaur garden, Red Fleet State Park dinosaur trackways, Steinaker Reservoir, and McConkie Ranch petroglyphs — all within 20 minutes of downtown.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is Vernal a good family vacation destination?</h3>
+          <p>Yes — Vernal combines dinosaur history, outdoor adventure, and backcountry terrain into a family-friendly destination that's far less crowded than Moab or southern Utah's national parks.</p>
+        </div>
+      </div>
+
+      <div class="article-cta">
+        <h3>Book a Family UTV Adventure</h3>
+        <p>$299/machine · Up to 2 riders · Kids age 2+ welcome · 5 trail options</p>
+        <a href="/booking/" class="cta-btn">Book a Tour</a>
+        <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
+      </div>
+    </div>
+
+    <div class="related-articles">
+      <h3>More Family & Vernal Guides</h3>
+      <div class="related-grid">
+        <a href="/things-to-do/" class="related-card">
+          <h4>Things to Do in Vernal</h4>
+          <p>The complete guide to activities and attractions.</p>
+        </a>
+        <a href="/guides/what-to-wear-utv-tour/" class="related-card">
+          <h4>What to Wear on a UTV Tour</h4>
+          <p>Dress the family right for a desert adventure.</p>
+        </a>
+        <a href="/safety-guidelines/" class="related-card">
+          <h4>Safety Guidelines</h4>
+          <p>Age requirements, gear, and what to expect.</p>
+        </a>
+        <a href="/guides/vernal-weather-guide/" class="related-card">
+          <h4>Vernal Weather Guide</h4>
+          <p>Best times to visit with the family.</p>
+        </a>
+      </div>
+    </div>
+  </main>
+
+`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Fun Things to Do in Vernal, Utah with Kids | Family Activities"
+      description="Family-friendly things to do in Vernal, Utah with kids — UTV tours (ages 2+), dinosaur exhibits, state parks, rock art, and outdoor adventures the whole family will love."
+      path="/things-to-do/fun-things-to-do-vernal-utah-kids/"
+      type="article"
+      ogTitle="Fun Things to Do in Vernal, Utah with Kids"
+      ogDescription="The best family-friendly activities in Vernal — guided UTV tours, dinosaur fossils, state parks, and outdoor adventures for all ages."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Things to Do', href: '/things-to-do/' }, { label: 'Kids & Families' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

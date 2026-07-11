@@ -1,0 +1,49 @@
+---
+// CityLayout.astro — city landing page shell (Build Guide §4.3,
+// 1,500-2,500 words). Reads structured facts off a `cities` collection
+// entry; the drive-by-drive prose and FAQ are supplied via the default
+// slot. City page rule (§4.3): minimum 40% unique content per city —
+// this layout only provides the scaffolding, not the words.
+import BaseLayout from './BaseLayout.astro';
+import Seo from '../components/seo/Seo.astro';
+import SchemaLocalBusiness from '../components/seo/SchemaLocalBusiness.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
+import QuickFacts from '../components/content/QuickFacts.astro';
+import TourCta from '../components/content/TourCta.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  heroImage?: string;
+  breadcrumbs: { label: string; href?: string }[];
+  city: CollectionEntry<'cities'>['data'];
+}
+const { title, description, path, heroImage, breadcrumbs, city } = Astro.props;
+
+const quickFacts = [
+  { label: 'Drive time', value: `${city.driveTimeHours} hours` },
+  { label: 'Distance', value: `${city.driveMiles} miles` },
+  { label: 'Route', value: city.routeSummary },
+  ...(city.nearestAirport ? [{ label: 'Nearest airport', value: city.nearestAirport }] : []),
+];
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo title={title} description={description} path={path} image={heroImage} />
+    <SchemaLocalBusiness />
+  </Fragment>
+  <Fragment slot="body">
+    <Header />
+    <Breadcrumbs items={breadcrumbs} />
+    <main class="city-page">
+      <QuickFacts facts={quickFacts} />
+      <slot />
+      <TourCta variant="family" />
+    </main>
+    <Footer />
+  </Fragment>
+</BaseLayout>

@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const headHtml = `
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found | Adventure Tours Vernal</title>
+  <meta name="description" content="This page doesn't exist. Find guided UTV tours, trail guides, and booking for Adventure Tours Vernal in Vernal, Utah. Call (435) 219-9447.">
+  <meta name="robots" content="noindex">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="/images/logo2.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="icon" type="image/webp" href="/images/logo1.webp">
+`;
+const bodyHtml = `
+<!-- Navigation -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="/" class="logo">
+      <img src="/images/logo.webp" alt="Adventure Tours Vernal">
+    </a>
+    <ul class="nav-menu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/utv/">Trails</a></li>
+      <li class="nav-dropdown">
+        <a href="#" class="dropdown-toggle">Information ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="/cancellation-policy/">Cancellation Policy</a></li>
+          <li><a href="/privacy-policy/">Privacy Policy</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/safety-guidelines/">Safety Guidelines</a></li>
+          <li><a href="/guides/what-to-bring/">What to Bring</a></li>
+        </ul>
+      </li>
+      <li><a href="tel:435-219-9447" class="nav-phone">📞 (435) 219-9447</a></li>
+      <li><a href="/booking/" class="nav-book-btn">Book Now</a></li>
+    </ul>
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<section class="policy-section">
+  <div class="container">
+    <div class="section-header">
+      <h1 class="section-title">Page Not Found</h1>
+      <p class="section-subtitle">The trail you're looking for doesn't exist — but the real ones do. Here's where to go next:</p>
+    </div>
+    <div class="policy-container">
+      <div class="policy-card">
+        <div class="policy-icon">🧭</div>
+        <h2 class="policy-heading">Get Back on the Trail</h2>
+        <ul>
+          <li><a href="/">Home</a> — start here</li>
+          <li><a href="/utv/">Our Trails</a> — Doc's Beach, Moonshine Arch, Ashley Gorge, Outlaw Trail &amp; Asphalt Ridge</li>
+          <li><a href="/booking/">Book a Tour</a> — live calendar, instant booking</li>
+          <li><a href="/faq/">FAQ</a> — common questions answered</li>
+        </ul>
+        <p>Or call us directly: <a href="tel:435-219-9447">(435) 219-9447</a> — open daily 7am–7pm.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+`;
+---
+<BaseLayout assets={false}>
+  <Fragment slot="head" set:html={headHtml} />
+  <Fragment slot="body" set:html={bodyHtml} />
+</BaseLayout>

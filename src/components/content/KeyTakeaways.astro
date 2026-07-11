@@ -1,0 +1,13 @@
+---
+// KeyTakeaways.astro — 3-5 tight, self-contained statements near the top
+// of pillars/guides/itineraries (Build Guide §7.5 "answer-ready structure").
+// Each statement must stand alone if an AI system quotes only this block.
+interface Props { points: string[] }
+const { points } = Astro.props;
+---
+<div class="key-takeaways" role="complementary" aria-label="Key takeaways">
+  <h2 class="key-takeaways-heading">Key Takeaways</h2>
+  <ul>
+    {points.map((point) => <li>{point}</li>)}
+  </ul>
+</div>

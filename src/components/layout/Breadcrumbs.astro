@@ -1,0 +1,60 @@
+---
+// Breadcrumbs.astro — visible trail + BreadcrumbList schema from one
+// source, so the two can never drift (Build Guide §2.2, §5.6).
+//
+// `schemaOnly` emits just the BreadcrumbList JSON-LD and no visible markup:
+// used on legacy pages that already ship their own styled `.article-breadcrumb`
+// trail, so they gain the structured data without a duplicate visible trail.
+import { SITE } from '../../config/site';
+import { absoluteUrl } from '../../lib/urls';
+
+// Crumb hrefs should be ROOT-RELATIVE ('/utv/') so the visible trail
+// works from nested routes; absoluteUrl() normalizes either form for the
+// JSON-LD, so legacy root-level callers keep byte-identical schema output.
+interface Crumb { label: string; href?: string }
+interface Props { items: Crumb[]; schemaOnly?: boolean }
+const { items, schemaOnly = false } = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+    ...items.map((crumb, i) => ({
+      '@type': 'ListItem',
+      position: i + 2,
+      name: crumb.label,
+      ...(crumb.href ? { item: absoluteUrl(crumb.href) } : {}),
+    })),
+  ],
+};
+---
+{!schemaOnly && (
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    {items.map((crumb) => (
+      <Fragment>
+        <span class="sep">&rsaquo;</span>
+        {crumb.href ? <a href={crumb.href}>{crumb.label}</a> : <span aria-current="page">{crumb.label}</span>}
+      </Fragment>
+    ))}
+  </nav>
+)}
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+<style>
+  .breadcrumbs {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 20px;
+    font-size: 0.9rem;
+    color: var(--charcoal, #333);
+  }
+  .breadcrumbs a {
+    color: var(--burnt-orange, #d4764e);
+    text-decoration: none;
+  }
+  .breadcrumbs a:hover { text-decoration: underline; }
+  .breadcrumbs .sep { margin: 0 8px; color: rgba(0, 0, 0, 0.4); }
+  .breadcrumbs [aria-current='page'] { color: rgba(0, 0, 0, 0.6); }
+</style>

@@ -1,31 +1,49 @@
 ---
-// BaseLayout.astro — the single page shell for every migrated page.
+// BaseLayout.astro — the single page shell for every page (Build Guide
+// §3.1). Owns <html>/<head>/<body> so that pillar/spoke/tour/etc. layouts
+// — and pages still on the legacy set:html pattern — can place the real
+// Header/Footer components as siblings around their content without
+// mismatched <body> tags.
 //
-// MIGRATION POSTURE (runbook Part 1, "migration not redesign"):
-// Investigation of the legacy site showed the header and footer are NOT
-// actually uniform — they have diverged across pages:
-//   - most pages use the standard .navbar header + standard footer
-//   - best-restaurants-*.html uses a different footer (different links,
-//     a different phone number, different copyright) and different nav IDs
-// Swapping in one canonical header/footer would therefore CHANGE visible
-// content and links on those pages — a redesign, not a migration. So this
-// layout deliberately does NOT impose a shared Header/Footer. Each page
-// keeps its own nav and footer inline, byte-for-byte. Centralizing them
-// into one component is a later, deliberate cleanup step — not migration.
+// Each page passes its <head> content through the `head` slot (title,
+// meta, canonical, OG/Twitter, schema) and its body content through the
+// `body` slot — Header/Footer components plus, on not-yet-refactored
+// legacy pages, a `set:html` fragment for the remaining inline markup.
 //
-// Each page also passes its original <head> through the `head` slot
-// verbatim (title, meta, canonical, OG/Twitter, page-specific JSON-LD,
-// and its own CSS link incl. the per-page ?v= cache-buster), guaranteeing
-// zero metadata/schema drift.
+// `bodyClass` lets a page carry a page-level body class forward (e.g.
+// legacy pages that styled `body.policy-page-body` for a background
+// treatment) now that BaseLayout, not the page, owns the <body> tag.
 //
-// What IS centralized here (the genuinely identical scaffolding):
-//   - the <html>/<head>/<body> structure and closing tags
-//   - the Vimeo player script present on every page
+// `assets` (default true) makes BaseLayout emit the shared, byte-identical
+// head assets that used to be duplicated in every page's headHtml — the
+// Google Fonts preconnect/stylesheet, the site stylesheet, and the three
+// favicon links (Build Guide §3.1, deduplication). Pages pass only their
+// page-specific <Seo>/schema through the head slot. 404.astro opts out
+// (assets={false}) because it deliberately keeps its own root-relative
+// asset paths.
+interface Props {
+  bodyClass?: string;
+  assets?: boolean;
+}
+const { bodyClass, assets = true } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <slot name="head" />
+  {assets && (
+    <Fragment>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+      <link rel="stylesheet" href="/styles.css" />
+      <link rel="icon" href="/images/logo2.ico" sizes="any" />
+      <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
+      <link rel="icon" type="image/webp" href="/images/logo1.webp" />
+    </Fragment>
+  )}
 </head>
-<slot name="body" />
+<body class={bodyClass}>
+  <slot name="body" />
+</body>
 </html>

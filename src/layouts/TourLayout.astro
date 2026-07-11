@@ -1,0 +1,47 @@
+---
+// TourLayout.astro — tour page shell, the highest-stakes template on the
+// site (Build Guide §9.2). Wires Product/Offer schema in addition to the
+// standard LocalBusiness entity; price is a required prop (never sourced
+// from SITE.pricing, which is an unresolved TODO — see site.ts).
+import BaseLayout from './BaseLayout.astro';
+import Seo from '../components/seo/Seo.astro';
+import SchemaLocalBusiness from '../components/seo/SchemaLocalBusiness.astro';
+import SchemaTour from '../components/seo/SchemaTour.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
+import QuickFacts from '../components/content/QuickFacts.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  heroImage: string;
+  breadcrumbs: { label: string; href?: string }[];
+  productName: string;
+  productDescription: string;
+  price: number;
+  reviewCount?: number;
+  quickFacts?: { label: string; value: string }[];
+}
+const {
+  title, description, path, heroImage, breadcrumbs,
+  productName, productDescription, price, reviewCount, quickFacts,
+} = Astro.props;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo title={title} description={description} path={path} image={heroImage} />
+    <SchemaLocalBusiness />
+    <SchemaTour name={productName} description={productDescription} price={price} path={path} reviewCount={reviewCount} />
+  </Fragment>
+  <Fragment slot="body">
+    <Header />
+    <Breadcrumbs items={breadcrumbs} />
+    <main class="tour-page">
+      {quickFacts && <QuickFacts facts={quickFacts} />}
+      <slot />
+    </main>
+    <Footer />
+  </Fragment>
+</BaseLayout>

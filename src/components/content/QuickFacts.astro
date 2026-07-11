@@ -1,0 +1,15 @@
+---
+// QuickFacts.astro — dl/dt/dd definition list (Build Guide §4.5).
+// This exact markup shape is what wins featured snippets for
+// "how long is X trail" style queries.
+interface Props { facts: { label: string; value: string }[] }
+const { facts } = Astro.props;
+---
+<dl class="quick-facts">
+  {facts.map(({ label, value }) => (
+    <div class="quick-fact">
+      <dt>{label}</dt>
+      <dd>{value}</dd>
+    </div>
+  ))}
+</dl>

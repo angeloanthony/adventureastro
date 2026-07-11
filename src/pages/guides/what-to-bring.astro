@@ -1,0 +1,351 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+const bodyHtml = `
+<!-- PAGE SUMMARY BLOCK -->
+<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+  What to bring on a guided UTV tour with Adventure Tours Vernal in Vernal, Utah. Essentials include a valid driver's license and closed-toe shoes. Adventure Tours Vernal provides water, snacks, walkie-talkies, and Kawasaki KRX 1000 side-by-sides. Call (435) 219-9447.
+</p>
+
+<section class="policy-section">
+  <div class="container">
+    <div class="section-header">
+      <h1 class="section-title">What to Bring</h1>
+      <p class="section-subtitle">Prepare for your adventure with our complete packing guide</p>
+    </div>
+
+    <div class="policy-container">
+
+      <!-- ESSENTIALS -->
+      <div class="policy-card">
+        <div class="policy-icon">✅</div>
+        <h2 class="policy-heading">Essential Items</h2>
+        <p class="required-badge">Required for All Tours</p>
+        <div class="policy-list">
+          <ul>
+            <li><strong>Valid Driver's License</strong> - Required for all drivers (original, not a copy)</li>
+            <li><strong>Closed-Toe Shoes</strong> - Sturdy shoes or boots (no sandals, flip-flops, or open-toed shoes)</li>
+            <li><strong>Weather-Appropriate Clothing</strong> - See seasonal guide below</li>
+          </ul>
+        </div>
+        <div class="policy-warning">
+          <strong>⚠️ Important:</strong> You will not be permitted to drive without a valid driver's license, and you cannot ride with open-toed shoes. No exceptions for safety reasons.
+        </div>
+      </div>
+
+      <!-- HIGHLY RECOMMENDED -->
+      <div class="policy-card">
+        <div class="policy-icon">⭐</div>
+        <h2 class="policy-heading">Highly Recommended</h2>
+        <div class="packing-grid">
+          <div class="packing-item">
+            <div class="packing-icon">🕶️</div>
+            <div class="packing-content">
+              <strong>Sunglasses</strong>
+              <p>UV protection recommended - dust and sun protection</p>
+            </div>
+          </div>
+          <div class="packing-item">
+            <div class="packing-icon">🧢</div>
+            <div class="packing-content">
+              <strong>Hat or Bandana</strong>
+              <p>Sun protection and dust barrier</p>
+            </div>
+          </div>
+          <div class="packing-item">
+            <div class="packing-icon">📸</div>
+            <div class="packing-content">
+              <strong>Camera/Phone</strong>
+              <p>Capture amazing memories (bring in secure bag)</p>
+            </div>
+          </div>
+          <div class="packing-item">
+            <div class="packing-icon">🧥</div>
+            <div class="packing-content">
+              <strong>Light Jacket</strong>
+              <p>Temperature changes throughout the day</p>
+            </div>
+          </div>
+          <div class="packing-item">
+            <div class="packing-icon">🧴</div>
+            <div class="packing-content">
+              <strong>Sunscreen</strong>
+              <p>SPF 30+ recommended - Utah sun is intense</p>
+            </div>
+          </div>
+          <div class="packing-item">
+            <div class="packing-icon">💋</div>
+            <div class="packing-content">
+              <strong>Lip Balm</strong>
+              <p>With SPF protection preferred</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEASONAL CLOTHING GUIDE -->
+      <div class="policy-card">
+        <div class="policy-icon">🌡️</div>
+        <h2 class="policy-heading">Seasonal Clothing Guide</h2>
+        <div class="seasonal-guide">
+          <div class="season-card">
+            <div class="season-header spring">
+              <h3>🌸 Spring (March - May)</h3>
+              <p class="temp-range">40°F - 70°F</p>
+            </div>
+            <div class="season-content">
+              <h4>Recommended:</h4>
+              <ul>
+                <li>Long pants (jeans work great)</li>
+                <li>Long-sleeve shirt or layers</li>
+                <li>Light jacket or windbreaker</li>
+                <li>Closed-toe shoes or boots</li>
+              </ul>
+              <p class="season-note"><strong>Tip:</strong> Mornings can be chilly, afternoons warm up. Dress in layers!</p>
+            </div>
+          </div>
+          <div class="season-card">
+            <div class="season-header summer">
+              <h3>☀️ Summer (June - August)</h3>
+              <p class="temp-range">60°F - 95°F</p>
+            </div>
+            <div class="season-content">
+              <h4>Recommended:</h4>
+              <ul>
+                <li>Light, breathable long pants</li>
+                <li>Long-sleeve shirt (protects from sun)</li>
+                <li>Bandana or neck gaiter for dust</li>
+                <li>Sturdy closed-toe shoes</li>
+                <li>Extra sunscreen and water</li>
+              </ul>
+              <p class="season-note"><strong>Tip:</strong> Long sleeves protect from sun and dust. Bring extra water!</p>
+            </div>
+          </div>
+          <div class="season-card">
+            <div class="season-header fall">
+              <h3>🍂 Fall (September - November)</h3>
+              <p class="temp-range">30°F - 70°F</p>
+            </div>
+            <div class="season-content">
+              <h4>Recommended:</h4>
+              <ul>
+                <li>Long pants (jeans or hiking pants)</li>
+                <li>Layers - base layer, mid layer, jacket</li>
+                <li>Gloves (for cooler mornings)</li>
+                <li>Warm closed-toe shoes or boots</li>
+              </ul>
+              <p class="season-note"><strong>Tip:</strong> Beautiful fall colors! Bring your camera and extra layers.</p>
+            </div>
+          </div>
+          <div class="season-card">
+            <div class="season-header winter">
+              <h3>❄️ Winter (December - February)</h3>
+              <p class="temp-range">20°F - 50°F</p>
+            </div>
+            <div class="season-content">
+              <h4>Recommended:</h4>
+              <ul>
+                <li>Warm, insulated pants</li>
+                <li>Multiple layers on top</li>
+                <li>Warm winter jacket</li>
+                <li>Gloves and warm hat</li>
+                <li>Insulated boots</li>
+              </ul>
+              <p class="season-note"><strong>Tip:</strong> Dress warmer than you think! Wind chill on the trail is real.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OPTIONAL BUT USEFUL -->
+      <div class="policy-card">
+        <div class="policy-icon">💼</div>
+        <h2 class="policy-heading">Optional But Useful</h2>
+        <div class="policy-list">
+          <ul>
+            <li><strong>Small Backpack or Fanny Pack</strong> - For personal items (must be securely closed)</li>
+            <li><strong>Bug Spray</strong> - Especially in warmer months near water</li>
+            <li><strong>Hand Wipes/Sanitizer</strong> - Gets dusty out there!</li>
+            <li><strong>Chapstick</strong> - Desert air is dry</li>
+            <li><strong>Personal Snacks</strong> - We provide snacks, but bring extras if you have dietary needs</li>
+            <li><strong>GoPro/Action Camera</strong> - Great for hands-free video</li>
+            <li><strong>Bandana or Buff</strong> - Dust protection for face</li>
+            <li><strong>Cash/Card</strong> - For tips (if you want to tip your guide)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- WE PROVIDE -->
+      <div class="policy-card">
+        <div class="policy-icon">🎁</div>
+        <h2 class="policy-heading">What We Provide</h2>
+        <div class="policy-note">
+          <strong>Included with Every Tour:</strong>
+        </div>
+        <div class="provided-grid">
+          <div class="provided-item">
+            <span class="provided-icon">💧</span>
+            <span class="provided-text">Complimentary Water</span>
+          </div>
+          <div class="provided-item">
+            <span class="provided-icon">🍫</span>
+            <span class="provided-text">Light Snacks</span>
+          </div>
+          <div class="provided-item">
+            <span class="provided-icon">📻</span>
+            <span class="provided-text">Walkie-Talkies</span>
+          </div>
+          <div class="provided-item">
+            <span class="provided-icon">🚙</span>
+            <span class="provided-text">Kawasaki KRX 1000 UTV</span>
+          </div>
+          <div class="provided-item">
+            <span class="provided-icon">🧭</span>
+            <span class="provided-text">Expert Guide</span>
+          </div>
+          <div class="provided-item">
+            <span class="provided-icon">🏥</span>
+            <span class="provided-text">First Aid Kit</span>
+          </div>
+          <div class="provided-item">
+            <span class="provided-icon">🧢</span>
+            <span class="provided-text">Helmets (upon request)</span>
+          </div>
+          <div class="provided-item">
+            <span class="provided-icon">🧻</span>
+            <span class="provided-text">Emergency Supplies</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- DO NOT BRING -->
+      <div class="policy-card">
+        <div class="policy-icon">🚫</div>
+        <h2 class="policy-heading">Do NOT Bring</h2>
+        <div class="policy-warning">
+          <strong>These items are prohibited on our tours:</strong>
+        </div>
+        <div class="policy-list">
+          <ul>
+            <li><strong>Alcohol or Drugs</strong> - Absolutely prohibited, zero tolerance</li>
+            <li><strong>Weapons</strong> - No firearms, knives (except small pocket knife), or weapons</li>
+            <li><strong>Glass Containers</strong> - Safety hazard on rough terrain</li>
+            <li><strong>Excessive Luggage</strong> - Limited storage space available</li>
+            <li><strong>Valuables</strong> - Leave expensive jewelry at home</li>
+            <li><strong>Pets</strong> - Sorry, no animals allowed for safety reasons</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- PACKING TIPS -->
+      <div class="policy-card">
+        <div class="policy-icon">💡</div>
+        <h2 class="policy-heading">Pro Packing Tips</h2>
+        <div class="tips-list">
+          <div class="tip-item">
+            <div class="tip-number">1</div>
+            <div class="tip-content">
+              <strong>Dress in Layers</strong>
+              <p>Temperature can vary 20-30 degrees throughout the day. Start with a base layer and add/remove as needed.</p>
+            </div>
+          </div>
+          <div class="tip-item">
+            <div class="tip-number">2</div>
+            <div class="tip-content">
+              <strong>Secure Your Items</strong>
+              <p>Use zippered pockets or a secure bag. Dusty trails can shake things loose!</p>
+            </div>
+          </div>
+          <div class="tip-item">
+            <div class="tip-number">3</div>
+            <div class="tip-content">
+              <strong>Protect Your Phone/Camera</strong>
+              <p>Dust is everywhere! Use a ziplock bag or protective case.</p>
+            </div>
+          </div>
+          <div class="tip-item">
+            <div class="tip-number">4</div>
+            <div class="tip-content">
+              <strong>Better to Have It</strong>
+              <p>When in doubt, bring it. Better to have a jacket and not need it than need it and not have it!</p>
+            </div>
+          </div>
+          <div class="tip-item">
+            <div class="tip-number">5</div>
+            <div class="tip-content">
+              <strong>Leave Valuables Behind</strong>
+              <p>We're going off-road in dusty conditions. Leave expensive items at your hotel.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUICK CHECKLIST -->
+      <div class="policy-card checklist-card">
+        <div class="policy-icon">📝</div>
+        <h2 class="policy-heading">Quick Departure Checklist</h2>
+        <div class="checklist">
+          <label class="checklist-item"><input type="checkbox" disabled><span>Valid driver's license</span></label>
+          <label class="checklist-item"><input type="checkbox" disabled><span>Closed-toe shoes (sturdy)</span></label>
+          <label class="checklist-item"><input type="checkbox" disabled><span>Sunglasses</span></label>
+          <label class="checklist-item"><input type="checkbox" disabled><span>Hat or bandana</span></label>
+          <label class="checklist-item"><input type="checkbox" disabled><span>Sunscreen & lip balm</span></label>
+          <label class="checklist-item"><input type="checkbox" disabled><span>Camera/phone (in protective case)</span></label>
+          <label class="checklist-item"><input type="checkbox" disabled><span>Light jacket or layers</span></label>
+          <label class="checklist-item"><input type="checkbox" disabled><span>Appropriate clothing for season</span></label>
+        </div>
+        <div class="policy-note">
+          <strong>💡 Pro Tip:</strong> Take a screenshot of this checklist and refer to it when packing!
+        </div>
+      </div>
+
+      <!-- CONTACT CTA -->
+      <div class="policy-cta">
+        <h3>Questions About What to Bring?</h3>
+        <p>Not sure if you should pack something? Give us a call! We're happy to help you prepare for your adventure.</p>
+        <div class="cta-buttons">
+          <a href="tel:435-219-9447" class="cta-button primary">📞 Call (435) 219-9447</a>
+          <a href="/booking/" class="cta-button secondary">Ready to Book</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Mobile Sticky CTA -->
+<div class="mobile-sticky-cta">
+  <button onclick="location.href='/booking/'">Book Your Ride Now</button>
+</div>
+`;
+---
+<BaseLayout bodyClass="policy-page-body">
+  <Fragment slot="head">
+    <Seo
+      title="What to Bring on a UTV Tour | Adventure Tours Vernal, Utah"
+      description="Complete packing guide for guided UTV tours in Vernal, Utah. What to wear, seasonal clothing tips, what's provided, and what not to bring. Call (435) 219-9447."
+      path="/guides/what-to-bring/"
+      type="website"
+      ogTitle="What to Bring | Adventure Tours Vernal — UTV Tours in Utah"
+      ogDescription="Packing guide for guided Kawasaki KRX 1000 UTV tours in Vernal, Utah. Essentials, seasonal clothing, what we provide, and prohibited items. Call (435) 219-9447."
+    />
+  </Fragment>
+  <Header slot="body" active="what-to-bring" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'What to Bring' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: 'Quick Links',
+      links: [
+        { href: '/#tours', label: 'Our Tours' },
+        { href: '/#vehicles', label: 'Our Fleet' },
+        { href: '/#gallery', label: 'Photo Gallery' },
+        { href: '/booking/', label: 'Book Now' },
+      ],
+    }}
+  />
+</BaseLayout>

@@ -1,0 +1,25 @@
+---
+// FaqAccordion.astro — renders Q&As AND emits FAQPage JSON-LD from the
+// same data, so visible content and schema can't drift (Build Guide §4.5).
+import SchemaFaq from '../seo/SchemaFaq.astro';
+
+interface Props { faq: { q: string; a: string }[] }
+const { faq } = Astro.props;
+---
+<div class="faq-accordion">
+  {faq.map(({ q, a }, i) => (
+    <details class="faq-item" name={`faq-${i}`}>
+      <summary class="faq-question">{q}</summary>
+      <div class="faq-answer">{a}</div>
+    </details>
+  ))}
+</div>
+<SchemaFaq faq={faq} />
+
+<style>
+  .faq-item summary { cursor: pointer; }
+  .faq-item summary:focus-visible { outline: 2px solid var(--burnt-orange, #d4764e); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) {
+    .faq-answer { transition: none; }
+  }
+</style>

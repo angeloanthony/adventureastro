@@ -1,0 +1,59 @@
+---
+// Seo.astro — title/meta/canonical/OG/Twitter, generated not hand-pasted
+// (Build Guide §5, §6.1, §7.6). Self-referencing canonical on every page.
+//
+// og:title / og:description / twitter:* default to the page title and
+// description, but every page's legacy head is preserved exactly by
+// passing the optional ogTitle/ogDescription/twitterTitle/twitterDescription
+// overrides where the old markup deliberately used different social copy.
+import { SITE } from '../../config/site';
+import { absoluteUrl } from '../../lib/urls';
+
+interface Props {
+  title: string; // <= 60 chars per §6.1; money pages append " | Adventure Tours Vernal"
+  description: string; // 120-165 chars per §6.1
+  path: string; // e.g. "about.html" or "" for homepage
+  image?: string; // any form — absolutized automatically (correction #8); defaults to the logo
+  type?: 'website' | 'article';
+  ogTitle?: string;
+  ogDescription?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
+  noindex?: boolean;
+}
+const {
+  title,
+  description,
+  path,
+  image: imageProp = `${SITE.url}/images/logo.webp`,
+  type = 'website',
+  ogTitle = title,
+  ogDescription = description,
+  twitterTitle = ogTitle,
+  twitterDescription = ogDescription,
+  noindex = false,
+} = Astro.props;
+
+const image = absoluteUrl(imageProp);
+const canonical = absoluteUrl(path);
+---
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>{title}</title>
+<meta name="description" content={description} />
+{noindex && <meta name="robots" content="noindex" />}
+
+<meta property="og:title" content={ogTitle} />
+<meta property="og:description" content={ogDescription} />
+<meta property="og:image" content={image} />
+<meta property="og:url" content={canonical} />
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={SITE.name} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={twitterTitle} />
+<meta name="twitter:description" content={twitterDescription} />
+<meta name="twitter:image" content={image} />
+
+<link rel="canonical" href={canonical} />

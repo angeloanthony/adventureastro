@@ -1,0 +1,33 @@
+---
+// SchemaArticle.astro — Article + author Person (Build Guide §5.3).
+// Author identity comes from src/lib/authors.ts; image/url absolutized
+// via src/lib/urls.ts (correction #8).
+import { SITE } from '../../config/site';
+import { absoluteUrl } from '../../lib/urls';
+import { personJsonLd, type AuthorKey } from '../../lib/authors';
+
+interface Props {
+  headline: string;
+  description: string;
+  path: string;
+  image: string;
+  author: AuthorKey;
+  publishDate: Date;
+  updatedDate: Date;
+}
+const { headline, description, path, image, author, publishDate, updatedDate } = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline,
+  description,
+  image: absoluteUrl(image),
+  url: absoluteUrl(path),
+  datePublished: publishDate.toISOString(),
+  dateModified: updatedDate.toISOString(),
+  author: personJsonLd(author),
+  publisher: { '@id': `${SITE.url}/#business` },
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

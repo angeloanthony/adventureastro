@@ -1,0 +1,46 @@
+---
+// SchemaItinerary.astro — Article + ItemList of days (Build Guide §5.5).
+// Author identity from src/lib/authors.ts; URLs absolutized (correction #8).
+import { SITE } from '../../config/site';
+import { absoluteUrl } from '../../lib/urls';
+import { personJsonLd, type AuthorKey } from '../../lib/authors';
+
+interface Props {
+  headline: string;
+  description: string;
+  path: string;
+  image: string;
+  author: AuthorKey;
+  publishDate: Date;
+  updatedDate: Date;
+  days: { label: string; blocks: { activity: string; link?: string }[] }[];
+}
+const { headline, description, path, image, author, publishDate, updatedDate, days } = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline,
+  description,
+  image: absoluteUrl(image),
+  url: absoluteUrl(path),
+  datePublished: publishDate.toISOString(),
+  dateModified: updatedDate.toISOString(),
+  author: personJsonLd(author),
+  publisher: { '@id': `${SITE.url}/#business` },
+  hasPart: {
+    '@type': 'ItemList',
+    itemListElement: days.map((day, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: day.label,
+      itemListElement: day.blocks.map((b) => ({
+        '@type': 'ListItem',
+        name: b.activity,
+        ...(b.link ? { url: absoluteUrl(b.link) } : {}),
+      })),
+    })),
+  },
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

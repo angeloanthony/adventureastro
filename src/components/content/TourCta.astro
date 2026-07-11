@@ -1,0 +1,30 @@
+---
+// TourCta.astro — the booking CTA block (Build Guide §4.5, §9.1).
+// Pulls pricing from SITE config so a single edit updates every page —
+// but SITE.pricing is currently a TODO (see site.ts), so this renders a
+// "Call for pricing" fallback until the $349/$125 vs. $299/$100 conflict
+// is resolved. Never render more than 2 of these on one page.
+import { SITE } from '../../config/site';
+
+interface Props {
+  variant?: 'family' | 'adventure' | 'sunset' | 'generic';
+  valueProp?: string;
+}
+
+const VALUE_PROPS: Record<string, string> = {
+  family: 'The way most families cap off their Vernal trip.',
+  adventure: 'Guided Kawasaki KRX 1000 tours through Dinosaur Country.',
+  sunset: 'Golden-hour trails, petroglyphs, and backcountry overlooks.',
+  generic: 'Guided UTV tours through Dinosaur Country.',
+};
+
+const { variant = 'generic', valueProp = VALUE_PROPS[variant] } = Astro.props;
+const priceDisplay = SITE.pricing.baseTour != null ? `$${SITE.pricing.baseTour}/machine` : null;
+---
+<div class={`tour-cta tour-cta-${variant}`}>
+  <p class="tour-cta-value-prop">{valueProp}</p>
+  <p class="tour-cta-details">
+    {priceDisplay ?? 'Call for pricing'} &middot; 3 hours &middot; up to {SITE.fleet.seatsPerMachine} riders
+  </p>
+  <a href={SITE.booking.path} class="tour-cta-button">Book Your Adventure</a>
+</div>

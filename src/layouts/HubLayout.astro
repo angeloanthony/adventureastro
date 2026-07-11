@@ -1,0 +1,39 @@
+---
+// HubLayout.astro — lightweight hub landing/index shell, distinct from
+// PillarLayout: no dated Article schema or AuthorByline, for curated
+// listing pages that aggregate multiple content types rather than one
+// long-form pillar (e.g. the "Things to Do" hub model, §2.2; a
+// third-party attractions index, §4.6). Composition, not narrative.
+import BaseLayout from './BaseLayout.astro';
+import Seo from '../components/seo/Seo.astro';
+import SchemaLocalBusiness from '../components/seo/SchemaLocalBusiness.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
+import TourCta from '../components/content/TourCta.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  heroImage?: string;
+  breadcrumbs: { label: string; href?: string }[];
+  showTourCta?: boolean;
+}
+const { title, description, path, heroImage, breadcrumbs, showTourCta = true } = Astro.props;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo title={title} description={description} path={path} image={heroImage} />
+    <SchemaLocalBusiness />
+  </Fragment>
+  <Fragment slot="body">
+    <Header />
+    <Breadcrumbs items={breadcrumbs} />
+    <main class="hub-page">
+      <slot />
+      {showTourCta && <TourCta variant="generic" />}
+    </main>
+    <Footer />
+  </Fragment>
+</BaseLayout>

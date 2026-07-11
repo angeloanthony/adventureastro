@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+const schema = `{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Backcountry Tours in Vernal, Utah","description":"Guided backcountry UTV tours through remote canyons, petroglyph sites, and historic outlaw trails near Vernal, Utah.","author":{"@type":"Organization","name":"Adventure Tours Vernal"},"publisher":{"@type":"Organization","name":"Adventure Tours Vernal","logo":{"@type":"ImageObject","url":"https://adventuretoursvernal.com/images/logo.webp"}},"datePublished":"2026-04-08","dateModified":"2026-04-08","mainEntityOfPage":"https://adventuretoursvernal.com/utv/backcountry-tours-vernal-utah/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are backcountry tours in Vernal like?","acceptedAnswer":{"@type":"Answer","text":"Guided backcountry tours with Adventure Tours Vernal take you deep into the Uintah Basin's canyon country via Kawasaki KRX 1000 side-by-sides. You'll ride through sandy washes, canyon corridors, and ridge-top trails, stopping at petroglyphs, natural arches, and historic outlaw sites. Three hours, fully guided by Dave and Trudy Wilson."}},{"@type":"Question","name":"Do I need off-road experience for a backcountry tour?","acceptedAnswer":{"@type":"Answer","text":"No. The KRX 1000 has automatic transmission and power steering. Dave and Trudy provide a safety briefing and adjust pace to your comfort level. All skill levels are welcome."}},{"@type":"Question","name":"What makes Vernal's backcountry special?","acceptedAnswer":{"@type":"Answer","text":"The combination of canyon terrain, ancient Fremont and Ute petroglyphs, Wild West outlaw history, natural sandstone arches, and Dinosaur Country geology — all accessible through trails that most visitors never see."}}]}]}`;
+const bodyHtml = `
+
+
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    Backcountry tours in Vernal, Utah are offered by Adventure Tours Vernal using guided Kawasaki KRX 1000 side-by-sides. Five trail systems explore remote canyons, Fremont and Ute petroglyphs, natural sandstone arches, and historic Butch Cassidy outlaw routes. Dave and Trudy Wilson guide every tour. $299/machine for 3 hours, up to 2 riders. All skill levels. Call (435) 219-9447.
+  </p>
+
+  <main class="article-page">
+    <header class="article-header">
+      <div class="article-breadcrumb"><a href="/">Home</a><span class="sep">›</span><span>Backcountry Tours</span></div>
+      <h1 class="article-title">Backcountry Tours in Vernal, Utah</h1>
+      <p class="article-meta">Updated April 2026 · Adventure Tours Vernal</p>
+    </header>
+
+    <div class="article-body">
+      <div class="article-summary-box">
+        The real Vernal isn't on the highway — it's in the backcountry. Remote canyons, thousand-year-old petroglyphs, outlaw hideouts, hidden arches, and terrain that looks like it hasn't changed since the Jurassic. A guided backcountry UTV tour is the only way most people will ever see it.
+      </div>
+
+      <h2>What "Backcountry" Means Here</h2>
+      <p>Vernal's backcountry isn't a marketing term — it's literal. The trail systems operated by Adventure Tours Vernal run through terrain with no cell service, no signage, no other vehicles, and no way in without knowing the route. These are canyon corridors, desert washes, ridge-top traverses, and historic paths that have been used for centuries but never developed. That's what makes them special, and that's why you need a guide.</p>
+
+      <h2>Five Trail Systems, Five Experiences</h2>
+      <p><strong>Doc's Beach:</strong> Open sandy terrain along the Green River corridor. Fast, wide, and accessible. The most popular trail for first-timers who want the backcountry feeling without technical demands.</p>
+      <p><strong>Moonshine Arch:</strong> Red rock canyons winding to a hidden natural sandstone arch. Beautiful terrain with a destination worth the ride. Great for photographers.</p>
+      <p><strong>Ashley Gorge:</strong> Towering sandstone walls create a dramatic canyon corridor with river valley scenery. The most visually immersive trail.</p>
+      <p><strong>Outlaw Trail:</strong> The most remote and rugged option. Follows historic routes used by Butch Cassidy and the Wild Bunch through canyon terrain that feels genuinely untouched. For guests who want the deepest backcountry experience.</p>
+      <p><strong>Asphalt Ridge:</strong> Ridge-top panoramas with 360-degree views of Dinosaur Country and the Uinta Mountains. A different perspective on the basin — elevation instead of canyons.</p>
+
+      <h2>Your Guides: Dave & Trudy Wilson</h2>
+      <p>Every tour is personally guided by Dave and Trudy Wilson, who built the trail routes and know every rock art panel, every overlook, and every piece of history along the way. They each ride their own Kawasaki KRX 1000 alongside your group, adjusting pace to match your skill level and interests. This isn't a follow-the-leader caravan — it's a personal guided experience through terrain they've spent years exploring.</p>
+
+      <h2>Equipment & What's Included</h2>
+      <p>Each guest machine is a Kawasaki KRX 1000 2-seater with FOX 2.5 PODIUM LSC suspension, full roll cage, power steering, and automatic transmission. Helmets and safety gear are provided. A thorough safety briefing covers vehicle operation before departure. No prior off-road experience is required.</p>
+      <p>Tours are three hours at $299 per machine (up to 2 riders). The $100 ride-along option lets a third person ride as a passenger with Dave or Trudy. Groups up to 12 guests across 6 machines — call for custom group pricing.</p>
+
+      <div class="article-tip">
+        <strong>Backcountry Tip:</strong> If you want the most remote, rugged experience, ask for Outlaw Trail when you book. If you want drama and beauty with a hidden destination, go with Moonshine Arch. Dave will help you match the trail to your group.
+      </div>
+
+      <div class="article-faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item"><h3>What are backcountry tours in Vernal like?</h3><p>Three hours in a Kawasaki KRX 1000 through remote canyons, petroglyphs, arches, and outlaw history — guided by Dave and Trudy Wilson on trails most visitors never see.</p></div>
+        <div class="faq-item"><h3>Do I need off-road experience?</h3><p>No. Automatic transmission, power steering, and a full safety briefing make the KRX 1000 accessible to all skill levels.</p></div>
+        <div class="faq-item"><h3>What makes Vernal's backcountry special?</h3><p>Canyon terrain, ancient petroglyphs, Wild West outlaw history, natural arches, and Dinosaur Country geology — all in one ride.</p></div>
+      </div>
+
+      <div class="article-cta">
+        <h3>Get Into the Backcountry</h3>
+        <p>Guided KRX 1000 tours · $299/machine · 5 trail systems · 5.0 stars</p>
+        <a href="/booking/" class="cta-btn">Book a Tour</a>
+        <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
+      </div>
+    </div>
+
+    <div class="related-articles">
+      <h3>More Adventure Guides</h3>
+      <div class="related-grid">
+        <a href="/utv/best-utv-trails-vernal/" class="related-card"><h4>Best UTV Trails</h4><p>Detailed breakdown of every trail system.</p></a>
+        <a href="/atv-trails-vernal-utah/" class="related-card"><h4>ATV Trails Near Vernal</h4><p>Off-road terrain options around the basin.</p></a>
+        <a href="/guides/what-to-wear-utv-tour/" class="related-card"><h4>What to Wear</h4><p>Gear up for backcountry desert riding.</p></a>
+        <a href="/dinosaur-national-monument/petroglyphs-rock-art-vernal/" class="related-card"><h4>Petroglyphs & Rock Art</h4><p>The ancient sites you'll see on the trails.</p></a>
+      </div>
+    </div>
+  </main>
+`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Backcountry Tours in Vernal, Utah | Guided UTV Adventures"
+      description="Guided backcountry UTV tours in Vernal, Utah. Explore remote canyons, petroglyphs, outlaw trails, and hidden arches in Kawasaki KRX 1000 side-by-sides. Book today."
+      path="/utv/backcountry-tours-vernal-utah/"
+      type="article"
+      ogTitle="Backcountry Tours in Vernal, Utah"
+      ogDescription="Guided Kawasaki KRX 1000 tours through Vernal's remote backcountry — canyons, petroglyphs, and outlaw history."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Backcountry Tours' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

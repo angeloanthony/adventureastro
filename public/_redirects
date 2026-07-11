@@ -1,4 +1,42 @@
-# Cloudflare Pages redirects (safety net).
-# This migration preserves every URL in its original .html form, so NO
-# redirects are required. Add rules here only if you later change a URL, e.g.:
-#   /old-page.html   /new-page.html   301
+# Cloudflare Pages 301 map — G2 URL migration (owner-approved 2026-07-10).
+# Every legacy flat .html URL redirects ONCE, directly to its final
+# directory URL per the approved disposition map. Never chain: if a page
+# moves again (e.g. atv/jeep spokes when those hubs launch), edit the
+# line here to point at the new final URL.
+
+/index.html / 301
+/about.html /about/ 301
+/booking.html /booking/ 301
+/faq.html /faq/ 301
+/cancellation-policy.html /cancellation-policy/ 301
+/privacy-policy.html /privacy-policy/ 301
+/safety-guidelines.html /safety-guidelines/ 301
+
+# UTV hub
+/trails.html /utv/ 301
+/best-utv-trails-vernal.html /utv/best-utv-trails-vernal/ 301
+/side-by-side-rentals-vernal-utah.html /utv/side-by-side-rentals-vernal-utah/ 301
+/group-utv-tours-vernal.html /utv/group-utv-tours-vernal/ 301
+/backcountry-tours-vernal-utah.html /utv/backcountry-tours-vernal-utah/ 301
+
+# Things to Do hub (outdoor-activities MERGED into the pillar)
+/things-to-do-vernal-utah.html /things-to-do/ 301
+/outdoor-activities-vernal-utah.html /things-to-do/ 301
+/vernal-utah-attractions.html /things-to-do/vernal-utah-attractions/ 301
+/fun-things-to-do-vernal-utah-kids.html /things-to-do/fun-things-to-do-vernal-utah-kids/ 301
+/best-restaurants-vernal-utah.html /things-to-do/best-restaurants-vernal-utah/ 301
+
+# Dinosaur National Monument hub
+/dinosaur-national-monument-tours.html /dinosaur-national-monument/ 301
+/petroglyphs-rock-art-vernal.html /dinosaur-national-monument/petroglyphs-rock-art-vernal/ 301
+
+# Guides hub (moab-alternative MERGED into moab-utv-tours)
+/what-to-bring.html /guides/what-to-bring/ 301
+/what-to-wear-utv-tour.html /guides/what-to-wear-utv-tour/ 301
+/vernal-weather-guide.html /guides/vernal-weather-guide/ 301
+/moab-utv-tours.html /guides/moab-utv-tours/ 301
+/moab-alternative.html /guides/moab-utv-tours/ 301
+
+# Root-level until their hubs launch (update these lines then — no chains)
+/atv-trails-vernal-utah.html /atv-trails-vernal-utah/ 301
+/jeep-trails-vernal-utah.html /jeep-trails-vernal-utah/ 301

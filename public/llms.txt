@@ -25,7 +25,7 @@
 
 ## About & Trust
 
-- [https://adventuretoursvernal.com/about.html]: Locally owned and operated by Dave and Trudy Wilson
+- [https://adventuretoursvernal.com/about/]: Locally owned and operated by Dave and Trudy Wilson
 - Expert local guides with deep knowledge of the Uintah Basin's backcountry
 - Tours feature petroglyphs, rock art, and ruins — evidence of ancient civilization preserved in the landscape
 - Access to hidden trails, historic Wild West landmarks (Butch Cassidy hideouts, Josie's Cabin)

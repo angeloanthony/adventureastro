@@ -1,0 +1,50 @@
+---
+// ItineraryLayout.astro — "Adventure Planner" shell (Build Guide §4.4).
+// Renders each day via ItineraryDay.astro from structured data; day 1 or
+// day 2 must contain the tour (enforced by content, not this layout).
+import BaseLayout from './BaseLayout.astro';
+import Seo from '../components/seo/Seo.astro';
+import SchemaLocalBusiness from '../components/seo/SchemaLocalBusiness.astro';
+import SchemaItinerary from '../components/seo/SchemaItinerary.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
+import AuthorByline from '../components/content/AuthorByline.astro';
+import ItineraryDay from '../components/content/ItineraryDay.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  heroImage: string;
+  author: 'dave' | 'trudy';
+  publishDate: Date;
+  updatedDate: Date;
+  breadcrumbs: { label: string; href?: string }[];
+  days: CollectionEntry<'itineraries'>['data']['days'];
+}
+const {
+  title, description, path, heroImage, author, publishDate, updatedDate,
+  breadcrumbs, days,
+} = Astro.props;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo title={title} description={description} path={path} image={heroImage} type="article" />
+    <SchemaLocalBusiness />
+    <SchemaItinerary headline={title} description={description} path={path} image={heroImage} author={author} publishDate={publishDate} updatedDate={updatedDate} days={days} />
+  </Fragment>
+  <Fragment slot="body">
+    <Header />
+    <Breadcrumbs items={breadcrumbs} />
+    <main class="itinerary-page">
+      <slot />
+      <div class="itinerary-days">
+        {days.map((day) => <ItineraryDay {...day} />)}
+      </div>
+      <AuthorByline author={author} updatedDate={updatedDate} />
+    </main>
+    <Footer />
+  </Fragment>
+</BaseLayout>
