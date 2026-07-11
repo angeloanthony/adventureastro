@@ -2,6 +2,64 @@
 
 Governing spec: adventure-tours-vernal-build-guide.pdf (July 2026). Read it plus this file at the start of every session. Do not re-analyze completed work.
 
+## ⭐ MILESTONE — Platform declared COMPLETE (owner, 2026-07-11)
+
+The engineering build is done. Architecture, routing, SEO framework, internal
+linking, content collections, validation, hub framework, and cornerstone
+framework are all frozen at 100%. Pricing is resolved. Author system is 95%
+(waiting on owner-supplied photos/bios — see Pending). **No more infrastructure
+work unless a bug is found.** The project is no longer "build a website" — it
+is now "build the definitive resource about Dinosaur Country," i.e. content,
+photography, video, maps, and promotion only.
+
+**Standing instruction for every future content/editorial session** (the
+owner's master prompt — apply it without being re-told):
+- Do NOT redesign, discuss implementation, suggest engineering improvements,
+  or review architecture. The platform is frozen except for bug fixes.
+- Act as senior editor. Mission: the most authoritative travel resource for
+  Vernal, Dinosaur National Monument, Flaming Gorge, Ashley National Forest,
+  and the Uintah Basin.
+- Every article: genuinely useful, demonstrates local expertise, helps plan a
+  better trip, strengthens topical authority, naturally supports bookings
+  without becoming sales copy. No filler, no repetition, no keyword stuffing,
+  no invented facts — mark anything needing verification (`VERIFY WITH
+  OWNER`/`VERIFY WITH OFFICIAL SOURCE`, per the DNM-guide/Things-to-Do
+  precedent already shipped).
+- Every article should include (as applicable): Quick Answer, Key Takeaways,
+  comparison tables, planning advice, local insights, family considerations,
+  accessibility notes, photography tips, seasonal considerations, FAQ,
+  internal link recommendations, suggested original photography, suggested
+  video opportunities, suggested future supporting spokes.
+- SEO: every article strengthens its hub, links upward to its cornerstone,
+  and links laterally to related spokes.
+- Output production-ready content only — no implementation/architecture
+  discussion, no engineering recommendations. (The ✔/⚠/➡ <300-word format in
+  "Rules" below still governs *engineering* replies; it does not apply to
+  article deliverables, which are the point of the session.)
+
+**Publishing roadmap (owner's sequence — work top to bottom within each
+group unless told otherwise):**
+- Destination Authority: Ultimate Guide to Vernal → Dinosaur National
+  Monument ✔ done → Things to Do in Vernal ✔ done → Flaming Gorge → Ashley
+  National Forest → Red Fleet State Park → Steinaker State Park
+- Commercial Authority: Ultimate Guide to UTV Riding in Vernal → Beginner's
+  Guide to UTV Tours → Family UTV Guide → Private UTV Tours → Group UTV
+  Tours → Photography UTV Tours
+- Planning: Weekend from Salt Lake City → Weekend from Denver → Weekend from
+  Grand Junction → Family Weekend → Romantic Weekend → Three-Day Itinerary
+- Seasonal: Spring/Summer/Fall/Winter → monthly guides (Jan–Dec)
+- Activities: Hiking, Camping, Fishing, Scenic Drives, Wildlife, Photography,
+  History
+- Supporting Spokes: expand each hub to 20–40 high-quality supporting
+  articles once its cornerstone/pillar exists
+- **Original-asset priority (owner's standing recommendation):** original
+  photography every season, drone footage, trail maps, GPX files, trail
+  difficulty ratings, itinerary maps, firsthand comparison tables, Dave &
+  Trudy's local stories — these compound the "Real History, No BS." brand
+  advantage in a way AI-generated or competitor text can't replicate. Flag
+  these as deliverables in every article's output (per the standing
+  instruction above), don't just write text.
+
 ## Completed
 
 - ✔ Site audit (2026-07-10) — 26 pages, flat `.html` URLs, conclusions cached
