@@ -15,7 +15,7 @@ import AuthorByline from '../components/content/AuthorByline.astro';
 import RelatedArticles from '../components/content/RelatedArticles.astro';
 import FaqAccordion from '../components/content/FaqAccordion.astro';
 import TourCta from '../components/content/TourCta.astro';
-import type { HubSlug } from '../lib/hubs';
+import type { LinkCollection } from '../lib/hubs';
 
 interface Props {
   title: string;
@@ -26,7 +26,7 @@ interface Props {
   publishDate: Date;
   updatedDate: Date;
   breadcrumbs: { label: string; href?: string }[];
-  collection: HubSlug;
+  collection: LinkCollection;
   currentId: string;
   tags?: string[];
   related?: string[];

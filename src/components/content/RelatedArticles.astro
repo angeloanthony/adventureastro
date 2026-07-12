@@ -9,18 +9,24 @@
 // A manual override that doesn't resolve FAILS THE BUILD — a silently
 // dropped link is how networks decay.
 import { getCollection, getEntry } from 'astro:content';
-import { HUB_SLUGS, spokeHref, type HubSlug } from '../../lib/hubs';
+import { HUB_SLUGS, spokeHref, type LinkCollection } from '../../lib/hubs';
 import type { SpokeData } from '../../content.config';
 
 interface Card { title: string; description: string; href: string }
 
 interface Props {
-  collection: HubSlug;
+  collection: LinkCollection;
   currentId: string;
   tags?: string[];
   related?: string[];
   limit?: number;
 }
+
+// Manual `related` refs may target any linkable collection (hub spokes OR
+// itineraries). A same-collection ref (no '/') resolves against `collection`,
+// which for an itinerary page is 'itineraries' — so the valid set is wider
+// than HUB_SLUGS.
+const LINKABLE: readonly LinkCollection[] = [...HUB_SLUGS, 'itineraries'];
 const { collection, currentId, tags = [], related = [], limit = 4 } = Astro.props;
 
 type Spoke = { id: string; data: SpokeData };
@@ -28,9 +34,9 @@ const sharedTagCount = (entry: Spoke) => entry.data.tags.filter((t: string) => t
 const byRelevance = (a: Spoke, b: Spoke) =>
   sharedTagCount(b) - sharedTagCount(a) || b.data.updatedDate.valueOf() - a.data.updatedDate.valueOf();
 
-const picked: { hub: HubSlug; entry: Spoke }[] = [];
+const picked: { hub: LinkCollection; entry: Spoke }[] = [];
 const seen = new Set<string>([`${collection}/${currentId}`]);
-const take = (hub: HubSlug, entry: Spoke) => {
+const take = (hub: LinkCollection, entry: Spoke) => {
   const key = `${hub}/${entry.id}`;
   if (seen.has(key) || picked.length >= limit) return;
   seen.add(key);
@@ -48,10 +54,10 @@ for (const entry of sameHub) {
 // Tier 2 — manual frontmatter overrides.
 for (const ref of related) {
   const [hub, id] = ref.includes('/')
-    ? [ref.slice(0, ref.indexOf('/')) as HubSlug, ref.slice(ref.indexOf('/') + 1)]
+    ? [ref.slice(0, ref.indexOf('/')) as LinkCollection, ref.slice(ref.indexOf('/') + 1)]
     : [collection, ref];
-  if (!HUB_SLUGS.includes(hub)) {
-    throw new Error(`RelatedArticles: unknown hub in related ref "${ref}" (page ${collection}/${currentId})`);
+  if (!LINKABLE.includes(hub)) {
+    throw new Error(`RelatedArticles: unknown collection in related ref "${ref}" (page ${collection}/${currentId})`);
   }
   const entry = (await getEntry(hub, id)) as unknown as Spoke | undefined;
   if (!entry) {

@@ -50,7 +50,7 @@ const datesInOrder = { message: 'updatedDate must be >= publishDate', path: ['up
 // `tags` is required (min 1) — it drives RelatedArticles ranking, future
 // HubIndex grouping, and the §8.2 tag-intersection pages; a spoke without
 // tags would be invisible to the linking network.
-const spokeSchemaFor = (hub: HubSlug) => z.object({
+const spokeSchemaFor = (hub: HubSlug | 'itineraries') => z.object({
   title: z.string().max(65),
   description: z.string().min(120).max(165),
   /** Optional social-copy overrides — preserve a legacy page's distinct
@@ -75,33 +75,12 @@ const spokeSchemaFor = (hub: HubSlug) => z.object({
   draft: z.boolean().default(false),
 }).refine((d) => d.updatedDate >= d.publishDate, datesInOrder);
 
-// §4.4 — itinerary day structure.
-const itineraryDaySchema = z.object({
-  label: z.string(), // "Day 1"
-  summary: z.string().optional(),
-  blocks: z.array(z.object({
-    time: z.enum(['morning', 'lunch', 'afternoon', 'dinner', 'evening']),
-    activity: z.string(),
-    link: z.string().optional(),
-  })),
-  packingNote: z.string().optional(),
-  backupPlanLink: z.string().optional(),
-});
-
-const itinerarySchema = z.object({
-  title: z.string().max(65),
-  description: z.string().min(120).max(165),
-  publishDate: z.date(),
-  updatedDate: z.date(),
-  author: z.enum(['dave', 'trudy']),
-  heroImage: heroImage(),
-  heroAlt: z.string().min(20),
-  days: z.array(itineraryDaySchema),
-  faq: z.array(z.object({ q: z.string(), a: z.string() })).optional(),
-  related: z.array(z.string()).optional(),
-  tourCta: z.enum(['utv', 'private', 'sunset', 'none']).default('utv'),
-  draft: z.boolean().default(false),
-}).refine((d) => d.updatedDate >= d.publishDate, datesInOrder);
+// §4.4 — Itinerary spokes (the "Planning Authority" cluster) render with the
+// SAME editorial pattern as activity spokes — Article + FAQPage + Breadcrumb
+// schema, AuthorByline, RelatedArticles, TourCta, and a hidden AI-summary in
+// the MDX body. So they reuse the spoke schema verbatim (hub literal
+// 'itineraries'); tags drive shared-tag RelatedArticles and `related` drives
+// manual overrides, exactly as on hub spokes. See src/pages/itineraries/[id].astro.
 
 // §3.2 — city landing page data schema, verbatim.
 // NOTE: cities/seasons/months use the JSON/YAML dataLoader, not the
@@ -152,7 +131,7 @@ const hubCollections = Object.fromEntries(
 
 export const collections = {
   ...hubCollections,
-  itineraries: defineCollection({ loader: contentLoader('itineraries'), schema: itinerarySchema }),
+  itineraries: defineCollection({ loader: contentLoader('itineraries'), schema: spokeSchemaFor('itineraries') }),
   cities: defineCollection({ loader: dataLoader('cities'), schema: citySchema }),
   seasons: defineCollection({ loader: dataLoader('seasons'), schema: seasonSchema }),
   months: defineCollection({ loader: dataLoader('months'), schema: monthSchema }),

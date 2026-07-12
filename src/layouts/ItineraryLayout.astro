@@ -1,17 +1,14 @@
 ---
-// ItineraryLayout.astro — "Adventure Planner" shell (Build Guide §4.4).
-// Renders each day via ItineraryDay.astro from structured data; day 1 or
-// day 2 must contain the tour (enforced by content, not this layout).
-import BaseLayout from './BaseLayout.astro';
-import Seo from '../components/seo/Seo.astro';
-import SchemaLocalBusiness from '../components/seo/SchemaLocalBusiness.astro';
-import SchemaItinerary from '../components/seo/SchemaItinerary.astro';
-import Header from '../components/layout/Header.astro';
-import Footer from '../components/layout/Footer.astro';
-import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
-import AuthorByline from '../components/content/AuthorByline.astro';
-import ItineraryDay from '../components/content/ItineraryDay.astro';
-import type { CollectionEntry } from 'astro:content';
+// ItineraryLayout.astro — itinerary-spoke shell (Planning Authority cluster).
+// Itinerary articles render with the SAME editorial pattern as the Hiking,
+// Camping, Fishing, and Scenic-Drive spokes, so this layout adds no markup of
+// its own: it delegates entirely to SpokeLayout with the collection pinned to
+// 'itineraries'. That reuses one code path for Seo, SchemaLocalBusiness,
+// Article + FAQPage + Breadcrumb schema, Header/Breadcrumbs/Footer,
+// FaqAccordion, TourCta, AuthorByline, and RelatedArticles (manual `related`
+// overrides + shared-tag matching). The page body — H1, prose, and the hidden
+// AI-summary block — is authored in the MDX and passed through the slot.
+import SpokeLayout from './SpokeLayout.astro';
 
 interface Props {
   title: string;
@@ -22,29 +19,16 @@ interface Props {
   publishDate: Date;
   updatedDate: Date;
   breadcrumbs: { label: string; href?: string }[];
-  days: CollectionEntry<'itineraries'>['data']['days'];
+  currentId: string;
+  tags?: string[];
+  related?: string[];
+  tourCta?: 'utv' | 'private' | 'sunset' | 'none';
+  faq?: { q: string; a: string }[];
+  ogTitle?: string;
+  ogDescription?: string;
 }
-const {
-  title, description, path, heroImage, author, publishDate, updatedDate,
-  breadcrumbs, days,
-} = Astro.props;
+const props = Astro.props;
 ---
-<BaseLayout>
-  <Fragment slot="head">
-    <Seo title={title} description={description} path={path} image={heroImage} type="article" />
-    <SchemaLocalBusiness />
-    <SchemaItinerary headline={title} description={description} path={path} image={heroImage} author={author} publishDate={publishDate} updatedDate={updatedDate} days={days} />
-  </Fragment>
-  <Fragment slot="body">
-    <Header />
-    <Breadcrumbs items={breadcrumbs} />
-    <main class="itinerary-page">
-      <slot />
-      <div class="itinerary-days">
-        {days.map((day) => <ItineraryDay {...day} />)}
-      </div>
-      <AuthorByline author={author} updatedDate={updatedDate} />
-    </main>
-    <Footer />
-  </Fragment>
-</BaseLayout>
+<SpokeLayout {...props} collection="itineraries">
+  <slot />
+</SpokeLayout>

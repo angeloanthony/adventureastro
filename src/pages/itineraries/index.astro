@@ -1,0 +1,324 @@
+---
+// /itineraries/ — Itineraries hub PILLAR (Planning Authority phase).
+// Cornerstone: "The Ultimate Dinosaur Country Itinerary Guide."
+// Follows the fishing/hiking/things-to-do pillar pattern: content written
+// directly as Astro markup + Article/FAQPage JSON-LD. This is the site's
+// trip-PLANNING headquarters — it does not duplicate the destination or
+// activity guides, it teaches visitors how to COMBINE them into a trip and
+// links out to each cornerstone. No HubIndex: `itineraries` is a standalone
+// collection (day-by-day itinerary spokes via ItineraryLayout), not a slug
+// in the hub registry, so there is nothing to auto-list yet — future
+// itinerary spokes are seeded, not built here.
+//
+// Factual discipline (per editorial standards): the only hard numbers stated
+// are ones already fixed sitewide — the $349/machine, up-to-2-riders, 3-hour
+// UTV tour and (435) 219-9447; the ~3-hour Salt Lake City drive; Kings Peak
+// at 13,528 ft; and Vernal sitting above 5,000 ft. Every changing or
+// site-specific detail — exact drive times, hours, seasons, road and facility
+// status, lodging, fees — is described by character and marked VERIFY WITH
+// OFFICIAL SOURCE. No lodging brands, prices, or schedules are invented.
+// Reachability: linked in-body from the Things-to-Do cornerstone (nav-reachable).
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+
+const schema = `{
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "The Ultimate Dinosaur Country Itinerary Guide",
+        "description": "A local guide's trip-planning headquarters for Vernal and Dinosaur Country — how to turn one, two, or three days into the perfect itinerary for families, adventurers, photographers, anglers, campers, and road-trippers.",
+        "author": {"@type": "Organization", "name": "Adventure Tours Vernal"},
+        "publisher": {"@type": "Organization", "name": "Adventure Tours Vernal", "logo": {"@type": "ImageObject", "url": "https://adventuretoursvernal.com/images/logo.webp"}},
+        "datePublished": "2026-07-11",
+        "dateModified": "2026-07-11",
+        "mainEntityOfPage": "https://adventuretoursvernal.com/itineraries/"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type": "Question", "name": "How many days do you need in Vernal and Dinosaur Country?", "acceptedAnswer": {"@type": "Answer", "text": "Two to three days is the sweet spot. One day is enough for a single headline — Dinosaur National Monument or a guided UTV tour — but forces hard choices. A two-day weekend covers the essentials without rushing: dinosaurs and rock art one day, backcountry adventure and the state parks the next. A third day opens up the bigger excursions — Flaming Gorge, the High Uintas, a fishing or camping trip. Longer trips let you go deep on one theme. Match the length to your interests and your travel time, and always confirm current hours, seasons, and access before you lock a plan."}},
+          {"@type": "Question", "name": "What is the best one-day itinerary near Vernal?", "acceptedAnswer": {"@type": "Answer", "text": "With a single day, pick one anchor and build a half-day around it. The classic is Dinosaur National Monument in the morning — the Quarry and the Cub Creek petroglyph drive — then a Vernal lunch and an easy afternoon at a state park or museum. The adventure version flips it: a morning guided UTV tour into the canyons, then the monument or the Utah Field House in the afternoon. Resist the urge to cram two big destinations into one day; the region rewards depth over box-ticking. Verify current hours and seasonal access before you go."}},
+          {"@type": "Question", "name": "Should I stay in Vernal or move between hotels?", "acceptedAnswer": {"@type": "Answer", "text": "For almost every trip, base in Vernal and take day trips out. The region is built like a wheel — Vernal is the hub, and the monument, state parks, Flaming Gorge, and forest are all within day-trip range, so a single basecamp saves you packing and re-checking-in every night. A moving trip only makes sense on a longer road trip that continues on to other regions, or a dedicated backcountry camping trip where the campground is the point. Confirm current lodging and campground availability with the providers before you commit."}},
+          {"@type": "Question", "name": "What is the best time of year for a Dinosaur Country trip?", "acceptedAnswer": {"@type": "Answer", "text": "Late spring and early fall are the region-wide sweet spots — comfortable temperatures, active wildlife, and thinner crowds. Summer is fully open and best for water and high-country trips, but the desert is hot, so plan early starts. Fall brings gold aspens and quiet trails but a closing window up high. Winter is cold and quiet, with some seasonal roads and facilities closed, and works best as a low-desert and town-based trip. Match your itinerary to the season: desert and reservoirs in spring and fall, the High Uintas in summer. Verify seasonal openings before planning around a date."}},
+          {"@type": "Question", "name": "Is Vernal good for a family trip?", "acceptedAnswer": {"@type": "Answer", "text": "Exceptionally. The headline attractions are things kids actually care about — real dinosaur fossils in the rock, footprints they can stand beside, canyons, and boats — and most involve only short walks. A great family itinerary keeps drives short, builds in water and downtime, saves the exposed desert for cool mornings, and lets kids ride along on a guided UTV tour as passengers. Two or three relaxed days beat one rushed one. Confirm age policies, hours, and facilities with each provider before you go."}},
+          {"@type": "Question", "name": "Can you do Vernal as a weekend trip from Salt Lake City?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — it is one of the best weekend escapes from the Wasatch Front. Vernal is roughly a three-hour drive east of Salt Lake City on US-40 over the Uinta Mountains, close enough to leave after work or early on a Saturday and get two full days on the ground. Base in Vernal, anchor the weekend with a guided UTV tour and Dinosaur National Monument, and drive home Sunday evening. See our Salt Lake City to Vernal travel guide for the route and timing, and verify current road and weather conditions over the passes before you leave."}},
+          {"@type": "Question", "name": "What should I book first when planning a Vernal itinerary?", "acceptedAnswer": {"@type": "Answer", "text": "Book the anchor activities first and build the flexible sights around them. A guided UTV tour has set departure times, so reserve it first — especially in summer and on weekends — and treat it as the fixed point of that day. Do the same for any river trip, lodging, or campground, which sell out in peak season. The monument, state parks, museums, and scenic drives are flexible and slot in around your anchors. Reserve early and confirm current availability directly with each provider."}},
+          {"@type": "Question", "name": "What is the best itinerary for adventure travelers?", "acceptedAnswer": {"@type": "Answer", "text": "Adventure travelers should build the trip around backcountry access and elevation. Anchor a day on a guided UTV tour into canyon country you cannot reach from a paved road, add a High Uintas day hike or a stretch of alpine trail, and layer in fishing, paddling, or a camping night to sleep close to the action. In summer, chase cool air up high; in the shoulder seasons, work the desert canyons. This is a big, remote, high-elevation region — carry water and a map, tell someone your plan, and verify trail, road, and permit status with the managing agency first."}},
+          {"@type": "Question", "name": "How do I plan the perfect trip to Dinosaur Country?", "acceptedAnswer": {"@type": "Answer", "text": "Start with three questions: how long do you have, who are you traveling with, and what season is it. Pick a trip length, choose a theme that fits your group — family, adventure, photography, fishing, camping, scenic driving, or hiking — and base in Vernal so every destination is a day trip. Book your anchor activities first, match the elevation to the season, pack for high-desert extremes, and read each destination's dedicated guide for the details. Confirm current hours, fees, seasons, and access before you finalize, and leave room to slow down and enjoy it."}}
+        ]
+      }
+    ]
+  }`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Dinosaur Country Itineraries | Vernal Utah Trip Planner"
+      description="How to plan the perfect trip to Vernal and Dinosaur Country — one-day, weekend, and three-day itineraries for families, adventurers, photographers, anglers, and road-trippers."
+      path="/itineraries/"
+      type="article"
+      ogTitle="The Ultimate Dinosaur Country Itinerary Guide"
+      ogDescription="Your trip-planning headquarters for Vernal, Utah — one-day, weekend, and three-day itineraries for every kind of traveler, from a local guide."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Itineraries' }]} />
+
+  <p slot="body" class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">The Ultimate Dinosaur Country Itinerary Guide is the trip-planning headquarters for Vernal, Utah and the surrounding Dinosaur Country in northeastern Utah. It helps visitors turn one, two, or three days into a complete itinerary, and it teaches travelers how to combine the region's attractions — Dinosaur National Monument, guided UTV tours, Flaming Gorge, Ashley National Forest and the High Uintas, Red Fleet and Steinaker state parks, petroglyphs, museums, fishing, camping, and scenic drives — rather than listing them. It covers choosing a trip length; one-day, two-day, three-day, and weekend itineraries; and themed trips for families, adventure travelers, photographers, anglers, campers, scenic drivers, hikers, and road-trippers, plus seasonal planning, whether to basecamp in Vernal or move between hotels, where to stay, what to pack, and how to sequence bookings. Drive times, hours, seasons, road and facility status, fees, and lodging change and are set by the National Park Service, the U.S. Forest Service, Utah State Parks, and local providers — verify with official sources. Adventure Tours Vernal offers guided UTV tours for $349 per machine, up to 2 riders, 3 hours. Call (435) 219-9447.</p>
+
+  <main class="article-page" slot="body">
+    <header class="article-header">
+      <h1 class="article-title">The Ultimate Dinosaur Country Itinerary Guide</h1>
+      <p class="article-meta">Updated July 2026 · Adventure Tours Vernal</p>
+    </header>
+
+    <div class="article-body">
+
+      <div class="article-summary-box"><strong>Quick Answer:</strong> People don't visit attractions — they plan trips. This is the guide that turns Dinosaur Country's dinosaurs, canyons, reservoirs, and backcountry into a single, well-paced itinerary. Give the region <strong>two to three days</strong> if you can: a two-day weekend covers the essentials — dinosaurs and rock art one day, a backcountry <a href="/booking/">UTV tour</a> and the state parks the next — and a third day opens up <a href="/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge</a>, the <a href="/guides/ultimate-guide-to-ashley-national-forest/">High Uintas</a>, or a <a href="/fishing/">fishing</a> or <a href="/camping/">camping</a> trip. Base yourself in <a href="/guides/ultimate-guide-to-vernal-utah/">Vernal</a> so every destination is a day trip, <strong>book your anchor activities first</strong>, match the elevation to the season, and pack for high-desert extremes. Below you'll find ready-to-use itineraries by length and by theme — family, adventure, photography, fishing, camping, scenic driving, and hiking — plus seasonal advice and the planning logic to build your own. Always confirm current hours, fees, seasons, and access before you finalize.</div>
+
+      <div class="key-takeaways">
+        <h2>Key Takeaways</h2>
+        <ul>
+          <li><strong>Two to three days is the sweet spot.</strong> One day covers a single headline; a long weekend sees the whole region without rushing; extra days let you go deep on a theme.</li>
+          <li><strong>Basecamp in Vernal.</strong> The region is a wheel — Vernal is the hub and every destination is a day trip, so one basecamp beats moving hotels for almost every trip.</li>
+          <li><strong>Book anchors first.</strong> A guided UTV tour, a river trip, and lodging or campgrounds have fixed times and sell out; reserve them first and slot the flexible sights around them.</li>
+          <li><strong>Match the elevation to the season.</strong> Desert and reservoirs shine in spring and fall; the High Uintas are a summer destination; winter is a low-desert and town trip.</li>
+          <li><strong>Choose a theme, then a length.</strong> Family, adventure, photography, fishing, camping, scenic driving, or hiking — each has a best-fit itinerary, and this guide gives you all of them.</li>
+          <li><strong>Verify the details.</strong> Drive times, hours, fees, seasonal openings, road status, and lodging change and are set by the agencies and providers — confirm current specifics before you lock a plan.</li>
+        </ul>
+      </div>
+
+      <h2>Why Plan a Trip Instead of a List</h2>
+      <p>Most travel guides hand you a list of attractions and wish you luck. That's not how good trips actually happen. A great trip to Dinosaur Country isn't a checklist of stops — it's a <em>sequence</em>: the right things, in the right order, at the right time of day and the right time of year, anchored around the activities you have to reserve and padded with the flexible ones you can move. Get the sequence right and a two-day weekend feels abundant; get it wrong and a week feels rushed.</p>
+      <p>This is your planning headquarters. Every activity in the region now has its own deep-dive guide — <a href="/dinosaur-national-monument/">Dinosaur National Monument</a>, guided <a href="/utv/">UTV touring</a>, <a href="/fishing/">fishing</a>, <a href="/camping/">camping</a>, <a href="/scenic-drives/">scenic drives</a>, <a href="/hiking/">hiking</a>, and <a href="/things-to-do/">everything else there is to do</a>. This page does the job none of those can do alone: it teaches you how to <strong>combine</strong> them into a trip that fits your days, your travelers, and your season. Read it top to bottom to understand the logic, or jump to the length or theme that matches your trip and lift the itinerary straight off the page.</p>
+      <p>One honest note up front, and you'll see it repeated: the <em>shape</em> of these itineraries holds season to season, but the specifics — exact hours, fees, seasonal road openings, campground and lodging availability — are set by the National Park Service, the U.S. Forest Service, Utah State Parks, and local providers, and they change. Treat every plan here as a smart starting point, and <strong>confirm the current details</strong> before you commit.</p>
+
+      <h2>Choosing Your Trip Length</h2>
+      <p>The single most useful planning decision is how many days to give the region — everything else follows from it. Dinosaur Country punches far above its size, so even a short trip is worthwhile, but each extra day unlocks a genuinely different tier of the region. Here's how to think about it.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Length</th><th>What it's good for</th><th>The honest trade-off</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>One day</td><td>A single headline done well — the monument, or a UTV tour — on a road-trip stopover or a day out from a nearby base</td><td>Forces a hard choice; no time for the region's range</td></tr>
+            <tr><td>Two days (weekend)</td><td>The essentials without rushing: dinosaurs and rock art, plus a backcountry adventure and the state parks</td><td>Leaves the bigger excursions — Flaming Gorge, the high country — for "next time"</td></tr>
+            <tr><td>Three days</td><td>The full sampler: the monument in depth, a UTV-and-parks day, and a Flaming Gorge or mountain day</td><td>Still a taste of each theme rather than a deep dive into one</td></tr>
+            <tr><td>Four-plus days</td><td>Going deep on a theme — a fishing trip, a camping trip, a photography trip, or a proper backcountry adventure</td><td>Needs a clear focus, or the extra days sprawl</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>If you take one rule from this section: <strong>depth beats breadth here.</strong> The instinct on a short trip is to race between destinations, but the region rewards the opposite — pick fewer things and do them properly. A single unhurried morning in <a href="/dinosaur-national-monument/visiting-dinosaur-national-monument/">Dinosaur National Monument</a> or one <a href="/booking/">guided UTV tour</a> will outshine a frantic day of half-seen stops every time.</p>
+
+      <h2>One-Day Trips</h2>
+      <p>With a single day, the whole game is choosing one anchor and building a comfortable half-day around it rather than trying to see everything. You cannot do the monument justice <em>and</em> take a backcountry tour <em>and</em> reach Flaming Gorge in one day — and trying is how good days go sideways. Pick your anchor, then relax into it.</p>
+      <p><strong>The dinosaur day.</strong> Start early at <a href="/dinosaur-national-monument/visiting-dinosaur-national-monument/">Dinosaur National Monument</a> — the Quarry with its wall of bones still in the rock, then the Cub Creek drive with its roadside <a href="/dinosaur-national-monument/petroglyphs-rock-art-vernal/">petroglyphs</a> and the historic Josie Morris cabin. Come back into town for lunch, and spend an easy afternoon at the Utah Field House dinosaur garden or a swim at a nearby reservoir. It's the region's signature day and the right call for first-timers and families.</p>
+      <p><strong>The adventure day.</strong> Flip it: put a morning <a href="/booking/">guided UTV tour</a> at the center — three hours into canyon country, hidden arches, and remote rock art you'd never reach from a paved road — then use the afternoon for the monument's headline stops or the Field House. This is the most adventure you can pack into one day, and the tour's fixed departure gives the day a reassuring backbone.</p>
+      <p><strong>The stopover day.</strong> Passing through on a bigger road trip? Give the monument its Quarry-and-Cub-Creek core in the morning and drive on, or trade it for the northern scenery on a piece of the <a href="/scenic-drives/flaming-gorge-uintas-scenic-byway/">Flaming Gorge–Uintas Byway</a>. Either leaves you with a genuine taste of Dinosaur Country between destinations.</p>
+      <div class="article-tip"><strong>One-day rule:</strong> don't stack two marquee destinations into a single day — the driving eats the day and you enjoy neither. Anchor on one, keep the afternoon flexible, and start early to beat both the heat and the crowds. Hours and seasonal access change — <strong>VERIFY WITH OFFICIAL SOURCE</strong> (the National Park Service and Utah State Parks) before you go.</div>
+
+      <h2>Two-Day Trips (The Perfect Weekend)</h2>
+      <p>Two days is the region's natural rhythm, and the classic weekend splits cleanly into a "low and red" day and a "backcountry" day — the desert and the adventure, the two halves of Dinosaur Country's character.</p>
+      <p><strong>Day 1 — Dinosaurs &amp; rock art.</strong> Open the day at <a href="/dinosaur-national-monument/visiting-dinosaur-national-monument/">Dinosaur National Monument</a>: the Quarry Exhibit Hall at opening, then the full Cub Creek drive with every petroglyph stop and the Josie Morris cabin. Lunch back on Vernal's Main Street. In the afternoon, drive up to the Fremont <a href="/dinosaur-national-monument/petroglyphs-rock-art-vernal/">petroglyph panels</a> in Dry Fork Canyon, or cool off at <a href="/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a> or <a href="/guides/ultimate-guide-to-steinaker-state-park/">Steinaker</a> — where kids can walk right up to the dinosaur trackways. Dinner in town.</p>
+      <p><strong>Day 2 — Backcountry adventure.</strong> Spend the morning on a <a href="/booking/">guided UTV tour</a> into the canyons — arches, remote rock art, and terrain no ordinary vehicle can reach. After lunch, pick your finish: the Utah Field House for an easy afternoon, a short hike, or the first overlooks of the <a href="/scenic-drives/">Flaming Gorge scenic drive</a> at golden hour. A hearty dinner sends the weekend off right.</p>
+      <div class="article-tip"><strong>Booking order matters:</strong> reserve your UTV tour first and build the weekend around it — the tour time anchors the day and the monument and parks flex easily around it. <a href="/booking/">Check availability here</a>. Coming from the Wasatch Front? It's about a three-hour drive — see our <a href="/from/salt-lake-city/">Salt Lake City to Vernal travel guide</a>.</div>
+
+      <h2>Three-Day Trips</h2>
+      <p>A third day is where Dinosaur Country opens all the way up. With two days you see the essentials; with three you add the region's <em>other half</em> — the big water and the high country — and you get to slow down.</p>
+      <p><strong>Day 1 — The monument, in full.</strong> Give <a href="/dinosaur-national-monument/">Dinosaur National Monument</a> a proper day: the Quarry at opening, the Fossil Discovery walk, the whole Cub Creek drive with every stop, and the Josie Morris cabin. Add a short Split Mountain–area walk in the late afternoon if you've got the energy.</p>
+      <p><strong>Day 2 — UTV tour &amp; state parks.</strong> A morning <a href="/booking/">guided UTV tour</a>, lunch in Vernal, then an afternoon at <a href="/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a> or <a href="/guides/ultimate-guide-to-steinaker-state-park/">Steinaker</a> for swimming, paddling, the trackways, and easy shoreline time — a day that balances adrenaline and downtime.</p>
+      <p><strong>Day 3 — Flaming Gorge &amp; the mountains.</strong> Take the <a href="/scenic-drives/flaming-gorge-uintas-scenic-byway/">Flaming Gorge–Uintas Byway</a> north into <a href="/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest</a> and the red canyons of the gorge. <a href="/fishing/">Fish</a>, boat, picnic at an overlook, or hike a stretch of high country — and in fall, chase the aspen gold. It's the alpine counterpoint to the desert of the first two days, and the day that makes the trip feel complete.</p>
+      <p>This three-day frame is the most popular shape for a reason: it shows you desert <em>and</em> mountains, fossils <em>and</em> adventure, without a single rushed hour. Confirm current road, ferry, and seasonal status for the northern drive before you count on it.</p>
+
+      <h2>Weekend Getaways</h2>
+      <p>Dinosaur Country is one of the best long-weekend escapes in the Intermountain West, precisely because it's close enough to reach and far enough to feel like somewhere else. The playbook is simple: arrive Friday evening or early Saturday, run the two-day weekend plan above, and drive home Sunday evening — or stretch it to a third day if you have the Monday.</p>
+      <p>The key to a weekend is <strong>protecting the two full days on the ground.</strong> Do your driving at the edges — in on Friday night, out on Sunday night — so you don't burn daylight in transit. From <a href="/from/salt-lake-city/">Salt Lake City</a> that's roughly a three-hour drive each way over the Uintas; from Denver or Grand Junction it's a longer haul that argues for adding a night. Whatever your origin, base in Vernal, anchor the weekend with a <a href="/booking/">UTV tour</a> and the monument, and let everything else flex around them. For the exact route, timing, and what to expect over the mountain passes, see our <a href="/from/salt-lake-city/">Salt Lake City to Vernal travel guide</a>, and always check current road and weather conditions before you leave.</p>
+
+      <h2>Family Itineraries</h2>
+      <p>This may be the most underrated <em>family</em> destination in Utah, because the headline attractions are things kids genuinely care about — real fossilized bone they can touch, footprints they can stand beside, canyons, and boats — and most involve only short walks. The art of a family itinerary here is pacing: short drives, real payoffs, water and downtime built in, and the exposed desert saved for cool mornings.</p>
+      <p><strong>A great two-day family weekend</strong> runs like this. Day one: the <a href="/dinosaur-national-monument/visiting-dinosaur-national-monument/">monument</a> at opening while it's cool — the Quarry's wall of bones is a guaranteed hit — then a midday break in town, and an afternoon at <a href="/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a> for the dinosaur trackways and a swim. Day two: an easy morning at the Utah Field House dinosaur garden, then a <a href="/booking/">guided UTV tour</a> where kids ride along as passengers into canyon country — the highlight most families remember most. Keep dinners early; little legs fade fast at altitude.</p>
+      <div class="article-tip"><strong>Family reality check:</strong> Vernal sits above 5,000 feet, the sun is intense, and the desert heats up fast — go early, carry far more water than seems necessary, and keep walks short with a reward at the end. For more kid-specific ideas, see <a href="/things-to-do/fun-things-to-do-vernal-utah-kids/">fun things to do in Vernal with kids</a>, and pack with our <a href="/guides/what-to-bring/">what to bring guide</a>. Confirm current age policies, hours, and facilities with each provider before you go.</div>
+
+      <h2>Adventure Itineraries</h2>
+      <p>For travelers who measure a trip by how far off the pavement it gets, Dinosaur Country delivers backcountry, big water, and real elevation in one compact region. The adventure itinerary is built around <em>access and altitude</em>: reach the places most visitors can't, and use the season to decide whether you go high or stay in the canyons.</p>
+      <p><strong>The two-day adventure weekend.</strong> Day one, anchor on a <a href="/booking/">guided UTV tour</a> deep into canyon country — arches, slickrock, and rock art beyond any paved road — then add an afternoon hike or a paddle. Day two, climb: a <a href="/hiking/high-uintas-day-hikes/">High Uintas day hike</a> to an alpine lake in summer, or a desert canyon route at the <a href="/dinosaur-national-monument/">monument</a> in the shoulder seasons. Add a night of <a href="/camping/">camping</a> to sleep close to the action and start the next day at first light.</p>
+      <p><strong>Going bigger.</strong> With more days, the region scales up fast: multi-day <a href="/hiking/high-uintas-backpacking-guide/">backpacking in the High Uintas Wilderness</a>, up toward <strong>Kings Peak at 13,528 feet</strong>, the highest point in Utah; long stretches of the alpine backcountry; and remote <a href="/fishing/green-river-fly-fishing/">river fishing</a>. This is serious, remote, high country — cell service is thin to nonexistent, weather turns fast, and help is far.</p>
+      <div class="article-tip"><strong>Backcountry discipline:</strong> carry more water than you think you need, bring a real map, tell someone your plan and expected return, and watch the afternoon sky on exposed high ground. Trail, road, and permit status change — <strong>VERIFY WITH OFFICIAL SOURCE</strong> (Ashley National Forest, the National Park Service) before any backcountry day.</div>
+
+      <h2>Photography Itineraries</h2>
+      <p>A trip built for the camera runs on a different clock — dawn and dusk, not mid-morning — and Dinosaur Country rewards it richly, with red canyon walls, mirror-calm reservoirs, dark night skies, gold autumn aspens, and fossils and rock art found nowhere else. The photographer's itinerary sequences <em>light</em>, not attractions.</p>
+      <p><strong>A photography weekend.</strong> Shoot the <a href="/dinosaur-national-monument/">monument's</a> canyon overlooks and the <a href="/dinosaur-national-monument/petroglyphs-rock-art-vernal/">petroglyphs</a> in the warm early light, rest through the flat midday hours, then chase sunset on the red sandstone at <a href="/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a> and the glassy reflections at a reservoir. On a clear, moonless night, stay out for the stars — away from town, the high desert delivers superb Milky Way skies. The next morning, catch first light along the <a href="/scenic-drives/flaming-gorge-uintas-scenic-byway/">Flaming Gorge byway</a> overlooks before the haze builds. In fall, plan an alpine drive or hike around the aspen change.</p>
+      <div class="article-tip"><strong>Photographer's ethic:</strong> use natural low-angle light to bring out fossils, tracks, and petroglyphs — and never chalk, wet, touch, or move any of them to "improve" a shot; they're irreplaceable. Get off exposed ridges when storms threaten. For a guided way into unreachable canyon light, a <a href="/booking/">UTV tour</a> puts you where the roads don't.</div>
+
+      <h2>Fishing Trips</h2>
+      <p>Anglers can build an entire trip around water here, and the region gives you three genuinely different fisheries within a short radius — a rare spread. The <a href="/fishing/">fishing trip</a> is about matching the water to your style and the season.</p>
+      <p>A classic fishing itinerary bases in Vernal and rotates the waters: a day of trophy potential on the big reservoir at <a href="/fishing/fishing-flaming-gorge/">Flaming Gorge</a>, a day of technical tailwater on the <a href="/fishing/green-river-fly-fishing/">Green River</a> below the dam, and an easy, family-friendly day at a closer reservoir like <a href="/fishing/fishing-red-fleet-reservoir/">Red Fleet</a> or <a href="/fishing/fishing-steinaker-reservoir/">Steinaker</a>. Non-anglers in the group aren't stuck — the same reservoirs offer swimming and paddling, and the monument is never far. For the full breakdown of each water, see the <a href="/fishing/">Ultimate Guide to Fishing in Dinosaur Country</a>.</p>
+      <div class="article-tip"><strong>Before you cast:</strong> licenses, limits, seasons, species regulations, boat rules, and stocking all change and are set by the state wildlife agency and the managing agencies. <strong>VERIFY WITH OFFICIAL SOURCE</strong> for current regulations and conditions on every water before you fish.</div>
+
+      <h2>Camping Trips</h2>
+      <p>Camping turns Dinosaur Country from a series of day trips into an immersion — you wake up in the landscape and start each day at its best hour. A <a href="/camping/">camping trip</a> can be the whole point of the visit or a way to extend an adventure or fishing trip cheaply and beautifully.</p>
+      <p>The region offers the full range, from developed state-park campgrounds with the reservoir at your doorstep — at <a href="/camping/camping-at-red-fleet-state-park/">Red Fleet</a> and <a href="/camping/camping-at-steinaker-state-park/">Steinaker</a> — to the cool pine campgrounds of <a href="/camping/camping-in-ashley-national-forest/">Ashley National Forest</a> and the high country, to the big-water sites around <a href="/camping/camping-at-flaming-gorge/">Flaming Gorge</a>. A great camping itinerary picks a basecamp campground that matches the trip's theme — reservoir for families and anglers, forest for cool-air escapes and hikers — and day-trips out from there. For the full comparison, see the <a href="/camping/">Ultimate Guide to Camping in Dinosaur Country</a>.</p>
+      <div class="article-tip"><strong>Camp smart:</strong> store all food and scented items secured and never in your tent, pack layers for cold desert and mountain nights, and plan around fire restrictions. Campground availability, reservations, seasons, and fire rules change — <strong>VERIFY WITH OFFICIAL SOURCE</strong> (Utah State Parks, the U.S. Forest Service) and reserve early in peak season.</div>
+
+      <h2>Scenic Drive Trips</h2>
+      <p>If your idea of a perfect day is a great road, big views, and the freedom to stop wherever you like, you can build a trip almost entirely around the region's <a href="/scenic-drives/">scenic drives</a> — and it's an especially good fit for travelers with limited mobility, mixed-ability groups, or simply a love of the open road.</p>
+      <p>The spine of a scenic-drive trip is the <a href="/scenic-drives/flaming-gorge-uintas-scenic-byway/">Flaming Gorge–Uintas Byway</a>, which climbs from the desert into the forest and down to the red canyons of the gorge, with overlook after overlook. Branch off onto the geology of the <a href="/scenic-drives/sheep-creek-geological-loop/">Sheep Creek Geological Loop</a>, the forest and fall color of the <a href="/scenic-drives/red-cloud-loop-scenic-drive/">Red Cloud Loop</a>, or the roadside dinosaurs and petroglyphs of <a href="/scenic-drives/cub-creek-road-tour-of-the-tilted-rocks/">Cub Creek Road</a> inside the monument. String two or three together over a couple of days, and you've seen the region's whole sweep from the driver's seat. See the <a href="/scenic-drives/">Ultimate Guide to Scenic Drives in Dinosaur Country</a> for the full network.</p>
+      <div class="article-tip"><strong>Drive-trip note:</strong> some of these routes climb high, include unpaved sections, or close seasonally with snow. Road surface, openings, and facilities change — <strong>VERIFY WITH OFFICIAL SOURCE</strong> for current status, and carry water and a full tank; services are sparse once you leave town.</div>
+
+      <h2>Hiking Trips</h2>
+      <p>Hikers can spend days here without repeating a landscape, because the region stacks desert fossil-canyon trails, red-rock reservoir walks, and genuine alpine wilderness within an hour of one town. A <a href="/hiking/">hiking trip</a> is really an exercise in matching the elevation to the season.</p>
+      <p>Build a hiking itinerary around contrast: a desert day on the fossil and canyon trails of <a href="/hiking/best-hikes-in-dinosaur-national-monument/">Dinosaur National Monument</a>, an alpine day on a <a href="/hiking/high-uintas-day-hikes/">High Uintas day hike</a> to a mountain lake, and an easy family or shoulder-season walk at a <a href="/hiking/family-hiking-near-vernal/">reservoir</a>. In summer, weight the trip toward the cool high country; in spring and fall, work the desert. For the deep dive — trails by ability, destination, and season — see the <a href="/hiking/">Ultimate Guide to Hiking in Dinosaur Country</a>.</p>
+      <div class="article-tip"><strong>Hiker's rule here:</strong> let heat and altitude, not just mileage, set your ambition — a short desert trail at midday can be harder than a longer walk in cool mountain air. Trail distances, difficulty, permits, and closures change — <strong>VERIFY WITH OFFICIAL SOURCE</strong> before every hike, and carry a map where there's no cell service.</div>
+
+      <h2>Seasonal Trips</h2>
+      <p>The same region rewards completely different itineraries depending on when you come, and the biggest planning mistake is fighting the season instead of leaning into it. The rule that ties it all together: <strong>pair elevation with the calendar</strong> — desert low, mountains high — and let the weather steer you.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Season</th><th>Best trip to build</th><th>What to expect</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Spring</td><td>Desert &amp; reservoirs — the monument, Red Fleet, Steinaker, canyon hikes</td><td>Ideal desert temperatures and thin crowds; the high country is still snowbound and muddy</td></tr>
+            <tr><td>Summer</td><td>High country &amp; water — High Uintas hikes, alpine camping, fishing, paddling</td><td>Peak season, fully open; desert needs early starts; afternoon thunderstorms up high</td></tr>
+            <tr><td>Fall</td><td>Nearly everything — aspen drives, desert hikes, quiet reservoirs</td><td>Many locals' favorite: cool air, gold color, fewer people; the high country closes as snow returns</td></tr>
+            <tr><td>Winter</td><td>Low-desert &amp; town — the monument on mild days, museums, easy walks</td><td>Cold and quiet; some seasonal roads and facilities closed; short days, plan a relaxed pace</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><em>Seasonal timing is general and shifts with weather and elevation year to year; road openings and facility seasons change annually. <strong>VERIFY WITH OFFICIAL SOURCE</strong> for current conditions before planning around a date.</em> For the month-by-month picture, see our <a href="/guides/vernal-weather-guide/">Vernal weather guide</a>.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Factor</th><th>Spring</th><th>Summer</th><th>Fall</th><th>Winter</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>High country</td><td>Mostly closed / melting out</td><td>Fully open — prime</td><td>Open early, closing with snow</td><td>Snow travel only</td></tr>
+            <tr><td>Desert &amp; monument</td><td>Excellent</td><td>Hot — early starts</td><td>Excellent</td><td>Cold but doable on mild days</td></tr>
+            <tr><td>Water activities</td><td>Cool, warming</td><td>Peak</td><td>Cooling, quiet</td><td>Off-season</td></tr>
+            <tr><td>Crowds</td><td>Light</td><td>Busiest</td><td>Light–moderate</td><td>Quietest</td></tr>
+            <tr><td>Best for</td><td>Desert hikes, first-timers, families</td><td>Alpine trips, families on break, anglers</td><td>Photographers, hikers, solitude</td><td>Quiet town-based trips</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Road Trips</h2>
+      <p>Plenty of visitors reach Dinosaur Country not as a destination but as a leg of a bigger drive — and it slots beautifully into a Western road trip. From <a href="/from/salt-lake-city/">Salt Lake City</a> it's about three hours east on US-40 over the Uinta Mountains, an easy add-on to a Utah loop; from Colorado it connects west through Dinosaur, Colorado. As a road-trip stop it works at any scale: a half-day at the monument between destinations, an overnight to add a UTV tour, or a two-to-three-day anchor in a longer itinerary.</p>
+      <p>If Dinosaur Country is the road trip itself, the region's own <a href="/scenic-drives/">scenic byways</a> turn it into days of driving with the reservoirs, forest, and canyons as your route. Either way, plan fuel and supplies around Vernal — it's the last full-service town before a lot of empty, beautiful country — and check current road and pass conditions before you set out, especially in the shoulder seasons and winter. For the Wasatch Front approach in detail, see our <a href="/from/salt-lake-city/">Salt Lake City to Vernal travel guide</a>.</p>
+
+      <h2>Basecamp vs. Moving Hotels</h2>
+      <p>One structural choice shapes every itinerary above: do you settle into one base and day-trip out, or move from place to place each night? For Dinosaur Country, the answer is clear for almost everyone — <strong>basecamp</strong> — and it's worth understanding why.</p>
+      <p>The region is built like a wheel. Vernal is the hub, and the monument, the state parks, Flaming Gorge, and the forest are all spokes within day-trip range. That geometry makes a single base enormously efficient: you unpack once, you don't re-check-in every evening, you can react to weather by swapping tomorrow's plan, and you always have a comfortable town with fuel, groceries, and restaurants to return to. A moving trip, by contrast, spends its energy on logistics — packing, driving to the next lodging, checking in — that a basecamp trip spends on actually seeing the region.</p>
+      <p>There are two honest exceptions. The first is a <strong>road trip</strong> that's passing through on the way to somewhere else — then a single night near the monument makes sense before you drive on. The second is a dedicated <strong>backcountry camping or backpacking trip</strong>, where sleeping out in the forest or wilderness <em>is</em> the experience, not a logistics cost. For everything else, pick a base in Vernal and let the region come to you.</p>
+
+      <h2>Where to Stay</h2>
+      <p>Where you sleep should follow the trip you're building, and Dinosaur Country offers a straightforward spread of options — the specifics of which are best confirmed directly with the providers, since availability and offerings change.</p>
+      <ul>
+        <li><strong>In-town lodging (Vernal).</strong> The default for most trips: hotels and motels in and around Vernal put you minutes from restaurants, fuel, and groceries and within day-trip range of everything. Best for families, weekenders, and anyone who values comfort and flexibility.</li>
+        <li><strong>State-park campgrounds.</strong> Sleeping at <a href="/camping/camping-at-red-fleet-state-park/">Red Fleet</a> or <a href="/camping/camping-at-steinaker-state-park/">Steinaker</a> puts the reservoir at your doorstep — ideal for families and anglers who want water-first mornings.</li>
+        <li><strong>Forest &amp; high-country campgrounds.</strong> The cool pine campgrounds of <a href="/camping/camping-in-ashley-national-forest/">Ashley National Forest</a> and <a href="/camping/camping-at-flaming-gorge/">Flaming Gorge</a> suit summer heat-escapers, hikers, and anyone chasing dark skies.</li>
+        <li><strong>Backcountry.</strong> For experienced, prepared groups, dispersed and wilderness camping in the High Uintas is the deepest immersion — and a serious undertaking. See the <a href="/hiking/high-uintas-backpacking-guide/">backpacking guide</a>.</li>
+      </ul>
+      <p>For the full comparison of campgrounds by location and character, see the <a href="/camping/">Ultimate Guide to Camping in Dinosaur Country</a>. <strong>VERIFY WITH OFFICIAL SOURCE</strong> and reserve early — lodging and campgrounds fill in peak season, and park and forest campground seasons and reservation rules change.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th></th><th>Basecamp in Vernal</th><th>Stay elsewhere / move</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Best for</td><td>Weekends, families, first visits, mixed-interest groups</td><td>Pass-through road trips; dedicated camping/backpacking trips</td></tr>
+            <tr><td>Logistics</td><td>Unpack once; day-trip everywhere</td><td>Repack and re-check-in each move</td></tr>
+            <tr><td>Comfort &amp; supplies</td><td>Town amenities on hand every night</td><td>Fewer services the farther out you sleep</td></tr>
+            <tr><td>Flexibility</td><td>Easy to swap plans for weather</td><td>Locked to the next reservation</td></tr>
+            <tr><td>The experience</td><td>See more of the region, less driving</td><td>Sleep in the landscape / cover more ground</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Family vs. Adventure: Two Ways to Build the Same Trip</h2>
+      <p>The same two or three days can be assembled into very different trips depending on your group. Here's how the region's core ingredients shift between a family plan and an adventure plan — useful if you're traveling as a mixed group and need to blend the two.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Ingredient</th><th>Family version</th><th>Adventure version</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>UTV tour</td><td>Ride along as passengers; shorter, scenic focus</td><td>Full backcountry route; the day's centerpiece</td></tr>
+            <tr><td>Monument</td><td>Quarry, easy interpretive trails, the trackways</td><td>Longer canyon and route-finding hikes</td></tr>
+            <tr><td>Water</td><td>Reservoir swimming and paddling</td><td>River fishing; high-lake destinations</td></tr>
+            <tr><td>Mountains</td><td>Drive-up overlooks and short lake walks</td><td>High Uintas day hikes and backpacking</td></tr>
+            <tr><td>Pace</td><td>Short drives, downtime, early dinners</td><td>Dawn starts, long days, camp close to the action</td></tr>
+            <tr><td>Lodging</td><td>Town hotel or reservoir campground</td><td>Forest or backcountry camping</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>What to Pack</h2>
+      <p>Your kit depends on the trip, but the region's defining conditions are constant — high elevation, intense sun, dry air, big temperature swings, and fast-changing mountain weather — so a few essentials cross every itinerary. Carry far <strong>more water than you think you need</strong>; dehydration is the most common real hazard here, and shade is scarce. Bring real <strong>sun protection</strong> — hat, sunglasses, high-SPF sunscreen — because the sun above 5,000 feet is fierce even on cool days. Dress in <strong>layers</strong> for hot days and cold nights, and pack a rain shell for anything in the high country. Add sturdy footwear, a map for backcountry areas with no cell service, and snacks.</p>
+      <p>For a full, season-by-season packing breakdown, see our <a href="/guides/what-to-bring/">what to bring guide</a>; for tour-day specifics, our <a href="/guides/what-to-wear-utv-tour/">what to wear on a UTV tour guide</a>; and time the trip with the <a href="/guides/vernal-weather-guide/">Vernal weather guide</a>, which covers the region's heat, cold, and afternoon-storm patterns month by month.</p>
+
+      <h2>Planning Tips</h2>
+      <ul>
+        <li><strong>Start with three questions:</strong> how many days you have, who you're traveling with, and what season it is. Those three answers point straight to the right itinerary above.</li>
+        <li><strong>Book your anchors first.</strong> Reserve the <a href="/booking/">UTV tour</a>, any river trip, and lodging or campgrounds before anything else, then slot the flexible sights — the monument, parks, museums, and drives — around them.</li>
+        <li><strong>Basecamp in Vernal.</strong> Unpack once and day-trip out; it's the most efficient and most flexible way to see a region built like a wheel.</li>
+        <li><strong>Match the elevation to the season.</strong> Desert and reservoirs in spring and fall; the High Uintas in summer; a low-desert and town trip in winter.</li>
+        <li><strong>Do fewer things, better.</strong> Depth beats breadth here — one unhurried destination outshines a day of half-seen stops.</li>
+        <li><strong>Start early.</strong> Beat the heat and the crowds, especially in the desert and in summer; the best light and the calmest water come at dawn.</li>
+        <li><strong>Build in a weather backup.</strong> Have an indoor or low-desert option ready — the Field House, the monument, a scenic drive — for a stormy afternoon up high.</li>
+        <li><strong>Verify before you finalize.</strong> Hours, fees, seasons, road status, and lodging change and are set by the agencies and providers — confirm the current specifics for your exact dates before you lock the plan.</li>
+      </ul>
+
+      <p>Dinosaur Country rewards the traveler who plans a <em>trip</em>, not a list. Choose your length, pick the theme that fits your group and your season, base yourself in <a href="/guides/ultimate-guide-to-vernal-utah/">Vernal</a>, book your anchors first, and read each destination's dedicated guide for the details. Do that, and a long weekend in this quiet corner of Utah delivers more range — fossils and canyons, big water and high peaks, adventure and ease — than trips twice its length to far more crowded places. When you're ready to put the region's best day on the calendar, <a href="/booking/">book a guided UTV tour with Adventure Tours Vernal</a> and let Dave and Trudy anchor your itinerary with country you'd never reach on your own.</p>
+
+      <div class="article-faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+          <h3>How many days do you need in Vernal and Dinosaur Country?</h3>
+          <p>Two to three days is the sweet spot. One day is enough for a single headline — Dinosaur National Monument or a guided UTV tour — but forces hard choices. A two-day weekend covers the essentials without rushing: dinosaurs and rock art one day, backcountry adventure and the state parks the next. A third day opens up the bigger excursions — Flaming Gorge, the High Uintas, a fishing or camping trip. Longer trips let you go deep on one theme. Match the length to your interests and your travel time, and always confirm current hours, seasons, and access before you lock a plan.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What is the best one-day itinerary near Vernal?</h3>
+          <p>With a single day, pick one anchor and build a half-day around it. The classic is Dinosaur National Monument in the morning — the Quarry and the Cub Creek petroglyph drive — then a Vernal lunch and an easy afternoon at a state park or museum. The adventure version flips it: a morning guided UTV tour into the canyons, then the monument or the Utah Field House in the afternoon. Resist the urge to cram two big destinations into one day; the region rewards depth over box-ticking. Verify current hours and seasonal access before you go.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Should I stay in Vernal or move between hotels?</h3>
+          <p>For almost every trip, base in Vernal and take day trips out. The region is built like a wheel — Vernal is the hub, and the monument, state parks, Flaming Gorge, and forest are all within day-trip range, so a single basecamp saves you packing and re-checking-in every night. A moving trip only makes sense on a longer road trip that continues on to other regions, or a dedicated backcountry camping trip where the campground is the point. Confirm current lodging and campground availability with the providers before you commit.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What is the best time of year for a Dinosaur Country trip?</h3>
+          <p>Late spring and early fall are the region-wide sweet spots — comfortable temperatures, active wildlife, and thinner crowds. Summer is fully open and best for water and high-country trips, but the desert is hot, so plan early starts. Fall brings gold aspens and quiet trails but a closing window up high. Winter is cold and quiet, with some seasonal roads and facilities closed, and works best as a low-desert and town-based trip. Match your itinerary to the season: desert and reservoirs in spring and fall, the High Uintas in summer. Verify seasonal openings before planning around a date.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is Vernal good for a family trip?</h3>
+          <p>Exceptionally. The headline attractions are things kids actually care about — real dinosaur fossils in the rock, footprints they can stand beside, canyons, and boats — and most involve only short walks. A great family itinerary keeps drives short, builds in water and downtime, saves the exposed desert for cool mornings, and lets kids ride along on a guided UTV tour as passengers. Two or three relaxed days beat one rushed one. Confirm age policies, hours, and facilities with each provider before you go.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Can you do Vernal as a weekend trip from Salt Lake City?</h3>
+          <p>Yes — it is one of the best weekend escapes from the Wasatch Front. Vernal is roughly a three-hour drive east of Salt Lake City on US-40 over the Uinta Mountains, close enough to leave after work or early on a Saturday and get two full days on the ground. Base in Vernal, anchor the weekend with a guided UTV tour and Dinosaur National Monument, and drive home Sunday evening. See our Salt Lake City to Vernal travel guide for the route and timing, and verify current road and weather conditions over the passes before you leave.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What should I book first when planning a Vernal itinerary?</h3>
+          <p>Book the anchor activities first and build the flexible sights around them. A guided UTV tour has set departure times, so reserve it first — especially in summer and on weekends — and treat it as the fixed point of that day. Do the same for any river trip, lodging, or campground, which sell out in peak season. The monument, state parks, museums, and scenic drives are flexible and slot in around your anchors. Reserve early and confirm current availability directly with each provider.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What is the best itinerary for adventure travelers?</h3>
+          <p>Adventure travelers should build the trip around backcountry access and elevation. Anchor a day on a guided UTV tour into canyon country you cannot reach from a paved road, add a High Uintas day hike or a stretch of alpine trail, and layer in fishing, paddling, or a camping night to sleep close to the action. In summer, chase cool air up high; in the shoulder seasons, work the desert canyons. This is a big, remote, high-elevation region — carry water and a map, tell someone your plan, and verify trail, road, and permit status with the managing agency first.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How do I plan the perfect trip to Dinosaur Country?</h3>
+          <p>Start with three questions: how long do you have, who are you traveling with, and what season is it. Pick a trip length, choose a theme that fits your group — family, adventure, photography, fishing, camping, scenic driving, or hiking — and base in Vernal so every destination is a day trip. Book your anchor activities first, match the elevation to the season, pack for high-desert extremes, and read each destination's dedicated guide for the details. Confirm current hours, fees, seasons, and access before you finalize, and leave room to slow down and enjoy it.</p>
+        </div>
+      </div>
+
+      <div class="article-tip"><strong>Before you go:</strong> Drive times, opening hours, entrance and day-use fees, seasonal road and facility openings, campground and lodging availability, and permit requirements for every destination in this guide are set by the National Park Service, the U.S. Forest Service, Utah State Parks, and local providers, and they change year to year. The structure of these itineraries holds season to season; the specifics are what shift. <strong>VERIFY WITH OFFICIAL SOURCE</strong> before you finalize any plan.</div>
+
+    </div>
+  </main>
+
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

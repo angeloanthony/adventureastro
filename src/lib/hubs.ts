@@ -32,6 +32,16 @@ export const HUB_SLUGS = [
 
 export type HubSlug = (typeof HUB_SLUGS)[number];
 
+// Collections whose entries render as spoke-style articles and participate in
+// the RelatedArticles linking network. Itineraries are the "Planning
+// Authority" cluster: they render with the SAME editorial pattern as activity
+// spokes, but live at /itineraries/[id]/ via their own route
+// (src/pages/itineraries/[id].astro), NOT the generic [hub]/[id].astro. So
+// 'itineraries' is a linkable collection yet deliberately NOT a HUB_SLUG — it
+// has a bespoke pillar + route and must never be emitted by the generic
+// activity-spoke route (that would collide with the dedicated route).
+export type LinkCollection = HubSlug | 'itineraries';
+
 export const HUBS: Record<HubSlug, { name: string }> = {
   utv: { name: 'UTV Trails & Tours' },
   atv: { name: 'ATV Trails' },
@@ -45,8 +55,9 @@ export const HUBS: Record<HubSlug, { name: string }> = {
   guides: { name: 'Destination Guides' },
 };
 
-/** Root-relative href of a spoke article page. */
-export const spokeHref = (hub: HubSlug, id: string): string => `/${hub}/${id}/`;
+/** Root-relative href of a spoke article page. Accepts any LinkCollection so
+ *  itinerary spokes (/itineraries/[id]/) get the same helper as hub spokes. */
+export const spokeHref = (hub: LinkCollection, id: string): string => `/${hub}/${id}/`;
 
 /** Root-relative href of a hub's pillar page. */
 export const pillarHref = (hub: HubSlug): string => `/${hub}/`;
