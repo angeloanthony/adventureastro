@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" width="1600" height="1200" role="img" aria-labelledby="map-title map-desc" preserveAspectRatio="xMidYMid meet" lang="en">
+  <title id="map-title">Dinosaur Country — Vernal, Utah as Regional Basecamp</title>
+  <desc id="map-desc">A schematic orientation diagram introducing Dinosaur Country as a wider, multi-state region. Vernal, Utah sits at the center as the basecamp, surrounded by four realms shown as labeled nodes: Dinosaur National Monument (spanning Utah and Colorado), Flaming Gorge (extending from Utah into Wyoming), the High Uintas and Ashley National Forest (Utah's high country), and the surrounding Uintah Basin high-desert country. The diagram shows regional relationships only and is not drawn to scale, distance, or compass direction; state names indicate where each area reaches, not mapped boundaries.</desc>
+
+  <!--
+    Map ID: M-DINO-COUNTRY (see docs/M6_REUSABLE_MAP_SYSTEM.md §1, Tier A base geography)
+    Wider brand-level "where is Dinosaur Country" orientation diagram. Derives from
+    M-REGIONAL (zoomed out): same palette, fonts, layer structure, and accessibility
+    scaffold. Schematic by design — NO roads, coordinates, mileage, drive times,
+    boundaries, or trail geometry (M6.3 constraint + M7.4 task: evergreen relationships
+    only). Distinct from M-REGIONAL: the nodes are the region's broad REALMS (not the
+    five nearby parks/destinations), each carrying its repository-established state reach.
+    Every relationship shown is documented in src/content/** (DNM spans UT/CO; Flaming
+    Gorge extends UT->WY; High Uintas/Ashley NF; Uintah Basin).
+
+    COLOR MODEL (important): concrete light-theme hex values are set as presentation
+    attributes on every element, so the map renders correctly in ALL contexts —
+    including librsvg/sharp rasterizers (og:image, astro:assets), which do NOT support
+    CSS var() custom properties. The <style> block below is a progressive-enhancement
+    DARK-MODE override only: modern browsers apply it for <img>-referenced SVG via
+    prefers-color-scheme (and data-theme when inlined); rasterizers ignore it and fall
+    back to the light hex attributes.
+  -->
+
+  <style>
+    .t-title  { font-family: 'Montserrat','Segoe UI','Helvetica Neue',Arial,sans-serif; font-weight: 800; }
+    .t-sub    { font-family: 'Open Sans','Segoe UI','Helvetica Neue',Arial,sans-serif;  font-weight: 400; }
+    .t-node   { font-family: 'Montserrat','Segoe UI','Helvetica Neue',Arial,sans-serif; font-weight: 700; }
+    .t-hub    { font-family: 'Montserrat','Segoe UI','Helvetica Neue',Arial,sans-serif; font-weight: 800; }
+    .t-legend { font-family: 'Open Sans','Segoe UI','Helvetica Neue',Arial,sans-serif;  font-weight: 400; }
+    /* Label knockout halo so text stays legible over its pill (stroke painted first) */
+    .node-text { paint-order: stroke; }
+    .node-tag  { paint-order: stroke; }
+
+    /* --- Dark-mode override (browsers only; rasterizers keep the light hex attrs) --- */
+    @media (prefers-color-scheme: dark) {
+      .canvas      { fill: #201D1A; }
+      .land        { fill: #2C2823; }
+      .ink         { fill: #F5EDE3; }
+      .ink-soft    { fill: #C9BEB2; }
+      .spoke       { stroke: #E08A5F; }
+      .node-fill   { fill: #47403A; stroke: #E08A5F; }
+      .node-text   { fill: #F5EDE3; stroke: #47403A; }
+      .node-tag    { fill: #F5EDE3; stroke: #47403A; }
+      .legend-node { fill: #47403A; stroke: #E08A5F; }
+      .legend-spoke{ stroke: #E08A5F; }
+      /* hub keeps canyon-red + white in both themes (5.1:1 either way) */
+    }
+    :root[data-theme="dark"] .canvas      { fill: #201D1A; }
+    :root[data-theme="dark"] .land        { fill: #2C2823; }
+    :root[data-theme="dark"] .ink         { fill: #F5EDE3; }
+    :root[data-theme="dark"] .ink-soft    { fill: #C9BEB2; }
+    :root[data-theme="dark"] .spoke       { stroke: #E08A5F; }
+    :root[data-theme="dark"] .node-fill   { fill: #47403A; stroke: #E08A5F; }
+    :root[data-theme="dark"] .node-text   { fill: #F5EDE3; stroke: #47403A; }
+    :root[data-theme="dark"] .node-tag    { fill: #F5EDE3; stroke: #47403A; }
+    :root[data-theme="dark"] .legend-node { fill: #47403A; stroke: #E08A5F; }
+    :root[data-theme="dark"] .legend-spoke{ stroke: #E08A5F; }
+  </style>
+
+  <!-- ===================== LAYER: background ===================== -->
+  <g id="layer-background" aria-hidden="true">
+    <rect class="canvas" x="0" y="0" width="1600" height="1200" fill="#FAF8F5"/>
+    <rect class="land" x="40" y="40" width="1520" height="1120" rx="28" fill="#F5EDE3"/>
+  </g>
+
+  <!-- ===================== LAYER: title ===================== -->
+  <g id="layer-title">
+    <text class="t-title ink" x="800" y="116" text-anchor="middle" font-size="54" fill="#3A3A3A">Dinosaur Country at a Glance</text>
+    <text class="t-sub ink-soft" x="800" y="160" text-anchor="middle" font-size="28" fill="#6E655C">A multi-state region &#8212; and Vernal, Utah, is your basecamp</text>
+  </g>
+
+  <!-- ===================== LAYER: spokes (hub 800,610 -> each realm) ===================== -->
+  <g id="layer-spokes" aria-hidden="true" fill="none" stroke-linecap="round">
+    <line class="spoke" x1="800" y1="610" x2="800"  y2="315" stroke="#D4764E" stroke-width="7"/> <!-- Flaming Gorge -->
+    <line class="spoke" x1="800" y1="610" x2="800"  y2="910" stroke="#D4764E" stroke-width="7"/> <!-- Uintah Basin -->
+    <line class="spoke" x1="800" y1="610" x2="360"  y2="610" stroke="#D4764E" stroke-width="7"/> <!-- High Uintas / Ashley NF -->
+    <line class="spoke" x1="800" y1="610" x2="1240" y2="610" stroke="#D4764E" stroke-width="7"/> <!-- Dinosaur National Monument -->
+  </g>
+
+  <!-- ===================== LAYER: realms ===================== -->
+  <g id="layer-destinations" class="t-node" text-anchor="middle">
+
+    <!-- Flaming Gorge (top) — extends from Utah into Wyoming -->
+    <g>
+      <rect class="node-fill" x="610" y="256" width="380" height="118" rx="20" fill="#E8D5C4" stroke="#D4764E" stroke-width="3"/>
+      <text class="node-text" x="800" y="322" font-size="40" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="5">Flaming Gorge</text>
+      <text class="node-tag t-sub" x="800" y="356" font-size="22" letter-spacing="2" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">UTAH &#183; WYOMING</text>
+    </g>
+
+    <!-- Dinosaur National Monument (right) — spans Utah and Colorado -->
+    <g>
+      <rect class="node-fill" x="1040" y="530" width="400" height="160" rx="20" fill="#E8D5C4" stroke="#D4764E" stroke-width="3"/>
+      <text class="node-text" x="1240" y="590" font-size="36" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="5">Dinosaur National</text>
+      <text class="node-text" x="1240" y="630" font-size="36" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="5">Monument</text>
+      <text class="node-tag t-sub" x="1240" y="666" font-size="22" letter-spacing="2" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">UTAH &#183; COLORADO</text>
+    </g>
+
+    <!-- Uintah Basin (bottom) — the surrounding high-desert country -->
+    <g>
+      <rect class="node-fill" x="590" y="851" width="420" height="118" rx="20" fill="#E8D5C4" stroke="#D4764E" stroke-width="3"/>
+      <text class="node-text" x="800" y="917" font-size="40" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="5">The Uintah Basin</text>
+      <text class="node-tag t-sub" x="800" y="951" font-size="22" letter-spacing="2" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">HIGH&#8209;DESERT COUNTRY</text>
+    </g>
+
+    <!-- High Uintas & Ashley National Forest (left) — Utah's high country -->
+    <g>
+      <rect class="node-fill" x="132" y="530" width="456" height="160" rx="20" fill="#E8D5C4" stroke="#D4764E" stroke-width="3"/>
+      <text class="node-text" x="360" y="590" font-size="36" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="5">High Uintas &amp;</text>
+      <text class="node-text" x="360" y="630" font-size="32" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="5">Ashley National Forest</text>
+      <text class="node-tag t-sub" x="360" y="666" font-size="20" letter-spacing="2" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">UTAH&#8217;S HIGH COUNTRY</text>
+    </g>
+  </g>
+
+  <!-- ===================== LAYER: hub (Vernal) ===================== -->
+  <g id="layer-hub" text-anchor="middle">
+    <rect x="648" y="544" width="304" height="132" rx="24" fill="#C1440E"/>
+    <text class="t-hub" x="800" y="606" font-size="62" fill="#FFFFFF">Vernal</text>
+    <text class="t-sub" x="800" y="648" font-size="26" fill="#FFFFFF" letter-spacing="3">UTAH &#183; BASECAMP</text>
+  </g>
+
+  <!-- ===================== LAYER: legend ===================== -->
+  <g id="layer-legend" class="t-legend" font-size="26">
+    <!-- hub swatch -->
+    <rect x="300" y="1052" width="34" height="34" rx="8" fill="#C1440E"/>
+    <text class="ink" x="346" y="1078" fill="#3A3A3A">Vernal &#8212; your basecamp</text>
+    <!-- realm swatch -->
+    <rect class="legend-node" x="700" y="1052" width="34" height="34" rx="8" fill="#E8D5C4" stroke="#D4764E" stroke-width="3"/>
+    <text class="ink" x="746" y="1078" fill="#3A3A3A">A realm of Dinosaur Country</text>
+    <!-- spoke swatch -->
+    <line class="legend-spoke" x1="1180" y1="1069" x2="1234" y2="1069" stroke="#D4764E" stroke-width="7" stroke-linecap="round"/>
+    <text class="ink" x="1246" y="1078" fill="#3A3A3A">Reached from Vernal</text>
+    <!-- honesty note (two lines) -->
+    <text class="t-legend ink-soft" x="800" y="1116" text-anchor="middle" font-size="23" fill="#6E655C">Schematic orientation diagram &#8212; regional relationships only; not to scale, distance, or compass direction.</text>
+    <text class="t-legend ink-soft" x="800" y="1146" text-anchor="middle" font-size="23" fill="#6E655C">State labels show where each area reaches, not a mapped boundary.</text>
+  </g>
+</svg>
