@@ -115,6 +115,8 @@ For each map: the pages that use it, the clusters it supports, its priority, and
 
 Standards for the whole library so every map reads as one branded system. **This section defines standards; it does not implement them** (no CSS/component/asset was created).
 
+> **Engineering standard (M6.4).** The *pipeline-level* rules for producing these SVGs — color model, dark-mode, font fallback, accessibility, optimization, export, and QA — are now formalized and toolchain-validated in **[`docs/SVG_ENGINEERING_STANDARD.md`](SVG_ENGINEERING_STANDARD.md)**. That document is authoritative for how every map is built; this section remains authoritative for *what* each map contains. Build every map to the SVG Engineering Standard.
+
 ### 3.1 Format — SVG vs raster
 - **Primary format: SVG.** All maps are vector line-art (roads, boundaries, water, labels, pins). SVG is resolution-independent (crisp on retina + when zoomed), tiny in bytes, diff-able in git, restyleable via a shared token set, and **theme-aware** (can respond to light/dark). This directly serves the "capture once, deploy many" economy — a spoke relabel is an edit, not a re-export.
 - **Raster (WebP/AVIF) only where** a map needs a photographic or shaded-relief base (e.g. a subtle terrain hillshade under M-DINO-COUNTRY or M-HIKING). In that case: raster relief layer **flattened and compressed to ≤500 KB WebP/AVIF** to respect the existing hero validator gate, with SVG line-art/labels composited on top so text stays vector-crisp.
@@ -149,6 +151,7 @@ Standards for the whole library so every map reads as one branded system. **This
   - **Boundaries** — a muted line style for jurisdictions (NPS/BLM/Forest/state park, UT–WY line) that never competes with roads or the accent.
 - **Accessibility of color:** never encode information by hue alone — pair color with shape/label/pattern (e.g. dashed = unpaved, not just "brown"). Verify all text/background pairings meet **WCAG AA (≥4.5:1)**; verify the categorical set is colorblind-safe (use the `dataviz` skill's palette validator as the checker, per the M5 graphics roadmap).
 - **Light + dark:** define both themes. Water/land/road tints get a dark-mode variant so maps don't glare in a dark UI (matches the theme-aware standard the rest of the media program targets).
+- **⚠ Rasterizer constraint — no CSS `var()` for fills (M6.3 finding, M6.4-validated).** `librsvg`/`sharp` (the engine behind `astro:assets` and og:image rasterization) does **not** resolve CSS custom properties, so `fill="var(--token)"` rasterizes to black. **Standard for every map:** set concrete light-theme hex values as *presentation attributes* on elements (the universal fallback all renderers honor), and confine theme-switching to a `<style>` **dark-mode override** (class selectors under `@media (prefers-color-scheme: dark)` + `:root[data-theme="dark"]`), which browsers apply and rasterizers safely ignore. Reproduced and quantified in [`docs/SVG_ENGINEERING_STANDARD.md`](SVG_ENGINEERING_STANDARD.md) §1 (F1–F2); that document's compatibility matrix and QA checklist govern all map production.
 
 ### 3.6 Accessibility
 - **SVG semantics:** each map carries a `<title>` (short name) and `<desc>` (the longer text description) so assistive tech can announce it; decorative sub-elements are `aria-hidden`. (Spec only — wiring happens at integration.)

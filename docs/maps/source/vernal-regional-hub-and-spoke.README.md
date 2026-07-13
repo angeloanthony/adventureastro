@@ -33,7 +33,8 @@ This is the editable design record so the SVG can be regenerated/extended withou
 | Node stroke | `#D4764E` | `#E08A5F` | `--burnt-orange` |
 
 - **Accent discipline** (spec §3.5): the canyon-red hub + burnt-orange spokes are the reserved accent family (hub / connection / "you are here"); destinations are neutral sandstone so the hub is always the most salient element.
-- **Theme-aware:** CSS custom properties flip via `@media (prefers-color-scheme: dark)` (works when the SVG is referenced as `<img>`/`og:image`) and via `:root[data-theme]` overrides (works when inlined and the host toggles theme).
+- **Color model — do NOT use `var()` for fills.** Concrete light-theme hex values are set as **presentation attributes** (`fill="#…"`) on every element. Theme-switching lives in the `<style>` block as a **dark-mode override only** (class selectors under `@media (prefers-color-scheme: dark)` + `:root[data-theme="dark"]`). Rationale below (implementation finding). Light is the universal fallback that every renderer produces; dark is progressive enhancement in browsers.
+  - ⚠ **Finding (M6.3):** `librsvg`/`sharp` — the engine behind `astro:assets` and og:image rasterization — **does not resolve CSS `var()` custom properties**. An earlier draft using `fill="var(--token)"` rasterized to an all-black image. Fix: hardcode hex on elements; keep CSS for the dark override only. **This applies to every map in the library** — future maps must follow the same model.
 
 ## Typography
 
