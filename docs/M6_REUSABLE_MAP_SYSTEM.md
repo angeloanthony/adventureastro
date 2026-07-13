@@ -202,6 +202,8 @@ For each map, the layers that belong on it. Layers are drawn from a **shared mas
 
 **Protection rule (non-negotiable, from M5 §5 + audit F6):** M-ROCKART (and the rock-art layer anywhere it appears, e.g. M-DNM-DETAIL, M-UTV Outlaw Trail) must never publish precise remote-panel locations. Vagueness is a feature.
 
+**Implementation note (M6.3 — M-REGIONAL first render).** The first production asset ([`public/images/maps/vernal-regional-hub-and-spoke.svg`](../public/images/maps/vernal-regional-hub-and-spoke.svg); source notes in [`docs/maps/source/`](maps/source/vernal-regional-hub-and-spoke.README.md)) was built as a **schematic radial diagram**, deliberately **omitting the `drive-time-spokes` and `north-arrow` layers** listed above: M6.3 barred mileage/drive-times ("changing information") and a north arrow would assert a compass relationship the schematic doesn't support. Spokes render as plain connectors and a legend note states the map is not to scale/distance/direction. When a *cartographic* (to-scale) variant of M-REGIONAL is later produced against verified geography, those two layers can be reintroduced. This affects only M-REGIONAL's first render; the layer vocabulary above is unchanged.
+
 ---
 
 ## Section 5 — Production Order

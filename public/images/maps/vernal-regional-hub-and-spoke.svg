@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" width="1600" height="1200" role="img" aria-labelledby="map-title map-desc" preserveAspectRatio="xMidYMid meet" lang="en">
+  <title id="map-title">Vernal, Utah — Hub of Dinosaur Country</title>
+  <desc id="map-desc">A schematic hub-and-spoke diagram showing Vernal, Utah at the center as a regional basecamp, connected by spokes to five major surrounding destinations: Dinosaur National Monument, Flaming Gorge, Ashley National Forest, Red Fleet State Park, and Steinaker State Park. The diagram illustrates that Vernal is the hub from which these destinations radiate; it shows relationships only and is not drawn to scale, distance, or compass direction.</desc>
+
+  <!--
+    Map ID: M-REGIONAL (see docs/M6_REUSABLE_MAP_SYSTEM.md §1)
+    Reusable regional hub-and-spoke asset. Schematic by design: no roads, no
+    coordinates, no mileage, no drive times (M6.3 constraint — evergreen concepts
+    only). Palette + fonts sampled from public/styles.css. Theme-aware via
+    prefers-color-scheme; also honors :root[data-theme] when inlined.
+  -->
+
+  <style>
+    svg {
+      /* Light theme (default) — roles sampled from styles.css brand tokens */
+      --map-canvas:      #FAF8F5; /* --off-white  */
+      --map-land:        #F5EDE3; /* --light-sand */
+      --map-ink:         #3A3A3A; /* --charcoal   */
+      --map-ink-soft:    #6E655C;
+      --map-hub-fill:    #C1440E; /* --canyon-red */
+      --map-hub-text:    #FFFFFF;
+      --map-spoke:       #D4764E; /* --burnt-orange */
+      --map-node-fill:   #E8D5C4; /* --sandstone  */
+      --map-node-stroke: #D4764E; /* --burnt-orange */
+      --map-node-text:   #3A3A3A; /* --charcoal   */
+      --map-legend-line: #CBBBA8;
+    }
+    @media (prefers-color-scheme: dark) {
+      svg {
+        --map-canvas:      #201D1A;
+        --map-land:        #2C2823;
+        --map-ink:         #F5EDE3;
+        --map-ink-soft:    #C9BEB2;
+        --map-hub-fill:    #C1440E;
+        --map-hub-text:    #FFFFFF;
+        --map-spoke:       #E08A5F;
+        --map-node-fill:   #47403A;
+        --map-node-stroke: #E08A5F;
+        --map-node-text:   #F5EDE3;
+        --map-legend-line: #5A5148;
+      }
+    }
+    /* Explicit theme overrides win when the SVG is inlined and the host toggles data-theme */
+    :root[data-theme="dark"] svg {
+      --map-canvas:#201D1A; --map-land:#2C2823; --map-ink:#F5EDE3; --map-ink-soft:#C9BEB2;
+      --map-hub-fill:#C1440E; --map-hub-text:#FFFFFF; --map-spoke:#E08A5F;
+      --map-node-fill:#47403A; --map-node-stroke:#E08A5F; --map-node-text:#F5EDE3; --map-legend-line:#5A5148;
+    }
+    :root[data-theme="light"] svg {
+      --map-canvas:#FAF8F5; --map-land:#F5EDE3; --map-ink:#3A3A3A; --map-ink-soft:#6E655C;
+      --map-hub-fill:#C1440E; --map-hub-text:#FFFFFF; --map-spoke:#D4764E;
+      --map-node-fill:#E8D5C4; --map-node-stroke:#D4764E; --map-node-text:#3A3A3A; --map-legend-line:#CBBBA8;
+    }
+
+    .t-title  { font-family: 'Montserrat','Segoe UI','Helvetica Neue',Arial,sans-serif; font-weight: 800; }
+    .t-sub    { font-family: 'Open Sans','Segoe UI','Helvetica Neue',Arial,sans-serif;  font-weight: 400; }
+    .t-node   { font-family: 'Montserrat','Segoe UI','Helvetica Neue',Arial,sans-serif; font-weight: 700; }
+    .t-hub    { font-family: 'Montserrat','Segoe UI','Helvetica Neue',Arial,sans-serif; font-weight: 800; }
+    .t-legend { font-family: 'Open Sans','Segoe UI','Helvetica Neue',Arial,sans-serif;  font-weight: 400; }
+    /* Label knockout so text stays legible over any fill (paint-order draws stroke first) */
+    .node-label { paint-order: stroke; }
+  </style>
+
+  <!-- ===================== LAYER: background ===================== -->
+  <g id="layer-background" aria-hidden="true">
+    <rect x="0" y="0" width="1600" height="1200" fill="var(--map-canvas)"/>
+    <rect x="40" y="40" width="1520" height="1120" rx="28" fill="var(--map-land)"/>
+  </g>
+
+  <!-- ===================== LAYER: title ===================== -->
+  <g id="layer-title">
+    <text class="t-title" x="800" y="118" text-anchor="middle" font-size="54" fill="var(--map-ink)">Vernal — Hub of Dinosaur Country</text>
+    <text class="t-sub"   x="800" y="162" text-anchor="middle" font-size="28" fill="var(--map-ink-soft)">The region&#8217;s major destinations radiate from one basecamp</text>
+  </g>
+
+  <!-- ===================== LAYER: spokes (hub 800,610 -> each node) ===================== -->
+  <g id="layer-spokes" aria-hidden="true" fill="none" stroke="var(--map-spoke)" stroke-width="7" stroke-linecap="round">
+    <line x1="800" y1="610" x2="1300" y2="610"/> <!-- to Dinosaur National Monument -->
+    <line x1="800" y1="610" x2="1190" y2="315"/> <!-- to Flaming Gorge -->
+    <line x1="800" y1="610" x2="360"  y2="315"/> <!-- to Ashley National Forest -->
+    <line x1="800" y1="610" x2="345"  y2="910"/> <!-- to Red Fleet State Park -->
+    <line x1="800" y1="610" x2="1215" y2="910"/> <!-- to Steinaker State Park -->
+  </g>
+
+  <!-- ===================== LAYER: destinations ===================== -->
+  <g id="layer-destinations" class="t-node" font-size="40" text-anchor="middle">
+
+    <!-- Dinosaur National Monument (right) -->
+    <g>
+      <rect x="1112" y="551" width="376" height="120" rx="20" fill="var(--map-node-fill)" stroke="var(--map-node-stroke)" stroke-width="3"/>
+      <text class="node-label" x="1300" y="602" fill="var(--map-node-text)" stroke="var(--map-node-fill)" stroke-width="5">Dinosaur National</text>
+      <text class="node-label" x="1300" y="648" fill="var(--map-node-text)" stroke="var(--map-node-fill)" stroke-width="5">Monument</text>
+    </g>
+
+    <!-- Flaming Gorge (upper right) -->
+    <g>
+      <rect x="1024" y="269" width="332" height="92" rx="20" fill="var(--map-node-fill)" stroke="var(--map-node-stroke)" stroke-width="3"/>
+      <text class="node-label" x="1190" y="328" fill="var(--map-node-text)" stroke="var(--map-node-fill)" stroke-width="5">Flaming Gorge</text>
+    </g>
+
+    <!-- Ashley National Forest (upper left) -->
+    <g>
+      <rect x="176" y="257" width="368" height="120" rx="20" fill="var(--map-node-fill)" stroke="var(--map-node-stroke)" stroke-width="3"/>
+      <text class="node-label" x="360" y="308" fill="var(--map-node-text)" stroke="var(--map-node-fill)" stroke-width="5">Ashley National</text>
+      <text class="node-label" x="360" y="354" fill="var(--map-node-text)" stroke="var(--map-node-fill)" stroke-width="5">Forest</text>
+    </g>
+
+    <!-- Red Fleet State Park (lower left) -->
+    <g>
+      <rect x="181" y="851" width="328" height="120" rx="20" fill="var(--map-node-fill)" stroke="var(--map-node-stroke)" stroke-width="3"/>
+      <text class="node-label" x="345" y="902" fill="var(--map-node-text)" stroke="var(--map-node-fill)" stroke-width="5">Red Fleet</text>
+      <text class="node-label" x="345" y="948" fill="var(--map-node-text)" stroke="var(--map-node-fill)" stroke-width="5">State Park</text>
+    </g>
+
+    <!-- Steinaker State Park (lower right) -->
+    <g>
+      <rect x="1043" y="851" width="344" height="120" rx="20" fill="var(--map-node-fill)" stroke="var(--map-node-stroke)" stroke-width="3"/>
+      <text class="node-label" x="1215" y="902" fill="var(--map-node-text)" stroke="var(--map-node-fill)" stroke-width="5">Steinaker</text>
+      <text class="node-label" x="1215" y="948" fill="var(--map-node-text)" stroke="var(--map-node-fill)" stroke-width="5">State Park</text>
+    </g>
+  </g>
+
+  <!-- ===================== LAYER: hub (Vernal) ===================== -->
+  <g id="layer-hub" text-anchor="middle">
+    <rect x="648" y="544" width="304" height="132" rx="24" fill="var(--map-hub-fill)"/>
+    <text class="t-hub" x="800" y="606" font-size="62" fill="var(--map-hub-text)">Vernal</text>
+    <text class="t-sub" x="800" y="648" font-size="26" fill="var(--map-hub-text)" letter-spacing="3">UTAH &#183; BASECAMP</text>
+  </g>
+
+  <!-- ===================== LAYER: legend ===================== -->
+  <g id="layer-legend" class="t-legend" font-size="26" fill="var(--map-ink-soft)">
+    <!-- hub swatch -->
+    <rect x="300" y="1052" width="34" height="34" rx="8" fill="var(--map-hub-fill)"/>
+    <text x="346" y="1078" fill="var(--map-ink)">Vernal — your basecamp</text>
+    <!-- destination swatch -->
+    <rect x="700" y="1052" width="34" height="34" rx="8" fill="var(--map-node-fill)" stroke="var(--map-node-stroke)" stroke-width="3"/>
+    <text x="746" y="1078" fill="var(--map-ink)">Regional destination</text>
+    <!-- spoke swatch -->
+    <line x1="1074" y1="1069" x2="1128" y2="1069" stroke="var(--map-spoke)" stroke-width="7" stroke-linecap="round"/>
+    <text x="1140" y="1078" fill="var(--map-ink)">Part of Dinosaur Country</text>
+    <!-- honesty note -->
+    <text class="t-legend" x="800" y="1128" text-anchor="middle" font-size="24" fill="var(--map-ink-soft)">Schematic diagram — shows regional relationships only, not to scale, distance, or compass direction.</text>
+  </g>
+</svg>
