@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" width="1600" height="1200" role="img" aria-labelledby="graphic-title graphic-desc" preserveAspectRatio="xMidYMid meet" lang="en">
+  <title id="graphic-title">Compare the Fishing Waters Near Vernal, Utah</title>
+  <desc id="graphic-desc">A comparison matrix of the four main fishing waters near Vernal, Utah documented on the Adventure Tours Vernal website, all fished from Vernal as a basecamp. Four waters (rows) are compared across four attributes (columns): what it is known for, the water type, access and effort, and who it suits best. Flaming Gorge is known for trophy lake trout and big brown trout, is a big reservoir spanning the Utah and Wyoming line, is primarily boat water, and best suits anglers chasing trophy fish. The Green River is known for wild blue-ribbon trout, is a tailwater below the dam, is fished by float trip or wading, and best suits fly anglers. Red Fleet is known for trout, bass, and bluegill, is a close-to-town reservoir with a famous dinosaur trackway nearby, offers easy family shore fishing, and best suits families. Steinaker is known for trout, bass, and bluegill, is the closest reservoir to town, offers easy family shore fishing, and best suits quick local trips. This reflects only what the site documents and is a planning aid, not a ranking; it is a companion to the fishing-waters orientation map, which shows how the waters group by environment.</desc>
+
+  <!--
+    Graphic ID: G-FISHING-WATERS (Comparison Graphics library; companion to
+    public/images/maps/vernal-fishing-waters-overview.svg — the map answers "where /
+    how they group"; this matrix answers "which water for which angler").
+    Source notes: docs/graphics/source/vernal-fishing-waters-comparison.README.md
+    Engineering standard: docs/SVG_ENGINEERING_STANDARD.md (authoritative for build).
+    Every cell traces to src/content/fishing/** and the fishing map's documented
+    descriptors. Access is kept QUALITATIVE (boat/shore/float, close/farthest) — no
+    exact drive time or mileage is asserted (those are VERIFY-marked in content).
+    Same palette/typography/accessibility/light-dark model as the map + matrix family.
+  -->
+
+  <style>
+    .t-title  { font-family: 'Montserrat','Segoe UI','Helvetica Neue',Arial,sans-serif; font-weight: 800; }
+    .t-sub    { font-family: 'Open Sans','Segoe UI','Helvetica Neue',Arial,sans-serif;  font-weight: 400; }
+    .t-node   { font-family: 'Montserrat','Segoe UI','Helvetica Neue',Arial,sans-serif; font-weight: 700; }
+    .t-cell   { font-family: 'Open Sans','Segoe UI','Helvetica Neue',Arial,sans-serif;  font-weight: 400; }
+    @media (prefers-color-scheme: dark) {
+      .canvas    { fill: #201D1A; }
+      .header    { fill: #47403A; }
+      .stripe    { fill: #262019; }
+      .rowbase   { fill: #201D1A; }
+      .grid      { stroke: #3E362F; }
+      .ink       { fill: #F5EDE3; }
+      .ink-soft  { fill: #C9BEB2; }
+      .watertab  { fill: #47403A; stroke: #6FA8C7; }
+      .watername { fill: #F5EDE3; }
+    }
+    :root[data-theme="dark"] .canvas    { fill: #201D1A; }
+    :root[data-theme="dark"] .header    { fill: #47403A; }
+    :root[data-theme="dark"] .stripe    { fill: #262019; }
+    :root[data-theme="dark"] .rowbase   { fill: #201D1A; }
+    :root[data-theme="dark"] .grid      { stroke: #3E362F; }
+    :root[data-theme="dark"] .ink       { fill: #F5EDE3; }
+    :root[data-theme="dark"] .ink-soft  { fill: #C9BEB2; }
+    :root[data-theme="dark"] .watertab  { fill: #47403A; stroke: #6FA8C7; }
+    :root[data-theme="dark"] .watername { fill: #F5EDE3; }
+  </style>
+
+  <g id="layer-1-background" aria-hidden="true">
+    <rect class="canvas" x="0" y="0" width="1600" height="1200" fill="#FAF8F5"/>
+  </g>
+
+  <g id="layer-2-title">
+    <text class="t-title ink" x="60" y="78" font-size="46" fill="#C1440E">Compare the Fishing Waters Near Vernal</text>
+    <text class="t-sub ink-soft" x="60" y="122" font-size="24" fill="#6E655C">Four waters, one basecamp &#8212; a companion to the fishing-waters map (which shows where they are)</text>
+  </g>
+
+  <g id="layer-3-grid" aria-hidden="true">
+    <rect class="header" x="60" y="170" width="1480" height="82" fill="#E8D5C4"/>
+    <rect class="rowbase" x="60" y="252" width="1480" height="215" fill="#FAF8F5"/>
+    <rect class="stripe"  x="60" y="467" width="1480" height="215" fill="#F0E6D9"/>
+    <rect class="rowbase" x="60" y="682" width="1480" height="215" fill="#FAF8F5"/>
+    <rect class="stripe"  x="60" y="897" width="1480" height="215" fill="#F0E6D9"/>
+    <g class="grid" stroke="#E2D2BF" stroke-width="2">
+      <line x1="360"  y1="170" x2="360"  y2="1112"/>
+      <line x1="720"  y1="170" x2="720"  y2="1112"/>
+      <line x1="1010" y1="170" x2="1010" y2="1112"/>
+      <line x1="1290" y1="170" x2="1290" y2="1112"/>
+      <rect x="60" y="170" width="1480" height="942" fill="none" stroke="#E2D2BF" stroke-width="2"/>
+    </g>
+  </g>
+
+  <g id="layer-4-header">
+    <text class="t-node ink" x="80"   y="220" font-size="24" fill="#3A3A3A">Water</text>
+    <text class="t-node ink" x="375"  y="220" font-size="24" fill="#3A3A3A">Known for</text>
+    <text class="t-node ink" x="735"  y="220" font-size="24" fill="#3A3A3A">Water type</text>
+    <text class="t-node ink" x="1025" y="220" font-size="24" fill="#3A3A3A">Access</text>
+    <text class="t-node ink" x="1305" y="220" font-size="24" fill="#3A3A3A">Best for</text>
+  </g>
+
+  <g id="layer-5-rows">
+    <!-- Row 1: Flaming Gorge (center y=359) -->
+    <rect class="watertab" x="80" y="318" width="8" height="82" fill="#4E86A8"/>
+    <text class="t-node watername" x="104" y="352" font-size="26" fill="#3A3A3A">Flaming Gorge</text>
+    <text class="t-cell ink-soft" x="104" y="384" font-size="19" fill="#6E655C">The big trophy water</text>
+    <text class="t-cell ink" x="375" y="348" font-size="21" fill="#3A3A3A">Trophy lake trout<tspan x="375" dy="26">&amp; big browns</tspan></text>
+    <text class="t-cell ink" x="735" y="348" font-size="21" fill="#3A3A3A">Big reservoir<tspan x="735" dy="26">(UT&#8211;WY line)</tspan></text>
+    <text class="t-cell ink" x="1025" y="359" font-size="21" fill="#3A3A3A">Boat water</text>
+    <text class="t-cell ink" x="1305" y="359" font-size="21" fill="#3A3A3A">Trophy hunting</text>
+
+    <!-- Row 2: Green River (center y=574) -->
+    <rect class="watertab" x="80" y="533" width="8" height="82" fill="#4E86A8"/>
+    <text class="t-node watername" x="104" y="567" font-size="26" fill="#3A3A3A">Green River</text>
+    <text class="t-cell ink-soft" x="104" y="599" font-size="19" fill="#6E655C">Blue-ribbon fly water</text>
+    <text class="t-cell ink" x="375" y="574" font-size="21" fill="#3A3A3A">Wild blue-ribbon trout</text>
+    <text class="t-cell ink" x="735" y="563" font-size="21" fill="#3A3A3A">Tailwater below<tspan x="735" dy="26">the dam</tspan></text>
+    <text class="t-cell ink" x="1025" y="574" font-size="21" fill="#3A3A3A">Float or wade</text>
+    <text class="t-cell ink" x="1305" y="574" font-size="21" fill="#3A3A3A">Fly anglers</text>
+
+    <!-- Row 3: Red Fleet (center y=789) -->
+    <rect class="watertab" x="80" y="748" width="8" height="82" fill="#4E86A8"/>
+    <text class="t-node watername" x="104" y="782" font-size="26" fill="#3A3A3A">Red Fleet</text>
+    <text class="t-cell ink-soft" x="104" y="814" font-size="19" fill="#6E655C">Family + a dino trackway</text>
+    <text class="t-cell ink" x="375" y="789" font-size="21" fill="#3A3A3A">Trout, bass &amp; bluegill</text>
+    <text class="t-cell ink" x="735" y="778" font-size="21" fill="#3A3A3A">Close-to-town<tspan x="735" dy="26">reservoir</tspan></text>
+    <text class="t-cell ink" x="1025" y="789" font-size="21" fill="#3A3A3A">Easy family shore</text>
+    <text class="t-cell ink" x="1305" y="789" font-size="21" fill="#3A3A3A">Families</text>
+
+    <!-- Row 4: Steinaker (center y=1004) -->
+    <rect class="watertab" x="80" y="963" width="8" height="82" fill="#4E86A8"/>
+    <text class="t-node watername" x="104" y="997" font-size="26" fill="#3A3A3A">Steinaker</text>
+    <text class="t-cell ink-soft" x="104" y="1029" font-size="19" fill="#6E655C">The closest water to town</text>
+    <text class="t-cell ink" x="375" y="1004" font-size="21" fill="#3A3A3A">Trout, bass &amp; bluegill</text>
+    <text class="t-cell ink" x="735" y="1004" font-size="21" fill="#3A3A3A">The closest reservoir</text>
+    <text class="t-cell ink" x="1025" y="1004" font-size="21" fill="#3A3A3A">Easy family shore</text>
+    <text class="t-cell ink" x="1305" y="1004" font-size="21" fill="#3A3A3A">Quick local trips</text>
+  </g>
+
+  <g id="layer-6-footnote">
+    <text class="t-sub ink-soft" x="60" y="1158" font-size="19" fill="#6E655C">Access is described by character (boat, shore, float), not exact drive time. Confirm current regulations and conditions with the managing agency.</text>
+  </g>
+</svg>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" width="1600" height="1200" role="img" aria-labelledby="graphic-title graphic-desc" preserveAspectRatio="xMidYMid meet" lang="en">
+  <title id="graphic-title">From Desert to Alpine — The Vernal Elevation Profile</title>
+  <desc id="graphic-desc">An elevation ladder showing how the country around Vernal, Utah rises from high desert to alpine tundra, which is why one Vernal basecamp reaches both red-rock canyons and high-mountain trails. Four stacked zones read from bottom (lowest) to top (highest). The bottom zone is the high-desert basecamp: Vernal sits at 5,331 feet, in red-rock canyon country with Dinosaur National Monument, petroglyphs, and desert trails. Above it are the foothills and montane forest, the climb up into Ashley National Forest. Above that is subalpine forest and alpine lakes, the High Uintas lake country reached by day hikes and camping. The top zone is alpine tundra, culminating at Kings Peak at 13,528 feet, the highest point in Utah, reached by multi-day backpacking. Only the two endpoint elevations, 5,331 feet at Vernal and 13,528 feet at Kings Peak, are exact; the band heights between them are illustrative of order, not drawn to exact elevation. The point is the range: desert and alpine from a single home base.</desc>
+
+  <!--
+    Graphic ID: G-ELEVATION (Comparison Graphics library — "elevation ladder" asset class,
+    docs/M5_IMPLEMENTATION_ROADMAP.md Section 6).
+    Source notes: docs/graphics/source/vernal-elevation-profile.README.md
+    Engineering standard: docs/SVG_ENGINEERING_STANDARD.md (authoritative for build).
+    Factual discipline: only two elevations are asserted and both are documented sitewide —
+    Vernal 5,331 ft and Kings Peak 13,528 ft (highest point in Utah). Intermediate band
+    heights are ILLUSTRATIVE of order, not exact elevation (stated in <desc> + footnote).
+    Zone content traces to src/content/hiking/** (desert/DNM hikes, High Uintas day-hikes,
+    alpine-lakes, backpacking, kings-peak) and guides/ultimate-guide-to-ashley-national-forest.
+    Same palette/typography/accessibility/light-dark model as the map + matrix family.
+  -->
+
+  <style>
+    .t-title  { font-family: 'Montserrat','Segoe UI','Helvetica Neue',Arial,sans-serif; font-weight: 800; }
+    .t-sub    { font-family: 'Open Sans','Segoe UI','Helvetica Neue',Arial,sans-serif;  font-weight: 400; }
+    .t-zone   { font-family: 'Montserrat','Segoe UI','Helvetica Neue',Arial,sans-serif; font-weight: 700; }
+    .t-cell   { font-family: 'Open Sans','Segoe UI','Helvetica Neue',Arial,sans-serif;  font-weight: 400; }
+    .t-elev   { font-family: 'Montserrat','Segoe UI','Helvetica Neue',Arial,sans-serif; font-weight: 800; }
+    @media (prefers-color-scheme: dark) {
+      .canvas   { fill: #201D1A; }
+      .ink      { fill: #F5EDE3; }
+      .ink-soft { fill: #C9BEB2; }
+      .axis     { stroke: #C9BEB2; }
+      .bandA    { fill: #3A322A; }
+      .bandB    { fill: #34342A; }
+      .bandC    { fill: #2E3A34; }
+      .bandD    { fill: #2E3742; }
+      .peak     { fill: #47403A; }
+    }
+    :root[data-theme="dark"] .canvas   { fill: #201D1A; }
+    :root[data-theme="dark"] .ink      { fill: #F5EDE3; }
+    :root[data-theme="dark"] .ink-soft { fill: #C9BEB2; }
+    :root[data-theme="dark"] .axis     { stroke: #C9BEB2; }
+    :root[data-theme="dark"] .bandA    { fill: #3A322A; }
+    :root[data-theme="dark"] .bandB    { fill: #34342A; }
+    :root[data-theme="dark"] .bandC    { fill: #2E3A34; }
+    :root[data-theme="dark"] .bandD    { fill: #2E3742; }
+    :root[data-theme="dark"] .peak     { fill: #47403A; }
+  </style>
+
+  <g id="layer-1-background" aria-hidden="true">
+    <rect class="canvas" x="0" y="0" width="1600" height="1200" fill="#FAF8F5"/>
+  </g>
+
+  <g id="layer-2-title">
+    <text class="t-title ink" x="60" y="78" font-size="46" fill="#C1440E">From Desert to Alpine</text>
+    <text class="t-sub ink-soft" x="60" y="122" font-size="24" fill="#6E655C">The Vernal elevation profile &#8212; why one basecamp reaches red-rock canyons and high-mountain trails</text>
+  </g>
+
+  <!-- zones stacked bottom (low) to top (high); band heights illustrative, not to exact elevation -->
+  <g id="layer-3-zones">
+    <!-- Zone D: Alpine tundra (top) -->
+    <rect class="bandD" x="250" y="180" width="1290" height="200" fill="#DCE4E8"/>
+    <text class="t-zone ink"  x="285" y="238" font-size="30" fill="#3A3A3A">Alpine tundra</text>
+    <text class="t-cell ink"  x="285" y="278" font-size="22" fill="#3A3A3A">Above the trees &#8212; multi-day backpacking to Utah&#8217;s highest ground.</text>
+    <text class="t-cell ink-soft" x="285" y="312" font-size="20" fill="#6E655C">Kings Peak &#183; High Uintas Wilderness</text>
+
+    <!-- Zone C: Subalpine forest & alpine lakes -->
+    <rect class="bandC" x="250" y="390" width="1290" height="200" fill="#E4E4D2"/>
+    <text class="t-zone ink"  x="285" y="448" font-size="30" fill="#3A3A3A">Subalpine forest &amp; alpine lakes</text>
+    <text class="t-cell ink"  x="285" y="488" font-size="22" fill="#3A3A3A">High Uinta lake country &#8212; day hikes, camping, cool-air summers.</text>
+    <text class="t-cell ink-soft" x="285" y="522" font-size="20" fill="#6E655C">Alpine-lake &amp; day-hike trails</text>
+
+    <!-- Zone B: Foothills & montane forest -->
+    <rect class="bandB" x="250" y="600" width="1290" height="200" fill="#E2D2BF"/>
+    <text class="t-zone ink"  x="285" y="658" font-size="30" fill="#3A3A3A">Foothills &amp; montane forest</text>
+    <text class="t-cell ink"  x="285" y="698" font-size="22" fill="#3A3A3A">The climb up into Ashley National Forest &#8212; scenic drives and cooler trails.</text>
+    <text class="t-cell ink-soft" x="285" y="732" font-size="20" fill="#6E655C">Ashley National Forest</text>
+
+    <!-- Zone A: High-desert basecamp (bottom) -->
+    <rect class="bandA" x="250" y="810" width="1290" height="230" fill="#E8D5C4"/>
+    <text class="t-zone ink"  x="285" y="868" font-size="30" fill="#3A3A3A">High-desert basecamp</text>
+    <text class="t-cell ink"  x="285" y="908" font-size="22" fill="#3A3A3A">Red-rock canyon country &#8212; Dinosaur National Monument, petroglyphs, desert trails,</text>
+    <text class="t-cell ink"  x="285" y="936" font-size="22" fill="#3A3A3A">and guided UTV tours out of town.</text>
+    <text class="t-cell ink-soft" x="285" y="978" font-size="20" fill="#6E655C">Vernal &#8212; your home base for the whole range</text>
+  </g>
+
+  <!-- elevation axis: only the two documented endpoint elevations are marked -->
+  <g id="layer-4-axis">
+    <line class="axis" x1="180" y1="180" x2="180" y2="1040" stroke="#6E655C" stroke-width="3"/>
+    <!-- top endpoint: Kings Peak -->
+    <circle cx="180" cy="230" r="9" fill="#C1440E"/>
+    <text class="t-elev ink" x="70" y="222" font-size="26" fill="#3A3A3A" text-anchor="end">13,528 ft</text>
+    <text class="t-cell ink-soft" x="70" y="250" font-size="19" fill="#6E655C" text-anchor="end">Kings Peak</text>
+    <text class="t-cell ink-soft" x="70" y="272" font-size="19" fill="#6E655C" text-anchor="end">(highest in Utah)</text>
+    <!-- bottom endpoint: Vernal -->
+    <circle cx="180" cy="960" r="9" fill="#C1440E"/>
+    <text class="t-elev ink" x="70" y="952" font-size="26" fill="#3A3A3A" text-anchor="end">5,331 ft</text>
+    <text class="t-cell ink-soft" x="70" y="980" font-size="19" fill="#6E655C" text-anchor="end">Vernal</text>
+    <!-- rise arrow -->
+    <text class="t-cell ink-soft" x="130" y="620" font-size="20" fill="#6E655C" text-anchor="middle" transform="rotate(-90 130 620)">elevation increases &#8593;</text>
+  </g>
+
+  <g id="layer-5-footnote">
+    <text class="t-sub ink-soft" x="60" y="1088" font-size="19" fill="#6E655C">Only the two endpoint elevations are exact (Vernal 5,331 ft; Kings Peak 13,528 ft). Zone heights show order, not scale.</text>
+  </g>
+</svg>

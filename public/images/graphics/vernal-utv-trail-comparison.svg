@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" width="1600" height="1200" role="img" aria-labelledby="graphic-title graphic-desc" preserveAspectRatio="xMidYMid meet" lang="en">
+  <title id="graphic-title">Compare the Five UTV Trails Near Vernal, Utah</title>
+  <desc id="graphic-desc">A comparison matrix of the five guided UTV trail systems near Vernal, Utah documented on the Adventure Tours Vernal website, all offered as three-hour guided Kawasaki KRX 1000 tours. Five trails (rows) are compared across four attributes (columns): signature terrain, scenery highlight, who it suits best, and skill level. Doc's Beach has sandy desert washes, Green River corridor scenery, suits first-timers and families, and is the most accessible trail, welcoming all skill levels. Moonshine Arch has red-rock canyons, a natural sandstone arch, suits couples and small groups, and is all skill levels with more engaging driving. Ashley Gorge is a canyon corridor with dramatic gorge walls, suits backcountry-scenery seekers, and is all skill levels but rewards attentive driving. Outlaw Trail mixes canyon and ridge terrain, features Wild West Butch Cassidy history and petroglyphs, suits history buffs, and is all skill levels with the best story. Asphalt Ridge is a high ridge-top with 360-degree panoramic views, suits big-view riders, and is all skill levels. Every trail is available to all skill levels; the matrix compares character, not difficulty ranking. It reflects only what the site documents and is a planning aid, not a rating.</desc>
+
+  <!--
+    Graphic ID: G-UTV-TRAILS (Comparison Graphics library; companion to
+    public/images/maps/vernal-utv-trail-systems.svg which answers "where the trails
+    are" — this matrix answers "how the trails differ").
+    Source notes: docs/graphics/source/vernal-utv-trail-comparison.README.md
+    Engineering standard: docs/SVG_ENGINEERING_STANDARD.md (authoritative for build).
+    Every cell traces verbatim to src/content/utv/best-utv-trails-vernal.mdx (trail
+    descriptions + FAQ). No terrain, difficulty, or "best for" claim is invented; all
+    five are documented as suitable for all skill levels. Same visual language, palette,
+    typography, accessibility scaffold, and light/dark model as the map + matrix family.
+  -->
+
+  <style>
+    .t-title  { font-family: 'Montserrat','Segoe UI','Helvetica Neue',Arial,sans-serif; font-weight: 800; }
+    .t-sub    { font-family: 'Open Sans','Segoe UI','Helvetica Neue',Arial,sans-serif;  font-weight: 400; }
+    .t-node   { font-family: 'Montserrat','Segoe UI','Helvetica Neue',Arial,sans-serif; font-weight: 700; }
+    .t-cell   { font-family: 'Open Sans','Segoe UI','Helvetica Neue',Arial,sans-serif;  font-weight: 400; }
+    @media (prefers-color-scheme: dark) {
+      .canvas    { fill: #201D1A; }
+      .header    { fill: #47403A; }
+      .stripe    { fill: #262019; }
+      .rowbase   { fill: #201D1A; }
+      .grid      { stroke: #3E362F; }
+      .ink       { fill: #F5EDE3; }
+      .ink-soft  { fill: #C9BEB2; }
+      .trailtab  { fill: #47403A; stroke: #E08A5F; }
+      .trailname { fill: #F5EDE3; }
+    }
+    :root[data-theme="dark"] .canvas    { fill: #201D1A; }
+    :root[data-theme="dark"] .header    { fill: #47403A; }
+    :root[data-theme="dark"] .stripe    { fill: #262019; }
+    :root[data-theme="dark"] .rowbase   { fill: #201D1A; }
+    :root[data-theme="dark"] .grid      { stroke: #3E362F; }
+    :root[data-theme="dark"] .ink       { fill: #F5EDE3; }
+    :root[data-theme="dark"] .ink-soft  { fill: #C9BEB2; }
+    :root[data-theme="dark"] .trailtab  { fill: #47403A; stroke: #E08A5F; }
+    :root[data-theme="dark"] .trailname { fill: #F5EDE3; }
+  </style>
+
+  <g id="layer-1-background" aria-hidden="true">
+    <rect class="canvas" x="0" y="0" width="1600" height="1200" fill="#FAF8F5"/>
+  </g>
+
+  <g id="layer-2-title">
+    <text class="t-title ink" x="60" y="78" font-size="46" fill="#C1440E">Compare the Five UTV Trails Near Vernal</text>
+    <text class="t-sub ink-soft" x="60" y="122" font-size="24" fill="#6E655C">Guided 3-hour Kawasaki KRX 1000 tours &#183; $349 per machine, up to 2 riders &#183; every trail welcomes all skill levels</text>
+  </g>
+
+  <g id="layer-3-grid" aria-hidden="true">
+    <!-- header band -->
+    <rect class="header" x="60" y="170" width="1480" height="82" fill="#E8D5C4"/>
+    <!-- row stripes (5 rows, height 172, from y=252) -->
+    <rect class="rowbase" x="60" y="252"  width="1480" height="172" fill="#FAF8F5"/>
+    <rect class="stripe"  x="60" y="424"  width="1480" height="172" fill="#F0E6D9"/>
+    <rect class="rowbase" x="60" y="596"  width="1480" height="172" fill="#FAF8F5"/>
+    <rect class="stripe"  x="60" y="768"  width="1480" height="172" fill="#F0E6D9"/>
+    <rect class="rowbase" x="60" y="940"  width="1480" height="172" fill="#FAF8F5"/>
+    <!-- column separators -->
+    <g class="grid" stroke="#E2D2BF" stroke-width="2">
+      <line x1="360"  y1="170" x2="360"  y2="1112"/>
+      <line x1="655"  y1="170" x2="655"  y2="1112"/>
+      <line x1="950"  y1="170" x2="950"  y2="1112"/>
+      <line x1="1245" y1="170" x2="1245" y2="1112"/>
+      <rect x="60" y="170" width="1480" height="942" fill="none" stroke="#E2D2BF" stroke-width="2"/>
+    </g>
+  </g>
+
+  <g id="layer-4-header">
+    <text class="t-node ink" x="80"   y="220" font-size="24" fill="#3A3A3A">Trail</text>
+    <text class="t-node ink" x="375"  y="220" font-size="24" fill="#3A3A3A">Signature terrain</text>
+    <text class="t-node ink" x="670"  y="220" font-size="24" fill="#3A3A3A">Scenery highlight</text>
+    <text class="t-node ink" x="965"  y="220" font-size="24" fill="#3A3A3A">Best for</text>
+    <text class="t-node ink" x="1260" y="220" font-size="24" fill="#3A3A3A">Skill level</text>
+  </g>
+
+  <g id="layer-5-rows">
+    <!-- Row 1: Doc's Beach (center y=338) -->
+    <rect class="trailtab" x="80" y="300" width="8" height="76" fill="#D4764E"/>
+    <text class="t-node trailname" x="104" y="332" font-size="26" fill="#3A3A3A">Doc&#8217;s Beach</text>
+    <text class="t-cell ink-soft" x="104" y="364" font-size="19" fill="#6E655C">The one most ride first</text>
+    <text class="t-cell ink" x="375" y="345" font-size="21" fill="#3A3A3A">Sandy desert washes</text>
+    <text class="t-cell ink" x="670" y="345" font-size="21" fill="#3A3A3A">Green River corridor</text>
+    <text class="t-cell ink" x="965" y="345" font-size="21" fill="#3A3A3A">First-timers &amp; families</text>
+    <text class="t-cell ink" x="1260" y="333" font-size="21" fill="#3A3A3A">All levels —<tspan x="1260" dy="26">most accessible</tspan></text>
+
+    <!-- Row 2: Moonshine Arch (center y=510) -->
+    <rect class="trailtab" x="80" y="472" width="8" height="76" fill="#D4764E"/>
+    <text class="t-node trailname" x="104" y="504" font-size="26" fill="#3A3A3A">Moonshine Arch</text>
+    <text class="t-cell ink-soft" x="104" y="536" font-size="19" fill="#6E655C">Photogenic canyon ride</text>
+    <text class="t-cell ink" x="375" y="517" font-size="21" fill="#3A3A3A">Red-rock canyons</text>
+    <text class="t-cell ink" x="670" y="505" font-size="21" fill="#3A3A3A">Natural sandstone<tspan x="670" dy="26">arch</tspan></text>
+    <text class="t-cell ink" x="965" y="505" font-size="21" fill="#3A3A3A">Couples &amp; small<tspan x="965" dy="26">groups</tspan></text>
+    <text class="t-cell ink" x="1260" y="505" font-size="21" fill="#3A3A3A">All levels —<tspan x="1260" dy="26">more engaging</tspan></text>
+
+    <!-- Row 3: Ashley Gorge (center y=682) -->
+    <rect class="trailtab" x="80" y="644" width="8" height="76" fill="#D4764E"/>
+    <text class="t-node trailname" x="104" y="676" font-size="26" fill="#3A3A3A">Ashley Gorge</text>
+    <text class="t-cell ink-soft" x="104" y="708" font-size="19" fill="#6E655C">Backcountry remoteness</text>
+    <text class="t-cell ink" x="375" y="689" font-size="21" fill="#3A3A3A">Canyon corridor</text>
+    <text class="t-cell ink" x="670" y="689" font-size="21" fill="#3A3A3A">Dramatic gorge walls</text>
+    <text class="t-cell ink" x="965" y="689" font-size="21" fill="#3A3A3A">Backcountry seekers</text>
+    <text class="t-cell ink" x="1260" y="677" font-size="21" fill="#3A3A3A">All levels —<tspan x="1260" dy="26">attentive driving</tspan></text>
+
+    <!-- Row 4: Outlaw Trail (center y=854) -->
+    <rect class="trailtab" x="80" y="816" width="8" height="76" fill="#D4764E"/>
+    <text class="t-node trailname" x="104" y="848" font-size="26" fill="#3A3A3A">Outlaw Trail</text>
+    <text class="t-cell ink-soft" x="104" y="880" font-size="19" fill="#6E655C">The ride with the story</text>
+    <text class="t-cell ink" x="375" y="843" font-size="21" fill="#3A3A3A">Mixed canyon<tspan x="375" dy="26">&amp; ridge</tspan></text>
+    <text class="t-cell ink" x="670" y="843" font-size="21" fill="#3A3A3A">Butch Cassidy history,<tspan x="670" dy="26">petroglyphs</tspan></text>
+    <text class="t-cell ink" x="965" y="861" font-size="21" fill="#3A3A3A">History buffs</text>
+    <text class="t-cell ink" x="1260" y="843" font-size="21" fill="#3A3A3A">All levels —<tspan x="1260" dy="26">the best story</tspan></text>
+
+    <!-- Row 5: Asphalt Ridge (center y=1026) -->
+    <rect class="trailtab" x="80" y="988" width="8" height="76" fill="#D4764E"/>
+    <text class="t-node trailname" x="104" y="1020" font-size="26" fill="#3A3A3A">Asphalt Ridge</text>
+    <text class="t-cell ink-soft" x="104" y="1052" font-size="19" fill="#6E655C">Elevation, not canyons</text>
+    <text class="t-cell ink" x="375" y="1033" font-size="21" fill="#3A3A3A">High ridge-top</text>
+    <text class="t-cell ink" x="670" y="1033" font-size="21" fill="#3A3A3A">360&#176; panoramic views</text>
+    <text class="t-cell ink" x="965" y="1033" font-size="21" fill="#3A3A3A">Big-view riders</text>
+    <text class="t-cell ink" x="1260" y="1033" font-size="21" fill="#3A3A3A">All levels</text>
+  </g>
+
+  <g id="layer-6-footnote">
+    <text class="t-sub ink-soft" x="60" y="1158" font-size="19" fill="#6E655C">Every trail is a guided tour with Dave &amp; Trudy Wilson. Character, not a difficulty ranking &#8212; all five welcome first-time riders.</text>
+  </g>
+</svg>
