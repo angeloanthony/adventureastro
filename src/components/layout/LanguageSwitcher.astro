@@ -1,0 +1,34 @@
+---
+// LanguageSwitcher.astro — existence-aware locale switcher (P1 infra).
+//
+// Renders ONLY when the current page has content in more than one locale.
+// Today getAvailableLocales() returns ['en'] for every page, so this emits
+// nothing and the header is unchanged. When localized content is committed it
+// lights up automatically — each option links to the same page in that locale
+// via switchLocalePath(), and the switcher only ever offers locales that
+// actually exist for this page, so it can never link to a 404.
+import {
+  getLangFromUrl, getAvailableLocales, getLocaleMeta,
+  switchLocalePath, DEFAULT_LOCALE, LOCALE_CODES,
+} from '../../lib/i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const segs = Astro.url.pathname.split('/').filter(Boolean);
+if (segs[0] && segs[0] !== DEFAULT_LOCALE && (LOCALE_CODES as readonly string[]).includes(segs[0])) segs.shift();
+const slug = segs.join('/');
+
+const available = getAvailableLocales(slug);
+const show = available.length > 1;
+---
+{show && (
+  <li class="nav-lang-switcher">
+    {available.map((code) => (
+      <a
+        href={switchLocalePath(Astro.url.pathname, code)}
+        hreflang={code}
+        aria-current={code === lang ? 'true' : undefined}
+        class:list={['lang-option', { active: code === lang }]}
+      >{getLocaleMeta(code).name}</a>
+    ))}
+  </li>
+)}

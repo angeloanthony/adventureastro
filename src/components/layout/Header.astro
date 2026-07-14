@@ -6,6 +6,7 @@
 // All hrefs are ROOT-RELATIVE (Phase-gate correction #1) so the nav works
 // identically on nested hub/spoke routes.
 import { SITE } from '../../config/site';
+import LanguageSwitcher from './LanguageSwitcher.astro';
 
 type ActiveKey = 'home' | 'about' | 'trails' | 'things-to-do' | 'dinosaur-national-monument' | 'guides' | 'food'
   | 'cancellation-policy' | 'privacy-policy' | 'faq' | 'safety-guidelines' | 'what-to-bring';
@@ -38,6 +39,7 @@ const { active = '' } = Astro.props;
         </ul>
       </li>
       <li><a href={SITE.phoneHrefDash} class="nav-phone">&#128222; {SITE.phoneDisplay}</a></li>
+      <LanguageSwitcher />
       <li><a href="/booking/" class="nav-book-btn">Book Now</a></li>
     </ul>
     <button class="mobile-menu-toggle" aria-label="Toggle menu">

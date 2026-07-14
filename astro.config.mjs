@@ -12,6 +12,16 @@ import mdx from '@astrojs/mdx';
 export default defineConfig({
   site: 'https://adventuretoursvernal.com',
   trailingSlash: 'always',
+  // P1 multilingual infra. Master ('en') at root, other locales prefixed
+  // ('/es/…'). This enables Astro.currentLocale + locale helpers; it does NOT
+  // generate any localized pages on its own (no fallback/redirect configured),
+  // so build output is unchanged until localized content is committed. The
+  // authoritative locale registry lives in src/lib/i18n.ts.
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'es', 'it', 'pt'],
+    routing: { prefixDefaultLocale: false },
+  },
   build: {
     // /about/index.html → served as /about/
     format: 'directory',

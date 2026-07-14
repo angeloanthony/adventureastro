@@ -21,16 +21,50 @@
 // page-specific <Seo>/schema through the head slot. 404.astro opts out
 // (assets={false}) because it deliberately keeps its own root-relative
 // asset paths.
+//
+// P1 MULTILINGUAL INFRA (existence-aware, inert while only English exists):
+//   • lang/dir derive from the URL (or an explicit `lang` prop). English →
+//     `<html lang="en">` with no dir attribute, byte-identical to before.
+//   • hreflang alternates emit ONLY when a page has >1 locale with content.
+//     Today getAvailableLocales() returns ['en'] for every page, so nothing
+//     is emitted and the head is unchanged. It goes live automatically when
+//     localized content is committed — no edit here required.
+import {
+  getLangFromUrl, isRtl, getAvailableLocales, getLocaleMeta,
+  localizedPath, DEFAULT_LOCALE, LOCALE_CODES,
+} from '../lib/i18n';
+import { absoluteUrl } from '../lib/urls';
 interface Props {
   bodyClass?: string;
   assets?: boolean;
+  /** Override the auto-detected locale (defaults to URL-derived). */
+  lang?: string;
+  /** Normalized page slug for hreflang alternates (defaults to URL-derived). */
+  slug?: string;
+  /** Locales that have content for this page (defaults to existence check). */
+  availableLocales?: string[];
 }
-const { bodyClass, assets = true } = Astro.props;
+const { bodyClass, assets = true, lang: langProp, slug, availableLocales } = Astro.props;
+const lang = langProp ?? getLangFromUrl(Astro.url);
+const dir = isRtl(lang) ? 'rtl' : undefined;
+const pageSlug = slug ?? (() => {
+  const segs = Astro.url.pathname.split('/').filter(Boolean);
+  if (segs[0] && segs[0] !== DEFAULT_LOCALE && (LOCALE_CODES as readonly string[]).includes(segs[0])) segs.shift();
+  return segs.join('/');
+})();
+const available = availableLocales ?? getAvailableLocales(pageSlug);
+const showHreflang = available.length > 1;
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang={lang} dir={dir}>
 <head>
   <slot name="head" />
+  {showHreflang && available.map((code) => (
+    <link rel="alternate" hreflang={getLocaleMeta(code).hreflang} href={absoluteUrl(localizedPath(pageSlug, code))} />
+  ))}
+  {showHreflang && (
+    <link rel="alternate" hreflang="x-default" href={absoluteUrl(localizedPath(pageSlug, DEFAULT_LOCALE))} />
+  )}
   {assets && (
     <Fragment>
       <link rel="preconnect" href="https://fonts.googleapis.com" />
