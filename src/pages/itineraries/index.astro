@@ -19,6 +19,7 @@
 // OFFICIAL SOURCE. No lodging brands, prices, or schedules are invented.
 // Reachability: linked in-body from the Things-to-Do cornerstone (nav-reachable).
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import GatewayRoutes from '../../components/content/GatewayRoutes.astro';
 import Header from '../../components/layout/Header.astro';
 import Footer from '../../components/layout/Footer.astro';
 import Seo from '../../components/seo/Seo.astro';
@@ -337,5 +338,6 @@ const schema = `{
     </div>
   </main>
 
+  <GatewayRoutes slot="body" showHubLink={false} />
   <Footer slot="body" variant="compact" />
 </BaseLayout>

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" width="1600" height="1200" role="img" aria-labelledby="graphic-title graphic-desc" preserveAspectRatio="xMidYMid meet" lang="en">
+  <title id="graphic-title">Compare Your Dinosaur Country Adventures — A Side-by-Side Planning Matrix</title>
+  <desc id="graphic-desc">A comparison matrix summarizing what the Adventure Tours Vernal website documents about its five primary experiences around Vernal, Utah, all reached from Vernal as a basecamp. The five experiences (rows) are compared across six attributes (columns): good for families, a guided tour you can book on the site, a relaxed low-effort option, an indoor or rainy-day option, year-round access, and being great for photography. A filled check mark means the site documents that attribute for that experience; an open circle means it is not a documented focus, though it may still be possible on your own. Dinosaurs at Dinosaur National Monument, meaning fossils, rock art, and the Quarry, is documented as good for families, offering a relaxed low-effort option, an indoor rainy-day option, year-round access to the grounds, and great for photography; it does not sell a guided tour of the monument itself. UTV Adventure, guided Kawasaki KRX backcountry tours, is documented as good for families and is the one experience with a guided tour you can book on the site; it is not documented as low-effort, indoor, year-round, or a photography focus. Hiking, from desert canyons to High Uintas alpine trails, is documented as good for families, offering a relaxed low-effort option, and great for photography; it has no bookable guided tour, no indoor option, and is seasonal by elevation rather than year-round. Fishing, at reservoirs, alpine lakes, and a blue-ribbon river, is documented as good for families, a relaxed low-effort option, year-round, and great for photography; it has no site-booked guided tour and no indoor option. Scenic Drives, a byway and backcountry loops seen from the car, is documented as good for families, a relaxed low-effort option, year-round on the paved routes, and great for photography; it has no bookable guided tour and no indoor option. This is a planning aid, not a ranking, score, or recommendation; it reflects only what the site documents, all five welcome families, and many trips combine several experiences, each of which has its own in-depth guide.</desc>
+
+  <!--
+    Graphic ID: G-COMPARISON-MATRIX (second asset in the Decision Graphics library; see
+    docs/M5_IMPLEMENTATION_ROADMAP.md Section 6, "Comparison" asset class, and the
+    first asset G-DECISION-TREE which answers "which experience is right for me").
+    Source notes: docs/graphics/source/vernal-adventure-comparison-matrix.README.md
+    Engineering standard: docs/SVG_ENGINEERING_STANDARD.md (authoritative for build).
+
+    Purpose: where G-DECISION-TREE fans a visitor from an interest to one experience,
+    this DECISION GRAPHIC lays the site's five primary experiences side by side so a
+    visitor can compare them across a fixed set of planning attributes at a glance.
+    Layout is a table: five experience rows (sandstone pills, matching the map/tree
+    node treatment) against six attribute columns, with a canyon-red "all from your
+    Vernal basecamp" corner badge (the reserved accent) anchoring the header.
+
+    Every row and every marked cell traces to documented site content; nothing is
+    invented and no ranking, score, or statistic is implied. The two-state marker is
+    strictly editorial-documentation, not a rating: a filled disc with a check means
+    "the site documents this attribute for this experience," an open ring means "not
+    a documented focus." Cell sources (verbatim-phrase evidence held in the README):
+      Families (all five): DNM "one of the most kid-friendly national monuments";
+        utv/family-utv-guide-vernal; hiking/family-hiking-near-vernal + hiking pillar
+        "best family-hiking region"; fishing pillar "best family-fishing region" +
+        fishing-red-fleet-reservoir "Family Angler's Guide"; scenic-drives pillar
+        "Family-Friendly Drives".
+      Guided tour booked on site (UTV only): utv pillar "five guided UTV trail tours"
+        + booking.astro Cal.com booking of "guided Kawasaki KRX 1000" tours. DNM,
+        hiking, fishing, and scenic drives are self-guided on this site (fishing and
+        DNM mention third-party/adjacent guides but sell none — see README).
+      Relaxed low-effort option (DNM, hiking, fishing, scenic drives): DNM "close to
+        the car with short walks... you set the pace"; hiking accessibility tier
+        "little or no walking from a parking area", "stroller-friendly loop"; fishing
+        "the lowest-commitment way", "relaxed half-day"; scenic drives "the car is the
+        trail... the effort dialed down". UTV is documented as an active adventure.
+      Indoor / rainy-day option (DNM only): DNM "Quarry Exhibit Hall, a
+        climate-controlled building".
+      Year-round access (DNM, fishing, scenic drives): DNM "the grounds are open
+        year-round" (winter-limited); fishing "fish year-round... no true off-season";
+        scenic drives paved routes "maintained year-round". UTV "peak season May
+        through October"; hiking seasonal by elevation ("high country is for snow
+        travel only" in winter).
+      Photography (DNM, hiking, fishing, scenic drives): each pillar carries a
+        Photography section; UTV is not documented as a photography subject.
+
+    COLOR MODEL (per docs/SVG_ENGINEERING_STANDARD.md F1-F3): concrete light-theme hex
+    values are set as presentation attributes on every element, so the graphic renders
+    correctly in ALL contexts, including librsvg/sharp rasterizers (og:image,
+    astro:assets), which do NOT resolve CSS custom properties. The style block below is
+    a progressive-enhancement DARK-MODE override only; rasterizers ignore it and fall
+    back to the light hex attributes. No external font, image, script, or reference is
+    used; there is no DOCTYPE, so the asset is self-contained and CSP-safe.
+  -->
+
+  <style>
+    .t-title  { font-family: 'Montserrat','Segoe UI','Helvetica Neue',Arial,sans-serif; font-weight: 800; }
+    .t-sub    { font-family: 'Open Sans','Segoe UI','Helvetica Neue',Arial,sans-serif;  font-weight: 400; }
+    .t-node   { font-family: 'Montserrat','Segoe UI','Helvetica Neue',Arial,sans-serif; font-weight: 700; }
+    .t-hub    { font-family: 'Montserrat','Segoe UI','Helvetica Neue',Arial,sans-serif; font-weight: 800; }
+    .t-legend { font-family: 'Open Sans','Segoe UI','Helvetica Neue',Arial,sans-serif;  font-weight: 400; }
+    /* Label knockout halo so text stays legible over its pill (stroke painted first) */
+    .node-text { paint-order: stroke; }
+
+    /* --- Dark-mode override (browsers only; rasterizers keep the light hex attrs) --- */
+    @media (prefers-color-scheme: dark) {
+      .canvas      { fill: #201D1A; }
+      .land        { fill: #2C2823; }
+      .ink         { fill: #F5EDE3; }
+      .ink-soft    { fill: #C9BEB2; }
+      .stripe      { fill: #262019; }
+      .grid        { stroke: #3E362F; }
+      .node-fill   { fill: #47403A; stroke: #E08A5F; }
+      .node-text   { fill: #F5EDE3; stroke: #47403A; }
+      .glyph-solid { fill: #F5EDE3; }
+      .check       { stroke: #201D1A; }
+      .glyph-ring  { stroke: #C9BEB2; }
+      .legend-node { fill: #47403A; stroke: #E08A5F; }
+      /* Canyon-red "Vernal basecamp" badge keeps canyon-red + white in both themes (5.1:1) */
+    }
+    :root[data-theme="dark"] .canvas      { fill: #201D1A; }
+    :root[data-theme="dark"] .land        { fill: #2C2823; }
+    :root[data-theme="dark"] .ink         { fill: #F5EDE3; }
+    :root[data-theme="dark"] .ink-soft    { fill: #C9BEB2; }
+    :root[data-theme="dark"] .stripe      { fill: #262019; }
+    :root[data-theme="dark"] .grid        { stroke: #3E362F; }
+    :root[data-theme="dark"] .node-fill   { fill: #47403A; stroke: #E08A5F; }
+    :root[data-theme="dark"] .node-text   { fill: #F5EDE3; stroke: #47403A; }
+    :root[data-theme="dark"] .glyph-solid { fill: #F5EDE3; }
+    :root[data-theme="dark"] .check       { stroke: #201D1A; }
+    :root[data-theme="dark"] .glyph-ring  { stroke: #C9BEB2; }
+    :root[data-theme="dark"] .legend-node { fill: #47403A; stroke: #E08A5F; }
+  </style>
+
+  <!-- ===================== LAYER 1: background ===================== -->
+  <g id="layer-1-background" aria-hidden="true">
+    <rect class="canvas" x="0" y="0" width="1600" height="1200" fill="#FAF8F5"/>
+    <rect class="land" x="40" y="40" width="1520" height="1120" rx="28" fill="#F5EDE3"/>
+  </g>
+
+  <!-- ===================== LAYER 2: title ===================== -->
+  <g id="layer-2-title">
+    <text class="t-title ink" x="800" y="96" text-anchor="middle" font-size="50" fill="#3A3A3A">Compare Your Dinosaur Country Adventures</text>
+    <text class="t-sub ink-soft" x="800" y="138" text-anchor="middle" font-size="26" fill="#6E655C">What the site documents about each experience &#8212; a planning aid, not a ranking</text>
+  </g>
+
+  <!-- ===================== LAYER 3: grid + row striping (decorative) ===================== -->
+  <g id="layer-3-grid" aria-hidden="true">
+    <!-- Row striping (rows 1,3,5) to guide the eye across the columns -->
+    <rect class="stripe" x="465" y="317" width="1055" height="116" fill="#F0E6D9"/>
+    <rect class="stripe" x="465" y="569" width="1055" height="116" fill="#F0E6D9"/>
+    <rect class="stripe" x="465" y="821" width="1055" height="116" fill="#F0E6D9"/>
+    <!-- Header underline -->
+    <line class="grid" x1="90" y1="308" x2="1520" y2="308" stroke="#E2D2BF" stroke-width="2"/>
+    <!-- Column separators (between attribute columns) -->
+    <line class="grid" x1="645"  y1="317" x2="645"  y2="937" stroke="#E2D2BF" stroke-width="2"/>
+    <line class="grid" x1="820"  y1="317" x2="820"  y2="937" stroke="#E2D2BF" stroke-width="2"/>
+    <line class="grid" x1="995"  y1="317" x2="995"  y2="937" stroke="#E2D2BF" stroke-width="2"/>
+    <line class="grid" x1="1170" y1="317" x2="1170" y2="937" stroke="#E2D2BF" stroke-width="2"/>
+    <line class="grid" x1="1345" y1="317" x2="1345" y2="937" stroke="#E2D2BF" stroke-width="2"/>
+  </g>
+
+  <!-- ===================== LAYER 4: header (corner badge + column labels) ===================== -->
+  <g id="layer-4-header">
+    <!-- Canyon-red basecamp corner badge (the single reserved accent) -->
+    <g text-anchor="middle">
+      <rect x="90" y="200" width="380" height="98" rx="18" fill="#C1440E"/>
+      <text class="t-sub" x="280" y="238" font-size="16" letter-spacing="2" fill="#FFFFFF">ALL FROM YOUR</text>
+      <text class="t-hub" x="280" y="272" font-size="27" fill="#FFFFFF">Vernal basecamp</text>
+    </g>
+    <!-- Column headers (two lines each), centered on each attribute column -->
+    <g class="t-node ink" text-anchor="middle" font-size="20" fill="#3A3A3A">
+      <text x="557.5"  y="240">Good for</text><text x="557.5"  y="266">families</text>
+      <text x="732.5"  y="240">Guided tour</text><text x="732.5"  y="266">(book on site)</text>
+      <text x="907.5"  y="240">Relaxed,</text><text x="907.5"  y="266">low-effort</text>
+      <text x="1082.5" y="240">Indoor /</text><text x="1082.5" y="266">rainy-day</text>
+      <text x="1257.5" y="240">Year-round</text><text x="1257.5" y="266">access</text>
+      <text x="1432.5" y="240">Great for</text><text x="1432.5" y="266">photos</text>
+    </g>
+  </g>
+
+  <!-- ===================== LAYER 5: row headers (experiences) ===================== -->
+  <g id="layer-5-rows">
+    <!-- Row 1: Dinosaurs (cy 375) -->
+    <g>
+      <rect class="node-fill" x="90" y="327" width="380" height="96" rx="18" fill="#E8D5C4" stroke="#D4764E" stroke-width="3"/>
+      <text class="node-text t-node" x="112" y="368" font-size="27" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">Dinosaurs</text>
+      <text class="node-text t-sub"  x="112" y="397" font-size="17" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">Fossils, rock art &amp; the Quarry (DNM)</text>
+    </g>
+    <!-- Row 2: UTV Adventure (cy 501) -->
+    <g>
+      <rect class="node-fill" x="90" y="453" width="380" height="96" rx="18" fill="#E8D5C4" stroke="#D4764E" stroke-width="3"/>
+      <text class="node-text t-node" x="112" y="494" font-size="27" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">UTV Adventure</text>
+      <text class="node-text t-sub"  x="112" y="523" font-size="17" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">Guided KRX backcountry tours</text>
+    </g>
+    <!-- Row 3: Hiking (cy 627) -->
+    <g>
+      <rect class="node-fill" x="90" y="579" width="380" height="96" rx="18" fill="#E8D5C4" stroke="#D4764E" stroke-width="3"/>
+      <text class="node-text t-node" x="112" y="620" font-size="27" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">Hiking</text>
+      <text class="node-text t-sub"  x="112" y="649" font-size="17" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">Desert canyons to alpine trails</text>
+    </g>
+    <!-- Row 4: Fishing (cy 753) -->
+    <g>
+      <rect class="node-fill" x="90" y="705" width="380" height="96" rx="18" fill="#E8D5C4" stroke="#D4764E" stroke-width="3"/>
+      <text class="node-text t-node" x="112" y="746" font-size="27" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">Fishing</text>
+      <text class="node-text t-sub"  x="112" y="775" font-size="17" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">Reservoirs, alpine lakes &amp; a river</text>
+    </g>
+    <!-- Row 5: Scenic Drives (cy 879) -->
+    <g>
+      <rect class="node-fill" x="90" y="831" width="380" height="96" rx="18" fill="#E8D5C4" stroke="#D4764E" stroke-width="3"/>
+      <text class="node-text t-node" x="112" y="872" font-size="27" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">Scenic Drives</text>
+      <text class="node-text t-sub"  x="112" y="901" font-size="17" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">A byway &amp; loops, seen from the car</text>
+    </g>
+  </g>
+
+  <!-- ===================== LAYER 6: cell markers (decorative; the <desc> carries the data) =====================
+       Filled disc + white check = "documented on the site"; open ring = "not a documented focus".
+       Column centers x: 557.5 | 732.5 | 907.5 | 1082.5 | 1257.5 | 1432.5
+       Row centers    y: 375 | 501 | 627 | 753 | 879
+  -->
+  <g id="layer-6-cells" aria-hidden="true">
+    <!-- ROW 1: Dinosaurs -> Y N Y Y Y Y -->
+    <g class="glyph-solid" transform="translate(557.5,375)" fill="#3A3A3A"><circle r="19"/><path class="check" d="M-8.5,0.5 L-3,7 L9,-7.5" fill="none" stroke="#FAF8F5" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <circle class="glyph-ring" cx="732.5" cy="375" r="16" fill="none" stroke="#6E655C" stroke-width="3"/>
+    <g class="glyph-solid" transform="translate(907.5,375)" fill="#3A3A3A"><circle r="19"/><path class="check" d="M-8.5,0.5 L-3,7 L9,-7.5" fill="none" stroke="#FAF8F5" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g class="glyph-solid" transform="translate(1082.5,375)" fill="#3A3A3A"><circle r="19"/><path class="check" d="M-8.5,0.5 L-3,7 L9,-7.5" fill="none" stroke="#FAF8F5" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g class="glyph-solid" transform="translate(1257.5,375)" fill="#3A3A3A"><circle r="19"/><path class="check" d="M-8.5,0.5 L-3,7 L9,-7.5" fill="none" stroke="#FAF8F5" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g class="glyph-solid" transform="translate(1432.5,375)" fill="#3A3A3A"><circle r="19"/><path class="check" d="M-8.5,0.5 L-3,7 L9,-7.5" fill="none" stroke="#FAF8F5" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+
+    <!-- ROW 2: UTV Adventure -> Y Y N N N N -->
+    <g class="glyph-solid" transform="translate(557.5,501)" fill="#3A3A3A"><circle r="19"/><path class="check" d="M-8.5,0.5 L-3,7 L9,-7.5" fill="none" stroke="#FAF8F5" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g class="glyph-solid" transform="translate(732.5,501)" fill="#3A3A3A"><circle r="19"/><path class="check" d="M-8.5,0.5 L-3,7 L9,-7.5" fill="none" stroke="#FAF8F5" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <circle class="glyph-ring" cx="907.5"  cy="501" r="16" fill="none" stroke="#6E655C" stroke-width="3"/>
+    <circle class="glyph-ring" cx="1082.5" cy="501" r="16" fill="none" stroke="#6E655C" stroke-width="3"/>
+    <circle class="glyph-ring" cx="1257.5" cy="501" r="16" fill="none" stroke="#6E655C" stroke-width="3"/>
+    <circle class="glyph-ring" cx="1432.5" cy="501" r="16" fill="none" stroke="#6E655C" stroke-width="3"/>
+
+    <!-- ROW 3: Hiking -> Y N Y N N Y -->
+    <g class="glyph-solid" transform="translate(557.5,627)" fill="#3A3A3A"><circle r="19"/><path class="check" d="M-8.5,0.5 L-3,7 L9,-7.5" fill="none" stroke="#FAF8F5" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <circle class="glyph-ring" cx="732.5" cy="627" r="16" fill="none" stroke="#6E655C" stroke-width="3"/>
+    <g class="glyph-solid" transform="translate(907.5,627)" fill="#3A3A3A"><circle r="19"/><path class="check" d="M-8.5,0.5 L-3,7 L9,-7.5" fill="none" stroke="#FAF8F5" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <circle class="glyph-ring" cx="1082.5" cy="627" r="16" fill="none" stroke="#6E655C" stroke-width="3"/>
+    <circle class="glyph-ring" cx="1257.5" cy="627" r="16" fill="none" stroke="#6E655C" stroke-width="3"/>
+    <g class="glyph-solid" transform="translate(1432.5,627)" fill="#3A3A3A"><circle r="19"/><path class="check" d="M-8.5,0.5 L-3,7 L9,-7.5" fill="none" stroke="#FAF8F5" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+
+    <!-- ROW 4: Fishing -> Y N Y N Y Y -->
+    <g class="glyph-solid" transform="translate(557.5,753)" fill="#3A3A3A"><circle r="19"/><path class="check" d="M-8.5,0.5 L-3,7 L9,-7.5" fill="none" stroke="#FAF8F5" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <circle class="glyph-ring" cx="732.5" cy="753" r="16" fill="none" stroke="#6E655C" stroke-width="3"/>
+    <g class="glyph-solid" transform="translate(907.5,753)" fill="#3A3A3A"><circle r="19"/><path class="check" d="M-8.5,0.5 L-3,7 L9,-7.5" fill="none" stroke="#FAF8F5" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <circle class="glyph-ring" cx="1082.5" cy="753" r="16" fill="none" stroke="#6E655C" stroke-width="3"/>
+    <g class="glyph-solid" transform="translate(1257.5,753)" fill="#3A3A3A"><circle r="19"/><path class="check" d="M-8.5,0.5 L-3,7 L9,-7.5" fill="none" stroke="#FAF8F5" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g class="glyph-solid" transform="translate(1432.5,753)" fill="#3A3A3A"><circle r="19"/><path class="check" d="M-8.5,0.5 L-3,7 L9,-7.5" fill="none" stroke="#FAF8F5" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+
+    <!-- ROW 5: Scenic Drives -> Y N Y N Y Y -->
+    <g class="glyph-solid" transform="translate(557.5,879)" fill="#3A3A3A"><circle r="19"/><path class="check" d="M-8.5,0.5 L-3,7 L9,-7.5" fill="none" stroke="#FAF8F5" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <circle class="glyph-ring" cx="732.5" cy="879" r="16" fill="none" stroke="#6E655C" stroke-width="3"/>
+    <g class="glyph-solid" transform="translate(907.5,879)" fill="#3A3A3A"><circle r="19"/><path class="check" d="M-8.5,0.5 L-3,7 L9,-7.5" fill="none" stroke="#FAF8F5" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <circle class="glyph-ring" cx="1082.5" cy="879" r="16" fill="none" stroke="#6E655C" stroke-width="3"/>
+    <g class="glyph-solid" transform="translate(1257.5,879)" fill="#3A3A3A"><circle r="19"/><path class="check" d="M-8.5,0.5 L-3,7 L9,-7.5" fill="none" stroke="#FAF8F5" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g class="glyph-solid" transform="translate(1432.5,879)" fill="#3A3A3A"><circle r="19"/><path class="check" d="M-8.5,0.5 L-3,7 L9,-7.5" fill="none" stroke="#FAF8F5" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+  </g>
+
+  <!-- ===================== LAYER 7: legend + honesty note ===================== -->
+  <g id="layer-7-legend">
+    <!-- Marker key -->
+    <g aria-hidden="true">
+      <g class="glyph-solid" transform="translate(166,1006)" fill="#3A3A3A"><circle r="17"/><path class="check" d="M-8,0.5 L-2.5,6.5 L8,-7" fill="none" stroke="#FAF8F5" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></g>
+      <circle class="glyph-ring" cx="630" cy="1006" r="15" fill="none" stroke="#6E655C" stroke-width="3"/>
+    </g>
+    <g class="t-legend ink" font-size="24" fill="#3A3A3A">
+      <text x="196" y="1014">Documented on the site</text>
+      <text x="659" y="1014">Not a documented focus (may still be possible on your own)</text>
+    </g>
+    <!-- Honesty note -->
+    <text class="t-legend ink-soft" x="800" y="1088" text-anchor="middle" font-size="22" fill="#6E655C">A planning aid, not a ranking or score &#8212; it shows only what the site documents. All five welcome families,</text>
+    <text class="t-legend ink-soft" x="800" y="1120" text-anchor="middle" font-size="22" fill="#6E655C">and many trips combine several. Each experience has its own in-depth guide, all from your Vernal basecamp.</text>
+  </g>
+</svg>

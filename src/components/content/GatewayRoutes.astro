@@ -1,0 +1,124 @@
+---
+// GatewayRoutes.astro — reusable trip-planning element (Phase 2A.3).
+//
+// "Coming from out of town?" — links each gateway city to its full weekend
+// itinerary, and (optionally) to the itineraries hub. It guides an out-of-area
+// visitor from "how do I get there" straight into a complete, ready-made plan.
+//
+// Pure markup + scoped styles: no JavaScript, no new CSS framework, no global
+// CSS change. Every href points to an EXISTING page and each link is unique.
+// Styling mirrors the site's existing cards via the same CSS variable TourCta
+// uses, with a hard-coded fallback.
+interface Props {
+  heading?: string;
+  showHubLink?: boolean;
+}
+const {
+  heading = 'Coming from out of town? Start with your gateway route.',
+  showHubLink = true,
+} = Astro.props;
+
+// Each gateway → its full weekend itinerary. Notes stay qualitative (matching
+// existing site copy) rather than committing to drive-time figures.
+const ROUTES = [
+  {
+    city: 'Salt Lake City',
+    note: 'The classic ~3-hour approach over the Uintas.',
+    href: '/itineraries/weekend-road-trip-from-salt-lake-city/',
+  },
+  {
+    city: 'Denver',
+    note: 'A half-day Rocky Mountain road trip west.',
+    href: '/itineraries/weekend-road-trip-from-denver/',
+  },
+  {
+    city: 'Grand Junction',
+    note: 'The closest Colorado gateway.',
+    href: '/itineraries/weekend-road-trip-from-grand-junction/',
+  },
+];
+---
+<section class="gateway-routes" aria-labelledby="gr-heading">
+  <h2 id="gr-heading" class="gr-heading">{heading}</h2>
+  <ul class="gr-grid">
+    {ROUTES.map((r) => (
+      <li class="gr-card">
+        <a class="gr-link" href={r.href}>
+          <span class="gr-city">{r.city} <span class="gr-arrow" aria-hidden="true">→</span></span>
+          <span class="gr-note">{r.note}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+  {showHubLink && (
+    <p class="gr-hub"><a href="/itineraries/">See all Vernal itineraries &rarr;</a></p>
+  )}
+</section>
+
+<style>
+  .gateway-routes {
+    max-width: 900px;
+    margin: 44px auto;
+    padding: 0 16px;
+  }
+  .gr-heading {
+    text-align: center;
+    font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+    margin: 0 0 20px;
+  }
+  .gr-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .gr-card {
+    margin: 0;
+  }
+  .gr-link {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    height: 100%;
+    padding: 18px 20px;
+    border: 1px solid rgba(212, 118, 78, 0.3);
+    border-top: 4px solid var(--burnt-orange, #d4764e);
+    border-radius: 12px;
+    background: rgba(212, 118, 78, 0.05);
+    text-decoration: none;
+    color: inherit;
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease,
+      background 0.15s ease;
+  }
+  .gr-link:hover,
+  .gr-link:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    background: rgba(212, 118, 78, 0.1);
+  }
+  .gr-city {
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .gr-note {
+    color: #6e655c;
+    font-size: 0.92rem;
+  }
+  .gr-arrow {
+    display: inline-block;
+    transition: transform 0.15s ease;
+  }
+  .gr-link:hover .gr-arrow,
+  .gr-link:focus-visible .gr-arrow {
+    transform: translateX(3px);
+  }
+  .gr-hub {
+    text-align: center;
+    margin: 18px 0 0;
+    font-weight: 600;
+  }
+</style>

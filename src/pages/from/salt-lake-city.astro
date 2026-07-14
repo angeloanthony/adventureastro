@@ -5,6 +5,7 @@
 // verified, non-invented body copy. TODOs mark owner-expertise/photography
 // gaps rather than inventing to fill them.
 import CityLayout from '../../layouts/CityLayout.astro';
+import GatewayRoutes from '../../components/content/GatewayRoutes.astro';
 import FaqAccordion from '../../components/content/FaqAccordion.astro';
 import { getEntry } from 'astro:content';
 import { cityHref } from '../../lib/hubs';
@@ -90,6 +91,8 @@ const faq = [
        departure time to avoid I-80/US-40 traffic, recommended overnight
        stop) and original photography of the drive route are not yet
        available. Add once supplied — do not invent. -->
+
+  <GatewayRoutes />
 
   <h2>Frequently Asked Questions</h2>
   <FaqAccordion faq={faq} />
