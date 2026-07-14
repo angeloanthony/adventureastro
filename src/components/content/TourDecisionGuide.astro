@@ -1,0 +1,113 @@
+---
+// TourDecisionGuide.astro — reusable editorial decision aid (Phase 2A.2).
+//
+// Helps a visitor confidently choose the right UTV experience by answering a
+// single question, then linking to the matching EXISTING guide. Pure markup +
+// scoped styles: no JavaScript, no new CSS framework, no global CSS change.
+// Every href points to a real page in this repository; each recommendation is
+// unique (no page is recommended twice).
+//
+// Styling mirrors the site's existing cards (burnt-orange accents, rounded
+// corners) via the same CSS variables TourCta uses, with hard-coded fallbacks.
+interface Props {
+  heading?: string;
+}
+const { heading = 'Not sure which tour? Start here.' } = Astro.props;
+
+// Question → the single best existing page for that visitor. Targets are all
+// distinct; if you add a row, keep the target unique.
+const CHOICES = [
+  { q: 'First time riding?', a: "Start with the beginner's guide", href: '/utv/beginners-guide-to-utv-tours-vernal/' },
+  { q: 'Bringing children?', a: 'See the family UTV guide', href: '/utv/family-utv-guide-vernal/' },
+  { q: 'Traveling as a couple?', a: 'Book a private tour for two', href: '/utv/private-utv-tours-vernal/' },
+  { q: 'Looking for scenery?', a: 'Compare the most scenic trails', href: '/utv/best-utv-trails-vernal/' },
+  { q: 'Looking for history?', a: 'Explore petroglyphs & rock art', href: '/dinosaur-national-monument/petroglyphs-rock-art-vernal/' },
+  { q: 'Want maximum adventure?', a: 'Go remote on a backcountry tour', href: '/utv/backcountry-tours-vernal-utah/' },
+  { q: 'Short on time?', a: 'Book the next 3-hour tour', href: '/booking/' },
+  { q: 'Large group?', a: 'Plan a group tour', href: '/utv/group-utv-tours-vernal/' },
+];
+---
+<section class="tour-decision-guide" aria-labelledby="tdg-heading">
+  <h2 id="tdg-heading" class="tdg-heading">{heading}</h2>
+  <p class="tdg-intro">Tell us what matters most and we'll point you to the right guide.</p>
+  <ul class="tdg-grid">
+    {CHOICES.map((c) => (
+      <li class="tdg-card">
+        <a class="tdg-link" href={c.href}>
+          <span class="tdg-q">{c.q}</span>
+          <span class="tdg-a">{c.a} <span class="tdg-arrow" aria-hidden="true">→</span></span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .tour-decision-guide {
+    max-width: 960px;
+    margin: 48px auto;
+    padding: 0 16px;
+  }
+  .tdg-heading {
+    text-align: center;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    margin: 0 0 6px;
+  }
+  .tdg-intro {
+    text-align: center;
+    margin: 0 auto 24px;
+    max-width: 620px;
+    color: #6e655c;
+  }
+  .tdg-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 14px;
+  }
+  .tdg-card {
+    margin: 0;
+  }
+  .tdg-link {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    height: 100%;
+    padding: 18px 20px;
+    border: 1px solid rgba(212, 118, 78, 0.3);
+    border-left: 4px solid var(--burnt-orange, #d4764e);
+    border-radius: 12px;
+    background: rgba(212, 118, 78, 0.05);
+    text-decoration: none;
+    color: inherit;
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease,
+      background 0.15s ease;
+  }
+  .tdg-link:hover,
+  .tdg-link:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    background: rgba(212, 118, 78, 0.1);
+  }
+  .tdg-q {
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+  .tdg-a {
+    color: var(--burnt-orange, #b85c38);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .tdg-arrow {
+    display: inline-block;
+    transition: transform 0.15s ease;
+  }
+  .tdg-link:hover .tdg-arrow,
+  .tdg-link:focus-visible .tdg-arrow {
+    transform: translateX(3px);
+  }
+</style>

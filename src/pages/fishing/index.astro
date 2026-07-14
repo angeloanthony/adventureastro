@@ -8,6 +8,7 @@
 // marked VERIFY WITH OFFICIAL SOURCE. Links up to every destination guide;
 // future /fishing/ spokes link back here.
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import TrustBadge from '../../components/content/TrustBadge.astro';
 import Header from '../../components/layout/Header.astro';
 import Footer from '../../components/layout/Footer.astro';
 import Seo from '../../components/seo/Seo.astro';
@@ -64,6 +65,7 @@ const schema = `{
     <header class="article-header">
       <h1 class="article-title">The Ultimate Guide to Fishing in Dinosaur Country</h1>
       <p class="article-meta">Updated July 2026 · Adventure Tours Vernal</p>
+      <TrustBadge align="left" />
     </header>
 
     <div class="article-body">
@@ -88,6 +90,11 @@ const schema = `{
 
       <h2>Fishing Regions Overview</h2>
       <p>Think of Dinosaur Country fishing as five distinct waters, each with its own personality. You do not have to choose just one — many trips combine two or three — but knowing what each offers is the key to a good plan.</p>
+      <p>Those waters group into four broad fishing environments, all a day trip from one Vernal base — here's how they relate:</p>
+      <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+        <img src="/images/maps/vernal-fishing-waters-overview.svg" alt="Schematic overview of fishing near Vernal, Utah as four environments sharing Vernal as a basecamp: the Big Reservoir (Flaming Gorge — trophy lake trout and big browns, boat water), the Tailwater River (the Green River below the dam — blue-ribbon fly fishing for wild trout), the Close-to-Town Reservoirs (Red Fleet and Steinaker — family shore fishing for trout, bass, and bluegill), and the Alpine Lakes (the Uinta lakes of Ashley National Forest — high-country trout and grayling). Not to scale; the blue shapes are illustrative water symbols, not mapped lakes or rivers." width="1600" height="1200" loading="lazy" decoding="async" />
+        <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">Four fishing environments, one basecamp — from the trophy reservoir to alpine lakes. Schematic overview, not to scale; no boundaries, ramps, or routes shown.</figcaption>
+      </figure>
       <div class="table-scroll">
         <table>
           <thead>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../config/site';
 import Header from '../../components/layout/Header.astro';
 import Footer from '../../components/layout/Footer.astro';
 import Seo from '../../components/seo/Seo.astro';
@@ -53,6 +54,7 @@ const bodyHtml = `
       </div>
       <h1 class="article-title">Things to Do in Vernal, Utah</h1>
       <p class="article-meta">Updated July 2026 · Adventure Tours Vernal</p>
+      <p style="display:inline-flex;align-items:center;gap:8px;margin:12px 0;padding:7px 15px;border:1px solid rgba(212,118,78,0.5);border-radius:999px;background:#ffffff;box-shadow:0 1px 4px rgba(0,0,0,0.08);font-size:0.95rem;color:#4a4139;"><span aria-hidden="true" style="color:#e6a817;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count} Google reviews</span></p>
     </header>
 
     <div class="article-body">
@@ -87,6 +89,13 @@ const bodyHtml = `
       <p>First, this is <strong>Dinosaur Country</strong> in a way nowhere else can claim. The fossils here aren't casts behind glass in a distant museum — they're real bone, still embedded in the cliff where they were buried, in a spot where you're actually invited to lay a hand on one. Add the dinosaur trackways at Red Fleet, the Field House's outdoor dinosaur garden, and the Morrison Formation rock that made the region famous, and you have a destination built around one of the most captivating subjects on earth.</p>
       <p>Second, Vernal offers a <strong>front-country and a backcountry</strong>, and knowing the difference is the key to a great trip. The front country is everything you can drive to: the monument, the state parks, the museum, downtown. The backcountry is the vast web of public land, canyons, and off-road trails that surrounds all of it — country most visitors never see because you can't get there on pavement. The town's guided UTV tours exist to bridge that gap, and they're the reason a Vernal trip can feel like an expedition rather than a drive-by.</p>
       <p>Third, it's a <strong>real, working town</strong>, not a resort built for tourism. That means honest prices, unpretentious food, genuine local knowledge, and a Main Street that goes about its business whether you're here or not. For a certain kind of traveler, that authenticity is worth more than any amenity.</p>
+
+      <p>With so much on the menu, the fastest way to plan is to start with what you enjoy. The selector below turns an interest into a shortlist of experiences — each covered in detail further down this page.</p>
+
+      <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+        <img src="/images/graphics/vernal-adventure-decision-tree.svg" alt="Decision-tree diagram that sorts Vernal, Utah attractions by interest. From a 'what are you in the mood for?' starting point, four interest branches — icons and fossils, getting active, taking it in at your own pace, and family-friendly — lead to seven experiences: Dinosaurs, UTV Adventure, Hiking, Fishing, Scenic Drives, Photography, and Family Activities. It links interests to things to do as a planning aid, not a rule." width="1600" height="1200" loading="lazy" decoding="async" />
+        <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">Start with what you're in the mood for, then jump to the matching experience below. A planning aid — plenty of visitors do a little of everything.</figcaption>
+      </figure>
 
       <h2>The Top Things to Do in Vernal (At a Glance)</h2>
       <p>If you're short on time and just want the shortlist, here's the region distilled. Each of these gets its own detailed section below, and our companion guide to <a href="/things-to-do/vernal-utah-attractions/">the top attractions in and around Vernal</a> ranks them with visiting logistics.</p>

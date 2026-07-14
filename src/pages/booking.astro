@@ -4,6 +4,7 @@ import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import Seo from '../components/seo/Seo.astro';
 import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
+import { SITE } from '../config/site';
 // LocalBusiness structured data preserved verbatim from the legacy head.
 const schema = `
   {
@@ -34,6 +35,7 @@ const bodyHtml = `
     <div class="page-header">
       <h1 class="page-title">Book Your Adventure</h1>
       <p class="page-subtitle">All tours use Kawasaki KRX 1000 side-by-sides with expert local guides — pick your trail when you book!</p>
+      <div style="text-align:center;margin-top:12px;"><span style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border:1px solid rgba(212,118,78,0.35);border-radius:999px;background:rgba(212,118,78,0.08);font-size:0.95rem;color:#4a4139;"><span aria-hidden="true" style="color:#e6a817;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count} Google reviews</span></span></div>
       <div class="calendar-badge">
         📅 Live Calendar &bull; Instant Booking &bull; See Available Times
       </div>

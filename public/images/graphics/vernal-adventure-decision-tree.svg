@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" width="1600" height="1200" role="img" aria-labelledby="graphic-title graphic-desc" preserveAspectRatio="xMidYMid meet" lang="en">
+  <title id="graphic-title">Find Your Dinosaur Country Adventure — A Decision Tree by Interest</title>
+  <desc id="graphic-desc">A visual decision tree that helps a visitor choose among the major experiences around Vernal, Utah by what they enjoy, starting from Vernal as a basecamp. From a "Start here — what are you in the mood for?" root, four interest branches lead to seven experiences. The "See the icons — fossils and deep time" branch leads to Dinosaurs: real fossils in the rock, petroglyphs, and the Quarry at Dinosaur National Monument. The "Get active — out on the land" branch leads to three experiences: UTV Adventure, guided Kawasaki KRX backcountry tours needing no experience; Hiking, desert canyons to High Uintas alpine trails; and Fishing, reservoirs, alpine lakes, and a blue-ribbon river. The "Take it in at your own pace" branch leads to Scenic Drives, a byway and backcountry loops seen from the car, and Photography, red rock, alpine light, and dark night skies. The "With the kids — family-friendly" branch leads to Family Activities: dinosaur tracks, easy trails, and kid-friendly tours. It is a planning aid, not a rule; many trips combine several of these, each of which has its own in-depth guide on the site. The diagram shows relationships between interests and experiences only; it is not a map and is not to scale, distance, or direction.</desc>
+
+  <!--
+    Graphic ID: G-DECISION-TREE (first asset in the Decision Graphics library; see
+    docs/M5_IMPLEMENTATION_ROADMAP.md Section 6, "Decision trees" asset class, and
+    docs/M5_EEAT_MEDIA_AUDIT.md "which spoke is right for you" selector concept).
+    Source notes: docs/graphics/source/vernal-adventure-decision-tree.README.md
+    Engineering standard: docs/SVG_ENGINEERING_STANDARD.md (authoritative for build).
+
+    Purpose: unlike the orientation maps (which answer "where"), this DECISION GRAPHIC
+    answers "which experience is right for me" by INTEREST, not geography. Layout is a
+    left-to-right tree: a canyon-red "Start here" root, four interest branch nodes, and
+    seven experience leaves, joined by burnt-orange connectors. New layout for the media
+    program, but built from the established visual language (same palette, typography,
+    node-pill treatment, accent discipline, accessibility scaffold, and color model).
+
+    Every experience and descriptor traces to documented site content: Dinosaurs =
+    src/content/dinosaur-national-monument/** (fossils, Quarry, Cub Creek petroglyphs);
+    UTV Adventure = src/content/utv/** + src/pages/booking.astro (guided KRX tours, no
+    experience needed); Hiking = src/content/hiking/** + src/pages/hiking (desert-to-alpine
+    "two worlds"); Fishing = src/content/fishing/** + src/pages/fishing (reservoirs, alpine
+    lakes, the Green River tailwater); Scenic Drives = src/content/scenic-drives/** +
+    src/pages/scenic-drives (a byway and backcountry loops); Photography =
+    src/content/hiking/photography-hikes-near-vernal + itineraries/photography-weekend-vernal
+    (red rock, alpine, dark skies); Family Activities =
+    things-to-do/fun-things-to-do-vernal-utah-kids, hiking/family-hiking-near-vernal,
+    utv/family-utv-guide-vernal, Red Fleet dinosaur trackway. No invented activities,
+    destinations, offerings, routes, or statistics.
+
+    COLOR MODEL (per docs/SVG_ENGINEERING_STANDARD.md F1-F3): concrete light-theme hex
+    values are set as presentation attributes on every element, so the graphic renders
+    correctly in ALL contexts, including librsvg/sharp rasterizers (og:image, astro:assets),
+    which do NOT resolve CSS var() custom properties. The style block below is a
+    progressive-enhancement DARK-MODE override only; rasterizers ignore it and fall back to
+    the light hex attributes.
+  -->
+
+  <style>
+    .t-title  { font-family: 'Montserrat','Segoe UI','Helvetica Neue',Arial,sans-serif; font-weight: 800; }
+    .t-sub    { font-family: 'Open Sans','Segoe UI','Helvetica Neue',Arial,sans-serif;  font-weight: 400; }
+    .t-node   { font-family: 'Montserrat','Segoe UI','Helvetica Neue',Arial,sans-serif; font-weight: 700; }
+    .t-hub    { font-family: 'Montserrat','Segoe UI','Helvetica Neue',Arial,sans-serif; font-weight: 800; }
+    .t-legend { font-family: 'Open Sans','Segoe UI','Helvetica Neue',Arial,sans-serif;  font-weight: 400; }
+    .node-text { paint-order: stroke; }
+
+    /* --- Dark-mode override (browsers only; rasterizers keep the light hex attrs) --- */
+    @media (prefers-color-scheme: dark) {
+      .canvas      { fill: #201D1A; }
+      .land        { fill: #2C2823; }
+      .ink         { fill: #F5EDE3; }
+      .ink-soft    { fill: #C9BEB2; }
+      .connector   { stroke: #E08A5F; }
+      .node-fill   { fill: #47403A; stroke: #E08A5F; }
+      .node-text   { fill: #F5EDE3; stroke: #47403A; }
+      .glyph-solid { fill: #F5EDE3; }
+      .glyph-line  { stroke: #F5EDE3; }
+      .legend-node { fill: #47403A; stroke: #E08A5F; }
+      /* Canyon-red "Start here" root keeps canyon-red + white in both themes (5.1:1) */
+    }
+    :root[data-theme="dark"] .canvas      { fill: #201D1A; }
+    :root[data-theme="dark"] .land        { fill: #2C2823; }
+    :root[data-theme="dark"] .ink         { fill: #F5EDE3; }
+    :root[data-theme="dark"] .ink-soft    { fill: #C9BEB2; }
+    :root[data-theme="dark"] .connector   { stroke: #E08A5F; }
+    :root[data-theme="dark"] .node-fill   { fill: #47403A; stroke: #E08A5F; }
+    :root[data-theme="dark"] .node-text   { fill: #F5EDE3; stroke: #47403A; }
+    :root[data-theme="dark"] .glyph-solid { fill: #F5EDE3; }
+    :root[data-theme="dark"] .glyph-line  { stroke: #F5EDE3; }
+    :root[data-theme="dark"] .legend-node { fill: #47403A; stroke: #E08A5F; }
+  </style>
+
+  <!-- ===================== LAYER 1: background ===================== -->
+  <g id="layer-1-background" aria-hidden="true">
+    <rect class="canvas" x="0" y="0" width="1600" height="1200" fill="#FAF8F5"/>
+    <rect class="land" x="40" y="40" width="1520" height="1120" rx="28" fill="#F5EDE3"/>
+  </g>
+
+  <!-- ===================== LAYER 2: title ===================== -->
+  <g id="layer-2-title">
+    <text class="t-title ink" x="800" y="96" text-anchor="middle" font-size="50" fill="#3A3A3A">Find Your Dinosaur Country Adventure</text>
+    <text class="t-sub ink-soft" x="800" y="138" text-anchor="middle" font-size="27" fill="#6E655C">Choose by what you love &#8212; follow a branch to the experience, then dive into that guide</text>
+  </g>
+
+  <!-- ===================== LAYER 3: connectors (decorative) ===================== -->
+  <g id="layer-3-connectors" class="connector" aria-hidden="true" fill="none" stroke="#D4764E" stroke-width="4" stroke-linecap="round">
+    <!-- root -> four branches -->
+    <path d="M410,591 C445,591 445,231 480,231"/>
+    <path d="M410,591 C445,591 445,471 480,471"/>
+    <path d="M410,591 C445,591 445,771 480,771"/>
+    <path d="M410,591 C445,591 445,951 480,951"/>
+    <!-- branch A -> leaf 1 -->
+    <path d="M770,231 C820,231 820,231 870,231"/>
+    <!-- branch B -> leaves 2,3,4 -->
+    <path d="M770,471 C820,471 820,351 870,351"/>
+    <path d="M770,471 C820,471 820,471 870,471"/>
+    <path d="M770,471 C820,471 820,591 870,591"/>
+    <!-- branch C -> leaves 5,6 -->
+    <path d="M770,771 C820,771 820,711 870,711"/>
+    <path d="M770,771 C820,771 820,831 870,831"/>
+    <!-- branch D -> leaf 7 -->
+    <path d="M770,951 C820,951 820,951 870,951"/>
+  </g>
+
+  <!-- ===================== LAYER 4: root (Start here) ===================== -->
+  <g id="layer-4-root" text-anchor="middle">
+    <rect x="80" y="526" width="330" height="130" rx="20" fill="#C1440E"/>
+    <text class="t-sub" x="245" y="565" font-size="18" letter-spacing="3" fill="#FFFFFF">START HERE</text>
+    <text class="t-hub" x="245" y="601" font-size="26" fill="#FFFFFF">What are you</text>
+    <text class="t-hub" x="245" y="633" font-size="26" fill="#FFFFFF">in the mood for?</text>
+  </g>
+
+  <!-- ===================== LAYER 5: branches (interest questions) ===================== -->
+  <g id="layer-5-branches" text-anchor="middle">
+    <!-- Branch A -->
+    <g>
+      <rect class="node-fill" x="480" y="189" width="290" height="84" rx="18" fill="#E8D5C4" stroke="#D4764E" stroke-width="3"/>
+      <text class="node-text t-node" x="625" y="227" font-size="24" letter-spacing="1" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">SEE THE ICONS</text>
+      <text class="node-text t-sub" x="625" y="253" font-size="19" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">fossils &amp; deep time</text>
+    </g>
+    <!-- Branch B -->
+    <g>
+      <rect class="node-fill" x="480" y="429" width="290" height="84" rx="18" fill="#E8D5C4" stroke="#D4764E" stroke-width="3"/>
+      <text class="node-text t-node" x="625" y="467" font-size="24" letter-spacing="1" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">GET ACTIVE</text>
+      <text class="node-text t-sub" x="625" y="493" font-size="19" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">out on the land</text>
+    </g>
+    <!-- Branch C -->
+    <g>
+      <rect class="node-fill" x="480" y="729" width="290" height="84" rx="18" fill="#E8D5C4" stroke="#D4764E" stroke-width="3"/>
+      <text class="node-text t-node" x="625" y="767" font-size="24" letter-spacing="1" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">TAKE IT IN</text>
+      <text class="node-text t-sub" x="625" y="793" font-size="19" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">at your own pace</text>
+    </g>
+    <!-- Branch D -->
+    <g>
+      <rect class="node-fill" x="480" y="909" width="290" height="84" rx="18" fill="#E8D5C4" stroke="#D4764E" stroke-width="3"/>
+      <text class="node-text t-node" x="625" y="947" font-size="24" letter-spacing="1" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">WITH THE KIDS</text>
+      <text class="node-text t-sub" x="625" y="973" font-size="19" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">family-friendly</text>
+    </g>
+  </g>
+
+  <!-- ===================== LAYER 6: leaves (experiences) ===================== -->
+  <g id="layer-6-leaves">
+    <!-- Leaf 1: Dinosaurs (cy 231) -->
+    <g>
+      <rect class="node-fill" x="870" y="182" width="660" height="98" rx="18" fill="#E8D5C4" stroke="#D4764E" stroke-width="3"/>
+      <g class="glyph-solid" aria-hidden="true" transform="translate(918,231)" fill="#3A3A3A">
+        <rect x="-20" y="-5" width="40" height="10" rx="5"/><circle cx="-20" cy="-9" r="8"/><circle cx="-20" cy="9" r="8"/><circle cx="20" cy="-9" r="8"/><circle cx="20" cy="9" r="8"/>
+      </g>
+      <text class="node-text t-node" x="985" y="225" font-size="27" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">Dinosaurs</text>
+      <text class="node-text t-sub" x="985" y="255" font-size="19" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">Real fossils in the rock, petroglyphs &amp; the Quarry</text>
+    </g>
+    <!-- Leaf 2: UTV Adventure (cy 351) -->
+    <g>
+      <rect class="node-fill" x="870" y="302" width="660" height="98" rx="18" fill="#E8D5C4" stroke="#D4764E" stroke-width="3"/>
+      <g aria-hidden="true" transform="translate(918,351)">
+        <path class="glyph-line" d="M-18,-4 L-8,-18 L10,-18 L20,-4" fill="none" stroke="#3A3A3A" stroke-width="3"/>
+        <rect class="glyph-solid" x="-22" y="-4" width="44" height="11" rx="4" fill="#3A3A3A"/>
+        <circle class="glyph-solid" cx="-13" cy="12" r="7" fill="#3A3A3A"/><circle class="glyph-solid" cx="13" cy="12" r="7" fill="#3A3A3A"/>
+      </g>
+      <text class="node-text t-node" x="985" y="345" font-size="27" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">UTV Adventure</text>
+      <text class="node-text t-sub" x="985" y="375" font-size="19" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">Guided KRX backcountry tours, no experience needed</text>
+    </g>
+    <!-- Leaf 3: Hiking (cy 471) -->
+    <g>
+      <rect class="node-fill" x="870" y="422" width="660" height="98" rx="18" fill="#E8D5C4" stroke="#D4764E" stroke-width="3"/>
+      <g class="glyph-solid" aria-hidden="true" transform="translate(918,471)" fill="#3A3A3A">
+        <path d="M-22,16 L-6,-16 L8,16 Z"/><path d="M2,16 L18,-6 L28,16 Z"/>
+      </g>
+      <text class="node-text t-node" x="985" y="465" font-size="27" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">Hiking</text>
+      <text class="node-text t-sub" x="985" y="495" font-size="19" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">Desert canyons to High Uintas alpine trails</text>
+    </g>
+    <!-- Leaf 4: Fishing (cy 591) -->
+    <g>
+      <rect class="node-fill" x="870" y="542" width="660" height="98" rx="18" fill="#E8D5C4" stroke="#D4764E" stroke-width="3"/>
+      <g class="glyph-solid" aria-hidden="true" transform="translate(918,591)" fill="#3A3A3A">
+        <ellipse cx="-4" cy="0" rx="20" ry="11"/><path d="M14,0 L30,-11 L30,11 Z"/>
+        <circle cx="-12" cy="-3" r="2.4" fill="#E8D5C4"/>
+      </g>
+      <text class="node-text t-node" x="985" y="585" font-size="27" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">Fishing</text>
+      <text class="node-text t-sub" x="985" y="615" font-size="19" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">Reservoirs, alpine lakes &amp; a blue-ribbon river</text>
+    </g>
+    <!-- Leaf 5: Scenic Drives (cy 711) -->
+    <g>
+      <rect class="node-fill" x="870" y="662" width="660" height="98" rx="18" fill="#E8D5C4" stroke="#D4764E" stroke-width="3"/>
+      <g aria-hidden="true" transform="translate(918,711)">
+        <line class="glyph-line" x1="-22" y1="10" x2="12" y2="-8" stroke="#3A3A3A" stroke-width="5" stroke-linecap="round"/>
+        <path class="glyph-solid" d="M6,-18 L26,-9 L10,3 Z" fill="#3A3A3A"/>
+      </g>
+      <text class="node-text t-node" x="985" y="705" font-size="27" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">Scenic Drives</text>
+      <text class="node-text t-sub" x="985" y="735" font-size="19" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">A byway &amp; backcountry loops, seen from the car</text>
+    </g>
+    <!-- Leaf 6: Photography (cy 831) -->
+    <g>
+      <rect class="node-fill" x="870" y="782" width="660" height="98" rx="18" fill="#E8D5C4" stroke="#D4764E" stroke-width="3"/>
+      <g aria-hidden="true" transform="translate(918,831)">
+        <rect class="glyph-line" x="-22" y="-11" width="44" height="26" rx="4" fill="none" stroke="#3A3A3A" stroke-width="4"/>
+        <rect class="glyph-solid" x="-9" y="-18" width="17" height="9" rx="2" fill="#3A3A3A"/>
+        <circle class="glyph-line" cx="0" cy="2" r="8" fill="none" stroke="#3A3A3A" stroke-width="4"/>
+      </g>
+      <text class="node-text t-node" x="985" y="825" font-size="27" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">Photography</text>
+      <text class="node-text t-sub" x="985" y="855" font-size="19" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">Red rock, alpine light &amp; dark night skies</text>
+    </g>
+    <!-- Leaf 7: Family Activities (cy 951) -->
+    <g>
+      <rect class="node-fill" x="870" y="902" width="660" height="98" rx="18" fill="#E8D5C4" stroke="#D4764E" stroke-width="3"/>
+      <g class="glyph-solid" aria-hidden="true" transform="translate(918,951)" fill="#3A3A3A">
+        <circle cx="-11" cy="-11" r="7"/><path d="M-19,-1 q8,-6 16,0 l0,20 l-16,0 Z"/>
+        <circle cx="10" cy="-5" r="5"/><path d="M4,3 q6,-5 12,0 l0,15 l-12,0 Z"/>
+      </g>
+      <text class="node-text t-node" x="985" y="945" font-size="27" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">Family Activities</text>
+      <text class="node-text t-sub" x="985" y="975" font-size="19" fill="#3A3A3A" stroke="#E8D5C4" stroke-width="4">Dinosaur tracks, easy trails &amp; kid-friendly tours</text>
+    </g>
+  </g>
+
+  <!-- ===================== LAYER 7: legend ===================== -->
+  <g id="layer-7-legend" class="t-legend" font-size="24">
+    <rect x="150" y="1048" width="32" height="32" rx="8" fill="#C1440E"/>
+    <text class="ink" x="194" y="1072" fill="#3A3A3A">Start here</text>
+    <rect class="legend-node" x="470" y="1048" width="32" height="32" rx="8" fill="#E8D5C4" stroke="#D4764E" stroke-width="3"/>
+    <text class="ink" x="514" y="1072" fill="#3A3A3A">An experience &#8212; each has its own in-depth guide</text>
+    <text class="t-legend ink-soft" x="800" y="1128" text-anchor="middle" font-size="22" fill="#6E655C">A planning aid, not a rule &#8212; many trips mix several of these, all from a Vernal base. It shows interests and experiences, not a map.</text>
+  </g>
+</svg>

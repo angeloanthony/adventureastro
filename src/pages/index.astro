@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import Seo from '../components/seo/Seo.astro';
+import { SITE } from '../config/site';
 // TouristInformationCenter + OfferCatalog structured data preserved verbatim
 // from the legacy head (no pricing fields — page pricing lives in the body).
 const schema = `
@@ -147,6 +148,7 @@ const bodyHtml = `
         Guided UTV Tours in Vernal, Utah
       </h1>
       <p class="hero-subtitle">Experience the thrill of Utah's backcountry with guided Kawasaki KRX 1000 Side-by-Side adventures</p>
+      <div style="margin-top:14px;"><span style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border:1px solid rgba(255,255,255,0.5);border-radius:999px;background:rgba(0,0,0,0.35);font-size:0.95rem;color:#fff;"><span aria-hidden="true" style="color:#f5c451;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count} Google reviews</span></span></div>
     </div>
 
     <div class="scroll-indicator"><span></span></div>

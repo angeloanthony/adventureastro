@@ -13,6 +13,7 @@
 // destination guide, the Fishing and Scenic Drives hubs; future /camping/
 // spokes link back here.
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import TrustBadge from '../../components/content/TrustBadge.astro';
 import Header from '../../components/layout/Header.astro';
 import Footer from '../../components/layout/Footer.astro';
 import Seo from '../../components/seo/Seo.astro';
@@ -69,6 +70,7 @@ const schema = `{
     <header class="article-header">
       <h1 class="article-title">The Ultimate Guide to Camping in Dinosaur Country</h1>
       <p class="article-meta">Updated July 2026 · Adventure Tours Vernal</p>
+      <TrustBadge align="left" />
     </header>
 
     <div class="article-body">

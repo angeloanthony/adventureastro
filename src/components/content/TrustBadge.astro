@@ -1,0 +1,40 @@
+---
+// TrustBadge.astro — visible social-proof chip (Phase 2A.1, Quick Win A).
+//
+// Renders the review rating that already lives in SITE.rating — the SAME data
+// SchemaTour's aggregateRating reads — so the number is never duplicated or
+// invented. Placed near booking CTAs to reinforce visitor confidence.
+//
+// Styled for a light page background (article bodies, hero cards). Scoped
+// styles only — no change to the global CSS architecture.
+import { SITE } from '../../config/site';
+
+interface Props {
+  align?: 'left' | 'center';
+}
+const { align = 'center' } = Astro.props;
+const { value, count } = SITE.rating;
+---
+<p class={`trust-badge trust-badge-${align}`} aria-label={`Rated ${value} out of 5 from ${count} Google reviews`}>
+  <span class="trust-badge-stars" aria-hidden="true">★★★★★</span>
+  <span class="trust-badge-text"><strong>{value}</strong> &middot; {count} Google reviews</span>
+</p>
+
+<style>
+  .trust-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 18px 0;
+    padding: 7px 15px;
+    border: 1px solid rgba(212, 118, 78, 0.35);
+    border-radius: 999px;
+    background: rgba(212, 118, 78, 0.08);
+    font-size: 0.95rem;
+    line-height: 1.2;
+    color: #4a4139;
+  }
+  .trust-badge-center { display: flex; width: fit-content; margin-left: auto; margin-right: auto; }
+  .trust-badge-stars { color: #e6a817; letter-spacing: 1px; font-size: 0.95rem; }
+  .trust-badge-text { white-space: nowrap; }
+</style>

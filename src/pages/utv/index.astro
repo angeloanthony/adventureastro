@@ -1,10 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../config/site';
 import Header from '../../components/layout/Header.astro';
 import Footer from '../../components/layout/Footer.astro';
 import Seo from '../../components/seo/Seo.astro';
 import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
 import HubIndex from '../../components/content/HubIndex.astro';
+import TourDecisionGuide from '../../components/content/TourDecisionGuide.astro';
 // TouristAttraction + provider LocalBusiness preserved verbatim from the legacy head.
 const schema = `
   {
@@ -50,6 +52,7 @@ const bodyHtml = `
       </nav>
       <div class="status-badge" style="animation:none;">Trail Guide</div>
       <h1 class="trail-hero-title">Our Trails</h1>
+      <div style="margin-top:14px;"><span style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border:1px solid rgba(255,255,255,0.5);border-radius:999px;background:rgba(0,0,0,0.35);font-size:0.95rem;color:#fff;"><span aria-hidden="true" style="color:#f5c451;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count} Google reviews</span></span></div>
       <div class="trail-hero-meta">
         <div class="trail-hero-meta-item"><span>&#128205;</span><span>Vernal, Utah</span></div>
         <div class="trail-hero-meta-item"><span>&#128106;</span><span>All Ages Welcome</span></div>
@@ -439,6 +442,7 @@ const bodyHtml = `
   <Header slot="body" active="trails" />
   <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Trails' }]} />
   <Fragment slot="body" set:html={bodyHtml} />
+  <TourDecisionGuide slot="body" />
   <HubIndex slot="body" collection="utv" heading="All UTV Trail Guides" />
   <Footer
     slot="body"
