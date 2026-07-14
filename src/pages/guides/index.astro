@@ -7,17 +7,18 @@ import Seo from '../../components/seo/Seo.astro';
 import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
 import HubIndex from '../../components/content/HubIndex.astro';
 // New pillar copy (Phase 3, guides hub activation; updated 2026-07-11 for
-// the 5th guide) — introduces the five guides (destination overview,
-// weather, what to wear, what to bring, Moab alternative) using only facts
-// already established elsewhere on the site (SITE config, the guides
-// themselves). No invented business facts.
+// the 5th guide) — introduces the nine guides (destination overview,
+// weather, what to wear, what to bring, Moab alternative, and the four
+// destination guides: Flaming Gorge, Red Fleet, Steinaker, Ashley National
+// Forest) using only facts already established elsewhere on the site (SITE
+// config, the guides themselves). No invented business facts.
 const schema = `{
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
         "headline": "Vernal, Utah Travel Guides — Plan Your UTV Trip",
-        "description": "Trip-planning guides for Vernal, Utah: a destination overview, what to wear, what to bring, seasonal weather, and how Vernal compares to Moab for guided UTV tours.",
+        "description": "Trip-planning guides for Vernal, Utah: a destination overview, what to wear, what to bring, seasonal weather, how Vernal compares to Moab, and in-depth guides to Flaming Gorge, Red Fleet State Park, Steinaker State Park, and Ashley National Forest.",
         "author": {"@type": "Organization", "name": "Adventure Tours Vernal"},
         "publisher": {"@type": "Organization", "name": "Adventure Tours Vernal", "logo": {"@type": "ImageObject", "url": "https://adventuretoursvernal.com/images/logo.webp"}},
         "datePublished": "2026-07-10",
@@ -27,7 +28,7 @@ const schema = `{
       {
         "@type": "FAQPage",
         "mainEntity": [
-          {"@type": "Question", "name": "What guides does Adventure Tours Vernal offer for trip planning?", "acceptedAnswer": {"@type": "Answer", "text": "Adventure Tours Vernal publishes five trip-planning guides: a complete destination overview of Vernal, a seasonal weather guide, a what-to-wear guide, a what-to-bring packing checklist, and a comparison guide for visitors coming from Moab. Each covers what you need to know before a guided Kawasaki KRX 1000 UTV tour near Vernal."}},
+          {"@type": "Question", "name": "What guides does Adventure Tours Vernal offer for trip planning?", "acceptedAnswer": {"@type": "Answer", "text": "Adventure Tours Vernal publishes nine trip-planning guides: a complete destination overview of Vernal, a seasonal weather guide, a what-to-wear guide, a what-to-bring packing checklist, a comparison guide for visitors coming from Moab, and in-depth guides to four nearby destinations — Flaming Gorge, Red Fleet State Park, Steinaker State Park, and Ashley National Forest. Each covers what you need to know before a guided Kawasaki KRX 1000 UTV tour near Vernal."}},
           {"@type": "Question", "name": "Do I need to read these guides before booking a UTV tour?", "acceptedAnswer": {"@type": "Answer", "text": "No, but they help you prepare. Most guests only need closed-toe shoes and a valid driver's license — Adventure Tours Vernal provides helmets and safety gear. The guides cover clothing, packing, seasonal weather, destination orientation, and how a Vernal tour compares to Moab."}}
         ]
       }
@@ -72,6 +73,9 @@ const schema = `{
 
       <h2>Comparing Vernal to Moab</h2>
       <p>If you're weighing Vernal against a Moab UTV tour, the <a href="/guides/moab-utv-tours/">Moab UTV Tours Alternative</a> guide lays out the honest comparison — trail crowds, summer temperatures, pricing, and the trails and sights (like Moonshine Arch and Dinosaur National Monument) that Vernal has and Moab doesn't.</p>
+
+      <h2>Explore the Region's Destinations</h2>
+      <p>Ready to go deeper on where to spend your days? Four in-depth destination guides cover the country that radiates from Vernal: the <a href="/guides/ultimate-guide-to-flaming-gorge/">Ultimate Guide to Flaming Gorge</a>, the <a href="/guides/ultimate-guide-to-red-fleet-state-park/">Ultimate Guide to Red Fleet State Park</a>, the <a href="/guides/ultimate-guide-to-steinaker-state-park/">Ultimate Guide to Steinaker State Park</a>, and the <a href="/guides/ultimate-guide-to-ashley-national-forest/">Ultimate Guide to Ashley National Forest</a> — each with its own scenery, water, and trails within easy reach of town.</p>
 
       <div class="article-tip">
         <strong>Not sure where to start?</strong> Call Dave or Trudy at <a href="tel:435-219-9447">(435) 219-9447</a> — they can walk you through what to expect based on your travel dates and group size. Or, when you're ready, <a href="/booking/">check dates and book online</a>.
