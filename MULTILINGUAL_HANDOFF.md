@@ -126,3 +126,29 @@ not sufficient).
 
 *Frozen reference. If reality contradicts this doc, trust the repo and update this doc —
 never the other way around.*
+
+---
+
+## Appendix — Infrastructure corrections during the localized-MDX phase (P4)
+
+Two one-time, owner-approved corrections to the P4A localized-MDX infrastructure. Both are
+**completions of P4A's existence-aware design, not new architecture** — logged here so they
+stay traceable and do NOT become a reason to reopen architecture in future batches.
+
+1. **`content.config.ts` — `generateId` on the hub/itinerary content loader (found in P4B).**
+   Astro's default glob `generateId` runs each id segment through github-slugger, which strips
+   the dot in `article.es.mdx` (id became `articlees`), defeating the `.es`/`.it`/`.pt`
+   filename-suffix convention. Fix: `generateId: ({ entry }) => entry.replace(/\.(mdx|md)$/i, '')`
+   preserves the suffix. English ids contain no dots → English output byte-identical (proven by
+   pristine-build hash diff).
+
+2. **`RelatedArticles.astro` — existence-aware tier-2 guard (found in P4C).**
+   A manual `related` ref that doesn't resolve threw the build. Correct for the English master;
+   for a localized page it blocked "one folder at a time" whenever a spoke's `related` points at
+   a not-yet-translated hub. Fix: for non-default locales, skip (`continue`) an unresolved ref
+   instead of throwing; English still throws. Lets `related` stay byte-identical in every
+   localized file; cross-hub cards appear automatically as those hubs are translated.
+
+Rule going forward: fix P4A existence-awareness gaps as they surface; otherwise the
+architecture stays frozen. The planned `ES_SLUGS` → per-locale registry generalization is
+deferred to the start of the Italian phase (do it before any Italian content).

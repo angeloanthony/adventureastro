@@ -76,7 +76,16 @@ for (const ref of related) {
   const lookupId = lang === DEFAULT_LOCALE ? id : `${id}.${lang}`;
   const entry = (await getEntry(hub, lookupId)) as unknown as Spoke | undefined;
   if (!entry) {
-    throw new Error(`RelatedArticles: related ref "${ref}" does not resolve for locale "${lang}" (page ${collection}/${currentId})`);
+    // English master: an unresolved ref is a real defect — fail the build so the
+    // linking network can't silently decay. Localized pages: the ref names a base
+    // id that simply isn't translated in THIS locale yet, so skip it — the same
+    // existence-awareness as hreflang/switcher/HubIndex. The card reappears
+    // automatically once that hub's translation lands, so `related` can stay
+    // byte-identical to the English master in every localized file (P4C).
+    if (lang === DEFAULT_LOCALE) {
+      throw new Error(`RelatedArticles: related ref "${ref}" does not resolve for locale "${lang}" (page ${collection}/${currentId})`);
+    }
+    continue;
   }
   if (!entry.data.draft) take(hub, entry);
 }

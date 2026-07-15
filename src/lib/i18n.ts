@@ -76,6 +76,15 @@ const ES_SLUGS = new Set([
   'utv/backcountry-tours-vernal-utah', 'utv/beginners-guide-to-utv-tours-vernal',
   'utv/best-utv-trails-vernal', 'utv/family-utv-guide-vernal', 'utv/group-utv-tours-vernal',
   'utv/private-utv-tours-vernal', 'utv/side-by-side-rentals-vernal-utah',
+  // P4C — Spanish hiking hub batch (16 spokes).
+  'hiking/alpine-lakes-hiking-high-uintas', 'hiking/beginner-hiking-guide-near-vernal',
+  'hiking/best-hikes-in-dinosaur-national-monument', 'hiking/bird-watching-near-vernal',
+  'hiking/dog-friendly-hiking-near-vernal', 'hiking/fall-hiking-near-vernal',
+  'hiking/family-hiking-near-vernal', 'hiking/high-uintas-backpacking-guide',
+  'hiking/high-uintas-day-hikes', 'hiking/kings-peak-hiking-guide',
+  'hiking/photography-hikes-near-vernal', 'hiking/spring-hiking-near-vernal',
+  'hiking/summer-hiking-near-vernal', 'hiking/wildflower-hiking-near-vernal',
+  'hiking/wildlife-hiking-guide-near-vernal', 'hiking/winter-hiking-near-vernal',
 ]);
 
 /**
