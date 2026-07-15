@@ -59,16 +59,57 @@ export function getLangFromUrl(url: URL): Locale {
   return (hit?.code ?? DEFAULT_LOCALE) as Locale;
 }
 
+// Slugs with a committed Spanish page-content translation (P3A commercial
+// batch + P3B Destination Authority). Normalized the same way
+// BaseLayout/LanguageSwitcher derive slugs ('' = home, no leading/trailing
+// slash otherwise). Add to this set — one line per slug — as each future
+// page/locale is translated; nothing else in the runtime changes
+// (existence check only, per the P1 design note this replaces).
+const ES_SLUGS = new Set([
+  '', 'booking', 'about', 'faq', 'privacy-policy', 'cancellation-policy', 'safety-guidelines', 'utv', // P3A
+  'dinosaur-national-monument', // P3B
+  'hiking', 'fishing', 'camping', 'scenic-drives', 'things-to-do', 'guides', 'itineraries', // P3C
+  'atv-trails-vernal-utah', 'jeep-trails-vernal-utah', 'from/salt-lake-city', 'things-to-do/best-restaurants-vernal-utah', // P3D
+  // P4B — first localized MDX spoke batch (UTV hub). Compound slug = `hub/base-id`
+  // (the translated file is `utv/<base-id>.es.mdx`); lights up hreflang + the
+  // language switcher on both the English and Spanish spoke.
+  'utv/backcountry-tours-vernal-utah', 'utv/beginners-guide-to-utv-tours-vernal',
+  'utv/best-utv-trails-vernal', 'utv/family-utv-guide-vernal', 'utv/group-utv-tours-vernal',
+  'utv/private-utv-tours-vernal', 'utv/side-by-side-rentals-vernal-utah',
+]);
+
 /**
- * Which locales actually have content for a given page.
- *
- * P1: only English has content, so this always returns ['en'] — which is
- * exactly what makes the switcher and hreflang emit nothing today. In P2 this
- * becomes an existence check against committed localized content for `slug`.
- * Signature already accepts the slug so callers never change when that lands.
+ * Which locales actually have content for a given page. Existence check
+ * against committed localized content for `slug` — currently the P3A
+ * Spanish commercial batch; every other slug still resolves to English
+ * only, which is what keeps the switcher and hreflang silent there.
  */
-export function getAvailableLocales(_slug?: string): Locale[] {
-  return LOCALES.filter((l) => l.code === DEFAULT_LOCALE).map((l) => l.code) as Locale[];
+export function getAvailableLocales(slug: string = ''): Locale[] {
+  const clean = slug.replace(/^\/+|\/+$/g, '');
+  const codes: Locale[] = [DEFAULT_LOCALE as Locale];
+  if (ES_SLUGS.has(clean)) codes.push('es');
+  return LOCALES.filter((l) => codes.includes(l.code)).map((l) => l.code) as Locale[];
+}
+
+/**
+ * Split a content-collection entry id into its locale + base id. Translated
+ * spoke/itinerary MDX uses a filename-suffix convention — `article.es.mdx`
+ * loads as id `article.es`, `article.mdx` as id `article`. Only a trailing
+ * `.`-segment that EXACTLY matches a registered non-default locale code counts;
+ * kebab slugs never contain dots, so an English id is always returned as-is
+ * (`{ locale: 'en', baseId: <id> }`). This is the ONE place the suffix
+ * convention is decoded — routes, sitemaps, and the linking network all read
+ * it so a translated file is picked up with no per-file wiring (P4A infra).
+ */
+export function parseEntryLocale(id: string): { locale: Locale; baseId: string } {
+  const dot = id.lastIndexOf('.');
+  if (dot > 0) {
+    const code = id.slice(dot + 1);
+    if (LOCALES.some((l) => l.code === code && l.code !== DEFAULT_LOCALE)) {
+      return { locale: code as Locale, baseId: id.slice(0, dot) };
+    }
+  }
+  return { locale: DEFAULT_LOCALE as Locale, baseId: id };
 }
 
 /**
@@ -92,4 +133,24 @@ export function switchLocalePath(currentPath: string, target: string): string {
     segs.shift();
   }
   return localizedPath(segs.join('/'), target);
+}
+
+// --- Locale formatting utilities (P2B framework) ---
+
+/** BCP-47 tag for Intl APIs — reuses the region-qualified hreflang value
+ *  ('en-US', 'es-US', 'it-IT', 'pt-PT'). One source, no second table. */
+export function getIntlLocale(code: string): string {
+  return getLocaleMeta(code).hreflang;
+}
+
+/** JSON-LD `inLanguage` value for a locale (same BCP-47 tag). */
+export function getInLanguage(code: string = DEFAULT_LOCALE): string {
+  return getIntlLocale(code);
+}
+
+/** Long-form date in the active locale. For 'en' this is byte-identical to the
+ *  previous hardcoded toLocaleDateString('en-US', …) — the P2B fix that stops
+ *  English month names leaking onto translated pages (extraction-plan defect). */
+export function formatDate(date: Date, code: string = DEFAULT_LOCALE): string {
+  return date.toLocaleDateString(getIntlLocale(code), { year: 'numeric', month: 'long', day: 'numeric' });
 }

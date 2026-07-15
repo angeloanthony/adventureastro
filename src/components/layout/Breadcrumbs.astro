@@ -7,6 +7,8 @@
 // trail, so they gain the structured data without a duplicate visible trail.
 import { SITE } from '../../config/site';
 import { absoluteUrl } from '../../lib/urls';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
 
 // Crumb hrefs should be ROOT-RELATIVE ('/utv/') so the visible trail
 // works from nested routes; absoluteUrl() normalizes either form for the
@@ -14,12 +16,13 @@ import { absoluteUrl } from '../../lib/urls';
 interface Crumb { label: string; href?: string }
 interface Props { items: Crumb[]; schemaOnly?: boolean }
 const { items, schemaOnly = false } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+    { '@type': 'ListItem', position: 1, name: t('nav.home', lang), item: `${SITE.url}/` },
     ...items.map((crumb, i) => ({
       '@type': 'ListItem',
       position: i + 2,
@@ -30,8 +33,8 @@ const jsonLd = {
 };
 ---
 {!schemaOnly && (
-  <nav class="breadcrumbs" aria-label="Breadcrumb">
-    <a href="/">Home</a>
+  <nav class="breadcrumbs" aria-label={t('a11y.breadcrumb', lang)}>
+    <a href="/">{t('nav.home', lang)}</a>
     {items.map((crumb) => (
       <Fragment>
         <span class="sep">&rsaquo;</span>

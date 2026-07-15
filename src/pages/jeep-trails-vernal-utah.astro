@@ -4,71 +4,12 @@ import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import Seo from '../components/seo/Seo.astro';
 import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
+import { bodyHtml } from '../page-content/jeep-trails';
+import { getLangFromUrl } from '../lib/i18n';
+import { t } from '../lib/ui';
+const lang = getLangFromUrl(Astro.url);
 // Article + FAQ structured data preserved verbatim from the legacy head.
 const schema = `{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Jeep Trails Near Vernal, Utah","description":"Guide to Jeep and off-road trails near Vernal, Utah, including backcountry routes and guided UTV tour options.","author":{"@type":"Organization","name":"Adventure Tours Vernal"},"publisher":{"@type":"Organization","name":"Adventure Tours Vernal","logo":{"@type":"ImageObject","url":"https://adventuretoursvernal.com/images/logo.webp"}},"datePublished":"2026-04-08","dateModified":"2026-04-08","mainEntityOfPage":"https://adventuretoursvernal.com/jeep-trails-vernal-utah/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are there Jeep trails near Vernal, Utah?","acceptedAnswer":{"@type":"Answer","text":"Yes. The BLM land and backcountry surrounding Vernal has extensive off-road routes suitable for Jeeps and 4x4 vehicles, plus five guided UTV trail systems accessible through Adventure Tours Vernal."}},{"@type":"Question","name":"Can I do a guided off-road tour instead of driving my own Jeep?","acceptedAnswer":{"@type":"Answer","text":"Yes. Adventure Tours Vernal offers guided Kawasaki KRX 1000 UTV tours across five trail systems with expert guides, so you don't need your own vehicle. $349 per machine for 3 hours."}},{"@type":"Question","name":"How does Vernal compare to Moab for off-roading?","acceptedAnswer":{"@type":"Answer","text":"Vernal offers similar canyon and desert terrain with significantly fewer crowds. The trails are less commercialized, the backcountry is more remote, and guided tour pricing is competitive with or better than Moab operators."}}]}]}`;
-const bodyHtml = `
-
-
-  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
-    Jeep trails and off-road routes near Vernal, Utah include BLM backcountry roads and five guided UTV trail systems operated by Adventure Tours Vernal using Kawasaki KRX 1000 side-by-sides. Trails feature canyons, desert washes, petroglyphs, and historic Wild West routes. Vernal offers similar terrain to Moab with far fewer crowds. $349/machine for guided 3-hour tours. Call (435) 219-9447.
-  </p>
-
-  <main class="article-page">
-    <header class="article-header">
-      <div class="article-breadcrumb"><a href="/">Home</a><span class="sep">›</span><a href="/utv/">Trails</a><span class="sep">›</span><span>Jeep Trails</span></div>
-      <h1 class="article-title">Jeep Trails Near Vernal, Utah</h1>
-      <p class="article-meta">Updated April 2026 · Adventure Tours Vernal</p>
-    </header>
-
-    <div class="article-body">
-      <div class="article-summary-box">
-        Vernal sits in the middle of some of Utah's best off-road terrain — the same canyon country, desert washes, and backcountry routes that make Moab famous, minus the crowds and the premium pricing. Whether you're bringing your own Jeep or want to experience the trails in a guided UTV, here's what's out there.
-      </div>
-
-      <h2>Off-Road Terrain Around Vernal</h2>
-      <p>The Uintah Basin is ringed by BLM land with a network of unpaved roads and trails ranging from graded gravel to technical rocky routes. The terrain south and east of town — toward Dinosaur National Monument and the Book Cliffs — is where the most dramatic canyon and mesa country starts. Red rock formations, deep washes, slickrock shelves, and remote mesa-top roads give Jeep and 4x4 drivers plenty of variety.</p>
-      <p>North of town, the roads climbing into Ashley National Forest and the Uinta Mountains offer a different character — forest service roads through aspen and pine with mountain views and seasonal creek crossings. The Diamond Mountain area is popular for Jeep camping and overlanding.</p>
-
-      <h2>Guided UTV Tours — No Jeep Required</h2>
-      <p>If you don't have a 4x4 or want access to trails that require local knowledge to navigate, Adventure Tours Vernal runs guided Kawasaki KRX 1000 tours through five trail systems that cover the best of the Vernal backcountry. The KRX 1000 handles terrain that would challenge most stock Jeeps — sandy washes, rocky climbs, and narrow canyon routes — and Dave and Trudy Wilson know every turn, every petroglyph panel, and every overlook.</p>
-      <p>Many Jeep enthusiasts book a guided UTV tour as a scouting mission — they ride with Dave first, learn the area, then come back with their own rigs and explore further. It's a smart approach for a region where the best trails aren't marked and GPS coverage is spotty.</p>
-
-      <h2>Vernal vs. Moab for Off-Roading</h2>
-      <p>Moab has the name recognition, but Vernal delivers the same caliber of terrain at a fraction of the cost and congestion. You won't wait in line for trails here. You won't fight for a campsite. And the landscape — canyon walls, natural arches, petroglyphs, and outlaw history — is just as compelling. The main trade-off is fewer services; Vernal doesn't have the same rental infrastructure as Moab, which is why guided tours fill that gap so effectively.</p>
-
-      <h2>Planning Your Off-Road Trip</h2>
-      <p>If you're bringing your own Jeep, the BLM Vernal Field Office can provide current maps and route conditions. Cell service drops out quickly once you leave pavement, so download offline maps before heading out. Fuel up in town — there's nothing once you're in the backcountry. Spring and fall are the best seasons; summer is rideable but hot, and some routes close during winter snow and mud season.</p>
-
-      <div class="article-tip">
-        <strong>Jeep Owner Tip:</strong> Book a guided UTV tour on day one to scout the area. Dave can point you toward the best Jeep-accessible routes based on your rig's capability and what you want to see. It's the fastest way to learn a new off-road area.
-      </div>
-
-      <div class="article-faq">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faq-item"><h3>Are there Jeep trails near Vernal?</h3><p>Yes — extensive BLM backcountry routes plus five guided UTV trail systems. Terrain ranges from graded gravel to technical canyon and mesa routes.</p></div>
-        <div class="faq-item"><h3>Can I do a guided tour instead of driving my Jeep?</h3><p>Yes. Adventure Tours Vernal provides KRX 1000 machines, guides, and gear for $349/machine for 3 hours across five trail systems.</p></div>
-        <div class="faq-item"><h3>How does Vernal compare to Moab?</h3><p>Similar terrain quality, significantly fewer crowds, and competitive pricing. Less rental infrastructure, which is why guided tours are the way to go.</p></div>
-      </div>
-
-      <div class="article-cta">
-        <h3>Scout the Trails with a Guide</h3>
-        <p>Guided KRX 1000 tours · $349/machine · 5 trail systems · Local expertise</p>
-        <a href="/booking/" class="cta-btn">Book a Tour</a>
-        <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
-      </div>
-    </div>
-
-    <div class="related-articles">
-      <h3>More Off-Road Guides</h3>
-      <div class="related-grid">
-        <a href="/atv-trails-vernal-utah/" class="related-card"><h4>ATV Trails Near Vernal</h4><p>All five UTV trail systems with terrain breakdowns.</p></a>
-        <a href="/guides/moab-utv-tours/" class="related-card"><h4>Vernal: The Moab Alternative</h4><p>Why Vernal beats Moab for off-road adventure.</p></a>
-        <a href="/utv/backcountry-tours-vernal-utah/" class="related-card"><h4>Backcountry Tours</h4><p>Deep-backcountry guided UTV experiences.</p></a>
-        <a href="/utv/best-utv-trails-vernal/" class="related-card"><h4>Best UTV Trails</h4><p>Trail-by-trail guide for every skill level.</p></a>
-      </div>
-    </div>
-  </main>
-`;
 ---
 <BaseLayout>
   <Fragment slot="head">
@@ -83,7 +24,7 @@ const bodyHtml = `
     <script type="application/ld+json" set:html={schema} />
   </Fragment>
   <Header slot="body" />
-  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Trails', href: '/utv/' }, { label: 'Jeep Trails' }]} />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.trails', lang), href: '/utv/' }, { label: 'Jeep Trails' }]} />
   <Fragment slot="body" set:html={bodyHtml} />
   <Footer slot="body" variant="compact" />
 </BaseLayout>

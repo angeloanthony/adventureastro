@@ -2,11 +2,15 @@
 // KeyTakeaways.astro — 3-5 tight, self-contained statements near the top
 // of pillars/guides/itineraries (Build Guide §7.5 "answer-ready structure").
 // Each statement must stand alone if an AI system quotes only this block.
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+
 interface Props { points: string[] }
 const { points } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
 ---
-<div class="key-takeaways" role="complementary" aria-label="Key takeaways">
-  <h2 class="key-takeaways-heading">Key Takeaways</h2>
+<div class="key-takeaways" role="complementary" aria-label={t('a11y.keyTakeaways', lang)}>
+  <h2 class="key-takeaways-heading">{t('section.keyTakeaways', lang)}</h2>
   <ul>
     {points.map((point) => <li>{point}</li>)}
   </ul>

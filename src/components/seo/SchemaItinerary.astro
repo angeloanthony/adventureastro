@@ -4,6 +4,7 @@
 import { SITE } from '../../config/site';
 import { absoluteUrl } from '../../lib/urls';
 import { personJsonLd, type AuthorKey } from '../../lib/authors';
+import { getLangFromUrl, getInLanguage } from '../../lib/i18n';
 
 interface Props {
   headline: string;
@@ -16,12 +17,14 @@ interface Props {
   days: { label: string; blocks: { activity: string; link?: string }[] }[];
 }
 const { headline, description, path, image, author, publishDate, updatedDate, days } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline,
   description,
+  inLanguage: getInLanguage(lang),
   image: absoluteUrl(image),
   url: absoluteUrl(path),
   datePublished: publishDate.toISOString(),

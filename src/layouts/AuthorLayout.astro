@@ -26,6 +26,9 @@ import { HUB_SLUGS, HUBS, spokeHref, type HubSlug } from '../lib/hubs';
 import type { SpokeData } from '../content.config';
 import { SITE } from '../config/site';
 import { absoluteUrl } from '../lib/urls';
+import { getLangFromUrl, parseEntryLocale } from '../lib/i18n';
+import { t } from '../lib/ui';
+import { bodyHtml as aboutBusinessHtml } from '../page-content/author-about-business';
 
 interface Props {
   author: AuthorKey;
@@ -33,6 +36,7 @@ interface Props {
   description: string;
 }
 const { author, title, description } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
 const info = AUTHORS[author];
 const hasPhoto = photoExists(author);
 const initials = info.name.split(' ').map((w) => w[0]).join('');
@@ -44,7 +48,7 @@ type Spoke = { id: string; data: SpokeData };
 const articles: { title: string; description: string; href: string }[] = [];
 for (const hub of HUB_SLUGS) {
   const entries = ((await getCollection(hub)) as unknown as Spoke[])
-    .filter((e) => !e.data.draft && e.data.author === author);
+    .filter((e) => !e.data.draft && e.data.author === author && parseEntryLocale(e.id).locale === lang);
   for (const e of entries) {
     articles.push({ title: e.data.title, description: e.data.description, href: spokeHref(hub as HubSlug, e.id) });
   }
@@ -81,7 +85,7 @@ const profileJsonLd = {
   </Fragment>
   <Fragment slot="body">
     <Header active="about" />
-    <Breadcrumbs items={[{ label: 'About', href: '/about/' }, { label: info.name }]} />
+    <Breadcrumbs items={[{ label: t('nav.about', lang), href: '/about/' }, { label: info.name }]} />
     <main class="author-page">
       <article class="author-profile">
         <header class="author-head">
@@ -100,32 +104,26 @@ const profileJsonLd = {
 
         {info.expertise.length > 0 && (
           <section class="author-expertise">
-            <h2>Areas of Expertise</h2>
+            <h2>{t('author.areasOfExpertise', lang)}</h2>
             <ul>{info.expertise.map((e) => <li>{e}</li>)}</ul>
           </section>
         )}
 
         {info.credentials.length > 0 && (
           <section class="author-credentials">
-            <h2>Credentials &amp; Experience</h2>
+            <h2>{t('author.credentials', lang)}</h2>
             <ul>{info.credentials.map((c) => <li>{c}</li>)}</ul>
           </section>
         )}
 
         <section class="author-about-business">
-          <h2>About Adventure Tours Vernal</h2>
-          <p>
-            {SITE.name} is a locally owned UTV tour company in {SITE.address.city},
-            {' '}{SITE.address.region}, founded by {SITE.owners[0]} and {SITE.owners[1]}. Tours run on a
-            fleet of {SITE.fleet.count} {SITE.fleet.vehicle} side-by-sides through the Uintah Basin
-            backcountry — from Dinosaur National Monument to Flaming Gorge.
-            {' '}<a href="/about/">Read the full story</a>.
-          </p>
+          <h2>{t('author.aboutBusiness', lang)}</h2>
+          <Fragment set:html={aboutBusinessHtml} />
         </section>
 
         {articles.length > 0 && (
-          <section class="author-articles" aria-label={`Articles by ${info.name}`}>
-            <h2>Articles by {info.name}</h2>
+          <section class="author-articles" aria-label={t('author.articlesBy', lang, { name: info.name })}>
+            <h2>{t('author.articlesBy', lang, { name: info.name })}</h2>
             <ul class="author-articles-list">
               {articles.map((a) => (
                 <li>

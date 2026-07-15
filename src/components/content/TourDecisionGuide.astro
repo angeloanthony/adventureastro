@@ -9,27 +9,37 @@
 //
 // Styling mirrors the site's existing cards (burnt-orange accents, rounded
 // corners) via the same CSS variables TourCta uses, with hard-coded fallbacks.
+import { getLangFromUrl, getAvailableLocales, localizedPath, DEFAULT_LOCALE } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+
 interface Props {
   heading?: string;
 }
-const { heading = 'Not sure which tour? Start here.' } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const { heading = t('decision.heading', lang) } = Astro.props;
+// Existence-aware: link to the booking page in the current locale only if
+// it exists there, otherwise fall back to English (P3A.1 — same pattern
+// BaseLayout/LanguageSwitcher already use, just applied to a CTA href).
+const bookingHref = localizedPath('booking', getAvailableLocales('booking').includes(lang) ? lang : DEFAULT_LOCALE);
 
 // Question → the single best existing page for that visitor. Targets are all
-// distinct; if you add a row, keep the target unique.
+// distinct; if you add a row, keep the target unique. hrefs are language-
+// invariant (except the booking card, which is existence-aware); only the
+// visible q/a localize.
 const CHOICES = [
-  { q: 'First time riding?', a: "Start with the beginner's guide", href: '/utv/beginners-guide-to-utv-tours-vernal/' },
-  { q: 'Bringing children?', a: 'See the family UTV guide', href: '/utv/family-utv-guide-vernal/' },
-  { q: 'Traveling as a couple?', a: 'Book a private tour for two', href: '/utv/private-utv-tours-vernal/' },
-  { q: 'Looking for scenery?', a: 'Compare the most scenic trails', href: '/utv/best-utv-trails-vernal/' },
-  { q: 'Looking for history?', a: 'Explore petroglyphs & rock art', href: '/dinosaur-national-monument/petroglyphs-rock-art-vernal/' },
-  { q: 'Want maximum adventure?', a: 'Go remote on a backcountry tour', href: '/utv/backcountry-tours-vernal-utah/' },
-  { q: 'Short on time?', a: 'Book the next 3-hour tour', href: '/booking/' },
-  { q: 'Large group?', a: 'Plan a group tour', href: '/utv/group-utv-tours-vernal/' },
+  { q: t('decision.q.firstTime', lang), a: t('decision.a.firstTime', lang), href: '/utv/beginners-guide-to-utv-tours-vernal/' },
+  { q: t('decision.q.children', lang), a: t('decision.a.children', lang), href: '/utv/family-utv-guide-vernal/' },
+  { q: t('decision.q.couple', lang), a: t('decision.a.couple', lang), href: '/utv/private-utv-tours-vernal/' },
+  { q: t('decision.q.scenery', lang), a: t('decision.a.scenery', lang), href: '/utv/best-utv-trails-vernal/' },
+  { q: t('decision.q.history', lang), a: t('decision.a.history', lang), href: '/dinosaur-national-monument/petroglyphs-rock-art-vernal/' },
+  { q: t('decision.q.adventure', lang), a: t('decision.a.adventure', lang), href: '/utv/backcountry-tours-vernal-utah/' },
+  { q: t('decision.q.shortTime', lang), a: t('decision.a.shortTime', lang), href: bookingHref },
+  { q: t('decision.q.group', lang), a: t('decision.a.group', lang), href: '/utv/group-utv-tours-vernal/' },
 ];
 ---
 <section class="tour-decision-guide" aria-labelledby="tdg-heading">
   <h2 id="tdg-heading" class="tdg-heading">{heading}</h2>
-  <p class="tdg-intro">Tell us what matters most and we'll point you to the right guide.</p>
+  <p class="tdg-intro">{t('decision.intro', lang)}</p>
   <ul class="tdg-grid">
     {CHOICES.map((c) => (
       <li class="tdg-card">

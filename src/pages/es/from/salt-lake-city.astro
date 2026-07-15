@@ -1,0 +1,101 @@
+---
+// es/from/salt-lake-city.astro — Spanish city landing page (P3D translation
+// batch). Mirrors src/pages/from/salt-lake-city.astro. The `cities` content
+// collection (src/content/cities/salt-lake-city.json) is English-only and
+// is NOT modified here (P3D scope excludes touching collections) — only the
+// locale-neutral numeric facts (driveTimeHours, driveMiles, routeSummary,
+// nearestAirport) are reused from the entry; title/description are
+// hardcoded Spanish literals instead of city.title/city.description.
+import CityLayout from '../../../layouts/CityLayout.astro';
+import GatewayRoutes from '../../../components/content/GatewayRoutes.astro';
+import FaqAccordion from '../../../components/content/FaqAccordion.astro';
+import { getEntry } from 'astro:content';
+import { SITE } from '../../../config/site';
+
+const cityEntry = await getEntry('cities', 'salt-lake-city');
+if (!cityEntry) throw new Error('cities/salt-lake-city.json entry not found');
+const city = cityEntry.data;
+
+const faq = [
+  {
+    q: '¿A qué distancia está Vernal, Utah de Salt Lake City?',
+    a: `Vernal está a unas ${city.driveTimeHours} horas (${city.driveMiles} millas) al este de Salt Lake City, por la I-80 E hasta la US-40 E. La ruta pasa por Heber City, Duchesne y Roosevelt antes de llegar a Vernal.`,
+  },
+  {
+    q: '¿A qué aeropuerto debo volar para un tour en UTV en Vernal?',
+    a: 'El Aeropuerto Internacional de Salt Lake City (SLC) es el aeropuerto principal más cercano con servicio comercial regular. Desde allí, Vernal se encuentra a un trayecto directo hacia el este por la I-80 y la US-40 — Vernal no cuenta con aeropuerto comercial propio.',
+  },
+  {
+    q: '¿Puedo hacer un tour en UTV en Vernal como excursión de un día desde Salt Lake City?',
+    a: `Es posible, pero ajustado — con cerca de ${city.driveTimeHours} horas de manejo en cada sentido más un tour guiado de 3 horas, la mayoría de los visitantes de Salt Lake City prefieren pasar la noche en Vernal para evitar un día muy largo en la carretera.`,
+  },
+];
+---
+<CityLayout
+  title="Tours en UTV Cerca de Vernal, Utah — Guía para Visitantes de Salt Lake City"
+  description="Viaja desde Salt Lake City a Vernal, Utah para un tour guiado en UTV Kawasaki KRX 1000. Ruta, tiempo de manejo y consejos de planificación desde el aeropuerto de SLC."
+  path="/es/from/salt-lake-city/"
+  breadcrumbs={[{ label: 'Salt Lake City' }]}
+  city={city}
+  relatedLinks={[
+    {
+      title: 'Mejores Senderos para UTV Cerca de Vernal',
+      description: 'Los cinco sistemas de senderos guiados, con terreno y dificultad de cada uno.',
+      href: '/utv/best-utv-trails-vernal/',
+    },
+    {
+      title: 'Guía del Clima de Vernal, Utah',
+      description: 'Condiciones mes a mes para ayudarle a elegir sus fechas de viaje.',
+      href: '/guides/vernal-weather-guide/',
+    },
+    {
+      title: 'Qué Llevar en un Tour en UTV',
+      description: 'Una lista completa de equipo para el día de su tour.',
+      href: '/guides/what-to-bring/',
+    },
+    {
+      title: 'Tours en UTV Cerca de Dinosaur National Monument',
+      description: 'Combine su tour con una visita al Quarry Exhibit Hall.',
+      href: '/es/dinosaur-national-monument/',
+    },
+  ]}
+>
+  <h1>Tours en UTV Cerca de Vernal, Utah — Guía para Visitantes de Salt Lake City</h1>
+
+  <div class="article-summary-box">
+    ¿Viene desde Salt Lake City? Vernal se encuentra a unas {city.driveTimeHours} horas al este por la I-80 y la US-40 — un recorrido escénico por Heber City, Duchesne y Roosevelt hasta la Tierra de los Dinosaurios de Utah. Adventure Tours Vernal ofrece tours guiados en side-by-side Kawasaki KRX 1000 por la zona agreste que rodea Dinosaur National Monument.
+  </div>
+
+  <h2>El Camino Hacia el Este</h2>
+  <p>
+    Desde Salt Lake City, la ruta hacia Vernal sigue la I-80 E hasta Silver Creek Junction, y luego la US-40 E pasando por Heber City, Duchesne y Roosevelt antes de llegar a Vernal. Son cerca de {city.driveMiles} millas y {city.driveTimeHours} horas de manejo, la mayor parte por el desierto alto y los paisajes de montaña abiertos de Utah — una excursión directa de un día desde la ciudad del aeropuerto, o el primer tramo de un viaje más largo por la Cuenca de Uintah.
+  </p>
+
+  <h2>Por Qué los Visitantes de Salt Lake City Eligen Vernal</h2>
+  <p>
+    El Aeropuerto Internacional de Salt Lake City (SLC) es el aeropuerto principal más cercano a Vernal con servicio comercial regular, lo que convierte a Vernal en una extensión fácil para quienes vuelan a Utah. Una vez en Vernal, Adventure Tours Vernal ofrece cinco sistemas de senderos guiados — Doc's Beach, Moonshine Arch, Ashley Gorge, Outlaw Trail y Asphalt Ridge — además de fácil acceso a <a href="/es/dinosaur-national-monument/">Dinosaur National Monument</a>, a solo 20 minutos de la ciudad. Si dispone de un día adicional, vale la pena extender el viaje una hora al norte hasta <a href="/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge</a> para pesca en el embalse, paseos en bote y rutas panorámicas por el cañón rojo.
+  </p>
+  <p>
+    Cada tour es guiado por los propietarios Dave y Trudy Wilson en side-by-side Kawasaki KRX 1000 con amortiguadores FOX 2.5 PODIUM LSC. No se requiere experiencia previa en UTV — se incluye una charla de seguridad completa y todo el equipo de seguridad. <a href="/es/booking/">Consulte fechas y reserve su tour</a> cuando esté listo, o vea las <a href="/guides/">guías de viaje</a> sobre qué ponerse, qué empacar y el clima según la temporada antes de emprender el viaje.
+  </p>
+
+  <h2>Antes de Viajar hacia el Este</h2>
+  <p>
+    Si Dinosaur National Monument está en su itinerario, lea nuestra <a href="/dinosaur-national-monument/visiting-dinosaur-national-monument/">Guía Definitiva de Dinosaur National Monument</a> antes de salir de Salt Lake City. Cubre cuánto tiempo destinar, las mejores rutas panorámicas y paradas de petroglifos, y cómo combinar una visita al monumento con un tour guiado en UTV.
+  </p>
+
+  <div class="article-tip">
+    <strong>Consejo de planificación:</strong> Llame a Dave o Trudy al <a href={SITE.phoneHrefDash}>{SITE.phoneDisplay}</a> para consultar las condiciones y los horarios de los senderos antes de emprender el viaje desde Salt Lake City — especialmente fuera de temporada alta (vea la <a href="/guides/vernal-weather-guide/">Guía del Clima de Vernal</a>).
+  </div>
+
+  <!-- TODO (owner input): Salt-Lake-specific visitor tips (e.g. best
+       departure time to avoid I-80/US-40 traffic, recommended overnight
+       stop) and original photography of the drive route are not yet
+       available. Add once supplied — do not invent. Mirrors the English
+       source's TODO verbatim; not user-facing. -->
+
+  <GatewayRoutes />
+
+  <h2>Preguntas Frecuentes</h2>
+  <FaqAccordion faq={faq} />
+</CityLayout>

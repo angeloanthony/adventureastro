@@ -7,6 +7,8 @@
 // identically on nested hub/spoke routes.
 import { SITE } from '../../config/site';
 import LanguageSwitcher from './LanguageSwitcher.astro';
+import { getLangFromUrl, getAvailableLocales, localizedPath, DEFAULT_LOCALE } from '../../lib/i18n';
+import { t } from '../../lib/ui';
 
 type ActiveKey = 'home' | 'about' | 'trails' | 'things-to-do' | 'dinosaur-national-monument' | 'guides' | 'food'
   | 'cancellation-policy' | 'privacy-policy' | 'faq' | 'safety-guidelines' | 'what-to-bring';
@@ -14,6 +16,11 @@ interface Props {
   active?: ActiveKey | '';
 }
 const { active = '' } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+// Existence-aware: link to the booking page in the current locale only if
+// it exists there, otherwise fall back to English (P3A.1 — same pattern
+// BaseLayout/LanguageSwitcher already use, just applied to a CTA href).
+const bookingHref = localizedPath('booking', getAvailableLocales('booking').includes(lang) ? lang : DEFAULT_LOCALE);
 ---
 <nav class="navbar">
   <div class="nav-container">
@@ -21,28 +28,28 @@ const { active = '' } = Astro.props;
       <img src="/images/logo.webp" alt={`${SITE.name} Logo`}>
     </a>
     <ul class="nav-menu">
-      <li><a href="/" class:list={[{ active: active === 'home' }]}>Home</a></li>
-      <li><a href="/about/" class:list={[{ active: active === 'about' }]}>About</a></li>
-      <li><a href="/utv/" class:list={[{ active: active === 'trails' }]}>Trails</a></li>
-      <li><a href="/things-to-do/" class:list={[{ active: active === 'things-to-do' }]}>Things to Do</a></li>
-      <li><a href="/dinosaur-national-monument/" class:list={[{ active: active === 'dinosaur-national-monument' }]}>Dinosaur Monument</a></li>
-      <li><a href="/guides/" class:list={[{ active: active === 'guides' }]}>Guides</a></li>
-      <li><a href="/things-to-do/best-restaurants-vernal-utah/" class:list={[{ active: active === 'food' }]}>Food</a></li>
+      <li><a href="/" class:list={[{ active: active === 'home' }]}>{t('nav.home', lang)}</a></li>
+      <li><a href="/about/" class:list={[{ active: active === 'about' }]}>{t('nav.about', lang)}</a></li>
+      <li><a href="/utv/" class:list={[{ active: active === 'trails' }]}>{t('nav.trails', lang)}</a></li>
+      <li><a href="/things-to-do/" class:list={[{ active: active === 'things-to-do' }]}>{t('nav.thingsToDo', lang)}</a></li>
+      <li><a href="/dinosaur-national-monument/" class:list={[{ active: active === 'dinosaur-national-monument' }]}>{t('nav.dinosaurMonument', lang)}</a></li>
+      <li><a href="/guides/" class:list={[{ active: active === 'guides' }]}>{t('nav.guides', lang)}</a></li>
+      <li><a href="/things-to-do/best-restaurants-vernal-utah/" class:list={[{ active: active === 'food' }]}>{t('nav.food', lang)}</a></li>
       <li class="nav-dropdown">
-        <a href="#" class="dropdown-toggle">Info &#9662;</a>
+        <a href="#" class="dropdown-toggle">{t('nav.info', lang)} &#9662;</a>
         <ul class="dropdown-menu">
-          <li><a href="/cancellation-policy/" class:list={[{ active: active === 'cancellation-policy' }]}>Cancellation Policy</a></li>
-          <li><a href="/privacy-policy/" class:list={[{ active: active === 'privacy-policy' }]}>Privacy Policy</a></li>
-          <li><a href="/faq/" class:list={[{ active: active === 'faq' }]}>FAQ</a></li>
-          <li><a href="/safety-guidelines/" class:list={[{ active: active === 'safety-guidelines' }]}>Safety Guidelines</a></li>
-          <li><a href="/guides/what-to-bring/" class:list={[{ active: active === 'what-to-bring' }]}>What to Bring</a></li>
+          <li><a href="/cancellation-policy/" class:list={[{ active: active === 'cancellation-policy' }]}>{t('nav.cancellationPolicy', lang)}</a></li>
+          <li><a href="/privacy-policy/" class:list={[{ active: active === 'privacy-policy' }]}>{t('nav.privacyPolicy', lang)}</a></li>
+          <li><a href="/faq/" class:list={[{ active: active === 'faq' }]}>{t('nav.faq', lang)}</a></li>
+          <li><a href="/safety-guidelines/" class:list={[{ active: active === 'safety-guidelines' }]}>{t('nav.safetyGuidelines', lang)}</a></li>
+          <li><a href="/guides/what-to-bring/" class:list={[{ active: active === 'what-to-bring' }]}>{t('nav.whatToBring', lang)}</a></li>
         </ul>
       </li>
       <li><a href={SITE.phoneHrefDash} class="nav-phone">&#128222; {SITE.phoneDisplay}</a></li>
       <LanguageSwitcher />
-      <li><a href="/booking/" class="nav-book-btn">Book Now</a></li>
+      <li><a href={bookingHref} class="nav-book-btn">{t('cta.bookNow', lang)}</a></li>
     </ul>
-    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+    <button class="mobile-menu-toggle" aria-label={t('a11y.toggleMenu', lang)}>
       <span></span><span></span><span></span>
     </button>
   </div>

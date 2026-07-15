@@ -1,19 +1,14 @@
 ---
-// itineraries/[id].astro — the itinerary spoke route (Planning Authority
-// cluster). Renders every non-draft entry of the `itineraries` collection
-// through ItineraryLayout → SpokeLayout, exactly as [hub]/[id].astro renders
-// activity-hub spokes. Emits zero pages while the collection is empty, so
-// activating this route publishes nothing. Draft entries are excluded here AND
-// in sitemap-itineraries.xml.ts — a draft must never reach dist.
-//
-// Itineraries live at /itineraries/[id]/ via THIS dedicated route rather than
-// the generic [hub]/[id].astro because 'itineraries' is deliberately not a
-// HUB_SLUG (see src/lib/hubs.ts): it owns a bespoke pillar (index.astro) and
-// must not be emitted by the generic activity-spoke route. The URL shape still
-// comes exclusively from src/lib/hubs.ts (spokeHref → /itineraries/[id]/).
-import { getCollection, render } from 'astro:content';
-import ItineraryLayout from '../../layouts/ItineraryLayout.astro';
-import { spokeHref } from '../../lib/hubs';
+// itineraries/[id].astro — the ENGLISH itinerary route (Planning Authority
+// cluster; P4A locale split). Renders every non-draft *English* `itineraries`
+// entry at /itineraries/id/ via ItineraryArticle. Translated entries are
+// emitted by src/pages/[locale]/itineraries/[id].astro. Itineraries live on a
+// dedicated route (not the generic [hub]/[id]) because 'itineraries' is
+// deliberately not a HUB_SLUG — see src/lib/hubs.ts. Draft entries are
+// excluded here AND in sitemap-itineraries.xml.ts.
+import { getCollection } from 'astro:content';
+import ItineraryArticle from '../../components/routing/ItineraryArticle.astro';
+import { parseEntryLocale, DEFAULT_LOCALE } from '../../lib/i18n';
 import type { SpokeData } from '../../content.config';
 
 type ItineraryEntry = { id: string; data: SpokeData; [key: string]: unknown };
@@ -21,36 +16,11 @@ type ItineraryEntry = { id: string; data: SpokeData; [key: string]: unknown };
 export async function getStaticPaths() {
   const entries = (await getCollection('itineraries')) as unknown as ItineraryEntry[];
   return entries
-    .filter((e) => !e.data.draft)
+    .filter((e) => !e.data.draft && parseEntryLocale(e.id).locale === DEFAULT_LOCALE)
     .map((entry) => ({ params: { id: entry.id }, props: { entry } }));
 }
 
 interface Props { entry: ItineraryEntry }
 const { entry } = Astro.props;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const { Content } = await render(entry as any);
-const d = entry.data;
 ---
-<ItineraryLayout
-  title={d.title}
-  description={d.description}
-  path={spokeHref('itineraries', entry.id)}
-  heroImage={d.heroImage}
-  author={d.author}
-  publishDate={d.publishDate}
-  updatedDate={d.updatedDate}
-  breadcrumbs={[
-    { label: 'Home', href: '/' },
-    { label: 'Itineraries', href: '/itineraries/' },
-    { label: d.title },
-  ]}
-  currentId={entry.id}
-  tags={d.tags}
-  related={d.related}
-  tourCta={d.tourCta}
-  faq={d.faq}
-  ogTitle={d.ogTitle}
-  ogDescription={d.ogDescription}
->
-  <Content />
-</ItineraryLayout>
+<ItineraryArticle entry={entry} />

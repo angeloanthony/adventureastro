@@ -5,7 +5,15 @@
       "Bash(grep -rEo '\\\\$[0-9]{2,3}\\(/machine|\\\\s*per\\\\s*\\(machine|vehicle|passenger|person\\)|/hr\\)?' dist --include=\"*.html\")",
       "Bash(grep -o '.\\\\{40\\\\}\\\\$350.\\\\{40\\\\}' dist/guides/moab-utv-tours/index.html)",
       "Bash(grep -o '.\\\\{40\\\\}\\\\$100[^,]\\\\{0,20\\\\}' dist/dinosaur-national-monument/petroglyphs-rock-art-vernal/index.html)",
-      "Bash(rm -rf node_modules/.astro)"
+      "Bash(rm -rf node_modules/.astro)",
+      "Bash(node -e \"console.log\\(JSON.parse\\(require\\('fs'\\).readFileSync\\('package.json'\\)\\).scripts\\)\")",
+      "Bash(grep -E '^\\(es|it|pt\\)$')",
+      "Bash(python3 -)",
+      "Bash(grep -E '^\\(it|pt\\)$')",
+      "Bash(grep -o '<li class=\"nav-lang-switcher\">.\\\\{0,180\\\\}' dist/dinosaur-national-monument/index.html)",
+      "Bash(grep -o '<li class=\"nav-lang-switcher\">.\\\\{0,180\\\\}' dist/es/dinosaur-national-monument/index.html)",
+      "Bash(grep -o '`' src/pages/es/fishing/index.astro)",
+      "Bash(node \"/c/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/52ddcef8-0572-4886-b59d-bfba30dc04a3/scratchpad/checktags.js\" \"src/pages/es/fishing/index.astro\")"
     ]
   }
 }

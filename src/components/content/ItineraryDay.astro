@@ -2,6 +2,9 @@
 // ItineraryDay.astro — renders one time-blocked day (Build Guide §4.4).
 // Every named place links to its own page on the site; day sidebar box
 // covers packing/backup-plan links.
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+
 interface Block { time: 'morning' | 'lunch' | 'afternoon' | 'dinner' | 'evening'; activity: string; link?: string }
 interface Props {
   label: string;
@@ -11,6 +14,7 @@ interface Props {
   backupPlanLink?: string;
 }
 const { label, summary, blocks, packingNote, backupPlanLink } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
 ---
 <article class="itinerary-day">
   <h3 class="itinerary-day-label">{label}</h3>
@@ -18,7 +22,7 @@ const { label, summary, blocks, packingNote, backupPlanLink } = Astro.props;
   <ol class="itinerary-day-blocks">
     {blocks.map((block) => (
       <li class={`itinerary-block itinerary-block-${block.time}`}>
-        <span class="itinerary-block-time">{block.time}</span>
+        <span class="itinerary-block-time">{t(`time.${block.time}`, lang)}</span>
         {block.link ? <a href={block.link}>{block.activity}</a> : <span>{block.activity}</span>}
       </li>
     ))}
@@ -26,7 +30,7 @@ const { label, summary, blocks, packingNote, backupPlanLink } = Astro.props;
   {(packingNote || backupPlanLink) && (
     <aside class="itinerary-day-sidebar">
       {packingNote && <p class="itinerary-packing-note">{packingNote}</p>}
-      {backupPlanLink && <a href={backupPlanLink} class="itinerary-backup-plan">Weather backup plan &rarr;</a>}
+      {backupPlanLink && <a href={backupPlanLink} class="itinerary-backup-plan">{t('itinerary.weatherBackup', lang)} &rarr;</a>}
     </aside>
   )}
 </article>

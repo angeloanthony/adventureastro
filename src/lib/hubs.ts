@@ -30,6 +30,8 @@ export const HUB_SLUGS = [
   'guides',
 ] as const;
 
+import { parseEntryLocale, localizedPath } from './i18n';
+
 export type HubSlug = (typeof HUB_SLUGS)[number];
 
 // Collections whose entries render as spoke-style articles and participate in
@@ -56,14 +58,23 @@ export const HUBS: Record<HubSlug, { name: string }> = {
 };
 
 /** Root-relative href of a spoke article page. Accepts any LinkCollection so
- *  itinerary spokes (/itineraries/[id]/) get the same helper as hub spokes. */
-export const spokeHref = (hub: LinkCollection, id: string): string => `/${hub}/${id}/`;
+ *  itinerary spokes (/itineraries/[id]/) get the same helper as hub spokes.
+ *  Locale-aware (P4A): a translated entry id (`article.es`) yields the
+ *  locale-prefixed URL (`/es/hub/article/`); an English id is unchanged
+ *  (`/hub/id/`). Callers pass a raw collection entry id and get the right
+ *  URL for that file's locale with no extra plumbing. */
+export const spokeHref = (hub: LinkCollection, id: string): string => {
+  const { locale, baseId } = parseEntryLocale(id);
+  return localizedPath(`${hub}/${baseId}`, locale);
+};
 
 /** Root-relative href of a hub's pillar page. */
 export const pillarHref = (hub: HubSlug): string => `/${hub}/`;
 
-/** Sitemap <loc> path (relative to SITE.url, no leading slash). */
-export const spokeSitemapLoc = (hub: HubSlug, id: string): string => `${hub}/${id}/`;
+/** Sitemap <loc> path (relative to SITE.url, no leading slash). Locale-aware,
+ *  mirroring spokeHref: a translated id emits its `/{locale}/…` loc. */
+export const spokeSitemapLoc = (hub: LinkCollection, id: string): string =>
+  spokeHref(hub, id).slice(1);
 
 /** Root-relative href of a city landing page (guide §4.3 "from" pages). */
 export const cityHref = (id: string): string => `/from/${id}/`;

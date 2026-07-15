@@ -19,6 +19,9 @@ import Footer from '../../components/layout/Footer.astro';
 import Seo from '../../components/seo/Seo.astro';
 import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
 import HubIndex from '../../components/content/HubIndex.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
 
 const schema = `{
     "@context": "https://schema.org",
@@ -62,7 +65,7 @@ const schema = `{
     <script type="application/ld+json" set:html={schema} />
   </Fragment>
   <Header slot="body" />
-  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Camping' }]} />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('hub.camping', lang) }]} />
 
   <p slot="body" class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">The Ultimate Guide to Camping in Dinosaur Country is a practical trip-planning guide to camping near Vernal, Utah in northeastern Utah. It helps visitors decide where to camp, which style of camping fits their trip, and which destination best matches their goals. It covers camping across Flaming Gorge, Ashley National Forest and the Uinta Mountains, Red Fleet State Park, Steinaker State Park, the Dinosaur National Monument area, and Vernal as a basecamp. It compares RV, tent, and dispersed camping; state park, national forest, and monument-area campgrounds; family camping, photography, wildlife safety, accessibility, and seasonal timing; and one-night, weekend, and week-long itineraries. Campground availability, reservation systems, campsite numbers, fees, hookups, dump stations, seasonal opening dates, fire restrictions, and permit requirements change and are set by the U.S. Forest Service, the National Park Service, and Utah State Parks — verify with official sources. Adventure Tours Vernal offers guided UTV tours for $349 per machine, up to 2 riders, 3 hours. Call (435) 219-9447.</p>
 

@@ -5,6 +5,8 @@
 // Person schema can never disagree. Links route to the shared about page
 // until the dedicated /about/dave/ + /about/trudy/ pages ship in Phase 3.
 import { AUTHORS, photoExists, type AuthorKey } from '../../lib/authors';
+import { getLangFromUrl, formatDate } from '../../lib/i18n';
+import { t } from '../../lib/ui';
 
 interface Props {
   author: AuthorKey;
@@ -12,10 +14,11 @@ interface Props {
 }
 const { author, updatedDate } = Astro.props;
 
+const lang = getLangFromUrl(Astro.url);
 const info = AUTHORS[author];
 const hasPhoto = photoExists(author);
 const initials = info.name.split(' ').map((w) => w[0]).join('');
-const formattedDate = updatedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const formattedDate = formatDate(updatedDate, lang);
 ---
 <div class="author-byline">
   <a href={info.pagePath} class="author-byline-link">
@@ -23,10 +26,10 @@ const formattedDate = updatedDate.toLocaleDateString('en-US', { year: 'numeric',
       ? <img src={info.photo} alt={info.name} class="author-byline-photo" width="48" height="48" loading="lazy" />
       : <span class="author-byline-photo author-byline-monogram" aria-hidden="true">{initials}</span>}
     <span class="author-byline-text">
-      Written by <strong>{info.name}</strong> — {info.role}
+      {t('author.writtenBy', lang)} <strong>{info.name}</strong> — {info.role}
     </span>
   </a>
-  <span class="author-byline-updated">Updated {formattedDate}</span>
+  <span class="author-byline-updated">{t('author.updated', lang)} {formattedDate}</span>
 </div>
 
 <style>

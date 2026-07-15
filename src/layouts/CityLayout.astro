@@ -12,7 +12,9 @@ import Footer from '../components/layout/Footer.astro';
 import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
 import QuickFacts from '../components/content/QuickFacts.astro';
 import TourCta from '../components/content/TourCta.astro';
-import { HUBS, pillarHref } from '../lib/hubs';
+import { pillarHref } from '../lib/hubs';
+import { getLangFromUrl } from '../lib/i18n';
+import { t, hubName } from '../lib/ui';
 import type { CollectionEntry } from 'astro:content';
 
 // Active authority hubs to cross-link from every city page (Build Guide
@@ -37,12 +39,13 @@ interface Props {
   relatedLinks?: RelatedLink[];
 }
 const { title, description, path, heroImage, breadcrumbs, city, relatedLinks = [] } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
 
 const quickFacts = [
-  { label: 'Drive time', value: `${city.driveTimeHours} hours` },
-  { label: 'Distance', value: `${city.driveMiles} miles` },
-  { label: 'Route', value: city.routeSummary },
-  ...(city.nearestAirport ? [{ label: 'Nearest airport', value: city.nearestAirport }] : []),
+  { label: t('city.driveTime', lang), value: `${city.driveTimeHours} hours` },
+  { label: t('city.distance', lang), value: `${city.driveMiles} miles` },
+  { label: t('city.route', lang), value: city.routeSummary },
+  ...(city.nearestAirport ? [{ label: t('city.nearestAirport', lang), value: city.nearestAirport }] : []),
 ];
 ---
 <BaseLayout>
@@ -58,20 +61,20 @@ const quickFacts = [
       <slot />
       <TourCta variant="family" />
 
-      <section class="hub-index" aria-label="Explore Vernal">
-        <h2 class="hub-index-heading">Explore Vernal</h2>
+      <section class="hub-index" aria-label={t('section.exploreVernal', lang)}>
+        <h2 class="hub-index-heading">{t('section.exploreVernal', lang)}</h2>
         <ul class="hub-index-list">
           {ACTIVE_HUBS.map((hub) => (
             <li class="hub-index-item">
-              <a href={pillarHref(hub)}>{HUBS[hub].name}</a>
+              <a href={pillarHref(hub)}>{hubName(hub, lang)}</a>
             </li>
           ))}
         </ul>
       </section>
 
       {relatedLinks.length > 0 && (
-        <section class="related-articles" aria-label="Related guides">
-          <h2 class="related-articles-heading">More Vernal Guides</h2>
+        <section class="related-articles" aria-label={t('a11y.relatedGuides', lang)}>
+          <h2 class="related-articles-heading">{t('section.moreVernalGuides', lang)}</h2>
           <div class="related-grid">
             {relatedLinks.map((link) => (
               <a href={link.href} class="related-card">

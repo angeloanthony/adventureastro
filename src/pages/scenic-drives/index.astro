@@ -15,6 +15,9 @@ import Footer from '../../components/layout/Footer.astro';
 import Seo from '../../components/seo/Seo.astro';
 import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
 import HubIndex from '../../components/content/HubIndex.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
 
 const schema = `{
     "@context": "https://schema.org",
@@ -58,7 +61,7 @@ const schema = `{
     <script type="application/ld+json" set:html={schema} />
   </Fragment>
   <Header slot="body" />
-  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Scenic Drives' }]} />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('hub.scenic-drives', lang) }]} />
 
   <p slot="body" class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">The Ultimate Guide to Scenic Drives in Dinosaur Country is a practical trip-planning guide to scenic driving near Vernal, Utah in northeastern Utah. It helps visitors choose the best drive based on available time, season, interests, family or adventure travel, photography, wildlife, road conditions, and vehicle type. It covers the Flaming Gorge–Uintas National Scenic Byway, the Red Cloud Loop, the Sheep Creek Geological Loop, Cub Creek Road and the scenic drives of Dinosaur National Monument, and the routes from Vernal to Flaming Gorge, Ashley National Forest, Red Fleet State Park, and Steinaker State Park. It compares difficulty, seasons, family-friendliness, half-day and full-day options, weekend road trips, accessibility, and vehicle suitability including RVs and motorcycles. Road conditions, closures, distances, drive times, seasonal openings, fees, and permits change and are set by the National Park Service, the U.S. Forest Service, the Utah Department of Transportation, and Utah State Parks — verify with official sources. Adventure Tours Vernal offers guided UTV tours for $349 per machine, up to 2 riders, 3 hours. Call (435) 219-9447.</p>
 

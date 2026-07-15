@@ -1,5 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getLangFromUrl } from '../lib/i18n';
+import { t } from '../lib/ui';
+// 404 ships its own standalone nav (assets={false}, no Header). Its nav
+// LABELS are the same chrome as Header — route them through the shared t()
+// dictionary so they can never drift from the real nav. 'Information ▾' is
+// left as-is: it differs from Header's 'Info ▾' (a pre-existing wording
+// difference), and P2C preserves existing output rather than silently
+// normalizing it (extraction is lossless — surface, don't fix).
+const lang = getLangFromUrl(Astro.url);
 const headHtml = `
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,23 +29,23 @@ const bodyHtml = `
       <img src="/images/logo.webp" alt="Adventure Tours Vernal">
     </a>
     <ul class="nav-menu">
-      <li><a href="/">Home</a></li>
-      <li><a href="/about/">About</a></li>
-      <li><a href="/utv/">Trails</a></li>
+      <li><a href="/">${t('nav.home', lang)}</a></li>
+      <li><a href="/about/">${t('nav.about', lang)}</a></li>
+      <li><a href="/utv/">${t('nav.trails', lang)}</a></li>
       <li class="nav-dropdown">
         <a href="#" class="dropdown-toggle">Information ▾</a>
         <ul class="dropdown-menu">
-          <li><a href="/cancellation-policy/">Cancellation Policy</a></li>
-          <li><a href="/privacy-policy/">Privacy Policy</a></li>
-          <li><a href="/faq/">FAQ</a></li>
-          <li><a href="/safety-guidelines/">Safety Guidelines</a></li>
-          <li><a href="/guides/what-to-bring/">What to Bring</a></li>
+          <li><a href="/cancellation-policy/">${t('nav.cancellationPolicy', lang)}</a></li>
+          <li><a href="/privacy-policy/">${t('nav.privacyPolicy', lang)}</a></li>
+          <li><a href="/faq/">${t('nav.faq', lang)}</a></li>
+          <li><a href="/safety-guidelines/">${t('nav.safetyGuidelines', lang)}</a></li>
+          <li><a href="/guides/what-to-bring/">${t('nav.whatToBring', lang)}</a></li>
         </ul>
       </li>
       <li><a href="tel:435-219-9447" class="nav-phone">📞 (435) 219-9447</a></li>
-      <li><a href="/booking/" class="nav-book-btn">Book Now</a></li>
+      <li><a href="/booking/" class="nav-book-btn">${t('cta.bookNow', lang)}</a></li>
     </ul>
-    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+    <button class="mobile-menu-toggle" aria-label="${t('a11y.toggleMenu', lang)}">
       <span></span><span></span><span></span>
     </button>
   </div>

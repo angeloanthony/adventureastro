@@ -1,250 +1,13 @@
 ---
+import { bodyHtml } from '../page-content/safety';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import Seo from '../components/seo/Seo.astro';
 import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
-const bodyHtml = `
-<!-- PAGE SUMMARY BLOCK -->
-<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
-  Adventure Tours Vernal safety guidelines for guided UTV tours in Vernal, Utah. Drivers must be 18+. Passengers must be 2+. Seatbelts required. Zero tolerance for alcohol or drugs. Full safety briefing provided before every tour. Call (435) 219-9447.
-</p>
-
-<section class="policy-section">
-  <div class="container">
-    <div class="section-header">
-      <h1 class="section-title">Safety Guidelines</h1>
-      <p class="section-subtitle">Your safety is our #1 priority. Please review these guidelines before your adventure.</p>
-    </div>
-
-    <div class="policy-container">
-
-      <!-- BEFORE YOUR TOUR -->
-      <div class="policy-card">
-        <div class="policy-icon">📋</div>
-        <h2 class="policy-heading">Before Your Tour</h2>
-        <div class="policy-list">
-          <h3>Arrival & Check-In:</h3>
-          <ul>
-            <li>Arrive <strong>30 minutes early</strong> for orientation and safety briefing</li>
-            <li>Bring a valid driver's license (required for all drivers)</li>
-            <li>Complete all required waivers and agreements</li>
-            <li>Attend the mandatory safety orientation</li>
-          </ul>
-          <h3>Health & Physical Requirements:</h3>
-          <ul>
-            <li>All participants must be in good physical health</li>
-            <li>Notify your guide of any medical conditions, injuries, or concerns</li>
-            <li>Pregnant women should consult their doctor before participating</li>
-            <li>If you have back, neck, or heart conditions, please inform us in advance</li>
-          </ul>
-          <h3>Alcohol & Substance Policy:</h3>
-          <ul>
-            <li><strong>Zero tolerance</strong> for alcohol or drugs</li>
-            <li>You will not be permitted to ride if under the influence</li>
-            <li>No refunds will be given for violations</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- AGE REQUIREMENTS -->
-      <div class="policy-card">
-        <div class="policy-icon">👥</div>
-        <h2 class="policy-heading">Age Requirements</h2>
-        <div class="policy-table">
-          <div class="policy-row">
-            <div class="policy-timeframe">To Drive</div>
-            <div class="policy-refund refund-full">18+ Years Old</div>
-          </div>
-          <div class="policy-row">
-            <div class="policy-timeframe">To Ride as Passenger</div>
-            <div class="policy-refund refund-full">2+ Years Old</div>
-          </div>
-        </div>
-        <div class="policy-note">
-          <strong>Important:</strong> All drivers must present a valid driver's license. Parents/guardians must sign waivers for minors.
-        </div>
-      </div>
-
-      <!-- VEHICLE OPERATION -->
-      <div class="policy-card">
-        <div class="policy-icon">🚙</div>
-        <h2 class="policy-heading">Vehicle Operation & Safety</h2>
-        <div class="policy-list">
-          <h3>Operating the Vehicle:</h3>
-          <ul>
-            <li>Always wear your seatbelt - no exceptions</li>
-            <li>Keep hands and arms inside the vehicle at all times</li>
-            <li>Never stand up while the vehicle is in motion</li>
-            <li>Follow your guide's instructions at all times</li>
-            <li>Maintain a safe distance from other vehicles</li>
-            <li>Use walkie-talkies to communicate with your guide</li>
-          </ul>
-          <h3>Safety Equipment (Required):</h3>
-          <ul>
-            <li>Seatbelts must be worn by all passengers</li>
-            <li>Helmets (provided upon request)</li>
-            <li>Safety goggles or sunglasses recommended</li>
-          </ul>
-          <h3>Prohibited Actions:</h3>
-          <ul>
-            <li>Racing or speeding</li>
-            <li>Reckless driving or stunts</li>
-            <li>Leaving the designated trail</li>
-            <li>Operating vehicle under the influence</li>
-            <li>Ignoring guide instructions</li>
-          </ul>
-        </div>
-        <div class="policy-warning">
-          <strong>⚠️ Warning:</strong> Failure to follow safety rules may result in immediate termination of your tour with no refund. Reckless behavior voids all insurance and damage waivers.
-        </div>
-      </div>
-
-      <!-- TERRAIN & TRAIL SAFETY -->
-      <div class="policy-card">
-        <div class="policy-icon">⛰️</div>
-        <h2 class="policy-heading">Terrain & Trail Safety</h2>
-        <div class="policy-list">
-          <h3>Trail Conditions:</h3>
-          <ul>
-            <li>Trails may include rocks, steep inclines, water crossings, and rough terrain</li>
-            <li>Weather can change quickly - be prepared</li>
-            <li>Dust and dirt are common - bring eye protection</li>
-            <li>Cell service may be limited in remote areas</li>
-          </ul>
-          <h3>Stay on Trail:</h3>
-          <ul>
-            <li>Never leave designated trails</li>
-            <li>Respect private property and posted signs</li>
-            <li>Follow Leave No Trace principles</li>
-            <li>Do not disturb wildlife or plants</li>
-          </ul>
-          <h3>Emergency Situations:</h3>
-          <ul>
-            <li>Alert your guide immediately if you feel unsafe</li>
-            <li>Use walkie-talkie for communication</li>
-            <li>First aid kits are available on every tour</li>
-            <li>Your guide is trained in wilderness first aid</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- WEATHER & ENVIRONMENTAL -->
-      <div class="policy-card">
-        <div class="policy-icon">🌦️</div>
-        <h2 class="policy-heading">Weather & Environmental Safety</h2>
-        <div class="policy-list">
-          <h3>Weather Preparedness:</h3>
-          <ul>
-            <li>We operate in most weather conditions</li>
-            <li>Tours may be cancelled or rescheduled for extreme weather</li>
-            <li>Temperatures can vary significantly - dress in layers</li>
-            <li>Bring rain gear if weather looks uncertain</li>
-          </ul>
-          <h3>Sun Protection:</h3>
-          <ul>
-            <li>Utah sun is intense - wear sunscreen (SPF 30+)</li>
-            <li>Bring sunglasses with UV protection</li>
-            <li>Wear a hat or bandana</li>
-            <li>Stay hydrated - water provided</li>
-          </ul>
-          <h3>Wildlife Safety:</h3>
-          <ul>
-            <li>Do not approach or feed wildlife</li>
-            <li>Keep a safe distance from all animals</li>
-            <li>Be aware of snakes, especially in warmer months</li>
-            <li>Report any wildlife sightings to your guide</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- COMMUNICATION -->
-      <div class="policy-card">
-        <div class="policy-icon">📡</div>
-        <h2 class="policy-heading">Communication & Group Safety</h2>
-        <div class="policy-list">
-          <h3>Staying Connected:</h3>
-          <ul>
-            <li>Walkie-talkies provided for each vehicle</li>
-            <li>Keep walkie-talkie on at all times</li>
-            <li>Alert guide immediately if you need to stop</li>
-            <li>Never leave the group without informing your guide</li>
-          </ul>
-          <h3>If You Experience Problems:</h3>
-          <ul>
-            <li>Stop safely and use walkie-talkie</li>
-            <li>Do not attempt to fix mechanical issues yourself</li>
-            <li>Wait for guide assistance</li>
-            <li>Never continue if vehicle seems unsafe</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- DAMAGE & LIABILITY -->
-      <div class="policy-card">
-        <div class="policy-icon">🛡️</div>
-        <h2 class="policy-heading">Damage & Liability</h2>
-        <div class="policy-list">
-          <h3>Vehicle Damage Waiver:</h3>
-          <ul>
-            <li>Required for all tours</li>
-            <li>Limits your liability to deductible amount</li>
-            <li>Void if caused by reckless driving</li>
-            <li>Void if alcohol/drugs are involved</li>
-          </ul>
-          <h3>Accident Procedures:</h3>
-          <ul>
-            <li>Stop immediately and assess injuries</li>
-            <li>Contact guide via walkie-talkie</li>
-            <li>Do not move injured persons unless in immediate danger</li>
-            <li>Document the incident with photos if possible</li>
-          </ul>
-        </div>
-        <div class="deductible-info">
-          <h3>Important Insurance Information:</h3>
-          <p>You are covered under our liability insurance with a <strong>$1,000 deductible per accident</strong>. This applies regardless of fault. The Vehicle Damage Waiver can help limit your out-of-pocket costs for vehicle damage.</p>
-        </div>
-      </div>
-
-      <!-- YOUR RESPONSIBILITIES -->
-      <div class="policy-card">
-        <div class="policy-icon">✅</div>
-        <h2 class="policy-heading">Your Responsibilities</h2>
-        <div class="policy-list">
-          <h3>As a Participant, You Agree To:</h3>
-          <ul>
-            <li>Follow all guide instructions</li>
-            <li>Operate vehicle safely and responsibly</li>
-            <li>Respect other riders and the environment</li>
-            <li>Communicate any concerns immediately</li>
-            <li>Complete all required paperwork honestly</li>
-            <li>Accept personal responsibility for your safety</li>
-          </ul>
-        </div>
-        <div class="policy-warning">
-          <strong>Remember:</strong> ATV/UTV riding involves inherent risks. While we take every precaution to ensure your safety, you participate at your own risk. Please read and understand all waivers before signing.
-        </div>
-      </div>
-
-      <!-- CONTACT CTA -->
-      <div class="policy-cta">
-        <h3>Questions About Safety?</h3>
-        <p>If you have any safety concerns or questions before your tour, please contact us. We're here to ensure you have a safe and amazing adventure!</p>
-        <div class="cta-buttons">
-          <a href="tel:435-219-9447" class="cta-button primary">📞 Call (435) 219-9447</a>
-          <a href="/booking/" class="cta-button secondary">Book Your Safe Adventure</a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- Mobile Sticky CTA -->
-<div class="mobile-sticky-cta">
-  <button onclick="location.href='/booking/'">Book Your Ride Now</button>
-</div>
-`;
+import { getLangFromUrl } from '../lib/i18n';
+import { t } from '../lib/ui';
+const lang = getLangFromUrl(Astro.url);
 ---
 <BaseLayout bodyClass="policy-page-body">
   <Fragment slot="head">
@@ -258,17 +21,17 @@ const bodyHtml = `
     />
   </Fragment>
   <Header slot="body" active="safety-guidelines" />
-  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Safety Guidelines' }]} />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.safetyGuidelines', lang) }]} />
   <Fragment slot="body" set:html={bodyHtml} />
   <Footer
     slot="body"
     trails={{
-      heading: 'Quick Links',
+      heading: t('footer.quickLinks', lang),
       links: [
-        { href: '/#tours', label: 'Our Tours' },
-        { href: '/#vehicles', label: 'Our Fleet' },
-        { href: '/#gallery', label: 'Photo Gallery' },
-        { href: '/booking/', label: 'Book Now' },
+        { href: '/#tours', label: t('footer.link.ourTours', lang) },
+        { href: '/#vehicles', label: t('footer.link.ourFleet', lang) },
+        { href: '/#gallery', label: t('footer.link.photoGallery', lang) },
+        { href: '/booking/', label: t('cta.bookNow', lang) },
       ],
     }}
   />

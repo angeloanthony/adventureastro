@@ -9,31 +9,36 @@
 // CSS change. Every href points to an EXISTING page and each link is unique.
 // Styling mirrors the site's existing cards via the same CSS variable TourCta
 // uses, with a hard-coded fallback.
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+
 interface Props {
   heading?: string;
   showHubLink?: boolean;
 }
+const lang = getLangFromUrl(Astro.url);
 const {
-  heading = 'Coming from out of town? Start with your gateway route.',
+  heading = t('gateway.heading', lang),
   showHubLink = true,
 } = Astro.props;
 
-// Each gateway → its full weekend itinerary. Notes stay qualitative (matching
-// existing site copy) rather than committing to drive-time figures.
+// Each gateway → its full weekend itinerary. City names are place names (kept
+// verbatim); only the qualitative note localizes. Notes stay qualitative
+// (matching existing site copy) rather than committing to drive-time figures.
 const ROUTES = [
   {
     city: 'Salt Lake City',
-    note: 'The classic ~3-hour approach over the Uintas.',
+    note: t('gateway.note.saltLakeCity', lang),
     href: '/itineraries/weekend-road-trip-from-salt-lake-city/',
   },
   {
     city: 'Denver',
-    note: 'A half-day Rocky Mountain road trip west.',
+    note: t('gateway.note.denver', lang),
     href: '/itineraries/weekend-road-trip-from-denver/',
   },
   {
     city: 'Grand Junction',
-    note: 'The closest Colorado gateway.',
+    note: t('gateway.note.grandJunction', lang),
     href: '/itineraries/weekend-road-trip-from-grand-junction/',
   },
 ];
@@ -51,7 +56,7 @@ const ROUTES = [
     ))}
   </ul>
   {showHubLink && (
-    <p class="gr-hub"><a href="/itineraries/">See all Vernal itineraries &rarr;</a></p>
+    <p class="gr-hub"><a href="/itineraries/">{t('gateway.seeAllItineraries', lang)} &rarr;</a></p>
   )}
 </section>
 

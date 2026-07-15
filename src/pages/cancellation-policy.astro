@@ -1,183 +1,13 @@
 ---
+import { bodyHtml } from '../page-content/cancellation';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import Seo from '../components/seo/Seo.astro';
 import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
-const bodyHtml = `
-
-<!-- ================================================
-     PAGE SUMMARY BLOCK — feeds Google AI Overviews
-     ================================================ -->
-<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
-  Adventure Tours Vernal cancellation policy for guided UTV tours in Vernal, Utah. Cancellations 72+ hours in advance receive a full refund. Less than 72 hours receives 50%. Less than 48 hours receives no refund. Call (435) 219-9447 with questions.
-</p>
-
-<section class="policy-section">
-  <div class="container">
-    <div class="section-header">
-      <h1 class="section-title">Cancellation Policy</h1>
-      <p class="section-subtitle">Please review our terms and conditions before booking your adventure</p>
-    </div>
-
-    <div class="policy-container">
-
-      <!-- CANCELLATION & REFUNDS -->
-      <div class="policy-card">
-        <div class="policy-icon">📅</div>
-        <h2 class="policy-heading">Cancellation & Refunds</h2>
-
-        <div class="policy-table">
-          <div class="policy-row">
-            <div class="policy-timeframe">Less than 48 hours</div>
-            <div class="policy-refund refund-none">No Refund</div>
-          </div>
-          <div class="policy-row">
-            <div class="policy-timeframe">Less than 72 hours</div>
-            <div class="policy-refund refund-partial">50% Refund</div>
-          </div>
-          <div class="policy-row">
-            <div class="policy-timeframe">72+ hours in advance</div>
-            <div class="policy-refund refund-full">100% Refund</div>
-          </div>
-          <div class="policy-row highlight">
-            <div class="policy-timeframe">Groups of 5+ vehicles</div>
-            <div class="policy-refund refund-full">2 weeks advance: 100% Refund<br>After 2 weeks: No Refund</div>
-          </div>
-        </div>
-
-        <div class="policy-note">
-          <strong>Note:</strong> All cancellation times are calculated from your scheduled tour departure time.
-        </div>
-      </div>
-
-      <!-- WEATHER POLICY -->
-      <div class="policy-card">
-        <div class="policy-icon">🌦️</div>
-        <h2 class="policy-heading">Weather Policy</h2>
-        <p>We operate sunshine or rain. However, in cases of extreme weather or in the event that Adventure Tours Vernal must cancel for other unforeseen circumstances you will have the option to reschedule or receive a full refund.</p>
-        <p><strong>Important:</strong> If you choose not to participate due to rain, our standard cancellation policy regarding refunds will be applied. In the event we cancel for extreme weather events, you will receive a full refund.</p>
-      </div>
-
-      <!-- REQUIRED AGREEMENTS -->
-      <div class="policy-card">
-        <div class="policy-icon">📝</div>
-        <h2 class="policy-heading">Required Agreements & Waivers</h2>
-        <p>All guests will be required to sign a <strong>Participant Agreement, Release and Assumption of Risk</strong> to participate in activities. Parents and legal guardians will be required to sign for minor children. Additionally, UTV Tour drivers will be required to sign a <strong>Driver Agreement</strong>.</p>
-
-        <div class="policy-warning">
-          <strong>⚠️ Important:</strong> If these agreements are not signed, you will not be permitted to participate in your adventure. Choosing not to sign will not be grounds for a refund and our cancellation policy will apply.
-        </div>
-      </div>
-
-      <!-- VEHICLE DAMAGE WAIVER -->
-      <div class="policy-card">
-        <div class="policy-icon">🛡️</div>
-        <h2 class="policy-heading">Vehicle Damage Waiver</h2>
-        <p class="required-badge">Required for all tours</p>
-
-        <p>Vehicle Damage Waiver limits your out-of-pocket costs to deductible+tax for damage to our equipment in the event of an accident.</p>
-
-        <div class="policy-list">
-          <h3>Damage Waiver is VOID if:</h3>
-          <ul>
-            <li>Damage is a result of reckless driving</li>
-            <li>Failure to follow your guide's instructions</li>
-            <li>You are found to have ANY alcohol or drugs in your system at the time of damage</li>
-          </ul>
-        </div>
-
-        <div class="deductible-info">
-          <h3>Deductible Information:</h3>
-          <p>When you sign an agreement for our guided tours you become a covered driver under our liability insurance subject to all policy terms and conditions. This coverage has a <strong>$1,000 deductible per accident</strong> so if you are involved in an accident with any other person, vehicle or property you agree to pay us $1,000 at the time of the accident regardless of fault in the accident.</p>
-        </div>
-      </div>
-
-      <!-- LIABILITY COVERAGE -->
-      <div class="policy-card">
-        <div class="policy-icon">📋</div>
-        <h2 class="policy-heading">Liability Coverage</h2>
-        <p>Our coverage provides the following limits of liability:</p>
-
-        <div class="coverage-details">
-          <div class="coverage-item">
-            <span class="coverage-label">Per person bodily injury:</span>
-            <span class="coverage-amount">Contact us for details</span>
-          </div>
-          <div class="coverage-item">
-            <span class="coverage-label">Property damage:</span>
-            <span class="coverage-amount">Contact us for details</span>
-          </div>
-          <div class="coverage-item">
-            <span class="coverage-label">Total per accident:</span>
-            <span class="coverage-amount">Contact us for details</span>
-          </div>
-        </div>
-
-        <div class="policy-disclaimer">
-          <p><strong>Insurance Disclaimer:</strong> Everyone's insurance needs are different and we make no representation that our liability limits are adequate for you. We are not insurance brokers, agents or providers. If you have questions about coverages, we suggest you contact your insurance agent/broker.</p>
-        </div>
-      </div>
-
-      <!-- RULES & REQUIREMENTS -->
-      <div class="policy-card">
-        <div class="policy-icon">⚖️</div>
-        <h2 class="policy-heading">Rules & Requirements</h2>
-
-        <div class="policy-list">
-          <h3>Punctuality:</h3>
-          <ul>
-            <li>If some members of your group are on time, we will take all on-time participants that have properly signed waivers even if the reserving party is not present.</li>
-            <li>No refunds will be given for guests that were not on time for their adventure.</li>
-          </ul>
-
-          <h3>Alcohol & Drug Policy:</h3>
-          <ul>
-            <li>Absolutely no alcohol may be brought on your adventure.</li>
-            <li>You will not be permitted to participate if your guide believes you are under the influence of alcohol or drugs, legal or illegal.</li>
-            <li>No refunds will be given if you are unable to participate due to alcohol or drug use.</li>
-          </ul>
-
-          <h3>Guide Instructions:</h3>
-          <ul>
-            <li>Your guide is there to ensure you have a safe adventure.</li>
-            <li>You are required to follow all instructions of the guide at all times.</li>
-          </ul>
-
-          <h3>Itinerary Changes:</h3>
-          <ul>
-            <li>Your itinerary is a guide, not a contract.</li>
-            <li>The itinerary may be changed at any time before or during your adventure.</li>
-            <li>Changes to the itinerary are not grounds for a refund.</li>
-          </ul>
-
-          <h3>Refund Processing:</h3>
-          <ul>
-            <li>Any applicable refunds due are refunded to the party that made the original reservation.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- CONTACT CTA -->
-      <div class="policy-cta">
-        <h3>Questions About Our Policy?</h3>
-        <p>If you have any questions about our cancellation policy or terms, please don't hesitate to contact us before booking.</p>
-        <div class="cta-buttons">
-          <a href="tel:435-219-9447" class="cta-button primary">📞 Call (435) 219-9447</a>
-          <a href="/booking/" class="cta-button secondary">Book Your Tour</a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- Mobile Sticky CTA -->
-<div class="mobile-sticky-cta">
-  <button onclick="location.href='/booking/'">Book Your Ride Now</button>
-</div>
-
-`;
+import { getLangFromUrl } from '../lib/i18n';
+import { t } from '../lib/ui';
+const lang = getLangFromUrl(Astro.url);
 ---
 <BaseLayout bodyClass="policy-page-body">
   <Fragment slot="head">
@@ -191,17 +21,17 @@ const bodyHtml = `
     />
   </Fragment>
   <Header slot="body" active="cancellation-policy" />
-  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Cancellation Policy' }]} />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.cancellationPolicy', lang) }]} />
   <Fragment slot="body" set:html={bodyHtml} />
   <Footer
     slot="body"
     trails={{
-      heading: 'Quick Links',
+      heading: t('footer.quickLinks', lang),
       links: [
-        { href: '/#tours', label: 'Our Tours' },
-        { href: '/#vehicles', label: 'Our Fleet' },
-        { href: '/#gallery', label: 'Photo Gallery' },
-        { href: '/booking/', label: 'Book Now' },
+        { href: '/#tours', label: t('footer.link.ourTours', lang) },
+        { href: '/#vehicles', label: t('footer.link.ourFleet', lang) },
+        { href: '/#gallery', label: t('footer.link.photoGallery', lang) },
+        { href: '/booking/', label: t('cta.bookNow', lang) },
       ],
     }}
   />

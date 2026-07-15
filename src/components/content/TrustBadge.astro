@@ -8,16 +8,19 @@
 // Styled for a light page background (article bodies, hero cards). Scoped
 // styles only — no change to the global CSS architecture.
 import { SITE } from '../../config/site';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
 
 interface Props {
   align?: 'left' | 'center';
 }
 const { align = 'center' } = Astro.props;
 const { value, count } = SITE.rating;
+const lang = getLangFromUrl(Astro.url);
 ---
-<p class={`trust-badge trust-badge-${align}`} aria-label={`Rated ${value} out of 5 from ${count} Google reviews`}>
+<p class={`trust-badge trust-badge-${align}`} aria-label={t('reviews.ratedAria', lang, { value, count })}>
   <span class="trust-badge-stars" aria-hidden="true">★★★★★</span>
-  <span class="trust-badge-text"><strong>{value}</strong> &middot; {count} Google reviews</span>
+  <span class="trust-badge-text"><strong>{value}</strong> &middot; {count} {t('reviews.googleReviews', lang)}</span>
 </p>
 
 <style>

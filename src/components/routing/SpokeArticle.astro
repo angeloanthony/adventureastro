@@ -1,0 +1,53 @@
+---
+// SpokeArticle.astro — shared hub-spoke renderer (P4A). The single place
+// that wires a hub-collection entry into SpokeLayout, used by BOTH the
+// English route (src/pages/[hub]/[id].astro → /hub/id/) and the localized
+// route (src/pages/[locale]/[hub]/[id].astro → /es/hub/id/). Factoring it
+// here means the two routes can never drift: add a SpokeLayout prop once and
+// every locale gets it.
+//
+// Locale is derived from the URL (getLangFromUrl): the English route renders
+// at /hub/id/ → 'en'; the localized route at /es/hub/id/ → 'es'. `path`,
+// breadcrumbs, and RelatedArticles all localize off that automatically. The
+// entry id carries the file's locale suffix (`article.es`), so `path` and the
+// article's own `currentId` are derived through parseEntryLocale.
+import { render } from 'astro:content';
+import SpokeLayout from '../../layouts/SpokeLayout.astro';
+import { spokeHref, type HubSlug } from '../../lib/hubs';
+import { getLangFromUrl, parseEntryLocale, localizedPath } from '../../lib/i18n';
+import { t, hubName } from '../../lib/ui';
+import type { SpokeData } from '../../content.config';
+
+type SpokeEntry = { id: string; data: SpokeData; [key: string]: unknown };
+interface Props { entry: SpokeEntry; hub: HubSlug }
+const { entry, hub } = Astro.props;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const { Content } = await render(entry as any);
+const d = entry.data;
+const lang = getLangFromUrl(Astro.url);
+const { baseId } = parseEntryLocale(entry.id);
+---
+<SpokeLayout
+  title={d.title}
+  description={d.description}
+  path={spokeHref(hub, entry.id)}
+  heroImage={d.heroImage}
+  author={d.author}
+  publishDate={d.publishDate}
+  updatedDate={d.updatedDate}
+  breadcrumbs={[
+    { label: t('nav.home', lang), href: localizedPath('', lang) },
+    { label: hubName(hub, lang), href: localizedPath(hub, lang) },
+    { label: d.title },
+  ]}
+  collection={hub}
+  currentId={baseId}
+  tags={d.tags}
+  related={d.related}
+  tourCta={d.tourCta}
+  faq={d.faq}
+  ogTitle={d.ogTitle}
+  ogDescription={d.ogDescription}
+>
+  <Content />
+</SpokeLayout>

@@ -24,6 +24,9 @@ import Header from '../../components/layout/Header.astro';
 import Footer from '../../components/layout/Footer.astro';
 import Seo from '../../components/seo/Seo.astro';
 import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
 
 const schema = `{
     "@context": "https://schema.org",
@@ -68,7 +71,7 @@ const schema = `{
     <script type="application/ld+json" set:html={schema} />
   </Fragment>
   <Header slot="body" />
-  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Itineraries' }]} />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.itineraries', lang) }]} />
 
   <p slot="body" class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">The Ultimate Dinosaur Country Itinerary Guide is the trip-planning headquarters for Vernal, Utah and the surrounding Dinosaur Country in northeastern Utah. It helps visitors turn one, two, or three days into a complete itinerary, and it teaches travelers how to combine the region's attractions — Dinosaur National Monument, guided UTV tours, Flaming Gorge, Ashley National Forest and the High Uintas, Red Fleet and Steinaker state parks, petroglyphs, museums, fishing, camping, and scenic drives — rather than listing them. It covers choosing a trip length; one-day, two-day, three-day, and weekend itineraries; and themed trips for families, adventure travelers, photographers, anglers, campers, scenic drivers, hikers, and road-trippers, plus seasonal planning, whether to basecamp in Vernal or move between hotels, where to stay, what to pack, and how to sequence bookings. Drive times, hours, seasons, road and facility status, fees, and lodging change and are set by the National Park Service, the U.S. Forest Service, Utah State Parks, and local providers — verify with official sources. Adventure Tours Vernal offers guided UTV tours for $349 per machine, up to 2 riders, 3 hours. Call (435) 219-9447.</p>
 

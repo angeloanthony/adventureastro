@@ -5,6 +5,8 @@
 // §4.5). URLs come from the hub registry — no per-call basePath.
 import { getCollection } from 'astro:content';
 import { spokeHref, type HubSlug } from '../../lib/hubs';
+import { getLangFromUrl, parseEntryLocale } from '../../lib/i18n';
+import { t } from '../../lib/ui';
 import type { SpokeData } from '../../content.config';
 
 type Spoke = { id: string; data: SpokeData };
@@ -13,13 +15,19 @@ interface Props {
   collection: HubSlug;
   heading?: string;
 }
-const { collection, heading = 'Explore This Hub' } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const { collection, heading = t('section.exploreThisHub', lang) } = Astro.props;
 
-const entries = ((await getCollection(collection)) as unknown as Spoke[]).filter((e) => !e.data.draft);
+// Only this page's locale: a pillar lists spokes written in the same language
+// it renders in (parseEntryLocale reads the file's suffix). On the English
+// pillar this is every current entry; on a localized pillar it is that
+// locale's translated spokes. Cross-locale entries never leak into the list.
+const entries = ((await getCollection(collection)) as unknown as Spoke[])
+  .filter((e) => !e.data.draft && parseEntryLocale(e.id).locale === lang);
 entries.sort((a, b) => b.data.updatedDate.valueOf() - a.data.updatedDate.valueOf());
 ---
 {entries.length > 0 && (
-  <section class="hub-index" aria-label="All articles in this hub">
+  <section class="hub-index" aria-label={t('a11y.allArticlesInHub', lang)}>
     <h2 class="hub-index-heading">{heading}</h2>
     <ul class="hub-index-list">
       {entries.map((entry) => (

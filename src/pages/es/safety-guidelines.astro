@@ -1,0 +1,41 @@
+---
+// es/safety-guidelines.astro — Spanish safety guidelines (P3A commercial
+// translation batch). Mirrors src/pages/safety-guidelines.astro.
+import { getBodyHtml } from '../../page-content/safety';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+---
+<BaseLayout bodyClass="policy-page-body">
+  <Fragment slot="head">
+    <Seo
+      title="Normas de Seguridad | Adventure Tours Vernal — Vernal, Utah"
+      description="Normas de seguridad para los tours guiados en UTV en Vernal, Utah. Requisitos de edad, normas de operación del vehículo, seguridad en el sendero y procedimientos de emergencia. Llame al (435) 219-9447."
+      path="/es/safety-guidelines/"
+      type="website"
+      ogTitle="Normas de Seguridad | Adventure Tours Vernal"
+      ogDescription="Revise las normas de seguridad para los tours guiados en UTV Kawasaki KRX 1000 en Vernal, Utah. Límites de edad, normas del vehículo, seguridad en el sendero y qué esperar. Llame al (435) 219-9447."
+    />
+  </Fragment>
+  <Header slot="body" active="safety-guidelines" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.safetyGuidelines', lang) }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: t('footer.quickLinks', lang),
+      links: [
+        { href: '/es/#tours', label: t('footer.link.ourTours', lang) },
+        { href: '/es/#vehicles', label: t('footer.link.ourFleet', lang) },
+        { href: '/es/#gallery', label: t('footer.link.photoGallery', lang) },
+        { href: '/es/booking/', label: t('cta.bookNow', lang) },
+      ],
+    }}
+  />
+</BaseLayout>

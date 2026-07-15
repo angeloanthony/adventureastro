@@ -1,0 +1,41 @@
+---
+// [locale]/[hub]/[id].astro — the LOCALIZED spoke route (P4A). Renders every
+// non-draft NON-English hub-collection entry at /{locale}/hub/id/ (e.g.
+// /es/hiking/kings-peak-hiking-guide/). A translated file uses the filename
+// suffix convention — `kings-peak-hiking-guide.es.mdx` loads as id
+// `kings-peak-hiking-guide.es`; parseEntryLocale splits the locale off and the
+// route emits the locale-prefixed path with the base id as the last segment.
+//
+// This dedicated 3-segment route exists because a single `/[hub]/[id]` route
+// cannot emit a leading /{locale}/ segment (a slash inside a non-spread param
+// generates the path but fails to re-match at render — verified on Astro
+// 6.4.4). Rendering is shared with the English route via SpokeArticle.astro.
+//
+// Emits ZERO pages until a translated hub-spoke file exists, so the English
+// build is byte-for-byte unchanged. The English `/hub/id/` variant is emitted
+// by src/pages/[hub]/[id].astro (which skips localized entries).
+import { getCollection } from 'astro:content';
+import SpokeArticle from '../../../components/routing/SpokeArticle.astro';
+import { HUB_SLUGS, type HubSlug } from '../../../lib/hubs';
+import { parseEntryLocale, DEFAULT_LOCALE } from '../../../lib/i18n';
+import type { SpokeData } from '../../../content.config';
+
+type SpokeEntry = { id: string; data: SpokeData; [key: string]: unknown };
+
+export async function getStaticPaths() {
+  const paths = [];
+  for (const hub of HUB_SLUGS) {
+    const entries = (await getCollection(hub)) as unknown as SpokeEntry[];
+    for (const entry of entries.filter((e) => !e.data.draft)) {
+      const { locale, baseId } = parseEntryLocale(entry.id);
+      if (locale === DEFAULT_LOCALE) continue; // English → unprefixed [hub]/[id] route
+      paths.push({ params: { locale, hub, id: baseId }, props: { entry, hub } });
+    }
+  }
+  return paths;
+}
+
+interface Props { entry: SpokeEntry; hub: HubSlug }
+const { entry, hub } = Astro.props;
+---
+<SpokeArticle entry={entry} hub={hub} />

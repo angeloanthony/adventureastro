@@ -1,13 +1,16 @@
 ---
-// [hub]/[id].astro — the ONE spoke route (Phase 2.6 framework). Renders
-// every non-draft entry of every hub collection through SpokeLayout;
-// emits zero pages while collections are empty, so activating it
-// publishes nothing. Draft entries are excluded here AND in
-// sitemap-articles.xml.ts — a draft must never reach dist.
-// URL shape comes exclusively from src/lib/hubs.ts (G2 change point).
-import { getCollection, render } from 'astro:content';
-import SpokeLayout from '../../layouts/SpokeLayout.astro';
-import { HUB_SLUGS, HUBS, pillarHref, spokeHref, type HubSlug } from '../../lib/hubs';
+// [hub]/[id].astro — the ENGLISH spoke route (Phase 2.6 framework; P4A
+// locale split). Renders every non-draft *English* entry of every hub
+// collection at /hub/id/ via SpokeArticle. Translated entries (id carries a
+// locale suffix, e.g. `article.es`) are emitted by the sibling
+// src/pages/[locale]/[hub]/[id].astro route instead — see that file. Rendering
+// lives in components/routing/SpokeArticle.astro so both routes stay in sync.
+// Draft entries are excluded here AND in sitemap-articles.xml.ts — a draft
+// must never reach dist. URL shape comes exclusively from src/lib/hubs.ts.
+import { getCollection } from 'astro:content';
+import SpokeArticle from '../../components/routing/SpokeArticle.astro';
+import { HUB_SLUGS, type HubSlug } from '../../lib/hubs';
+import { parseEntryLocale, DEFAULT_LOCALE } from '../../lib/i18n';
 import type { SpokeData } from '../../content.config';
 
 type SpokeEntry = { id: string; data: SpokeData; [key: string]: unknown };
@@ -17,6 +20,7 @@ export async function getStaticPaths() {
   for (const hub of HUB_SLUGS) {
     const entries = (await getCollection(hub)) as unknown as SpokeEntry[];
     for (const entry of entries.filter((e) => !e.data.draft)) {
+      if (parseEntryLocale(entry.id).locale !== DEFAULT_LOCALE) continue; // localized → [locale]/ route
       paths.push({ params: { hub, id: entry.id }, props: { entry, hub } });
     }
   }
@@ -25,31 +29,5 @@ export async function getStaticPaths() {
 
 interface Props { entry: SpokeEntry; hub: HubSlug }
 const { entry, hub } = Astro.props;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const { Content } = await render(entry as any);
-const d = entry.data;
 ---
-<SpokeLayout
-  title={d.title}
-  description={d.description}
-  path={spokeHref(hub, entry.id)}
-  heroImage={d.heroImage}
-  author={d.author}
-  publishDate={d.publishDate}
-  updatedDate={d.updatedDate}
-  breadcrumbs={[
-    { label: 'Home', href: '/' },
-    { label: HUBS[hub].name, href: pillarHref(hub) },
-    { label: d.title },
-  ]}
-  collection={hub}
-  currentId={entry.id}
-  tags={d.tags}
-  related={d.related}
-  tourCta={d.tourCta}
-  faq={d.faq}
-  ogTitle={d.ogTitle}
-  ogDescription={d.ogDescription}
->
-  <Content />
-</SpokeLayout>
+<SpokeArticle entry={entry} hub={hub} />

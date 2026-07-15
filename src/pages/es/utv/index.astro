@@ -1,0 +1,80 @@
+---
+// es/utv/index.astro — Spanish UTV landing page (P3A commercial
+// translation batch). Mirrors src/pages/utv/index.astro.
+//
+// Known limitation (flagged in the P3A delivery notes): HubIndex reads
+// the `utv` content collection, whose spoke articles are English-only
+// (spokes are out of scope this batch) — the "All UTV Trail Guides" list
+// on this Spanish page will show English titles/links until those spokes
+// are translated. This is the existence-aware fallback the framework was
+// built for, not a bug.
+import { getBodyHtml } from '../../../page-content/utv';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE } from '../../../config/site';
+import Header from '../../../components/layout/Header.astro';
+import Footer from '../../../components/layout/Footer.astro';
+import Seo from '../../../components/seo/Seo.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import HubIndex from '../../../components/content/HubIndex.astro';
+import TourDecisionGuide from '../../../components/content/TourDecisionGuide.astro';
+import { getLangFromUrl } from '../../../lib/i18n';
+import { t } from '../../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `
+  {
+    "@context": "https://schema.org",
+    "@type": "TouristAttraction",
+    "name": "Tours de Senderos en UTV — Adventure Tours Vernal",
+    "description": "Tours guiados en UTV cerca de Vernal, Utah. Los senderos incluyen Doc's Beach, Moonshine Arch, Ashley Gorge, Outlaw Trail y Asphalt Ridge. Petroglifos, fauna silvestre incluyendo águilas doradas, águilas calvas, venados y pumas, y amplios miradores escénicos.",
+    "url": "https://adventuretoursvernal.com/es/utv/",
+    "image": "https://adventuretoursvernal.com/images/Docs%20Beach.webp",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Adventure Tours Vernal",
+      "telephone": "+1-435-219-9447",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1935 S 1500 E",
+        "addressLocality": "Vernal",
+        "addressRegion": "UT",
+        "postalCode": "84078",
+        "addressCountry": "US"
+      }
+    }
+  }
+`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Tours de Senderos en UTV en Vernal, Utah | Adventure Tours Vernal"
+      description="Explore tours guiados en senderos en UTV Kawasaki KRX 1000 cerca de Vernal, Utah — Doc's Beach, Moonshine Arch, Ashley Gorge, Outlaw Trail y Asphalt Ridge. Llame al (435) 219-9447."
+      path="/es/utv/"
+      type="website"
+      image="https://adventuretoursvernal.com/images/Docs%20Beach.webp"
+      ogTitle="Tours de Senderos en UTV | Adventure Tours Vernal"
+      ogDescription="Cinco tours guiados en senderos en UTV cerca de Vernal, Utah. Águilas, petroglifos, cañones y paisajes impresionantes. Llame al (435) 219-9447."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="trails" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.trails', lang) }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <TourDecisionGuide slot="body" />
+  <HubIndex slot="body" collection="utv" heading="Todas las Guías de Senderos en UTV" />
+  <Footer
+    slot="body"
+    trails={{
+      heading: t('footer.ourTrails', lang),
+      links: [
+        { href: '/es/utv/', label: "Doc's Beach" },
+        { href: '/es/utv/', label: 'Moonshine Arch' },
+        { href: '/es/utv/', label: 'Ashley Gorge' },
+        { href: '/es/utv/', label: 'Outlaw Trail' },
+        { href: '/es/utv/', label: 'Asphalt Ridge' },
+      ],
+    }}
+    contact={{ heading: 'Contacto' }}
+  />
+</BaseLayout>

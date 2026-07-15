@@ -15,6 +15,8 @@ import AuthorByline from '../components/content/AuthorByline.astro';
 import RelatedArticles from '../components/content/RelatedArticles.astro';
 import FaqAccordion from '../components/content/FaqAccordion.astro';
 import TourCta from '../components/content/TourCta.astro';
+import { getLangFromUrl } from '../lib/i18n';
+import { t } from '../lib/ui';
 import type { LinkCollection } from '../lib/hubs';
 
 interface Props {
@@ -40,6 +42,7 @@ const {
   breadcrumbs, collection, currentId, tags = [], related = [], tourCta = 'utv',
   faq = [], ogTitle, ogDescription,
 } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
 ---
 <BaseLayout>
   <Fragment slot="head">
@@ -54,7 +57,7 @@ const {
       <slot />
       {faq.length > 0 && (
         <section class="spoke-faq">
-          <h2>Frequently Asked Questions</h2>
+          <h2>{t('section.faq', lang)}</h2>
           <FaqAccordion faq={faq} />
         </section>
       )}

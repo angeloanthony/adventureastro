@@ -8,6 +8,7 @@
 // overrides where the old markup deliberately used different social copy.
 import { SITE } from '../../config/site';
 import { absoluteUrl } from '../../lib/urls';
+import { getLangFromUrl, getLocaleMeta } from '../../lib/i18n';
 
 interface Props {
   title: string; // <= 60 chars per §6.1; money pages append " | Adventure Tours Vernal"
@@ -36,6 +37,7 @@ const {
 
 const image = absoluteUrl(imageProp);
 const canonical = absoluteUrl(path);
+const lang = getLangFromUrl(Astro.url);
 ---
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -50,6 +52,7 @@ const canonical = absoluteUrl(path);
 <meta property="og:url" content={canonical} />
 <meta property="og:type" content={type} />
 <meta property="og:site_name" content={SITE.name} />
+<meta property="og:locale" content={getLocaleMeta(lang).ogLocale} />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={twitterTitle} />

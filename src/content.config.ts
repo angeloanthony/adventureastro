@@ -11,7 +11,19 @@ import { existsSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { HUB_SLUGS, type HubSlug } from './lib/hubs';
 
-const contentLoader = (dir: string) => glob({ pattern: '**/[^_]*.{md,mdx}', base: `./src/content/${dir}` });
+// P4A correction: the default glob `generateId` runs each id segment through
+// github-slugger, which STRIPS the dot in a locale-suffixed filename
+// (`article.es.mdx` → id `articlees`), defeating the `.es.mdx` sibling
+// convention parseEntryLocale() relies on. Override with a minimal id =
+// extension-stripped relative path, preserving the `.es`/`.it`/`.pt` suffix so
+// the locale survives into routing. English filenames contain no dots, so their
+// ids (and URLs) are byte-identical to before. Content ids are already
+// lowercase-kebab slugs, so no slugification is lost.
+const contentLoader = (dir: string) => glob({
+  pattern: '**/[^_]*.{md,mdx}',
+  base: `./src/content/${dir}`,
+  generateId: ({ entry }) => entry.replace(/\.(mdx|md)$/i, ''),
+});
 const dataLoader = (dir: string) => glob({ pattern: '**/[^_]*.{json,yaml,yml}', base: `./src/content/${dir}` });
 
 // Build-time validation: hero images must exist in public/ (or be a full

@@ -52,7 +52,7 @@ const pageSlug = slug ?? (() => {
   if (segs[0] && segs[0] !== DEFAULT_LOCALE && (LOCALE_CODES as readonly string[]).includes(segs[0])) segs.shift();
   return segs.join('/');
 })();
-const available = availableLocales ?? getAvailableLocales(pageSlug);
+const available: string[] = availableLocales ?? getAvailableLocales(pageSlug);
 const showHreflang = available.length > 1;
 ---
 <!DOCTYPE html>

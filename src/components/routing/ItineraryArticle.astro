@@ -1,0 +1,45 @@
+---
+// ItineraryArticle.astro — shared itinerary-spoke renderer (P4A). The single
+// place that wires an `itineraries` entry into ItineraryLayout, used by BOTH
+// the English route (src/pages/itineraries/[id].astro → /itineraries/id/) and
+// the localized route (src/pages/[locale]/itineraries/[id].astro →
+// /es/itineraries/id/). See SpokeArticle.astro for the same rationale.
+import { render } from 'astro:content';
+import ItineraryLayout from '../../layouts/ItineraryLayout.astro';
+import { spokeHref } from '../../lib/hubs';
+import { getLangFromUrl, parseEntryLocale, localizedPath } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+import type { SpokeData } from '../../content.config';
+
+type ItineraryEntry = { id: string; data: SpokeData; [key: string]: unknown };
+interface Props { entry: ItineraryEntry }
+const { entry } = Astro.props;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const { Content } = await render(entry as any);
+const d = entry.data;
+const lang = getLangFromUrl(Astro.url);
+const { baseId } = parseEntryLocale(entry.id);
+---
+<ItineraryLayout
+  title={d.title}
+  description={d.description}
+  path={spokeHref('itineraries', entry.id)}
+  heroImage={d.heroImage}
+  author={d.author}
+  publishDate={d.publishDate}
+  updatedDate={d.updatedDate}
+  breadcrumbs={[
+    { label: t('nav.home', lang), href: localizedPath('', lang) },
+    { label: t('nav.itineraries', lang), href: localizedPath('itineraries', lang) },
+    { label: d.title },
+  ]}
+  currentId={baseId}
+  tags={d.tags}
+  related={d.related}
+  tourCta={d.tourCta}
+  faq={d.faq}
+  ogTitle={d.ogTitle}
+  ogDescription={d.ogDescription}
+>
+  <Content />
+</ItineraryLayout>

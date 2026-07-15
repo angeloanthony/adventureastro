@@ -10,7 +10,11 @@
 // dropped link is how networks decay.
 import { getCollection, getEntry } from 'astro:content';
 import { HUB_SLUGS, spokeHref, type LinkCollection } from '../../lib/hubs';
+import { getLangFromUrl, parseEntryLocale, DEFAULT_LOCALE } from '../../lib/i18n';
+import { t } from '../../lib/ui';
 import type { SpokeData } from '../../content.config';
+
+const lang = getLangFromUrl(Astro.url);
 
 interface Card { title: string; description: string; href: string }
 
@@ -34,10 +38,17 @@ const sharedTagCount = (entry: Spoke) => entry.data.tags.filter((t: string) => t
 const byRelevance = (a: Spoke, b: Spoke) =>
   sharedTagCount(b) - sharedTagCount(a) || b.data.updatedDate.valueOf() - a.data.updatedDate.valueOf();
 
+// The linking network stays within one locale: a Spanish article relates only
+// to Spanish articles, English only to English. `currentId` is the locale-less
+// base id (passed by SpokeArticle), so identity/dedupe compare against each
+// candidate's base id too. (P4A — byte-identical while only English exists.)
+const baseOf = (e: Spoke) => parseEntryLocale(e.id).baseId;
+const inLocale = (e: Spoke) => parseEntryLocale(e.id).locale === lang;
+
 const picked: { hub: LinkCollection; entry: Spoke }[] = [];
 const seen = new Set<string>([`${collection}/${currentId}`]);
 const take = (hub: LinkCollection, entry: Spoke) => {
-  const key = `${hub}/${entry.id}`;
+  const key = `${hub}/${baseOf(entry)}`;
   if (seen.has(key) || picked.length >= limit) return;
   seen.add(key);
   picked.push({ hub, entry });
@@ -45,7 +56,7 @@ const take = (hub: LinkCollection, entry: Spoke) => {
 
 // Tier 1 — same hub by shared tags.
 const sameHub = ((await getCollection(collection)) as unknown as Spoke[])
-  .filter((e) => e.id !== currentId && !e.data.draft);
+  .filter((e) => inLocale(e) && baseOf(e) !== currentId && !e.data.draft);
 sameHub.sort(byRelevance);
 for (const entry of sameHub) {
   if (sharedTagCount(entry) > 0) take(collection, entry);
@@ -59,9 +70,13 @@ for (const ref of related) {
   if (!LINKABLE.includes(hub)) {
     throw new Error(`RelatedArticles: unknown collection in related ref "${ref}" (page ${collection}/${currentId})`);
   }
-  const entry = (await getEntry(hub, id)) as unknown as Spoke | undefined;
+  // `related` refs name the locale-less base id; resolve to THIS page's locale
+  // (English → base id as-is; 'es' → `${id}.es`). An unresolved ref still fails
+  // the build — the same guard that keeps the English network from decaying.
+  const lookupId = lang === DEFAULT_LOCALE ? id : `${id}.${lang}`;
+  const entry = (await getEntry(hub, lookupId)) as unknown as Spoke | undefined;
   if (!entry) {
-    throw new Error(`RelatedArticles: related ref "${ref}" does not resolve (page ${collection}/${currentId})`);
+    throw new Error(`RelatedArticles: related ref "${ref}" does not resolve for locale "${lang}" (page ${collection}/${currentId})`);
   }
   if (!entry.data.draft) take(hub, entry);
 }
@@ -70,7 +85,7 @@ for (const ref of related) {
 if (picked.length < limit && tags.length > 0) {
   for (const hub of HUB_SLUGS) {
     if (hub === collection) continue;
-    const entries = ((await getCollection(hub)) as unknown as Spoke[]).filter((e) => !e.data.draft);
+    const entries = ((await getCollection(hub)) as unknown as Spoke[]).filter((e) => inLocale(e) && !e.data.draft);
     const tagged = entries.filter((e) => sharedTagCount(e) > 0).sort(byRelevance);
     for (const entry of tagged) take(hub, entry);
   }
@@ -86,8 +101,8 @@ const cards: Card[] = picked.map(({ hub, entry }) => ({
 }));
 ---
 {cards.length > 0 && (
-  <section class="related-articles" aria-label="Related articles">
-    <h2 class="related-articles-heading">You Might Also Like</h2>
+  <section class="related-articles" aria-label={t('a11y.relatedArticles', lang)}>
+    <h2 class="related-articles-heading">{t('section.youMightAlsoLike', lang)}</h2>
     <div class="related-grid">
       {cards.map((card) => (
         <a href={card.href} class="related-card">

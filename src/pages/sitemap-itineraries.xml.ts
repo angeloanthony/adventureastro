@@ -3,11 +3,12 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 import { buildSitemapXml, type SitemapUrl } from '../lib/sitemap';
+import { spokeSitemapLoc } from '../lib/hubs';
 
 export const GET: APIRoute = async () => {
   const entries = await getCollection('itineraries', ({ data }) => !data.draft);
   const urls: SitemapUrl[] = entries.map((e) => ({
-    loc: `itineraries/${e.id}/`,
+    loc: spokeSitemapLoc('itineraries', e.id),
     lastmod: e.data.updatedDate,
   }));
   return new Response(buildSitemapXml(urls), { headers: { 'Content-Type': 'application/xml' } });

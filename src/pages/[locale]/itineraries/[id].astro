@@ -1,0 +1,30 @@
+---
+// [locale]/itineraries/[id].astro — the LOCALIZED itinerary route (P4A).
+// Renders every non-draft NON-English `itineraries` entry at
+// /{locale}/itineraries/id/. Mirrors src/pages/[locale]/[hub]/[id].astro but
+// for the dedicated itineraries collection (see itineraries/[id].astro for why
+// itineraries own a bespoke route). Rendering is shared via
+// ItineraryArticle.astro. Emits ZERO pages until a translated itinerary file
+// exists, so the English build is byte-for-byte unchanged.
+import { getCollection } from 'astro:content';
+import ItineraryArticle from '../../../components/routing/ItineraryArticle.astro';
+import { parseEntryLocale, DEFAULT_LOCALE } from '../../../lib/i18n';
+import type { SpokeData } from '../../../content.config';
+
+type ItineraryEntry = { id: string; data: SpokeData; [key: string]: unknown };
+
+export async function getStaticPaths() {
+  const entries = (await getCollection('itineraries')) as unknown as ItineraryEntry[];
+  return entries
+    .filter((e) => !e.data.draft)
+    .flatMap((entry) => {
+      const { locale, baseId } = parseEntryLocale(entry.id);
+      if (locale === DEFAULT_LOCALE) return []; // English → unprefixed itineraries/[id] route
+      return [{ params: { locale, id: baseId }, props: { entry } }];
+    });
+}
+
+interface Props { entry: ItineraryEntry }
+const { entry } = Astro.props;
+---
+<ItineraryArticle entry={entry} />

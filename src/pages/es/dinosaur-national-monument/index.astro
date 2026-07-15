@@ -1,0 +1,43 @@
+---
+// es/dinosaur-national-monument/index.astro — Spanish DNM hub pillar
+// (P3B Destination Authority batch). Mirrors
+// src/pages/dinosaur-national-monument/index.astro exactly.
+//
+// Known limitation (flagged in the P3B delivery notes): HubIndex reads
+// the `dinosaur-national-monument` content collection, whose spoke
+// articles (petroglyphs-rock-art-vernal, visiting-dinosaur-national-monument)
+// are English-only MDX — out of scope this batch. The "All Dinosaur
+// Monument Guides" list on this Spanish page will show English
+// titles/links until those spokes are translated — the existence-aware
+// fallback the framework was built for, not a bug.
+import { getBodyHtml } from '../../../page-content/dnm';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE } from '../../../config/site';
+import Header from '../../../components/layout/Header.astro';
+import Footer from '../../../components/layout/Footer.astro';
+import Seo from '../../../components/seo/Seo.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import HubIndex from '../../../components/content/HubIndex.astro';
+import { getLangFromUrl } from '../../../lib/i18n';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Tours en UTV Cerca de Dinosaur National Monument","description":"Tours guiados en UTV en la zona agreste que rodea Dinosaur National Monument, Vernal, Utah.","author":{"@type":"Organization","name":"Adventure Tours Vernal"},"publisher":{"@type":"Organization","name":"Adventure Tours Vernal","logo":{"@type":"ImageObject","url":"https://adventuretoursvernal.com/images/logo.webp"}},"datePublished":"2026-04-08","dateModified":"2026-04-08","mainEntityOfPage":"https://adventuretoursvernal.com/es/dinosaur-national-monument/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Se pueden hacer tours en UTV cerca de Dinosaur National Monument?","acceptedAnswer":{"@type":"Answer","text":"Sí. Adventure Tours Vernal opera tours guiados en Kawasaki KRX 1000 por la zona agreste que rodea el monumento. Aunque no se permiten vehículos motorizados dentro del monumento, los senderos justo afuera presentan el mismo terreno de cañones, petroglifos y formaciones geológicas."}},{"@type":"Question","name":"¿Qué tan lejos está Adventure Tours Vernal de Dinosaur National Monument?","acceptedAnswer":{"@type":"Answer","text":"Adventure Tours Vernal tiene su base en Vernal, Utah, aproximadamente 20 minutos al oeste del Quarry Exhibit Hall del monumento. Muchos visitantes combinan un tour en UTV con una visita al monumento en el mismo viaje."}},{"@type":"Question","name":"¿Cuál es la mejor manera de combinar un tour en UTV con Dinosaur National Monument?","acceptedAnswer":{"@type":"Answer","text":"Reserve su tour en UTV para la mañana y visite el monumento por la tarde, o al revés. Un tour guiado de 3 horas en UTV más medio día en el monumento hacen un día completo de aventura en la tierra de los cañones."}}]}]}`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Tours en UTV Cerca de Dinosaur National Monument | Adventure Tours Vernal"
+      description="Tours guiados en UTV cerca de Dinosaur National Monument en Vernal, Utah. Explore cañones de la zona agreste, petroglifos y terreno desértico a pocos minutos del monumento. Reserve hoy."
+      path="/es/dinosaur-national-monument/"
+      type="article"
+      ogTitle="Tours en UTV Cerca de Dinosaur National Monument"
+      ogDescription="Tours guiados en Kawasaki KRX 1000 por la zona agreste que rodea Dinosaur National Monument — cañones, petroglifos y aventura en el desierto."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="dinosaur-national-monument" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Tours al Monumento a los Dinosaurios' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <HubIndex slot="body" collection="dinosaur-national-monument" heading="Todas las Guías del Monumento a los Dinosaurios" />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

@@ -17,6 +17,8 @@
 // Pages that pass custom trails/info/columns links MUST do the same —
 // never relative, never .html.
 import { SITE } from '../../config/site';
+import { getLangFromUrl, getAvailableLocales, localizedPath, DEFAULT_LOCALE } from '../../lib/i18n';
+import { t } from '../../lib/ui';
 
 interface LinkItem { href: string; label: string; class?: string }
 interface FooterColumn { heading: string; links: LinkItem[] }
@@ -44,43 +46,49 @@ interface Props {
   copyright?: { prefix?: string; linkText?: string; linkHref?: string; suffix?: string };
 }
 
+const lang = getLangFromUrl(Astro.url);
+// Existence-aware: link to the booking page in the current locale only if
+// it exists there, otherwise fall back to English (P3A.1 — same pattern
+// BaseLayout/LanguageSwitcher already use, just applied to a CTA href).
+const bookingHref = localizedPath('booking', getAvailableLocales('booking').includes(lang) ? lang : DEFAULT_LOCALE);
 const {
   variant = 'full',
   showSocial = true,
-  tagline = "Experience the adventure of a lifetime in Utah's dinosaur country.",
+  tagline = t('footer.tagline', lang),
   logoHeight,
   brandPhone = false,
   trails = {
-    heading: 'Our Trails',
+    heading: t('footer.ourTrails', lang),
+    // Trail names are place names — kept verbatim, never translated.
     links: [
       { href: '/#tours', label: "Doc's Beach" },
       { href: '/#tours', label: 'Moonshine Arch' },
       { href: '/#tours', label: 'Ashley Gorge' },
       { href: '/#tours', label: 'Outlaw Trail' },
       { href: '/#tours', label: 'Asphalt Ridge' },
-      { href: '/booking/', label: 'Book Now', class: 'nav-book-btn' },
+      { href: bookingHref, label: t('cta.bookNow', lang), class: 'nav-book-btn' },
     ],
   },
   contact = {},
   info = {
-    heading: 'Information',
+    heading: t('footer.information', lang),
     links: [
-      { href: '/cancellation-policy/', label: 'Cancellation Policy' },
-      { href: '/privacy-policy/', label: 'Privacy Policy' },
-      { href: '/faq/', label: 'FAQ' },
-      { href: '/safety-guidelines/', label: 'Safety Guidelines' },
-      { href: '/guides/what-to-bring/', label: 'What to Bring' },
+      { href: '/cancellation-policy/', label: t('nav.cancellationPolicy', lang) },
+      { href: '/privacy-policy/', label: t('nav.privacyPolicy', lang) },
+      { href: '/faq/', label: t('nav.faq', lang) },
+      { href: '/safety-guidelines/', label: t('nav.safetyGuidelines', lang) },
+      { href: '/guides/what-to-bring/', label: t('nav.whatToBring', lang) },
     ],
     // Active authority hubs (Task 3, Build Guide §2.2) — the default
     // footer's second column, so every collection spoke page (SpokeLayout
     // renders a bare <Footer /> with no props) links out to every hub.
-    secondHeading: 'Explore Vernal',
+    secondHeading: t('section.exploreVernal', lang),
     secondLinks: [
-      { href: '/utv/', label: 'UTV Trails & Tours' },
-      { href: '/things-to-do/', label: 'Things to Do' },
-      { href: '/dinosaur-national-monument/', label: 'Dinosaur National Monument' },
-      { href: '/guides/', label: 'Guides' },
-      { href: '/from/salt-lake-city/', label: 'Visiting from Salt Lake City' },
+      { href: '/utv/', label: t('footer.link.utvTrailsTours', lang) },
+      { href: '/things-to-do/', label: t('footer.link.thingsToDo', lang) },
+      { href: '/dinosaur-national-monument/', label: t('footer.link.dinosaurNationalMonument', lang) },
+      { href: '/guides/', label: t('footer.link.guides', lang) },
+      { href: '/from/salt-lake-city/', label: t('footer.link.visitingFromSLC', lang) },
     ],
   },
   columns,
@@ -91,12 +99,12 @@ const copyrightConfig = {
   prefix: '',
   linkText: 'cozelosdata.com',
   linkHref: 'https://cozelosdata.com',
-  suffix: ' - All rights reserved.',
+  suffix: t('footer.copyrightSuffix', lang),
   ...copyright,
 };
 
 const contactConfig: ContactConfig | false = contact === false ? false : {
-  heading: 'Contact Info',
+  heading: t('footer.contactInfo', lang),
   showStreet: true,
   phoneFormat: 'dash',
   emailAsLink: false,
