@@ -85,6 +85,9 @@ const ES_SLUGS = new Set([
   'hiking/photography-hikes-near-vernal', 'hiking/spring-hiking-near-vernal',
   'hiking/summer-hiking-near-vernal', 'hiking/wildflower-hiking-near-vernal',
   'hiking/wildlife-hiking-guide-near-vernal', 'hiking/winter-hiking-near-vernal',
+  // P4D — Spanish fishing hub batch (4 spokes).
+  'fishing/fishing-flaming-gorge', 'fishing/fishing-red-fleet-reservoir',
+  'fishing/fishing-steinaker-reservoir', 'fishing/green-river-fly-fishing',
 ]);
 
 /**
