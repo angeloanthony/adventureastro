@@ -519,12 +519,270 @@ const ES = `
 
 `;
 
+const IT = `
+<section class="policy-section">
+    <div class="container">
+        <div class="section-header">
+            <h1 class="section-title">Politica sulla Privacy</h1>
+            <p class="section-subtitle">La Sua privacy è importante per noi. Scopra come raccogliamo, utilizziamo e proteggiamo le Sue informazioni.</p>
+            <p class="policy-effective-date">Data di entrata in vigore: febbraio 2026</p>
+        </div>
+
+        <div class="policy-container">
+
+            <!-- INTRODUZIONE -->
+            <div class="policy-card">
+                <div class="policy-icon">🔒</div>
+                <h2 class="policy-heading">Il Nostro Impegno per la Privacy</h2>
+                <p>Presso Adventure Tours Vernal, accessibile da <strong>adventuretoursvernal.com</strong>, una delle nostre principali priorità è la privacy dei nostri visitatori. Questo documento sulla Politica sulla Privacy descrive i tipi di informazioni raccolte e registrate da Adventure Tours Vernal e come le utilizziamo.</p>
+                <p>Se ha ulteriori domande o necessita di maggiori informazioni sulla nostra Politica sulla Privacy, non esiti a contattarci.</p>
+                <div class="policy-note">
+                    <strong>Ambito:</strong> Questa Politica sulla Privacy si applica esclusivamente alle nostre attività online ed è valida per i visitatori del nostro sito web in relazione alle informazioni che vengono condivise e/o raccolte. Questa politica non si applica a informazioni raccolte offline o tramite canali diversi da questo sito web.
+                </div>
+            </div>
+
+            <!-- CONSENSO -->
+            <div class="policy-card">
+                <div class="policy-icon">✅</div>
+                <h2 class="policy-heading">Consenso</h2>
+                <p>Utilizzando il nostro sito web, Lei acconsente alla nostra Politica sulla Privacy e ne accetta i termini.</p>
+            </div>
+
+            <!-- INFORMAZIONI CHE RACCOGLIAMO -->
+            <div class="policy-card">
+                <div class="policy-icon">📋</div>
+                <h2 class="policy-heading">Informazioni che Raccogliamo</h2>
+
+                <p>Le informazioni personali che Le vengono richieste, e i motivi per cui Le vengono richieste, Le saranno indicati chiaramente nel momento in cui Le chiediamo di fornire i Suoi dati personali.</p>
+
+                <div class="policy-list">
+                    <h3>Quando Ci Contatta Direttamente:</h3>
+                    <p>Se ci contatta direttamente, potremmo ricevere ulteriori informazioni su di Lei, come:</p>
+                    <ul>
+                        <li>Il Suo nome</li>
+                        <li>Indirizzo email</li>
+                        <li>Numero di telefono</li>
+                        <li>Il contenuto del messaggio e/o degli allegati che potrebbe inviarci</li>
+                        <li>Qualsiasi altra informazione che desideri fornire</li>
+                    </ul>
+
+                    <h3>Quando Effettua un Acquisto o una Prenotazione:</h3>
+                    <p>Potremmo richiederLe le Sue informazioni di contatto, tra cui:</p>
+                    <ul>
+                        <li>Nome</li>
+                        <li>Ragione sociale (se applicabile)</li>
+                        <li>Indirizzo</li>
+                        <li>Indirizzo email</li>
+                        <li>Numero di telefono</li>
+                        <li>Informazioni della carta di credito (per completare l'acquisto)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- COME UTILIZZIAMO LE SUE INFORMAZIONI -->
+            <div class="policy-card">
+                <div class="policy-icon">🔧</div>
+                <h2 class="policy-heading">Come Utilizziamo le Sue Informazioni</h2>
+
+                <p>Utilizziamo le informazioni raccolte in vari modi, tra cui per:</p>
+
+                <div class="usage-grid">
+                    <div class="usage-item">
+                        <div class="usage-icon">🌐</div>
+                        <div class="usage-text">
+                            <strong>Fornire e Gestire il Nostro Sito Web</strong>
+                            <p>Mantenere e offrirLe i nostri servizi</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">📈</div>
+                        <div class="usage-text">
+                            <strong>Migliorare e Personalizzare</strong>
+                            <p>Migliorare la Sua esperienza e ampliare i nostri servizi</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">📊</div>
+                        <div class="usage-text">
+                            <strong>Analizzare l'Utilizzo</strong>
+                            <p>Capire come utilizza il nostro sito web</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">💡</div>
+                        <div class="usage-text">
+                            <strong>Sviluppare Nuove Funzionalità</strong>
+                            <p>Creare nuovi prodotti, servizi e funzionalità</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">💬</div>
+                        <div class="usage-text">
+                            <strong>Comunicare con Lei</strong>
+                            <p>Assistenza clienti, aggiornamenti e promozioni</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">📧</div>
+                        <div class="usage-text">
+                            <strong>Inviare Aggiornamenti via Email</strong>
+                            <p>Messaggi promozionali e informativi</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">🛡️</div>
+                        <div class="usage-text">
+                            <strong>Prevenire le Frodi</strong>
+                            <p>Individuare e prevenire attività fraudolente</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FILE DI REGISTRO -->
+            <div class="policy-card">
+                <div class="policy-icon">📁</div>
+                <h2 class="policy-heading">File di Registro</h2>
+
+                <p>Adventure Tours Vernal segue una procedura standard di utilizzo dei file di registro ("log files"). Questi file registrano i visitatori quando visitano i siti web. Tutte le aziende di hosting lo fanno come parte dei servizi di analisi dell'hosting.</p>
+
+                <div class="info-box">
+                    <h3>Informazioni Raccolte dai File di Registro:</h3>
+                    <div class="info-items">
+                        <span class="info-tag">Indirizzi IP</span>
+                        <span class="info-tag">Tipo di Browser</span>
+                        <span class="info-tag">Fornitore di Servizi Internet (ISP)</span>
+                        <span class="info-tag">Data e Ora</span>
+                        <span class="info-tag">Pagine di Provenienza/Uscita</span>
+                        <span class="info-tag">Numero di Clic</span>
+                    </div>
+                </div>
+
+                <p class="policy-disclaimer">Queste informazioni non sono collegate a nessun dato personalmente identificabile. Il loro scopo è analizzare le tendenze, amministrare il sito, monitorare i movimenti degli utenti sul sito web e raccogliere informazioni demografiche.</p>
+            </div>
+
+            <!-- COOKIE -->
+            <div class="policy-card">
+                <div class="policy-icon">🍪</div>
+                <h2 class="policy-heading">Cookie e Web Beacon</h2>
+
+                <p>Come qualsiasi altro sito web, Adventure Tours Vernal utilizza i "cookie". Questi cookie vengono utilizzati per memorizzare informazioni, incluse le preferenze dei visitatori e le pagine del sito web consultate o visitate dal visitatore. Queste informazioni vengono utilizzate per ottimizzare l'esperienza dell'utente personalizzando i contenuti della nostra pagina web in base al tipo di browser del visitatore e/o ad altre informazioni.</p>
+
+                <div class="policy-warning">
+                    <strong>La Sua Scelta:</strong> Può scegliere di disabilitare i cookie tramite le opzioni del Suo browser. Per informazioni più dettagliate sulla gestione dei cookie con browser specifici, può consultarle sui siti web dei rispettivi browser.
+                </div>
+            </div>
+
+            <!-- DIRITTI CCPA -->
+            <div class="policy-card">
+                <div class="policy-icon">⚖️</div>
+                <h2 class="policy-heading">Diritti alla Privacy CCPA (Non Vendere le Mie Informazioni Personali)</h2>
+
+                <p>Ai sensi del California Consumer Privacy Act (CCPA), tra gli altri diritti, i consumatori della California hanno il diritto di:</p>
+
+                <div class="rights-list">
+                    <div class="right-item">
+                        <div class="right-number">1</div>
+                        <div class="right-content">
+                            <strong>Richiedere la Divulgazione dei Dati</strong>
+                            <p>Richiedere che un'azienda che raccoglie i dati personali di un consumatore divulghi le categorie e i dati personali specifici che tale azienda ha raccolto sui consumatori.</p>
+                        </div>
+                    </div>
+                    <div class="right-item">
+                        <div class="right-number">2</div>
+                        <div class="right-content">
+                            <strong>Richiedere la Cancellazione dei Dati</strong>
+                            <p>Richiedere che un'azienda cancelli qualsiasi dato personale relativo al consumatore che tale azienda abbia raccolto.</p>
+                        </div>
+                    </div>
+                    <div class="right-item">
+                        <div class="right-number">3</div>
+                        <div class="right-content">
+                            <strong>Rinunciare alla Vendita dei Dati</strong>
+                            <p>Richiedere che un'azienda che vende i dati personali di un consumatore non venda tali dati.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="policy-note">
+                    <strong>Tempo di Risposta:</strong> Se presenta una richiesta, abbiamo un mese di tempo per risponderLe. Se desidera esercitare uno di questi diritti, La preghiamo di contattarci.
+                </div>
+            </div>
+
+            <!-- DIRITTI GDPR -->
+            <div class="policy-card">
+                <div class="policy-icon">🇪🇺</div>
+                <h2 class="policy-heading">Diritti alla Protezione dei Dati GDPR</h2>
+
+                <p>Desideriamo assicurarci che Lei sia pienamente consapevole di tutti i Suoi diritti in materia di protezione dei dati. Ogni utente ha diritto a quanto segue:</p>
+
+                <div class="gdpr-rights">
+                    <div class="gdpr-right">
+                        <h3>Diritto di Accesso</h3>
+                        <p>Ha il diritto di richiedere copie dei Suoi dati personali. Potremmo addebitarLe una piccola tariffa per questo servizio.</p>
+                    </div>
+                    <div class="gdpr-right">
+                        <h3>Diritto di Rettifica</h3>
+                        <p>Ha il diritto di richiedere che correggiamo qualsiasi informazione che ritenga inesatta. Ha inoltre il diritto di richiedere che completiamo le informazioni che ritenga incomplete.</p>
+                    </div>
+                    <div class="gdpr-right">
+                        <h3>Diritto alla Cancellazione</h3>
+                        <p>Ha il diritto di richiedere che cancelliamo i Suoi dati personali, a determinate condizioni.</p>
+                    </div>
+                    <div class="gdpr-right">
+                        <h3>Diritto alla Limitazione del Trattamento</h3>
+                        <p>Ha il diritto di richiedere che limitiamo il trattamento dei Suoi dati personali, a determinate condizioni.</p>
+                    </div>
+                    <div class="gdpr-right">
+                        <h3>Diritto di Opporsi al Trattamento</h3>
+                        <p>Ha il diritto di opporsi al trattamento dei Suoi dati personali, a determinate condizioni.</p>
+                    </div>
+                    <div class="gdpr-right">
+                        <h3>Diritto alla Portabilità dei Dati</h3>
+                        <p>Ha il diritto di richiedere che trasferiamo i dati che abbiamo raccolto a un'altra organizzazione, o direttamente a Lei, a determinate condizioni.</p>
+                    </div>
+                </div>
+
+                <div class="policy-note">
+                    <strong>Tempo di Risposta:</strong> Se presenta una richiesta, abbiamo un mese di tempo per risponderLe. Se desidera esercitare uno di questi diritti, La preghiamo di contattarci.
+                </div>
+            </div>
+
+            <!-- INFORMAZIONI SUI MINORI -->
+            <div class="policy-card">
+                <div class="policy-icon">👶</div>
+                <h2 class="policy-heading">Informazioni sui Minori</h2>
+
+                <p>Adventure Tours Vernal non raccoglie consapevolmente alcuna Informazione di Identificazione Personale da minori di 13 anni.</p>
+
+                <div class="policy-warning">
+                    <strong>⚠️ Importante:</strong> Se ritiene che Suo figlio abbia fornito questo tipo di informazioni sul nostro sito web, La invitiamo vivamente a contattarci immediatamente; faremo del nostro meglio per rimuovere tempestivamente tali informazioni dai nostri archivi.
+                </div>
+            </div>
+
+            <!-- INVITO ALL'AZIONE -->
+            <div class="policy-cta">
+                <h3>Domande sulla Nostra Politica sulla Privacy?</h3>
+                <p>Se ha domande o dubbi su come gestiamo i Suoi dati, non esiti a contattarci.</p>
+                <div class="cta-buttons">
+                    <a href="tel:435-219-9447" class="cta-button primary">📞 Chiami il (435) 219-9447</a>
+                    <a href="mailto:adventuretoursvernal@gmail.com" class="cta-button secondary">✉️ Ci Scriva</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+`;
+
 /**
- * Locale-aware accessor (P2D pattern; Spanish populated P3A). Every
- * locale without a committed variant falls back to English. Callers that
- * don't need locale awareness keep importing `bodyHtml` directly.
+ * Locale-aware accessor (P2D pattern; Spanish populated P3A, Italian P6).
+ * Every locale without a committed variant falls back to English. Callers
+ * that don't need locale awareness keep importing `bodyHtml` directly.
  */
 export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'es') return ES;
+  if (locale === 'it') return IT;
   return bodyHtml;
 }

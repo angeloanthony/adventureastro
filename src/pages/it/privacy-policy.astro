@@ -1,0 +1,50 @@
+---
+// it/privacy-policy.astro — Italian privacy policy (P6 inline batch).
+// Mirrors src/pages/es/privacy-policy.astro.
+import { getBodyHtml } from '../../page-content/privacy';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+---
+<BaseLayout bodyClass="policy-page-body">
+  <Fragment slot="head">
+    <Seo
+      title="Politica sulla Privacy | Adventure Tours Vernal"
+      description="Politica sulla privacy di Adventure Tours Vernal a Vernal, Utah: come raccogliamo, utilizziamo e proteggiamo le Sue informazioni. Chiami (435) 219-9447."
+      path="/it/privacy-policy/"
+      type="website"
+      ogDescription="Come Adventure Tours Vernal raccoglie, utilizza e protegge le Sue informazioni quando prenota un tour guidato in UTV a Vernal, Utah."
+    />
+  </Fragment>
+  <Header slot="body" active="privacy-policy" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.privacyPolicy', lang) }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: t('footer.quickLinks', lang),
+      links: [
+        { href: '/it/#tours', label: t('footer.link.ourTours', lang) },
+        { href: '/it/#vehicles', label: t('footer.link.ourFleet', lang) },
+        { href: '/it/#gallery', label: t('footer.link.photoGallery', lang) },
+        { href: '/it/booking/', label: t('cta.bookNow', lang) },
+      ],
+    }}
+    contact={{ showStreet: false }}
+    info={{
+      heading: t('footer.information', lang),
+      links: [
+        { href: '/it/cancellation-policy/', label: t('nav.cancellationPolicy', lang) },
+        { href: '/it/privacy-policy/', label: t('nav.privacyPolicy', lang) },
+        { href: '/it/faq/', label: t('nav.faq', lang) },
+        { href: '/it/safety-guidelines/', label: t('nav.safetyGuidelines', lang) },
+      ],
+    }}
+  />
+</BaseLayout>

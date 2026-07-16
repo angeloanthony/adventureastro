@@ -487,12 +487,255 @@ const ES = `
 </div>
 `;
 
+const IT = `
+<!-- BLOCCO RIEPILOGO PAGINA -->
+<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+  Norme di sicurezza di Adventure Tours Vernal per i tour guidati in UTV a Vernal, Utah. I conducenti devono avere almeno 18 anni. I passeggeri devono avere almeno 2 anni. Cinture di sicurezza obbligatorie. Tolleranza zero per alcol o droghe. Briefing di sicurezza completo fornito prima di ogni tour. Chiami il (435) 219-9447.
+</p>
+
+<section class="policy-section">
+  <div class="container">
+    <div class="section-header">
+      <h1 class="section-title">Norme di Sicurezza</h1>
+      <p class="section-subtitle">La Sua sicurezza è la nostra priorità assoluta. La preghiamo di leggere queste norme prima della Sua avventura.</p>
+    </div>
+
+    <div class="policy-container">
+
+      <!-- PRIMA DEL TOUR -->
+      <div class="policy-card">
+        <div class="policy-icon">📋</div>
+        <h2 class="policy-heading">Prima del Tour</h2>
+        <div class="policy-list">
+          <h3>Arrivo e Registrazione:</h3>
+          <ul>
+            <li>Arrivi <strong>con 30 minuti di anticipo</strong> per l'orientamento e il briefing di sicurezza</li>
+            <li>Porti con sé una patente di guida valida (obbligatoria per tutti i conducenti)</li>
+            <li>Completi tutte le liberatorie e gli accordi richiesti</li>
+            <li>Partecipi all'orientamento di sicurezza obbligatorio</li>
+          </ul>
+          <h3>Requisiti di Salute e Fisici:</h3>
+          <ul>
+            <li>Tutti i partecipanti devono essere in buone condizioni fisiche</li>
+            <li>Informi la guida su eventuali condizioni mediche, lesioni o preoccupazioni</li>
+            <li>Le donne in gravidanza devono consultare il proprio medico prima di partecipare</li>
+            <li>Se soffre di problemi alla schiena, al collo o al cuore, La preghiamo di informarci in anticipo</li>
+          </ul>
+          <h3>Politica su Alcol e Sostanze:</h3>
+          <ul>
+            <li><strong>Tolleranza zero</strong> per alcol o droghe</li>
+            <li>Non Le sarà permesso di guidare se si trova sotto l'effetto di alcol o droghe</li>
+            <li>Non saranno concessi rimborsi in caso di infrazioni</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- REQUISITI DI ETÀ -->
+      <div class="policy-card">
+        <div class="policy-icon">👥</div>
+        <h2 class="policy-heading">Requisiti di Età</h2>
+        <div class="policy-table">
+          <div class="policy-row">
+            <div class="policy-timeframe">Per Guidare</div>
+            <div class="policy-refund refund-full">18 anni o più</div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-timeframe">Per Viaggiare come Passeggero</div>
+            <div class="policy-refund refund-full">2 anni o più</div>
+          </div>
+        </div>
+        <div class="policy-note">
+          <strong>Importante:</strong> Tutti i conducenti devono presentare una patente di guida valida. I genitori/tutori devono firmare le liberatorie per i minori.
+        </div>
+      </div>
+
+      <!-- OPERAZIONE DEL VEICOLO -->
+      <div class="policy-card">
+        <div class="policy-icon">🚙</div>
+        <h2 class="policy-heading">Operazione del Veicolo e Sicurezza</h2>
+        <div class="policy-list">
+          <h3>Durante la Guida del Veicolo:</h3>
+          <ul>
+            <li>Indossi sempre la cintura di sicurezza, senza eccezioni</li>
+            <li>Tenga sempre mani e braccia all'interno del veicolo</li>
+            <li>Non si alzi mai in piedi mentre il veicolo è in movimento</li>
+            <li>Segua sempre le istruzioni della guida</li>
+            <li>Mantenga una distanza di sicurezza dagli altri veicoli</li>
+            <li>Usi il walkie-talkie per comunicare con la guida</li>
+          </ul>
+          <h3>Dispositivi di Sicurezza (Obbligatori):</h3>
+          <ul>
+            <li>Le cinture di sicurezza devono essere indossate da tutti i passeggeri</li>
+            <li>Caschi (disponibili su richiesta)</li>
+            <li>Si consigliano occhiali di sicurezza o da sole</li>
+          </ul>
+          <h3>Azioni Vietate:</h3>
+          <ul>
+            <li>Gareggiare o superare i limiti di velocità</li>
+            <li>Guida spericolata o acrobazie</li>
+            <li>Uscire dal sentiero designato</li>
+            <li>Guidare il veicolo sotto l'effetto di alcol o droghe</li>
+            <li>Ignorare le istruzioni della guida</li>
+          </ul>
+        </div>
+        <div class="policy-warning">
+          <strong>⚠️ Avviso:</strong> Il mancato rispetto delle norme di sicurezza può comportare l'interruzione immediata del tour senza rimborso. Un comportamento spericolato annulla tutte le coperture assicurative e le liberatorie per danni.
+        </div>
+      </div>
+
+      <!-- SICUREZZA DEL TERRENO E DEI SENTIERI -->
+      <div class="policy-card">
+        <div class="policy-icon">⛰️</div>
+        <h2 class="policy-heading">Sicurezza del Terreno e dei Sentieri</h2>
+        <div class="policy-list">
+          <h3>Condizioni dei Sentieri:</h3>
+          <ul>
+            <li>I sentieri possono includere rocce, salite ripide, attraversamenti d'acqua e terreno accidentato</li>
+            <li>Il tempo può cambiare rapidamente: sia preparato/a</li>
+            <li>Polvere e sporco sono comuni; porti una protezione per gli occhi</li>
+            <li>Il segnale del cellulare può essere limitato nelle zone remote</li>
+          </ul>
+          <h3>Rimanga sul Sentiero:</h3>
+          <ul>
+            <li>Non esca mai dai sentieri designati</li>
+            <li>Rispetti la proprietà privata e i cartelli segnaletici</li>
+            <li>Segua i principi "Non Lasciare Traccia"</li>
+            <li>Non disturbi la fauna selvatica né le piante</li>
+          </ul>
+          <h3>Situazioni di Emergenza:</h3>
+          <ul>
+            <li>Avvisi immediatamente la guida se si sente in pericolo</li>
+            <li>Usi il walkie-talkie per comunicare</li>
+            <li>Kit di primo soccorso disponibili su ogni tour</li>
+            <li>La guida è formata in primo soccorso in ambiente selvaggio</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CLIMA E AMBIENTE -->
+      <div class="policy-card">
+        <div class="policy-icon">🌦️</div>
+        <h2 class="policy-heading">Clima e Sicurezza Ambientale</h2>
+        <div class="policy-list">
+          <h3>Preparazione al Clima:</h3>
+          <ul>
+            <li>Operiamo nella maggior parte delle condizioni climatiche</li>
+            <li>I tour possono essere annullati o riprogrammati in caso di condizioni climatiche estreme</li>
+            <li>Le temperature possono variare notevolmente: si vesta a strati</li>
+            <li>Porti un abbigliamento antipioggia se il tempo sembra incerto</li>
+          </ul>
+          <h3>Protezione Solare:</h3>
+          <ul>
+            <li>Il sole dello Utah è intenso: usi una protezione solare (SPF 30 o superiore)</li>
+            <li>Porti occhiali da sole con protezione UV</li>
+            <li>Indossi un cappello o una bandana</li>
+            <li>Si mantenga idratato/a: acqua fornita</li>
+          </ul>
+          <h3>Sicurezza nei Confronti della Fauna Selvatica:</h3>
+          <ul>
+            <li>Non si avvicini né dia da mangiare alla fauna selvatica</li>
+            <li>Mantenga una distanza di sicurezza da tutti gli animali</li>
+            <li>Faccia attenzione ai serpenti, specialmente nei mesi più caldi</li>
+            <li>Segnali qualsiasi avvistamento di fauna selvatica alla guida</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- COMUNICAZIONE -->
+      <div class="policy-card">
+        <div class="policy-icon">📡</div>
+        <h2 class="policy-heading">Comunicazione e Sicurezza di Gruppo</h2>
+        <div class="policy-list">
+          <h3>Rimanere in Contatto:</h3>
+          <ul>
+            <li>Walkie-talkie fornito per ogni veicolo</li>
+            <li>Tenga sempre acceso il walkie-talkie</li>
+            <li>Avvisi immediatamente la guida se ha bisogno di fermarsi</li>
+            <li>Non si allontani mai dal gruppo senza informare la guida</li>
+          </ul>
+          <h3>In Caso di Problemi:</h3>
+          <ul>
+            <li>Si fermi in sicurezza e usi il walkie-talkie</li>
+            <li>Non tenti di risolvere da solo/a eventuali problemi meccanici</li>
+            <li>Attenda l'assistenza della guida</li>
+            <li>Non prosegua mai se il veicolo sembra non sicuro</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DANNI E RESPONSABILITÀ -->
+      <div class="policy-card">
+        <div class="policy-icon">🛡️</div>
+        <h2 class="policy-heading">Danni e Responsabilità</h2>
+        <div class="policy-list">
+          <h3>Liberatoria per Danni al Veicolo:</h3>
+          <ul>
+            <li>Obbligatoria per tutti i tour</li>
+            <li>Limita la Sua responsabilità all'importo della franchigia</li>
+            <li>Nulla se causata da guida spericolata</li>
+            <li>Nulla se sono coinvolti alcol o droghe</li>
+          </ul>
+          <h3>Procedure in Caso di Incidente:</h3>
+          <ul>
+            <li>Si fermi immediatamente e valuti eventuali lesioni</li>
+            <li>Contatti la guida tramite walkie-talkie</li>
+            <li>Non sposti le persone ferite a meno che non siano in pericolo immediato</li>
+            <li>Documenti l'incidente con foto, se possibile</li>
+          </ul>
+        </div>
+        <div class="deductible-info">
+          <h3>Informazioni Importanti sull'Assicurazione:</h3>
+          <p>Lei è coperto/a dalla nostra assicurazione di responsabilità civile con una <strong>franchigia di $1,000 per incidente</strong>. Questo si applica indipendentemente dalla colpa. La Liberatoria per Danni al Veicolo può aiutare a limitare le Sue spese vive per i danni al veicolo.</p>
+        </div>
+      </div>
+
+      <!-- LE SUE RESPONSABILITÀ -->
+      <div class="policy-card">
+        <div class="policy-icon">✅</div>
+        <h2 class="policy-heading">Le Sue Responsabilità</h2>
+        <div class="policy-list">
+          <h3>In Qualità di Partecipante, Lei Accetta Di:</h3>
+          <ul>
+            <li>Seguire tutte le istruzioni della guida</li>
+            <li>Guidare il veicolo in modo sicuro e responsabile</li>
+            <li>Rispettare gli altri partecipanti e l'ambiente</li>
+            <li>Comunicare immediatamente qualsiasi preoccupazione</li>
+            <li>Completare onestamente tutta la documentazione richiesta</li>
+            <li>Accettare la responsabilità personale della propria sicurezza</li>
+          </ul>
+        </div>
+        <div class="policy-warning">
+          <strong>Ricordi:</strong> La guida di ATV/UTV comporta rischi intrinseci. Sebbene adottiamo ogni precauzione per garantire la Sua sicurezza, Lei partecipa a proprio rischio. La preghiamo di leggere e comprendere tutte le liberatorie prima di firmarle.
+        </div>
+      </div>
+
+      <!-- CONTATTO CTA -->
+      <div class="policy-cta">
+        <h3>Domande sulla Sicurezza?</h3>
+        <p>Se ha dubbi o domande sulla sicurezza prima del Suo tour, ci contatti. Siamo qui per garantirLe un'avventura sicura e straordinaria!</p>
+        <div class="cta-buttons">
+          <a href="tel:435-219-9447" class="cta-button primary">📞 Chiami il (435) 219-9447</a>
+          <a href="/it/booking/" class="cta-button secondary">Prenoti la Sua Avventura Sicura</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Pulsante Fisso per Mobile -->
+<div class="mobile-sticky-cta">
+  <button onclick="location.href='/it/booking/'">Prenoti il Suo Tour Ora</button>
+</div>
+`;
+
 /**
- * Locale-aware accessor (P2D pattern; Spanish populated P3A). Every
- * locale without a committed variant falls back to English. Callers that
- * don't need locale awareness keep importing `bodyHtml` directly.
+ * Locale-aware accessor (P2D pattern; Spanish populated P3A, Italian P6).
+ * Every locale without a committed variant falls back to English. Callers
+ * that don't need locale awareness keep importing `bodyHtml` directly.
  */
 export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'es') return ES;
+  if (locale === 'it') return IT;
   return bodyHtml;
 }

@@ -509,12 +509,265 @@ const ES = `
 </div>
 `;
 
+const IT = `
+<!-- ================================================
+     BLOCCO RIASSUNTIVO DELLA PAGINA — per Google AI Overviews
+     e Bing Copilot. Posizionato all'inizio del contenuto.
+     ================================================ -->
+<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+  Adventure Tours Vernal è un'azienda di tour in UTV a conduzione locale a Vernal, Utah, fondata da Dave e Trudy Wilson. Dave Wilson è il proprietario e la guida principale, e offre tour guidati in UTV Kawasaki KRX 1000 side-by-side attraverso l'Uintah Basin. Valutata 5.0 stelle su 82 recensioni Google. Chiami il (435) 219-9447.
+</p>
+
+<!-- Sezione Hero -->
+<section class="about-hero" style="position:relative; overflow:hidden;">
+  <div class="about-hero-video-bg">
+    <iframe
+      src="https://www.youtube.com/embed/LsqbwVkwrbw?autoplay=1&mute=1&loop=1&playlist=LsqbwVkwrbw&controls=0&rel=0&playsinline=1"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+  </div>
+  <div class="about-hero-overlay"></div>
+  <div class="about-hero-content">
+    <h1 class="about-hero-title">Tour in UTV a Vernal, Utah — Costruiti con Passione per l'Avventura</h1>
+    <p class="about-hero-subtitle">La Sua porta d'ingresso alle più grandi avventure dell'Uintah Basin</p>
+    <p class="about-hero-subtitle" style="font-weight:600;">★★★★★ Valutata 5.0 su 82 recensioni Google — ogni tour guidato personalmente da Dave e Trudy Wilson</p>
+  </div>
+</section>
+
+<!-- Contenuto Principale -->
+<section class="about-main">
+  <div class="container">
+
+    <!-- Dichiarazione di Missione -->
+    <div class="about-card mission-card">
+      <div class="mission-content">
+        <h2 class="about-heading">La Prima. La Migliore. L'Esperienza Definitiva in UTV.</h2>
+        <p class="lead-text">Ci impegniamo a diventare non solo la prima, ma la migliore azienda di tour in UTV dell'Uintah Basin! Adventure Tours Vernal offre le avventure più sicure ed emozionanti utilizzando i migliori side-by-side <strong>Kawasaki</strong> KRX.</p>
+        <p>I nostri Tour d'Avventura mostrano sentieri straordinari tra canyon panoramici e storia elevata. Includiamo tesori locali come:</p>
+
+        <div class="highlights-grid">
+          <div class="highlight-item">
+            <div class="highlight-icon">🏞️</div>
+            <div class="highlight-text">
+              <strong>Flaming Gorge</strong>
+              <p>Splendidi canyon di roccia rossa e acque cristalline</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/tktE4GbS9gQ?si=PwYv9yMUs-yYAM4U"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🦕</div>
+            <div class="highlight-text">
+              <strong>Monumento ai Dinosauri</strong>
+              <p>Antichi giacimenti fossili e paesaggi preistorici</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/PoCN4Lo9Lkk?si=OYkfE56RP_uMcHoF"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🛶</div>
+            <div class="highlight-text">
+              <strong>Green River</strong>
+              <p>Destinazione di rafting e pesca di livello mondiale</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/p05cObabbjg?si=gjsw6MKCJHx6s6Vq"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🗿</div>
+            <div class="highlight-text">
+              <strong>Antichi Petroglifi</strong>
+              <p>Migliaia di anni di storia indigena</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/fwzaXWfuFdk?si=Xt1_DCIPRzqx7QDL"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">⛰️</div>
+            <div class="highlight-text">
+              <strong>Montagne Uintah</strong>
+              <p>Vette maestose e natura alpina incontaminata</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/AanVVzP0_oM?si=5GOFOiI5MBc5dm1D"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🌈</div>
+            <div class="highlight-text">
+              <strong>Fantasy Canyon</strong>
+              <p>Formazioni rocciose fuori dal mondo e bellezza del deserto</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/m64J-ovzTf4?si=FLULmmhzbq8zDzV2"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- La Nostra Storia -->
+    <div class="our-story-section">
+      <div class="story-content">
+        <h2 class="section-title">La Nostra Storia</h2>
+        <div class="story-text">
+          <p class="story-intro">L'avventura non è solo ciò che facciamo — è ciò che siamo.</p>
+
+          <p>Dopo essere cresciuto nella Salt Lake Valley e aver trascorso la mia giovinezza esplorando le montagne Wasatch e Oquirrh, ho capito di aver trovato una passione per tutta la vita. Da bambino degli anni '80, con molta libertà di girovagare, io e i miei fratelli andavamo in mountain bike, in Jeep, a fare escursioni, in motoslitta, a sciare, in campeggio, a cavallo, in rappel, a tuffarci dalle scogliere, a esplorare grotte, e così via... Abbiamo trascorso tanti weekend indimenticabili nella baita di famiglia.</p>
+
+          <p>Fin da piccolo, sapevo che era la scarica di adrenalina ciò che desideravo. Dopo qualche osso rotto, e forse un asse o due, non ho mai perso il mio spirito per l'aria aperta.</p>
+
+          <p>Io e la mia Bellissima-Straordinaria-Splendida-Fantastica-Meravigliosa Moglie e Migliore Amica — Trudy, ci siamo trasferiti a Vernal, Utah. Dopo il trasferimento, ci siamo innamorati della zona dell'Uintah Basin e abbiamo deciso di dedicare la nostra passione a condividere le meraviglie naturali che abbiamo imparato ad amare così tanto con amici, famiglia e visitatori.</p>
+        </div>
+      </div>
+
+      <!-- Sezione Foto di Famiglia -->
+      <div class="family-section">
+        <div class="family-photo-container">
+          <img src="/images/wilson-family.webp" alt="Dave e Trudy Wilson, proprietari di Adventure Tours Vernal, con la loro famiglia" class="family-photo">
+          <div class="family-photo-caption">
+            <h3>Conosca la Famiglia Wilson</h3>
+            <p>Dave e Trudy Wilson con i loro quattro figli e il nipote</p>
+            <p class="family-names">8 Boys, Ansley, Trinity, Scott e Chandler - Little Z-man</p>
+            <p class="guide-profile-links">Conosca le Sue guide: <a href="/about/dave/">Dave Wilson</a> &amp; <a href="/about/trudy/">Trudy Wilson</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Il Nostro Futuro -->
+    <div class="about-card future-card">
+      <h2 class="about-heading">Il Nostro Futuro</h2>
+      <div class="future-content">
+        <p class="lead-text">Adventure Tours Vernal è nata dal nostro amore per le esperienze.</p>
+
+        <p>Una volta trasferita la nostra famiglia, abbiamo iniziato a investire in ricordi familiari. Questa passione di una vita ci ha portato all'acquisto di ATV, mountain bike, motoslitte, una barca, e attrezzatura da campeggio, caccia e pesca, e soprattutto all'investimento nella nostra crescente comunità di amici e familiari.</p>
+
+        <p>La nostra famiglia si è resa conto che stavamo praticamente supplicando le persone di venire a visitare la bellezza che avevamo trovato nel nostro «cortile di casa»! Nelle nostre uscite personali abbiamo scoperto grotte, sentieri, vissuto la storia e goduto di paesaggi meravigliosi oltre le nostre aspettative.</p>
+
+        <p>Oggi condividiamo quella conoscenza diretta in ogni giro — dai nostri <a href="/it/utv/backcountry-tours-vernal-utah/">tour guidati nel backcountry</a> attraverso canyon remoti e siti di petroglifi, fino ai <a href="/it/utv/best-utv-trails-vernal/">cinque sistemi di sentieri che gestiamo vicino a Vernal</a>. È lo stesso territorio che abbiamo esplorato noi stessi, ora esplorato, mappato e guidato di persona.</p>
+
+        <p>Quel «cortile di casa» è più grande di una singola città. È una regione multistatale — il Dinosaur National Monument si estende dallo Utah al Colorado, Flaming Gorge si spinge a nord fino al Wyoming, le High Uintas si innalzano a ovest — con Vernal proprio al centro.</p>
+
+        <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+          <img src="/images/maps/vernal-dinosaur-country-overview.svg" alt="Diagramma schematico di orientamento della Terra dei Dinosauri come regione multistatale che Adventure Tours Vernal chiama casa, centrato su Vernal, Utah come campo base, con quattro aree etichettate: Dinosaur National Monument (che si estende tra Utah e Colorado), Flaming Gorge (che si spinge dallo Utah fino al Wyoming), le High Uintas e la Ashley National Forest, e l'Uintah Basin circostante. Mostra solo relazioni regionali e non è in scala, distanza o direzione della bussola; le etichette statali indicano l'estensione, non un confine mappato." width="1600" height="1200" loading="lazy" decoding="async" />
+          <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">Il «cortile di casa» a cui ci riferiamo: una regione multistatale che si estende fino al Colorado e al Wyoming, con Vernal nel suo cuore. Diagramma di orientamento, non in scala.</figcaption>
+        </figure>
+
+        <div class="vision-box">
+          <h3>La Nostra Visione</h3>
+          <p>A.T.V. è qui per godersi il paesaggio maestoso che abbiamo nel nostro cortile di casa. Venga a rilassarsi, e si fermi un po', non se ne pentirà!</p>
+          <p>Speriamo che parta con ricordi indimenticabili dell'Uintah Basin — oltre a bellissime foto, storia affascinante e racconti da condividere con i Suoi amici.</p>
+          <p><strong>Tornerà per averne ancora, glielo garantiamo!</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Perché Sceglierci -->
+    <div class="why-choose-section">
+      <h2 class="section-title">Perché Scegliere Adventure Tours Vernal?</h2>
+      <div class="why-grid">
+        <div class="why-item">
+          <div class="why-icon">🏆</div>
+          <h3>La Prima e la Migliore</h3>
+          <p>La principale azienda di tour in UTV dell'Uintah Basin</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🛡️</div>
+          <h3>La Sicurezza Prima di Tutto</h3>
+          <p>Attrezzatura all'avanguardia e guide esperte</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🌟</div>
+          <h3>Esperti Locali</h3>
+          <p>Conosciamo questa terra come le nostre tasche</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">❤️</div>
+          <h3>Passione di Famiglia</h3>
+          <p>Condividiamo con Lei il nostro amore per l'avventura</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🏔️</div>
+          <h3>Gemme Nascoste</h3>
+          <p>Accesso a sentieri e panorami che altri non conoscono</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">✨</div>
+          <h3>Indimenticabile</h3>
+          <p>Ricordi che durano tutta la vita</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sezione Call to Action -->
+    <div class="about-cta">
+      <h2>Pronto a Vivere l'Avventura?</h2>
+      <p>Si unisca alla famiglia Wilson e scopra perché Vernal, Utah è il parco giochi all'aperto definitivo.</p>
+      <div class="cta-buttons">
+        <a href="/it/booking/" class="cta-button primary">Prenoti la Sua Avventura</a>
+        <a href="tel:435-219-9447" class="cta-button secondary">📞 Chiami il (435) 219-9447</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Pulsante flottante per mobile -->
+<div class="mobile-sticky-cta">
+  <button onclick="location.href='/it/booking/'">Prenoti Ora il Suo Giro</button>
+</div>
+`;
+
 /**
- * Locale-aware accessor (P2D pattern; Spanish populated P3A). Every
- * locale without a committed variant falls back to English. Callers that
- * don't need locale awareness keep importing `bodyHtml` directly.
+ * Locale-aware accessor (P2D pattern; Spanish populated P3A, Italian P6).
+ * Every locale without a committed variant falls back to English. Callers
+ * that don't need locale awareness keep importing `bodyHtml` directly.
  */
 export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'es') return ES;
+  if (locale === 'it') return IT;
   return bodyHtml;
 }

@@ -1,0 +1,173 @@
+---
+// it/faq.astro — Italian FAQ page (P6 inline batch, mirrors es/faq.astro).
+// Mirrors src/pages/faq.astro. FAQPage schema mirrors the visible Italian
+// FAQ below (translated name/text for all 15 questions), matching the
+// existing "schema mirrors visible FAQ verbatim" convention.
+import { getBodyHtml } from '../../page-content/faq';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../config/site';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Posso portare la mia macchina nei tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sì! Portare la propria macchina consente esperienze più personalizzate e persino più estreme. Adventure Tours Vernal fornisce radio ricetrasmittenti e offre alternative più semplici nei tratti più impegnativi del sentiero. Chiami o scriva per spiegare il tipo di esperienza che desidera. La sicurezza è la priorità numero uno, seguita da vicino dal divertimento."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Posso portare un gruppo ai tour in ATV a Vernal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Assolutamente sì! Adventure Tours Vernal accoglie con piacere tour di gruppo di ogni dimensione. Ci contatti per discutere le esigenze del Suo gruppo, inclusi luoghi aggiuntivi, ristoranti, sistemazioni in hotel, bar, vita notturna e attività per bambini nella Uintah Basin. Chiami il (435) 219-9447."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Cosa succede in caso di maltempo durante i tour in ATV?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal opera con sole o pioggia. Tuttavia, in caso di condizioni meteo estreme o circostanze impreviste, avrà la possibilità di riprogrammare o ricevere un rimborso completo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Cosa devo portare per un tour in ATV a Vernal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Porti occhiali da sole, un cappello, una macchina fotografica, una giacca e scarpe chiuse. Si vesta a strati poiché la temperatura può variare. Adventure Tours Vernal offre acqua e uno snack leggero in omaggio, oltre a caschi ed equipaggiamento di sicurezza. Si consigliano crema solare, spray antizanzare e burrocacao."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quando devo arrivare per il mio tour in ATV?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Arrivi 30 minuti prima dell'orario di partenza per tutti i tour. Non partiremo finché tutta la formazione sulla sicurezza non sarà completata. Se non sarà presente all'inizio dell'orientamento, potrebbe perdere il Suo posto nel tour, che non è rimborsabile."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quanti anni devo avere per i tour in ATV?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Per guidare le macchine di Adventure Tours Vernal, deve avere almeno 18 anni di età. Per viaggiare come passeggero, deve avere almeno 2 anni di età."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Qual è la politica di cancellazione per i tour in ATV?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal ha una politica di cancellazione dettagliata. Visiti la pagina della politica di cancellazione su adventuretoursvernal.com o chiami il (435) 219-9447 per tutti i dettagli su cancellazioni e depositi."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quanto costano i tour in ATV a Vernal, Utah?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal offre un tour guidato di 3 ore su side-by-side Kawasaki KRX 1000: $349 a macchina, con capacità fino a 2 passeggeri. Può aggiungere un terzo passeggero come accompagnatore per $125, oppure prolungare il tour per $99 all'ora a macchina. È richiesto un minimo di 3 persone, e sono benvenuti gruppi fino a 12 ospiti (6 macchine). Chiami il (435) 219-9447 per la disponibilità."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Ho bisogno di esperienza per guidare un ATV a Vernal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Non è richiesta alcuna esperienza precedente con gli ATV per i tour a Vernal. Adventure Tours Vernal accoglie principianti assoluti e offre una formazione completa sulla sicurezza prima di ogni tour. Guide esperte Le mostrano passo dopo passo come utilizzare i side-by-side Kawasaki KRX 1000. Tutti i livelli di abilità sono benvenuti."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Si può visitare Dinosaur National Monument durante un tour in ATV?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sì. Il tour guidato di 3 ore in UTV di Adventure Tours Vernal esplora sentieri nel backcountry vicino a Dinosaur National Monument, incluse antiche formazioni rocciose e petroglifi. Il famoso muro di ossa di dinosauro del monumento è un sito separato del National Park Service; molti ospiti abbinano una mattinata al monumento a un tour pomeridiano in UTV nel backcountry circostante della Terra dei Dinosauri."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Qual è la migliore azienda di tour in ATV a Vernal, Utah?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal è l'unica azienda di tour guidati in Kawasaki KRX 1000 a Vernal, Utah. Offriamo accesso esclusivo a sentieri nascosti, petroglifi, nascondigli di Butch Cassidy e archi panoramici. Guide locali esperte, equipaggiamento di sicurezza professionale e tutti i livelli di abilità sono benvenuti. Aperto tutti i giorni dalle 7 alle 19. Chiami il (435) 219-9447."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quanto durano i tour in ATV a Vernal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal offre un tour guidato standard che dura circa 3 ore. Preferisce più tempo sul sentiero? Può prolungare il tour per $99 all'ora a macchina. Chiami il (435) 219-9447 per organizzare un giro più lungo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "I tour in ATV a Vernal sono adatti alle famiglie?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sì. Il tour guidato è adatto alle famiglie, con un briefing di sicurezza completo prima di ogni giro e passeggeri benvenuti a partire dai 2 anni. Ogni Kawasaki KRX 1000 ha capacità fino a 2 passeggeri, per cui le famiglie prenotano più macchine per viaggiare insieme — fino a 6 macchine e 12 ospiti per tour. Non è necessaria esperienza; viene fornita una formazione completa sulla sicurezza."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Qual è l'orario di Adventure Tours Vernal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal è aperto tutti i giorni dalle 7:00 alle 19:00 ora delle Montagne Rocciose, 7 giorni su 7. Chiami il (435) 219-9447 per prenotare il Suo tour in ATV o visiti adventuretoursvernal.com."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quali tour offre Adventure Tours Vernal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal offre un tour guidato di 3 ore su side-by-side Kawasaki KRX 1000 a Vernal, Utah, con una scelta di cinque sistemi di sentieri — Doc's Beach, Moonshine Arch, Ashley Gorge, Outlaw Trail e Asphalt Ridge — selezionati al momento della prenotazione. Ogni tour include guide locali esperte, un briefing di sicurezza completo ed equipaggiamento di sicurezza."
+        }
+      }
+    ]
+  }
+`;
+---
+<BaseLayout bodyClass="faq-page-body">
+  <Fragment slot="head">
+    <Seo
+      title="Domande Frequenti sui Tour in UTV | Adventure Tours Vernal"
+      description="Risposte alle domande più frequenti sui tour guidati in UTV a Vernal, Utah. Requisiti di età, prezzi, cosa portare, politica meteo e altro. Chiami il (435) 219-9447."
+      path="/it/faq/"
+      type="website"
+      ogTitle="Domande Frequenti — Adventure Tours Vernal | Tour Guidati in UTV nello Utah"
+      ogDescription="Tutto quello che deve sapere prima del Suo tour guidato in UTV Kawasaki KRX 1000 a Vernal, Utah. Limiti di età, prezzi, cosa portare e altro."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="faq" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.faq', lang) }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: t('footer.quickLinks', lang),
+      links: [
+        { href: '/it/#tours', label: t('footer.link.ourTours', lang) },
+        { href: '/it/#vehicles', label: t('footer.link.ourFleet', lang) },
+        { href: '/it/#gallery', label: t('footer.link.photoGallery', lang) },
+        { href: '/it/booking/', label: t('cta.bookNow', lang) },
+      ],
+    }}
+  />
+</BaseLayout>

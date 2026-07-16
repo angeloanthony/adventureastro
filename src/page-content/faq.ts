@@ -660,6 +660,329 @@ document.addEventListener('DOMContentLoaded', function() {
 
 `;
 
+const IT = `
+
+<!-- ================================================
+     BLOCCO RIASSUNTO PAGINA — per Google AI Overviews
+     ================================================ -->
+<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+  Adventure Tours Vernal risponde alle domande più frequenti sui tour guidati in UTV a Vernal, Utah. Gli argomenti includono prezzi, requisiti di età, cosa portare, politica meteo, tour di gruppo e opzioni di tour. Aperto tutti i giorni dalle 7:00 alle 19:00. Chiami il (435) 219-9447.
+</p>
+
+<section id="faq" class="faq-section">
+  <div class="faq-watermark">INTEL</div>
+
+  <div class="container">
+    <div class="section-header">
+      <span class="status-badge">PREPARAZIONE MISSIONE</span>
+      <h1 class="section-title" style="font-size:clamp(1.8rem,3.5vw,2.8rem);">Domande Frequenti sui Tour in UTV — Adventure Tours Vernal</h1>
+      <p class="section-subtitle">Si prepari con le informazioni prima di addentrarsi nel backcountry dello Utah.</p>
+      <p style="display:inline-flex;align-items:center;gap:8px;margin:14px auto 0;padding:7px 15px;border:1px solid rgba(212,118,78,0.5);border-radius:999px;background:#ffffff;box-shadow:0 1px 4px rgba(0,0,0,0.08);font-size:0.95rem;color:#4a4139;"><span aria-hidden="true" style="color:#e6a817;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count} recensioni su Google</span></p>
+    </div>
+
+    <div class="faq-container">
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq1" class="faq-toggle">
+        <label for="faq1" class="faq-question">
+          <span class="faq-index">01</span> POSSO PORTARE LA MIA MACCHINA?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p><strong>Certamente!</strong> Portare la propria macchina consente esperienze più personalizzate e persino più estreme. Può prenotare online, ma per portare la propria macchina o per un giro personalizzato è meglio chiamarci o scriverci prima per spiegarci il tipo di esperienza che desidera.</p>
+            <p>Le forniamo radio ricetrasmittenti e facciamo del nostro meglio affinché tutti si divertano (restando comodi). Nei tratti più "impegnativi" di un sentiero, siamo lieti di offrire alternative più semplici. Siamo orgogliosi di conoscere queste zone a fondo e dei tanti modi per goderne!</p>
+            <p>Comunichi liberamente con la sua guida. Se non si sente a proprio agio ad affrontare una parte del sentiero, lo dica pure! La sicurezza è la priorità numero uno, seguita da vicino dal divertimento.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq2" class="faq-toggle">
+        <label for="faq2" class="faq-question">
+          <span class="faq-index">02</span> POSSO PORTARE UN GRUPPO?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Assolutamente sì! La preghiamo di contattarci per i tour di gruppo. Ci faccia sapere quanto è grande il Suo gruppo e cosa vorrebbe vedere. Abbiamo molte opzioni e possiamo discutere le esigenze del Suo gruppo, come luoghi aggiuntivi da visitare, ristoranti e sistemazioni in hotel, bar, vita notturna, attività adatte ai bambini, ecc. Saremmo lieti di far parte delle attività del Suo gruppo durante la Sua visita alla splendida Uintah Basin.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq3" class="faq-toggle">
+        <label for="faq3" class="faq-question">
+          <span class="faq-index">03</span> COSA SUCCEDE IN CASO DI MALTEMPO?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Operiamo con sole o pioggia. Tuttavia, in caso di condizioni meteo estreme o qualora dovessimo annullare per altre circostanze impreviste, avrà la possibilità di riprogrammare o ricevere un rimborso completo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq4" class="faq-toggle">
+        <label for="faq4" class="faq-question">
+          <span class="faq-index">04</span> COSA DEVO PORTARE?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Saremo all'aperto per ore, La preghiamo di usare buon senso. Facciamo del nostro meglio per avere carta igienica di emergenza e altri articoli essenziali a disposizione per ogni tour. Tuttavia, se pensa di averne bisogno, è meglio portarlo! Crema solare, spray antizanzare e burrocacao non sono mai una cattiva idea.</p>
+            <p>Le consigliamo di portare <strong>occhiali da sole, un cappello, una macchina fotografica, una giacca e scarpe chiuse.</strong> Non sono obbligatori (ma è meglio averli e non averne bisogno, no?) Può anche vestirsi a strati poiché la temperatura può variare. Offriamo acqua e uno snack leggero in omaggio. In caso di allergie, Le consigliamo di portare qualcosa di specifico per le Sue esigenze alimentari. Lo spazio nella parte posteriore di un side-by-side è limitato, quindi se non è sicuro di cosa portare, ci chieda pure!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq5" class="faq-toggle">
+        <label for="faq5" class="faq-question">
+          <span class="faq-index">05</span> QUANDO DEVO ARRIVARE AL PUNTO DI RITROVO?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Per tutti i tour, La preghiamo di arrivare <strong>30 minuti prima</strong> dell'orario di partenza. L'orario di prenotazione del tour corrisponde all'orario effettivo di partenza. Non partiremo finché tutta la formazione sulla sicurezza non sarà completata e Lei non avrà preso familiarità con il Suo veicolo. Prima della partenza, esamineremo insieme l'orientamento e le misure di sicurezza, come le liberatorie, la scelta dell'equipaggiamento, ecc.</p>
+            <p>Dopo aver completato la prenotazione, riceverà un'email di conferma con informazioni importanti sul tour selezionato. La preghiamo di seguirla e leggerla attentamente. Se non sarà presente con tutte le pratiche completate e l'equipaggiamento scelto all'inizio dell'orientamento, potrebbe perdere il Suo posto nel tour, che non è rimborsabile. Come per un autobus scolastico... se non è lì all'orario stabilito, resterà a terra!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq6" class="faq-toggle">
+        <label for="faq6" class="faq-question">
+          <span class="faq-index">06</span> QUANTI ANNI DEVO AVERE?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Per guidare le nostre macchine, deve avere almeno <strong>18 anni di età.</strong> Per viaggiare a bordo delle nostre macchine, deve avere almeno <strong>2 anni di età.</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq7" class="faq-toggle">
+        <label for="faq7" class="faq-question">
+          <span class="faq-index">07</span> CANCELLAZIONI E DEPOSITI?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Clicchi <a href="/it/cancellation-policy/" class="faq-link">QUI</a> per la politica di cancellazione completa.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq8" class="faq-toggle">
+        <label for="faq8" class="faq-question">
+          <span class="faq-index">08</span> QUANTO COSTANO I TOUR IN ATV?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Offriamo un tour guidato di 3 ore su side-by-side Kawasaki KRX 1000:</p>
+            <ul>
+              <li><strong>$349 a macchina</strong> — fino a 2 passeggeri</li>
+              <li><strong>$125 come passeggero aggiuntivo</strong> — aggiunga un terzo passeggero con una guida</li>
+              <li><strong>$99 all'ora</strong> — a macchina, per prolungare il Suo tour</li>
+            </ul>
+            <p>È richiesto un minimo di 3 persone, e i gruppi fino a 12 ospiti (6 macchine) sono i benvenuti. <strong>Chiami il <a href="tel:435-219-9447" class="faq-link">(435) 219-9447</a> per la disponibilità.</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq9" class="faq-toggle">
+        <label for="faq9" class="faq-question">
+          <span class="faq-index">09</span> HO BISOGNO DI ESPERIENZA CON GLI ATV?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p><strong>Non è richiesta alcuna esperienza con gli ATV!</strong> Adventure Tours Vernal accoglie principianti assoluti e offre una formazione completa sulla sicurezza prima di ogni tour.</p>
+            <p>Le nostre guide esperte Le mostrano passo dopo passo come utilizzare i side-by-side Kawasaki KRX 1000. Accogliamo tutti i livelli di abilità, dai principianti assoluti ai conduttori esperti.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq10" class="faq-toggle">
+        <label for="faq10" class="faq-question">
+          <span class="faq-index">10</span> POSSIAMO VISITARE DINOSAUR NATIONAL MONUMENT?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p><strong>Sì!</strong> Il nostro <strong>tour guidato di 3 ore in UTV</strong> esplora sentieri nel backcountry vicino a Dinosaur National Monument, incluse antiche formazioni rocciose e petroglifi.</p>
+            <p>Il famoso muro di ossa di dinosauro del monumento è un sito separato del National Park Service — molti ospiti abbinano una mattinata al monumento a un tour pomeridiano in UTV nel backcountry circostante della Terra dei Dinosauri.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq11" class="faq-toggle">
+        <label for="faq11" class="faq-question">
+          <span class="faq-index">11</span> PERCHÉ SCEGLIERE ADVENTURE TOURS VERNAL?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Adventure Tours Vernal è l'<strong>unica azienda di tour guidati in Kawasaki KRX 1000 a Vernal, Utah.</strong> Offriamo accesso esclusivo a:</p>
+            <ul>
+              <li>Sentieri nascosti conosciuti solo dai locali</li>
+              <li>Antichi petroglifi e arte rupestre</li>
+              <li>Nascondigli di Butch Cassidy</li>
+              <li>Archi panoramici e formazioni scenografiche</li>
+            </ul>
+            <p>Guide locali esperte, equipaggiamento di sicurezza professionale e tutti i livelli di abilità sono benvenuti. <strong>Aperto tutti i giorni dalle 7:00 alle 19:00.</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq12" class="faq-toggle">
+        <label for="faq12" class="faq-question">
+          <span class="faq-index">12</span> QUANTO DURANO I VOSTRI TOUR?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Il nostro tour guidato standard dura circa <strong>3 ore</strong>, con una scelta di cinque sistemi di sentieri per adattarsi al Suo gruppo e livello di esperienza:</p>
+            <ul>
+              <li><strong>Doc's Beach</strong>, <strong>Moonshine Arch</strong>, <strong>Ashley Gorge</strong>, <strong>Outlaw Trail</strong> e <strong>Asphalt Ridge</strong></li>
+              <li>Sceglie il Suo sistema di sentieri al momento della prenotazione</li>
+              <li>Vuole più tempo? Prolunghi per $99 all'ora a macchina</li>
+            </ul>
+            <p>Ogni tour include equipaggiamento di sicurezza, formazione, acqua e snack.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq13" class="faq-toggle">
+        <label for="faq13" class="faq-question">
+          <span class="faq-index">13</span> I VOSTRI TOUR SONO ADATTI ALLE FAMIGLIE?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p><strong>Assolutamente sì!</strong> Il nostro tour guidato è perfetto per le famiglie con bambini. Include:</p>
+            <ul>
+              <li>Sentieri facili con terreno dolce</li>
+              <li>Splendide vedute del deserto</li>
+              <li>Opportunità fotografiche</li>
+              <li>Side-by-side a 2 posti; le famiglie prenotano più macchine per viaggiare insieme</li>
+            </ul>
+            <p>Non è necessaria esperienza — viene fornita una formazione completa sulla sicurezza. I bambini devono avere almeno 2 anni per viaggiare come passeggeri.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq14" class="faq-toggle">
+        <label for="faq14" class="faq-question">
+          <span class="faq-index">14</span> QUALI SONO I VOSTRI ORARI?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Adventure Tours Vernal è <strong>aperto tutti i giorni dalle 7:00 alle 19:00</strong>, ora delle Montagne Rocciose, 7 giorni su 7.</p>
+            <p><strong>Chiami il <a href="tel:435-219-9447" class="faq-link">(435) 219-9447</a></strong> per prenotare il Suo tour in ATV o visiti <a href="https://adventuretoursvernal.com" class="faq-link">adventuretoursvernal.com</a>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq15" class="faq-toggle">
+        <label for="faq15" class="faq-question">
+          <span class="faq-index">15</span> QUALI OPZIONI DI TOUR OFFRITE?
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Adventure Tours Vernal offre un tour guidato di 3 ore su side-by-side Kawasaki KRX 1000, con una scelta di cinque sistemi di sentieri selezionati al momento della prenotazione:</p>
+            <ul>
+              <li>Doc's Beach</li>
+              <li>Moonshine Arch</li>
+              <li>Ashley Gorge</li>
+              <li>Outlaw Trail</li>
+              <li>Asphalt Ridge</li>
+            </ul>
+            <p>Ogni tour include side-by-side Kawasaki KRX 1000, guide locali esperte, equipaggiamento di sicurezza, formazione, acqua e snack.</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end .faq-container -->
+  </div>
+</section>
+
+<!-- Pulsante flottante per dispositivi mobili -->
+<div class="mobile-sticky-cta">
+  <button onclick="location.href='/it/booking/'">Prenoti il Suo Tour Ora</button>
+</div>
+
+<script is:inline>
+document.addEventListener('DOMContentLoaded', function() {
+
+  // Auto-close other FAQs when one opens
+  const faqToggles = document.querySelectorAll('.faq-toggle');
+  faqToggles.forEach(toggle => {
+    toggle.addEventListener('change', function() {
+      if (this.checked) {
+        faqToggles.forEach(otherToggle => {
+          if (otherToggle !== this && otherToggle.checked) {
+            otherToggle.checked = false;
+          }
+        });
+        setTimeout(() => {
+          this.parentElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 300);
+      }
+    });
+  });
+
+  // Keyboard navigation
+  const faqQuestions = document.querySelectorAll('.faq-question');
+  faqQuestions.forEach((question, index) => {
+    question.setAttribute('tabindex', '0');
+    question.setAttribute('role', 'button');
+    question.setAttribute('aria-expanded', 'false');
+    question.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const checkbox = this.previousElementSibling;
+        checkbox.checked = !checkbox.checked;
+        this.setAttribute('aria-expanded', checkbox.checked);
+        checkbox.dispatchEvent(new Event('change'));
+      }
+      if (e.key === 'ArrowDown') { e.preventDefault(); if (faqQuestions[index + 1]) faqQuestions[index + 1].focus(); }
+      if (e.key === 'ArrowUp') { e.preventDefault(); if (faqQuestions[index - 1]) faqQuestions[index - 1].focus(); }
+    });
+    question.addEventListener('click', function() {
+      const checkbox = this.previousElementSibling;
+      setTimeout(() => { this.setAttribute('aria-expanded', checkbox.checked); }, 10);
+    });
+  });
+
+  // URL hash linking
+  if (window.location.hash) {
+    const targetId = window.location.hash.substring(1);
+    const targetCheckbox = document.getElementById(targetId);
+    if (targetCheckbox && targetCheckbox.classList.contains('faq-toggle')) {
+      targetCheckbox.checked = true;
+      setTimeout(() => {
+        targetCheckbox.parentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 500);
+    }
+  }
+
+  // Smooth load animation
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach((item, index) => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+      item.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+      item.style.opacity = '1';
+      item.style.transform = 'translateY(0)';
+    }, 100 * index);
+  });
+});
+</script>
+
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3A). Every
  * locale without a committed variant falls back to English. Callers that
@@ -667,5 +990,6 @@ document.addEventListener('DOMContentLoaded', function() {
  */
 export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'es') return ES;
+  if (locale === 'it') return IT;
   return bodyHtml;
 }

@@ -39,7 +39,7 @@
  }
 
  .nav-container {
- max-width: var(--container-max); margin: 0 auto;
+ max-width: 1600px; margin: 0 auto;
  padding: 8px 20px 8px 340px;
  display: flex; justify-content: space-between; align-items: center; min-height: 60px;
  }
@@ -53,8 +53,8 @@
 
  .nav-menu {
  display: flex; list-style: none;
- flex-wrap: wrap;
- gap: 20px; row-gap: 10px;
+ flex-wrap: nowrap;
+ gap: 16px; row-gap: 10px;
  align-items: center;
  justify-content: flex-end;
  }
@@ -63,7 +63,7 @@
 
  .nav-menu a {
  font-family: var(--font-heading); font-weight: 600;
- font-size: 0.85rem;
+ font-size: 0.8rem;
  white-space: nowrap;
  color: var(--charcoal); transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
  position: relative; text-decoration: none; padding: 8px 2px;
@@ -79,8 +79,8 @@
 
  .nav-phone {
  color: var(--burnt-orange) !important; font-weight: 700 !important;
- font-size: 0.92rem;
- padding: 8px 16px;
+ font-size: 0.85rem;
+ padding: 7px 14px;
  background: linear-gradient(135deg, rgba(212,118,78,0.12) 0%, rgba(218,165,32,0.12) 100%);
  border-radius: 10px; transition: var(--transition-smooth); border: 2px solid rgba(212,118,78,0.2); box-shadow: 0 4px 15px rgba(212,118,78,0.1);
  }
@@ -89,7 +89,7 @@
 
  .nav-book-btn {
  background: linear-gradient(135deg, var(--burnt-orange) 0%, var(--rust-red) 100%); color: white !important;
- padding: 10px 22px;
+ padding: 9px 18px;
  border-radius: 30px; transition: var(--transition-smooth); font-weight: 700;
  box-shadow: 0 6px 20px rgba(212,118,78,0.3), inset 0 1px 0 rgba(255,255,255,0.2); position: relative; overflow: hidden;
  }
@@ -452,9 +452,14 @@
   .features-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1150px) {
   .nav-menu { display: none; }
   .mobile-menu-toggle { display: block; margin-left: auto; }
+  .dropdown-menu { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; background: rgba(212,118,78,0.05); margin: 10px 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .nav-dropdown.active .dropdown-menu { max-height: 400px; }
+}
+
+@media (max-width: 768px) {
   .logo { left: 15px; }
   .logo img { height: 100px; }
   .nav-container { padding: 8px 20px 8px 140px; }
@@ -482,8 +487,6 @@
   .nav-limo-link { font-size: 0.9rem !important; padding: 10px 16px !important; }
   .bw-promo-badge { display: none; }
   .hcl-promo-badge { display: none; }
-  .dropdown-menu { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; background: rgba(212,118,78,0.05); margin: 10px 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-  .nav-dropdown.active .dropdown-menu { max-height: 400px; }
   :root { --section-padding: 60px 20px; }
 }
 

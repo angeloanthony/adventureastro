@@ -353,12 +353,188 @@ const ES = `
 
 `;
 
+const IT = `
+
+<!-- ================================================
+     BLOCCO RIASSUNTO PAGINA — per Google AI Overviews
+     ================================================ -->
+<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+  Politica di cancellazione di Adventure Tours Vernal per i tour guidati in UTV a Vernal, Utah. Le cancellazioni con 72 ore o più di anticipo ricevono un rimborso completo. Meno di 72 ore riceve il 50%. Meno di 48 ore non riceve alcun rimborso. Chiami il (435) 219-9447 per domande.
+</p>
+
+<section class="policy-section">
+  <div class="container">
+    <div class="section-header">
+      <h1 class="section-title">Politica di Cancellazione</h1>
+      <p class="section-subtitle">La preghiamo di rivedere i nostri termini e condizioni prima di prenotare la Sua avventura</p>
+    </div>
+
+    <div class="policy-container">
+
+      <!-- CANCELLAZIONE E RIMBORSI -->
+      <div class="policy-card">
+        <div class="policy-icon">📅</div>
+        <h2 class="policy-heading">Cancellazione e Rimborsi</h2>
+
+        <div class="policy-table">
+          <div class="policy-row">
+            <div class="policy-timeframe">Meno di 48 ore</div>
+            <div class="policy-refund refund-none">Nessun Rimborso</div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-timeframe">Meno di 72 ore</div>
+            <div class="policy-refund refund-partial">Rimborso del 50%</div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-timeframe">72 ore o più di anticipo</div>
+            <div class="policy-refund refund-full">Rimborso del 100%</div>
+          </div>
+          <div class="policy-row highlight">
+            <div class="policy-timeframe">Gruppi di 5 o più veicoli</div>
+            <div class="policy-refund refund-full">Con 2 settimane di anticipo: rimborso del 100%<br>Dopo 2 settimane: nessun rimborso</div>
+          </div>
+        </div>
+
+        <div class="policy-note">
+          <strong>Nota:</strong> Tutti i termini di cancellazione sono calcolati a partire dall'orario di partenza previsto del Suo tour.
+        </div>
+      </div>
+
+      <!-- POLITICA SUL METEO -->
+      <div class="policy-card">
+        <div class="policy-icon">🌦️</div>
+        <h2 class="policy-heading">Politica sul Meteo</h2>
+        <p>Operiamo con sole o pioggia. Tuttavia, in caso di condizioni meteorologiche estreme o nel caso in cui Adventure Tours Vernal debba cancellare per altre circostanze impreviste, Lei avrà la possibilità di riprogrammare o ricevere un rimborso completo.</p>
+        <p><strong>Importante:</strong> Se Lei decide di non partecipare a causa della pioggia, verrà applicata la nostra politica standard di cancellazione riguardo ai rimborsi. Nel caso in cui siamo noi a cancellare per eventi meteorologici estremi, Lei riceverà un rimborso completo.</p>
+      </div>
+
+      <!-- ACCORDI RICHIESTI -->
+      <div class="policy-card">
+        <div class="policy-icon">📝</div>
+        <h2 class="policy-heading">Accordi e Liberatorie Richiesti</h2>
+        <p>Tutti gli ospiti dovranno firmare un <strong>Accordo di Partecipazione, Liberatoria e Assunzione di Rischio</strong> per partecipare alle attività. I genitori e i tutori legali dovranno firmare per i minorenni. Inoltre, i conducenti del tour in UTV dovranno firmare un <strong>Accordo del Conducente</strong>.</p>
+
+        <div class="policy-warning">
+          <strong>⚠️ Importante:</strong> Se questi accordi non vengono firmati, non Le sarà consentito partecipare alla Sua avventura. La scelta di non firmare non costituirà motivo di rimborso e si applicherà la nostra politica di cancellazione.
+        </div>
+      </div>
+
+      <!-- LIBERATORIA PER DANNI AL VEICOLO -->
+      <div class="policy-card">
+        <div class="policy-icon">🛡️</div>
+        <h2 class="policy-heading">Liberatoria per Danni al Veicolo</h2>
+        <p class="required-badge">Richiesta per tutti i tour</p>
+
+        <p>La Liberatoria per Danni al Veicolo limita le Sue spese vive alla franchigia più imposte per i danni alla nostra attrezzatura in caso di incidente.</p>
+
+        <div class="policy-list">
+          <h3>La liberatoria per danni è NULLA se:</h3>
+          <ul>
+            <li>Il danno è il risultato di una guida spericolata</li>
+            <li>Non vengono seguite le istruzioni della Sua guida</li>
+            <li>Viene riscontrato che Lei aveva QUALSIASI quantità di alcol o droghe nel Suo organismo al momento del danno</li>
+          </ul>
+        </div>
+
+        <div class="deductible-info">
+          <h3>Informazioni sulla Franchigia:</h3>
+          <p>Firmando un accordo per i nostri tour guidati, Lei diventa un conducente coperto dalla nostra assicurazione di responsabilità civile, soggetta a tutti i termini e condizioni della polizza. Questa copertura prevede una <strong>franchigia di $1,000 per incidente</strong>, pertanto, se Lei è coinvolto in un incidente con un'altra persona, veicolo o proprietà, si impegna a pagarci $1,000 al momento dell'incidente, indipendentemente da chi sia responsabile dell'incidente.</p>
+        </div>
+      </div>
+
+      <!-- COPERTURA DI RESPONSABILITÀ CIVILE -->
+      <div class="policy-card">
+        <div class="policy-icon">📋</div>
+        <h2 class="policy-heading">Copertura di Responsabilità Civile</h2>
+        <p>La nostra copertura fornisce i seguenti limiti di responsabilità:</p>
+
+        <div class="coverage-details">
+          <div class="coverage-item">
+            <span class="coverage-label">Lesioni personali per persona:</span>
+            <span class="coverage-amount">Ci contatti per i dettagli</span>
+          </div>
+          <div class="coverage-item">
+            <span class="coverage-label">Danni alla proprietà:</span>
+            <span class="coverage-amount">Ci contatti per i dettagli</span>
+          </div>
+          <div class="coverage-item">
+            <span class="coverage-label">Totale per incidente:</span>
+            <span class="coverage-amount">Ci contatti per i dettagli</span>
+          </div>
+        </div>
+
+        <div class="policy-disclaimer">
+          <p><strong>Avviso Assicurativo:</strong> Le esigenze assicurative di ciascuno sono diverse e non garantiamo che i nostri limiti di responsabilità siano adeguati per Lei. Non siamo broker, agenti o fornitori assicurativi. Se ha domande sulle coperture, Le suggeriamo di contattare il Suo agente o broker assicurativo.</p>
+        </div>
+      </div>
+
+      <!-- REGOLE E REQUISITI -->
+      <div class="policy-card">
+        <div class="policy-icon">⚖️</div>
+        <h2 class="policy-heading">Regole e Requisiti</h2>
+
+        <div class="policy-list">
+          <h3>Puntualità:</h3>
+          <ul>
+            <li>Se alcuni membri del Suo gruppo sono puntuali, accetteremo tutti i partecipanti puntuali che hanno firmato correttamente le liberatorie, anche se la persona che ha effettuato la prenotazione non è presente.</li>
+            <li>Non verrà concesso alcun rimborso agli ospiti che non sono stati puntuali per la loro avventura.</li>
+          </ul>
+
+          <h3>Politica su Alcol e Droghe:</h3>
+          <ul>
+            <li>Non è assolutamente consentito portare alcolici durante la Sua avventura.</li>
+            <li>Non Le sarà consentito partecipare se la Sua guida ritiene che Lei sia sotto l'effetto di alcol o droghe, legali o illegali.</li>
+            <li>Non verrà concesso alcun rimborso se Lei non è in grado di partecipare a causa del consumo di alcol o droghe.</li>
+          </ul>
+
+          <h3>Istruzioni della Guida:</h3>
+          <ul>
+            <li>La Sua guida è presente per garantirLe un'avventura sicura.</li>
+            <li>Lei è tenuto a seguire sempre tutte le istruzioni della guida.</li>
+          </ul>
+
+          <h3>Modifiche all'Itinerario:</h3>
+          <ul>
+            <li>Il Suo itinerario è una guida, non un contratto.</li>
+            <li>L'itinerario può essere modificato in qualsiasi momento prima o durante la Sua avventura.</li>
+            <li>Le modifiche all'itinerario non costituiscono motivo di rimborso.</li>
+          </ul>
+
+          <h3>Elaborazione dei Rimborsi:</h3>
+          <ul>
+            <li>Eventuali rimborsi dovuti vengono restituiti alla persona che ha effettuato la prenotazione originale.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- INVITO ALL'AZIONE -->
+      <div class="policy-cta">
+        <h3>Domande Sulla Nostra Politica?</h3>
+        <p>Se ha domande sulla nostra politica di cancellazione o sui nostri termini, non esiti a contattarci prima di prenotare.</p>
+        <div class="cta-buttons">
+          <a href="tel:435-219-9447" class="cta-button primary">📞 Chiami il (435) 219-9447</a>
+          <a href="/it/booking/" class="cta-button secondary">Prenoti il Suo Tour</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Pulsante flottante per mobile -->
+<div class="mobile-sticky-cta">
+  <button onclick="location.href='/it/booking/'">Prenoti il Suo Giro Ora</button>
+</div>
+
+`;
+
 /**
- * Locale-aware accessor (P2D pattern; Spanish populated P3A). Every
- * locale without a committed variant falls back to English. Callers that
- * don't need locale awareness keep importing `bodyHtml` directly.
+ * Locale-aware accessor (P2D pattern; Spanish populated P3A, Italian P6).
+ * Every locale without a committed variant falls back to English. Callers
+ * that don't need locale awareness keep importing `bodyHtml` directly.
  */
 export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'es') return ES;
+  if (locale === 'it') return IT;
   return bodyHtml;
 }

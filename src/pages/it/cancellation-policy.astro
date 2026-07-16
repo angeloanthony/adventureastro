@@ -1,0 +1,41 @@
+---
+// it/cancellation-policy.astro — Italian cancellation policy (P6 inline
+// batch). Mirrors src/pages/es/cancellation-policy.astro.
+import { getBodyHtml } from '../../page-content/cancellation';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+---
+<BaseLayout bodyClass="policy-page-body">
+  <Fragment slot="head">
+    <Seo
+      title="Politica di Cancellazione | Adventure Tours Vernal — Vernal, Utah"
+      description="Politica di cancellazione e rimborso di Adventure Tours Vernal per tour guidati in UTV a Vernal, Utah. 72+ ore = rimborso completo. Domande? Chiami il (435) 219-9447"
+      path="/it/cancellation-policy/"
+      type="website"
+      ogTitle="Politica di Cancellazione | Adventure Tours Vernal"
+      ogDescription="Consulti la politica di cancellazione e rimborso per i tour guidati in UTV a Vernal, Utah. Rimborsi completi disponibili con 72+ ore di preavviso. Chiami il (435) 219-9447."
+    />
+  </Fragment>
+  <Header slot="body" active="cancellation-policy" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.cancellationPolicy', lang) }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: t('footer.quickLinks', lang),
+      links: [
+        { href: '/it/#tours', label: t('footer.link.ourTours', lang) },
+        { href: '/it/#vehicles', label: t('footer.link.ourFleet', lang) },
+        { href: '/it/#gallery', label: t('footer.link.photoGallery', lang) },
+        { href: '/it/booking/', label: t('cta.bookNow', lang) },
+      ],
+    }}
+  />
+</BaseLayout>
