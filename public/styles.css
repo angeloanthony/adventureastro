@@ -53,13 +53,18 @@
 
  .nav-menu {
  display: flex; list-style: none;
- gap: 20px;
+ flex-wrap: wrap;
+ gap: 20px; row-gap: 10px;
  align-items: center;
+ justify-content: flex-end;
  }
+
+ .nav-menu > li { flex-shrink: 0; }
 
  .nav-menu a {
  font-family: var(--font-heading); font-weight: 600;
  font-size: 0.85rem;
+ white-space: nowrap;
  color: var(--charcoal); transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
  position: relative; text-decoration: none; padding: 8px 2px;
  }
