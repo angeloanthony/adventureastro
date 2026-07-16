@@ -63,7 +63,7 @@
 
  .nav-menu a {
  font-family: var(--font-heading); font-weight: 600;
- font-size: 0.8rem;
+ font-size: 0.95rem;
  white-space: nowrap;
  color: var(--charcoal); transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
  position: relative; text-decoration: none; padding: 8px 2px;
@@ -79,7 +79,7 @@
 
  .nav-phone {
  color: var(--burnt-orange) !important; font-weight: 700 !important;
- font-size: 0.85rem;
+ font-size: 0.95rem;
  padding: 7px 14px;
  background: linear-gradient(135deg, rgba(212,118,78,0.12) 0%, rgba(218,165,32,0.12) 100%);
  border-radius: 10px; transition: var(--transition-smooth); border: 2px solid rgba(212,118,78,0.2); box-shadow: 0 4px 15px rgba(212,118,78,0.1);
