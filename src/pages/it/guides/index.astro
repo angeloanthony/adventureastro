@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import TrustBadge from '../../../components/content/TrustBadge.astro';
+import Header from '../../../components/layout/Header.astro';
+import Footer from '../../../components/layout/Footer.astro';
+import Seo from '../../../components/seo/Seo.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import HubIndex from '../../../components/content/HubIndex.astro';
+import { getLangFromUrl } from '../../../lib/i18n';
+import { t } from '../../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+// it/guides/index.astro — Italian Guides hub pillar (P6 batch, mirrors the
+// Spanish P3C page src/pages/es/guides/index.astro). Mirrors
+// src/pages/guides/index.astro exactly (structure, classes, ids).
+//
+// Unlike the Spanish P3C page, the Italian guides spokes (all 9) already
+// exist as translated MDX by the time this pillar lands (P5F batch) — so,
+// per the Italian rollout's internal-link rule, every spoke link below
+// points at its /it/ prefixed path instead of falling back to English.
+const schema = `{
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "Guide di Viaggio a Vernal, Utah — Pianifichi la Sua Avventura in UTV",
+        "description": "Guide per pianificare il Suo viaggio a Vernal, Utah: una panoramica della destinazione, cosa indossare, cosa portare, il clima secondo la stagione, come Vernal si confronta con Moab, e guide dettagliate su Flaming Gorge, Red Fleet State Park, Steinaker State Park e Ashley National Forest.",
+        "author": {"@type": "Organization", "name": "Adventure Tours Vernal"},
+        "publisher": {"@type": "Organization", "name": "Adventure Tours Vernal", "logo": {"@type": "ImageObject", "url": "https://adventuretoursvernal.com/images/logo.webp"}},
+        "datePublished": "2026-07-10",
+        "dateModified": "2026-07-11",
+        "mainEntityOfPage": "https://adventuretoursvernal.com/it/guides/"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type": "Question", "name": "Quali guide offre Adventure Tours Vernal per pianificare un viaggio?", "acceptedAnswer": {"@type": "Answer", "text": "Adventure Tours Vernal pubblica nove guide per pianificare il Suo viaggio: una panoramica completa della destinazione di Vernal, una guida al clima secondo la stagione, una guida su cosa indossare, un elenco di cosa portare, una guida comparativa per i visitatori provenienti da Moab, e guide dettagliate su quattro destinazioni vicine — Flaming Gorge, Red Fleet State Park, Steinaker State Park e Ashley National Forest. Ognuna illustra ciò che deve sapere prima di un tour guidato in UTV Kawasaki KRX 1000 vicino a Vernal."}},
+          {"@type": "Question", "name": "Devo leggere queste guide prima di prenotare un tour in UTV?", "acceptedAnswer": {"@type": "Answer", "text": "No, ma L'aiutano a prepararsi. La maggior parte degli ospiti ha bisogno solo di scarpe chiuse e di una patente di guida valida — Adventure Tours Vernal fornisce caschi ed equipaggiamento di sicurezza. Le guide illustrano l'abbigliamento, il bagaglio, il clima secondo la stagione, l'orientamento sulla destinazione e come un tour a Vernal si confronta con Moab."}}
+        ]
+      }
+    ]
+  }`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Guide di Viaggio a Vernal, Utah | Adventure Tours Vernal"
+      description="Guide per pianificare il Suo viaggio a Vernal, Utah — cosa indossare, cosa portare, clima secondo la stagione, e il confronto tra un tour in UTV a Vernal e Moab."
+      path="/it/guides/"
+      type="article"
+      ogTitle="Guide di Viaggio a Vernal, Utah | Adventure Tours Vernal"
+      ogDescription="Tutto ciò che Le serve per pianificare un tour guidato in UTV vicino a Vernal, Utah — abbigliamento, bagaglio, clima secondo la stagione e un confronto con Moab."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="guides" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.guides', lang) }]} />
+  <main class="article-page" slot="body">
+    <header class="article-header">
+      <h1 class="article-title">Guide di Viaggio a Vernal, Utah</h1>
+      <p class="article-meta">Adventure Tours Vernal</p>
+      <TrustBadge align="left" />
+    </header>
+    <div class="article-body">
+      <div class="article-summary-box">
+        Un tour guidato in UTV Kawasaki KRX 1000 è facile da preparare — la maggior parte degli ospiti ha bisogno solo di una patente di guida valida e di scarpe chiuse. Queste guide illustrano il resto: cosa indossare, cosa mettere in valigia, come cambia secondo la stagione il clima dell'alto deserto di Vernal, e come si confronta un tour a Vernal se lo sta valutando rispetto a Moab.
+      </div>
+
+      <div class="article-tip"><strong>Sta pianificando la Sua prima visita?</strong> Legga la <a href="/it/dinosaur-national-monument/visiting-dinosaur-national-monument/">Guida Definitiva a Dinosaur National Monument</a> — un piano completo che copre fossili, petroglifi, strade panoramiche, escursioni e il periodo migliore dell'anno per andarci.</div>
+
+      <h2>Cominci dalla Destinazione Stessa</h2>
+      <p>È la prima volta che visita Vernal? La <a href="/it/guides/ultimate-guide-to-vernal-utah/">Guida Definitiva a Vernal, Utah</a> illustra le basi di cui ogni visitatore alle prime armi ha bisogno — dove si trova Vernal, come è diventata la Terra dei Dinosauri, come arrivarci e spostarsi, dove alloggiare e mangiare, e come costruire un viaggio attorno alle attrazioni principali della regione. Cominci da lì, poi usi le guide qui sotto per prepararsi al sentiero.</p>
+
+      <h2>Si Prepari per il Suo Tour</h2>
+      <p>Prima di prenotare, è utile sapere come si sentono davvero il terreno e il clima intorno a Vernal. La guida <a href="/it/guides/what-to-wear-utv-tour/">Cosa Indossare per un Tour in UTV nel Deserto</a> illustra le calzature, la vestizione a strati e la protezione solare per un giro di tre ore su un veicolo fuoristrada a cielo aperto. L'elenco <a href="/it/guides/what-to-bring/">Cosa Portare</a> completa il bagaglio — cosa è obbligatorio, cosa viene fornito e cosa lasciare a casa.</p>
+
+      <h2>Scelga il Momento della Sua Visita</h2>
+      <p>Vernal si trova a 5.331 piedi di altitudine nell'alto deserto dello Utah, dove le mattine e i pomeriggi possono variare tra 30 e 40°F. La <a href="/it/guides/vernal-weather-guide/">Guida al Clima di Vernal</a> illustra le condizioni stagione per stagione, così può scegliere la finestra migliore per il Suo viaggio — e sapere cosa aspettarsi se farà il tour in piena estate o al limite dell'inverno.</p>
+
+      <h2>Confronto tra Vernal e Moab</h2>
+      <p>Se sta valutando Vernal rispetto a un tour in UTV a Moab, la guida <a href="/it/guides/moab-utv-tours/">Alternativa ai Tour in UTV di Moab</a> presenta il confronto onesto — l'affollamento dei sentieri, le temperature estive, i prezzi, e i sentieri e le attrazioni (come Moonshine Arch e Dinosaur National Monument) che Vernal ha e Moab no.</p>
+
+      <h2>Esplori le Destinazioni della Regione</h2>
+      <p>Pronto ad approfondire dove trascorrere le Sue giornate? Quattro guide dettagliate sulle destinazioni illustrano il territorio che si estende da Vernal: la <a href="/it/guides/ultimate-guide-to-flaming-gorge/">Guida Definitiva a Flaming Gorge</a>, la <a href="/it/guides/ultimate-guide-to-red-fleet-state-park/">Guida Definitiva a Red Fleet State Park</a>, la <a href="/it/guides/ultimate-guide-to-steinaker-state-park/">Guida Definitiva a Steinaker State Park</a>, e la <a href="/it/guides/ultimate-guide-to-ashley-national-forest/">Guida Definitiva ad Ashley National Forest</a> — ciascuna con il proprio paesaggio, i propri corsi d'acqua e i propri sentieri a breve distanza dal paese.</p>
+
+      <div class="article-tip">
+        <strong>Non sa da dove cominciare?</strong> Chiami Dave o Trudy al <a href="tel:435-219-9447">(435) 219-9447</a> — potranno spiegarLe cosa aspettarsi in base alle Sue date di viaggio e alla dimensione del Suo gruppo. Oppure, quando sarà pronto, <a href="/it/booking/">consulti le date e prenoti online</a>.
+      </div>
+    </div>
+  </main>
+  <HubIndex slot="body" collection="guides" heading="Tutte le Guide" />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

@@ -119,6 +119,8 @@ const ES_SLUGS = new Set([
 // exactly as Spanish was — no code change to getAvailableLocales required.
 // Italian translations, added batch by batch exactly as Spanish was.
 const IT_SLUGS = new Set([
+  // P6 — first Italian wrapper page (mirrors Spanish P3A).
+  'about',
   // P5A — Italian UTV hub batch (7 spokes). Compound slug = `utv/<base-id>`.
   'utv/backcountry-tours-vernal-utah', 'utv/beginners-guide-to-utv-tours-vernal',
   'utv/best-utv-trails-vernal', 'utv/family-utv-guide-vernal', 'utv/group-utv-tours-vernal',
