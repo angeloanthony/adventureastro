@@ -88,6 +88,17 @@ const ES_SLUGS = new Set([
   // P4D — Spanish fishing hub batch (4 spokes).
   'fishing/fishing-flaming-gorge', 'fishing/fishing-red-fleet-reservoir',
   'fishing/fishing-steinaker-reservoir', 'fishing/green-river-fly-fishing',
+  // P4E — Spanish camping hub batch (4 spokes).
+  'camping/camping-at-flaming-gorge', 'camping/camping-at-red-fleet-state-park',
+  'camping/camping-at-steinaker-state-park', 'camping/camping-in-ashley-national-forest',
+  // P4F — Spanish scenic-drives hub batch (4 spokes).
+  'scenic-drives/flaming-gorge-uintas-scenic-byway', 'scenic-drives/red-cloud-loop-scenic-drive',
+  'scenic-drives/sheep-creek-geological-loop', 'scenic-drives/cub-creek-road-tour-of-the-tilted-rocks',
+  // P4G — Spanish guides hub batch (9 spokes).
+  'guides/ultimate-guide-to-vernal-utah', 'guides/ultimate-guide-to-flaming-gorge',
+  'guides/ultimate-guide-to-ashley-national-forest', 'guides/ultimate-guide-to-red-fleet-state-park',
+  'guides/ultimate-guide-to-steinaker-state-park', 'guides/moab-utv-tours',
+  'guides/vernal-weather-guide', 'guides/what-to-bring', 'guides/what-to-wear-utv-tour',
 ]);
 
 /**
