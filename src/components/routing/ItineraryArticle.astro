@@ -7,7 +7,7 @@
 import { render } from 'astro:content';
 import ItineraryLayout from '../../layouts/ItineraryLayout.astro';
 import { spokeHref } from '../../lib/hubs';
-import { getLangFromUrl, parseEntryLocale, localizedPath } from '../../lib/i18n';
+import { getLangFromUrl, parseEntryLocale, localizedPath, getAvailableLocales, DEFAULT_LOCALE } from '../../lib/i18n';
 import { t } from '../../lib/ui';
 import type { SpokeData } from '../../content.config';
 
@@ -19,6 +19,9 @@ const { Content } = await render(entry as any);
 const d = entry.data;
 const lang = getLangFromUrl(Astro.url);
 const { baseId } = parseEntryLocale(entry.id);
+// Existence-aware breadcrumb ancestors — see SpokeArticle.astro.
+const homeLocale = getAvailableLocales('').includes(lang) ? lang : DEFAULT_LOCALE;
+const itinLocale = getAvailableLocales('itineraries').includes(lang) ? lang : DEFAULT_LOCALE;
 ---
 <ItineraryLayout
   title={d.title}
@@ -29,8 +32,8 @@ const { baseId } = parseEntryLocale(entry.id);
   publishDate={d.publishDate}
   updatedDate={d.updatedDate}
   breadcrumbs={[
-    { label: t('nav.home', lang), href: localizedPath('', lang) },
-    { label: t('nav.itineraries', lang), href: localizedPath('itineraries', lang) },
+    { label: t('nav.home', lang), href: localizedPath('', homeLocale) },
+    { label: t('nav.itineraries', lang), href: localizedPath('itineraries', itinLocale) },
     { label: d.title },
   ]}
   currentId={baseId}

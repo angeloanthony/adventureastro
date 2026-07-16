@@ -14,7 +14,7 @@
 import { render } from 'astro:content';
 import SpokeLayout from '../../layouts/SpokeLayout.astro';
 import { spokeHref, type HubSlug } from '../../lib/hubs';
-import { getLangFromUrl, parseEntryLocale, localizedPath } from '../../lib/i18n';
+import { getLangFromUrl, parseEntryLocale, localizedPath, getAvailableLocales, DEFAULT_LOCALE } from '../../lib/i18n';
 import { t, hubName } from '../../lib/ui';
 import type { SpokeData } from '../../content.config';
 
@@ -26,6 +26,13 @@ const { Content } = await render(entry as any);
 const d = entry.data;
 const lang = getLangFromUrl(Astro.url);
 const { baseId } = parseEntryLocale(entry.id);
+// Existence-aware breadcrumb ancestors: link to the localized home/hub pillar
+// only when that page actually exists in `lang`; otherwise fall back to the
+// English page (same pattern as the Header/Footer booking link). Lets a hub's
+// MDX spokes ship in a new locale before its inline pillar/home are translated
+// without emitting links to pages that don't exist yet.
+const homeLocale = getAvailableLocales('').includes(lang) ? lang : DEFAULT_LOCALE;
+const hubLocale = getAvailableLocales(hub).includes(lang) ? lang : DEFAULT_LOCALE;
 ---
 <SpokeLayout
   title={d.title}
@@ -36,8 +43,8 @@ const { baseId } = parseEntryLocale(entry.id);
   publishDate={d.publishDate}
   updatedDate={d.updatedDate}
   breadcrumbs={[
-    { label: t('nav.home', lang), href: localizedPath('', lang) },
-    { label: hubName(hub, lang), href: localizedPath(hub, lang) },
+    { label: t('nav.home', lang), href: localizedPath('', homeLocale) },
+    { label: hubName(hub, lang), href: localizedPath(hub, hubLocale) },
     { label: d.title },
   ]}
   collection={hub}

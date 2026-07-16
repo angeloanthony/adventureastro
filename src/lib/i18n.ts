@@ -59,12 +59,14 @@ export function getLangFromUrl(url: URL): Locale {
   return (hit?.code ?? DEFAULT_LOCALE) as Locale;
 }
 
-// Slugs with a committed Spanish page-content translation (P3A commercial
-// batch + P3B Destination Authority). Normalized the same way
-// BaseLayout/LanguageSwitcher derive slugs ('' = home, no leading/trailing
-// slash otherwise). Add to this set — one line per slug — as each future
-// page/locale is translated; nothing else in the runtime changes
-// (existence check only, per the P1 design note this replaces).
+// Per-locale registry of slugs that have a committed translation. One Set per
+// non-default locale; a slug present in locale L's Set means L has a page for
+// it, which is what lights up hreflang + the language switcher there. Slugs are
+// normalized the same way BaseLayout/LanguageSwitcher derive them ('' = home,
+// no leading/trailing slash otherwise). Add a slug to its locale's Set — one
+// line per slug — as each page/locale is translated; nothing else in the
+// runtime changes (existence check only). Locales with no content yet (it/pt)
+// carry an empty Set and stay invisible everywhere (existence-awareness).
 const ES_SLUGS = new Set([
   '', 'booking', 'about', 'faq', 'privacy-policy', 'cancellation-policy', 'safety-guidelines', 'utv', // P3A
   'dinosaur-national-monument', // P3B
@@ -99,19 +101,50 @@ const ES_SLUGS = new Set([
   'guides/ultimate-guide-to-ashley-national-forest', 'guides/ultimate-guide-to-red-fleet-state-park',
   'guides/ultimate-guide-to-steinaker-state-park', 'guides/moab-utv-tours',
   'guides/vernal-weather-guide', 'guides/what-to-bring', 'guides/what-to-wear-utv-tour',
+  // P4H — Spanish itineraries hub batch (9 spokes). Compound slug = `itineraries/<base-id>`.
+  'itineraries/2-day-family-itinerary', 'itineraries/3-day-adventure-itinerary',
+  'itineraries/one-day-adventure-vernal', 'itineraries/photography-weekend-vernal',
+  'itineraries/romantic-weekend-dinosaur-country', 'itineraries/weekend-fishing-trip-vernal',
+  'itineraries/weekend-road-trip-from-denver', 'itineraries/weekend-road-trip-from-grand-junction',
+  'itineraries/weekend-road-trip-from-salt-lake-city',
+  // P4I — Spanish things-to-do hub batch (2 spokes).
+  'things-to-do/vernal-utah-attractions', 'things-to-do/fun-things-to-do-vernal-utah-kids',
+  // P4J — Spanish dinosaur-national-monument hub batch (2 spokes). Final Spanish batch.
+  'dinosaur-national-monument/visiting-dinosaur-national-monument',
+  'dinosaur-national-monument/petroglyphs-rock-art-vernal',
 ]);
+
+// The registry itself: every non-default locale mapped to its slug Set. New
+// locales (it, pt, …) start with an empty Set and are populated batch by batch
+// exactly as Spanish was — no code change to getAvailableLocales required.
+// Italian translations, added batch by batch exactly as Spanish was.
+const IT_SLUGS = new Set([
+  // P5A — Italian UTV hub batch (7 spokes). Compound slug = `utv/<base-id>`.
+  'utv/backcountry-tours-vernal-utah', 'utv/beginners-guide-to-utv-tours-vernal',
+  'utv/best-utv-trails-vernal', 'utv/family-utv-guide-vernal', 'utv/group-utv-tours-vernal',
+  'utv/private-utv-tours-vernal', 'utv/side-by-side-rentals-vernal-utah',
+]);
+
+const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {
+  es: ES_SLUGS,
+  it: IT_SLUGS,
+  pt: new Set<string>(),
+};
 
 /**
  * Which locales actually have content for a given page. Existence check
- * against committed localized content for `slug` — currently the P3A
- * Spanish commercial batch; every other slug still resolves to English
- * only, which is what keeps the switcher and hreflang silent there.
+ * against the per-locale registry: English (the master) is always present;
+ * any non-default locale whose Set contains `slug` is added. Every other slug
+ * resolves to English only, which is what keeps the switcher and hreflang
+ * silent there.
  */
 export function getAvailableLocales(slug: string = ''): Locale[] {
   const clean = slug.replace(/^\/+|\/+$/g, '');
-  const codes: Locale[] = [DEFAULT_LOCALE as Locale];
-  if (ES_SLUGS.has(clean)) codes.push('es');
-  return LOCALES.filter((l) => codes.includes(l.code)).map((l) => l.code) as Locale[];
+  const codes = new Set<Locale>([DEFAULT_LOCALE as Locale]);
+  for (const [code, slugs] of Object.entries(LOCALE_SLUGS)) {
+    if (slugs.has(clean)) codes.add(code as Locale);
+  }
+  return LOCALES.filter((l) => codes.has(l.code)).map((l) => l.code) as Locale[];
 }
 
 /**
