@@ -138,6 +138,25 @@ const IT_SLUGS = new Set([
   // P5D — Italian camping hub batch (4 spokes).
   'camping/camping-at-flaming-gorge', 'camping/camping-at-red-fleet-state-park',
   'camping/camping-at-steinaker-state-park', 'camping/camping-in-ashley-national-forest',
+  // P5E — Italian scenic-drives hub batch (4 spokes).
+  'scenic-drives/flaming-gorge-uintas-scenic-byway', 'scenic-drives/red-cloud-loop-scenic-drive',
+  'scenic-drives/sheep-creek-geological-loop', 'scenic-drives/cub-creek-road-tour-of-the-tilted-rocks',
+  // P5F — Italian guides hub batch (9 spokes).
+  'guides/moab-utv-tours', 'guides/ultimate-guide-to-ashley-national-forest',
+  'guides/ultimate-guide-to-flaming-gorge', 'guides/ultimate-guide-to-red-fleet-state-park',
+  'guides/ultimate-guide-to-steinaker-state-park', 'guides/ultimate-guide-to-vernal-utah',
+  'guides/vernal-weather-guide', 'guides/what-to-bring', 'guides/what-to-wear-utv-tour',
+  // P5G — Italian itineraries hub batch (9 spokes).
+  'itineraries/2-day-family-itinerary', 'itineraries/3-day-adventure-itinerary',
+  'itineraries/one-day-adventure-vernal', 'itineraries/photography-weekend-vernal',
+  'itineraries/romantic-weekend-dinosaur-country', 'itineraries/weekend-fishing-trip-vernal',
+  'itineraries/weekend-road-trip-from-denver', 'itineraries/weekend-road-trip-from-grand-junction',
+  'itineraries/weekend-road-trip-from-salt-lake-city',
+  // P5H — Italian things-to-do hub batch (2 spokes).
+  'things-to-do/vernal-utah-attractions', 'things-to-do/fun-things-to-do-vernal-utah-kids',
+  // P5I — Italian dinosaur-national-monument hub batch (2 spokes).
+  'dinosaur-national-monument/visiting-dinosaur-national-monument',
+  'dinosaur-national-monument/petroglyphs-rock-art-vernal',
 ]);
 
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {
