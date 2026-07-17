@@ -177,6 +177,15 @@ const PT_SLUGS = new Set([
   // P7E — Portuguese camping hub batch (4 spokes).
   'camping/camping-at-flaming-gorge', 'camping/camping-at-red-fleet-state-park',
   'camping/camping-at-steinaker-state-park', 'camping/camping-in-ashley-national-forest',
+  // P7F — Portuguese hiking hub batch (16 spokes).
+  'hiking/alpine-lakes-hiking-high-uintas', 'hiking/beginner-hiking-guide-near-vernal',
+  'hiking/best-hikes-in-dinosaur-national-monument', 'hiking/bird-watching-near-vernal',
+  'hiking/dog-friendly-hiking-near-vernal', 'hiking/fall-hiking-near-vernal',
+  'hiking/family-hiking-near-vernal', 'hiking/high-uintas-backpacking-guide',
+  'hiking/high-uintas-day-hikes', 'hiking/kings-peak-hiking-guide',
+  'hiking/photography-hikes-near-vernal', 'hiking/spring-hiking-near-vernal',
+  'hiking/summer-hiking-near-vernal', 'hiking/wildflower-hiking-near-vernal',
+  'hiking/wildlife-hiking-guide-near-vernal', 'hiking/winter-hiking-near-vernal',
 ]);
 
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {
