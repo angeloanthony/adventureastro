@@ -119,8 +119,12 @@ const ES_SLUGS = new Set([
 // exactly as Spanish was — no code change to getAvailableLocales required.
 // Italian translations, added batch by batch exactly as Spanish was.
 const IT_SLUGS = new Set([
-  // P6 — first Italian wrapper page (mirrors Spanish P3A).
-  'about',
+  // P6 — Italian inline pages (mirrors Spanish P3A–P3D): home/commercial,
+  // DNM inline, 7 activity-hub pillars, 4 city/legacy/restaurant pages.
+  '', 'booking', 'about', 'faq', 'privacy-policy', 'cancellation-policy', 'safety-guidelines', 'utv',
+  'dinosaur-national-monument',
+  'hiking', 'fishing', 'camping', 'scenic-drives', 'things-to-do', 'guides', 'itineraries',
+  'atv-trails-vernal-utah', 'jeep-trails-vernal-utah', 'from/salt-lake-city', 'things-to-do/best-restaurants-vernal-utah',
   // P5A — Italian UTV hub batch (7 spokes). Compound slug = `utv/<base-id>`.
   'utv/backcountry-tours-vernal-utah', 'utv/beginners-guide-to-utv-tours-vernal',
   'utv/best-utv-trails-vernal', 'utv/family-utv-guide-vernal', 'utv/group-utv-tours-vernal',

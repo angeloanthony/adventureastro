@@ -270,13 +270,133 @@ const ES: Dict = {
   'hub.guides': 'Guías del Destino',
 };
 
-// One entry per locale. it/pt still ship English PLACEHOLDER values (P2D)
-// until their own translation batch — master-fallback in t() covers any
-// gap. es is now a real Spanish dictionary (P3A).
+// Italian chrome dictionary (P6, mirrors Spanish P3A). Formal "Lei" register.
+// Keys mirror EN 1:1 — master-fallback in t() covers any key added to EN
+// before its Italian counterpart lands. Brand, NAP, prices, fleet, place
+// names, and people stay in the English value (never present here) per the
+// multilingual handoff's proper-noun policy.
+const IT: Dict = {
+  'nav.home': 'Home',
+  'nav.about': 'Chi Siamo',
+  'nav.trails': 'Sentieri',
+  'nav.thingsToDo': 'Cosa Fare',
+  'nav.dinosaurMonument': 'Dinosaur Monument',
+  'nav.guides': 'Guide',
+  'nav.food': 'Ristoranti',
+  'nav.info': 'Informazioni',
+  'nav.cancellationPolicy': 'Politica di Cancellazione',
+  'nav.privacyPolicy': 'Informativa sulla Privacy',
+  'nav.faq': 'Domande Frequenti',
+  'nav.safetyGuidelines': 'Norme di Sicurezza',
+  'nav.whatToBring': 'Cosa Portare',
+  'nav.itineraries': 'Itinerari',
+
+  'cta.bookNow': 'Prenoti Ora',
+  'cta.bookYourAdventure': 'Prenoti la Sua Avventura',
+
+  'a11y.toggleMenu': 'Attiva/disattiva menu',
+  'a11y.breadcrumb': 'Percorso di navigazione',
+  'a11y.relatedArticles': 'Articoli correlati',
+  'a11y.allArticlesInHub': 'Tutti gli articoli di questa categoria',
+  'a11y.keyTakeaways': 'Punti chiave',
+  'a11y.relatedGuides': 'Guide correlate',
+
+  'section.faq': 'Domande Frequenti',
+  'section.exploreThisHub': 'Esplori Questa Categoria',
+  'section.youMightAlsoLike': 'Potrebbe InteressarLe Anche',
+  'section.keyTakeaways': 'Punti Chiave',
+  'section.exploreVernal': 'Esplori Vernal',
+  'section.moreVernalGuides': 'Altre Guide su Vernal',
+
+  'footer.tagline': "Viva l'avventura di una vita nella terra dei dinosauri dello Utah.",
+  'footer.ourTrails': 'I Nostri Sentieri',
+  'footer.information': 'Informazioni',
+  'footer.contactInfo': 'Informazioni di Contatto',
+  'footer.copyrightSuffix': ' - Tutti i diritti riservati.',
+  'footer.link.utvTrailsTours': 'Sentieri e Tour in UTV',
+  'footer.link.thingsToDo': 'Cosa Fare',
+  'footer.link.dinosaurNationalMonument': 'Dinosaur National Monument',
+  'footer.link.guides': 'Guide',
+  'footer.link.visitingFromSLC': 'In Visita da Salt Lake City',
+  'footer.quickLinks': 'Link Rapidi',
+  'footer.link.ourTours': 'I Nostri Tour',
+  'footer.link.ourFleet': 'La Nostra Flotta',
+  'footer.link.photoGallery': 'Galleria Fotografica',
+
+  'tour.value.family': 'Il modo in cui la maggior parte delle famiglie conclude il proprio viaggio a Vernal.',
+  'tour.value.adventure': 'Tour guidati su Kawasaki KRX 1000 nella Terra dei Dinosauri.',
+  'tour.value.sunset': "Sentieri all'ora dorata, petroglifi e punti panoramici nel backcountry.",
+  'tour.value.generic': 'Tour guidati in UTV nella Terra dei Dinosauri.',
+  'tour.callForPricing': 'Chiami per i prezzi',
+  'tour.threeHours': '3 ore',
+  'tour.upToRiders': 'fino a {n} passeggeri',
+
+  'reviews.googleReviews': 'recensioni Google',
+  'reviews.ratedAria': 'Valutato {value} su 5 in base a {count} recensioni Google',
+
+  'author.writtenBy': 'Scritto da',
+  'author.updated': 'Aggiornato',
+  'author.areasOfExpertise': 'Aree di Competenza',
+  'author.credentials': 'Credenziali ed Esperienza',
+  'author.aboutBusiness': 'Chi è Adventure Tours Vernal',
+  'author.articlesBy': 'Articoli di {name}',
+
+  'time.morning': 'mattina',
+  'time.lunch': 'pranzo',
+  'time.afternoon': 'pomeriggio',
+  'time.dinner': 'cena',
+  'time.evening': 'sera',
+  'itinerary.weatherBackup': 'Piano alternativo in caso di maltempo',
+
+  'gateway.heading': 'Viene da fuori città? Inizi dal Suo percorso di accesso.',
+  'gateway.note.saltLakeCity': "Il classico percorso di ~3 ore attraverso gli Uinta.",
+  'gateway.note.denver': 'Una gita di mezza giornata attraverso le Montagne Rocciose.',
+  'gateway.note.grandJunction': "La porta d'accesso più vicina dal Colorado.",
+  'gateway.seeAllItineraries': 'Veda tutti gli itinerari di Vernal',
+
+  'decision.heading': 'Non è sicuro di quale tour scegliere? Inizi da qui.',
+  'decision.intro': 'Ci dica cosa conta di più per Lei e La indirizzeremo alla guida giusta.',
+  'decision.q.firstTime': 'È la Sua prima volta in UTV?',
+  'decision.a.firstTime': 'Inizi con la guida per principianti',
+  'decision.q.children': 'Viaggia con bambini?',
+  'decision.a.children': 'Veda la guida UTV per famiglie',
+  'decision.q.couple': 'Viaggia in coppia?',
+  'decision.a.couple': 'Prenoti un tour privato per due',
+  'decision.q.scenery': 'Cerca paesaggi spettacolari?',
+  'decision.a.scenery': 'Confronti i sentieri più panoramici',
+  'decision.q.history': 'Cerca storia?',
+  'decision.a.history': 'Esplori petroglifi e arte rupestre',
+  'decision.q.adventure': 'Vuole la massima avventura?',
+  'decision.a.adventure': 'Vada nel backcountry con un tour remoto',
+  'decision.q.shortTime': 'Ha poco tempo a disposizione?',
+  'decision.a.shortTime': 'Prenoti il prossimo tour di 3 ore',
+  'decision.q.group': 'Gruppo numeroso?',
+  'decision.a.group': 'Pianifichi un tour di gruppo',
+
+  'city.driveTime': 'Tempo di guida',
+  'city.distance': 'Distanza',
+  'city.route': 'Percorso',
+  'city.nearestAirport': 'Aeroporto più vicino',
+
+  'hub.utv': 'Sentieri e Tour in UTV',
+  'hub.atv': 'Sentieri per ATV',
+  'hub.jeep': 'Sentieri per Jeep',
+  'hub.dinosaur-national-monument': 'Dinosaur National Monument',
+  'hub.things-to-do': 'Cosa Fare a Vernal',
+  'hub.hiking': 'Escursionismo',
+  'hub.camping': 'Campeggio',
+  'hub.fishing': 'Pesca',
+  'hub.scenic-drives': 'Strade Panoramiche',
+  'hub.guides': 'Guide sulla Destinazione',
+};
+
+// One entry per locale. pt still ships English PLACEHOLDER values (P2D)
+// until its own translation batch — master-fallback in t() covers any
+// gap. es (P3A) and it (P6) are now real dictionaries.
 const UI_STRINGS: Partial<Record<Locale, Dict>> = {
   en: EN,
   es: ES,
-  it: { ...EN },
+  it: IT,
   pt: { ...EN },
 };
 
