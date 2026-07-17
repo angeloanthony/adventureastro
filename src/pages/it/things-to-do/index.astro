@@ -1,0 +1,73 @@
+---
+// it/things-to-do/index.astro — Italian Things to Do hub pillar (P6 Italian
+// inline batch, mirrors Spanish P3C / src/pages/es/things-to-do/index.astro,
+// which in turn mirrors src/pages/things-to-do/index.astro).
+//
+// Unlike the Spanish P3C rollout, the Italian spoke articles for this hub
+// (vernal-utah-attractions, fun-things-to-do-vernal-utah-kids) already exist
+// as translated MDX (see IT_SLUGS in src/lib/i18n.ts), so HubIndex renders
+// Italian titles/links directly, and internal links to specific spokes and
+// to other pillar/hub pages in this same batch use the /it/ prefix.
+import { getBodyHtml } from '../../../page-content/things-to-do';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE } from '../../../config/site';
+import Header from '../../../components/layout/Header.astro';
+import Footer from '../../../components/layout/Footer.astro';
+import Seo from '../../../components/seo/Seo.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import HubIndex from '../../../components/content/HubIndex.astro';
+import { getLangFromUrl } from '../../../lib/i18n';
+import { t } from '../../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+// Cornerstone Article + expanded FAQ structured data. Mirrors the
+// English/Spanish schema graph; author kept as Organization to match the
+// pillar's existing entity. FAQPage mirrors the visible FAQ below verbatim.
+const schema = `{
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "Cose da Fare a Vernal, Utah — La Guida Locale Completa",
+        "description": "Il piano completo di una guida locale per le cose da fare a Vernal, Utah — Dinosaur National Monument, tour guidati in UTV, petroglifi, strade panoramiche, parchi statali, ristoranti, consigli stagionali e itinerari già pronti.",
+        "author": {"@type": "Organization", "name": "Adventure Tours Vernal"},
+        "publisher": {"@type": "Organization", "name": "Adventure Tours Vernal", "logo": {"@type": "ImageObject", "url": "https://adventuretoursvernal.com/images/logo.webp"}},
+        "datePublished": "2026-04-08",
+        "dateModified": "2026-07-10",
+        "mainEntityOfPage": "https://adventuretoursvernal.com/it/things-to-do/"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type": "Question", "name": "Quali sono le migliori cose da fare a Vernal, Utah?", "acceptedAnswer": {"@type": "Answer", "text": "Le migliori cose da fare a Vernal sono un tour guidato in UTV nel backcountry, la visita a Dinosaur National Monument e al suo Wall of Bones, l'osservazione dei petroglifi Fremont a McConkie Ranch e Dry Fork Canyon, la camminata sulle orme di dinosauro al Red Fleet State Park, il giardino dei dinosauri dello Utah Field House of Natural History, e la pesca o le gite in barca a Steinaker, Red Fleet e Flaming Gorge."}},
+          {"@type": "Question", "name": "Quanti giorni servono a Vernal, Utah?", "acceptedAnswer": {"@type": "Answer", "text": "Da due a tre giorni è l'ideale. Un giorno per Dinosaur National Monument e i petroglifi, un giorno per un tour guidato in UTV e i parchi statali, e un terzo giorno opzionale per Flaming Gorge, la pesca o l'escursionismo sulle Uinta Mountains. Un solo giorno permette solo il monumento o un'altra attività principale."}},
+          {"@type": "Question", "name": "Vale la pena visitare Vernal, Utah?", "acceptedAnswer": {"@type": "Answer", "text": "Sì. Vernal è la porta d'accesso a Dinosaur National Monument e racchiude fossili di dinosauro autentici, antica arte rupestre, canyon di roccia rossa, storia del Far West e ricreazione all'aperto di livello mondiale in un piccolo raggio poco affollato. Offre gran parte di ciò che attira i visitatori nel sud dello Utah, senza le folle."}},
+          {"@type": "Question", "name": "Qual è la cosa numero uno da fare a Vernal?", "acceptedAnswer": {"@type": "Answer", "text": "Un tour guidato in UTV nel backcountry con Adventure Tours Vernal è l'attività singolarmente più immersiva — combina avventura fuoristrada, petroglifi, archi naturali e scenari di canyon a cui non si può arrivare da una strada asfaltata, tutto in un'unica esperienza di tre ore. Dinosaur National Monument è l'attrazione principale da non perdere."}},
+          {"@type": "Question", "name": "Vernal, Utah è adatta alle famiglie con bambini?", "acceptedAnswer": {"@type": "Answer", "text": "Molto. I bambini possono toccare fossili di dinosauro autentici a Dinosaur National Monument, camminare fino alle orme di dinosauro al Red Fleet State Park, esplorare il giardino dei dinosauri dello Utah Field House, e partecipare a un tour guidato in UTV come passeggeri da 2 anni in su accompagnati da un genitore. La maggior parte delle attrazioni principali richiede solo brevi camminate."}},
+          {"@type": "Question", "name": "Qual è il periodo migliore dell'anno per visitare Vernal, Utah?", "acceptedAnswer": {"@type": "Answer", "text": "La tarda primavera (maggio–giugno) e l'inizio dell'autunno (settembre–ottobre) offrono le temperature più piacevoli, fauna selvatica attiva e folle più ridotte. L'estate è calda, tutto è aperto, ed è ideale per le attività acquatiche. L'inverno è tranquillo e scenografico ma freddo, con alcune strutture stagionali e strade chiuse."}},
+          {"@type": "Question", "name": "Quanto dista Vernal da Salt Lake City?", "acceptedAnswer": {"@type": "Answer", "text": "Vernal dista circa tre ore d'auto a est di Salt Lake City sulla US-40, e Salt Lake City è il principale aeroporto più vicino. Il percorso panoramico sale sopra le Uinta Mountains e attraversa la zona di Daniels Summit e Strawberry Reservoir."}},
+          {"@type": "Question", "name": "Per cosa è conosciuta Vernal, Utah?", "acceptedAnswer": {"@type": "Answer", "text": "Vernal è conosciuta come la Terra dei Dinosauri dello Utah. Si trova ai margini di Dinosaur National Monument nella Uintah Basin, circondata da canyon di roccia rossa, petroglifi Fremont e Ute, storia dei fuorilegge del Far West e ricreazione all'aperto su terre pubbliche."}},
+          {"@type": "Question", "name": "Serve un'automobile per visitare Vernal?", "acceptedAnswer": {"@type": "Answer", "text": "Sì. Le attrazioni di Vernal sono disperse nella campagna circostante — il monumento è a 20 minuti a est, i parchi statali e i canyon sono a 5–60 minuti — e non esiste un trasporto pubblico completo tra di essi, quindi un veicolo personale è essenziale. I tour guidati in UTV forniscono il trasporto una volta sul sentiero."}},
+          {"@type": "Question", "name": "Vernal è una buona alternativa a Moab?", "acceptedAnswer": {"@type": "Answer", "text": "Per molti viaggiatori, sì. Vernal offre canyon di roccia rossa, avventura fuoristrada e scenari spettacolari simili nello spirito a Moab, ma con molte meno folle, oltre a fossili di dinosauro e petroglifi che Moab non può eguagliare. È una scelta valida per i visitatori che vogliono avventura senza la congestione."}}
+        ]
+      }
+    ]
+  }`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Cose da Fare a Vernal, Utah | Migliori Attività e Attrazioni"
+      description="Le migliori cose da fare a Vernal, Utah: tour in UTV, Dinosaur National Monument, escursionismo, pesca e petroglifi. Pianifichi oggi la Sua avventura."
+      path="/it/things-to-do/"
+      type="article"
+      ogDescription="Scopra le migliori attività a Vernal, Utah — tour in UTV, fossili di dinosauro, arte rupestre e ricreazione all'aperto nella Uintah Basin."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="things-to-do" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('hub.things-to-do', lang) }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <HubIndex slot="body" collection="things-to-do" heading="Tutte le Guide su Cosa Fare" />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>
