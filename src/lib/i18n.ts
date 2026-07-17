@@ -165,10 +165,18 @@ const IT_SLUGS = new Set([
   'dinosaur-national-monument/petroglyphs-rock-art-vernal',
 ]);
 
+// Portuguese translations, added batch by batch exactly as Spanish/Italian were.
+const PT_SLUGS = new Set([
+  // P7C — Portuguese UTV hub batch (7 spokes). Compound slug = `utv/<base-id>`.
+  'utv/backcountry-tours-vernal-utah', 'utv/beginners-guide-to-utv-tours-vernal',
+  'utv/best-utv-trails-vernal', 'utv/family-utv-guide-vernal', 'utv/group-utv-tours-vernal',
+  'utv/private-utv-tours-vernal', 'utv/side-by-side-rentals-vernal-utah',
+]);
+
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {
   es: ES_SLUGS,
   it: IT_SLUGS,
-  pt: new Set<string>(),
+  pt: PT_SLUGS,
 };
 
 /**
