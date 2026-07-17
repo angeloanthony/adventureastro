@@ -353,6 +353,28 @@
 .dropdown-menu a { display: block; padding: 12px 20px; color: var(--charcoal); font-size: 0.95rem; transition: all 0.2s ease; border-left: 3px solid transparent; }
 .dropdown-menu a:hover { background: rgba(212,118,78,0.1); border-left-color: var(--burnt-orange); color: var(--burnt-orange); padding-left: 25px; }
 
+/* ===== LANGUAGE SWITCHER (scalable dropdown, P7B) ===== */
+.lang-switcher { position: relative; }
+.lang-toggle {
+ display: inline-flex; align-items: center; gap: 4px;
+ background: none; border: none; padding: 8px 2px; margin: 0; cursor: pointer;
+ font-family: var(--font-heading); font-weight: 600; font-size: 0.88rem;
+ color: var(--charcoal); white-space: nowrap; transition: color 0.3s ease;
+}
+.lang-toggle:hover, .lang-toggle:focus-visible { color: var(--burnt-orange); }
+.lang-switcher.open .lang-toggle { color: var(--burnt-orange); }
+.lang-menu {
+ position: absolute; top: 100%; right: 0; min-width: 160px;
+ background: var(--off-white); box-shadow: 0 8px 25px rgba(0,0,0,0.15); border-radius: 8px;
+ padding: 10px 0; margin-top: 10px; opacity: 0; visibility: hidden; transform: translateY(-10px);
+ transition: all 0.2s ease; z-index: 1000; list-style: none;
+}
+.lang-switcher.open .lang-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.lang-menu li { padding: 0; margin: 0; }
+.lang-menu a { display: block; padding: 10px 20px; color: var(--charcoal); font-size: 0.9rem; transition: all 0.2s ease; border-left: 3px solid transparent; }
+.lang-menu a:hover, .lang-menu a:focus-visible { background: rgba(212,118,78,0.1); border-left-color: var(--burnt-orange); color: var(--burnt-orange); padding-left: 25px; }
+.lang-menu a.active { color: var(--burnt-orange); font-weight: 700; }
+
 /* Trail badge & grid */
 .trail-badge { font-size: 0.75rem; padding: 7px 14px; white-space: nowrap; }
 .trails-grid { grid-template-columns: repeat(2, 1fr); }
@@ -457,6 +479,8 @@
   .mobile-menu-toggle { display: block; margin-left: auto; }
   .dropdown-menu { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; background: rgba(212,118,78,0.05); margin: 10px 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
   .nav-dropdown.active .dropdown-menu { max-height: 400px; }
+  .lang-menu { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; background: rgba(212,118,78,0.05); margin: 6px 0 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .lang-switcher.open .lang-menu { max-height: 300px; }
 }
 
 @media (max-width: 768px) {

@@ -1,12 +1,15 @@
 ---
-// LanguageSwitcher.astro — existence-aware locale switcher (P1 infra).
+// LanguageSwitcher.astro — existence-aware locale switcher (P1 infra;
+// P7B redesigned as a scalable dropdown ahead of the 4th locale going live).
 //
 // Renders ONLY when the current page has content in more than one locale.
-// Today getAvailableLocales() returns ['en'] for every page, so this emits
-// nothing and the header is unchanged. When localized content is committed it
-// lights up automatically — each option links to the same page in that locale
-// via switchLocalePath(), and the switcher only ever offers locales that
-// actually exist for this page, so it can never link to a 404.
+// getAvailableLocales() drives everything — no hardcoded locale list — so
+// this scales to any number of registered LOCALES with no further changes.
+// Each option links to the same page in that locale via switchLocalePath(),
+// and the switcher only ever offers locales that actually exist for this
+// page, so it can never link to a 404. One component instance serves both
+// desktop and the mobile nav-menu (same markup; only CSS position changes
+// at the existing 1280px breakpoint, mirroring the Info dropdown).
 import {
   getLangFromUrl, getAvailableLocales, getLocaleMeta,
   switchLocalePath, DEFAULT_LOCALE, LOCALE_CODES,
@@ -19,16 +22,103 @@ const slug = segs.join('/');
 
 const available = getAvailableLocales(slug);
 const show = available.length > 1;
+const current = getLocaleMeta(lang);
 ---
 {show && (
-  <li class="nav-lang-switcher">
-    {available.map((code) => (
-      <a
-        href={switchLocalePath(Astro.url.pathname, code)}
-        hreflang={code}
-        aria-current={code === lang ? 'true' : undefined}
-        class:list={['lang-option', { active: code === lang }]}
-      >{getLocaleMeta(code).name}</a>
-    ))}
+  <li class="lang-switcher" data-lang-switcher>
+    <button
+      type="button"
+      class="lang-toggle"
+      aria-haspopup="true"
+      aria-expanded="false"
+      aria-controls="lang-switcher-menu"
+    >
+      {current.name} <span aria-hidden="true">&#9662;</span>
+    </button>
+    <ul class="lang-menu" id="lang-switcher-menu" role="menu" aria-label="Language">
+      {available.map((code) => (
+        <li role="none">
+          <a
+            role="menuitem"
+            tabindex="-1"
+            href={switchLocalePath(Astro.url.pathname, code)}
+            hreflang={code}
+            aria-current={code === lang ? 'true' : undefined}
+            class:list={['lang-option', { active: code === lang }]}
+          >{getLocaleMeta(code).name}</a>
+        </li>
+      ))}
+    </ul>
   </li>
 )}
+
+<script>
+  // Generic WAI-ARIA menu-button behavior — works for any number of options,
+  // no locale-specific code. Scoped to each [data-lang-switcher] instance so
+  // it never touches the unrelated .nav-dropdown ("Info") toggle.
+  document.querySelectorAll<HTMLElement>('[data-lang-switcher]').forEach((root) => {
+    const toggle = root.querySelector<HTMLButtonElement>('.lang-toggle');
+    const menu = root.querySelector<HTMLUListElement>('.lang-menu');
+    if (!toggle || !menu) return;
+    const items = () => Array.from(menu.querySelectorAll<HTMLAnchorElement>('.lang-option'));
+
+    const open = () => {
+      root.classList.add('open');
+      toggle.setAttribute('aria-expanded', 'true');
+    };
+    const close = (focusToggle = false) => {
+      root.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      if (focusToggle) toggle.focus();
+    };
+    const isOpen = () => root.classList.contains('open');
+
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (isOpen()) {
+        close();
+      } else {
+        open();
+        items()[0]?.focus();
+      }
+    });
+
+    toggle.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        open();
+        items()[0]?.focus();
+      }
+    });
+
+    menu.addEventListener('keydown', (e) => {
+      const list = items();
+      const currentIndex = list.indexOf(document.activeElement as HTMLAnchorElement);
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        close(true);
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        list[(currentIndex + 1) % list.length]?.focus();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        list[(currentIndex - 1 + list.length) % list.length]?.focus();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        list[0]?.focus();
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        list[list.length - 1]?.focus();
+      } else if (e.key === 'Tab') {
+        close();
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (isOpen() && !root.contains(e.target as Node)) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen()) close(true);
+    });
+  });
+</script>
