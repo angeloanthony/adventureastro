@@ -33,6 +33,7 @@ export const LOCALES = [
   { code: 'es', name: 'Español',    dir: 'ltr', ogLocale: 'es_US', hreflang: 'es-US' },
   { code: 'it', name: 'Italiano',   dir: 'ltr', ogLocale: 'it_IT', hreflang: 'it-IT' },
   { code: 'pt', name: 'Português',  dir: 'ltr', ogLocale: 'pt_PT', hreflang: 'pt-PT' },
+  { code: 'fr', name: 'Français',   dir: 'ltr', ogLocale: 'fr_FR', hreflang: 'fr-FR' },
 ] as const satisfies readonly LocaleMeta[];
 
 export const DEFAULT_LOCALE = 'en';
@@ -186,12 +187,37 @@ const PT_SLUGS = new Set([
   'hiking/photography-hikes-near-vernal', 'hiking/spring-hiking-near-vernal',
   'hiking/summer-hiking-near-vernal', 'hiking/wildflower-hiking-near-vernal',
   'hiking/wildlife-hiking-guide-near-vernal', 'hiking/winter-hiking-near-vernal',
+  // P7G — Portuguese scenic-drives hub batch (4 spokes).
+  'scenic-drives/cub-creek-road-tour-of-the-tilted-rocks', 'scenic-drives/flaming-gorge-uintas-scenic-byway',
+  'scenic-drives/red-cloud-loop-scenic-drive', 'scenic-drives/sheep-creek-geological-loop',
+  // P7H — Portuguese guides hub batch (9 spokes).
+  'guides/moab-utv-tours', 'guides/ultimate-guide-to-ashley-national-forest',
+  'guides/ultimate-guide-to-flaming-gorge', 'guides/ultimate-guide-to-red-fleet-state-park',
+  'guides/ultimate-guide-to-steinaker-state-park', 'guides/ultimate-guide-to-vernal-utah',
+  'guides/vernal-weather-guide', 'guides/what-to-bring', 'guides/what-to-wear-utv-tour',
+  // P7I — Portuguese itineraries hub batch (9 spokes).
+  'itineraries/2-day-family-itinerary', 'itineraries/3-day-adventure-itinerary',
+  'itineraries/one-day-adventure-vernal', 'itineraries/photography-weekend-vernal',
+  'itineraries/romantic-weekend-dinosaur-country', 'itineraries/weekend-fishing-trip-vernal',
+  'itineraries/weekend-road-trip-from-denver', 'itineraries/weekend-road-trip-from-grand-junction',
+  'itineraries/weekend-road-trip-from-salt-lake-city',
+  // P7J — Portuguese things-to-do hub batch (2 spokes).
+  'things-to-do/vernal-utah-attractions', 'things-to-do/fun-things-to-do-vernal-utah-kids',
+  // P7K — Portuguese dinosaur-national-monument hub batch (2 spokes) — Portuguese MDX spokes complete.
+  'dinosaur-national-monument/visiting-dinosaur-national-monument',
+  'dinosaur-national-monument/petroglyphs-rock-art-vernal',
+]);
+
+// French translations, added batch by batch exactly as Spanish/Italian/Portuguese were.
+const FR_SLUGS = new Set([
+  // P8A — French UTV hub batch (7 spokes). Compound slug = `utv/<base-id>`.
 ]);
 
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {
   es: ES_SLUGS,
   it: IT_SLUGS,
   pt: PT_SLUGS,
+  fr: FR_SLUGS,
 };
 
 /**

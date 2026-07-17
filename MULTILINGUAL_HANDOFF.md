@@ -152,3 +152,111 @@ stay traceable and do NOT become a reason to reopen architecture in future batch
 Rule going forward: fix P4A existence-awareness gaps as they surface; otherwise the
 architecture stays frozen. The planned `ES_SLUGS` → per-locale registry generalization is
 deferred to the start of the Italian phase (do it before any Italian content).
+
+---
+
+## Appendix — Editorial decision rules (accumulated across ES/IT/PT batches)
+
+The glossary (in each batch's brief) answers **"what is the translation."** This appendix
+answers **"when do we translate it at all."** These are recurring judgment calls that would
+otherwise get reinvented — and inconsistently re-decided — by every new translator/agent.
+Reuse these rules verbatim for every remaining PT batch and for the next locale (French,
+German, …) rather than re-deriving them.
+
+**1. Mirror-casing for a "descriptive phrase vs. official name" pair** (the "Wall of Bones"
+pattern — will recur for any attraction whose common description overlaps its brand name):
+- English source capitalizes it as a proper noun ("Wall of Bones") → keep it in English,
+  unchanged, every time.
+- English source uses lowercase descriptive prose ("wall of bones", "wall of dinosaur
+  bones") → translate it naturally (PT: "muro de ossos").
+- **Check every occurrence individually, even within the same file** — several source files
+  mix both forms in one document. Sentence-initial capitalization in prose or a table cell
+  (e.g. "Wall of bones + Cub Creek drive") is NOT the proper-noun form; treat it as
+  descriptive/lowercase.
+
+**2. Generic common noun vs. official facility name** (the "Quarry" pattern): a word that is
+part of a locked official name (`Quarry Exhibit Hall`, `Quarry Visitor Center`) stays English
+only in that exact compound. The same word used generically elsewhere ("the quarry wall",
+"the quarry area") is a normal common noun — translate it (PT: "pedreira").
+
+**3. Reservoir/park proper nouns — translate the "Reservoir" compound, keep the "State Park"
+compound English:**
+- `"<Name> Reservoir"` → translate as `"Albufeira de <Name>"` (PT). Locked: Albufeira de
+  Steinaker, Albufeira de Red Fleet, Albufeira de Flaming Gorge.
+- `"<Name> State Park"` and bare `"<Name>"` (no Reservoir/State Park suffix, e.g. just
+  "Steinaker" or "Flaming Gorge" used as a place-name shorthand) stay English.
+- Generic lowercase "reservoir" → "albufeira".
+- This divergence (translate one compound, keep the other English) is deliberate, not an
+  inconsistency — verify new occurrences against already-published sibling files in
+  `fishing/`/`camping/` for that same destination before guessing.
+
+**4. The locked VERIFY phrase is matched by EXACT STRING, not by meaning:**
+- Only the literal canonical English string ("VERIFY WITH OFFICIAL SOURCE", all-caps
+  imperative) gets mechanically replaced by the locked translation (PT: "VERIFICA JUNTO DA
+  FONTE OFICIAL").
+- A lowercase/plural variant appearing elsewhere in the same file ("verify with official
+  sources", in body prose or the hidden page-summary paragraph) is NOT the locked phrase —
+  translate it naturally instead of substituting the locked string.
+- Never insert a word inside the locked phrase (e.g. "VERIFICA sempre JUNTO DA FONTE
+  OFICIAL" breaks it) — if the English source modifies the imperative with an adverb like
+  "always", move the modifier outside the phrase or restructure the sentence, but keep the
+  locked string byte-identical and contiguous.
+- Portuguese-specific grammar trap: a modal construction like "deve VERIFY..." doesn't work
+  because "dever" requires an infinitive, not an imperative — restructure the clause (e.g.
+  into a conditional) rather than producing an ungrammatical sentence just to preserve the
+  locked string's position.
+
+**5. A hub's own official name containing a common English word is a cross-file drift risk**
+(the "Loop"/"Byway"/"Reservoir" class, distinct from #1's descriptive/proper-noun split):
+when translating generic backreferences to a hub's own named feature (e.g. "the loop", "the
+byway"), check what the *other* files in that same hub already do — one file translating a
+generic backreference while a sibling leaves it in English is a real corpus inconsistency,
+not a stylistic choice. PT-specific locked outcome so far: "byway" (generic use) stays a bare
+English loanword; "loop" (generic use) is translated ("circuito") except inside a proper
+noun like "Red Cloud Loop".
+
+**6. `ogTitle`/`ogDescription` are translatable prose, not copy-verbatim metadata** — even on
+batches whose brief doesn't explicitly list them. They're user-facing social-share text, not
+a technical/routing field. Translate them like `title`/`description` whenever present.
+
+**7. Numbers are never reformatted, including thousands separators** — English "13,528" /
+"5,000" (comma-thousands) must NOT become the target locale's native convention (e.g. PT
+"13.528" / "5.000" period-thousands) even though that's the locally "correct" format. This
+has been a recurring first-draft mistake across ES/IT/PT batches — always verify digit
+sequences are byte-identical to English, not just visually similar.
+
+**8. In-page `#anchor` links require an explicit English-slug `id` on the translated
+heading** (first established in Spanish itineraries P4H, reused every batch since): Astro's
+default heading-ID generator slugifies the *translated* heading text, silently breaking any
+`href="#english-slug"` written against the English version. Fix: keep every `href="#..."`
+byte-identical, and render that specific target heading as raw HTML with the English id
+preserved (`<h2 id="decision-framework">Translated heading</h2>`), matching the source's
+heading level. Only the heading(s) an anchor actually points at need this — don't convert
+every heading in the file to raw HTML.
+
+**9. Known open inconsistency, not yet normalized (flag, don't silently fix mid-batch):**
+"ride-along" (the paid third-passenger add-on) has been translated three different ways
+across the PT corpus so far — bare English loanword, "lugar de acompanhante (ride-along)",
+and dropped entirely. Not worth a blocking fix per-file; worth a single corpus-wide
+normalization pass once a locale is feature-complete (see the pre-French full-locale audit
+below).
+
+---
+
+## Appendix — Pre-next-locale audit checklist
+
+Before starting a new locale (French, German, …), run one full-locale audit on the most
+recently completed locale rather than immediately cloning the process. This catches
+corpus-consistency drift that only becomes visible once dozens of related pages exist, and
+turns the completed locale into a trustworthy template instead of an assumed-good one.
+
+- Dead-link scan across every localized page.
+- hreflang triplet verification (reciprocal en/es/it/pt + x-default) on a sample of pages
+  across every hub.
+- Sitemap verification — every localized URL that should exist is listed, nothing orphaned.
+- Metadata audit — spot-check title/description length compliance site-wide, not just
+  per-batch.
+- Spot-check a representative sample of long articles for read-through quality, not just
+  mechanical QA.
+- Corpus-consistency sweep: grep for known-inconsistent terms (see rule 9 above and any
+  new ones logged during the locale) and normalize them in one pass.
