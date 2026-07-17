@@ -174,6 +174,9 @@ const PT_SLUGS = new Set([
   // P7D — Portuguese fishing hub batch (4 spokes).
   'fishing/fishing-flaming-gorge', 'fishing/fishing-red-fleet-reservoir',
   'fishing/fishing-steinaker-reservoir', 'fishing/green-river-fly-fishing',
+  // P7E — Portuguese camping hub batch (4 spokes).
+  'camping/camping-at-flaming-gorge', 'camping/camping-at-red-fleet-state-park',
+  'camping/camping-at-steinaker-state-park', 'camping/camping-in-ashley-national-forest',
 ]);
 
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {
