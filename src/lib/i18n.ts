@@ -171,6 +171,9 @@ const PT_SLUGS = new Set([
   'utv/backcountry-tours-vernal-utah', 'utv/beginners-guide-to-utv-tours-vernal',
   'utv/best-utv-trails-vernal', 'utv/family-utv-guide-vernal', 'utv/group-utv-tours-vernal',
   'utv/private-utv-tours-vernal', 'utv/side-by-side-rentals-vernal-utah',
+  // P7D — Portuguese fishing hub batch (4 spokes).
+  'fishing/fishing-flaming-gorge', 'fishing/fishing-red-fleet-reservoir',
+  'fishing/fishing-steinaker-reservoir', 'fishing/green-river-fly-fishing',
 ]);
 
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {
