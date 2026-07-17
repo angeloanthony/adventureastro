@@ -677,8 +677,8 @@
 .about-hero { position: relative; height: 500px; background: linear-gradient(135deg, var(--burnt-orange) 0%, var(--rust-red) 100%); display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .about-hero-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: transparent; }
 .about-hero-content { position: relative; z-index: 1; text-align: center; color: white; max-width: 900px; padding: 0 20px; bottom: -36px; }
-.about-hero-title { font-family: var(--font-heading); font-size: clamp(3rem, 8vw, 5rem); font-weight: 800; margin-bottom: 20px; text-shadow: 0 4px 20px rgba(0,0,0,0.3); letter-spacing: -2px; }
-.about-hero-subtitle { font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 400; opacity: 0.95; }
+.about-hero-title { font-family: var(--font-heading); font-size: clamp(1.8rem, 3.6vw, 2.75rem); font-weight: 800; margin-bottom: 16px; text-shadow: 0 4px 20px rgba(0,0,0,0.3); letter-spacing: -1px; line-height: 1.1; }
+.about-hero-subtitle { font-size: clamp(1rem, 1.8vw, 1.3rem); font-weight: 400; opacity: 0.95; }
 .about-main { padding: 80px 20px; background: var(--off-white); }
 .about-card { background: white; border-radius: 25px; padding: 60px; margin-bottom: 50px; box-shadow: 0 15px 50px rgba(0,0,0,0.08); border: 1px solid rgba(212,118,78,0.1); }
 .about-heading { font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--charcoal); margin-bottom: 30px; letter-spacing: -1px; line-height: 1.2; }
