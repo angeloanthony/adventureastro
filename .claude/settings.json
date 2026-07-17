@@ -13,7 +13,17 @@
       "Bash(grep -o '<li class=\"nav-lang-switcher\">.\\\\{0,180\\\\}' dist/dinosaur-national-monument/index.html)",
       "Bash(grep -o '<li class=\"nav-lang-switcher\">.\\\\{0,180\\\\}' dist/es/dinosaur-national-monument/index.html)",
       "Bash(grep -o '`' src/pages/es/fishing/index.astro)",
-      "Bash(node \"/c/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/52ddcef8-0572-4886-b59d-bfba30dc04a3/scratchpad/checktags.js\" \"src/pages/es/fishing/index.astro\")"
+      "Bash(node \"/c/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/52ddcef8-0572-4886-b59d-bfba30dc04a3/scratchpad/checktags.js\" \"src/pages/es/fishing/index.astro\")",
+      "PowerShell($s = \"Guide local pour Kings Peak, le plus haut sommet de l'Utah à 13,528 pieds — qui devrait tenter l'ascension, difficulté, altitude, saisons et préparation.\"; $s.Length)",
+      "Bash(python3 -c ' *)",
+      "PowerShell($s = \"Logo Adventure Tours Vernal - guide pour gravir Kings Peak, le plus haut sommet de l'Utah, dans le desert High Uintas Wilderness de l'Ashley National Forest\"; $s.Length)",
+      "PowerShell($s = \"Guide de Kings Peak: Gravir le Plus Haut Sommet de l'Utah\"; $s.Length)",
+      "Bash(sed -n '/^related:/,/^tourCta/p' src/content/hiking/beginner-hiking-guide-near-vernal.mdx)",
+      "Bash(sed -n '/^related:/,/^tourCta/p' src/content/hiking/beginner-hiking-guide-near-vernal.fr.mdx)",
+      "Bash(grep -no '13,528\\\\|\\\\$349\\\\|\\(435\\) 219-9447' winter-hiking-near-vernal.fr.mdx)",
+      "Bash(grep -o \"\\\\$[0-9,]*\\\\|\\([0-9]\\\\{3\\\\}\\) [0-9]\\\\{3\\\\}-[0-9]\\\\{4\\\\}\" wildlife-hiking-guide-near-vernal.mdx)",
+      "Bash(grep -o \"\\\\$[0-9,]*\\\\|\\([0-9]\\\\{3\\\\}\\) [0-9]\\\\{3\\\\}-[0-9]\\\\{4\\\\}\" wildlife-hiking-guide-near-vernal.fr.mdx)",
+      "Bash(node \"C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/969be9b0-1c55-482c-89cc-3f30517d5da2/scratchpad/check.js\")"
     ]
   }
 }
