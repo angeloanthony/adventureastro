@@ -1,0 +1,32 @@
+---
+// it/jeep-trails-vernal-utah.astro — Italian Jeep trails landing page (P6
+// translation batch). Mirrors src/pages/es/jeep-trails-vernal-utah.astro.
+import { getBodyHtml } from '../../page-content/jeep-trails';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Sentieri per Jeep Vicino a Vernal, Utah","description":"Guida ai sentieri per Jeep e ai percorsi fuoristrada vicino a Vernal, Utah, incluse rotte nel backcountry e opzioni di tour guidati in UTV.","author":{"@type":"Organization","name":"Adventure Tours Vernal"},"publisher":{"@type":"Organization","name":"Adventure Tours Vernal","logo":{"@type":"ImageObject","url":"https://adventuretoursvernal.com/images/logo.webp"}},"datePublished":"2026-04-08","dateModified":"2026-04-08","mainEntityOfPage":"https://adventuretoursvernal.com/it/jeep-trails-vernal-utah/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Ci sono sentieri per Jeep vicino a Vernal, Utah?","acceptedAnswer":{"@type":"Answer","text":"Sì. I terreni della BLM e il backcountry che circondano Vernal offrono estese rotte fuoristrada adatte a Jeep e veicoli 4x4, oltre a cinque sistemi di sentieri guidati in UTV accessibili tramite Adventure Tours Vernal."}},{"@type":"Question","name":"Posso fare un tour guidato invece di guidare il mio Jeep?","acceptedAnswer":{"@type":"Answer","text":"Sì. Adventure Tours Vernal offre tour guidati in Kawasaki KRX 1000 su cinque sistemi di sentieri con guide esperte, così non avrà bisogno del Suo mezzo. $349 a macchina per 3 ore."}},{"@type":"Question","name":"Come si confronta Vernal con Moab per il fuoristrada?","acceptedAnswer":{"@type":"Answer","text":"Vernal offre un terreno di canyon e deserto simile con folle molto minori. I sentieri sono meno commercializzati, il backcountry è più remoto e i prezzi dei tour guidati sono competitivi o migliori rispetto agli operatori di Moab."}}]}]}`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Sentieri per Jeep Vicino a Vernal, Utah | Guida Fuoristrada e UTV"
+      description="Sentieri per Jeep e percorsi fuoristrada vicino a Vernal, Utah. Canyon nel backcountry, terreno desertico e rotte storiche in Jeep o in tour guidato in UTV."
+      path="/it/jeep-trails-vernal-utah/"
+      type="article"
+      ogTitle="Sentieri per Jeep Vicino a Vernal, Utah | Guida Fuoristrada"
+      ogDescription="Percorsi fuoristrada vicino a Vernal per Jeep, 4x4 e tour guidati in UTV tra canyon e backcountry."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.trails', lang), href: '/it/utv/' }, { label: 'Sentieri per Jeep' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

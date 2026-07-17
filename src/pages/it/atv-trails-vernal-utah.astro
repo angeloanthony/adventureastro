@@ -1,0 +1,32 @@
+---
+// it/atv-trails-vernal-utah.astro — Italian ATV trails landing page (P6
+// batch). Mirrors src/pages/es/atv-trails-vernal-utah.astro.
+import { getBodyHtml } from '../../page-content/atv-trails';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Sentieri per ATV Vicino a Vernal, Utah","description":"Guida ai sentieri per ATV e UTV vicino a Vernal, Utah, con tour guidati in Kawasaki KRX 1000 su cinque sistemi di sentieri.","author":{"@type":"Organization","name":"Adventure Tours Vernal"},"publisher":{"@type":"Organization","name":"Adventure Tours Vernal","logo":{"@type":"ImageObject","url":"https://adventuretoursvernal.com/images/logo.webp"}},"datePublished":"2026-04-08","dateModified":"2026-04-08","mainEntityOfPage":"https://adventuretoursvernal.com/it/atv-trails-vernal-utah/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Ci sono sentieri per ATV vicino a Vernal, Utah?","acceptedAnswer":{"@type":"Answer","text":"Sì. La Uintah Basin che circonda Vernal offre estesi sistemi di sentieri nel backcountry, tra cui Doc's Beach, Moonshine Arch, Ashley Gorge, Outlaw Trail e Asphalt Ridge, tutti accessibili tramite tour guidati in UTV con Adventure Tours Vernal."}},{"@type":"Question","name":"È possibile guidare ATV vicino a Dinosaur National Monument?","acceptedAnswer":{"@type":"Answer","text":"I veicoli a motore non sono ammessi all'interno di Dinosaur National Monument, ma i sentieri del backcountry che circondano Vernal e l'area del monumento offrono ampi percorsi in UTV attraverso un terreno simile di canyon e deserto, con accesso guidato."}},{"@type":"Question","name":"Ho bisogno del mio ATV personale per percorrere i sentieri vicino a Vernal?","acceptedAnswer":{"@type":"Answer","text":"No. Adventure Tours Vernal fornisce UTV Kawasaki KRX 1000, caschi, dotazioni di sicurezza e guide esperte. I tour costano $349 a macchina per 3 ore, fino a 2 passeggeri per mezzo."}}]}]}`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Sentieri per ATV Vicino a Vernal, Utah | Tour Guidati in UTV"
+      description="Scopra i migliori sentieri per ATV e UTV vicino a Vernal, Utah. Tour guidati in Kawasaki KRX 1000 tra canyon, deserto sabbioso e backcountry. Prenoti oggi."
+      path="/it/atv-trails-vernal-utah/"
+      type="article"
+      ogTitle="Sentieri per ATV Vicino a Vernal, Utah | Tour Guidati in UTV"
+      ogDescription="I migliori sentieri per ATV e UTV vicino a Vernal — tour guidati in Kawasaki KRX 1000 tra canyon, siti di arte rupestre e backcountry."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.trails', lang), href: '/it/utv/' }, { label: 'Sentieri ATV Vernal' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

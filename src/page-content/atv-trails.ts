@@ -145,6 +145,77 @@ const ES = `
   </main>
 `;
 
+const IT = `
+
+
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    I sentieri per ATV e UTV vicino a Vernal, Utah, includono Doc's Beach, Moonshine Arch, Ashley Gorge, Outlaw Trail e Asphalt Ridge. Adventure Tours Vernal offre tour guidati in side-by-side Kawasaki KRX 1000 su tutti e cinque i sistemi di sentieri. $349/macchina per 3 ore, fino a 2 passeggeri. Caschi, dotazioni di sicurezza e guide esperte inclusi. Chiami il (435) 219-9447.
+  </p>
+
+  <main class="article-page">
+    <header class="article-header">
+      <div class="article-breadcrumb">
+        <a href="/it/">Home</a><span class="sep">›</span><a href="/it/utv/">Sentieri</a><span class="sep">›</span><span>Sentieri ATV Vernal</span>
+      </div>
+      <h1 class="article-title">Sentieri per ATV Vicino a Vernal, Utah</h1>
+      <p class="article-meta">Aggiornato ad aprile 2026 · Adventure Tours Vernal</p>
+    </header>
+
+    <div class="article-body">
+      <div class="article-summary-box">
+        La Uintah Basin che circonda Vernal racchiude alcuni dei migliori terreni fuoristrada dello Utah — canyon di roccia rossa, distese sabbiose nel deserto, panorami dalle creste e antiche rotte nel backcountry che la maggior parte dei visitatori non vede mai. Ecco come accedere a tutto questo con tour guidati in UTV, senza bisogno di un ATV personale.
+      </div>
+
+      <h2>Perché Scegliere Vernal per Andare in ATV e UTV</h2>
+      <p>Lo Utah meridionale conquista i titoli dei giornali, ma il backcountry di Vernal offre un terreno della stessa qualità con una frazione del traffico. I percorsi qui spaziano da ampie distese sabbiose lungo il corridoio del Green River fino a strette curve nei canyon e sentieri in cresta con viste a 360 gradi sulle montagne. E poiché è meno commercializzato di Moab o Sand Hollow, spesso avrà i sentieri tutti per Lei.</p>
+      <p>La zona offre anche qualcosa che la maggior parte delle destinazioni per ATV non può eguagliare: antichi petroglifi Fremont e Ute, nascondigli di fuorilegge del Far West e archi naturali di arenaria sono disseminati in tutti i sistemi di sentieri, trasformando ogni uscita in parte avventura, parte lezione di storia.</p>
+
+      <h2>I Cinque Sistemi di Sentieri</h2>
+      <p><strong>Doc's Beach</strong> — Distese sabbiose nel deserto e terreno aperto lungo il corridoio del Green River. Ampio, veloce e accessibile per tutti i livelli. Il sentiero più popolare per chi guida per la prima volta.</p>
+      <p><strong>Moonshine Arch</strong> — Canyon di roccia rossa che conducono a un arco naturale di arenaria nascosto. Terreno panoramico e vario con una meta gratificante. Un favorito tra fotografi e famiglie.</p>
+      <p><strong>Ashley Gorge</strong> — Un drammatico corridoio di canyon con imponenti pareti di arenaria e paesaggi della valle fluviale. Terreno più stretto che risulta immersivo e raccolto nel migliore dei modi.</p>
+      <p><strong>Outlaw Trail</strong> — Storica rotta del backcountry usata da Butch Cassidy and the Wild Bunch. Terreno impervio, storia di fuorilegge e paesaggi remoti di canyon. L'opzione più avventurosa.</p>
+      <p><strong>Asphalt Ridge</strong> — Sentiero in cresta con viste panoramiche sulla Terra dei Dinosauri e sulle montagne Uinta. La quota Le offre una prospettiva sull'intera ampiezza del bacino.</p>
+
+      <h2>Tour Guidati vs. Guida Autonoma</h2>
+      <p>Se porta il Suo ATV o UTV personale, i terreni della BLM che circondano Vernal offrono aree di guida aperte e percorsi designati. Tuttavia, i sentieri migliori — quelli con arte rupestre, archi e accesso ai canyon — si affrontano meglio con una guida locale che conosce i percorsi, la storia e le condizioni del terreno.</p>
+      <p>Adventure Tours Vernal fornisce tutto: side-by-side Kawasaki KRX 1000 a 2 posti con sospensioni FOX 2.5 PODIUM LSC, caschi, briefing di sicurezza e guide esperte. Dave e Trudy Wilson guidano ciascuno il proprio mezzo, viaggiando accanto al Suo gruppo per l'intero tour di tre ore.</p>
+
+      <h2>Cosa Sapere Prima di Partire</h2>
+      <p>I tour operano tutto l'anno, tempo permettendo. La primavera (aprile–maggio) e l'autunno (settembre–ottobre) sono le stagioni migliori — temperature piacevoli, sentieri asciutti e luce dorata. Le uscite estive iniziano presto per evitare il caldo. La guida invernale è disponibile nelle giornate serene, con un paesaggio completamente diverso.</p>
+      <p>Non è richiesta alcuna esperienza fuoristrada pregressa. Il KRX 1000 dispone di servosterzo, cambio automatico e una gabbia di sicurezza completa. Dave e Trudy adattano il ritmo al livello di comfort del Suo gruppo, da una rilassata gita panoramica a una guida più intensa nel backcountry.</p>
+
+      <div class="article-tip">
+        <strong>Consiglio per la Scelta del Sentiero:</strong> Se è la Sua prima volta, inizi con Doc's Beach o Moonshine Arch. Se desidera l'esperienza più remota e impervia, chieda l'Outlaw Trail. Dave La aiuterà a scegliere in base al Suo gruppo al momento della prenotazione.
+      </div>
+
+      <div class="article-faq">
+        <h2>Domande Frequenti</h2>
+        <div class="faq-item"><h3>Ci sono sentieri per ATV vicino a Vernal, Utah?</h3><p>Sì — cinque sistemi di sentieri distinti che includono canyon, distese sabbiose nel deserto e percorsi in cresta, tutti accessibili tramite tour guidati in UTV.</p></div>
+        <div class="faq-item"><h3>È possibile guidare ATV vicino a Dinosaur National Monument?</h3><p>Non all'interno del monumento, ma il backcountry circostante offre estesi sistemi di sentieri per UTV attraverso un terreno simile, con accesso guidato.</p></div>
+        <div class="faq-item"><h3>Ho bisogno del mio ATV personale per percorrere i sentieri vicino a Vernal?</h3><p>No. Adventure Tours Vernal fornisce mezzi Kawasaki KRX 1000, caschi, attrezzatura e guide. $349 a macchina per 3 ore.</p></div>
+      </div>
+
+      <div class="article-cta">
+        <h3>Percorra i Sentieri</h3>
+        <p>Tour guidati in Kawasaki KRX 1000 · $349/macchina · 5 sistemi di sentieri · Tutti i livelli</p>
+        <a href="/it/booking/" class="cta-btn">Prenoti un Tour</a>
+        <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
+      </div>
+    </div>
+
+    <div class="related-articles">
+      <h3>Altre Guide sui Sentieri</h3>
+      <div class="related-grid">
+        <a href="/it/utv/best-utv-trails-vernal/" class="related-card"><h4>Migliori Sentieri per UTV Vicino a Vernal</h4><p>Analisi dettagliata di tutti i 5 sistemi di sentieri.</p></a>
+        <a href="/it/jeep-trails-vernal-utah/" class="related-card"><h4>Sentieri per Jeep Vicino a Vernal</h4><p>Opzioni fuoristrada per appassionati di Jeep e 4x4.</p></a>
+        <a href="/it/utv/side-by-side-rentals-vernal-utah/" class="related-card"><h4>Tour in Side-by-Side vs. Noleggio</h4><p>Perché i tour guidati sono meglio del noleggio autonomo.</p></a>
+        <a href="/it/guides/what-to-wear-utv-tour/" class="related-card"><h4>Cosa Indossare</h4><p>Guida all'attrezzatura per la guida in UTV nel deserto.</p></a>
+      </div>
+    </div>
+  </main>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3D). Every
  * locale without a committed variant falls back to English. Callers that
@@ -152,5 +223,6 @@ const ES = `
  */
 export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'es') return ES;
+  if (locale === 'it') return IT;
   return bodyHtml;
 }

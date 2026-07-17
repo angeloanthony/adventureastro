@@ -131,6 +131,70 @@ const ES = `
   </main>
 `;
 
+const IT = `
+
+
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    I sentieri per Jeep e i percorsi fuoristrada vicino a Vernal, Utah, comprendono strade nel backcountry gestite dalla BLM e cinque sistemi di sentieri guidati in UTV gestiti da Adventure Tours Vernal con side-by-side Kawasaki KRX 1000. I sentieri offrono canyon, torrenti del deserto, petroglifi e storiche rotte del Far West. Vernal offre un terreno simile a Moab con molte meno folle. $349/macchina per tour guidati di 3 ore. Chiami il (435) 219-9447.
+  </p>
+
+  <main class="article-page">
+    <header class="article-header">
+      <div class="article-breadcrumb"><a href="/it/">Home</a><span class="sep">›</span><a href="/it/utv/">Sentieri</a><span class="sep">›</span><span>Sentieri per Jeep</span></div>
+      <h1 class="article-title">Sentieri per Jeep Vicino a Vernal, Utah</h1>
+      <p class="article-meta">Aggiornato ad aprile 2026 · Adventure Tours Vernal</p>
+    </header>
+
+    <div class="article-body">
+      <div class="article-summary-box">
+        Vernal si trova nel mezzo di alcuni dei migliori terreni fuoristrada dello Utah — lo stesso paesaggio di canyon, torrenti del deserto e percorsi nel backcountry che rendono famosa Moab, senza le folle e i prezzi elevati. Che porti il Suo Jeep o voglia vivere i sentieri a bordo di un UTV guidato, ecco cosa La aspetta.
+      </div>
+
+      <h2>Il Terreno Fuoristrada Intorno a Vernal</h2>
+      <p>L'Uintah Basin è circondata da terreni della BLM con una rete di strade e sentieri non asfaltati che vanno dalla ghiaia battuta a percorsi tecnici e rocciosi. Il terreno a sud e a est della città — verso Dinosaur National Monument e le Book Cliffs — è dove inizia il paesaggio più spettacolare di canyon e altipiani. Formazioni di roccia rossa, torrenti profondi, lastre di slickrock e remote strade in quota offrono grande varietà a chi guida Jeep e 4x4.</p>
+      <p>A nord della città, le strade che salgono verso Ashley National Forest e i Monti Uinta offrono un carattere diverso — strade del servizio forestale tra pioppi tremuli e pini, con vista sulle montagne e guadi stagionali sui torrenti. L'area di Diamond Mountain è molto amata per il campeggio in Jeep e per l'overlanding.</p>
+
+      <h2>Tour Guidati in UTV — Senza Bisogno di un Jeep</h2>
+      <p>Se non dispone di un 4x4 o desidera accedere a sentieri che richiedono una conoscenza locale per essere percorsi, Adventure Tours Vernal organizza tour guidati in Kawasaki KRX 1000 attraverso cinque sistemi di sentieri che coprono il meglio del backcountry di Vernal. Il KRX 1000 affronta terreni che metterebbero alla prova la maggior parte dei Jeep di serie — torrenti sabbiosi, salite rocciose e stretti percorsi tra i canyon — e Dave e Trudy Wilson conoscono ogni curva, ogni pannello di petroglifi e ogni punto panoramico.</p>
+      <p>Molti appassionati di Jeep prenotano un tour guidato in UTV come missione di ricognizione — percorrono prima il territorio con Dave, imparano a conoscere l'area, poi tornano con il proprio mezzo per esplorare oltre. È un approccio intelligente per una regione dove i sentieri migliori non sono segnalati e la copertura GPS è irregolare.</p>
+
+      <h2>Vernal contro Moab per il Fuoristrada</h2>
+      <p>Moab ha il nome più conosciuto, ma Vernal offre terreno della stessa qualità a una frazione del costo e della congestione. Qui non dovrà fare la fila per i sentieri. Non dovrà contendersi una piazzola per il campeggio. E il paesaggio — pareti di canyon, archi naturali, petroglifi e storia di fuorilegge — è altrettanto affascinante. Il principale compromesso è la minore quantità di servizi; Vernal non dispone della stessa infrastruttura di noleggio di Moab, motivo per cui i tour guidati colmano questo vuoto in modo così efficace.</p>
+
+      <h2>Pianifichi il Suo Viaggio Fuoristrada</h2>
+      <p>Se porta il Suo Jeep, il BLM Vernal Field Office può fornire mappe aggiornate e condizioni dei percorsi. Il segnale del cellulare scompare rapidamente non appena si lascia l'asfalto, quindi scarichi le mappe offline prima di partire. Faccia rifornimento in città — non troverà nulla una volta nel backcountry. Primavera e autunno sono le stagioni migliori; l'estate è percorribile ma calda, e alcune rotte chiudono durante la neve e il fango invernali.</p>
+
+      <div class="article-tip">
+        <strong>Consiglio per i Proprietari di Jeep:</strong> Prenoti un tour guidato in UTV il primo giorno per esplorare la zona. Dave può indicarLe i migliori percorsi accessibili in Jeep in base alle capacità del Suo mezzo e a ciò che desidera vedere. È il modo più rapido per conoscere una nuova zona fuoristrada.
+      </div>
+
+      <div class="article-faq">
+        <h2>Domande Frequenti</h2>
+        <div class="faq-item"><h3>Ci sono sentieri per Jeep vicino a Vernal?</h3><p>Sì — estesi percorsi nel backcountry della BLM, oltre a cinque sistemi di sentieri guidati in UTV. Il terreno va dalla ghiaia battuta a percorsi tecnici tra canyon e altipiani.</p></div>
+        <div class="faq-item"><h3>Posso fare un tour guidato invece di guidare il mio Jeep?</h3><p>Sì. Adventure Tours Vernal fornisce mezzi KRX 1000, guide ed equipaggiamento per $349/macchina per 3 ore su cinque sistemi di sentieri.</p></div>
+        <div class="faq-item"><h3>Come si confronta Vernal con Moab?</h3><p>Qualità del terreno simile, folle molto minori e prezzi competitivi. Meno infrastruttura di noleggio, motivo per cui i tour guidati sono la scelta migliore.</p></div>
+      </div>
+
+      <div class="article-cta">
+        <h3>Esplori i Sentieri con una Guida</h3>
+        <p>Tour guidati in KRX 1000 · $349/macchina · 5 sistemi di sentieri · Conoscenza del territorio</p>
+        <a href="/it/booking/" class="cta-btn">Prenoti un Tour</a>
+        <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
+      </div>
+    </div>
+
+    <div class="related-articles">
+      <h3>Altre Guide Fuoristrada</h3>
+      <div class="related-grid">
+        <a href="/it/atv-trails-vernal-utah/" class="related-card"><h4>Sentieri per ATV Vicino a Vernal</h4><p>Tutti e cinque i sistemi di sentieri UTV con dettagli sul terreno.</p></a>
+        <a href="/it/guides/moab-utv-tours/" class="related-card"><h4>Vernal: L'Alternativa a Moab</h4><p>Perché Vernal supera Moab per l'avventura fuoristrada.</p></a>
+        <a href="/it/utv/backcountry-tours-vernal-utah/" class="related-card"><h4>Tour nel Backcountry</h4><p>Esperienze guidate in UTV nel backcountry più remoto.</p></a>
+        <a href="/it/utv/best-utv-trails-vernal/" class="related-card"><h4>Migliori Sentieri per UTV</h4><p>Guida sentiero per sentiero per ogni livello di abilità.</p></a>
+      </div>
+    </div>
+  </main>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3D). Every
  * locale without a committed variant falls back to English. Callers that
@@ -138,5 +202,6 @@ const ES = `
  */
 export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'es') return ES;
+  if (locale === 'it') return IT;
   return bodyHtml;
 }
