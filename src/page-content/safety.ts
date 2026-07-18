@@ -729,6 +729,248 @@ const IT = `
 </div>
 `;
 
+const PT = `
+<!-- BLOCO DE RESUMO DA PÁGINA -->
+<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+  Diretrizes de segurança da Adventure Tours Vernal para tours guiados em UTV em Vernal, Utah. Os condutores devem ter 18 anos ou mais. Os passageiros devem ter 2 anos ou mais. Cinto de segurança obrigatório. Tolerância zero para álcool ou drogas. Briefing de segurança completo fornecido antes de cada tour. Liga para (435) 219-9447.
+</p>
+
+<section class="policy-section">
+  <div class="container">
+    <div class="section-header">
+      <h1 class="section-title">Normas de Segurança</h1>
+      <p class="section-subtitle">A tua segurança é a nossa prioridade número um. Por favor, revê estas normas antes da tua aventura.</p>
+    </div>
+
+    <div class="policy-container">
+
+      <!-- ANTES DO TEU TOUR -->
+      <div class="policy-card">
+        <div class="policy-icon">📋</div>
+        <h2 class="policy-heading">Antes do Teu Tour</h2>
+        <div class="policy-list">
+          <h3>Chegada e Registo:</h3>
+          <ul>
+            <li>Chega <strong>30 minutos antes</strong> para a orientação e o briefing de segurança</li>
+            <li>Traz uma carta de condução válida (obrigatória para todos os condutores)</li>
+            <li>Completa todas as declarações de responsabilidade e acordos necessários</li>
+            <li>Participa na orientação de segurança obrigatória</li>
+          </ul>
+          <h3>Requisitos de Saúde e Condição Física:</h3>
+          <ul>
+            <li>Todos os participantes devem estar em boa forma física</li>
+            <li>Informa o teu guia sobre qualquer condição médica, lesão ou preocupação</li>
+            <li>As mulheres grávidas devem consultar o médico antes de participar</li>
+            <li>Se tens problemas nas costas, no pescoço ou no coração, informa-nos com antecedência</li>
+          </ul>
+          <h3>Política sobre Álcool e Substâncias:</h3>
+          <ul>
+            <li><strong>Tolerância zero</strong> para álcool ou drogas</li>
+            <li>Não te será permitido conduzir se estiveres sob a influência</li>
+            <li>Não serão dados reembolsos por infrações</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- REQUISITOS DE IDADE -->
+      <div class="policy-card">
+        <div class="policy-icon">👥</div>
+        <h2 class="policy-heading">Requisitos de Idade</h2>
+        <div class="policy-table">
+          <div class="policy-row">
+            <div class="policy-timeframe">Para Conduzir</div>
+            <div class="policy-refund refund-full">18 anos ou mais</div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-timeframe">Para Viajar como Passageiro</div>
+            <div class="policy-refund refund-full">2 anos ou mais</div>
+          </div>
+        </div>
+        <div class="policy-note">
+          <strong>Importante:</strong> Todos os condutores devem apresentar uma carta de condução válida. Os pais/tutores devem assinar as declarações de responsabilidade para os menores.
+        </div>
+      </div>
+
+      <!-- OPERAÇÃO DO VEÍCULO -->
+      <div class="policy-card">
+        <div class="policy-icon">🚙</div>
+        <h2 class="policy-heading">Operação do Veículo e Segurança</h2>
+        <div class="policy-list">
+          <h3>Ao Operar o Veículo:</h3>
+          <ul>
+            <li>Usa sempre o cinto de segurança - sem exceções</li>
+            <li>Mantém as mãos e os braços dentro do veículo em todos os momentos</li>
+            <li>Nunca te levantes enquanto o veículo estiver em movimento</li>
+            <li>Segue sempre as instruções do teu guia</li>
+            <li>Mantém uma distância segura de outros veículos</li>
+            <li>Usa o walkie-talkie para comunicar com o teu guia</li>
+          </ul>
+          <h3>Equipamento de Segurança (Obrigatório):</h3>
+          <ul>
+            <li>O cinto de segurança deve ser usado por todos os passageiros</li>
+            <li>Capacetes (fornecidos mediante pedido)</li>
+            <li>Óculos de segurança ou de sol recomendados</li>
+          </ul>
+          <h3>Ações Proibidas:</h3>
+          <ul>
+            <li>Correr ou exceder a velocidade</li>
+            <li>Condução imprudente ou acrobacias</li>
+            <li>Sair do trilho designado</li>
+            <li>Operar o veículo sob a influência</li>
+            <li>Ignorar as instruções do guia</li>
+          </ul>
+        </div>
+        <div class="policy-warning">
+          <strong>⚠️ Aviso:</strong> O incumprimento das normas de segurança pode resultar na interrupção imediata do teu tour sem reembolso. O comportamento imprudente anula todas as coberturas de seguro e declarações de responsabilidade por danos.
+        </div>
+      </div>
+
+      <!-- SEGURANÇA DO TERRENO E DOS TRILHOS -->
+      <div class="policy-card">
+        <div class="policy-icon">⛰️</div>
+        <h2 class="policy-heading">Segurança do Terreno e dos Trilhos</h2>
+        <div class="policy-list">
+          <h3>Condições do Trilho:</h3>
+          <ul>
+            <li>Os trilhos podem incluir rochas, subidas íngremes, travessias de água e terreno acidentado</li>
+            <li>O tempo pode mudar rapidamente - está preparado</li>
+            <li>Pó e terra são comuns - traz proteção para os olhos</li>
+            <li>O sinal de telemóvel pode ser limitado em áreas remotas</li>
+          </ul>
+          <h3>Fica no Trilho:</h3>
+          <ul>
+            <li>Nunca saias dos trilhos designados</li>
+            <li>Respeita a propriedade privada e os sinais afixados</li>
+            <li>Segue os princípios Leave No Trace</li>
+            <li>Não perturbes a fauna selvagem nem as plantas</li>
+          </ul>
+          <h3>Situações de Emergência:</h3>
+          <ul>
+            <li>Avisa o teu guia imediatamente se te sentires inseguro</li>
+            <li>Usa o walkie-talkie para comunicar</li>
+            <li>Kits de primeiros socorros estão disponíveis em cada tour</li>
+            <li>O teu guia é treinado em primeiros socorros em ambiente selvagem</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CLIMA E SEGURANÇA AMBIENTAL -->
+      <div class="policy-card">
+        <div class="policy-icon">🌦️</div>
+        <h2 class="policy-heading">Clima e Segurança Ambiental</h2>
+        <div class="policy-list">
+          <h3>Preparação para o Clima:</h3>
+          <ul>
+            <li>Operamos na maioria das condições climatéricas</li>
+            <li>Os tours podem ser cancelados ou reagendados em caso de clima extremo</li>
+            <li>As temperaturas podem variar significativamente - veste-te em camadas</li>
+            <li>Traz equipamento de chuva se o tempo parecer incerto</li>
+          </ul>
+          <h3>Proteção Solar:</h3>
+          <ul>
+            <li>O sol de Utah é intenso - usa protetor solar (FPS 30+)</li>
+            <li>Traz óculos de sol com proteção UV</li>
+            <li>Usa um chapéu ou bandana</li>
+            <li>Mantém-te hidratado - água fornecida</li>
+          </ul>
+          <h3>Segurança com a Fauna Selvagem:</h3>
+          <ul>
+            <li>Não te aproximes nem alimentes a fauna selvagem</li>
+            <li>Mantém uma distância segura de todos os animais</li>
+            <li>Tem atenção às cobras, especialmente nos meses mais quentes</li>
+            <li>Reporta qualquer avistamento de fauna selvagem ao teu guia</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- COMUNICAÇÃO -->
+      <div class="policy-card">
+        <div class="policy-icon">📡</div>
+        <h2 class="policy-heading">Comunicação e Segurança de Grupo</h2>
+        <div class="policy-list">
+          <h3>Mantém-te Ligado:</h3>
+          <ul>
+            <li>Walkie-talkie fornecido para cada veículo</li>
+            <li>Mantém o walkie-talkie ligado em todos os momentos</li>
+            <li>Avisa o guia imediatamente se precisares de parar</li>
+            <li>Nunca deixes o grupo sem informar o teu guia</li>
+          </ul>
+          <h3>Se Tiveres Problemas:</h3>
+          <ul>
+            <li>Para em segurança e usa o walkie-talkie</li>
+            <li>Não tentes reparar problemas mecânicos sozinho</li>
+            <li>Espera pela assistência do guia</li>
+            <li>Nunca continues se o veículo parecer inseguro</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DANOS E RESPONSABILIDADE -->
+      <div class="policy-card">
+        <div class="policy-icon">🛡️</div>
+        <h2 class="policy-heading">Danos e Responsabilidade</h2>
+        <div class="policy-list">
+          <h3>Declaração de Responsabilidade por Danos ao Veículo:</h3>
+          <ul>
+            <li>Obrigatória para todos os tours</li>
+            <li>Limita a tua responsabilidade ao valor da franquia</li>
+            <li>Anulada se causada por condução imprudente</li>
+            <li>Anulada se houver envolvimento de álcool/drogas</li>
+          </ul>
+          <h3>Procedimentos em Caso de Acidente:</h3>
+          <ul>
+            <li>Para imediatamente e avalia as lesões</li>
+            <li>Contacta o guia via walkie-talkie</li>
+            <li>Não movas pessoas feridas a menos que estejam em perigo imediato</li>
+            <li>Documenta o incidente com fotos, se possível</li>
+          </ul>
+        </div>
+        <div class="deductible-info">
+          <h3>Informação Importante sobre o Seguro:</h3>
+          <p>Estás coberto pelo nosso seguro de responsabilidade civil com uma <strong>franquia de $1,000 por acidente</strong>. Isto aplica-se independentemente da culpa. A Declaração de Responsabilidade por Danos ao Veículo pode ajudar a limitar os teus custos diretos por danos ao veículo.</p>
+        </div>
+      </div>
+
+      <!-- AS TUAS RESPONSABILIDADES -->
+      <div class="policy-card">
+        <div class="policy-icon">✅</div>
+        <h2 class="policy-heading">As Tuas Responsabilidades</h2>
+        <div class="policy-list">
+          <h3>Como Participante, Concordas em:</h3>
+          <ul>
+            <li>Seguir todas as instruções do guia</li>
+            <li>Operar o veículo de forma segura e responsável</li>
+            <li>Respeitar os outros participantes e o ambiente</li>
+            <li>Comunicar qualquer preocupação imediatamente</li>
+            <li>Preencher toda a documentação necessária com honestidade</li>
+            <li>Aceitar a responsabilidade pessoal pela tua segurança</li>
+          </ul>
+        </div>
+        <div class="policy-warning">
+          <strong>Lembra-te:</strong> Andar de ATV/UTV envolve riscos inerentes. Embora tomemos todas as precauções para garantir a tua segurança, participas por tua conta e risco. Por favor, lê e compreende todas as declarações de responsabilidade antes de as assinares.
+        </div>
+      </div>
+
+      <!-- CTA DE CONTACTO -->
+      <div class="policy-cta">
+        <h3>Tens Dúvidas sobre Segurança?</h3>
+        <p>Se tiveres alguma preocupação ou dúvida de segurança antes do teu tour, contacta-nos. Estamos aqui para garantir que tens uma aventura segura e incrível!</p>
+        <div class="cta-buttons">
+          <a href="tel:435-219-9447" class="cta-button primary">📞 Liga para (435) 219-9447</a>
+          <a href="/pt/booking/" class="cta-button secondary">Reserva a Tua Aventura Segura</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA Fixo para Móvel -->
+<div class="mobile-sticky-cta">
+  <button onclick="location.href='/pt/booking/'">Reserva o Teu Passeio Agora</button>
+</div>
+`;
+
 const FR = `
 <!-- BLOC RÉSUMÉ DE PAGE -->
 <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
@@ -980,6 +1222,7 @@ const FR = `
 export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'es') return ES;
   if (locale === 'it') return IT;
+  if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
   return bodyHtml;
 }

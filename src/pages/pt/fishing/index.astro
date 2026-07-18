@@ -1,0 +1,338 @@
+---
+// /pt/fishing/ — Portuguese translation of the Fishing hub PILLAR (P7-P6
+// batch, mirrors the French P8-P6 and Italian P6 rollout pattern).
+// Mirrors src/pages/fishing/index.astro exactly (structure, classes, ids).
+// Author kept as Organization to match the other pillars' existing entity.
+// No invented regulations/fees/limits — changing facts are marked
+// VERIFICA JUNTO DA FONTE OFICIAL. Links to specific spoke articles and to
+// other pillar/hub pages in this same Portuguese batch use the /pt/ prefix
+// (all 57 Portuguese spokes already exist); anything outside that set keeps
+// the English path (existence-aware fallback). Register: informal "tu"
+// throughout (locked).
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import TrustBadge from '../../../components/content/TrustBadge.astro';
+import Header from '../../../components/layout/Header.astro';
+import Footer from '../../../components/layout/Footer.astro';
+import Seo from '../../../components/seo/Seo.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import HubIndex from '../../../components/content/HubIndex.astro';
+import { getLangFromUrl } from '../../../lib/i18n';
+import { t } from '../../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+
+const schema = `{
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "O Guia Definitivo da Pesca na Terra dos Dinossauros",
+        "description": "O plano de um guia local para pescar perto de Vernal, Utah e por toda a Terra dos Dinossauros — Flaming Gorge, o Green River, os lagos de montanha Uinta, Red Fleet e Steinaker — com conselhos para escolher a água certa consoante o objetivo, a experiência e a estação.",
+        "author": {"@type": "Organization", "name": "Adventure Tours Vernal"},
+        "publisher": {"@type": "Organization", "name": "Adventure Tours Vernal", "logo": {"@type": "ImageObject", "url": "https://adventuretoursvernal.com/images/logo.webp"}},
+        "datePublished": "2026-07-11",
+        "dateModified": "2026-07-11",
+        "mainEntityOfPage": "https://adventuretoursvernal.com/pt/fishing/"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type": "Question", "name": "Onde é a melhor pesca perto de Vernal, Utah?", "acceptedAnswer": {"@type": "Answer", "text": "Depende do teu objetivo. Flaming Gorge, a cerca de uma hora a norte, é a água de referência da região para a truta lacustre de troféu e a grande truta-fário. O Green River, a jusante da barragem, é um tailwater de pesca à mosca de classe mundial. Para uma pesca fácil, perto e adequada a famílias, as albufeiras de Red Fleet e Steinaker ficam a minutos da cidade, e os lagos de montanha Uinta na Ashley National Forest oferecem pesca de truta cénica em alta montanha."}},
+          {"@type": "Question", "name": "Precisas de uma licença de pesca para pescar perto de Vernal?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. Quem pesca no Utah precisa de uma licença de pesca do Utah válida, disponível em várias durações. Flaming Gorge estende-se até ao Wyoming e tem um acordo de licença recíproca para a albufeira, e as regras diferem das do Green River a jusante da barragem. As licenças, os limites e os regulamentos mudam, por isso confirma os requisitos atuais junto da Utah Division of Wildlife Resources (e da Wyoming Game and Fish para Flaming Gorge) antes de pescares."}},
+          {"@type": "Question", "name": "Podes pescar durante todo o ano na Terra dos Dinossauros?", "acceptedAnswer": {"@type": "Answer", "text": "Sim, de formas diferentes. A pesca em água aberta estende-se da primavera ao outono nas albufeiras e no Green River, os lagos altos Uinta pescam melhor no verão, depois do degelo, e o inverno traz a pesca no gelo a Flaming Gorge e às albufeiras mais baixas quando as condições o permitem. Confirma sempre as condições atuais do gelo e o acesso sazonal antes de uma viagem de inverno."}},
+          {"@type": "Question", "name": "Que peixes se podem apanhar perto de Vernal?", "acceptedAnswer": {"@type": "Answer", "text": "A região oferece truta lacustre (mackinaw), truta-fário, truta-arco-íris, salmão kokanee e achigã em Flaming Gorge; truta-arco-íris e truta-fário selvagens no Green River; truta-de-riacho, truta-cutthroat, truta-tigre e truta-arco-íris, além do peixe-branco-ártico, nos lagos Uinta; e truta-arco-íris com achigã e peixe-sol em Red Fleet e Steinaker. As espécies e o repovoamento mudam, por isso verifica os detalhes atuais junto da Utah Division of Wildlife Resources."}},
+          {"@type": "Question", "name": "Flaming Gorge ou o Green River — qual é melhor para pescar?", "acceptedAnswer": {"@type": "Answer", "text": "São experiências diferentes. Flaming Gorge é pesca de grande água em albufeira, normalmente de barco, famosa pela truta lacustre de categoria recorde e pela truta-fário de troféu. O Green River, a jusante da barragem, é um tailwater frio e cristalino de pesca à mosca para truta selvagem, pescado com float ou a vadear. Muitos pescadores fazem as duas coisas na mesma viagem."}},
+          {"@type": "Question", "name": "Onde podem os iniciantes e as famílias pescar perto de Vernal?", "acceptedAnswer": {"@type": "Answer", "text": "As albufeiras de Red Fleet e Steinaker são as opções mais fáceis e mais adequadas a famílias — perto da cidade, quentes no verão, e pescáveis a partir da margem sem barco. São ideais para introduzir as crianças à pesca, e ambas se combinam naturalmente com natação e remo para um dia completo em família."}},
+          {"@type": "Question", "name": "Podes pescar a partir da margem, ou precisas de um barco?", "acceptedAnswer": {"@type": "Answer", "text": "Ambas funcionam. Red Fleet, Steinaker e partes de Flaming Gorge e do Green River oferecem pesca produtiva a partir da margem e a vadear, perfeita para iniciantes e famílias. Um barco abre o acesso às águas mais profundas da albufeira — essencial para perseguir grandes trutas lacustres em Flaming Gorge — e os passeios de float são a forma clássica de pescar no Green River."}},
+          {"@type": "Question", "name": "Como posso planear uma viagem de pesca à Terra dos Dinossauros?", "acceptedAnswer": {"@type": "Answer", "text": "Instala-te em Vernal, que tem alojamento, combustível e provisões, e depois faz excursões de um dia até à água que corresponde ao teu objetivo — Flaming Gorge e o Green River a norte, Red Fleet e Steinaker a minutos da cidade, e os lagos Uinta nas montanhas. Compra a tua licença do Utah com antecedência, verifica os regulamentos atuais para cada água, e vê o tempo, já que as condições do deserto alto e da montanha mudam rapidamente."}}
+        ]
+      }
+    ]
+  }`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Pesca na Terra dos Dinossauros | Guia de Vernal e Flaming Gorge"
+      description="Onde pescar perto de Vernal, Utah: Flaming Gorge, o Green River, os lagos Uinta, Red Fleet e Steinaker. Como escolher a água certa pela estação e objetivo."
+      path="/pt/fishing/"
+      type="article"
+      ogTitle="O Guia Definitivo da Pesca na Terra dos Dinossauros"
+      ogDescription="Flaming Gorge, o Green River, os lagos de montanha Uinta, Red Fleet e Steinaker — como escolher onde pescar perto de Vernal, Utah, consoante o objetivo, a experiência e a estação."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('hub.fishing', lang) }]} />
+
+  <p slot="body" class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">O Guia Definitivo da Pesca na Terra dos Dinossauros é um guia prático de planeamento de viagens de pesca recreativa perto de Vernal, Utah, no nordeste do Utah. Cobre onde pescar consoante os teus objetivos, a tua experiência, a estação e o tempo disponível: a Albufeira de Flaming Gorge para truta lacustre e truta-fário de troféu, o Green River a jusante da barragem para pesca à mosca de primeira categoria, os lagos alpinos da Ashley National Forest e das High Uintas, e as albufeiras adequadas a famílias dos Red Fleet e Steinaker State Parks. Compara pesca a partir da margem, de barco e à mosca, a tempistica sazonal, as espécies, a pesca em família, a acessibilidade e as viagens de um dia e de fim de semana. As licenças e os regulamentos de pesca do Utah são definidos pela Utah Division of Wildlife Resources e mudam com o tempo. A Adventure Tours Vernal oferece tours de UTV guiados por $349 por máquina, até 2 passageiros, 3 horas. Liga para (435) 219-9447.</p>
+
+  <main class="article-page" slot="body">
+    <header class="article-header">
+      <h1 class="article-title">O Guia Definitivo da Pesca na Terra dos Dinossauros</h1>
+      <p class="article-meta">Atualizado em julho de 2026 · Adventure Tours Vernal</p>
+      <TrustBadge align="left" />
+    </header>
+
+    <div class="article-body">
+
+      <div class="article-summary-box"><strong>Resposta Rápida:</strong> A Terra dos Dinossauros — o canto nordeste do Utah à volta de Vernal — é uma das regiões de pesca mais subestimadas do Oeste, e o truque está em fazer corresponder a água ao teu objetivo. Queres um troféu? Flaming Gorge tem truta lacustre de categoria recorde e trutas-fário gigantes. Queres um dia de pesca à mosca inesquecível? O Green River a jusante da barragem é mundialmente famoso. Queres ensinar os teus filhos a pescar, ou aproveitar algumas horas entre outras aventuras? As albufeiras de Red Fleet e Steinaker ficam a minutos da cidade. Queres paisagem de montanha refrescante e truta ansiosa por morder? Os lagos Uinta cumprem. Este guia ajuda-te a escolher — pela estação, pela experiência e pelo tempo disponível — e depois encaminha-te para um aprofundamento dedicado a cada água. Fica baseado em Vernal, compra a tua licença do Utah, e confirma os regulamentos atuais antes de lançares a linha.</div>
+
+      <div class="key-takeaways">
+        <h2>Pontos-Chave</h2>
+        <ul>
+          <li><strong>Cinco pescarias distintas, uma só base.</strong> Flaming Gorge, o Green River, os lagos Uinta, Red Fleet e Steinaker estão todos ao alcance de uma excursão de um dia a partir de Vernal, e cada um oferece um tipo de pesca genuinamente diferente.</li>
+          <li><strong>Faz corresponder a água ao teu objetivo.</strong> A caça ao troféu, a pesca à mosca, as saídas em família e a pesca cénica de alta montanha têm cada uma o seu melhor lugar aqui — este guia foi feito para te ajudar a escolher.</li>
+          <li><strong>Pesca-se em todas as estações.</strong> A pesca em albufeira e em rio da primavera ao outono, os lagos alpinos no verão e a pesca no gelo no inverno significam que não existe verdadeira época baixa.</li>
+          <li><strong>Fácil para iniciantes, profundo para especialistas.</strong> Podes pescar a partir da margem de Red Fleet com uma cana e uma minhoca, ou perseguir trutas lacustres de 40 libras num barco na Gorge — a amplitude é o que conta.</li>
+          <li><strong>Verifica sempre as regras.</strong> As licenças, os limites e os regulamentos são definidos pelas agências estatais de vida selvagem e mudam de ano para ano — confirma os detalhes atuais antes de cada viagem.</li>
+        </ul>
+      </div>
+
+      <h2>Porque Pescar na Terra dos Dinossauros</h2>
+      <p>A maioria das pessoas conhece esta região pelos dinossauros e pela rocha vermelha, não pela pesca — e é exatamente por isso que a pesca aqui é tão boa. Enquanto os pescadores se amontoam em águas ocidentais mais famosas, a Terra dos Dinossauros oferece discretamente uma pescaria que seria um destino de destaque em qualquer outro lugar: uma albufeira que já produziu truta lacustre de categoria recorde, um rio de pesca à mosca classificado entre os melhores do país, e uma dispersão de lagos de montanha e albufeiras quentes que mantêm a cana dobrada do degelo até ao regelo.</p>
+      <p>A verdadeira vantagem aqui é a <em>variedade num raio pequeno</em>. A partir de uma só base em Vernal, podes perseguir uma truta lacustre de cinquenta anos em água profunda numa manhã e caçar trutas-arco-íris selvagens num rio cristalino como gin no dia seguinte, e depois levar as crianças a apanhar o primeiro peixe-sol a partir de uma margem quente à tarde. Poucos lugares juntam pesca de troféu em grande água, água de mosca de primeira categoria, lagos alpinos e albufeiras fáceis em família a uma hora de carro umas das outras.</p>
+      <p>E fá-lo sem multidões. É um território ativo e pouco frequentado, onde ainda podes encontrar um troço de margem ou um lago de montanha só para ti. Para o panorama completo da região e como planear uma viagem à volta dela, começa pelo nosso <a href="/pt/guides/ultimate-guide-to-vernal-utah/">Guia Definitivo de Vernal</a>; para tudo o resto que há para fazer entre viagens de pesca, vê <a href="/pt/things-to-do/">coisas para fazer em Vernal</a>.</p>
+
+      <h2>Visão Geral das Regiões de Pesca</h2>
+      <p>Pensa na pesca na Terra dos Dinossauros como cinco águas distintas, cada uma com a sua própria personalidade. Não precisas de escolher apenas uma — muitas viagens combinam duas ou três — mas saber o que cada uma oferece é a chave para um bom plano.</p>
+      <p>Essas águas agrupam-se em quatro grandes ambientes de pesca, todos a uma excursão de um dia de uma só base em Vernal — eis como se relacionam:</p>
+      <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+        <img src="/images/maps/vernal-fishing-waters-overview.svg" alt="Visão esquemática da pesca perto de Vernal, Utah, como quatro ambientes que partilham Vernal como base: a Grande Albufeira (Flaming Gorge — truta lacustre de troféu e grandes trutas-fário, água de barco), o Rio de Tailwater (o Green River a jusante da barragem — pesca à mosca de primeira categoria para truta selvagem), as Albufeiras Perto da Cidade (Red Fleet e Steinaker — pesca familiar a partir da margem para truta, achigã e peixe-sol), e os Lagos Alpinos (os lagos Uinta da Ashley National Forest — truta e peixe-branco-ártico em alta montanha). Sem escala; as formas azuis são símbolos ilustrativos de água, não lagos ou rios mapeados." width="1600" height="1200" loading="lazy" decoding="async" />
+        <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">Quatro ambientes de pesca, uma só base — da albufeira de troféu aos lagos alpinos. Visão esquemática, sem escala; não mostra limites, rampas ou rotas.</figcaption>
+      </figure>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Água</th><th>Tipo</th><th>Conhecida Por</th><th>Distância de Vernal</th><th>Ideal Para</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Flaming Gorge</td><td>Grande albufeira</td><td>Truta lacustre de troféu, grandes trutas-fário, kokanee, achigã</td><td>~1 hora a norte</td><td>Caçadores de troféus, navegadores</td></tr>
+            <tr><td>Green River (a jusante da barragem)</td><td>Rio de tailwater</td><td>Truta-arco-íris e truta-fário selvagens, pesca à mosca</td><td>~1 hora a norte</td><td>Pescadores à mosca, passeios de float</td></tr>
+            <tr><td>Lagos Uinta (Ashley NF)</td><td>Lagos alpinos</td><td>Truta-de-riacho, truta-cutthroat, truta-tigre e truta-arco-íris; peixe-branco-ártico</td><td>~30–90 min a norte</td><td>Cénico, backcountry, verão</td></tr>
+            <tr><td>Albufeira de Red Fleet</td><td>Pequena albufeira</td><td>Truta-arco-íris, achigã, peixe-sol</td><td>~15 min a norte</td><td>Famílias, pesca a partir da margem</td></tr>
+            <tr><td>Albufeira de Steinaker</td><td>Pequena albufeira</td><td>Truta-arco-íris, achigã, peixe-sol</td><td>~5–10 min a norte</td><td>Famílias, acesso fácil</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><em>As distâncias são aproximadas; as espécies e o repovoamento mudam ao longo do tempo. <strong>VERIFICA JUNTO DA FONTE OFICIAL</strong> (a Utah Division of Wildlife Resources) para as espécies e os regulamentos atuais de cada água.</em></p>
+
+      <figure style="margin:2.5rem auto;max-width:900px;text-align:center;">
+        <img src="/images/graphics/vernal-fishing-waters-comparison.svg" alt="Matriz de comparação das quatro principais águas de pesca perto de Vernal — Flaming Gorge (truta lacustre de troféu e grandes trutas-fário, uma grande albufeira Utah-Wyoming, água de barco, para caça ao troféu), o Green River (truta selvagem de primeira categoria, um tailwater a jusante da barragem, float ou vadear, para pescadores à mosca), Red Fleet (truta, achigã e peixe-sol, uma albufeira perto da cidade com um trilho de pegadas de dinossauro, margem familiar fácil, para famílias), e Steinaker (truta, achigã e peixe-sol, a albufeira mais próxima, margem familiar fácil, para saídas locais rápidas)." width="1600" height="1200" loading="lazy" decoding="async" />
+        <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">As quatro águas num relance — aquilo por que cada uma é conhecida e a quem se adequa. Um complemento ao mapa acima; confirma os regulamentos atuais antes de lançares a linha.</figcaption>
+      </figure>
+
+      <h2>Flaming Gorge</h2>
+      <p>Se a Terra dos Dinossauros tem uma vedeta da pesca, é esta. <a href="/pt/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge</a> é uma albufeira de 91 milhas a cavalo na fronteira Utah-Wyoming, e é nacionalmente conhecida pela sua <strong>truta lacustre (mackinaw)</strong>, que aqui atinge tamanhos enormes e já produziu peixes de categoria recorde, e pela <strong>truta-fário</strong> de troféu, com uma reputação antiga por gigantes. Os pescadores também visam a <strong>truta-arco-íris</strong>, o <strong>salmão kokanee</strong> e o <strong>achigã</strong>, o que torna a Gorge uma verdadeira pescaria multiespécie ao longo das estações.</p>
+      <p>Trata-se sobretudo de <strong>pesca de barco</strong>: as maiores trutas lacustres vivem em profundidade, e cobrir água faz parte do jogo, embora a pesca a partir da margem e perto dela também produza. Como a albufeira atravessa a fronteira entre estados, a licença é peculiar — o Utah e o Wyoming mantêm um acordo de reciprocidade para as águas da albufeira — e as regras diferem das do Green River a jusante da barragem.</p>
+      <div class="article-tip"><strong>Planeia bem a Gorge:</strong> o nosso <a href="/pt/guides/ultimate-guide-to-flaming-gorge/">Guia Definitivo de Flaming Gorge</a> dedicado cobre em detalhe as marinas, as rampas de barco, as áreas de recreio e o acesso. Para licenças, limites e regras de reciprocidade, <strong>VERIFICA JUNTO DA FONTE OFICIAL</strong> (a Utah Division of Wildlife Resources e a Wyoming Game and Fish) antes da tua viagem.</div>
+
+      <h2>O Green River</h2>
+      <p>Mesmo abaixo da Barragem de Flaming Gorge, a albufeira dá lugar a algo completamente diferente: o <strong>tailwater do Green River</strong>, um troço frio, cristalino e de primeira categoria para pesca à mosca, regularmente classificado entre os melhores rios de truta dos Estados Unidos. A água libertada na base da barragem mantém-se fria e limpa durante todo o ano, criando condições ideais para <strong>truta-arco-íris</strong> e <strong>truta-fário</strong> selvagens em números notáveis, numa água famosamente cristalina onde muitas vezes é possível pescar à vista.</p>
+      <p>A experiência clássica é um <strong>passeio de float</strong> desde logo abaixo da barragem, rio abaixo, através de <strong>Little Hole</strong> e para além dele, lançando a truta em poços cristalinos como gin, embora a pesca a vadear também seja excelente, e o trilho ribeirinho ofereça acesso a pé. É uma pescaria de destino por direito próprio — pescadores viajam de todo o país por ela — e combina-se perfeitamente com um dia na albufeira acima.</p>
+      <p>Como o rio se pesca de forma diferente da albufeira e tem os seus próprios regulamentos, trata-o como uma saída separada. <strong>VERIFICA JUNTO DA FONTE OFICIAL</strong> para os regulamentos atuais do Green River, que podem diferir dos da albufeira de Flaming Gorge, mesmo a montante, e considera um guia local licenciado para o teu primeiro float.</p>
+
+      <h2>Os Lagos da Ashley National Forest</h2>
+      <p>A norte de Vernal, o terreno sobe até às Uinta Mountains e à <a href="/pt/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest</a>, que alberga <strong>centenas de lagos alpinos</strong>. É um mundo diferente das albufeiras lá em baixo: água fria e cristalina de alta montanha, de beleza indescritível e cheia de truta ansiosa por morder. Consoante a bacia, os lagos têm <strong>truta-de-riacho</strong>, <strong>truta-cutthroat</strong>, <strong>truta-arco-íris</strong>, <strong>truta-tigre</strong> e <strong>peixe-branco-ártico</strong>, e muitas das águas mais remotas são povoadas para se manterem produtivas.</p>
+      <p>A experiência vai desde albufeiras de montanha acessíveis de carro, como Moon Lake, onde podes pescar a partir da margem ou de um pequeno barco em família, até lagos de backcountry na <strong>High Uintas Wilderness</strong>, alcançados a pé e que podes ter inteiramente para ti. É a melhor pesca da região para solidão, paisagem e uma alta taxa de captura de truta disposta a morder (embora muitas vezes mais pequena).</p>
+      <div class="article-tip"><strong>A realidade da alta montanha:</strong> estes lagos ficam a grande altitude, com uma época curta — a melhor janela é geralmente o verão, depois de a neve derreter. Trovoadas de tarde, noites frias e grandes distâncias dos serviços fazem todos parte da experiência. Consulta o <a href="/pt/guides/ultimate-guide-to-ashley-national-forest/">guia da Ashley National Forest</a> para acesso e planeamento, e <strong>VERIFICA JUNTO DA FONTE OFICIAL</strong> para o estado atual das estradas e as condições dos lagos.</div>
+
+      <h2>A Albufeira de Red Fleet</h2>
+      <p>Mais perto da cidade, o <a href="/pt/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet State Park</a> oferece uma pescaria acolhedora e acessível, rodeada de arenito vermelho dramático. A albufeira é geralmente conhecida pela <strong>truta-arco-íris</strong>, além de espécies de água quente como o <strong>achigã</strong> e o <strong>peixe-sol</strong>, e o seu tamanho controlável torna-a especialmente boa para pescar a partir da margem ou de um pequeno barco, sem a logística de uma grande albufeira. É uma saída fácil e cénica — e uma que podes combinar com um passeio de remo até ao famoso trilho de pegadas de dinossauro do parque.</p>
+      <p>Red Fleet é uma excelente escolha para meio dia descontraído, para iniciantes e para famílias que querem mesmo apanhar peixe sem uma longa abordagem. Para o plano completo — acesso, campismo, remo e o trilho — consulta o <a href="/pt/guides/ultimate-guide-to-red-fleet-state-park/">Guia Definitivo do Red Fleet State Park</a>, e <strong>VERIFICA JUNTO DA FONTE OFICIAL</strong> para as espécies, licenças e limites atuais.</p>
+
+      <h2>A Albufeira de Steinaker</h2>
+      <p>A pesca mais próxima de Vernal, o <a href="/pt/guides/ultimate-guide-to-steinaker-state-park/">Steinaker State Park</a>, fica a apenas cinco a dez minutos a norte da cidade, o que o torna a opção mais fácil e espontânea da região. Tal como Red Fleet, é geralmente conhecido pela <strong>truta-arco-íris</strong>, além de espécies de água quente como o <strong>achigã</strong> e o <strong>peixe-sol</strong>, e pesca-se bem a partir da margem ou de barco. Nas estações intermédias mais frescas, a pesca de truta tende a brilhar; no verão, as espécies de água quente estão mais ativas, e a albufeira também serve de local de natação e remo para o resto da família.</p>
+      <p>Steinaker é a opção certa para um lançamento fácil ao entardecer, uma primeira viagem de pesca com crianças, ou algumas horas na água sem te comprometeres com uma longa viagem de carro. Consulta o <a href="/pt/guides/ultimate-guide-to-steinaker-state-park/">Guia Definitivo do Steinaker State Park</a> para o plano completo, e <strong>VERIFICA JUNTO DA FONTE OFICIAL</strong> para os detalhes de pesca atuais.</p>
+
+      <h2>Como Escolher o Destino Certo</h2>
+      <p>Com cinco boas opções, a verdadeira questão é qual delas se adequa à <em>tua</em> viagem. Usa este guia de decisão rápida para te orientares para a água certa.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Se queres…</th><th>Vai a…</th><th>Porquê</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Um peixe de troféu de uma vida</td><td>Flaming Gorge</td><td>Truta lacustre de categoria recorde e trutas-fário gigantes</td></tr>
+            <tr><td>Um dia de pesca à mosca de classe mundial</td><td>Green River</td><td>Tailwater de primeira categoria, truta selvagem, passeios de float</td></tr>
+            <tr><td>Paisagem, solidão, altas taxas de captura</td><td>Lagos Uinta</td><td>Centenas de lagos alpinos, truta ansiosa por morder</td></tr>
+            <tr><td>Uma saída fácil em família, perto da cidade</td><td>Steinaker ou Red Fleet</td><td>Albufeiras quentes, pesca a partir da margem, a minutos</td></tr>
+            <tr><td>Para ensinar uma criança a pescar</td><td>Red Fleet ou Steinaker</td><td>Acessível, indulgente, muita ação</td></tr>
+            <tr><td>Para combinar a pesca com outra aventura</td><td>Red Fleet (trilho) ou Flaming Gorge (navegação)</td><td>Pesca mais dinossauros, remo ou paisagem</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Pouco tempo? Pesca em Steinaker ou Red Fleet. Um dia inteiro e um barco? Flaming Gorge. Estás à procura de uma experiência específica — a viagem de pesca à mosca, o troféu, os lagos de montanha? Encontra-a acima, e depois lê o guia dedicado a essa água antes de partires.</p>
+
+      <h2>Visão Geral das Espécies</h2>
+      <p>A Terra dos Dinossauros sustenta uma gama genuinamente ampla de peixes desportivos, o que faz parte do que a torna especial. Esta é uma orientação geral, não uma folha de regulamentos — <strong>VERIFICA JUNTO DA FONTE OFICIAL</strong> para os peixes efetivamente presentes, e as regras aplicáveis, em cada água.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Espécie</th><th>Onde</th><th>Notas</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Truta lacustre (mackinaw)</td><td>Flaming Gorge</td><td>Água profunda; cresce muito; já aqui se apanharam peixes de categoria recorde</td></tr>
+            <tr><td>Truta-fário</td><td>Flaming Gorge, Green River</td><td>Reputação de troféu; possíveis peixes grandes</td></tr>
+            <tr><td>Truta-arco-íris</td><td>Green River, albufeiras, lagos Uinta</td><td>Espinha dorsal das pescarias de tailwater e de albufeira</td></tr>
+            <tr><td>Salmão kokanee</td><td>Flaming Gorge</td><td>Sazonal; aplicam-se frequentemente regulamentos especiais</td></tr>
+            <tr><td>Achigã</td><td>Flaming Gorge</td><td>Ação divertida na estação quente, ao longo da margem rochosa</td></tr>
+            <tr><td>Truta-de-riacho / truta-cutthroat / truta-tigre</td><td>Lagos Uinta</td><td>Espécies de alta montanha; frequentemente ansiosas por morder, por vezes pequenas</td></tr>
+            <tr><td>Peixe-branco-ártico</td><td>Alguns lagos Uinta</td><td>Uma captura distinta e bonita dos lagos de altitude</td></tr>
+            <tr><td>Achigã e peixe-sol</td><td>Red Fleet, Steinaker</td><td>Espécies de água quente; ótimas para crianças e pesca a partir da margem</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Pesca a Partir da Margem</h2>
+      <p>Não precisas de um barco para pescar bem na Terra dos Dinossauros. A <strong>pesca a partir da margem</strong> é produtiva e acessível, e para muitos visitantes é todo o ponto — sem lançamento de barco, sem reboque, sem complicações. Red Fleet e Steinaker são os destaques: albufeiras quentes e perto da cidade, com margem pescável onde um iniciante pode instalar-se com uma cana e uma bóia e apanhar mesmo peixe. O Green River oferece excelente acesso a vadear e a pé ao longo do seu trilho ribeirinho, e até Flaming Gorge tem locais perto da margem que produzem sem barco.</p>
+      <p>A pesca a partir da margem é o ponto de entrada mais acolhedor no desporto, o mais fácil de combinar com um dia em família junto à água, e a forma de menor compromisso de passar uma hora com uma linha na água. Traz uma cadeira, alguma paciência e proteção solar, e estás pronto.</p>
+
+      <h2>Pesca de Barco</h2>
+      <p>No entanto, para desbloquear os maiores peixes e a maior parte da água da região, um <strong>barco</strong> muda o jogo. Em Flaming Gorge, um barco é, na prática, necessário para alcançar os refúgios profundos da truta lacustre de troféu e para cobrir eficientemente as 91 milhas de albufeira. Os barcos também ampliam as tuas opções em Red Fleet e Steinaker e abrem as albufeiras de montanha acessíveis de carro das Uintas.</p>
+      <p>Há rampas para barcos disponíveis em Flaming Gorge (nas suas marinas), Red Fleet e Steinaker. A disponibilidade de aluguer de barcos no local muda consoante o local e a estação, por isso <strong>VERIFICA JUNTO DA FONTE OFICIAL</strong> (cada parque ou marina) antes de contares com um aluguer. Dois lembretes universais: o Utah exige que os navegadores limpem, drenem e sequem a sua embarcação e pode realizar <strong>inspeções de espécies invasoras</strong>, e a água fria mais o vento da tarde tornam os coletes salva-vidas e um lançamento cedo sensatos em qualquer uma destas águas.</p>
+
+      <h2>Pesca à Mosca</h2>
+      <p>Para os pescadores à mosca, a Terra dos Dinossauros é um destino, e a joia da coroa é o <strong>Green River</strong>, abaixo da Barragem de Flaming Gorge — um tailwater frio e cristalino, com truta-arco-íris e truta-fário selvagens numa água famosamente cristalina, pescado de drift boat ou a pé. É o tipo de rio à volta do qual as pessoas planeiam viagens inteiras, e um guia local licenciado vale bem a pena numa primeira visita para aprender a água e as eclosões.</p>
+      <p>Mas a pesca à mosca não termina aí. Os <strong>lagos de montanha Uinta</strong> são uma água de mosca soberba e pouco frequentada no verão, onde a truta-de-riacho e a truta-cutthroat, ansiosas por morder, sobem com facilidade, e uma pequena mochila de material pode chegar para um dia inteiro. Até as albufeiras oferecem oportunidades de pesca à mosca ao longo das margens e nos baixios. Quer queiras um float guiado num rio de primeira categoria, quer uma noite solitária a lançar a trutas que sobem à superfície num lago de montanha, a região cumpre.</p>
+
+      <h2>Precisas de um Guia de Pesca?</h2>
+      <p>Para algumas destas águas, um guia é opcional; para outras, faz toda a diferença entre um dia frustrante e um dia fantástico. Eis a análise honesta.</p>
+      <p><strong>Vale a pena um guia.</strong> O passeio de float no <a href="/pt/guides/ultimate-guide-to-flaming-gorge/">Green River</a>, sobretudo numa primeira visita — um operador licenciado fornece o drift boat, lê a água e a eclosão, e coloca-te junto a truta selvagem que provavelmente passarias a remar sozinho. A truta lacustre de grande água de <strong>Flaming Gorge</strong> também recompensa o conhecimento local e o sonar, por isso um charter pode poupar-te anos a aprender as profundidades e a estrutura da albufeira.</p>
+      <p><strong>Fácil de fazer sozinho.</strong> <a href="/pt/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a>, <a href="/pt/guides/ultimate-guide-to-steinaker-state-park/">Steinaker</a> e a maioria dos <a href="/pt/guides/ultimate-guide-to-ashley-national-forest/">lagos Uinta</a> são acessíveis a partir da margem ou de um pequeno barco com equipamento básico — ideais para pescadores independentes e famílias. Os operadores, os charters, a disponibilidade e os preços mudam, por isso <strong>VERIFICA JUNTO DA FONTE OFICIAL</strong> e reserva com antecedência, sobretudo na época alta.</p>
+
+      <h2>Pesca em Família</h2>
+      <p>Esta pode ser a melhor região de pesca em família do Utah de que ninguém fala. A razão é simples: <strong>Red Fleet</strong> e <strong>Steinaker</strong> tornam genuinamente fácil para as crianças apanharem peixe. Água quente e calma, margens pescáveis, espécies de água quente indulgentes como o peixe-sol, e uma curta viagem de carro desde a cidade somam-se na fórmula de baixa frustração e alta recompensa que fisga os jovens pescadores. E como ambas as albufeiras também são locais de natação e remo, o resto da família mantém-se feliz enquanto a pesca acontece.</p>
+      <p>A fórmula para um ótimo dia de pesca em família aqui: escolhe Red Fleet ou Steinaker, vai de manhã ou ao entardecer, quando está mais fresco, mantém o equipamento simples, celebra cada captura, e deixa o dia oscilar entre pesca, natação e lanches. Combina-o com o trilho de pegadas de dinossauro em Red Fleet e terás combinado a pesca com uma verdadeira aventura. Para mais ideias focadas nas crianças, vê <a href="/pt/things-to-do/fun-things-to-do-vernal-utah-kids/">coisas divertidas para fazer em Vernal com crianças</a>.</p>
+
+      <h2>Pesca Sazonal</h2>
+      <p>Um dos pontos fortes discretos da região é que <em>há sempre algo a pescar-se bem</em>. Eis como o ano se desenrola.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Estação</th><th>Melhores Águas</th><th>O Que Esperar</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Primavera</td><td>Albufeiras, Green River</td><td>Água fria, peixe esfomeado, pouca gente; a alta montanha ainda coberta de neve</td></tr>
+            <tr><td>Verão</td><td>Lagos Uinta, Green River, todas as albufeiras</td><td>Época ideal de alta montanha; começar cedo evita o calor e o vento lá em baixo</td></tr>
+            <tr><td>Outono</td><td>Flaming Gorge, albufeiras, Green River</td><td>Água a arrefecer, peixe ativo, cores bonitas, menos gente</td></tr>
+            <tr><td>Inverno</td><td>Flaming Gorge, albufeiras mais baixas (gelo)</td><td>Pesca no gelo quando as condições o permitem; silêncio profundo e solidão</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><em>A tempistica sazonal é geral e varia com o tempo e a altitude de ano para ano. <strong>VERIFICA JUNTO DA FONTE OFICIAL</strong> para as condições atuais, a segurança do gelo e o acesso antes de uma viagem — e nunca te aventures sobre o gelo sem confirmares que é seguro.</em> Para o tempo mês a mês da região, consulta o nosso <a href="/pt/guides/vernal-weather-guide/">guia do tempo em Vernal</a>.</p>
+
+      <h2>Pesca no Gelo no Inverno</h2>
+      <p>Quando a época de água aberta termina, a Terra dos Dinossauros continua a pescar através do gelo. <a href="/pt/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge</a> é a pescaria de gelo de referência da região, atraindo pescadores para a truta lacustre, o kokanee e outras espécies através da água dura, e as albufeiras mais baixas também podem oferecer pesca no gelo quando as condições o permitem. É uma forma de pescar tranquila, austera e recompensadora — solidão, neve e um ritmo completamente diferente de um dia de verão na água.</p>
+      <p>A pesca no gelo também exige cuidado real. A espessura do gelo varia ao longo de uma albufeira e ao longo da estação, o frio é um perigo genuíno, e as condições mudam rapidamente. Nunca te aventures sobre o gelo sem confirmares que é atualmente seguro, veste-te para o frio intenso, e vai com alguém que conheça a água. <strong>VERIFICA JUNTO DA FONTE OFICIAL</strong> para as condições do gelo, o acesso e os regulamentos atuais antes de qualquer viagem de inverno.</p>
+
+      <h2>Dicas de Fotografia</h2>
+      <p>Uma viagem de pesca aqui é também uma viagem fotográfica, e um pouco de planeamento transforma instantâneos em recordações memoráveis.</p>
+      <ul>
+        <li><strong>Fotografa nas horas douradas.</strong> O amanhecer e o entardecer — a melhor luz para pescar — são também a melhor luz para fotografar, quente e rasante sobre a água.</li>
+        <li><strong>Capta os reflexos.</strong> A água calma da manhã nas albufeiras e nos lagos de montanha reflete a rocha vermelha e os picos; sai antes de o vento chegar.</li>
+        <li><strong>Trata as fotos com o peixe na mão rapidamente.</strong> Se estiveres a fotografar um peixe que vais soltar, mantém-no molhado, apoia-o com delicadeza, fotografa depressa, e devolve-o à água.</li>
+        <li><strong>Protege o teu equipamento na água.</strong> Um saco seco ou uma caixa impermeável é um seguro barato num barco ou numa prancha de remo.</li>
+        <li><strong>Presta atenção às tempestades.</strong> Céus dramáticos fazem ótimas fotografias mas água perigosa — sai da água aberta e da margem exposta quando a trovoada ameaçar.</li>
+      </ul>
+
+      <h2>Considerações para Famílias</h2>
+      <p>Além da pesca em si, algumas coisas fazem uma viagem de pesca em família correr bem aqui. <strong>A segurança na água vem primeiro</strong>: nenhuma destas águas tem nadador-salvador, a água está mais fria abaixo da superfície do que parece, e as crianças devem usar coletes salva-vidas perto ou dentro de água. <strong>O sol e o calor</strong> são a preocupação seguinte — o sol do deserto alto é intenso, a sombra é escassa nas albufeiras, e vais querer chapéus, protetor solar e muito mais água para beber do que esperas.</p>
+      <p>Mantém as expectativas flexíveis e o dia curto e variado, sobretudo com crianças pequenas: uma hora de pesca, um mergulho, um lanche e uma sesta vale mais do que uma maratona sombria de dia inteiro. Red Fleet e Steinaker são feitas exatamente para este tipo de dia em família flexível. Para detalhes de bagagem para as condições da região, vê o nosso <a href="/pt/guides/what-to-bring/">guia do que levar</a>.</p>
+
+      <h2>Acessibilidade</h2>
+      <p>A pesca mais acessível da região encontra-se nos parques estaduais desenvolvidos. <strong>Red Fleet</strong> e <strong>Steinaker</strong> oferecem geralmente estacionamento e instalações acessíveis, com margem e áreas de uso diurno perto do estacionamento, o que os torna dos lugares mais fáceis para pescar para visitantes com necessidades de mobilidade. Partes de <strong>Flaming Gorge</strong> e do corredor do <strong>Green River</strong> também oferecem pontos de acesso relativamente acessíveis e margem perto do estacionamento, embora isto varie consoante o local.</p>
+      <p>Em contraste, os lagos de montanha de backcountry, as estradas florestais não pavimentadas e a pesca a vadear sobre terreno irregular são acidentados e não uniformemente acessíveis. Como as instalações acessíveis específicas e as condições de acesso à pesca mudam consoante o local e a estação, <strong>VERIFICA JUNTO DA FONTE OFICIAL</strong> (Utah State Parks, Ashley National Forest, ou a agência competente) para as condições atuais antes de uma visita, se tiveres necessidades específicas.</p>
+
+      <h2>Viagens de Pesca de Um Dia Sugeridas</h2>
+      <p>Pouco tempo? Qualquer uma destas opções compõe um dia completo a partir de uma base em Vernal.</p>
+      <ul>
+        <li><strong>O dia de troféu (Flaming Gorge).</strong> Parte cedo, pesca a albufeira à procura de truta lacustre e trutas-fário, e aprecia a paisagem do canyon vermelho entre mordidas. Um barco faz o dia; vê o <a href="/pt/guides/ultimate-guide-to-flaming-gorge/">guia de Flaming Gorge</a>.</li>
+        <li><strong>O dia de pesca à mosca (Green River).</strong> Um float guiado ou um dia a vadear e caminhar abaixo da barragem, através de Little Hole, lançando a truta selvagem em água cristalina.</li>
+        <li><strong>O dia de lago de montanha (lagos Uinta).</strong> Sobe de carro até à <a href="/pt/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest</a>, pesca num lago cénico, e faz um piquenique na frescura da alta montanha.</li>
+        <li><strong>O dia em família (Red Fleet ou Steinaker).</strong> Pesca matinal a partir da margem, um mergulho e um passeio de remo a meio do dia, e uma viagem de carro fácil de volta. Junta o trilho de pegadas de dinossauro de <a href="/pt/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a> para aventura.</li>
+      </ul>
+
+      <h2>Viagens de Pesca de Fim de Semana Sugeridas</h2>
+      <p>Com dois ou três dias, podes pescar mais do que uma água e conhecer a região como deve ser.</p>
+      <p><strong>O fim de semana do pescador.</strong> Primeiro dia em <a href="/pt/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge</a>, à procura de troféus de barco; segundo dia num float no <a href="/pt/guides/ultimate-guide-to-flaming-gorge/">Green River</a>, abaixo da barragem, à procura de truta selvagem; um terceiro dia opcional nos <a href="/pt/guides/ultimate-guide-to-ashley-national-forest/">lagos Uinta</a> pela paisagem e por peixe ansioso por morder. Fica baseado em Vernal ou acampa perto da água.</p>
+      <p><strong>O fim de semana em família.</strong> Primeiro dia em <a href="/pt/guides/ultimate-guide-to-steinaker-state-park/">Steinaker</a>, com pesca fácil a partir da margem e natação; segundo dia em <a href="/pt/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a>, combinando pesca com o trilho de pegadas de dinossauro; um terceiro dia opcional no <a href="/pt/dinosaur-national-monument/visiting-dinosaur-national-monument/">Dinosaur National Monument</a> ou outras <a href="/pt/things-to-do/">coisas para fazer à volta de Vernal</a>. Vens de carro a partir de oeste? Vê o nosso <a href="/pt/from/salt-lake-city/">guia de Salt Lake City a Vernal</a>.</p>
+
+      <h2>Licenças, Limites e Regulamentos: O Básico</h2>
+      <p>Este guia não é, deliberadamente, uma folha de regulamentos — as regras mudam, e enganares-te pode custar-te caro. Mas todo o pescador deve compreender o enquadramento geral antes de uma viagem.</p>
+      <ul>
+        <li><strong>É necessária uma licença.</strong> Quem pesca no Utah precisa de uma licença de pesca do Utah válida, vendida em várias durações, desde um único dia até um ano inteiro.</li>
+        <li><strong>Flaming Gorge é especial.</strong> Como a albufeira se estende até ao Wyoming, o Utah e o Wyoming mantêm um acordo de licença recíproca para as águas da albufeira — mas o Green River a jusante da barragem e as regras dos dois estados podem diferir.</li>
+        <li><strong>Os limites e as regras variam consoante a água.</strong> Os limites de posse, os limites de tamanho e de faixa, as restrições de equipamento e os regulamentos especiais para espécies como o kokanee diferem entre as albufeiras, o rio e os lagos de montanha.</li>
+        <li><strong>Tudo pode mudar de ano para ano.</strong> O repovoamento, os limites e as regras sazonais são atualizados regularmente.</li>
+      </ul>
+      <p>Em resumo: compra a tua licença antes de ires, e <strong>VERIFICA JUNTO DA FONTE OFICIAL</strong> — a Utah Division of Wildlife Resources, e a Wyoming Game and Fish para Flaming Gorge — para as regras atuais e específicas de cada água antes de lançares a linha.</p>
+
+      <h2>Equipamento e o Que Levar</h2>
+      <p>O teu equipamento depende da água, mas alguns itens essenciais atravessam todas as viagens. Para as <strong>albufeiras</strong> — Flaming Gorge, Red Fleet e Steinaker — o equipamento de spinning com iscos básicos, isco vivo e bóias cobre a maioria das situações e é a configuração mais indulgente para iniciantes e crianças. Para o <strong>Green River</strong> e os <strong>lagos Uinta</strong>, o equipamento de mosca brilha, embora os pescadores de spinning também se saiam bem. A truta lacustre de grande água na Gorge exige equipamento mais pesado e, muitas vezes, um barco com sonar.</p>
+      <p>Além do equipamento de pesca, faz as malas para o ambiente, não só para o peixe: proteção solar e mais água do que pensas precisar para as albufeiras do deserto alto; camadas quentes e equipamento de chuva para as montanhas e para as manhãs frias na água; óculos de sol polarizados para cortar o brilho e avistar peixe; e uma forma de manter os aparelhos eletrónicos secos na água. O nosso <a href="/pt/guides/what-to-bring/">guia do que levar</a> cobre em detalhe as condições da região, e o <a href="/pt/guides/vernal-weather-guide/">guia do tempo em Vernal</a> ajuda-te a planear a altura da viagem.</p>
+
+      <h2>Onde Ficar Baseado na Tua Viagem de Pesca</h2>
+      <p>Para a maioria dos visitantes, <a href="/pt/guides/ultimate-guide-to-vernal-utah/">Vernal</a> é a base lógica. Tem alojamento, restaurantes, combustível, artigos de pesca e provisões, e cada água deste guia está a uma excursão de um dia da cidade — Flaming Gorge e o Green River a cerca de uma hora a norte, Red Fleet e Steinaker a minutos, e os lagos Uinta lá em cima nas montanhas. Podes perseguir uma pescaria diferente a cada dia e dormir na mesma cama.</p>
+      <p>Se preferires ficar perto da água, há campismo em Flaming Gorge, Red Fleet, Steinaker e por toda a <a href="/pt/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest</a> — acordar a poucos passos do teu local matinal é uma recompensa por si só. Cada guia de destino cobre as suas opções de campismo, e a disponibilidade e as reservas mudam, por isso <strong>VERIFICA JUNTO DA FONTE OFICIAL</strong> e reserva com antecedência para o verão. Vens de fora do estado? O nosso <a href="/pt/from/salt-lake-city/">guia de Salt Lake City a Vernal</a> cobre a viagem de chegada.</p>
+
+      <h2>Conservação e Etiqueta</h2>
+      <p>Estas águas mantêm-se excelentes porque os pescadores cuidam delas. Pratica um <strong>apanhar e soltar</strong> cuidadoso quando apropriado: mantém o peixe molhado, manuseia-o com delicadeza com as mãos molhadas, minimiza o tempo fora de água, e reanima-o antes de o soltares — importa especialmente para a truta selvagem do Green River e para os peixes de troféu da Gorge. Segue as <strong>regras de espécies invasoras</strong>, limpando, drenando e secando o teu barco e equipamento entre águas. E pratica o <strong>Leave No Trace</strong>: leva contigo toda a linha, o equipamento e o lixo, respeita o espaço de outros pescadores, e pisa com cuidado nas margens frágeis e nas bacias dos lagos de montanha.</p>
+      <p>Guardar peixe para uma refeição também é parte da pesca, dentro dos limites legais — basta conhecer e seguir as regras atuais de posse e tamanho da água onde estás, e levar apenas o que vais usar.</p>
+
+      <h2>Dicas de Planeamento</h2>
+      <ul>
+        <li><strong>Compra primeiro a tua licença do Utah.</strong> Todos os que pescam precisam de uma; obtém-na antes de partires, e nota que Flaming Gorge tem um acordo de reciprocidade especial com o Wyoming. <strong>VERIFICA JUNTO DA FONTE OFICIAL</strong> (Utah Division of Wildlife Resources).</li>
+        <li><strong>Verifica as regras para cada água.</strong> Os limites e os regulamentos diferem entre as albufeiras, o Green River e os lagos de montanha, e mudam de ano para ano.</li>
+        <li><strong>Fica baseado em Vernal.</strong> Tem alojamento, combustível, artigos de pesca e provisões, e cada água está a uma excursão de um dia da cidade.</li>
+        <li><strong>Faz corresponder a água ao teu objetivo e à estação</strong> usando as tabelas acima — não te limites à albufeira mais próxima se vieste por um troféu ou por um dia de pesca à mosca.</li>
+        <li><strong>Prepara-te para o ambiente.</strong> O sol do deserto alto, a água fria, o vento da tarde e a cobertura de telemóvel irregular são todos reais — leva água, proteção solar e camadas de roupa, e conta a alguém o teu plano.</li>
+        <li><strong>Limpa, drena e seca</strong> qualquer barco ou equipamento para cumprir as regras de espécies invasoras.</li>
+        <li><strong>Considera um guia</strong> para o Green River ou para a grande água de Flaming Gorge se for a tua primeira vez — o conhecimento local encurta drasticamente a curva de aprendizagem.</li>
+      </ul>
+
+      <p>A Terra dos Dinossauros recompensa o pescador que planeia em função da pesca, em vez de tropeçar nela por acaso. Escolhe a água que se adequa ao teu objetivo, à tua família e à tua estação; lê o guia dedicado dessa água; compra a tua licença; verifica as regras atuais; e dá-te tempo para desfrutar de uma das pescarias genuinamente subestimadas do Oeste. Quando quiseres trocar a cana por uma aventura guiada de backcountry entre dias de pesca, <a href="/pt/booking/">reserva um tour de UTV com a Adventure Tours Vernal</a> e deixa que Dave e Trudy te mostrem o território para além da água.</p>
+
+      <div class="article-faq">
+        <h2>Perguntas Frequentes</h2>
+        <div class="faq-item">
+          <h3>Onde é a melhor pesca perto de Vernal, Utah?</h3>
+          <p>Depende do teu objetivo. Flaming Gorge, a cerca de uma hora a norte, é a água de referência da região para a truta lacustre de troféu e a grande truta-fário. O Green River, a jusante da barragem, é um tailwater de pesca à mosca de classe mundial. Para uma pesca fácil, perto e adequada a famílias, as albufeiras de Red Fleet e Steinaker ficam a minutos da cidade, e os lagos de montanha Uinta na Ashley National Forest oferecem pesca de truta cénica em alta montanha.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Precisas de uma licença de pesca para pescar perto de Vernal?</h3>
+          <p>Sim. Quem pesca no Utah precisa de uma licença de pesca do Utah válida. Flaming Gorge estende-se até ao Wyoming e tem um acordo de licença recíproca para a albufeira, e as regras diferem das do Green River a jusante da barragem. As licenças, os limites e os regulamentos mudam, por isso confirma os requisitos atuais junto da Utah Division of Wildlife Resources (e da Wyoming Game and Fish para Flaming Gorge) antes de pescares.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Podes pescar durante todo o ano na Terra dos Dinossauros?</h3>
+          <p>Sim, de formas diferentes. A pesca em água aberta estende-se da primavera ao outono nas albufeiras e no Green River, os lagos altos Uinta pescam melhor no verão, depois do degelo, e o inverno traz a pesca no gelo a Flaming Gorge e às albufeiras mais baixas quando as condições o permitem. Confirma sempre as condições atuais do gelo e o acesso sazonal antes de uma viagem de inverno.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Que peixes se podem apanhar perto de Vernal?</h3>
+          <p>Truta lacustre (mackinaw), truta-fário, truta-arco-íris, salmão kokanee e achigã em Flaming Gorge; truta-arco-íris e truta-fário selvagens no Green River; truta-de-riacho, truta-cutthroat, truta-tigre e truta-arco-íris, além do peixe-branco-ártico, nos lagos Uinta; e truta-arco-íris com achigã e peixe-sol em Red Fleet e Steinaker. As espécies e o repovoamento mudam, por isso verifica os detalhes atuais junto da Utah Division of Wildlife Resources.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Flaming Gorge ou o Green River — qual é melhor para pescar?</h3>
+          <p>São experiências diferentes. Flaming Gorge é pesca de grande água em albufeira, normalmente de barco, famosa pela truta lacustre de categoria recorde e pela truta-fário de troféu. O Green River, a jusante da barragem, é um tailwater frio e cristalino de pesca à mosca para truta selvagem, pescado com float ou a vadear. Muitos pescadores fazem as duas coisas na mesma viagem.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Onde podem os iniciantes e as famílias pescar perto de Vernal?</h3>
+          <p>As albufeiras de Red Fleet e Steinaker são as opções mais fáceis e mais adequadas a famílias — perto da cidade, quentes no verão, e pescáveis a partir da margem sem barco. São ideais para introduzir as crianças à pesca, e ambas se combinam naturalmente com natação e remo para um dia completo em família.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Podes pescar a partir da margem, ou precisas de um barco?</h3>
+          <p>Ambas funcionam. Red Fleet, Steinaker e partes de Flaming Gorge e do Green River oferecem pesca produtiva a partir da margem e a vadear, perfeita para iniciantes e famílias. Um barco abre o acesso às águas mais profundas da albufeira — essencial para perseguir grandes trutas lacustres em Flaming Gorge — e os passeios de float são a forma clássica de pescar no Green River.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Como posso planear uma viagem de pesca à Terra dos Dinossauros?</h3>
+          <p>Instala-te em Vernal, que tem alojamento, combustível e provisões, e depois faz excursões de um dia até à água que corresponde ao teu objetivo — Flaming Gorge e o Green River a norte, Red Fleet e Steinaker a minutos da cidade, e os lagos Uinta nas montanhas. Compra a tua licença do Utah com antecedência, verifica os regulamentos atuais para cada água, e vê o tempo, já que as condições do deserto alto e da montanha mudam rapidamente.</p>
+        </div>
+      </div>
+
+      <div class="article-tip"><strong>Antes de lançares a linha:</strong> As licenças de pesca, os limites de posse e os regulamentos de cada água deste guia são definidos pela Utah Division of Wildlife Resources (e pela Wyoming Game and Fish em Flaming Gorge) e mudam de ano para ano. Tudo o que aqui se explica sobre onde e como pescar mantém-se válido de estação para estação; são as regras que mudam. <strong>VERIFICA JUNTO DA FONTE OFICIAL</strong> antes de cada viagem.</div>
+
+    </div>
+  </main>
+
+  <HubIndex slot="body" collection="fishing" heading="Todos os Guias de Pesca" />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

@@ -1,0 +1,40 @@
+---
+// pt/safety-guidelines.astro — Portuguese safety guidelines (P7-P6 batch,
+// mirrors French P8-P6). Mirrors src/pages/safety-guidelines.astro.
+import { getBodyHtml } from '../../page-content/safety';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+---
+<BaseLayout bodyClass="policy-page-body">
+  <Fragment slot="head">
+    <Seo
+      title="Normas de Segurança | Adventure Tours Vernal — Vernal, Utah"
+      description="Normas de segurança para tours em UTV em Vernal, Utah: idade mínima, regras do veículo, segurança nos trilhos e emergências. Liga para (435) 219-9447."
+      path="/pt/safety-guidelines/"
+      type="website"
+      ogTitle="Normas de Segurança | Adventure Tours Vernal"
+      ogDescription="Revê as normas de segurança para tours em UTV Kawasaki KRX 1000 em Vernal, Utah: limites de idade, regras do veículo e segurança nos trilhos. Liga (435) 219-9447."
+    />
+  </Fragment>
+  <Header slot="body" active="safety-guidelines" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Normas de Segurança' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: 'Ligações Rápidas',
+      links: [
+        { href: '/pt/#tours', label: 'Os Nossos Tours' },
+        { href: '/pt/#vehicles', label: 'A Nossa Frota' },
+        { href: '/pt/#gallery', label: 'Galeria de Fotos' },
+        { href: '/pt/booking/', label: 'Reserva Já' },
+      ],
+    }}
+  />
+</BaseLayout>

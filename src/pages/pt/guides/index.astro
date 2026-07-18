@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import TrustBadge from '../../../components/content/TrustBadge.astro';
+import Header from '../../../components/layout/Header.astro';
+import Footer from '../../../components/layout/Footer.astro';
+import Seo from '../../../components/seo/Seo.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import HubIndex from '../../../components/content/HubIndex.astro';
+import { getLangFromUrl } from '../../../lib/i18n';
+import { t } from '../../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+// pt/guides/index.astro — Portuguese Guides hub pillar (P7-P6 batch, mirrors
+// the French P8-P6 page src/pages/fr/guides/index.astro). Mirrors
+// src/pages/guides/index.astro exactly (structure, classes, ids).
+//
+// The Portuguese guides spokes (all 9) already exist as translated MDX by
+// the time this pillar lands — so, per the rollout's internal-link rule,
+// every spoke link below points at its /pt/ prefixed path instead of
+// falling back to English.
+const schema = `{
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "Guias de Viagem a Vernal, Utah — Planeia a Tua Aventura em UTV",
+        "description": "Guias para planear a tua viagem a Vernal, Utah: uma visão geral do destino, o que vestir, o que levar, o clima consoante a estação, como Vernal se compara a Moab, e guias detalhados sobre Flaming Gorge, Red Fleet State Park, Steinaker State Park e Ashley National Forest.",
+        "author": {"@type": "Organization", "name": "Adventure Tours Vernal"},
+        "publisher": {"@type": "Organization", "name": "Adventure Tours Vernal", "logo": {"@type": "ImageObject", "url": "https://adventuretoursvernal.com/images/logo.webp"}},
+        "datePublished": "2026-07-10",
+        "dateModified": "2026-07-11",
+        "mainEntityOfPage": "https://adventuretoursvernal.com/pt/guides/"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type": "Question", "name": "Que guias oferece a Adventure Tours Vernal para planear a viagem?", "acceptedAnswer": {"@type": "Answer", "text": "A Adventure Tours Vernal publica nove guias de planeamento de viagem: uma visão geral completa do destino Vernal, um guia do clima consoante a estação, um guia sobre o que vestir, uma lista do que levar, um guia comparativo para visitantes que vêm de Moab, e guias detalhados sobre quatro destinos vizinhos — Flaming Gorge, Red Fleet State Park, Steinaker State Park e Ashley National Forest. Cada um apresenta o que precisas de saber antes de um tour guiado em UTV Kawasaki KRX 1000 perto de Vernal."}},
+          {"@type": "Question", "name": "Preciso de ler estes guias antes de reservar um tour em UTV?", "acceptedAnswer": {"@type": "Answer", "text": "Não, mas ajudam-te a preparares-te. A maioria dos convidados só precisa de sapatos fechados e de uma carta de condução válida — a Adventure Tours Vernal fornece capacetes e equipamento de segurança. Os guias cobrem o vestuário, a bagagem, o clima consoante a estação, a orientação sobre o destino, e como um tour em Vernal se compara a Moab."}}
+        ]
+      }
+    ]
+  }`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Guias de Viagem a Vernal, Utah | Adventure Tours Vernal"
+      description="Guias para planear a tua viagem a Vernal, Utah — o que vestir, o que levar, clima consoante a estação, e como um tour em UTV em Vernal se compara a Moab."
+      path="/pt/guides/"
+      type="article"
+      ogTitle="Guias de Viagem a Vernal, Utah | Adventure Tours Vernal"
+      ogDescription="Tudo o que precisas para planear um tour guiado em UTV perto de Vernal, Utah — vestuário, bagagem, clima consoante a estação, e uma comparação com Moab."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="guides" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.guides', lang) }]} />
+  <main class="article-page" slot="body">
+    <header class="article-header">
+      <h1 class="article-title">Guias de Viagem a Vernal, Utah</h1>
+      <p class="article-meta">Adventure Tours Vernal</p>
+      <TrustBadge align="left" />
+    </header>
+    <div class="article-body">
+      <div class="article-summary-box">
+        Um tour guiado em UTV Kawasaki KRX 1000 é fácil de preparar — a maioria dos convidados só precisa de uma carta de condução válida e de sapatos fechados. Estes guias cobrem o resto: o que vestir, o que levar, como o clima do deserto de altitude de Vernal muda consoante a estação, e como um tour em Vernal se compara se o estiveres a pesar com Moab.
+      </div>
+
+      <div class="article-tip"><strong>A planear a tua primeira visita?</strong> Lê o <a href="/pt/dinosaur-national-monument/visiting-dinosaur-national-monument/">Guia Definitivo do Dinosaur National Monument</a> — um plano completo que cobre fósseis, petróglifos, estradas panorâmicas, caminhadas, e a melhor altura do ano para ires.</div>
+
+      <h2>Começa Pelo Próprio Destino</h2>
+      <p>Vernal é uma novidade total para ti? O <a href="/pt/guides/ultimate-guide-to-vernal-utah/">Guia Definitivo de Vernal, Utah</a> cobre o básico de que todo o visitante de primeira viagem precisa — onde fica Vernal, como se tornou a Terra dos Dinossauros, como chegar e como te deslocares, onde ficar e comer, e como construir uma viagem à volta dos destaques da região. Começa por aí e depois usa os guias abaixo para te preparares para o trilho.</p>
+
+      <h2>Prepara-te Para o Teu Tour</h2>
+      <p>Antes de reservares, ajuda saber como são realmente o terreno e o clima à volta de Vernal. O guia <a href="/pt/guides/what-to-wear-utv-tour/">O que Vestir num Tour em UTV pelo Deserto</a> cobre calçado, camadas de roupa, e proteção solar para um passeio de três horas num side-by-side a céu aberto. A lista <a href="/pt/guides/what-to-bring/">O que Levar</a> completa a bagagem — o que é obrigatório, o que é fornecido, e o que deves deixar em casa.</p>
+
+      <h2>Escolhe a Altura da Tua Visita</h2>
+      <p>Vernal fica a 5,331 pés de altitude no deserto de altitude do Utah, onde as manhãs e as tardes podem variar 30–40°F. O <a href="/pt/guides/vernal-weather-guide/">Guia do Clima de Vernal</a> detalha as condições estação a estação, para que possas escolher a melhor janela para a tua viagem — e saber o que esperar se fizeres o tour no auge do verão ou na fronteira do inverno.</p>
+
+      <h2>Comparação entre Vernal e Moab</h2>
+      <p>Se estás a hesitar entre Vernal e um tour em UTV em Moab, o guia <a href="/pt/guides/moab-utv-tours/">Alternativa aos Tours de UTV em Moab</a> apresenta a comparação honesta — a afluência nos trilhos, as temperaturas de verão, os preços, e os trilhos e locais (como Moonshine Arch e o Dinosaur National Monument) que Vernal tem e Moab não tem.</p>
+
+      <h2>Explora os Destinos da Região</h2>
+      <p>Pronto para aprofundares onde passar os teus dias? Quatro guias detalhados de destinos cobrem o território que irradia à volta de Vernal: o <a href="/pt/guides/ultimate-guide-to-flaming-gorge/">Guia Definitivo de Flaming Gorge</a>, o <a href="/pt/guides/ultimate-guide-to-red-fleet-state-park/">Guia Definitivo do Red Fleet State Park</a>, o <a href="/pt/guides/ultimate-guide-to-steinaker-state-park/">Guia Definitivo do Steinaker State Park</a>, e o <a href="/pt/guides/ultimate-guide-to-ashley-national-forest/">Guia Definitivo do Ashley National Forest</a> — cada um com a sua própria paisagem, os seus cursos de água, e os seus trilhos perto da cidade.</p>
+
+      <div class="article-tip">
+        <strong>Não sabes por onde começar?</strong> Liga ao Dave ou à Trudy para o <a href="tel:435-219-9447">(435) 219-9447</a> — eles podem explicar-te o que esperar consoante as tuas datas de viagem e o tamanho do teu grupo. Ou, quando estiveres pronto, <a href="/pt/booking/">consulta as datas e reserva online</a>.
+      </div>
+    </div>
+  </main>
+  <HubIndex slot="body" collection="guides" heading="Todos os Guias" />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

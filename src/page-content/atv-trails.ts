@@ -216,6 +216,77 @@ const IT = `
   </main>
 `;
 
+const PT = `
+
+
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    Os trilhos de ATV e UTV perto de Vernal, Utah, incluem Doc's Beach, Moonshine Arch, Ashley Gorge, Outlaw Trail e Asphalt Ridge. A Adventure Tours Vernal oferece tours guiados em side-by-side Kawasaki KRX 1000 pelos cinco sistemas de trilhos. $349/máquina por 3 horas, até 2 passageiros. Capacetes, equipamento de segurança e guias experientes incluídos. Liga para (435) 219-9447.
+  </p>
+
+  <main class="article-page">
+    <header class="article-header">
+      <div class="article-breadcrumb">
+        <a href="/pt/">Início</a><span class="sep">›</span><a href="/pt/utv/">Trilhos</a><span class="sep">›</span><span>Trilhos ATV Vernal</span>
+      </div>
+      <h1 class="article-title">Trilhos de ATV Perto de Vernal, Utah</h1>
+      <p class="article-meta">Atualizado em abril de 2026 · Adventure Tours Vernal</p>
+    </header>
+
+    <div class="article-body">
+      <div class="article-summary-box">
+        A Uintah Basin que rodeia Vernal contém alguns dos melhores terrenos off-road de Utah — canyons de rocha vermelha, leitos secos arenosos no deserto, panoramas do topo da crista e rotas históricas do backcountry que a maioria dos visitantes nunca vê. Eis como podes aceder a tudo isto através de tours guiados em UTV, sem precisares de um ATV próprio.
+      </div>
+
+      <h2>Porque Escolher Vernal para Andar de ATV e UTV</h2>
+      <p>O sul do Utah recebe as manchetes, mas o backcountry de Vernal oferece terreno da mesma qualidade com uma fração do trânsito. A condução aqui vai desde amplas planícies arenosas ao longo do corredor do Green River até curvas apertadas em canyons e trilhos no topo da crista com vistas a 360 graus sobre as montanhas. E como é menos comercializado do que Moab ou Sand Hollow, muitas vezes terás os trilhos só para ti.</p>
+      <p>A zona também oferece algo que a maioria dos destinos de ATV não consegue igualar: petróglifos ancestrais Fremont e Ute, esconderijos de foras-da-lei do Velho Oeste e arcos naturais de arenito estão espalhados por todos os sistemas de trilhos, transformando cada passeio em parte aventura, parte lição de história.</p>
+
+      <h2>Os Cinco Sistemas de Trilhos</h2>
+      <p><strong>Doc's Beach</strong> — Leitos secos arenosos no deserto e terreno aberto ao longo do corredor do Green River. Amplo, rápido e acessível para todos os níveis. O trilho mais popular para quem anda pela primeira vez.</p>
+      <p><strong>Moonshine Arch</strong> — Canyons de rocha vermelha que conduzem a um arco natural de arenito escondido. Terreno paisagístico e variado com um destino gratificante. Um favorito entre fotógrafos e famílias.</p>
+      <p><strong>Ashley Gorge</strong> — Um corredor de canyon dramático com paredes de arenito imponentes e paisagens de vale fluvial. Terreno mais estreito que se sente imersivo e envolvente da melhor forma possível.</p>
+      <p><strong>Outlaw Trail</strong> — Rota histórica do backcountry usada por Butch Cassidy and the Wild Bunch. Terreno acidentado, história de foras-da-lei e paisagens remotas de canyon. A opção mais aventureira.</p>
+      <p><strong>Asphalt Ridge</strong> — Trilho no topo da crista com vistas panorâmicas da Terra dos Dinossauros e das montanhas Uinta. A altitude dá-te uma perspetiva sobre toda a extensão da bacia.</p>
+
+      <h2>Tours Guiados vs. Condução Autónoma</h2>
+      <p>Se trouxeres o teu próprio ATV ou UTV, os terrenos do BLM que rodeiam Vernal têm áreas de condução abertas e rotas designadas. No entanto, os melhores trilhos — os que dão acesso a arte rupestre, arcos e canyons — percorrem-se melhor com um guia local que conhece as rotas, a história e as condições do terreno.</p>
+      <p>A Adventure Tours Vernal fornece tudo: side-by-sides Kawasaki KRX 1000 de 2 lugares com suspensão FOX 2.5 PODIUM LSC, capacetes, briefing de segurança e guias experientes. Dave e Trudy Wilson guiam cada um a sua própria máquina, acompanhando o teu grupo ao longo de todo o tour de três horas.</p>
+
+      <h2>O Que Precisas de Saber Antes de Andar</h2>
+      <p>Os tours funcionam durante todo o ano, consoante as condições meteorológicas. A primavera (abril–maio) e o outono (setembro–outubro) são as melhores épocas — temperaturas agradáveis, trilhos secos e luz dourada. Os passeios de verão começam cedo para evitar o calor. A condução de inverno está disponível em dias limpos, com uma paisagem completamente diferente.</p>
+      <p>Não é necessária qualquer experiência off-road prévia. O KRX 1000 tem direção assistida, caixa automática e uma jaula de proteção completa. Dave e Trudy ajustam o ritmo ao nível de conforto do teu grupo, desde um passeio panorâmico relaxado até uma condução mais intensa no backcountry.</p>
+
+      <div class="article-tip">
+        <strong>Dica para Escolher o Trilho:</strong> Se é a tua primeira vez, começa por Doc's Beach ou Moonshine Arch. Se queres a experiência mais remota e acidentada, pede o Outlaw Trail. O Dave ajuda-te a escolher com base no teu grupo no momento da reserva.
+      </div>
+
+      <div class="article-faq">
+        <h2>Perguntas Frequentes</h2>
+        <div class="faq-item"><h3>Há trilhos de ATV perto de Vernal, Utah?</h3><p>Sim — cinco sistemas de trilhos distintos, incluindo canyons, leitos secos no deserto e rotas no topo da crista, todos acessíveis através de tours guiados em UTV.</p></div>
+        <div class="faq-item"><h3>Pode-se andar de ATV perto do Dinosaur National Monument?</h3><p>Não dentro do monumento, mas o backcountry circundante tem extensos sistemas de trilhos para UTV por terreno semelhante, com acesso guiado.</p></div>
+        <div class="faq-item"><h3>Preciso do meu próprio ATV para andar nos trilhos perto de Vernal?</h3><p>Não. A Adventure Tours Vernal fornece máquinas Kawasaki KRX 1000, capacetes, equipamento e guias. $349 por máquina para 3 horas.</p></div>
+      </div>
+
+      <div class="article-cta">
+        <h3>Parte Para os Trilhos</h3>
+        <p>Tours guiados em Kawasaki KRX 1000 · $349/máquina · 5 sistemas de trilhos · Todos os níveis</p>
+        <a href="/pt/booking/" class="cta-btn">Reservar um Tour</a>
+        <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
+      </div>
+    </div>
+
+    <div class="related-articles">
+      <h3>Mais Guias de Trilhos</h3>
+      <div class="related-grid">
+        <a href="/pt/utv/best-utv-trails-vernal/" class="related-card"><h4>Melhores Trilhos de UTV Perto de Vernal</h4><p>Análise detalhada dos 5 sistemas de trilhos.</p></a>
+        <a href="/pt/jeep-trails-vernal-utah/" class="related-card"><h4>Trilhos de Jeep Perto de Vernal</h4><p>Opções off-road para entusiastas de Jeep e 4x4.</p></a>
+        <a href="/pt/utv/side-by-side-rentals-vernal-utah/" class="related-card"><h4>Tours em Side-by-Side vs. Aluguer</h4><p>Porque os tours guiados são melhores do que o aluguer autónomo.</p></a>
+        <a href="/pt/guides/what-to-wear-utv-tour/" class="related-card"><h4>O Que Vestir</h4><p>Guia de equipamento para andar de UTV no deserto.</p></a>
+      </div>
+    </div>
+  </main>
+`;
+
 const FR = `
 
 
@@ -295,6 +366,7 @@ const FR = `
 export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'es') return ES;
   if (locale === 'it') return IT;
+  if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
   return bodyHtml;
 }

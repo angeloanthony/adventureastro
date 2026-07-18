@@ -1,0 +1,37 @@
+---
+// pt/dinosaur-national-monument/index.astro — Portuguese DNM hub pillar
+// (P7-P6 Portuguese inline batch, mirrors French P8-P6 / src/pages/fr/dinosaur-national-monument/index.astro).
+// Portuguese spoke articles for this hub already exist (visiting-dinosaur-national-monument,
+// petroglyphs-rock-art-vernal — see PT_SLUGS in src/lib/i18n.ts), so HubIndex renders
+// Portuguese titles/links directly, matching the Italian/Spanish/French rollout pattern.
+import { getBodyHtml } from '../../../page-content/dnm';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE } from '../../../config/site';
+import Header from '../../../components/layout/Header.astro';
+import Footer from '../../../components/layout/Footer.astro';
+import Seo from '../../../components/seo/Seo.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import HubIndex from '../../../components/content/HubIndex.astro';
+import { getLangFromUrl } from '../../../lib/i18n';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Tours de UTV Perto do Dinosaur National Monument","description":"Tours guiados de UTV no backcountry que rodeia o Dinosaur National Monument, Vernal, Utah.","author":{"@type":"Organization","name":"Adventure Tours Vernal"},"publisher":{"@type":"Organization","name":"Adventure Tours Vernal","logo":{"@type":"ImageObject","url":"https://adventuretoursvernal.com/images/logo.webp"}},"datePublished":"2026-04-08","dateModified":"2026-04-08","mainEntityOfPage":"https://adventuretoursvernal.com/pt/dinosaur-national-monument/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"É possível fazer tours de UTV perto do Dinosaur National Monument?","acceptedAnswer":{"@type":"Answer","text":"Sim. A Adventure Tours Vernal opera tours guiados de Kawasaki KRX 1000 pelo backcountry que rodeia o monumento. Embora os veículos motorizados não sejam permitidos dentro do monumento, as trilhas mesmo do lado de fora apresentam o mesmo terreno de canyons, petróglifos e formações geológicas."}},{"@type":"Question","name":"A que distância fica a Adventure Tours Vernal do Dinosaur National Monument?","acceptedAnswer":{"@type":"Answer","text":"A Adventure Tours Vernal está sediada em Vernal, Utah, a cerca de 20 minutos a oeste do Quarry Exhibit Hall do monumento. Muitos visitantes combinam um tour de UTV com uma visita ao monumento na mesma viagem."}},{"@type":"Question","name":"Qual é a melhor forma de combinar um tour de UTV com o Dinosaur National Monument?","acceptedAnswer":{"@type":"Answer","text":"Reserva o teu tour de UTV para a manhã e visita o monumento à tarde, ou o inverso. Um tour guiado de 3 horas de UTV mais meio dia no monumento formam um dia completo de aventura na terra dos canyons."}}]}]}`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Tours UTV Perto do Dinosaur National Monument | Adventure Tours"
+      description="Tours guiados em UTV perto do Dinosaur National Monument em Vernal, Utah. Explora canyons, petróglifos e deserto a poucos minutos do monumento. Reserva hoje."
+      path="/pt/dinosaur-national-monument/"
+      type="article"
+      ogTitle="Tours UTV Perto do Dinosaur National Monument"
+      ogDescription="Tours guiados em Kawasaki KRX 1000 pelo backcountry que rodeia o Dinosaur National Monument — canyons, petróglifos e aventura no deserto."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="dinosaur-national-monument" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Tours ao Monumento dos Dinossauros' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <HubIndex slot="body" collection="dinosaur-national-monument" heading="Todos os Guias do Monumento dos Dinossauros" />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

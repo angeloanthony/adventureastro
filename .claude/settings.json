@@ -88,7 +88,18 @@
       "Bash(grep -n '^`;$' src/page-content/home.ts)",
       "Bash(awk 'NR==1863,NR==2478' src/page-content/home.ts)",
       "Bash(cd \"c:/Users/deluc/Documents/adventureastro\" && sed -n '1863,2478p' src/page-content/home.ts > /tmp/fr_block2.txt *)",
-      "Bash(node \"C:\\\\Users\\\\deluc\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-deluc-Documents-adventureastro\\\\fada0d74-b465-4246-a75a-f2d51864284b\\\\scratchpad\\\\fr_p6_audit.mjs\")"
+      "Bash(node \"C:\\\\Users\\\\deluc\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-deluc-Documents-adventureastro\\\\fada0d74-b465-4246-a75a-f2d51864284b\\\\scratchpad\\\\fr_p6_audit.mjs\")",
+      "Bash(awk '/^const PT = `/{p=1} p{print NR\": \"$0} /^const FR = `/{if\\(p\\) exit}' src/page-content/dnm.ts)",
+      "Bash(sed -n '1863,2478p' src/page-content/home.ts)",
+      "Bash(echo \"exit:$?\")",
+      "Bash(grep -nE '[0-9],[0-9]{3}' pt_block.txt)",
+      "Bash(grep -c '^`;$' src/page-content/home.ts)",
+      "Bash(grep -c '^const [A-Z]* = `$\\\\|^export const bodyHtml = `$' src/page-content/home.ts)",
+      "Bash(awk 'NR==909,NR==1204' src/page-content/things-to-do.ts)",
+      "Bash(awk 'NR==1195,NR==1210' src/page-content/things-to-do.ts)",
+      "Bash(awk 'NR==10,NR==304' src/page-content/things-to-do.ts)",
+      "Bash(grep -c '`')",
+      "Bash(grep -o '\\\\${[^}]*}')"
     ],
     "additionalDirectories": [
       "\\tmp",

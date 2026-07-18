@@ -528,6 +528,181 @@ const IT = `
 
 `;
 
+const PT = `
+
+<!-- ================================================
+     BLOCO DE RESUMO DA PÁGINA — para Google AI Overviews
+     ================================================ -->
+<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+  Política de cancelamento da Adventure Tours Vernal para tours guiados em UTV em Vernal, Utah. Cancelamentos com 72+ horas de antecedência recebem reembolso completo. Menos de 72 horas recebe 50%. Menos de 48 horas não recebe reembolso. Liga para (435) 219-9447 com dúvidas.
+</p>
+
+<section class="policy-section">
+  <div class="container">
+    <div class="section-header">
+      <h1 class="section-title">Política de Cancelamento</h1>
+      <p class="section-subtitle">Por favor revê os nossos termos e condições antes de reservares a tua aventura</p>
+    </div>
+
+    <div class="policy-container">
+
+      <!-- CANCELAMENTO E REEMBOLSOS -->
+      <div class="policy-card">
+        <div class="policy-icon">📅</div>
+        <h2 class="policy-heading">Cancelamento e Reembolsos</h2>
+
+        <div class="policy-table">
+          <div class="policy-row">
+            <div class="policy-timeframe">Menos de 48 horas</div>
+            <div class="policy-refund refund-none">Sem Reembolso</div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-timeframe">Menos de 72 horas</div>
+            <div class="policy-refund refund-partial">Reembolso de 50%</div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-timeframe">72+ horas de antecedência</div>
+            <div class="policy-refund refund-full">Reembolso de 100%</div>
+          </div>
+          <div class="policy-row highlight">
+            <div class="policy-timeframe">Grupos de 5+ veículos</div>
+            <div class="policy-refund refund-full">Com 2 semanas de antecedência: Reembolso de 100%<br>Depois de 2 semanas: Sem Reembolso</div>
+          </div>
+        </div>
+
+        <div class="policy-note">
+          <strong>Nota:</strong> Todos os prazos de cancelamento são calculados a partir da hora agendada de partida do teu tour.
+        </div>
+      </div>
+
+      <!-- POLÍTICA DE CLIMA -->
+      <div class="policy-card">
+        <div class="policy-icon">🌦️</div>
+        <h2 class="policy-heading">Política de Clima</h2>
+        <p>Operamos com sol ou chuva. No entanto, em casos de clima extremo ou caso a Adventure Tours Vernal tenha de cancelar por outras circunstâncias imprevistas, terás a opção de reagendar ou receber um reembolso completo.</p>
+        <p><strong>Importante:</strong> Se optares por não participar devido à chuva, será aplicada a nossa política padrão de cancelamento relativa a reembolsos. Caso nós cancelemos devido a eventos climáticos extremos, receberás um reembolso completo.</p>
+      </div>
+
+      <!-- ACORDOS OBRIGATÓRIOS -->
+      <div class="policy-card">
+        <div class="policy-icon">📝</div>
+        <h2 class="policy-heading">Acordos e Isenções Obrigatórios</h2>
+        <p>Todos os convidados terão de assinar um <strong>Acordo de Participação, Liberação e Assunção de Risco</strong> para participar nas atividades. Pais e tutores legais terão de assinar em nome de menores. Além disso, os condutores do tour em UTV terão de assinar um <strong>Acordo do Condutor</strong>.</p>
+
+        <div class="policy-warning">
+          <strong>⚠️ Importante:</strong> Se estes acordos não forem assinados, não te será permitido participar na tua aventura. A escolha de não assinar não será motivo para reembolso e a nossa política de cancelamento será aplicada.
+        </div>
+      </div>
+
+      <!-- ISENÇÃO DE DANOS AO VEÍCULO -->
+      <div class="policy-card">
+        <div class="policy-icon">🛡️</div>
+        <h2 class="policy-heading">Isenção de Danos ao Veículo</h2>
+        <p class="required-badge">Obrigatória para todos os tours</p>
+
+        <p>A Isenção de Danos ao Veículo limita os teus custos diretos à franquia + impostos por danos ao nosso equipamento em caso de acidente.</p>
+
+        <div class="policy-list">
+          <h3>A Isenção de Danos é NULA se:</h3>
+          <ul>
+            <li>O dano for resultado de condução imprudente</li>
+            <li>Não seguires as instruções do teu guia</li>
+            <li>For constatado que tinhas QUALQUER quantidade de álcool ou drogas no organismo no momento do dano</li>
+          </ul>
+        </div>
+
+        <div class="deductible-info">
+          <h3>Informação sobre a Franquia:</h3>
+          <p>Ao assinares um acordo para os nossos tours guiados, tornas-te um condutor coberto pelo nosso seguro de responsabilidade civil, sujeito a todos os termos e condições da apólice. Esta cobertura tem uma <strong>franquia de $1,000 por acidente</strong>, portanto, se estiveres envolvido num acidente com qualquer outra pessoa, veículo ou propriedade, concordas em pagar-nos $1,000 no momento do acidente, independentemente da culpa no acidente.</p>
+        </div>
+      </div>
+
+      <!-- COBERTURA DE RESPONSABILIDADE CIVIL -->
+      <div class="policy-card">
+        <div class="policy-icon">📋</div>
+        <h2 class="policy-heading">Cobertura de Responsabilidade Civil</h2>
+        <p>A nossa cobertura oferece os seguintes limites de responsabilidade:</p>
+
+        <div class="coverage-details">
+          <div class="coverage-item">
+            <span class="coverage-label">Lesões corporais por pessoa:</span>
+            <span class="coverage-amount">Contacta-nos para mais detalhes</span>
+          </div>
+          <div class="coverage-item">
+            <span class="coverage-label">Danos materiais:</span>
+            <span class="coverage-amount">Contacta-nos para mais detalhes</span>
+          </div>
+          <div class="coverage-item">
+            <span class="coverage-label">Total por acidente:</span>
+            <span class="coverage-amount">Contacta-nos para mais detalhes</span>
+          </div>
+        </div>
+
+        <div class="policy-disclaimer">
+          <p><strong>Aviso sobre o Seguro:</strong> As necessidades de seguro de cada pessoa são diferentes e não garantimos que os nossos limites de responsabilidade sejam adequados para ti. Não somos corretores, agentes ou fornecedores de seguros. Se tiveres dúvidas sobre coberturas, sugerimos que contactes o teu agente/corretor de seguros.</p>
+        </div>
+      </div>
+
+      <!-- REGRAS E REQUISITOS -->
+      <div class="policy-card">
+        <div class="policy-icon">⚖️</div>
+        <h2 class="policy-heading">Regras e Requisitos</h2>
+
+        <div class="policy-list">
+          <h3>Pontualidade:</h3>
+          <ul>
+            <li>Se alguns membros do teu grupo chegarem a horas, aceitaremos todos os participantes pontuais que tenham assinado corretamente as isenções, mesmo que a pessoa que fez a reserva não esteja presente.</li>
+            <li>Não serão concedidos reembolsos a convidados que não chegaram a horas para a sua aventura.</li>
+          </ul>
+
+          <h3>Política sobre Álcool e Drogas:</h3>
+          <ul>
+            <li>É absolutamente proibido trazer álcool para a tua aventura.</li>
+            <li>Não te será permitido participar se o teu guia acreditar que estás sob a influência de álcool ou drogas, legais ou ilegais.</li>
+            <li>Não serão concedidos reembolsos se não conseguires participar devido ao consumo de álcool ou drogas.</li>
+          </ul>
+
+          <h3>Instruções do Guia:</h3>
+          <ul>
+            <li>O teu guia está ali para garantir que tenhas uma aventura segura.</li>
+            <li>És obrigado a seguir todas as instruções do guia em todos os momentos.</li>
+          </ul>
+
+          <h3>Alterações ao Itinerário:</h3>
+          <ul>
+            <li>O teu itinerário é um guia, não um contrato.</li>
+            <li>O itinerário pode ser alterado a qualquer momento antes ou durante a tua aventura.</li>
+            <li>Alterações ao itinerário não são motivo para reembolso.</li>
+          </ul>
+
+          <h3>Processamento de Reembolsos:</h3>
+          <ul>
+            <li>Quaisquer reembolsos aplicáveis são devolvidos à parte que fez a reserva original.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CHAMADA PARA AÇÃO -->
+      <div class="policy-cta">
+        <h3>Perguntas Sobre a Nossa Política?</h3>
+        <p>Se tiveres alguma dúvida sobre a nossa política de cancelamento ou termos, não hesites em contactar-nos antes de reservares.</p>
+        <div class="cta-buttons">
+          <a href="tel:435-219-9447" class="cta-button primary">📞 Liga para (435) 219-9447</a>
+          <a href="/pt/booking/" class="cta-button secondary">Reserva o Teu Tour</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Botão flutuante para dispositivos móveis -->
+<div class="mobile-sticky-cta">
+  <button onclick="location.href='/pt/booking/'">Reserva o Teu Passeio Agora</button>
+</div>
+
+`;
+
 const FR = `
 
 <!-- ================================================
@@ -712,6 +887,7 @@ const FR = `
 export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'es') return ES;
   if (locale === 'it') return IT;
+  if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
   return bodyHtml;
 }

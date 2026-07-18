@@ -1,0 +1,52 @@
+---
+// pt/booking.astro — Portuguese booking page (P7-P6 inline batch, mirrors fr/booking.astro).
+// Mirrors src/pages/booking.astro; LocalBusiness schema fields are
+// business-identity data (name/address/hours), not page copy, so only
+// the page-specific "url" changes to this page's own /pt/ address.
+import { getBodyHtml } from '../../page-content/booking';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Adventure Tours Vernal",
+    "url": "https://adventuretoursvernal.com/pt/booking/",
+    "image": "https://adventuretoursvernal.com/images/logo.webp",
+    "telephone": "+1-435-219-9447",
+    "email": "adventuretoursvernal@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1935 S 1500 E",
+      "addressLocality": "Vernal",
+      "addressRegion": "UT",
+      "postalCode": "84078",
+      "addressCountry": "US"
+    },
+    "openingHours": "Mo-Su 07:00-19:00"
+  }
+`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Reserva o Teu Tour em UTV | Adventure Tours Vernal"
+      description="Reserva um tour guiado em UTV Kawasaki KRX 1000 em Vernal, Utah. Escolhe entre cinco trilhos panorâmicos. Aberto todos os dias das 7h às 19h."
+      path="/pt/booking/"
+      type="website"
+      ogDescription="Tour guiado em UTV Kawasaki KRX 1000 em Vernal, Utah. Calendário em tempo real, reserva instantânea. Aberto todos os dias, das 7h às 19h. Liga para (435) 219-9447."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Reserva o Teu Tour' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer slot="body" />
+</BaseLayout>
