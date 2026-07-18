@@ -124,8 +124,103 @@ not sufficient).
 
 ---
 
+## 7. Locale lifecycle (six stages — the definition of "done")
+
+Proven across five locales (es/it/pt/fr, plus the en master). Every future locale
+follows this pipeline with no special-casing unless a genuine bug forces a fix
+(see appendix below — fix once centrally, don't redesign per locale).
+
+1. **Registration & infrastructure.** Add the locale to `LOCALES` in `src/lib/i18n.ts`
+   with an empty slug set in `LOCALE_SLUGS`. Confirm the build stays byte-identical
+   (page count unchanged) before any content lands — proves the registry pattern
+   needs zero other code changes for a new locale. Lock the register (formal/informal)
+   via corpus grep against a sibling locale or `AskUserQuestion` if there's no
+   precedent — never assume.
+2. **MDX spoke translation.** All 57 spokes, hub-by-hub, same order every time:
+   utv(7) → hiking(16) → fishing(4) → camping(4) → scenic-drives(4) → guides(9) →
+   itineraries(9) → things-to-do(2) → dinosaur-national-monument(2). One on-disk
+   brief per batch (carry the full locked glossary + accumulated critical warnings
+   forward each batch), parallel subagents, then a central structural-mirror QA
+   harness + terminology grep before declaring the batch done.
+3. **Full-locale spoke audit.** Once 57/57 land, run one audit against the whole
+   set (not per-batch): registry parity (slug set ↔ on-disk files, zero orphans
+   either direction), `astro check`, `npm run build`, validator, hreflang sample,
+   sitemap count, metadata caps, and the corpus-consistency sweep (§ Editorial
+   decision rules below + register-drift check). Fix only content-layer drift here;
+   a structural finding gets fixed once centrally, not redesigned per locale.
+4. **Inline pages + shared UI.** Translate all 20 inline pillar/commercial/gateway
+   pages and populate `UI_STRINGS.<locale>` in `src/lib/ui.ts`. For every
+   module-backed page this is **two deliverables, not one**: the
+   `page-content/*.ts` content block AND its literal Astro route file
+   (`src/pages/<locale>/<page>.astro`) — there is no shared/dynamic route for
+   these pages. Brief both halves explicitly (see the PT_P6 lesson below — a
+   brief that only asks for the content block silently ships ~90 broken links).
+5. **Runtime verification.** Verify in the actual built `dist/` output, not source:
+   hreflang reciprocity (full alternate set + x-default, on both the new locale's
+   pages and the English pages that should now list it), breadcrumb resolution
+   (existence-aware fallback firing correctly), `og:locale`/`inLanguage`, sitemap
+   coverage, language-switcher correctness, and a cross-locale internal-link-set
+   parity check (extract every `href` per locale, strip the prefix, diff against
+   the English master — stronger than per-file byte-diffing, see lesson below).
+6. **Freeze / tag.** Once stage 5 passes clean, tag the locale as a completed
+   reference implementation (`git tag -a i18n-<locale>-complete`) and treat it as
+   the template — future locales' briefs should quote its locked glossary/rules
+   directly rather than re-deriving them.
+
+---
+
 *Frozen reference. If reality contradicts this doc, trust the repo and update this doc —
 never the other way around.*
+
+---
+
+## Appendix — Operational reliability lessons (agent execution, not editorial)
+
+Distinct from the editorial "when do we translate it" rules below — these are
+about running the batches reliably. Reuse verbatim; don't rediscover them.
+
+1. **A "failed" agent status does not mean no output.** Always disk-check
+   (line/byte count vs. the English sibling) before deciding to retry — repeatedly
+   saved rework across ES/IT/PT/FR batches, including 6 of 20 agents in the
+   Portuguese inline-pages batch that had written a complete block but died
+   before the final wiring line.
+2. **Resume a failed/restarted agent by its raw agent id, not a description-based
+   name.** `SendMessage` only resolves description-style names for agents that
+   are still reachable/named; a failed agent must be addressed by its literal id.
+   Resuming (not relaunching fresh) is also cheaper — it retains full context.
+3. **Simultaneous identical-message failures across many agents usually means a
+   session-level rate limit, not transient flakiness.** When several parallel
+   agents fail at once with the same "session limit" message, check wall-clock
+   time against the stated reset before spending retry budget on it.
+4. **A single agent response can exceed the output-token ceiling.** If an agent
+   fails with a token-limit error, have the resumed agent write the file in one
+   focused `Write` call with minimal narration instead of a verbose
+   read-translate-verify-reread loop — that pattern is what balloons output size.
+5. **After 3–4 independent infrastructure failures on the same file** (each
+   confirmed via disk-check to have produced zero output), stop retrying via
+   agent and translate it directly in the main thread instead. Different failure
+   modes each time (rate limit, stream stall, connection drop, process restart)
+   point to transient backend instability, not a defect in the file.
+6. **Module-backed inline pages need TWO deliverables per page, not one:** the
+   `page-content/*.ts` content block AND its literal Astro route file. A brief
+   that only specifies the content block produces pages that "exist" in the data
+   layer but 404 in practice — caught only by `npm run build` reporting broken
+   links, not by any per-agent self-check.
+7. **Concurrent agents doing their own "does X exist in this locale yet" check
+   mid-batch can race and get stale answers** (e.g. one agent finishing before a
+   sibling page it links to has landed). Do one centralized link-prefix pass
+   after all agents in a batch land — don't trust each agent's individual
+   existence check.
+8. **Cross-locale link-parity check, run once per batch:** extract every `href`
+   from each locale's block/page, strip the locale prefix, and diff the
+   normalized set against the English master across the whole batch at once.
+   Stronger guarantee than per-file byte-diffing; standard check for every
+   inline-page batch going forward.
+9. **Agent self-report is not reliable enough on its own for the single most-locked
+   term in the glossary** (e.g. "Dinosaur Country" / its per-locale translation).
+   Always run a literal corpus-wide grep for the untranslated source phrase as a
+   central QA step — one file left all 14 instances of "Dinosaur Country"
+   untranslated despite the agent's self-report claiming compliance.
 
 ---
 
