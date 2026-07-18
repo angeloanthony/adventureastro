@@ -30,7 +30,25 @@
       "Bash(node \"C:\\\\Users\\\\deluc\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-deluc-Documents-adventureastro\\\\969be9b0-1c55-482c-89cc-3f30517d5da2\\\\scratchpad\\\\verify_camping_fr.mjs\")",
       "Bash(grep -oE '\\\\$[0-9,]+|\\\\\\([0-9]{3}\\\\\\) [0-9]{3}-[0-9]{4}|[0-9]+\\(,[0-9]{3}\\)*' cub-creek-road-tour-of-the-tilted-rocks.mdx)",
       "Bash(grep -oE '\\\\$[0-9,]+|\\\\\\([0-9]{3}\\\\\\) [0-9]{3}-[0-9]{4}|[0-9]+\\(,[0-9]{3}\\)*' cub-creek-road-tour-of-the-tilted-rocks.fr.mdx)",
-      "Bash(node \"C:\\\\Users\\\\deluc\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-deluc-Documents-adventureastro\\\\969be9b0-1c55-482c-89cc-3f30517d5da2\\\\scratchpad\\\\verify_scenic_fr.mjs\")"
+      "Bash(node \"C:\\\\Users\\\\deluc\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-deluc-Documents-adventureastro\\\\969be9b0-1c55-482c-89cc-3f30517d5da2\\\\scratchpad\\\\verify_scenic_fr.mjs\")",
+      "Bash(grep -n \"href=\\\\\"/\\\\|href=\\\\\"tel:\\\\|\\\\]\\(\\\\/\" src/content/guides/vernal-weather-guide.fr.mdx)",
+      "Bash(awk '/^---$/{c++; next} c==1' ultimate-guide-to-steinaker-state-park.fr.mdx)",
+      "Bash(node \"C:\\\\Users\\\\deluc\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-deluc-Documents-adventureastro\\\\969be9b0-1c55-482c-89cc-3f30517d5da2\\\\scratchpad\\\\verify_guides_fr.mjs\")",
+      "Bash(grep -n \"349 \\\\$\\\\|349\\\\$\" src/content/guides/moab-utv-tours.fr.mdx src/content/guides/ultimate-guide-to-vernal-utah.fr.mdx)",
+      "Bash(grep -o '\\\\$[0-9,]*[0-9]' src/content/guides/moab-utv-tours.fr.mdx)",
+      "Bash(grep -o '\\\\$[0-9,]*[0-9]' src/content/guides/ultimate-guide-to-vernal-utah.fr.mdx)",
+      "Bash(grep -n \"[0-9] \\\\$\" src/content/guides/moab-utv-tours.fr.mdx src/content/guides/ultimate-guide-to-vernal-utah.fr.mdx)",
+      "Bash(grep -no \"\\\\$[0-9]*\" 2-day-family-itinerary.fr.mdx)",
+      "Bash(grep -o \"\\\\$[0-9]*\" 2-day-family-itinerary.fr.mdx)",
+      "Bash(python count2.py)",
+      "Bash(python count3.py)",
+      "Bash(grep -o '\\\\$[0-9]*' romantic-weekend-dinosaur-country.mdx)",
+      "Bash(grep -o '\\\\$[0-9]*' romantic-weekend-dinosaur-country.fr.mdx)",
+      "Bash(rm -f /tmp/check.js /tmp/check2.js /tmp/check3.js)",
+      "Bash(node -e 'console.log\\(require\\('\\\\''fs'\\\\''\\).readFileSync\\('\\\\''__TRACKED_VAR__'\\\\'','\\\\''utf8'\\\\''\\).match\\(/^description: \"\\(.*\\)\"/m\\)[1].length\\)')"
+    ],
+    "additionalDirectories": [
+      "\\tmp"
     ]
   }
 }
