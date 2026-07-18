@@ -34,6 +34,7 @@ export const LOCALES = [
   { code: 'it', name: 'Italiano',   dir: 'ltr', ogLocale: 'it_IT', hreflang: 'it-IT' },
   { code: 'pt', name: 'Português',  dir: 'ltr', ogLocale: 'pt_PT', hreflang: 'pt-PT' },
   { code: 'fr', name: 'Français',   dir: 'ltr', ogLocale: 'fr_FR', hreflang: 'fr-FR' },
+  { code: 'de', name: 'Deutsch',    dir: 'ltr', ogLocale: 'de_DE', hreflang: 'de-DE' },
 ] as const satisfies readonly LocaleMeta[];
 
 export const DEFAULT_LOCALE = 'en';
@@ -261,11 +262,15 @@ const FR_SLUGS = new Set([
   'dinosaur-national-monument/visiting-dinosaur-national-monument', 'dinosaur-national-monument/petroglyphs-rock-art-vernal',
 ]);
 
+// P9 — German (de-DE). Registration only: empty until the first MDX batch lands.
+const DE_SLUGS = new Set<string>([]);
+
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {
   es: ES_SLUGS,
   it: IT_SLUGS,
   pt: PT_SLUGS,
   fr: FR_SLUGS,
+  de: DE_SLUGS,
 };
 
 /**
