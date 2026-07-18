@@ -26,7 +26,8 @@
       "Bash(node \"C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/969be9b0-1c55-482c-89cc-3f30517d5da2/scratchpad/check.js\")",
       "Bash(grep -o \"\\\\$349\" \"src/content/hiking/spring-hiking-near-vernal.fr.mdx\")",
       "Bash(node \"C:\\\\Users\\\\deluc\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-deluc-Documents-adventureastro\\\\969be9b0-1c55-482c-89cc-3f30517d5da2\\\\scratchpad\\\\verify_hiking_fr.mjs\")",
-      "Bash(node \"C:\\\\Users\\\\deluc\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-deluc-Documents-adventureastro\\\\969be9b0-1c55-482c-89cc-3f30517d5da2\\\\scratchpad\\\\verify_fishing_fr.mjs\")"
+      "Bash(node \"C:\\\\Users\\\\deluc\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-deluc-Documents-adventureastro\\\\969be9b0-1c55-482c-89cc-3f30517d5da2\\\\scratchpad\\\\verify_fishing_fr.mjs\")",
+      "Bash(node \"C:\\\\Users\\\\deluc\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-deluc-Documents-adventureastro\\\\969be9b0-1c55-482c-89cc-3f30517d5da2\\\\scratchpad\\\\verify_camping_fr.mjs\")"
     ]
   }
 }
