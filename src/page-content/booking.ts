@@ -635,6 +635,216 @@ const IT = `
 </script>
 `;
 
+const FR = `
+
+  <!-- Page -->
+  <div class="booking-page">
+
+    <!-- En-tête -->
+    <div class="page-header">
+      <h1 class="page-title">Réservez Votre Aventure</h1>
+      <p class="page-subtitle">Tous les tours utilisent des UTV Kawasaki KRX 1000 side-by-side avec des guides locaux experts — choisissez votre piste au moment de la réservation&nbsp;!</p>
+      <div style="text-align:center;margin-top:12px;"><span style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border:1px solid rgba(212,118,78,0.35);border-radius:999px;background:rgba(212,118,78,0.08);font-size:0.95rem;color:#4a4139;"><span aria-hidden="true" style="color:#e6a817;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count} avis Google</span></span></div>
+      <div class="calendar-badge">
+        📅 Calendrier en Direct &bull; Réservation Instantanée &bull; Consultez les Horaires Disponibles
+      </div>
+
+      <!-- INTÉGRATION EN LIGNE DE CAL.COM -->
+<div id="cal-booking-inline" style="width:100%; min-height:700px; margin-top:30px; border-radius:12px; overflow:hidden;"></div>
+    </div>
+
+    <!-- Section des Pistes -->
+    <section class="tours-section">
+      <div class="section-intro">
+        <h2>5 Pistes à Explorer</h2>
+        <p>Parcourez nos pistes ci-dessous, puis cliquez sur <strong>"Réservez Votre Aventure"</strong> pour choisir votre date, votre heure et votre piste — le tout au même endroit.</p>
+      </div>
+
+      <p style="max-width:820px;margin:1rem auto 0;padding:0 1rem;text-align:center;line-height:1.7;">Quelle que soit la piste que vous choisissez ci-dessous, chaque tour guidé part du même point de départ à Vernal. Ce diagramme montre les cinq systèmes de pistes parmi lesquels vous pouvez choisir au moment de la réservation.</p>
+
+      <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+        <img src="/images/maps/vernal-utv-trail-systems.svg" alt="Diagramme schématique de réservation montrant les cinq systèmes de pistes UTV que les clients peuvent choisir près de Vernal, Utah — Doc's Beach, Moonshine Arch, Ashley Gorge, Asphalt Ridge et Outlaw Trail — chacun représenté comme un rayon étiqueté partant du point de départ unique des tours à Vernal où commence chaque tour. Pas à l'échelle&nbsp;; il ne montre ni itinéraires, ni distances, ni directions, ni départs de piste." width="1600" height="1200" loading="lazy" decoding="async" />
+        <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">Choisissez l'un des cinq systèmes de pistes au moment de la réservation — tous les tours partent d'un même point de départ à Vernal. Schématique uniquement, pas à l'échelle.</figcaption>
+      </figure>
+
+      <div class="tours-grid">
+
+        <!-- Doc's Beach -->
+        <div class="tour-card">
+          <div class="tour-image" style="background-image: url('/images/Docs Beach.webp');">
+            <span class="difficulty-badge trail-badge">Doc's Beach</span>
+          </div>
+          <div class="tour-content">
+            <h3 class="tour-title">Doc's Beach</h3>
+            <p class="tour-description">Descendez vers l'une des destinations riveraines les plus appréciées de Vernal. Des lits de sable désertiques, un terrain ouvert et des vues magnifiques sur le corridor du Green River en font un favori pour tous les niveaux.</p>
+            <div class="tour-details">
+              <div class="tour-detail">
+                <span class="tour-detail-icon">📍</span>
+                <span>Zone du Green River</span>
+              </div>
+              <div class="tour-detail">
+                <span class="tour-detail-icon">⭐</span>
+                <span>Tous Niveaux</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Moonshine Arch -->
+        <div class="tour-card">
+          <div class="tour-image" style="background-image: url('/images/Moonshine Arch.webp');">
+            <span class="difficulty-badge trail-badge">Moonshine Arch</span>
+          </div>
+          <div class="tour-content">
+            <h3 class="tour-title">Moonshine Arch</h3>
+            <p class="tour-description">Serpentez à travers des canyons de roche rouge accidentés jusqu'à une magnifique arche naturelle de grès cachée au cœur du backcountry. Une destination panoramique et inoubliable qui rivalise avec les parcs les plus célèbres de l'Utah — sans la foule.</p>
+            <div class="tour-details">
+              <div class="tour-detail">
+                <span class="tour-detail-icon">📍</span>
+                <span>Canyon de Roche Rouge</span>
+              </div>
+              <div class="tour-detail">
+                <span class="tour-detail-icon">⭐</span>
+                <span>Panoramique et Historique</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ashley Gorge -->
+        <div class="tour-card">
+          <div class="tour-image" style="background-image: url('/images/50a.webp');">
+            <span class="difficulty-badge trail-badge">Ashley Gorge</span>
+          </div>
+          <div class="tour-content">
+            <h3 class="tour-title">Ashley Gorge</h3>
+            <p class="tour-description">Descendez dans le spectaculaire corridor du canyon d'Ashley Gorge, où d'imposantes parois de grès encadrent une vallée fluviale sinueuse. L'un des tours les plus impressionnants de tout l'Uintah Basin.</p>
+            <div class="tour-details">
+              <div class="tour-detail">
+                <span class="tour-detail-icon">📍</span>
+                <span>Ashley National Forest</span>
+              </div>
+              <div class="tour-detail">
+                <span class="tour-detail-icon">⭐</span>
+                <span>Aventure en Canyon</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Outlaw Trail -->
+        <div class="tour-card">
+          <div class="tour-image" style="background-image: url('/images/51a.webp');">
+            <span class="difficulty-badge trail-badge">Outlaw Trail</span>
+          </div>
+          <div class="tour-content">
+            <h3 class="tour-title">Outlaw Trail</h3>
+            <p class="tour-description">Parcourez l'itinéraire autrefois emprunté par Butch Cassidy et la Wild Bunch. Cette piste historique du backcountry traverse un pays de canyons et de vastes plateaux de haut désert où les hors-la-loi disparaissaient autrefois dans la nature sauvage.</p>
+            <div class="tour-details">
+              <div class="tour-detail">
+                <span class="tour-detail-icon">📍</span>
+                <span>Pays des Canyons</span>
+              </div>
+              <div class="tour-detail">
+                <span class="tour-detail-icon">⭐</span>
+                <span>Itinéraire Historique</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Asphalt Ridge -->
+        <div class="tour-card">
+          <div class="tour-image" style="background-image: url('/images/52a.webp');">
+            <span class="difficulty-badge trail-badge">Asphalt Ridge</span>
+          </div>
+          <div class="tour-content">
+            <h3 class="tour-title">Asphalt Ridge</h3>
+            <p class="tour-description">Montez au sommet d'Asphalt Ridge pour des vues panoramiques à 360 degrés sur la Terre des Dinosaures, les Uintah Mountains et le vaste haut désert en contrebas. L'expérience ultime en UTV sur une crête, près de Vernal.</p>
+            <div class="tour-details">
+              <div class="tour-detail">
+                <span class="tour-detail-icon">📍</span>
+                <span>Crête de l'Uintah Basin</span>
+              </div>
+              <div class="tour-detail">
+                <span class="tour-detail-icon">⭐</span>
+                <span>Vues Panoramiques</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    <div style="text-align:center; margin-top:50px; padding:20px 0;">
+      <p style="font-size:1.05rem; color:#666; font-family:var(--font-body);">Utilisez le calendrier ci-dessus pour choisir votre date et votre piste.</p>
+    </div>
+
+    </section>
+
+    <!-- Section d'Aide -->
+    <section class="help-section">
+      <h3>Besoin d'Aide pour Réserver&nbsp;?</h3>
+      <p>Appelez-nous et nous vous aiderons personnellement à choisir la piste parfaite et à trouver un horaire qui vous convient.</p>
+      <a href="tel:435-219-9447" class="phone-cta">(435) 219-9447</a>
+      <p class="hours">Ouvert Tous les Jours &bull; 7am – 7pm Heure de la Montagne</p>
+    </section>
+
+  </div>
+
+  <!-- Bouton flottant pour mobile -->
+  <div class="mobile-sticky-cta">
+    <button onclick="window.open('https://cal.com/adventuretoursvernal/trails', '_blank')">Réservez Votre Tour Maintenant</button>
+  </div>
+
+  <!-- Script d'intégration en ligne de Cal.com -->
+<script is:inline type="text/javascript">
+  (function (C, A, L) {
+    let p = function (a, ar) { a.q.push(ar); };
+    let d = C.document;
+    C.Cal = C.Cal || function () {
+      let cal = C.Cal; let ar = arguments;
+      if (!cal.loaded) {
+        cal.ns = {}; cal.q = cal.q || [];
+        d.head.appendChild(d.createElement("script")).src = A;
+        cal.loaded = true;
+      }
+      if (ar[0] === L) {
+        const api = function () { p(api, arguments); };
+        const namespace = ar[1];
+        api.q = api.q || [];
+        if (typeof namespace === "string") {
+          cal.ns[namespace] = cal.ns[namespace] || api;
+          p(cal.ns[namespace], ar);
+          p(cal, [L, namespace, ar[2]]);
+        } else p(cal, ar);
+        return;
+      }
+      p(cal, ar);
+    };
+  })(window, "https://app.cal.com/embed/embed.js", "init");
+
+  Cal("init", { origin: "https://cal.com" });
+
+  Cal("inline", {
+  elementOrSelector: "#cal-booking-inline",
+  calLink: "adventuretoursvernal/trails",
+  layout: "month_view",
+  config: {
+    duration: 180,
+    overlayCalendar: true
+  }
+});
+
+  Cal("ui", {
+    theme: "light",
+    styles: { branding: { brandColor: "#d4764e" } },
+    hideEventTypeDetails: false,
+    layout: "month_view"
+  });
+</script>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3A). Every
  * locale without a committed variant falls back to English. Callers that
@@ -643,5 +853,6 @@ const IT = `
 export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'es') return ES;
   if (locale === 'it') return IT;
+  if (locale === 'fr') return FR;
   return bodyHtml;
 }

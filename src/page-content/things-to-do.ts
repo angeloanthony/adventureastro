@@ -901,13 +901,316 @@ const IT = `
 
 `;
 
+// French variant (P8-P6 inline batch, formal "vous" register). Mirrors the
+// IT structure 1:1 (same tags/classes/attributes). All French spoke MDX for
+// this hub already exists (see FR_SLUGS in src/lib/i18n.ts), so internal
+// links to specific spokes and to other pillar/hub pages in this same batch
+// use the /fr/ prefix directly rather than falling back to English.
+const FR = `
+
+  <!-- AI Summary Block -->
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    Parmi les choses à faire à Vernal, dans l'Utah, on compte la visite de Dinosaur National Monument et de son Wall of Bones, un tour guidé en UTV Kawasaki KRX 1000 avec Adventure Tours Vernal, l'observation des pétroglyphes Fremont à McConkie Ranch et Dry Fork Canyon, la marche sur les empreintes de dinosaures de Red Fleet State Park, le jardin des dinosaures de l'Utah Field House of Natural History, la navigation et la pêche à Steinaker et Flaming Gorge, la randonnée dans Ashley National Forest et les Uinta Mountains, et l'exploration de l'histoire des hors-la-loi du Far West. Vernal est la Terre des Dinosaures de l'Utah — une porte d'entrée vers les loisirs de plein air, l'aventure en backcountry et l'histoire ancienne, avec beaucoup moins de foule que le sud de l'Utah. Les tours guidés en UTV durent trois heures pour $349 par machine, jusqu'à 2 passagers ; appelez le (435) 219-9447.
+  </p>
+
+  <main class="article-page">
+    <header class="article-header">
+      <div class="article-breadcrumb">
+        <a href="/fr/">Accueil</a><span class="sep">›</span><span>Que Faire à Vernal</span>
+      </div>
+      <h1 class="article-title">Que Faire à Vernal, Utah</h1>
+      <p class="article-meta">Mis à jour en juillet 2026 · Adventure Tours Vernal</p>
+      <p style="display:inline-flex;align-items:center;gap:8px;margin:12px 0;padding:7px 15px;border:1px solid rgba(212,118,78,0.5);border-radius:999px;background:#ffffff;box-shadow:0 1px 4px rgba(0,0,0,0.08);font-size:0.95rem;color:#4a4139;"><span aria-hidden="true" style="color:#e6a817;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count} avis Google</span></p>
+    </header>
+
+    <div class="article-body">
+      <div class="article-summary-box"><strong>Réponse Rapide&nbsp;:</strong> Vernal, dans l'Utah, est la porte d'entrée vers Dinosaur National Monument et le cœur de l'Uintah Basin de l'Utah — un centre d'aventure compact où vous pouvez toucher de vrais fossiles de dinosaures vieux de 149 millions d'années, parcourir des canyons de roche rouge lors d'un tour guidé en UTV, marcher jusqu'à des pétroglyphes millénaires et pêcher dans des réservoirs alpins, le tout à moins d'une heure du centre-ville. Prévoyez deux à trois jours&nbsp;: un pour le monument et l'art rupestre, un pour un tour guidé en UTV dans le backcountry et les parcs d'État, et un troisième en option pour Flaming Gorge, la pêche ou les hautes Uintas. Les meilleurs mois sont mai–juin et septembre–octobre. Cela offre une grande partie de ce qui attire les gens dans le sud de l'Utah, avec une fraction des foules.</div>
+
+      <div class="key-takeaways">
+        <h2>Points Clés</h2>
+        <ul>
+          <li><strong>Dinosaur National Monument est la vedette.</strong> Le Wall of Bones du Quarry Exhibit Hall — environ 1,500 fossiles encore incrustés dans la roche — se trouve à 20 minutes à l'est du centre-ville et ne ressemble à rien d'autre dans l'État.</li>
+          <li><strong>Le backcountry est la moitié cachée.</strong> Les canyons, les arches et l'art rupestre isolé autour de Vernal ne sont pas accessibles par route pavée. Un tour guidé en UTV est le moyen le plus rapide et le plus immersif de les découvrir.</li>
+          <li><strong>C'est une véritable destination familiale.</strong> Les enfants peuvent toucher des fossiles, marcher sur des empreintes de dinosaures et participer à un tour dès l'âge de 2 ans — la plupart des points forts ne demandent que de courtes marches.</li>
+          <li><strong>Deux à trois jours est l'idéal.</strong> Une seule journée couvre à peine le monument ; un long week-end vous permet de voir toute la région sans vous presser.</li>
+          <li><strong>Venez pendant les saisons intermédiaires.</strong> La fin du printemps et le début de l'automne apportent des températures agréables, une faune active et peu de foule. L'été est chaud et idéal pour l'eau ; l'hiver est calme mais limité.</li>
+          <li><strong>Il vous faut une voiture.</strong> Les attractions de Vernal sont dispersées dans la campagne environnante, et il n'existe pas de transport en commun complet entre elles.</li>
+        </ul>
+      </div>
+
+      <p>Une seule image explique pourquoi Vernal fonctionne si bien comme base : les attractions de la région rayonnent depuis la ville comme les rayons d'une roue, chacune constituant une facile excursion d'une journée, aller-retour.</p>
+
+      <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+        <img src="/images/maps/vernal-regional-hub-and-spoke.svg" alt="Diagramme schématique en étoile de la Terre des Dinosaures avec Vernal, Utah, au centre et cinq destinations rayonnant depuis celui-ci comme des rayons étiquetés — Dinosaur National Monument, Flaming Gorge, Ashley National Forest, Red Fleet State Park et Steinaker State Park. Il montre uniquement les relations régionales et n'est pas dessiné à l'échelle, ni selon la distance ou la direction de la boussole." width="1600" height="1200" loading="lazy" decoding="async" />
+        <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">Vernal au centre, les destinations de la région sur les rayons. Diagramme schématique — pas à l'échelle, ni selon la distance ou la direction de la boussole.</figcaption>
+      </figure>
+
+      <h2>Pourquoi Visiter Vernal, Utah</h2>
+      <p>La plupart des voyageurs découvrent Vernal par hasard — un nom sur la carte à mi-chemin entre Salt Lake City et les Rocheuses du Colorado, ou la ville la plus proche d'un monument de dinosaures que leurs enfants ont supplié de voir. Puis ils arrivent, et la ville dépasse discrètement les attentes. Vernal se trouve en bordure de l'Uintah Basin, entourée par les Uinta Mountains au nord et par un pays de canyons au sud et à l'est, au centre d'un paysage qui rassemble une variété improbable dans un petit rayon.</p>
+      <p>En un seul long week-end, vous pouvez vous tenir devant un lit de rivière jurassique rempli d'os fossilisés, suivre du regard des pétroglyphes que le peuple Fremont a gravés dans des parois rocheuses il y a plus de mille ans, parcourir des canyons cachés de roche rouge en UTV, attraper des truites trophées dans une gorge d'un rouge flamboyant, et marcher littéralement dans les empreintes d'un dinosaure. Cet éventail — temps profond, cultures anciennes, histoire du Far West et loisirs de plein air sérieux, tout cela superposé — est ce qui rend Vernal spécial. C'est le genre d'endroit qui récompense la curiosité.</p>
+      <p>Et tout cela sans la foule. Alors que Moab, Zion et Arches croulent sous une fréquentation record, Vernal reste l'un des coins véritablement peu fréquentés de l'Utah. Vous pouvez souvent avoir un point de vue, un départ de sentier ou un panneau de pétroglyphes entièrement pour vous. Pour les familles lasses de se disputer une place de stationnement, pour les photographes en quête d'une lumière sans monde, et pour quiconque apprécie un peu d'espace pour respirer, ce n'est pas un avantage mineur — c'est tout l'attrait.</p>
+
+      <h2>Ce Qui Rend Vernal Différente</h2>
+      <p>Beaucoup de villes peuvent se prévaloir d'un monument national ou d'un bon réseau de sentiers. Ce qui distingue Vernal, c'est la <em>combinaison</em>, et le fait qu'une si grande partie soit étonnamment facile d'accès.</p>
+      <p>Premièrement, c'est la <strong>Terre des Dinosaures</strong> comme nulle part ailleurs ne peut le prétendre. Les fossiles ici ne sont pas des moulages derrière une vitre dans un musée lointain — ce sont de vrais os, toujours incrustés dans la falaise où ils ont été ensevelis, à un endroit où l'on vous invite réellement à poser la main sur l'un d'eux. Ajoutez les empreintes de dinosaures de Red Fleet, le jardin des dinosaures en plein air du Field House, et la roche de la Formation Morrison qui a rendu la région célèbre, et vous obtenez une destination bâtie autour de l'un des sujets les plus fascinants de la Terre.</p>
+      <p>Deuxièmement, Vernal offre une <strong>zone accessible et un backcountry</strong>, et connaître la différence est la clé d'un excellent voyage. La zone accessible, c'est tout ce à quoi vous pouvez accéder en voiture : le monument, les parcs d'État, le musée, le centre-ville. Le backcountry est le vaste réseau de terres publiques, de canyons et de sentiers hors route qui entoure tout cela — un territoire que la plupart des visiteurs ne voient jamais parce qu'on n'y accède pas par la route pavée. Les tours guidés en UTV de la ville existent pour combler cet écart, et c'est pourquoi un voyage à Vernal peut ressembler à une expédition plutôt qu'à une simple visite éclair.</p>
+      <p>Troisièmement, c'est une <strong>ville authentique et active</strong>, pas une station construite pour le tourisme. Cela signifie des prix honnêtes, une cuisine sans prétention, une connaissance locale authentique, et une Main Street qui poursuit sa vie que vous soyez là ou non. Pour un certain type de voyageur, cette authenticité vaut plus que n'importe quel équipement.</p>
+
+      <p>Avec autant de choix au menu, la façon la plus rapide de planifier est de commencer par ce que vous aimez. Le sélecteur ci-dessous transforme un intérêt en une courte liste d'expériences — chacune détaillée plus loin sur cette page.</p>
+
+      <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+        <img src="/images/graphics/vernal-adventure-decision-tree.svg" alt="Diagramme en arbre de décision qui classe les attractions de Vernal, Utah, par centre d'intérêt. À partir d'un point de départ 'qu'avez-vous envie de faire ?', quatre branches d'intérêt — icônes et fossiles, être actif, prendre son temps à son propre rythme, et adapté aux familles — mènent à sept expériences : Dinosaures, Aventure en UTV, Randonnée, Pêche, Routes Panoramiques, Photographie et Activités Familiales. Il relie les intérêts aux activités comme aide à la planification, non comme une règle." width="1600" height="1200" loading="lazy" decoding="async" />
+        <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">Commencez par ce qui vous tente, puis passez à l'expérience correspondante ci-dessous. Une aide à la planification — de nombreux visiteurs font un peu de tout.</figcaption>
+      </figure>
+
+      <h2>Le Top des Choses à Faire à Vernal (En Bref)</h2>
+      <p>Si vous manquez de temps et voulez seulement la liste courte, voici la région résumée. Chacun de ces points a sa propre section détaillée plus bas, et notre guide complémentaire sur <a href="/fr/things-to-do/vernal-utah-attractions/">les meilleures attractions à Vernal et ses environs</a> les classe avec la logistique de visite.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Attraction</th><th>Ce Que C'est</th><th>Distance depuis Vernal</th><th>Idéal Pour</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Dinosaur National Monument</td><td>Plus de 1,500 vrais fossiles dans la roche ; pays de canyons</td><td>~20 min à l'est</td><td>Tout le monde ; première visite</td></tr>
+            <tr><td>Tour Guidé en UTV</td><td>Canyons du backcountry, arches, art rupestre isolé</td><td>Départ de Vernal</td><td>Amateurs d'aventure, familles</td></tr>
+            <tr><td>Pétroglyphes de McConkie Ranch</td><td>Grands panneaux d'art rupestre Fremont</td><td>~15–20 min au nord</td><td>Histoire, photographie</td></tr>
+            <tr><td>Red Fleet State Park</td><td>Empreintes de dinosaures + réservoir de roche rouge</td><td>~15 min au nord</td><td>Familles, baignade</td></tr>
+            <tr><td>Utah Field House of Natural History</td><td>Musée + jardin des dinosaures en plein air</td><td>Centre-ville</td><td>Enfants, jours de pluie</td></tr>
+            <tr><td>Steinaker State Park</td><td>Baignade, bateau, pagaie, camping</td><td>~5–10 min au nord</td><td>Été, familles</td></tr>
+            <tr><td>Flaming Gorge</td><td>Pêche trophée, réservoir dans un canyon rouge</td><td>~1 h au nord</td><td>Pêcheurs, routes panoramiques</td></tr>
+            <tr><td>Ashley National Forest / Uintas</td><td>Randonnée alpine, camping, lacs</td><td>~30–60 min au nord</td><td>Randonneurs, journées d'été plus fraîches</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Dinosaur National Monument</h2>
+      <p>C'est la raison pour laquelle la plupart des gens placent d'abord Vernal sur leur carte, et cela se mérite. Le <strong>Quarry Exhibit Hall</strong>, à environ 20 minutes à l'est près de Jensen, est un bâtiment climatisé construit directement au-dessus d'une paroi rocheuse qui contient environ 1,500 os de dinosaures — crânes, membres et vertèbres d'animaux comme l'<em>Allosaurus</em>, le <em>Stegosaurus</em>, le <em>Diplodocus</em> et l'<em>Apatosaurus</em> — toujours incrustés dans la roche exactement là où une rivière jurassique les a ensevelis il y a environ 149 millions d'années. Il y a un endroit où l'on vous invite à toucher un fossile authentique dans la paroi, et voir ce moment marquer un enfant (ou un adulte) ne lasse jamais.</p>
+      <p>Au-delà de la carrière, le monument s'étend sur plus de 200,000 acres de pays de canyons le long des rivières Green et Yampa. La <strong>route panoramique de Cub Creek</strong> (Tour of the Tilted Rocks) traverse des couches de roche inclinées, des pétroglyphes en bordure de route et l'habitation de pionnière de Josie Bassett Morris, qui y a vécu en grande partie seule pendant près d'un demi-siècle. De courts sentiers, une marche de découverte des fossiles et une faune abondante complètent la visite. Prévoyez au moins une demi-journée ; une journée complète si vous voulez ajouter des randonnées et les canyons du côté Colorado.</p>
+      <div class="article-tip"><strong>Planifiez bien la visite du monument&nbsp;:</strong> les horaires, les tarifs et la navette saisonnière de la carrière changent au fil de l'année. Notre guide complet et indépendant pour <a href="/fr/dinosaur-national-monument/visiting-dinosaur-national-monument/">visiter Dinosaur National Monument</a> détaille toute la visite — quoi prioriser, les meilleures routes et randonnées, des conseils saison par saison, et des astuces pour les familles et l'accessibilité. Lisez-le avant de partir, et confirmez toujours les opérations actuelles auprès du National Park Service.</p>
+
+      <h2>Aventures Guidées en UTV</h2>
+      <p>Voici la partie que la plupart des visiteurs de première fois manquent complètement. Le monument vous montre des fossiles et des points de vue en bordure de route, mais il ne vous montre pas le sauvage backcountry qui entoure Vernal — les canyons cachés, les arches naturelles et les panneaux de pétroglyphes isolés qu'aucune route panoramique pavée n'atteint. Ce territoire est exactement là où intervient un tour guidé en UTV, et c'est de loin le moyen le plus immersif de découvrir ce qui rend ce paysage unique.</p>
+      <p>Adventure Tours Vernal propose des tours guidés en <strong>Kawasaki KRX 1000</strong> sur cinq réseaux de sentiers distincts, chacun avec son propre caractère : des lits sablonneux du désert à <strong>Doc's Beach</strong>, un canyon de roche rouge à <strong>Moonshine Arch</strong> se terminant par une arche de grès cachée, des corridors spectaculaires à <strong>Ashley Gorge</strong>, un territoire de repaires de hors-la-loi sur l'<strong>Outlaw Trail</strong>, et des vues panoramiques sur crête à <strong>Asphalt Ridge</strong>. En chemin, vous vous arrêtez aux pétroglyphes Fremont et Ute, aux arches naturelles et aux sites historiques du Far West que la plupart des visiteurs ne voient jamais.</p>
+      <p>Les machines sont des 2 places avec cage de sécurité complète, direction assistée et suspension FOX 2.5 PODIUM LSC conçue pour le confort sur terrain accidenté. Les tours durent environ trois heures pour <strong>$349 par machine</strong>, jusqu'à deux passagers, avec tous les casques et l'équipement de sécurité inclus, et Dave et Trudy Wilson guident personnellement chaque tour — ce qui signifie une connaissance locale que vous ne trouverez sur aucune carte. Les passagers peuvent participer en ride-along (en tant que passager) dès l'âge de 2 ans avec un parent ; les conducteurs doivent avoir 18 ans ou plus. Si votre groupe a un nombre impair de personnes, une option ride-along permet à une troisième personne de se joindre comme passager avec un guide.</p>
+      <div class="article-tip"><strong>Quel sentier choisir&nbsp;?</strong> Les familles avec de jeunes enfants ont tendance à préférer Doc's Beach (large, accessible, sablonneux) et Moonshine Arch (une véritable aventure de canyon avec une récompense à la fin). Comparez les cinq côte à côte dans notre <a href="/fr/utv/">hub des tours en UTV</a>, puis <a href="/fr/booking/">réservez un tour</a> ou appelez le <strong>(435) 219-9447</strong> pour trouver le sentier adapté à votre groupe.</p>
+
+      <h2>Musées et Attractions Intérieures</h2>
+      <p>Quand le temps change ou que la famille a besoin d'une pause loin du soleil, le centre-ville de Vernal offre un véritable point d'ancrage : l'<strong>Utah Field House of Natural History State Park Museum</strong>. Son <strong>Dinosaur Garden</strong> extérieur présente des répliques grandeur nature parmi lesquelles vous pouvez marcher — un succès garanti auprès des enfants — tandis que les galeries intérieures couvrent la géologie, la paléontologie et l'histoire culturelle de l'Uintah Basin. Prévoyez une à deux heures ; c'est la meilleure option de la région pour un jour de pluie et une introduction parfaite avant ou après le monument.</p>
+      <p>Le centre-ville récompense aussi une promenade tranquille. La Main Street de Vernal arbore l'image classique du dinosaure rose de la région, des boutiques locales et de petites galeries, et c'est un endroit agréable pour se retrouver entre deux aventures. Gardez un œil sur les événements communautaires saisonniers et les expositions sur le patrimoine western de la région.</p>
+      <!-- VERIFY WITH OFFICIAL SOURCE: Utah Field House hours, admission fees, and current exhibit list change seasonally — confirm on the Utah State Parks site before quoting specifics. Do not publish set hours/prices here. -->
+
+      <h2>Pétroglyphes et Art Rupestre Ancien</h2>
+      <p>La région de Vernal abrite l'une des concentrations les plus denses d'art rupestre de l'Ouest américain. Le <strong>peuple Fremont</strong> a vécu et cultivé ces canyons pendant des siècles, laissant derrière lui des pétroglyphes élaborés — figures, animaux et motifs abstraits gravés dans la roche patinée par le désert — puis les <strong>Ute</strong> ont ajouté les leurs. Se tenir devant un panneau vieux de mille ans, dans un canyon silencieux sans personne autour, est l'une des expériences les plus émouvantes de la région.</p>
+      <p>La vitrine la plus accessible est <strong>McConkie Ranch</strong>, dans Dry Fork Canyon, au nord de la ville, où de grands panneaux détaillés sont visibles depuis un sentier entretenu le long de la paroi du canyon — entrée gratuite et environ une heure pour voir les principales figures. À l'intérieur du monument, les <strong>pétroglyphes de Cub Creek</strong>, dont le célèbre panneau du lézard, sont des arrêts incontournables en bordure de route. Plus loin encore, des panneaux isolés dispersés dans le backcountry environnant ne sont accessibles qu'à pied ou lors d'un <a href="/fr/utv/">tour guidé en UTV</a>.</p>
+      <p>L'art rupestre est irremplaçable et légalement protégé&nbsp;: ne touchez jamais un panneau — les huiles de la peau accélèrent sa dégradation — et photographiez à une distance respectueuse. Notre guide dédié aux <a href="/fr/dinosaur-national-monument/petroglyphs-rock-art-vernal/">pétroglyphes et à l'art rupestre près de Vernal</a> couvre les cultures, l'étiquette et les meilleurs sites à découvrir.</p>
+
+      <h2>Histoire du Far West et Patrimoine Local</h2>
+      <p>L'histoire humaine ici ne s'est pas arrêtée avec les Fremont. Les canyons escarpés à l'est et au sud de Vernal étaient, il y a un siècle, parmi les territoires de repli les plus efficaces de l'Ouest américain — et ils ont acquis une véritable réputation de hors-la-loi. C'est le territoire de <strong>Butch Cassidy and the Wild Bunch</strong>&nbsp;: le labyrinthe de canyons isolés le long de l'Outlaw Trail donnait aux cavaliers un endroit où disparaître entre deux coups, et le terrain qui les rendait difficiles à attraper est le même qui rend aujourd'hui le backcountry si fascinant à explorer.</p>
+      <p>On peut encore ressentir ce passé de frontière. Au bout de la route de Cub Creek dans le monument se trouve l'habitation de <strong>Josie Bassett Morris</strong>, une femme remarquable qui a vécu en grande partie seule dans son canyon fermé pendant environ cinquante ans, élevant du bétail et cultivant des jardins loin de toute ville — sa cabane et ses dépendances comptent parmi les points les plus paisibles et les plus humains de la région. Vernal elle-même s'est développée comme une ville d'élevage puis, plus tard, d'énergie, et ce caractère western actif traverse encore sa Main Street, ses traditions de rodéo et de foire de comté, et l'amabilité sans hâte que vous remarquerez dès votre arrivée.</p>
+      <p>Plusieurs des itinéraires de <a href="/fr/utv/">tours guidés en UTV</a> retracent directement ce territoire de hors-la-loi et de pionniers, associant l'histoire au paysage qui l'a façonnée — un rappel qu'à Vernal, le passé lointain et le passé récent coexistent côte à côte, tous deux inscrits dans la même roche.</p>
+
+      <h2>Routes Panoramiques</h2>
+      <p>Certaines des meilleures expériences de la région se vivent à travers un pare-brise, et les routes autour de Vernal sont des destinations qui valent le détour en elles-mêmes. Chacune d'elles est pavée et accessible avec un véhicule ordinaire, bien que les routes de montagne soient saisonnières.</p>
+      <ul>
+        <li><strong>Cub Creek Road de Dinosaur National Monument (Tour of the Tilted Rocks).</strong> Environ dix miles de roche inclinée, de pétroglyphes en bordure de route et la cabane de Josie Morris, avec un livret de visite autoguidée disponible au centre des visiteurs. La meilleure courte route de la région.</li>
+        <li><strong>Flaming Gorge – Uintas National Scenic Byway (US-191 nord).</strong> L'une des routes classiques de l'Utah, montant du désert à travers Ashley National Forest jusqu'aux canyons rouges de Flaming Gorge, avec des points de vue spectaculaires en chemin. Prévoyez d'une demi-journée à une journée complète aller-retour.</li>
+        <li><strong>Red Cloud Loop.</strong> Une route de montagne dans le backcountry au nord de Vernal, à travers les trembles et la forêt des Uintas — magnifique, surtout en automne, mais partiellement non pavée et saisonnière. Confirmez les conditions avant de partir.</li>
+        <li><strong>Dry Fork Canyon.</strong> La route vers les pétroglyphes de McConkie Ranch est en elle-même une courte route panoramique à travers un pays de ranchs et de canyons.</li>
+      </ul>
+      <!-- VERIFY WITH OFFICIAL SOURCE: Red Cloud Loop pavement status and seasonal closures vary; the Flaming Gorge byway length/overlooks should be confirmed against Ashley National Forest / UDOT before adding exact mileages. -->
+      <div class="article-tip"><strong>Conseil pour les routes de montagne&nbsp;:</strong> Les routes hautes vers les Uintas ouvrent et ferment selon la neige et peuvent garder du verglas jusqu'au début de l'été, puis à nouveau en automne. Si vous parcourez une boucle de montagne, faites le plein à Vernal, emportez de l'eau et des couches de vêtements, et vérifiez d'abord l'état actuel des routes.</div>
+
+      <h2>Activités Familiales</h2>
+      <p>Vernal est l'une des destinations familiales les plus sous-estimées de l'Utah, précisément parce que les attractions vedettes sont des choses que les enfants apprécient vraiment — dinosaures, empreintes, canyons et bateaux. Où ailleurs vos enfants peuvent-ils toucher de véritables os fossilisés, se tenir dans les empreintes d'un dinosaure et traverser un pays de canyons en UTV, le tout en un seul week-end ?</p>
+      <p>Les incontournables pour les familles&nbsp;: le <strong>Quarry Exhibit Hall</strong> et son programme gratuit Junior Ranger au monument ; les <a href="/fr/guides/ultimate-guide-to-red-fleet-state-park/"><strong>empreintes de dinosaures de Red Fleet State Park</strong></a>, accessibles par une courte marche essentiellement plate ; le <strong>jardin des dinosaures de l'Utah Field House</strong> au centre-ville ; la baignade et la pagaie au <strong>Steinaker Reservoir</strong> ; et un <strong>tour en UTV</strong> au rythme familial, avec des passagers dès l'âge de 2 ans. La plupart de ces activités ne demandent que de courtes marches, et le rythme est entièrement le vôtre.</p>
+      <p>Pour un aperçu complet et centré sur les enfants — comprenant des conseils par âge, des solutions de repli pour les jours de pluie, et comment garder les plus jeunes voyageurs heureux — consultez notre guide dédié aux <a href="/fr/things-to-do/fun-things-to-do-vernal-utah-kids/">choses amusantes à faire à Vernal avec des enfants</a>.</p>
+
+      <h2>Loisirs de Plein Air</h2>
+      <p>Enlevez les dinosaures, et Vernal resterait tout de même une ville de plein air de premier ordre. Elle se trouve entre le pays de canyons du haut désert et les High Uintas de 13,000 pieds — la chaîne la plus haute de l'Utah — ce qui se traduit par une variété inhabituelle de terrains et d'activités à portée de main.</p>
+      <p><strong>Pêche.</strong> C'est un <a href="/fr/fishing/">véritable pays de pêche</a>. <a href="/fr/guides/ultimate-guide-to-flaming-gorge/"><strong>Flaming Gorge</strong></a>, à environ une heure au nord, est l'une des meilleures zones de pêche de l'Ouest, connue pour sa truite de lac trophée et son saumon kokanee, tandis que le tailwater de la <strong>Green River</strong> en aval du barrage est une rivière à truites légendaire. Plus près de la ville, les réservoirs de <strong>Steinaker</strong> et <strong>Red Fleet</strong> offrent une pêche tranquille depuis la rive et en bateau, et les lacs d'altitude des Uintas abritent l'omble de fontaine et la truite fardée.</p>
+      <p><strong>Randonnée et randonnée itinérante.</strong> <a href="/fr/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest</a> couvre les montagnes au nord de la ville avec tout, des faciles promenades de vallée aux itinéraires alpins accidentés au-dessus de 10,000 pieds. L'<strong>Uinta Highline Trail</strong> est un itinéraire de randonnée itinérante en haute montagne incontournable pour les randonneurs expérimentés. Plus bas, le monument et les canyons offrent de plus courtes randonnées dans le désert vers des points de vue, des arches et de l'art rupestre.</p>
+      <p><strong>Routes panoramiques.</strong> Ici, une partie des meilleurs panoramas se contemplent à travers un pare-brise. Les <a href="/fr/scenic-drives/">routes panoramiques autour de Vernal</a> vont de la <strong>Flaming Gorge–Uintas National Scenic Byway</strong>, qui monte du haut désert à la forêt jusqu'au réservoir de roche rouge, à l'accidentée <strong>Red Cloud Loop</strong>, à la <strong>Sheep Creek Loop</strong> riche en géologie, et à la <strong>Cub Creek Road</strong> de Dinosaur National Monument, qui passe devant des pétroglyphes et un pays de dinosaures — idéal quand vous voulez voir beaucoup de choses sans marcher chaque mile.</p>
+      <p><strong>Camping.</strong> Des emplacements de RV avec tous les raccordements à la solitude primitive de la forêt, c'est un excellent <a href="/fr/camping/">pays de camping</a>. <a href="/fr/guides/ultimate-guide-to-flaming-gorge/"><strong>Flaming Gorge</strong></a> entoure son réservoir de campings, <a href="/fr/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest</a> offre des emplacements frais de montagne et du camping dispersé parmi des centaines de lacs, et les parcs d'État de <strong>Red Fleet</strong> et <strong>Steinaker</strong> proposent un camping facile et adapté aux familles au bord du lac, à quelques minutes de la ville.</p>
+      <p><strong>Eau et hiver.</strong> L'été apporte baignade, paddleboard, kayak et bateau sur les réservoirs ; la Green et la Yampa sont célèbres pour leurs excursions fluviales en eaux vives sur plusieurs jours à travers les canyons du monument. Quand la neige arrive, les Uintas s'ouvrent à la motoneige, au ski de fond et à la pêche sur glace.</p>
+      <div class="article-tip"><strong>Réalité des terres publiques&nbsp;:</strong> une grande partie de cette zone est isolée, sans réseau cellulaire, sans eau et avec de longues distances entre les services. Emportez plus d'eau que vous ne pensez en avoir besoin, informez quelqu'un de votre plan, téléchargez des cartes hors ligne, et vérifiez les conditions avant de partir — surtout pour toute activité en haute montagne ou sur des routes non pavées.</div>
+
+      <p>Les expériences de la région étant exposées, voici un moyen rapide de les comparer entre elles. La matrice ci-dessous aligne les cinq autour desquelles vous construirez un voyage à Vernal et montre, pour chacune, ce que ce site documente réellement — si elle convient aux familles, si elle est proposée comme tour guidé réservable ici, si elle fonctionne comme sortie peu exigeante, si elle offre une option intérieure pour les jours de pluie, si elle reste ouverte toute l'année, et si elle est gratifiante pour la photographie.</p>
+
+      <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+        <img src="/images/graphics/vernal-adventure-comparison-matrix.svg" alt="Matrice de comparaison alignant cinq choses à faire autour de Vernal — Dinosaures, Aventure en UTV, Randonnée, Pêche et Routes Panoramiques — face à six critères de planification : adaptée aux familles, un tour guidé réservable sur ce site, détendue et peu exigeante, une option intérieure pour les jours de pluie, un accès toute l'année, et excellente pour la photographie. Une coche pleine marque un critère que le site documente pour cette expérience ; un cercle vide marque un critère qui n'est pas un point documenté." width="1600" height="1200" loading="lazy" decoding="async" />
+        <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">Les cinq expériences essentielles de Vernal, comparées côte à côte selon les critères qui déterminent le plan d'une journée. Une aide à la planification fondée uniquement sur ce que ce site documente — pas un classement.</figcaption>
+      </figure>
+
+      <h2>Où Manger&nbsp;: Les Restaurants de Vernal</h2>
+      <p>Vernal ne prétend pas être une capitale de la gastronomie, et cela fait partie de son charme. Ce qu'elle offre, c'est une cuisine honnête, généreuse et sans prétention — le genre de cuisine de ville de l'Ouest qui fait du bien après une longue journée en plein air. Vous trouverez des diners et steakhouses américains classiques, un bel éventail de restaurants mexicains reflétant la culture de la région, du barbecue et des burgers taillés pour les grands appétits, et quelques cafés et boulangeries locaux pour bien commencer la matinée avant de prendre le sentier.</p>
+      <p>La Main Street du centre-ville est l'endroit naturel pour grignoter un peu de tout, et la plupart des établissements sont décontractés et adaptés aux familles. Pour nos choix actuels et vérifiés — avec les restaurants précis, leurs cuisines et ce que chacun fait de mieux — consultez le guide complémentaire sur <a href="/fr/things-to-do/best-restaurants-vernal-utah/">les meilleurs restaurants à Vernal, Utah</a>.</p>
+      <!-- VERIFY WITH OWNER / OFFICIAL SOURCE: do not publish specific restaurant names, hours, or menus in this cornerstone — they change. All specifics live in the maintained best-restaurants guide, which is the single source of truth for that list. -->
+
+      <h2>Trésors Cachés et Secrets Locaux</h2>
+      <p>Une fois les sites vedettes visités, voici les coins plus tranquilles que les habitants adorent — les choses qui transforment un bon voyage en un voyage mémorable.</p>
+      <ul>
+        <li><strong>Pétroglyphes isolés du backcountry.</strong> Au-delà de McConkie Ranch et de Cub Creek, des panneaux cachés dans les canyons autour de Vernal ne voient presque aucun visiteur. Beaucoup ne sont accessibles qu'à pied ou en UTV guidé — et se tenir seul devant eux est inoubliable.</li>
+        <li><strong>Moonshine Arch.</strong> Une saisissante arche naturelle de grès nichée dans la roche rouge au nord de la ville — une véritable récompense et un lieu photo prisé, et l'une des destinations du tour en UTV.</li>
+        <li><strong>La cabane de Josie Morris et les canyons fermés.</strong> Au bout de la route de Cub Creek dans le monument, cette paisible habitation de pionnière avec ses canyons latéraux ombragés est ignorée par les visiteurs pressés et adorée par ceux qui prennent leur temps.</li>
+        <li><strong>La lumière du lever et du coucher du soleil sur les roches inclinées.</strong> Les couches rocheuses du monument et les canyons de la région prennent vie sous une lumière basse et rasante. La plupart des visiteurs d'un jour la manquent — les lève-tôt et les retardataires du soir sont récompensés.</li>
+        <li><strong>Les lacs d'altitude des Uintas.</strong> Un court trajet en montagne mène à des lacs alpins et à une forêt fraîche — un monde complètement différent du désert en contrebas, et une escapade parfaite par un chaud après-midi d'été.</li>
+      </ul>
+
+      <h2>Vernal à Travers les Saisons</h2>
+      <p>Vernal est une véritable destination quatre saisons, et le meilleur moment pour venir dépend de ce que vous voulez faire. Voici comment l'année se déroule. Pour les conditions actuelles et les détails à emporter, associez ceci à notre <a href="/fr/guides/vernal-weather-guide/">guide météo de Vernal</a>.</p>
+
+      <h3>Printemps (avril–juin)</h3>
+      <p>Sans doute la plus belle saison. Les températures sont agréables, les fleurs sauvages apparaissent, la faune est active, et le désert est à son plus vert avant l'arrivée de la chaleur estivale. Le monument et les sentiers les plus bas sont idéaux, et les tours en UTV sont superbes dans l'air doux. Les routes de haute montagne se libèrent encore de la neige, alors gardez les Uintas pour plus tard. La fin du printemps — de mai à juin — est un moment idéal avant le pic de l'été.</p>
+
+      <h3>Été (juillet–août)</h3>
+      <p>Haute saison et chaleur maximale, avec des températures diurnes du désert souvent autour de 90°F (32°C). Tout est ouvert, les journées sont longues, et c'est le moment idéal pour l'eau : baignade et bateau à <a href="/fr/guides/ultimate-guide-to-steinaker-state-park/">Steinaker</a> et Red Fleet, se rafraîchir à Flaming Gorge, et s'échapper vers les hautes Uintas où l'air est agréablement frais. Prévoyez l'activité intense pour le matin, emportez beaucoup d'eau, utilisez une véritable protection solaire, et surveillez les orages de l'après-midi.</p>
+
+      <h3>Automne (septembre–octobre)</h3>
+      <p>À égalité avec le printemps, et la saison préférée de nombreux habitants. Les températures s'adoucissent, les foules diminuent, les peupliers et les trembles se parent d'or, et la lumière devient longue et chaude — la saison du photographe. Le début de l'automne est idéal pour combiner le monument, un tour en UTV et une route panoramique de montagne pendant que les trembles changent de couleur. Un moment splendide et peu fréquenté pour visiter.</p>
+
+      <h3>Hiver (novembre–mars)</h3>
+      <p>Calme, austère et souvent magnifique sous la neige — mais limité. La ville, les principaux sites du monument et le Field House restent accessibles, mais certaines installations saisonnières, la navette de la carrière, et les routes de haute montagne et non pavées ferment ou fonctionnent avec des horaires réduits. C'est la saison de la solitude, de la motoneige, du ski de fond et de la pêche sur glace en montagne. Une visite d'hiver peut être magique ; confirmez simplement ce qui est ouvert avant de prendre la route, et emportez de quoi affronter le vrai froid.</p>
+      <!-- VERIFY WITH OFFICIAL SOURCE: seasonal date ranges above are typical, not guaranteed. Snowpack shifts mountain access by weeks year to year. UTV tour winter availability: VERIFY WITH OWNER before implying year-round operation. -->
+
+      <h2>Meilleure Période pour Visiter</h2>
+      <p>Si vous voulez la version courte&nbsp;: <strong>mai–juin et septembre–octobre</strong> sont les meilleures fenêtres dans l'ensemble — climat agréable, tout ouvert et peu de foule. L'été est idéal si l'eau et la haute montagne sont votre priorité. L'hiver est fait pour la solitude et les sports de neige. Ce tableau résume tout.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Saison</th><th>Météo</th><th>Foule</th><th>Idéal Pour</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Printemps (avr–juin)</td><td>Doux, verdissant, vent occasionnel</td><td>Légère–modérée</td><td>Monument, tours en UTV, fleurs sauvages, polyvalent</td></tr>
+            <tr><td>Été (juil–août)</td><td>Désert chaud, montagnes fraîches</td><td>Maximale</td><td>Sports nautiques, hautes Uintas, longues journées</td></tr>
+            <tr><td>Automne (sep–oct)</td><td>Rafraîchissant, couleurs dorées, lumière superbe</td><td>Légère</td><td>Photographie, routes panoramiques, polyvalent</td></tr>
+            <tr><td>Hiver (nov–mar)</td><td>Froid, neige possible ; accès limité</td><td>Très légère</td><td>Solitude, sports de neige, pêche sur glace</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Le Week-End Parfait à Vernal (Itinéraire de 2 Jours)</h2>
+      <p>Deux jours suffisent pour couvrir l'essentiel sans se presser. Ce plan suppose que vous logez à Vernal et disposez d'un véhicule.</p>
+      <p><strong>Jour 1 — Dinosaures et art rupestre.</strong> Commencez tôt à <strong>Dinosaur National Monument</strong> : le Quarry Exhibit Hall et le Wall of Bones, puis la route panoramique de Cub Creek avec ses pétroglyphes en bordure de route et la cabane de Josie Morris. Retournez à Vernal pour déjeuner sur Main Street. L'après-midi, montez à <strong>McConkie Ranch</strong> dans Dry Fork Canyon pour les panneaux de pétroglyphes Fremont, ou rafraîchissez-vous en vous baignant à <strong>Steinaker</strong> ou <strong>Red Fleet</strong> — où les enfants peuvent marcher sur les empreintes de dinosaures. Dîner en ville.</p>
+      <p><strong>Jour 2 — Aventure dans le backcountry.</strong> Passez la matinée sur un <strong>tour guidé en UTV</strong> dans les canyons — arches cachées, art rupestre isolé et terrain inaccessible autrement. Après le déjeuner, choisissez comment finir&nbsp;: l'<strong>Utah Field House</strong> et son jardin des dinosaures pour un après-midi tranquille, une courte randonnée, ou le début de la route panoramique de Flaming Gorge pour des points de vue à l'heure dorée. Célébrez un week-end complet avec un copieux dîner avant de repartir.</p>
+      <div class="article-tip"><strong>L'ordre de réservation compte&nbsp;:</strong> réservez d'abord votre tour en UTV et construisez le reste du week-end autour de lui — les horaires du tour ancrent la journée, et le monument et les parcs sont flexibles autour de lui. <a href="/fr/booking/">Vérifiez la disponibilité ici</a>.</div>
+
+      <h2>Un Itinéraire de Trois Jours à Vernal</h2>
+      <p>Avec un troisième jour, vous pouvez ralentir et ajouter les grandes excursions de la région.</p>
+      <p><strong>Jour 1 — Dinosaur National Monument, en entier.</strong> Consacrez une journée complète au monument&nbsp;: le Quarry Exhibit Hall à l'ouverture, la marche Fossil Discovery, toute la route de Cub Creek avec chaque arrêt pétroglyphe, et la cabane de Josie Morris. Pique-niquez dans le parc ou retournez en ville. Si vous avez encore de l'énergie, ajoutez une courte randonnée dans la zone de Split Mountain en fin d'après-midi.</p>
+      <p><strong>Jour 2 — Tour en UTV et parcs d'État.</strong> Un tour guidé en UTV dans le backcountry le matin, déjeuner à Vernal, puis un après-midi à Steinaker ou Red Fleet pour la baignade, la pagaie, les empreintes de dinosaures et un moment tranquille au bord de l'eau. Une journée détendue et active qui équilibre adrénaline et repos.</p>
+      <p><strong>Jour 3 — Flaming Gorge et les montagnes.</strong> Prenez la route panoramique de Flaming Gorge vers le nord, dans Ashley National Forest et les canyons rouges de la gorge. Pêchez, naviguez, pique-niquez à un point de vue, ou parcourez un tronçon de la haute montagne — et en automne, poursuivez la couleur des trembles. C'est une boucle d'une journée complète qui vous montre la moitié alpine de la région, un contraste parfait avec le désert des deux premiers jours.</p>
+      <p>Vous venez de plus loin&nbsp;? Vernal est à environ trois heures de route de Salt Lake City — consultez notre <a href="/fr/from/salt-lake-city/">guide de voyage de Salt Lake City à Vernal</a> pour l'itinéraire et les détails de planification. Et pour d'autres plans déjà prêts — itinéraires d'une journée, de week-end, familiaux, d'aventure, de photographie, de pêche et de camping — consultez notre <a href="/fr/itineraries/">Guide Définitif des Itinéraires de la Terre des Dinosaures</a>.</p>
+
+      <h2>Quoi Emporter pour Vernal</h2>
+      <p>La plus grande erreur que commettent les visiteurs est de mal se préparer aux conditions du haut désert et de la haute altitude. Vernal se trouve à plus de 5,000 pieds d'altitude, le soleil est intense, l'air est sec, et les températures varient fortement entre midi et la nuit. Faites vos bagages en tenant compte de cette réalité&nbsp;:</p>
+      <ul>
+        <li><strong>De l'eau, et beaucoup</strong> — au moins un demi-gallon (près de 2 litres) par personne pour toute journée active, davantage en été.</li>
+        <li><strong>Protection solaire</strong> — chapeau à large bord, lunettes de soleil, crème solaire à indice élevé et baume à lèvres. L'ombre se fait rare.</li>
+        <li><strong>Des couches</strong> — les matins et les soirées peuvent être frais même quand les après-midis sont chauds ; une veste légère ou une polaire trouve sa place toute l'année, et un véritable équipement pour le froid en hiver.</li>
+        <li><strong>Des chaussures fermées et robustes</strong> pour les sentiers rocheux, le slickrock et les empreintes.</li>
+        <li><strong>Un plein d'essence</strong> — faites le plein en ville ; les services se raréfient dans le backcountry et en montagne.</li>
+        <li><strong>Appareil photo et jumelles</strong> pour la faune, les points de vue et les détails des pétroglyphes.</li>
+        <li><strong>Cartes hors ligne et informations enregistrées</strong> — le réseau cellulaire est peu fiable, voire inexistant, sur une grande partie de la région.</li>
+      </ul>
+      <p>Pour un aperçu saison par saison — et des conseils spécifiques pour une journée de tour en UTV — consultez notre <a href="/fr/guides/what-to-bring/">guide détaillé sur quoi emporter</a>, et vérifiez le <a href="/fr/guides/vernal-weather-guide/">guide météo de Vernal</a> avant de finaliser votre sac.</p>
+
+      <h2>Conseils Pratiques de Planification</h2>
+      <p><strong>Se déplacer.</strong> Vernal se trouve à environ trois heures de route à l'est de Salt Lake City sur la US-40, et Salt Lake City est le principal aéroport le plus proche. La région se connecte aussi à l'est avec le Colorado. Une voiture est indispensable une fois sur place — les attractions sont dispersées dans la campagne, sans transport en commun complet entre elles.</p>
+      <p><strong>Combien de temps rester.</strong> Deux jours couvrent l'essentiel ; trois vous permettent d'ajouter Flaming Gorge et les montagnes sans vous presser. Une seule journée ne permet que le monument ou une autre activité vedette — la plupart des visiteurs auraient aimé rester plus longtemps.</p>
+      <p><strong>Où s'installer.</strong> Le centre-ville de Vernal est le point d'ancrage pratique — hébergement, restaurants, essence et services de guides s'y concentrent, et tout le reste n'est qu'à un court trajet. Camping et cabanes sont disponibles dans les parcs d'État et à Ashley National Forest pour ceux qui veulent rester plus près de la nature.</p>
+      <p><strong>Réservez d'abord les activités phares.</strong> Réservez un tour en UTV et toute excursion fluviale à l'avance, surtout en été et le week-end, puis intégrez les sites flexibles autour d'elles.</p>
+      <p><strong>Vérifiez les détails.</strong> Les horaires, tarifs, services de navette et conditions des routes et sentiers changent selon la saison — confirmez toujours les opérations actuelles auprès du National Park Service, d'Utah State Parks et d'Ashley National Forest avant de partir. Pour une bibliothèque complète de ressources de planification, parcourez nos <a href="/fr/guides/">guides de voyage de Vernal</a>.</p>
+      <div class="article-tip"><strong>La seule chose que je dis à tout le monde&nbsp;:</strong> ne traitez pas Vernal comme un simple passage vers ailleurs. Les visiteurs qui lui consacrent deux ou trois jours — et qui prennent le temps pour le backcountry, pas seulement pour les sites pavés — repartent en comprenant pourquoi ceux d'entre nous qui vivent ici ne s'en lassent jamais.</div>
+
+      <!-- FAQ Section -->
+      <div class="article-faq">
+        <h2>Questions Fréquentes</h2>
+        <div class="faq-item">
+          <h3>Quelles sont les meilleures choses à faire à Vernal, Utah&nbsp;?</h3>
+          <p>Les meilleures choses à faire à Vernal sont un tour guidé en UTV dans le backcountry, la visite de Dinosaur National Monument et de son Wall of Bones, l'observation des pétroglyphes Fremont à McConkie Ranch et Dry Fork Canyon, la marche sur les empreintes de dinosaures de Red Fleet State Park, le jardin des dinosaures de l'Utah Field House of Natural History, et la pêche ou le bateau à Steinaker, Red Fleet et Flaming Gorge.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Combien de jours faut-il à Vernal, Utah&nbsp;?</h3>
+          <p>Deux à trois jours est idéal. Une journée pour Dinosaur National Monument et les pétroglyphes, une journée pour un tour guidé en UTV et les parcs d'État, et une troisième journée en option pour Flaming Gorge, la pêche ou la randonnée dans les Uinta Mountains. Une seule journée ne permet que le monument ou une autre activité vedette.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Vernal, Utah, vaut-elle le détour&nbsp;?</h3>
+          <p>Oui. Vernal est la porte d'entrée vers Dinosaur National Monument et réunit de vrais fossiles de dinosaures, de l'art rupestre ancien, des canyons de roche rouge, l'histoire du Far West et des loisirs de plein air de classe mondiale dans un petit rayon peu fréquenté. Elle offre une grande partie de ce qui attire les gens dans le sud de l'Utah, sans la foule.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Quelle est la meilleure chose à faire à Vernal&nbsp;?</h3>
+          <p>Un tour guidé en UTV dans le backcountry avec Adventure Tours Vernal est l'activité la plus immersive — elle combine aventure hors route, pétroglyphes, arches naturelles et paysages de canyon inaccessibles depuis une route pavée, le tout en une seule expérience de trois heures. Dinosaur National Monument est l'attraction incontournable numéro un.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Vernal, Utah, convient-elle aux familles avec enfants&nbsp;?</h3>
+          <p>Tout à fait. Les enfants peuvent toucher de vrais fossiles de dinosaures à Dinosaur National Monument, marcher jusqu'aux empreintes de dinosaures de Red Fleet State Park, explorer le jardin des dinosaures de l'Utah Field House, et participer à un tour guidé en UTV comme passagers dès l'âge de 2 ans avec un parent. La plupart des points forts ne demandent que de courtes marches.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Quelle est la meilleure période de l'année pour visiter Vernal, Utah&nbsp;?</h3>
+          <p>La fin du printemps (mai–juin) et le début de l'automne (septembre–octobre) offrent les températures les plus agréables, une faune active et une foule plus réduite. L'été est chaud, tout est ouvert, et il est idéal pour les activités nautiques. L'hiver est calme et pittoresque mais froid, avec certaines installations et routes saisonnières fermées.</p>
+        </div>
+        <div class="faq-item">
+          <h3>À quelle distance Vernal se trouve-t-elle de Salt Lake City&nbsp;?</h3>
+          <p>Vernal se trouve à environ trois heures de route à l'est de Salt Lake City sur la US-40, et Salt Lake City est le principal aéroport le plus proche. L'itinéraire panoramique monte au-dessus des Uinta Mountains et traverse la zone de Daniels Summit et Strawberry Reservoir.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Pour quoi Vernal, Utah, est-elle connue&nbsp;?</h3>
+          <p>Vernal est connue comme la Terre des Dinosaures de l'Utah. Elle se trouve en bordure de Dinosaur National Monument dans l'Uintah Basin, entourée de canyons de roche rouge, de pétroglyphes Fremont et Ute, de l'histoire des hors-la-loi du Far West et de loisirs de plein air sur des terres publiques.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Faut-il une voiture pour visiter Vernal&nbsp;?</h3>
+          <p>Oui. Les attractions de Vernal sont dispersées dans la campagne environnante — le monument est à 20 minutes à l'est, les parcs d'État et les canyons sont à 5–60 minutes — et il n'existe pas de transport en commun complet entre eux, donc un véhicule personnel est indispensable. Les tours guidés en UTV assurent le transport une fois sur le sentier.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Vernal est-elle une bonne alternative à Moab&nbsp;?</h3>
+          <p>Pour de nombreux voyageurs, oui. Vernal offre des canyons de roche rouge, de l'aventure hors route et des paysages spectaculaires dans un esprit similaire à Moab, mais avec beaucoup moins de foule, ainsi que des fossiles de dinosaures et des pétroglyphes que Moab ne peut égaler. C'est un excellent choix pour les visiteurs qui veulent de l'aventure sans la congestion.</p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="article-cta">
+        <h3>Prêt à Explorer le Backcountry de Vernal&nbsp;?</h3>
+        <p>Tours guidés en Kawasaki KRX 1000 — $349/machine (jusqu'à 2 passagers) pour 3 heures. 5 sentiers, guidés personnellement par Dave &amp; Trudy Wilson.</p>
+        <a href="/fr/booking/" class="cta-btn">Réserver un Tour</a>
+        <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
+      </div>
+    </div>
+
+    <!-- Related Articles -->
+    <div class="related-articles">
+      <h3>Plus de Guides sur Vernal</h3>
+      <div class="related-grid">
+        <a href="/fr/dinosaur-national-monument/visiting-dinosaur-national-monument/" class="related-card">
+          <h4>Visiter Dinosaur National Monument</h4>
+          <p>Le guide local complet sur les fossiles, les routes et les canyons.</p>
+        </a>
+        <a href="/fr/things-to-do/vernal-utah-attractions/" class="related-card">
+          <h4>Les Meilleures Attractions de Vernal</h4>
+          <p>Les meilleurs sites et lieux à visiter à Vernal et ses environs.</p>
+        </a>
+        <a href="/fr/things-to-do/fun-things-to-do-vernal-utah-kids/" class="related-card">
+          <h4>Choses à Faire avec des Enfants</h4>
+          <p>Activités et aventures adaptées aux familles à Vernal.</p>
+        </a>
+        <a href="/fr/utv/" class="related-card">
+          <h4>Tours Guidés en UTV</h4>
+          <p>Les 5 réseaux de sentiers avec le détail du terrain et le caractère de chacun.</p>
+        </a>
+      </div>
+    </div>
+  </main>
+
+`;
+
 /**
- * Locale-aware accessor (P2D pattern; Spanish populated P3C, Italian P6).
+ * Locale-aware accessor (P2D pattern; Spanish populated P3C, Italian P6,
+ * French P8-P6).
  * Every locale without a committed variant falls back to English. Callers
  * that don't need locale awareness keep importing `bodyHtml` directly.
  */
 export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'es') return ES;
   if (locale === 'it') return IT;
+  if (locale === 'fr') return FR;
   return bodyHtml;
 }

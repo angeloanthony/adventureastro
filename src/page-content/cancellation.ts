@@ -528,13 +528,190 @@ const IT = `
 
 `;
 
+const FR = `
+
+<!-- ================================================
+     BLOC RÉSUMÉ DE PAGE — pour Google AI Overviews
+     ================================================ -->
+<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+  Politique d'annulation d'Adventure Tours Vernal pour les tours guidés en UTV à Vernal, Utah. Les annulations avec 72 heures ou plus d'avance reçoivent un remboursement complet. Moins de 72 heures reçoit 50%. Moins de 48 heures ne reçoit aucun remboursement. Appelez le (435) 219-9447 pour toute question.
+</p>
+
+<section class="policy-section">
+  <div class="container">
+    <div class="section-header">
+      <h1 class="section-title">Politique d'Annulation</h1>
+      <p class="section-subtitle">Veuillez consulter nos termes et conditions avant de réserver votre aventure</p>
+    </div>
+
+    <div class="policy-container">
+
+      <!-- ANNULATION ET REMBOURSEMENTS -->
+      <div class="policy-card">
+        <div class="policy-icon">📅</div>
+        <h2 class="policy-heading">Annulation et Remboursements</h2>
+
+        <div class="policy-table">
+          <div class="policy-row">
+            <div class="policy-timeframe">Moins de 48 heures</div>
+            <div class="policy-refund refund-none">Aucun Remboursement</div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-timeframe">Moins de 72 heures</div>
+            <div class="policy-refund refund-partial">Remboursement de 50%</div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-timeframe">72 heures ou plus à l'avance</div>
+            <div class="policy-refund refund-full">Remboursement de 100%</div>
+          </div>
+          <div class="policy-row highlight">
+            <div class="policy-timeframe">Groupes de 5 véhicules ou plus</div>
+            <div class="policy-refund refund-full">2 semaines à l'avance : remboursement de 100%<br>Après 2 semaines : aucun remboursement</div>
+          </div>
+        </div>
+
+        <div class="policy-note">
+          <strong>Remarque :</strong> Tous les délais d'annulation sont calculés à partir de l'heure de départ prévue de votre tour.
+        </div>
+      </div>
+
+      <!-- POLITIQUE MÉTÉO -->
+      <div class="policy-card">
+        <div class="policy-icon">🌦️</div>
+        <h2 class="policy-heading">Politique Météo</h2>
+        <p>Nous opérons par soleil ou par pluie. Cependant, en cas de conditions météorologiques extrêmes ou si Adventure Tours Vernal doit annuler pour d'autres circonstances imprévues, vous aurez la possibilité de reprogrammer ou de recevoir un remboursement complet.</p>
+        <p><strong>Important :</strong> Si vous choisissez de ne pas participer en raison de la pluie, notre politique d'annulation standard concernant les remboursements s'appliquera. Si nous annulons en raison d'événements météorologiques extrêmes, vous recevrez un remboursement complet.</p>
+      </div>
+
+      <!-- ACCORDS REQUIS -->
+      <div class="policy-card">
+        <div class="policy-icon">📝</div>
+        <h2 class="policy-heading">Accords et Décharges Requis</h2>
+        <p>Tous les invités devront signer un <strong>Accord de Participation, Décharge et Acceptation des Risques</strong> pour participer aux activités. Les parents et tuteurs légaux devront signer pour les mineurs. De plus, les conducteurs de tour en UTV devront signer un <strong>Accord du Conducteur</strong>.</p>
+
+        <div class="policy-warning">
+          <strong>⚠️ Important :</strong> Si ces accords ne sont pas signés, vous ne serez pas autorisé à participer à votre aventure. Le refus de signer ne constituera pas un motif de remboursement et notre politique d'annulation s'appliquera.
+        </div>
+      </div>
+
+      <!-- DÉCHARGE POUR DOMMAGES AU VÉHICULE -->
+      <div class="policy-card">
+        <div class="policy-icon">🛡️</div>
+        <h2 class="policy-heading">Décharge pour Dommages au Véhicule</h2>
+        <p class="required-badge">Requise pour tous les tours</p>
+
+        <p>La Décharge pour Dommages au Véhicule limite vos frais à votre charge à la franchise plus les taxes pour les dommages causés à notre équipement en cas d'accident.</p>
+
+        <div class="policy-list">
+          <h3>La décharge de dommages est NULLE si :</h3>
+          <ul>
+            <li>Le dommage résulte d'une conduite imprudente</li>
+            <li>Non-respect des instructions de votre guide</li>
+            <li>Il est constaté que vous aviez de l'alcool ou des drogues dans votre organisme au moment du dommage</li>
+          </ul>
+        </div>
+
+        <div class="deductible-info">
+          <h3>Informations sur la Franchise :</h3>
+          <p>Lorsque vous signez un accord pour nos tours guidés, vous devenez un conducteur couvert par notre assurance responsabilité civile, sous réserve de tous les termes et conditions de la police. Cette couverture comporte une <strong>franchise de $1,000 par accident</strong>, donc si vous êtes impliqué dans un accident avec une autre personne, un véhicule ou une propriété, vous acceptez de nous payer $1,000 au moment de l'accident, quelle que soit la responsabilité dans l'accident.</p>
+        </div>
+      </div>
+
+      <!-- COUVERTURE DE RESPONSABILITÉ CIVILE -->
+      <div class="policy-card">
+        <div class="policy-icon">📋</div>
+        <h2 class="policy-heading">Couverture de Responsabilité Civile</h2>
+        <p>Notre couverture offre les limites de responsabilité suivantes :</p>
+
+        <div class="coverage-details">
+          <div class="coverage-item">
+            <span class="coverage-label">Blessures corporelles par personne :</span>
+            <span class="coverage-amount">Contactez-nous pour plus de détails</span>
+          </div>
+          <div class="coverage-item">
+            <span class="coverage-label">Dommages matériels :</span>
+            <span class="coverage-amount">Contactez-nous pour plus de détails</span>
+          </div>
+          <div class="coverage-item">
+            <span class="coverage-label">Total par accident :</span>
+            <span class="coverage-amount">Contactez-nous pour plus de détails</span>
+          </div>
+        </div>
+
+        <div class="policy-disclaimer">
+          <p><strong>Avis d'Assurance :</strong> Les besoins d'assurance de chacun sont différents et nous ne garantissons pas que nos limites de responsabilité sont adéquates pour vous. Nous ne sommes pas courtiers, agents ou fournisseurs d'assurance. Si vous avez des questions sur les couvertures, nous vous suggérons de contacter votre agent ou courtier d'assurance.</p>
+        </div>
+      </div>
+
+      <!-- RÈGLES ET EXIGENCES -->
+      <div class="policy-card">
+        <div class="policy-icon">⚖️</div>
+        <h2 class="policy-heading">Règles et Exigences</h2>
+
+        <div class="policy-list">
+          <h3>Ponctualité :</h3>
+          <ul>
+            <li>Si certains membres de votre groupe sont à l'heure, nous accueillerons tous les participants ponctuels ayant correctement signé les décharges, même si la personne ayant effectué la réservation n'est pas présente.</li>
+            <li>Aucun remboursement ne sera accordé aux invités qui ne se sont pas présentés à l'heure pour leur aventure.</li>
+          </ul>
+
+          <h3>Politique sur l'Alcool et les Drogues :</h3>
+          <ul>
+            <li>Il est absolument interdit d'apporter de l'alcool lors de votre aventure.</li>
+            <li>Vous ne serez pas autorisé à participer si votre guide pense que vous êtes sous l'influence de l'alcool ou de drogues, légales ou illégales.</li>
+            <li>Aucun remboursement ne sera accordé si vous ne pouvez pas participer en raison de la consommation d'alcool ou de drogues.</li>
+          </ul>
+
+          <h3>Instructions du Guide :</h3>
+          <ul>
+            <li>Votre guide est là pour vous garantir une aventure en toute sécurité.</li>
+            <li>Vous êtes tenu de suivre à tout moment toutes les instructions du guide.</li>
+          </ul>
+
+          <h3>Modifications de l'Itinéraire :</h3>
+          <ul>
+            <li>Votre itinéraire est un guide, non un contrat.</li>
+            <li>L'itinéraire peut être modifié à tout moment avant ou pendant votre aventure.</li>
+            <li>Les modifications de l'itinéraire ne constituent pas un motif de remboursement.</li>
+          </ul>
+
+          <h3>Traitement des Remboursements :</h3>
+          <ul>
+            <li>Tout remboursement applicable est remboursé à la partie ayant effectué la réservation initiale.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- APPEL À L'ACTION -->
+      <div class="policy-cta">
+        <h3>Des Questions Sur Notre Politique ?</h3>
+        <p>Si vous avez des questions concernant notre politique d'annulation ou nos conditions, n'hésitez pas à nous contacter avant de réserver.</p>
+        <div class="cta-buttons">
+          <a href="tel:435-219-9447" class="cta-button primary">📞 Appelez le (435) 219-9447</a>
+          <a href="/fr/booking/" class="cta-button secondary">Réservez Votre Tour</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Bouton flottant pour mobile -->
+<div class="mobile-sticky-cta">
+  <button onclick="location.href='/fr/booking/'">Réservez Votre Sortie Maintenant</button>
+</div>
+
+`;
+
 /**
- * Locale-aware accessor (P2D pattern; Spanish populated P3A, Italian P6).
+ * Locale-aware accessor (P2D pattern; Spanish populated P3A, Italian P6,
+ * French P8-P6).
  * Every locale without a committed variant falls back to English. Callers
  * that don't need locale awareness keep importing `bodyHtml` directly.
  */
 export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'es') return ES;
   if (locale === 'it') return IT;
+  if (locale === 'fr') return FR;
   return bodyHtml;
 }

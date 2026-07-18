@@ -210,6 +210,12 @@ const PT_SLUGS = new Set([
 
 // French translations, added batch by batch exactly as Spanish/Italian/Portuguese were.
 const FR_SLUGS = new Set([
+  // P8-P6 — French inline pages (mirrors Italian P6): home/commercial,
+  // DNM inline, 7 activity-hub pillars, 4 city/legacy/restaurant pages.
+  '', 'booking', 'about', 'faq', 'privacy-policy', 'cancellation-policy', 'safety-guidelines', 'utv',
+  'dinosaur-national-monument',
+  'hiking', 'fishing', 'camping', 'scenic-drives', 'things-to-do', 'guides', 'itineraries',
+  'atv-trails-vernal-utah', 'jeep-trails-vernal-utah', 'from/salt-lake-city', 'things-to-do/best-restaurants-vernal-utah',
   // P8A — French UTV hub batch (7 spokes). Compound slug = `utv/<base-id>`.
   'utv/backcountry-tours-vernal-utah', 'utv/beginners-guide-to-utv-tours-vernal',
   'utv/best-utv-trails-vernal', 'utv/family-utv-guide-vernal', 'utv/group-utv-tours-vernal',
@@ -237,6 +243,16 @@ const FR_SLUGS = new Set([
   'guides/ultimate-guide-to-flaming-gorge', 'guides/ultimate-guide-to-red-fleet-state-park',
   'guides/ultimate-guide-to-steinaker-state-park', 'guides/ultimate-guide-to-vernal-utah',
   'guides/vernal-weather-guide', 'guides/what-to-bring', 'guides/what-to-wear-utv-tour',
+  // P8G — French itineraries hub batch (9 spokes).
+  'itineraries/2-day-family-itinerary', 'itineraries/3-day-adventure-itinerary',
+  'itineraries/one-day-adventure-vernal', 'itineraries/photography-weekend-vernal',
+  'itineraries/romantic-weekend-dinosaur-country', 'itineraries/weekend-fishing-trip-vernal',
+  'itineraries/weekend-road-trip-from-denver', 'itineraries/weekend-road-trip-from-grand-junction',
+  'itineraries/weekend-road-trip-from-salt-lake-city',
+  // P8H — French things-to-do hub batch (2 spokes).
+  'things-to-do/vernal-utah-attractions', 'things-to-do/fun-things-to-do-vernal-utah-kids',
+  // P8I — French dinosaur-national-monument hub batch (2 spokes) — FINAL French MDX batch.
+  'dinosaur-national-monument/visiting-dinosaur-national-monument', 'dinosaur-national-monument/petroglyphs-rock-art-vernal',
 ]);
 
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {

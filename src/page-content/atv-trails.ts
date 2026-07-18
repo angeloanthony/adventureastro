@@ -216,6 +216,77 @@ const IT = `
   </main>
 `;
 
+const FR = `
+
+
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    Les pistes pour ATV et UTV près de Vernal, dans l'Utah, incluent Doc's Beach, Moonshine Arch, Ashley Gorge, Outlaw Trail et Asphalt Ridge. Adventure Tours Vernal propose des tours guidés en side-by-side Kawasaki KRX 1000 sur les cinq systèmes de pistes. $349/machine pour 3 heures, jusqu'à 2 passagers. Casques, équipement de sécurité et guides experts inclus. Appelez le (435) 219-9447.
+  </p>
+
+  <main class="article-page">
+    <header class="article-header">
+      <div class="article-breadcrumb">
+        <a href="/fr/">Accueil</a><span class="sep">›</span><a href="/fr/utv/">Pistes</a><span class="sep">›</span><span>Pistes ATV Vernal</span>
+      </div>
+      <h1 class="article-title">Pistes pour ATV Près de Vernal, Utah</h1>
+      <p class="article-meta">Mis à jour en avril 2026 · Adventure Tours Vernal</p>
+    </header>
+
+    <div class="article-body">
+      <div class="article-summary-box">
+        Le bassin de l'Uintah qui entoure Vernal renferme certains des meilleurs terrains tout-terrain de l'Utah — canyons de roche rouge, lits d'oued sablonneux du désert, panoramas depuis les crêtes et itinéraires historiques du backcountry que la plupart des visiteurs ne voient jamais. Voici comment y accéder entièrement grâce à des tours guidés en UTV, sans besoin d'un ATV personnel.
+      </div>
+
+      <h2>Pourquoi Choisir Vernal pour Rouler en ATV et UTV</h2>
+      <p>Le sud de l'Utah fait les gros titres, mais le backcountry de Vernal offre un terrain de la même qualité avec une fraction du trafic. La conduite ici va des vastes étendues sablonneuses le long du corridor du Green River jusqu'aux lacets serrés des canyons et aux pistes de crête offrant des vues à 360 degrés sur les montagnes. Et comme la région est moins commercialisée que Moab ou Sand Hollow, vous aurez souvent les pistes pour vous seuls.</p>
+      <p>La région ajoute aussi quelque chose que la plupart des destinations pour ATV ne peuvent égaler : d'anciens pétroglyphes Fremont et Ute, des repaires de hors-la-loi du Far West et des arches naturelles de grès sont disséminés dans tous les systèmes de pistes, transformant chaque sortie en un mélange d'aventure et de leçon d'histoire.</p>
+
+      <h2>Les Cinq Systèmes de Pistes</h2>
+      <p><strong>Doc's Beach</strong> — Lits d'oued sablonneux du désert et terrain ouvert le long du corridor du Green River. Large, rapide et accessible à tous les niveaux. La piste la plus populaire pour les débutants.</p>
+      <p><strong>Moonshine Arch</strong> — Canyons de roche rouge menant à une arche naturelle de grès cachée. Terrain pittoresque et varié avec une destination gratifiante. Un favori pour les photographes et les familles.</p>
+      <p><strong>Ashley Gorge</strong> — Un corridor de canyon spectaculaire avec des parois de grès imposantes et des paysages de vallée fluviale. Terrain plus étroit qui procure une sensation immersive et enveloppante, dans le meilleur sens du terme.</p>
+      <p><strong>Outlaw Trail</strong> — Itinéraire historique du backcountry emprunté par Butch Cassidy and the Wild Bunch. Terrain accidenté, histoire de hors-la-loi et paysages de canyons isolés. L'option la plus aventureuse.</p>
+      <p><strong>Asphalt Ridge</strong> — Piste de crête offrant des vues panoramiques sur la Terre des Dinosaures et les montagnes Uinta. L'altitude vous donne une perspective sur toute l'étendue du bassin.</p>
+
+      <h2>Tours Guidés vs. Conduite en Autonomie</h2>
+      <p>Si vous apportez votre propre ATV ou UTV, les terres du BLM qui entourent Vernal offrent des zones de conduite libres et des itinéraires désignés. Cependant, les meilleures pistes — celles qui donnent accès à l'art rupestre, aux arches et aux canyons — se parcourent mieux avec un guide local qui connaît les itinéraires, l'histoire et l'état du terrain.</p>
+      <p>Adventure Tours Vernal fournit tout : des side-by-side Kawasaki KRX 1000 à 2 places avec suspension FOX 2.5 PODIUM LSC, des casques, un briefing de sécurité et des guides experts. Dave et Trudy Wilson conduisent chacun leur propre machine, roulant aux côtés de votre groupe pendant tout le tour de trois heures.</p>
+
+      <h2>Ce Qu'il Faut Savoir Avant de Rouler</h2>
+      <p>Les tours fonctionnent toute l'année, selon la météo. Le printemps (avril–mai) et l'automne (septembre–octobre) sont les meilleures saisons — températures agréables, pistes sèches et lumière dorée. Les sorties d'été commencent tôt pour éviter la chaleur. La conduite hivernale est possible les jours de ciel dégagé, avec un paysage entièrement différent.</p>
+      <p>Aucune expérience tout-terrain préalable n'est nécessaire. Le KRX 1000 est équipé d'une direction assistée, d'une boîte automatique et d'une cage de sécurité complète. Dave et Trudy adaptent le rythme au niveau de confort de votre groupe, d'une balade panoramique détendue à une conduite plus intense dans le backcountry.</p>
+
+      <div class="article-tip">
+        <strong>Conseil pour Choisir une Piste :</strong> Si c'est votre première fois, commencez par Doc's Beach ou Moonshine Arch. Si vous recherchez l'expérience la plus isolée et la plus accidentée, demandez l'Outlaw Trail. Dave vous aidera à choisir en fonction de votre groupe au moment de la réservation.
+      </div>
+
+      <div class="article-faq">
+        <h2>Questions Fréquentes</h2>
+        <div class="faq-item"><h3>Y a-t-il des pistes pour ATV près de Vernal, Utah ?</h3><p>Oui — cinq systèmes de pistes distincts comprenant des canyons, des lits d'oued désertiques et des itinéraires de crête, tous accessibles grâce à des tours guidés en UTV.</p></div>
+        <div class="faq-item"><h3>Peut-on rouler en ATV près de Dinosaur National Monument ?</h3><p>Pas à l'intérieur du monument, mais le backcountry environnant possède de vastes systèmes de pistes en UTV à travers un terrain similaire, avec un accès guidé.</p></div>
+        <div class="faq-item"><h3>Ai-je besoin de mon propre ATV pour rouler sur les pistes près de Vernal ?</h3><p>Non. Adventure Tours Vernal fournit des machines Kawasaki KRX 1000, des casques, de l'équipement et des guides. $349 par machine pour 3 heures.</p></div>
+      </div>
+
+      <div class="article-cta">
+        <h3>Prenez la Piste</h3>
+        <p>Tours guidés en Kawasaki KRX 1000 · $349/machine · 5 systèmes de pistes · Tous niveaux</p>
+        <a href="/fr/booking/" class="cta-btn">Réserver un Tour</a>
+        <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
+      </div>
+    </div>
+
+    <div class="related-articles">
+      <h3>Plus de Guides de Pistes</h3>
+      <div class="related-grid">
+        <a href="/fr/utv/best-utv-trails-vernal/" class="related-card"><h4>Meilleures Pistes UTV Près de Vernal</h4><p>Analyse détaillée des 5 systèmes de pistes.</p></a>
+        <a href="/fr/jeep-trails-vernal-utah/" class="related-card"><h4>Pistes pour Jeep Près de Vernal</h4><p>Options tout-terrain pour les passionnés de Jeep et de 4x4.</p></a>
+        <a href="/fr/utv/side-by-side-rentals-vernal-utah/" class="related-card"><h4>Tours en Side-by-Side vs. Location</h4><p>Pourquoi les tours guidés valent mieux que la location en autonomie.</p></a>
+        <a href="/fr/guides/what-to-wear-utv-tour/" class="related-card"><h4>Que Porter</h4><p>Guide de l'équipement pour rouler en UTV dans le désert.</p></a>
+      </div>
+    </div>
+  </main>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3D). Every
  * locale without a committed variant falls back to English. Callers that
@@ -224,5 +295,6 @@ const IT = `
 export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'es') return ES;
   if (locale === 'it') return IT;
+  if (locale === 'fr') return FR;
   return bodyHtml;
 }

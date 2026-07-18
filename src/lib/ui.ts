@@ -512,13 +512,137 @@ const PT: Dict = {
   'hub.guides': 'Guias do Destino',
 };
 
-// One entry per locale. es (P3A), it (P6), and pt (P7A) are all real
-// dictionaries now — every registered locale has a translated UI chrome.
+// French chrome dictionary (P8-P6, mirrors Italian P6). Formal "vous" register
+// (mirrors Spanish "usted" / Italian "Lei" — not Portuguese's informal "tu").
+// Keys mirror EN 1:1 — master-fallback in t() covers any key added to EN
+// before its French counterpart lands. Brand, NAP, prices, fleet, place
+// names, and people stay in the English value (never present here) per the
+// multilingual handoff's proper-noun policy. "Dinosaur National Monument" /
+// "Dinosaur Monument" kept English (official park name), matching the IT/PT
+// precedent rather than the earlier ES translation of the same key.
+const FR: Dict = {
+  'nav.home': 'Accueil',
+  'nav.about': 'À Propos',
+  'nav.trails': 'Sentiers',
+  'nav.thingsToDo': 'Que Faire',
+  'nav.dinosaurMonument': 'Dinosaur Monument',
+  'nav.guides': 'Guides',
+  'nav.food': 'Restaurants',
+  'nav.info': 'Informations',
+  'nav.cancellationPolicy': "Politique d'Annulation",
+  'nav.privacyPolicy': 'Politique de Confidentialité',
+  'nav.faq': 'Questions Fréquentes',
+  'nav.safetyGuidelines': 'Consignes de Sécurité',
+  'nav.whatToBring': 'Quoi Apporter',
+  'nav.itineraries': 'Itinéraires',
+
+  'cta.bookNow': 'Réservez Maintenant',
+  'cta.bookYourAdventure': 'Réservez Votre Aventure',
+
+  'a11y.toggleMenu': 'Basculer le menu',
+  "a11y.breadcrumb": "Fil d'Ariane",
+  'a11y.relatedArticles': 'Articles connexes',
+  'a11y.allArticlesInHub': 'Tous les articles de cette catégorie',
+  'a11y.keyTakeaways': 'Points clés',
+  'a11y.relatedGuides': 'Guides connexes',
+
+  'section.faq': 'Questions Fréquentes',
+  'section.exploreThisHub': 'Explorez Cette Catégorie',
+  'section.youMightAlsoLike': 'Vous Pourriez Aussi Aimer',
+  'section.keyTakeaways': 'Points Clés',
+  'section.exploreVernal': 'Explorez Vernal',
+  'section.moreVernalGuides': 'Plus de Guides sur Vernal',
+
+  'footer.tagline': "Vivez l'aventure d'une vie dans la terre des dinosaures de l'Utah.",
+  'footer.ourTrails': 'Nos Sentiers',
+  'footer.information': 'Informations',
+  'footer.contactInfo': 'Coordonnées',
+  'footer.copyrightSuffix': ' - Tous droits réservés.',
+  'footer.link.utvTrailsTours': 'Sentiers et Circuits en UTV',
+  'footer.link.thingsToDo': 'Que Faire',
+  'footer.link.dinosaurNationalMonument': 'Dinosaur National Monument',
+  'footer.link.guides': 'Guides',
+  'footer.link.visitingFromSLC': 'Visite depuis Salt Lake City',
+  'footer.quickLinks': 'Liens Rapides',
+  'footer.link.ourTours': 'Nos Circuits',
+  'footer.link.ourFleet': 'Notre Flotte',
+  'footer.link.photoGallery': 'Galerie Photo',
+
+  'tour.value.family': 'La façon dont la plupart des familles concluent leur séjour à Vernal.',
+  'tour.value.adventure': 'Circuits guidés en Kawasaki KRX 1000 à travers la Terre des Dinosaures.',
+  'tour.value.sunset': "Sentiers à l'heure dorée, pétroglyphes et points de vue dans le backcountry.",
+  'tour.value.generic': 'Circuits guidés en UTV à travers la Terre des Dinosaures.',
+  'tour.callForPricing': 'Appelez pour connaître les tarifs',
+  'tour.threeHours': '3 heures',
+  'tour.upToRiders': "jusqu'à {n} passagers",
+
+  'reviews.googleReviews': 'avis Google',
+  'reviews.ratedAria': "Noté {value} sur 5 d'après {count} avis Google",
+
+  'author.writtenBy': 'Écrit par',
+  'author.updated': 'Mis à jour',
+  'author.areasOfExpertise': "Domaines d'Expertise",
+  'author.credentials': 'Références et Expérience',
+  'author.aboutBusiness': "À Propos d'Adventure Tours Vernal",
+  'author.articlesBy': 'Articles de {name}',
+
+  'time.morning': 'matin',
+  'time.lunch': 'déjeuner',
+  'time.afternoon': 'après-midi',
+  'time.dinner': 'dîner',
+  'time.evening': 'soirée',
+  'itinerary.weatherBackup': 'Plan de secours en cas de mauvais temps',
+
+  'gateway.heading': "Vous venez d'ailleurs ? Commencez par votre itinéraire d'accès.",
+  'gateway.note.saltLakeCity': "Le classique trajet d'environ 3 heures par les Uintas.",
+  'gateway.note.denver': "Une excursion d'une demi-journée dans les Rocheuses.",
+  'gateway.note.grandJunction': "La porte d'entrée la plus proche depuis le Colorado.",
+  'gateway.seeAllItineraries': 'Voir tous les itinéraires de Vernal',
+
+  'decision.heading': 'Vous ne savez pas quel circuit choisir ? Commencez ici.',
+  'decision.intro': 'Dites-nous ce qui compte le plus pour vous et nous vous dirigerons vers le bon guide.',
+  'decision.q.firstTime': 'Première fois en UTV ?',
+  'decision.a.firstTime': 'Commencez par le guide pour débutants',
+  'decision.q.children': 'Vous voyagez avec des enfants ?',
+  'decision.a.children': 'Consultez le guide UTV en famille',
+  'decision.q.couple': 'Vous voyagez en couple ?',
+  'decision.a.couple': 'Réservez un circuit privé pour deux',
+  'decision.q.scenery': 'Vous cherchez de beaux paysages ?',
+  'decision.a.scenery': 'Comparez les sentiers les plus panoramiques',
+  'decision.q.history': "Vous cherchez l'histoire ?",
+  'decision.a.history': "Découvrez les pétroglyphes et l'art rupestre",
+  'decision.q.adventure': "Vous voulez le maximum d'aventure ?",
+  'decision.a.adventure': 'Partez loin de tout sur un circuit dans le backcountry',
+  'decision.q.shortTime': 'Vous manquez de temps ?',
+  'decision.a.shortTime': 'Réservez le prochain circuit de 3 heures',
+  'decision.q.group': 'Grand groupe ?',
+  'decision.a.group': 'Planifiez un circuit de groupe',
+
+  'city.driveTime': 'Temps de trajet',
+  'city.distance': 'Distance',
+  'city.route': 'Itinéraire',
+  'city.nearestAirport': 'Aéroport le plus proche',
+
+  'hub.utv': 'Sentiers et Circuits en UTV',
+  'hub.atv': 'Sentiers pour ATV',
+  'hub.jeep': 'Sentiers pour Jeep',
+  'hub.dinosaur-national-monument': 'Dinosaur National Monument',
+  'hub.things-to-do': 'Que Faire à Vernal',
+  'hub.hiking': 'Randonnée',
+  'hub.camping': 'Camping',
+  'hub.fishing': 'Pêche',
+  'hub.scenic-drives': 'Routes Panoramiques',
+  'hub.guides': 'Guides de Destination',
+};
+
+// One entry per locale. es (P3A), it (P6), pt (P7A), and fr (P8-P6) are all
+// real dictionaries now — every registered locale has a translated UI chrome.
 const UI_STRINGS: Partial<Record<Locale, Dict>> = {
   en: EN,
   es: ES,
   it: IT,
   pt: PT,
+  fr: FR,
 };
 
 /**

@@ -1198,6 +1198,401 @@ const IT = `
   </script>
 `;
 
+const FR = `
+
+  <!-- HERO -->
+  <div class="trail-hero">
+    <div class="trail-hero-video-bg">
+  <iframe
+  src="https://www.youtube.com/embed/YQVFzCTh4m4?autoplay=1&mute=1&loop=1&playlist=YQVFzCTh4m4&controls=0&showinfo=0&rel=0&playsinline=1"
+  frameborder="0"
+  allow="autoplay; encrypted-media"
+  allowfullscreen>
+</iframe>
+</div>
+    <div class="trail-hero-overlay"></div>
+    <div class="trail-hero-content">
+      <nav class="trail-breadcrumb" aria-label="Breadcrumb">
+        <a href="/fr/">Accueil</a>
+        <span>&#8250;</span>
+        <span class="current">Sentiers</span>
+      </nav>
+      <div class="status-badge" style="animation:none;">Guide des Sentiers</div>
+      <h1 class="trail-hero-title">Nos Sentiers</h1>
+      <div style="margin-top:14px;"><span style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border:1px solid rgba(255,255,255,0.5);border-radius:999px;background:rgba(0,0,0,0.35);font-size:0.95rem;color:#fff;"><span aria-hidden="true" style="color:#f5c451;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count} avis Google</span></span></div>
+      <div class="trail-hero-meta">
+        <div class="trail-hero-meta-item"><span>&#128205;</span><span>Vernal, Utah</span></div>
+        <div class="trail-hero-meta-item"><span>&#128106;</span><span>Pour Tous les Âges</span></div>
+        <div class="trail-hero-meta-item"><span>&#129413;</span><span>Faune et Pétroglyphes</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRINCIPAL -->
+  <div class="trail-main">
+
+      <!-- CAROUSEL DOC'S BEACH -->
+    <div class="docs-beach-section">
+      <h2>Doc's Beach Vernal Utah</h2>
+      <p>Des images authentiques du backcountry de Vernal — sans filtre.</p>
+
+      <div class="docs-beach-carousel">
+        <button class="docs-beach-carousel-btn prev" aria-label="Vidéo précédente">&#8249;</button>
+
+        <div class="docs-beach-carousel-track-wrap">
+          <div class="docs-beach-carousel-track">
+
+            <div class="docs-beach-carousel-slide">
+              <div class="docs-beach-portrait-frame">
+                <div class="docs-beach-portrait-screen">
+                  <iframe src="https://www.youtube.com/embed/U4RogvmCLFU" title="Doc's Beach Vernal Utah" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="docs-beach-carousel-slide">
+              <div class="docs-beach-portrait-frame">
+                <div class="docs-beach-portrait-screen">
+                  <iframe src="https://www.youtube.com/embed/keP0VM7arfU" title="Doc's Beach Vernal Utah" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="docs-beach-carousel-slide">
+              <div class="docs-beach-portrait-frame">
+                <div class="docs-beach-portrait-screen">
+                  <iframe src="https://www.youtube.com/embed/zVhDfvb3W3U" title="Doc's Beach Vernal Utah" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="docs-beach-carousel-slide">
+              <div class="docs-beach-portrait-frame">
+                <div class="docs-beach-portrait-screen">
+                  <iframe src="https://www.youtube.com/embed/NHmuaQLcenk" title="Doc's Beach Vernal Utah" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="docs-beach-carousel-slide">
+              <div class="docs-beach-portrait-frame">
+                <div class="docs-beach-portrait-screen">
+                  <iframe src="https://www.youtube.com/embed/Pld_Ud8Vg58" title="Doc's Beach Vernal Utah" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="docs-beach-carousel-slide">
+              <div class="docs-beach-portrait-frame">
+                <div class="docs-beach-portrait-screen">
+                  <iframe src="https://www.youtube.com/embed/_28bv0vq_OY" title="Doc's Beach Vernal Utah" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="docs-beach-carousel-slide">
+              <div class="docs-beach-portrait-frame">
+                <div class="docs-beach-portrait-screen">
+                  <iframe src="https://www.youtube.com/embed/guQRW68vlIQ" title="Doc's Beach Vernal Utah" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="docs-beach-carousel-slide">
+              <div class="docs-beach-portrait-frame">
+                <div class="docs-beach-portrait-screen">
+                  <iframe src="https://www.youtube.com/embed/IfIEozbAWXc" title="Doc's Beach Vernal Utah" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="docs-beach-carousel-slide">
+              <div class="docs-beach-portrait-frame">
+                <div class="docs-beach-portrait-screen">
+                  <iframe src="https://www.youtube.com/embed/c0Ikw96DuUk" title="Doc's Beach Vernal Utah" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="docs-beach-carousel-slide">
+              <div class="docs-beach-portrait-frame">
+                <div class="docs-beach-portrait-screen">
+                  <iframe src="https://www.youtube.com/embed/Qpqn3COiM-c" title="Doc's Beach Vernal Utah" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="docs-beach-carousel-slide">
+              <div class="docs-beach-portrait-frame">
+                <div class="docs-beach-portrait-screen">
+                  <iframe src="https://www.youtube.com/embed/vEX-XavayK8" title="Doc's Beach Vernal Utah" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="docs-beach-carousel-slide">
+              <div class="docs-beach-portrait-frame">
+                <div class="docs-beach-portrait-screen">
+                  <iframe src="https://www.youtube.com/embed/LsqbwVkwrbw" title="Doc's Beach Vernal Utah" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="docs-beach-carousel-slide">
+              <div class="docs-beach-portrait-frame">
+                <div class="docs-beach-portrait-screen">
+                  <iframe src="https://www.youtube.com/embed/YQVFzCTh4m4" title="Doc's Beach Vernal Utah" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="docs-beach-carousel-slide">
+              <div class="docs-beach-portrait-frame">
+                <div class="docs-beach-portrait-screen">
+                  <iframe src="https://www.youtube.com/embed/BHOABkrNnnE" title="Doc's Beach Vernal Utah" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="docs-beach-carousel-slide">
+              <div class="docs-beach-portrait-frame">
+                <div class="docs-beach-portrait-screen">
+                  <iframe src="https://www.youtube.com/embed/tC9hDT--vNE" title="Doc's Beach Vernal Utah" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="docs-beach-carousel-slide">
+              <div class="docs-beach-portrait-frame">
+                <div class="docs-beach-portrait-screen">
+                  <iframe src="https://www.youtube.com/embed/_GEkyZvT1NY" title="Doc's Beach Vernal Utah" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="docs-beach-carousel-slide">
+              <div class="docs-beach-portrait-frame">
+                <div class="docs-beach-portrait-screen">
+                  <iframe src="https://www.youtube.com/embed/9o5CePPqr9k" title="Doc's Beach Vernal Utah" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="docs-beach-carousel-slide">
+              <div class="docs-beach-portrait-frame">
+                <div class="docs-beach-portrait-screen">
+                  <iframe src="https://www.youtube.com/embed/AkBqq7C6XhM" title="Doc's Beach Vernal Utah" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="docs-beach-carousel-slide">
+              <div class="docs-beach-portrait-frame">
+                <div class="docs-beach-portrait-screen">
+                  <iframe src="https://www.youtube.com/embed/0j4NYKi5rl4" title="Doc's Beach Vernal Utah" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="docs-beach-carousel-slide">
+              <div class="docs-beach-portrait-frame">
+                <div class="docs-beach-portrait-screen">
+                  <iframe src="https://www.youtube.com/embed/oXR3mkEPxQc" title="Doc's Beach Vernal Utah" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="docs-beach-carousel-slide">
+              <div class="docs-beach-portrait-frame">
+                <div class="docs-beach-portrait-screen">
+                  <iframe src="https://www.youtube.com/embed/ugR79DX2CHE" title="Doc's Beach Vernal Utah" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+        <button class="docs-beach-carousel-btn next" aria-label="Vidéo suivante">&#8250;</button>
+      </div>
+
+      <div class="docs-beach-carousel-dots">
+        <button class="docs-beach-dot active" data-index="0"></button>
+        <button class="docs-beach-dot" data-index="1"></button>
+        <button class="docs-beach-dot" data-index="2"></button>
+        <button class="docs-beach-dot" data-index="3"></button>
+        <button class="docs-beach-dot" data-index="4"></button>
+        <button class="docs-beach-dot" data-index="5"></button>
+        <button class="docs-beach-dot" data-index="6"></button>
+        <button class="docs-beach-dot" data-index="7"></button>
+        <button class="docs-beach-dot" data-index="8"></button>
+        <button class="docs-beach-dot" data-index="9"></button>
+        <button class="docs-beach-dot" data-index="10"></button>
+        <button class="docs-beach-dot" data-index="11"></button>
+        <button class="docs-beach-dot" data-index="12"></button>
+        <button class="docs-beach-dot" data-index="13"></button>
+        <button class="docs-beach-dot" data-index="14"></button>
+        <button class="docs-beach-dot" data-index="15"></button>
+        <button class="docs-beach-dot" data-index="16"></button>
+        <button class="docs-beach-dot" data-index="17"></button>
+        <button class="docs-beach-dot" data-index="18"></button>
+        <button class="docs-beach-dot" data-index="19"></button>
+        <button class="docs-beach-dot" data-index="20"></button>
+      </div>
+    </div>
+
+    <!-- INTRO + BARRE LATÉRALE -->
+    <div class="trail-intro">
+      <div class="trail-intro-text">
+        <h2>Cinq Sentiers Légendaires en Terre des Dinosaures de l'Utah</h2>
+        <div class="section-divider"></div>
+        <p>Adventure Tours Vernal propose cinq tours guidés en UTV à travers l'un des backcountry les plus spectaculaires de l'Uintah Basin. Que vous recherchiez de superbes vues sur les canyons, d'anciens pétroglyphes ou des rencontres avec la faune, il y a un sentier pour chaque aventurier.</p>
+        <p>Tous les tours sont guidés par Dave et Trudy Wilson à bord de side-by-side Kawasaki KRX 1000 — conçus pour le confort, la puissance et la sécurité. Des sables riverains de Doc's Beach aux panoramas de crête d'Asphalt Ridge, chaque sortie est une expérience que vous n'oublierez pas.</p>
+        <p>Gardez l'œil ouvert pour les aigles royaux, les pygargues à tête blanche, les hiboux, les balbuzards, les faucons, les cerfs et même les pumas en chemin — le backcountry de Vernal grouille de faune à chaque tournant.</p>
+      </div>
+
+      <div class="trail-highlights-box">
+        <h3>Points Forts du Sentier</h3>
+        <ul class="highlight-list">
+          <li><span class="hl-icon">&#129413;</span><span>Aigles Royaux et Pygargues à Tête Blanche</span></li>
+          <li><span class="hl-icon">&#129417;</span><span>Hiboux, Balbuzards et Faucons</span></li>
+          <li><span class="hl-icon">&#129420;</span><span>Cerfs et Pumas</span></li>
+          <li><span class="hl-icon">&#129704;</span><span>Pétroglyphes Anciens</span></li>
+          <li><span class="hl-icon">&#127956;</span><span>Points de Vue Panoramiques</span></li>
+          <li><span class="hl-icon">&#127754;</span><span>Vue sur le Green River</span></li>
+          <li><span class="hl-icon">&#128106;</span><span>Idéal pour les Familles</span></li>
+        </ul>
+        <a href="/fr/booking/" class="tour-book-btn" style="display:block;text-align:center;margin-bottom:12px;">Réserver un Sentier</a>
+        <a href="tel:435-219-9447" class="call-sidebar-btn">&#128222; (435) 219-9447</a>
+      </div>
+    </div>
+
+
+
+    <!-- VIDÉO PROMOTIONNELLE — CADRE 3D -->
+    <div class="promo-video-section">
+      <h2>5 Sentiers. 5 Aventures. 1 Lieu Extraordinaire.</h2>
+      <p>Découvrez un aperçu de tout ce que le backcountry de Vernal a à offrir.</p>
+      <div class="promo-video-3d-wrap">
+        <div class="promo-video-frame">
+          <div class="promo-video-screen">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/ugR79DX2CHE?si=8geOb3H2XYk8Q-js" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+   <!-- GALERIE PHOTO -->
+    <div class="photo-gallery-section">
+      <h2>Un aperçu du terrain, du paysage et de l'aventure qui vous attendent sur les sentiers.</h2>
+        <div class="photo-grid">
+        <div class="photo-grid-item featured">
+          <img src="/images/Docs%20Beach.webp" alt="Tour guidé en UTV à Doc's Beach — Adventure Tours Vernal">
+        </div>
+        <div class="photo-grid-item">
+          <img src="/images/Docs Beach 1.webp" alt="Sentier UTV hors-piste à Doc's Beach, Vernal Utah">
+        </div>
+
+      </div>
+    </div>
+
+    <!-- APPEL À L'ACTION -->
+    <div class="policy-cta trail-cta" style="position:relative; overflow:hidden;">
+  <div class="cta-video-bg">
+    <iframe
+      src="https://www.youtube.com/embed/U4RogvmCLFU?autoplay=1&mute=1&loop=1&playlist=U4RogvmCLFU&controls=0&showinfo=0&rel=0&playsinline=1"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+  </div>
+  <div class="cta-video-overlay"></div>
+      <span class="trail-cta-watermark">L'AVENTURE VOUS ATTEND</span>
+      <h3>Prêt à Prendre les Sentiers&nbsp;?</h3>
+      <p>Cinq destinations légendaires. Réservez votre tour guidé dès aujourd'hui et laissez Dave et Trudy Wilson vous montrer ce qu'est le backcountry de Vernal.</p>
+      <div class="cta-buttons">
+        <a href="/fr/booking/" class="cta-button primary">Réservez Votre Aventure</a>
+        <a href="tel:435-219-9447" class="cta-button secondary">&#128222; (435) 219-9447</a>
+      </div>
+    </div>
+
+    <!-- CARTE D'ORIENTATION DES SYSTÈMES DE SENTIERS -->
+    <p style="max-width:820px;margin:2rem auto 0;padding:0 1rem;text-align:center;line-height:1.7;">Chaque sortie Adventure Tours Vernal débute à un point de départ unique en ville et se dirige vers l'un des cinq systèmes de sentiers distincts, chacun avec son propre terrain et son propre caractère. Le schéma ci-dessous montre comment les cinq se relient avant que vous ne les exploriez un par un.</p>
+
+    <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+      <img src="/images/maps/vernal-utv-trail-systems.svg" alt="Schéma des cinq systèmes de sentiers en UTV d'Adventure Tours Vernal — Doc's Beach, Moonshine Arch, Ashley Gorge, Asphalt Ridge et Outlaw Trail — disposés en rayons étiquetés autour d'un point de départ central des tours à Vernal, Utah. Il montre uniquement les systèmes de sentiers et leur point de départ commun, n'est pas dessiné à l'échelle et ne montre aucun itinéraire, distance, direction ou emplacement de départ de sentier." width="1600" height="1200" loading="lazy" decoding="async" />
+      <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">Cinq systèmes de sentiers distincts, un seul point de départ à Vernal. Schéma — non à l'échelle, et ne montre aucun itinéraire, distance ou emplacement de départ de sentier.</figcaption>
+    </figure>
+
+    <!-- TOUS LES SENTIERS -->
+<div class="other-trails-section">
+  <h2>Explorez Tous les Sentiers</h2>
+  <div class="other-trails-grid">
+
+    <div class="other-trail-card">
+      <div class="other-trail-img" style="background-image:url('/images/48.webp');"></div>
+      <div class="other-trail-info"><h3>Doc's Beach</h3><span>Tous Niveaux</span></div>
+    </div>
+
+    <div class="other-trail-card">
+      <div class="other-trail-img" style="background-image:url('/images/42a.webp');"></div>
+      <div class="other-trail-info"><h3>Moonshine Arch</h3><span>Pittoresque et Historique</span></div>
+    </div>
+
+    <div class="other-trail-card">
+      <div class="other-trail-img" style="background-image:url('/images/50a.webp');"></div>
+      <div class="other-trail-info"><h3>Ashley Gorge</h3><span>Aventure en Canyon</span></div>
+    </div>
+
+    <div class="other-trail-card">
+      <div class="other-trail-img" style="background-image:url('/images/51a.webp');"></div>
+      <div class="other-trail-info"><h3>Outlaw Trail</h3><span>Itinéraire Historique</span></div>
+    </div>
+
+    <div class="other-trail-card">
+      <div class="other-trail-img" style="background-image:url('/images/52a.webp');"></div>
+      <div class="other-trail-info"><h3>Asphalt Ridge</h3><span>Vues Panoramiques</span></div>
+    </div>
+
+  </div>
+</div>
+
+
+  </div><!-- end .trail-main -->
+
+  <div class="mobile-sticky-cta">
+    <button onclick="location.href='/fr/booking/'">Réservez Votre Aventure Maintenant</button>
+  </div>
+
+  <script is:inline>
+    // Doc's Beach Carousel
+    (function() {
+      var track = document.querySelector('.docs-beach-carousel-track');
+      var slides = document.querySelectorAll('.docs-beach-carousel-slide');
+      var dots = document.querySelectorAll('.docs-beach-dot');
+      var prevBtn = document.querySelector('.docs-beach-carousel-btn.prev');
+      var nextBtn = document.querySelector('.docs-beach-carousel-btn.next');
+      var current = 0;
+      var total = slides.length;
+
+      function goTo(index) {
+        current = (index + total) % total;
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        dots.forEach(function(d, i) {
+          d.classList.toggle('active', i === current);
+        });
+      }
+
+      prevBtn.addEventListener('click', function() { goTo(current - 1); });
+      nextBtn.addEventListener('click', function() { goTo(current + 1); });
+      dots.forEach(function(dot) {
+        dot.addEventListener('click', function() { goTo(parseInt(this.dataset.index)); });
+      });
+    })();
+  </script>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3A, Italian P6).
  * Every locale without a committed variant falls back to English. Callers
@@ -1206,5 +1601,6 @@ const IT = `
 export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'es') return ES;
   if (locale === 'it') return IT;
+  if (locale === 'fr') return FR;
   return bodyHtml;
 }

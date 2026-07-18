@@ -232,6 +232,80 @@ const IT = `
   </main>
 `;
 
+const FR = `
+
+
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    Adventure Tours Vernal propose des tours en UTV près de Dinosaur National Monument avec des side-by-side Kawasaki KRX 1000 guidés. Cinq systèmes de pistes explorent le backcountry qui entoure le monument, avec des canyons, des pétroglyphes, des arches naturelles et un terrain désertique. Basé à Vernal, Utah, à 20 minutes du monument. $349/machine pour 3 heures. Appelez le (435) 219-9447.
+  </p>
+
+  <main class="article-page">
+    <header class="article-header">
+      <div class="article-breadcrumb"><a href="/fr/">Accueil</a><span class="sep">›</span><span>Tours au Monument des Dinosaures</span></div>
+      <h1 class="article-title">Tours en UTV Près de Dinosaur National Monument</h1>
+      <p class="article-meta">Mis à jour en avril 2026 · Adventure Tours Vernal</p>
+      <p style="display:inline-flex;align-items:center;gap:8px;margin:12px 0;padding:7px 15px;border:1px solid rgba(212,118,78,0.5);border-radius:999px;background:#ffffff;box-shadow:0 1px 4px rgba(0,0,0,0.08);font-size:0.95rem;color:#4a4139;"><span aria-hidden="true" style="color:#e6a817;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count} avis Google</span></p>
+    </header>
+
+    <div class="article-body">
+      <div class="article-summary-box">
+        Dinosaur National Monument attire des visiteurs du monde entier venus voir des fossiles de l'ère jurassique — mais le backcountry qui entoure le monument recèle un tout autre niveau d'aventure. Les tours guidés en UTV vous plongent au cœur d'un terrain de canyons, de pétroglyphes anciens et de paysages désertiques que la plupart des visiteurs du monument se contentent de traverser en voiture.
+      </div>
+
+      <div class="article-tip"><strong>Commencez Ici :</strong> Nouveau dans la planification d'un voyage au monument ? Lisez notre <a href="/fr/dinosaur-national-monument/visiting-dinosaur-national-monument/">Guide Ultime de Dinosaur National Monument</a> — le plan complet couvrant les fossiles, les pétroglyphes, les routes panoramiques, les randonnées et la meilleure période pour visiter.</div>
+
+      <h2>Le Backcountry Au-Delà du Monument</h2>
+      <p>Les véhicules motorisés ne sont pas autorisés à l'intérieur de Dinosaur National Monument, mais les terres de la BLM (Bureau of Land Management) et le backcountry qui entourent le monument présentent les mêmes formations géologiques, systèmes de canyons et art rupestre ancien — ainsi qu'un accès à des pistes tout-terrain qui vous conduit au cœur d'un territoire que les routes panoramiques du monument ne font qu'effleurer.</p>
+      <p>Adventure Tours Vernal exploite cinq systèmes de pistes à travers ce paysage. L'Outlaw Trail suit les routes historiques empruntées par la Wild Bunch de Butch Cassidy à travers un territoire de canyons isolé. Moonshine Arch serpente à travers des canyons de roche rouge jusqu'à une arche naturelle de grès cachée. Ashley Gorge traverse un corridor spectaculaire aux parois imposantes. Le terrain et la géologie sont en continuité avec ce que vous voyez à l'intérieur du monument — vous parcourez le même paysage ancestral.</p>
+
+      <h2>Pétroglyphes, Art Rupestre et Histoire Ancienne</h2>
+      <p>Les peuples fremont et ute qui ont laissé des pétroglyphes et des pictogrammes à l'intérieur du monument en ont également laissé dans tout le backcountry environnant. Plusieurs itinéraires d'Adventure Tours Vernal passent directement devant des panneaux d'art rupestre inaccessibles depuis toute route pavée — ce sont des sites que vous ne trouveriez jamais sans un guide qui sait où chercher. Le lien entre l'histoire culturelle du monument et le paysage vivant qui l'entoure est l'un des aspects les plus fascinants d'un tour guidé.</p>
+
+      <h2>Comment Associer un Tour en UTV à Votre Visite du Monument</h2>
+      <p>L'approche la plus populaire consiste à réserver un tour en UTV le matin et à visiter le Quarry Exhibit Hall l'après-midi, ou l'inverse. Adventure Tours Vernal se trouve à 20 minutes à l'ouest de l'entrée principale du monument, ce qui simplifie la logistique. Un tour guidé de 3 heures plus une demi-journée à la carrière font une journée complète d'exploration de la Terre des Dinosaures, couvrant à la fois les archives fossiles et le backcountry vivant.</p>
+      <p>Pour les visiteurs restant plusieurs jours, ajouter un tour en UTV à votre itinéraire du monument transforme un simple voyage dans un parc national en une expérience bien plus mémorable. Les enfants se souviendront du tour en UTV plus longtemps que du centre des visiteurs.</p>
+
+      <p>Il est utile de savoir comment le monument lui-même est organisé. Il s'agit en réalité de deux zones : le côté fossiles, à l'extrémité de l'Utah, près de Vernal — celui que vous associerez à un tour — et un côté canyons, de l'autre côté de la frontière de l'État, dans le Colorado, qui constitue une excursion distincte.</p>
+
+      <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+        <img src="/images/maps/dinosaur-national-monument-orientation.svg" alt="Carte d'orientation schématique des deux zones de Dinosaur National Monument. Le côté fossiles près de Vernal, Utah — le Quarry Exhibit Hall et le Wall of Bones, Cub Creek Road et ses pétroglyphes, la cabane de Josie Morris, et Split Mountain — est le côté qui s'associe naturellement à un tour en UTV basé à Vernal. Le côté canyons du Colorado, près de Dinosaur, Colorado — la Harpers Corner Scenic Drive, les canyons des rivières Green et Yampa, et Echo Park — est une sortie distincte, sans fossiles. Les deux forment un seul monument accessible par des entrées différentes ; le schéma montre uniquement les relations et n'est ni à l'échelle, ni fidèle aux distances ou aux directions." width="1600" height="1200" loading="lazy" decoding="async" />
+        <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">Comment le monument est organisé : le côté fossiles près de Vernal est celui que vous associez à un tour en UTV ; le côté canyons du Colorado est une excursion à part. Schéma d'orientation, sans échelle.</figcaption>
+      </figure>
+
+      <h2>Ce Que Comprend le Tour</h2>
+      <p>Side-by-side Kawasaki KRX 1000 à 2 places avec suspension FOX 2.5 PODIUM LSC, casques, équipement de sécurité et guides experts. Dave et Trudy Wilson accompagnent votre groupe sur leurs propres machines. Trois heures, $349 par machine, jusqu'à 2 passagers. Tous les niveaux sont les bienvenus — aucune expérience tout-terrain préalable n'est requise.</p>
+
+      <div class="article-tip">
+        <strong>Conseil sur les Horaires :</strong> Si vous visitez le monument un week-end ou un jour férié, réservez votre tour en UTV pour le matin — la carrière devient animée en milieu de journée. En semaine, les deux ordres fonctionnent. Appelez Dave au (435) 219-9447 et il vous aidera à planifier en fonction de votre programme au monument.
+      </div>
+
+      <div class="article-faq">
+        <h2>Questions Fréquentes</h2>
+        <div class="faq-item"><h3>Peut-on faire des tours en UTV près de Dinosaur National Monument ?</h3><p>Oui. Adventure Tours Vernal propose des tours guidés dans le backcountry qui entoure le monument, avec des canyons, des pétroglyphes et une géologie similaire.</p></div>
+        <div class="faq-item"><h3>À quelle distance se trouve Adventure Tours Vernal du monument ?</h3><p>Environ 20 minutes. Basé à Vernal, Utah, juste à l'ouest de l'entrée du Quarry Exhibit Hall du monument.</p></div>
+        <div class="faq-item"><h3>Quelle est la meilleure façon de combiner un tour avec le monument ?</h3><p>Un tour en UTV le matin et une visite du monument l'après-midi (ou l'inverse) forment une journée complète d'aventure en Terre des Dinosaures.</p></div>
+      </div>
+
+      <div class="article-cta">
+        <h3>Ajoutez de l'Aventure à Votre Voyage au Monument</h3>
+        <p>Tours guidés en KRX 1000 · $349/machine · 20 min du monument · 5.0 étoiles</p>
+        <a href="/fr/booking/" class="cta-btn">Réservez un Tour</a>
+        <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
+      </div>
+    </div>
+
+    <div class="related-articles">
+      <h3>Planifiez Votre Visite</h3>
+      <div class="related-grid">
+        <a href="/fr/things-to-do/" class="related-card"><h4>Choses à Faire à Vernal</h4><p>Guide complet au-delà du monument.</p></a>
+        <a href="/fr/things-to-do/vernal-utah-attractions/" class="related-card"><h4>Meilleures Attractions de Vernal</h4><p>Tous les sites incontournables de la région.</p></a>
+        <a href="/fr/dinosaur-national-monument/petroglyphs-rock-art-vernal/" class="related-card"><h4>Pétroglyphes et Art Rupestre</h4><p>Sites d'art ancien sur et hors des pistes.</p></a>
+        <a href="/fr/things-to-do/best-restaurants-vernal-utah/" class="related-card"><h4>Où Manger à Vernal</h4><p>Faites le plein d'énergie après votre aventure.</p></a>
+      </div>
+    </div>
+  </main>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3B). Every
  * locale without a committed variant falls back to English. Callers that
@@ -240,5 +314,6 @@ const IT = `
 export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'es') return ES;
   if (locale === 'it') return IT;
+  if (locale === 'fr') return FR;
   return bodyHtml;
 }

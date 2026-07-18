@@ -1,0 +1,40 @@
+---
+// fr/safety-guidelines.astro — French safety guidelines (P8-P6 batch,
+// mirrors Italian P6). Mirrors src/pages/safety-guidelines.astro.
+import { getBodyHtml } from '../../page-content/safety';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+---
+<BaseLayout bodyClass="policy-page-body">
+  <Fragment slot="head">
+    <Seo
+      title="Consignes de Sécurité | Adventure Tours Vernal — Vernal, Utah"
+      description="Consignes de sécurité pour les tours en UTV à Vernal, Utah : âge minimum, règles du véhicule, sécurité sur piste et procédures d'urgence. Appelez le (435) 219-9447."
+      path="/fr/safety-guidelines/"
+      type="website"
+      ogTitle="Consignes de Sécurité | Adventure Tours Vernal"
+      ogDescription="Consignes de sécurité pour les tours en UTV KRX 1000 à Vernal, Utah : âge minimum, règles du véhicule et sécurité sur piste. Appelez le (435) 219-9447."
+    />
+  </Fragment>
+  <Header slot="body" active="safety-guidelines" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Consignes de Sécurité' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: 'Liens Rapides',
+      links: [
+        { href: '/fr/#tours', label: 'Nos Tours' },
+        { href: '/fr/#vehicles', label: 'Notre Flotte' },
+        { href: '/fr/#gallery', label: 'Galerie Photos' },
+        { href: '/fr/booking/', label: 'Réserver Maintenant' },
+      ],
+    }}
+  />
+</BaseLayout>
