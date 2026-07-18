@@ -229,6 +229,9 @@ const FR_SLUGS = new Set([
   // P8D — French camping hub batch (4 spokes).
   'camping/camping-at-flaming-gorge', 'camping/camping-at-red-fleet-state-park',
   'camping/camping-at-steinaker-state-park', 'camping/camping-in-ashley-national-forest',
+  // P8E — French scenic-drives hub batch (4 spokes).
+  'scenic-drives/cub-creek-road-tour-of-the-tilted-rocks', 'scenic-drives/flaming-gorge-uintas-scenic-byway',
+  'scenic-drives/red-cloud-loop-scenic-drive', 'scenic-drives/sheep-creek-geological-loop',
 ]);
 
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {
