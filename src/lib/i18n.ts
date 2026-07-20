@@ -262,8 +262,13 @@ const FR_SLUGS = new Set([
   'dinosaur-national-monument/visiting-dinosaur-national-monument', 'dinosaur-national-monument/petroglyphs-rock-art-vernal',
 ]);
 
-// P9 — German (de-DE). Registration only: empty until the first MDX batch lands.
-const DE_SLUGS = new Set<string>([]);
+// German translations, added batch by batch exactly as Spanish/Italian/Portuguese/French were.
+const DE_SLUGS = new Set([
+  // P9A — German UTV hub batch (7 spokes). Compound slug = `utv/<base-id>`.
+  'utv/backcountry-tours-vernal-utah', 'utv/beginners-guide-to-utv-tours-vernal',
+  'utv/best-utv-trails-vernal', 'utv/family-utv-guide-vernal', 'utv/group-utv-tours-vernal',
+  'utv/private-utv-tours-vernal', 'utv/side-by-side-rentals-vernal-utah',
+]);
 
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {
   es: ES_SLUGS,
