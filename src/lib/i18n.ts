@@ -268,6 +268,39 @@ const DE_SLUGS = new Set([
   'utv/backcountry-tours-vernal-utah', 'utv/beginners-guide-to-utv-tours-vernal',
   'utv/best-utv-trails-vernal', 'utv/family-utv-guide-vernal', 'utv/group-utv-tours-vernal',
   'utv/private-utv-tours-vernal', 'utv/side-by-side-rentals-vernal-utah',
+  // P9B — German hiking hub batch (16 spokes).
+  'hiking/alpine-lakes-hiking-high-uintas', 'hiking/beginner-hiking-guide-near-vernal',
+  'hiking/best-hikes-in-dinosaur-national-monument', 'hiking/bird-watching-near-vernal',
+  'hiking/dog-friendly-hiking-near-vernal', 'hiking/fall-hiking-near-vernal',
+  'hiking/family-hiking-near-vernal', 'hiking/high-uintas-backpacking-guide',
+  'hiking/high-uintas-day-hikes', 'hiking/kings-peak-hiking-guide',
+  'hiking/photography-hikes-near-vernal', 'hiking/spring-hiking-near-vernal',
+  'hiking/summer-hiking-near-vernal', 'hiking/wildflower-hiking-near-vernal',
+  'hiking/wildlife-hiking-guide-near-vernal', 'hiking/winter-hiking-near-vernal',
+  // P9C — German fishing hub batch (4 spokes).
+  'fishing/fishing-flaming-gorge', 'fishing/fishing-red-fleet-reservoir',
+  'fishing/fishing-steinaker-reservoir', 'fishing/green-river-fly-fishing',
+  // P9D — German camping hub batch (4 spokes).
+  'camping/camping-at-flaming-gorge', 'camping/camping-at-red-fleet-state-park',
+  'camping/camping-at-steinaker-state-park', 'camping/camping-in-ashley-national-forest',
+  // P9E — German scenic-drives hub batch (4 spokes).
+  'scenic-drives/flaming-gorge-uintas-scenic-byway', 'scenic-drives/red-cloud-loop-scenic-drive',
+  'scenic-drives/sheep-creek-geological-loop', 'scenic-drives/cub-creek-road-tour-of-the-tilted-rocks',
+  // P9F — German guides hub batch (9 spokes).
+  'guides/ultimate-guide-to-vernal-utah', 'guides/ultimate-guide-to-flaming-gorge',
+  'guides/ultimate-guide-to-ashley-national-forest', 'guides/ultimate-guide-to-red-fleet-state-park',
+  'guides/ultimate-guide-to-steinaker-state-park', 'guides/moab-utv-tours',
+  'guides/vernal-weather-guide', 'guides/what-to-bring', 'guides/what-to-wear-utv-tour',
+  // P9G — German itineraries hub batch (9 spokes).
+  'itineraries/one-day-adventure-vernal', 'itineraries/2-day-family-itinerary',
+  'itineraries/3-day-adventure-itinerary', 'itineraries/photography-weekend-vernal',
+  'itineraries/romantic-weekend-dinosaur-country', 'itineraries/weekend-fishing-trip-vernal',
+  'itineraries/weekend-road-trip-from-denver', 'itineraries/weekend-road-trip-from-grand-junction',
+  'itineraries/weekend-road-trip-from-salt-lake-city',
+  // P9H — German things-to-do + dinosaur-national-monument batch (4 spokes). FINAL German MDX batch — all 57 spokes complete.
+  'things-to-do/vernal-utah-attractions', 'things-to-do/fun-things-to-do-vernal-utah-kids',
+  'dinosaur-national-monument/visiting-dinosaur-national-monument',
+  'dinosaur-national-monument/petroglyphs-rock-art-vernal',
 ]);
 
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {

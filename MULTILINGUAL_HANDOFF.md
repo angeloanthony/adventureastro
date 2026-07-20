@@ -221,6 +221,30 @@ about running the batches reliably. Reuse verbatim; don't rediscover them.
    Always run a literal corpus-wide grep for the untranslated source phrase as a
    central QA step — one file left all 14 instances of "Dinosaur Country"
    untranslated despite the agent's self-report claiming compliance.
+10. **Four distinct infrastructure failure classes have now been observed across
+   locales, and they all get the SAME recovery procedure.** Don't try to solve
+   them differently — the fix is always: disk-check first, resume/retry only what
+   genuinely has no output.
+    - **Session rate limit** — resets on a short (hours) clock; check the stated
+      reset time before retrying.
+    - **Weekly account-wide rate limit** — more severe than session limits (an
+      account-wide quota, not per-agent); first seen in German P9A. If the reset
+      is hours away, don't wait — disk-check the "failed" agents (often already
+      complete) and translate any genuine gaps directly in the main thread.
+    - **Stream idle timeout / stall** — the agent goes quiet mid-response; treat
+      like any other non-output failure, disk-check before resuming.
+    - **Connection closed mid-response / plain request timeout** — a transport
+      drop, not a content problem; resume via the agent's raw id once confirmed
+      empty on disk.
+
+   **Standard recovery procedure (all four classes):** (1) disk-check — does the
+   file exist, and is it structurally complete (line count near the English
+   sibling, correct ending, no stray artifact tags)? (2) if complete, treat the
+   agent as done, don't retranslate. (3) if genuinely missing/truncated, resume
+   the same agent by its raw id if reachable, otherwise relaunch fresh. (4) after
+   3–4 independent failures on the same file across different failure classes,
+   stop retrying via agent and translate it directly in the main thread — that
+   pattern (not the specific error message) is the signal to stop delegating.
 
 ---
 
