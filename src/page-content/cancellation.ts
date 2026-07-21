@@ -878,9 +878,184 @@ const FR = `
 
 `;
 
+const DE = `
+
+<!-- ================================================
+     SEITENZUSAMMENFASSUNG — für Google AI Overviews
+     ================================================ -->
+<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+  Stornierungsbedingungen von Adventure Tours Vernal für geführte UTV-Touren in Vernal, Utah. Stornierungen 72+ Stunden im Voraus erhalten eine volle Rückerstattung. Weniger als 72 Stunden erhält 50%. Weniger als 48 Stunden erhält keine Rückerstattung. Ruf bei Fragen (435) 219-9447 an.
+</p>
+
+<section class="policy-section">
+  <div class="container">
+    <div class="section-header">
+      <h1 class="section-title">Stornierungsbedingungen</h1>
+      <p class="section-subtitle">Bitte lies dir unsere Bedingungen durch, bevor du dein Abenteuer buchst</p>
+    </div>
+
+    <div class="policy-container">
+
+      <!-- STORNIERUNG & RÜCKERSTATTUNG -->
+      <div class="policy-card">
+        <div class="policy-icon">📅</div>
+        <h2 class="policy-heading">Stornierung & Rückerstattung</h2>
+
+        <div class="policy-table">
+          <div class="policy-row">
+            <div class="policy-timeframe">Weniger als 48 Stunden</div>
+            <div class="policy-refund refund-none">Keine Rückerstattung</div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-timeframe">Weniger als 72 Stunden</div>
+            <div class="policy-refund refund-partial">50% Rückerstattung</div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-timeframe">72+ Stunden im Voraus</div>
+            <div class="policy-refund refund-full">100% Rückerstattung</div>
+          </div>
+          <div class="policy-row highlight">
+            <div class="policy-timeframe">Gruppen mit 5+ Fahrzeugen</div>
+            <div class="policy-refund refund-full">2 Wochen im Voraus: 100% Rückerstattung<br>Nach 2 Wochen: Keine Rückerstattung</div>
+          </div>
+        </div>
+
+        <div class="policy-note">
+          <strong>Hinweis:</strong> Alle Stornierungsfristen werden ab der geplanten Abfahrtszeit deiner Tour berechnet.
+        </div>
+      </div>
+
+      <!-- WETTERRICHTLINIE -->
+      <div class="policy-card">
+        <div class="policy-icon">🌦️</div>
+        <h2 class="policy-heading">Wetterrichtlinie</h2>
+        <p>Wir fahren bei Sonne oder Regen. Bei extremem Wetter oder falls Adventure Tours Vernal aus anderen unvorhersehbaren Gründen absagen muss, hast du die Möglichkeit, deinen Termin zu verschieben oder eine volle Rückerstattung zu erhalten.</p>
+        <p><strong>Wichtig:</strong> Wenn du dich wegen Regen entscheidest, nicht teilzunehmen, gilt unsere reguläre Stornierungsrichtlinie für Rückerstattungen. Sagen wir wegen extremer Wetterereignisse ab, erhältst du eine volle Rückerstattung.</p>
+      </div>
+
+      <!-- ERFORDERLICHE VEREINBARUNGEN -->
+      <div class="policy-card">
+        <div class="policy-icon">📝</div>
+        <h2 class="policy-heading">Erforderliche Vereinbarungen & Haftungsausschlüsse</h2>
+        <p>Alle Gäste müssen eine <strong>Teilnahmevereinbarung, Haftungsfreistellung und Risikoübernahme</strong> unterschreiben, um an den Aktivitäten teilzunehmen. Eltern und Erziehungsberechtigte müssen für minderjährige Kinder unterschreiben. Zusätzlich müssen UTV-Tourfahrer eine <strong>Fahrervereinbarung</strong> unterschreiben.</p>
+
+        <div class="policy-warning">
+          <strong>⚠️ Wichtig:</strong> Wenn diese Vereinbarungen nicht unterschrieben werden, darfst du nicht an deinem Abenteuer teilnehmen. Eine Weigerung zu unterschreiben ist kein Grund für eine Rückerstattung, und unsere Stornierungsbedingungen gelten.
+        </div>
+      </div>
+
+      <!-- FAHRZEUGSCHADEN-HAFTUNGSAUSSCHLUSS -->
+      <div class="policy-card">
+        <div class="policy-icon">🛡️</div>
+        <h2 class="policy-heading">Fahrzeugschaden-Haftungsausschluss</h2>
+        <p class="required-badge">Erforderlich für alle Touren</p>
+
+        <p>Der Fahrzeugschaden-Haftungsausschluss begrenzt deine Kosten im Schadensfall auf die Selbstbeteiligung zzgl. Steuern für Schäden an unserer Ausrüstung.</p>
+
+        <div class="policy-list">
+          <h3>Der Haftungsausschluss ist UNGÜLTIG, wenn:</h3>
+          <ul>
+            <li>der Schaden durch rücksichtsloses Fahren entsteht</li>
+            <li>die Anweisungen deines Guides nicht befolgt werden</li>
+            <li>bei dir zum Zeitpunkt des Schadens JEGLICHER Alkohol oder Drogen im Körper festgestellt werden</li>
+          </ul>
+        </div>
+
+        <div class="deductible-info">
+          <h3>Informationen zur Selbstbeteiligung:</h3>
+          <p>Wenn du eine Vereinbarung für unsere geführten Touren unterschreibst, wirst du als versicherter Fahrer im Rahmen unserer Haftpflichtversicherung geführt, vorbehaltlich aller Bedingungen der Police. Diese Deckung hat eine <strong>Selbstbeteiligung von $1,000 pro Unfall</strong>. Solltest du in einen Unfall mit einer anderen Person, einem Fahrzeug oder Eigentum verwickelt sein, erklärst du dich damit einverstanden, uns zum Zeitpunkt des Unfalls $1,000 zu zahlen, unabhängig von der Schuldfrage beim Unfall.</p>
+        </div>
+      </div>
+
+      <!-- HAFTPFLICHTDECKUNG -->
+      <div class="policy-card">
+        <div class="policy-icon">📋</div>
+        <h2 class="policy-heading">Haftpflichtdeckung</h2>
+        <p>Unsere Deckung bietet folgende Haftungsgrenzen:</p>
+
+        <div class="coverage-details">
+          <div class="coverage-item">
+            <span class="coverage-label">Personenschaden pro Person:</span>
+            <span class="coverage-amount">Kontaktiere uns für Details</span>
+          </div>
+          <div class="coverage-item">
+            <span class="coverage-label">Sachschaden:</span>
+            <span class="coverage-amount">Kontaktiere uns für Details</span>
+          </div>
+          <div class="coverage-item">
+            <span class="coverage-label">Gesamt pro Unfall:</span>
+            <span class="coverage-amount">Kontaktiere uns für Details</span>
+          </div>
+        </div>
+
+        <div class="policy-disclaimer">
+          <p><strong>Versicherungshinweis:</strong> Der Versicherungsbedarf ist von Person zu Person verschieden, und wir geben keine Zusicherung, dass unsere Haftungsgrenzen für dich ausreichend sind. Wir sind keine Versicherungsmakler, -vertreter oder -anbieter. Wenn du Fragen zum Versicherungsschutz hast, empfehlen wir dir, deinen Versicherungsvertreter/-makler zu kontaktieren.</p>
+        </div>
+      </div>
+
+      <!-- REGELN & ANFORDERUNGEN -->
+      <div class="policy-card">
+        <div class="policy-icon">⚖️</div>
+        <h2 class="policy-heading">Regeln & Anforderungen</h2>
+
+        <div class="policy-list">
+          <h3>Pünktlichkeit:</h3>
+          <ul>
+            <li>Wenn einige Mitglieder deiner Gruppe pünktlich sind, nehmen wir alle pünktlichen Teilnehmer mit, die die Haftungsausschlüsse ordnungsgemäß unterschrieben haben, auch wenn die Person, die die Reservierung vorgenommen hat, nicht anwesend ist.</li>
+            <li>Für Gäste, die nicht pünktlich zu ihrem Abenteuer erscheinen, gibt es keine Rückerstattung.</li>
+          </ul>
+
+          <h3>Alkohol- & Drogenrichtlinie:</h3>
+          <ul>
+            <li>Es darf absolut kein Alkohol zu deinem Abenteuer mitgebracht werden.</li>
+            <li>Du darfst nicht teilnehmen, wenn dein Guide der Meinung ist, dass du unter dem Einfluss von Alkohol oder Drogen stehst, egal ob legal oder illegal.</li>
+            <li>Kannst du wegen Alkohol- oder Drogenkonsums nicht teilnehmen, gibt es keine Rückerstattung.</li>
+          </ul>
+
+          <h3>Anweisungen des Guides:</h3>
+          <ul>
+            <li>Dein Guide ist da, um dir ein sicheres Abenteuer zu garantieren.</li>
+            <li>Du musst jederzeit alle Anweisungen des Guides befolgen.</li>
+          </ul>
+
+          <h3>Änderungen am Reiseplan:</h3>
+          <ul>
+            <li>Dein Reiseplan ist eine Orientierung, kein Vertrag.</li>
+            <li>Der Reiseplan kann jederzeit vor oder während deines Abenteuers geändert werden.</li>
+            <li>Änderungen am Reiseplan sind kein Grund für eine Rückerstattung.</li>
+          </ul>
+
+          <h3>Bearbeitung von Rückerstattungen:</h3>
+          <ul>
+            <li>Anfallende Rückerstattungen werden an die Person zurückgezahlt, die die ursprüngliche Reservierung vorgenommen hat.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- KONTAKT-CTA -->
+      <div class="policy-cta">
+        <h3>Fragen zu unseren Bedingungen?</h3>
+        <p>Wenn du Fragen zu unseren Stornierungsbedingungen hast, melde dich gerne vor deiner Buchung bei uns.</p>
+        <div class="cta-buttons">
+          <a href="tel:435-219-9447" class="cta-button primary">📞 Ruf (435) 219-9447 an</a>
+          <a href="/de/booking/" class="cta-button secondary">Buche deine Tour</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Mobiler Sticky-Button -->
+<div class="mobile-sticky-cta">
+  <button onclick="location.href='/de/booking/'">Jetzt deine Tour buchen</button>
+</div>
+
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3A, Italian P6,
- * French P8-P6).
+ * French P8-P6, German inline batch).
  * Every locale without a committed variant falls back to English. Callers
  * that don't need locale awareness keep importing `bodyHtml` directly.
  */
@@ -889,5 +1064,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'it') return IT;
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
+  if (locale === 'de') return DE;
   return bodyHtml;
 }

@@ -1,0 +1,100 @@
+---
+// de/about.astro — German about page (P9-inline informal-register translation
+// batch, mirrors French P8-P6 / Portuguese P7-P6 / Italian P6 structurally).
+// Person + TouristInformationCenter schema: translated jobTitle/description/
+// knowsAbout (visible structured content); business-identity fields
+// (name/address/rating) stay byte-identical.
+import { getBodyHtml } from '../../page-content/about';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Dave Wilson",
+      "jobTitle": "Inhaber und Chef-Guide",
+      "description": "Dave Wilson ist Inhaber und Chef-Guide von Adventure Tours Vernal, dem führenden UTV-Tour-Unternehmen im Uintah Basin. Aufgewachsen mit Erkundungstouren durch die Wasatch- und Oquirrh-Berge, entwickelte Dave eine lebenslange Leidenschaft für Outdoor-Abenteuer. Nach dem Umzug nach Vernal, Utah, mit seiner Frau Trudy gründete er Adventure Tours Vernal, um die Naturwunder des Uintah Basin — vom Dinosaur National Monument bis Flaming Gorge — mit Besuchern und Einheimischen zu teilen.",
+      "url": "https://adventuretoursvernal.com/de/about/",
+      "image": "https://adventuretoursvernal.com/images/wilson-family.webp",
+      "worksFor": {
+        "@type": "TouristInformationCenter",
+        "name": "Adventure Tours Vernal",
+        "url": "https://adventuretoursvernal.com"
+      },
+      "knowsAbout": [
+        "UTV-Touren in Vernal, Utah",
+        "Dinosaur National Monument",
+        "Flaming Gorge",
+        "Backcountry-Pisten des Uintah Basin",
+        "Kawasaki KRX 1000 Side-by-Side-UTV-Touren",
+        "Outdoor-Abenteuer in Utah"
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristInformationCenter",
+      "name": "Adventure Tours Vernal",
+      "image": "https://adventuretoursvernal.com/images/logo.webp",
+      "telephone": "+1-435-219-9447",
+      "email": "adventuretoursvernal@gmail.com",
+      "url": "https://adventuretoursvernal.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1935 S 1500 E",
+        "addressLocality": "Vernal",
+        "addressRegion": "UT",
+        "postalCode": "84078",
+        "addressCountry": "US"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "82",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Dave Wilson"
+      }
+    }
+  ]
+`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Über uns | Adventure Tours Vernal — Dave & Trudy Wilson"
+      description="Lerne Dave und Trudy Wilson kennen, die Inhaber von Adventure Tours Vernal, einem lokalen UTV-Tour-Unternehmen in Vernal, Utah. 5.0 Sterne, 82 Bewertungen. Ruf an: (435) 219-9447."
+      path="/de/about/"
+      type="website"
+      image="https://adventuretoursvernal.com/images/wilson-family.webp"
+      ogTitle="Über Adventure Tours Vernal | Lerne die Familie Wilson kennen"
+      ogDescription="Dave und Trudy Wilson teilen ihre Leidenschaft für das Uintah Basin mit geführten Kawasaki-KRX-1000-UTV-Touren in Vernal, Utah. 5 Sterne. Ruf an: (435) 219-9447."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="about" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.about', lang) }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: t('footer.quickLinks', lang),
+      links: [
+        { href: '/de/#tours', label: t('footer.link.ourTours', lang) },
+        { href: '/de/#vehicles', label: t('footer.link.ourFleet', lang) },
+        { href: '/de/#gallery', label: t('footer.link.photoGallery', lang) },
+        { href: '/de/booking/', label: t('cta.bookNow', lang) },
+      ],
+    }}
+  />
+</BaseLayout>

@@ -1352,6 +1352,343 @@ const PT = `
   </script>
 `;
 
+const DE = `
+
+  <!-- Coupon Modal -->
+  <div class="coupon-modal-overlay" id="couponModal"><div class="coupon-modal">
+    <button class="coupon-modal-close" id="couponModalClose">&times;</button>
+    <div class="coupon-modal-icon">🎟️</div>
+    <h2>Adventure Tours Rabatt</h2>
+    <p class="modal-restaurant" id="modalRestaurant"></p>
+    <div class="modal-code-box"><div class="modal-code" id="modalCode"></div><div class="modal-discount" id="modalDiscount"></div></div>
+    <p class="modal-instructions">Zeig diesen Bildschirm deinem Kellner, um deinen Rabatt einzulösen. Gültig für Gäste von Adventure Tours Vernal mit bestätigter Buchung.</p>
+    <div class="modal-branding"><img src="/images/logo.webp" alt="Adventure Tours Vernal" height="40"><span>adventuretoursvernal.com</span></div>
+  </div></div>
+
+  <main class="restaurant-page">
+    <!-- Hero -->
+    <div class="dining-hero"><div class="dining-hero-bg"></div><div class="dining-hero-overlay"></div>
+      <div class="dining-hero-content">
+        <nav aria-label="Brotkrümelnavigation"><a href="/de/">Startseite</a><span>›</span><span style="color:rgba(255,255,255,0.9)">Beste Restaurants in Vernal</span></nav>
+        <h1>Iss wie ein Einheimischer in Vernal, Utah</h1>
+        <p>Unsere Gäste fragen uns jede Woche: <em>"Wo sollen wir essen?"</em> Nach Jahren, die wir hier leben, sind das unsere ehrlichen Empfehlungen — und <strong>du bekommst bei jedem einzelnen exklusive Rabatte</strong>, nur weil du eine Tour buchst.</p>
+      </div>
+    </div>
+
+    <!-- Discount Banner -->
+    <div class="discount-banner">
+      <div class="discount-banner-icon">🎟️</div>
+      <div class="discount-banner-text">
+        <h2>Exklusive Restaurant-Rabatte für Tour-Gäste</h2>
+        <p>Buche eine <a href="/de/booking/" style="color:var(--desert-gold);font-weight:700">UTV-Tour mit Adventure Tours Vernal</a> und schalte <strong>exklusive Gutscheincodes</strong> bei den Restaurants unten frei. Tippe auf <strong>"Dem Kellner zeigen"</strong> bei einer beliebigen Karte, um einen Vollbild-Gutschein auf deinem Handy zu öffnen.</p>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="category-filters" id="categoryFilters">
+      <button class="filter-btn active" data-filter="all">🍽️ Alle Restaurants</button>
+      <button class="filter-btn" data-filter="casual">🍕 Lässig</button>
+      <button class="filter-btn" data-filter="breakfast">☕ Frühstück &amp; Diners</button>
+      <button class="filter-btn" data-filter="steakhouse">🥩 Steakhouses</button>
+      <button class="filter-btn" data-filter="mexican">🌮 Mexikanisch &amp; International</button>
+    </div>
+
+    <!-- Restaurant Grid -->
+    <div class="restaurant-grid" id="restaurantGrid">
+
+      <!-- 4 Brothers Pizza -->
+      <div class="restaurant-card" data-category="casual">
+        <div class="card-image" style="background-image:url('/images/102.webp')"><span class="cuisine-badge">Pizza</span><span class="discount-tag">🎟️ 10% Rabatt</span></div>
+        <div class="card-body">
+          <h3>4 Brothers Pizza</h3>
+          <p class="card-address">📍 1060 Market Dr. #5, Vernal, UT 84078</p>
+          <p class="card-description">Die Pizzeria Nummer eins in der Stadt — solider Boden, großzügige Beläge, und es passt einfach immer. Iss vor Ort oder nimm dir eine Box mit auf dem Rückweg zum Hotel.</p>
+          <div class="card-actions">
+            <a href="tel:+14357892222" class="card-action-btn action-call">📞 Anrufen</a>
+            <a href="https://maps.google.com/?q=4+Brothers+Pizza+Vernal+UT" target="_blank" rel="noopener" class="card-action-btn action-map">📍 Karte</a>
+          </div>
+          <div class="coupon-section">
+            <div class="coupon-label">🎟️ Rabatt für Tour-Gäste</div>
+            <div class="coupon-row"><div class="coupon-code">ATV-PIZZA10</div><button class="coupon-copy-btn" onclick="copyCoupon(this,'ATV-PIZZA10')">Kopieren</button></div>
+            <button class="coupon-copy-btn coupon-show-btn" onclick="showCouponModal('4 Brothers Pizza','ATV-PIZZA10','10% Rabatt auf deine Bestellung')">📱 Dem Kellner zeigen</button>
+            <p class="coupon-note">Gültig mit Buchungsbestätigung von Adventure Tours</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Country Grub -->
+      <div class="restaurant-card" data-category="casual">
+        <div class="card-image" style="background-image:url('/images/103.webp')"><span class="cuisine-badge">Burger</span><span class="discount-tag">🎟️ 10% Rabatt</span></div>
+        <div class="card-body">
+          <h3>Country Grub Hamburger Restaurant</h3>
+          <p class="card-address">📍 2416 W 1500 E, Vernal, UT 84078</p>
+          <p class="card-description">Klassische amerikanische Burger, richtig gemacht — gut gewürzte Patties, knusprige Pommes, und genau die Mahlzeit, die nach einem Tag draußen perfekt passt.</p>
+          <div class="card-actions">
+            <a href="tel:+14357891414" class="card-action-btn action-call">📞 Anrufen</a>
+            <a href="https://maps.google.com/?q=Country+Grub+Vernal+UT" target="_blank" rel="noopener" class="card-action-btn action-map">📍 Karte</a>
+          </div>
+          <div class="coupon-section">
+            <div class="coupon-label">🎟️ Rabatt für Tour-Gäste</div>
+            <div class="coupon-row"><div class="coupon-code">ATV-GRUB10</div><button class="coupon-copy-btn" onclick="copyCoupon(this,'ATV-GRUB10')">Kopieren</button></div>
+            <button class="coupon-copy-btn coupon-show-btn" onclick="showCouponModal('Country Grub','ATV-GRUB10','10% Rabatt auf deine Bestellung')">📱 Dem Kellner zeigen</button>
+            <p class="coupon-note">Gültig mit Buchungsbestätigung von Adventure Tours</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Get Grilled -->
+      <div class="restaurant-card" data-category="casual">
+        <div class="card-image" style="background-image:url('/images/95a.webp')"><span class="cuisine-badge">Sandwiches</span><span class="discount-tag">🎟️ Kostenloses Getränk</span></div>
+        <div class="card-body">
+          <h3>Get Grilled Sandwiches</h3>
+          <p class="card-address">📍 1096 W Hwy 40, Vernal, UT 84078</p>
+          <p class="card-description">Ideal für ein schnelles Mittagessen — frisch gemachte Sandwiches und schneller Service direkt am Highway. Perfekt auf deinem Weg zum oder vom Dinosaur National Monument.</p>
+          <div class="card-actions">
+            <a href="tel:+14357893900" class="card-action-btn action-call">📞 Anrufen</a>
+            <a href="https://maps.google.com/?q=Get+Grilled+Sandwiches+Vernal+UT" target="_blank" rel="noopener" class="card-action-btn action-map">📍 Karte</a>
+          </div>
+          <div class="coupon-section">
+            <div class="coupon-label">🎟️ Rabatt für Tour-Gäste</div>
+            <div class="coupon-row"><div class="coupon-code">ATV-GRILL1</div><button class="coupon-copy-btn" onclick="copyCoupon(this,'ATV-GRILL1')">Kopieren</button></div>
+            <button class="coupon-copy-btn coupon-show-btn" onclick="showCouponModal('Get Grilled Sandwiches','ATV-GRILL1','Kostenloses Getränk zu jedem Sandwich')">📱 Dem Kellner zeigen</button>
+            <p class="coupon-note">Gültig mit Buchungsbestätigung von Adventure Tours</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Abby's Café -->
+      <div class="restaurant-card" data-category="breakfast">
+        <div class="card-image" style="background-image:url('/images/105.webp')"><span class="cuisine-badge">Frühstück</span><span class="discount-tag">🎟️ 10% Rabatt</span></div>
+        <div class="card-body">
+          <h3>Abby's Café</h3>
+          <p class="card-address">📍 73 W Main St., Vernal, UT 84078</p>
+          <p class="card-description">Ein langjähriger Favorit der Einheimischen für Frühstück und Comfort Food. Die Art von Lokal, in dem die Kellnerin die halbe Runde beim Namen kennt. Perfekt vor einer Tour am Morgen.</p>
+          <div class="card-actions">
+            <a href="tel:+14357891366" class="card-action-btn action-call">📞 Anrufen</a>
+            <a href="https://maps.google.com/?q=Abbys+Cafe+Vernal+UT" target="_blank" rel="noopener" class="card-action-btn action-map">📍 Karte</a>
+          </div>
+          <div class="coupon-section">
+            <div class="coupon-label">🎟️ Rabatt für Tour-Gäste</div>
+            <div class="coupon-row"><div class="coupon-code">ATV-ABBY10</div><button class="coupon-copy-btn" onclick="copyCoupon(this,'ATV-ABBY10')">Kopieren</button></div>
+            <button class="coupon-copy-btn coupon-show-btn" onclick="showCouponModal('Abby\\'s Café','ATV-ABBY10','10% Rabatt aufs Frühstück')">📱 Dem Kellner zeigen</button>
+            <p class="coupon-note">Gültig mit Buchungsbestätigung von Adventure Tours</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Betty's Café -->
+      <div class="restaurant-card" data-category="breakfast">
+        <div class="card-image" style="background-image:url('/images/97a.webp')"><span class="cuisine-badge">Diner</span><span class="discount-tag">🎟️ Kostenloser Kaffee</span></div>
+        <div class="card-body">
+          <h3>Betty's Café</h3>
+          <p class="card-address">📍 416 W Main St., Vernal, UT 84078</p>
+          <p class="card-description">Diner-Atmosphäre alter Schule mit deftigen Gerichten und freundlichem Service. Betty's versorgt Vernal schon seit Jahren, und die Portionen sind nicht kleiner geworden.</p>
+          <div class="card-actions">
+            <a href="tel:+14357810827" class="card-action-btn action-call">📞 Anrufen</a>
+            <a href="https://maps.google.com/?q=Bettys+Cafe+Vernal+UT" target="_blank" rel="noopener" class="card-action-btn action-map">📍 Karte</a>
+          </div>
+          <div class="coupon-section">
+            <div class="coupon-label">🎟️ Rabatt für Tour-Gäste</div>
+            <div class="coupon-row"><div class="coupon-code">ATV-BETTY1</div><button class="coupon-copy-btn" onclick="copyCoupon(this,'ATV-BETTY1')">Kopieren</button></div>
+            <button class="coupon-copy-btn coupon-show-btn" onclick="showCouponModal('Betty\\'s Café','ATV-BETTY1','Kostenloser Kaffee zu jeder Mahlzeit')">📱 Dem Kellner zeigen</button>
+            <p class="coupon-note">Gültig mit Buchungsbestätigung von Adventure Tours</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Swain's Steakhouse -->
+      <div class="restaurant-card" data-category="steakhouse">
+        <div class="card-image" style="background-image:url('/images/99a.webp')"><span class="cuisine-badge">Steakhouse</span><span class="discount-tag">🎟️ 15% Rabatt</span></div>
+        <div class="card-body">
+          <h3>Swain's Steakhouse</h3>
+          <p class="card-address">📍 29 S Vernal Ave., Vernal, UT 84078</p>
+          <p class="card-description">Das Nächste an gehobener Küche, das du in Vernal findest — und es ist wirklich gut. Wenn du dir nur ein Essen mit Bedienung in der Stadt gönnst, dann dieses. Die Steaks werden genau richtig zubereitet.</p>
+          <div class="card-actions">
+            <a href="tel:+14357892671" class="card-action-btn action-call">📞 Anrufen</a>
+            <a href="https://maps.google.com/?q=Swains+Steakhouse+Vernal+UT" target="_blank" rel="noopener" class="card-action-btn action-map">📍 Karte</a>
+          </div>
+          <div class="coupon-section">
+            <div class="coupon-label">🎟️ Rabatt für Tour-Gäste</div>
+            <div class="coupon-row"><div class="coupon-code">ATV-STEAK15</div><button class="coupon-copy-btn" onclick="copyCoupon(this,'ATV-STEAK15')">Kopieren</button></div>
+            <button class="coupon-copy-btn coupon-show-btn" onclick="showCouponModal('Swain\\'s Steakhouse','ATV-STEAK15','15% Rabatt auf dein Abendessen')">📱 Dem Kellner zeigen</button>
+            <p class="coupon-note">Gültig mit Buchungsbestätigung von Adventure Tours</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7-11 Ranch -->
+      <div class="restaurant-card" data-category="steakhouse">
+        <div class="card-image" style="background-image:url('/images/100a.webp')"><span class="cuisine-badge">Western</span><span class="discount-tag">🎟️ 10% Rabatt</span></div>
+        <div class="card-body">
+          <h3>7-11 Ranch Restaurant</h3>
+          <p class="card-address">📍 77 E Main St., Vernal, UT 84078</p>
+          <p class="card-description">Rustikaler Western-Charme, deftige Portionen, und genau die Atmosphäre, die dich daran erinnert, dass du im echten ländlichen Westen bist. Toll für Familien.</p>
+          <div class="card-actions">
+            <a href="tel:+14357891170" class="card-action-btn action-call">📞 Anrufen</a>
+            <a href="https://maps.google.com/?q=7-11+Ranch+Restaurant+Vernal+UT" target="_blank" rel="noopener" class="card-action-btn action-map">📍 Karte</a>
+          </div>
+          <div class="coupon-section">
+            <div class="coupon-label">🎟️ Rabatt für Tour-Gäste</div>
+            <div class="coupon-row"><div class="coupon-code">ATV-RANCH10</div><button class="coupon-copy-btn" onclick="copyCoupon(this,'ATV-RANCH10')">Kopieren</button></div>
+            <button class="coupon-copy-btn coupon-show-btn" onclick="showCouponModal('7-11 Ranch Restaurant','ATV-RANCH10','10% Rabatt auf deine Bestellung')">📱 Dem Kellner zeigen</button>
+            <p class="coupon-note">Gültig mit Buchungsbestätigung von Adventure Tours</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Red Canyon Lodge -->
+      <div class="restaurant-card" data-category="steakhouse">
+        <div class="card-image" style="background-image:url('/images/101a.webp')"><span class="cuisine-badge">Lodge-Küche</span><span class="discount-tag">🎟️ 10% Rabatt</span></div>
+        <div class="card-body">
+          <h3>Red Canyon Lodge</h3>
+          <p class="card-address">📍 2450 Red Canyon Rd, Dutch John, UT 84023</p>
+          <p class="card-description">Etwa eine Stunde nördlich in Richtung Flaming Gorge — aber allein die Landschaft macht die Fahrt wert. Gutes Essen in einer beeindruckenden Berghütten-Kulisse.</p>
+          <div class="card-actions">
+            <a href="tel:+14358892090" class="card-action-btn action-call">📞 Anrufen</a>
+            <a href="https://www.redcanyonlodge.com" target="_blank" rel="noopener" class="card-action-btn action-website">🌐 Website</a>
+            <a href="https://maps.google.com/?q=Red+Canyon+Lodge+Dutch+John+UT" target="_blank" rel="noopener" class="card-action-btn action-map">📍 Karte</a>
+          </div>
+          <div class="coupon-section">
+            <div class="coupon-label">🎟️ Rabatt für Tour-Gäste</div>
+            <div class="coupon-row"><div class="coupon-code">ATV-CANYON10</div><button class="coupon-copy-btn" onclick="copyCoupon(this,'ATV-CANYON10')">Kopieren</button></div>
+            <button class="coupon-copy-btn coupon-show-btn" onclick="showCouponModal('Red Canyon Lodge','ATV-CANYON10','10% Rabatt aufs Essen')">📱 Dem Kellner zeigen</button>
+            <p class="coupon-note">Gültig mit Buchungsbestätigung von Adventure Tours</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Plaza Mexicana -->
+      <div class="restaurant-card" data-category="mexican">
+        <div class="card-image" style="background-image:url('/images/102a.webp')"><span class="cuisine-badge">Mexikanisch</span><span class="discount-tag">🎟️ 10% Rabatt</span></div>
+        <div class="card-body">
+          <h3>Plaza Mexicana</h3>
+          <p class="card-address">📍 55 E Main St., Vernal, UT 84078</p>
+          <p class="card-description">Authentische Aromen, einladende Atmosphäre, und genau das Restaurant, zu dem Familien bei jedem Besuch in Vernal wieder zurückkehren. Enchiladas und Chile Verde sind die Highlights.</p>
+          <div class="card-actions">
+            <a href="tel:+14357893340" class="card-action-btn action-call">📞 Anrufen</a>
+            <a href="https://maps.google.com/?q=Plaza+Mexicana+Vernal+UT" target="_blank" rel="noopener" class="card-action-btn action-map">📍 Karte</a>
+          </div>
+          <div class="coupon-section">
+            <div class="coupon-label">🎟️ Rabatt für Tour-Gäste</div>
+            <div class="coupon-row"><div class="coupon-code">ATV-PLAZA10</div><button class="coupon-copy-btn" onclick="copyCoupon(this,'ATV-PLAZA10')">Kopieren</button></div>
+            <button class="coupon-copy-btn coupon-show-btn" onclick="showCouponModal('Plaza Mexicana','ATV-PLAZA10','10% Rabatt auf deine Bestellung')">📱 Dem Kellner zeigen</button>
+            <p class="coupon-note">Gültig mit Buchungsbestätigung von Adventure Tours</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mi Hacienda -->
+      <div class="restaurant-card" data-category="mexican">
+        <div class="card-image" style="background-image:url('/images/103a.webp')"><span class="cuisine-badge">Mexikanisch</span><span class="discount-tag">🎟️ 15% Rabatt</span></div>
+        <div class="card-body">
+          <h3>Mi Hacienda</h3>
+          <p class="card-address">📍 2075 US-40, Suite A, Vernal, UT 84078 (Towne Center)</p>
+          <p class="card-description">Eines der beliebtesten Restaurants der Stadt, ganz einfach. Tolle Tacos, solide Enchiladas, und die Margaritas sind genau das, was du nach einem staubigen Nachmittag auf den Pisten willst.</p>
+          <div class="card-actions">
+            <a href="tel:+14357810099" class="card-action-btn action-call">📞 (435) 781-0099</a>
+            <a href="https://maps.google.com/?q=Mi+Hacienda+Vernal+UT" target="_blank" rel="noopener" class="card-action-btn action-map">📍 Karte</a>
+          </div>
+          <div class="coupon-section">
+            <div class="coupon-label">🎟️ Rabatt für Tour-Gäste</div>
+            <div class="coupon-row"><div class="coupon-code">ATV-MIH15</div><button class="coupon-copy-btn" onclick="copyCoupon(this,'ATV-MIH15')">Kopieren</button></div>
+            <button class="coupon-copy-btn coupon-show-btn" onclick="showCouponModal('Mi Hacienda','ATV-MIH15','15% Rabatt auf deine Bestellung')">📱 Dem Kellner zeigen</button>
+            <p class="coupon-note">Gültig mit Buchungsbestätigung von Adventure Tours</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Canton Canyon City -->
+      <div class="restaurant-card" data-category="mexican">
+        <div class="card-image" style="background-image:url('/images/104a.png')"><span class="cuisine-badge">Chinesisch</span><span class="discount-tag">🎟️ 10% Rabatt</span></div>
+        <div class="card-body">
+          <h3>Canton Canyon City Chinese Restaurant</h3>
+          <p class="card-address">📍 1175 W Hwy 40, Vernal, UT 84078</p>
+          <p class="card-description">Eine zuverlässige Option für chinesische Küche mit großzügigen Portionen. Wenn du mal eine Pause von Burgern und Steaks brauchst, liefert Canton genau das. Familienfreundliche Speisekarte.</p>
+          <div class="card-actions">
+            <a href="tel:+14357891388" class="card-action-btn action-call">📞 Anrufen</a>
+            <a href="https://maps.google.com/?q=Canton+Canyon+City+Vernal+UT" target="_blank" rel="noopener" class="card-action-btn action-map">📍 Karte</a>
+          </div>
+          <div class="coupon-section">
+            <div class="coupon-label">🎟️ Rabatt für Tour-Gäste</div>
+            <div class="coupon-row"><div class="coupon-code">ATV-CANTON10</div><button class="coupon-copy-btn" onclick="copyCoupon(this,'ATV-CANTON10')">Kopieren</button></div>
+            <button class="coupon-copy-btn coupon-show-btn" onclick="showCouponModal('Canton Canyon City','ATV-CANTON10','10% Rabatt auf deine Bestellung')">📱 Dem Kellner zeigen</button>
+            <p class="coupon-note">Gültig mit Buchungsbestätigung von Adventure Tours</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- La Cabaña -->
+      <div class="restaurant-card" data-category="mexican">
+        <div class="card-image" style="background-image:url('/images/98a.webp')"><span class="cuisine-badge">Mexikanisch</span><span class="discount-tag">🎟️ 10% Rabatt</span></div>
+        <div class="card-body">
+          <h3>La Cabaña</h3>
+          <p class="card-address">📍 120 E Main St, Vernal, UT 84078</p>
+          <p class="card-description">Authentisches mexikanisches Essen mitten in der Innenstadt — brutzelnde Fajitas, von Hand gerollte Enchiladas und Street-Style-Tacos. Ein langjähriger Favorit der Einheimischen für eine deftige Mahlzeit nach der Tour.</p>
+          <div class="card-actions">
+            <a href="tel:+14357893151" class="card-action-btn action-call">📞 Anrufen</a>
+            <a href="https://maps.google.com/?q=La+Cabana+Restaurant+Vernal+UT" target="_blank" rel="noopener" class="card-action-btn action-map">📍 Karte</a>
+          </div>
+          <div class="coupon-section">
+            <div class="coupon-label">🎟️ Rabatt für Tour-Gäste</div>
+            <div class="coupon-row"><div class="coupon-code">ATV-CABANA10</div><button class="coupon-copy-btn" onclick="copyCoupon(this,'ATV-CABANA10')">Kopieren</button></div>
+            <button class="coupon-copy-btn coupon-show-btn" onclick="showCouponModal('La Cabaña','ATV-CABANA10','10% Rabatt auf deine Bestellung')">📱 Dem Kellner zeigen</button>
+            <p class="coupon-note">Gültig mit Buchungsbestätigung von Adventure Tours</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Tips -->
+    <section>
+      <div class="section-header"><h2 class="section-title">Tipps fürs Essen in Vernal</h2><p class="section-subtitle">Ein paar Dinge, die du wissen solltest, bevor du losziehst zum Essen.</p></div>
+      <div class="rest-tips-grid">
+        <div class="rest-tip-card"><div class="rest-tip-icon">⏰</div><h3>Plane um die Tour-Zeiten herum</h3><p>Unsere <a href="/de/utv/" style="color:var(--burnt-orange);font-weight:600">UTV-Touren</a> dauern etwa drei Stunden. Wer morgens fährt, hat am frühen Nachmittag Hunger. Abendtour? Dann geht's direkt zu Swain's oder zur Plaza Mexicana.</p></div>
+        <div class="rest-tip-card"><div class="rest-tip-icon">📅</div><h3>An Wochenenden wird's voll</h3><p>Beliebte Lokale sind freitags und samstags abends schnell voll — besonders im Sommer. Bist du mit einer größeren Gruppe unterwegs? Ruf vorher an, um einen Tisch bei Swain's oder im 7-11 Ranch zu reservieren.</p></div>
+        <div class="rest-tip-card"><div class="rest-tip-icon">💵</div><h3>Bargeld funktioniert immer noch</h3><p>Die meisten Restaurants akzeptieren Karten, aber ein paar kleinere Cafés freuen sich über Bargeld. Hab etwas dabei, wenn du im ländlichen Utah unterwegs bist.</p></div>
+        <div class="rest-tip-card"><div class="rest-tip-icon">🦕</div><h3>Auf dem Weg zum Monument?</h3><p>Iss etwas in der Innenstadt an der Main Street, bevor es nach Osten zum <a href="https://www.nps.gov/dino" target="_blank" rel="noopener" style="color:var(--burnt-orange);font-weight:600">Dinosaur National Monument</a> geht. La Cabaña und Plaza Mexicana sind schnelle, deftige Stopps auf dem Weg dorthin.</p></div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="article-faq" style="background:white;border-radius:25px;padding:50px 45px;box-shadow:0 20px 60px rgba(0,0,0,0.08);border:1px solid rgba(212,118,78,0.1);margin-bottom:50px">
+      <h2 style="font-family:var(--font-heading);font-size:1.6rem;font-weight:700;color:var(--charcoal);text-align:center;margin-bottom:30px;border:none;padding:0">Häufig gestellte Fragen</h2>
+      <div class="faq-item"><h3>Was sind die besten Restaurants in Vernal, Utah?</h3><p>Zu den Top-Empfehlungen gehören 4 Brothers Pizza für zwanglose Küche, Betty's Café fürs Frühstück, Swain's Steakhouse für ein Abendessen mit Bedienung, und Plaza Mexicana für authentisches mexikanisches Essen. Tour-Gäste bekommen bei jedem exklusive Rabattcodes.</p></div>
+      <div class="faq-item"><h3>Gibt es Restaurants in der Nähe des Dinosaur National Monument?</h3><p>Ja — Vernal ist die Tor-Stadt, und alle Restaurants auf dieser Seite liegen nur eine kurze Fahrt vom Monument entfernt. Lokale in der Innenstadt wie La Cabaña und Plaza Mexicana an der Main Street sind ein einfacher Stopp auf dem Weg nach Osten zum Quarry Visitor Center.</p></div>
+      <div class="faq-item"><h3>Wie benutze ich die Restaurant-Rabattcodes von Adventure Tours?</h3><p>Jede Restaurant-Karte hat einen eigenen Gutscheincode. Tippe auf "Dem Kellner zeigen", um einen Vollbild-Gutschein auf deinem Handy anzuzeigen, oder nenne den Code bei der Bestellung. Gültig mit einer bestätigten Buchung bei Adventure Tours.</p></div>
+      <div class="faq-item"><h3>Wo sollte ich nach einer UTV-Tour essen?</h3><p>Nach einer dreistündigen Tour wollen die meisten Gäste etwas Deftiges. 4 Brothers Pizza, Country Grub und 7-11 Ranch sind beliebte Ziele nach der Fahrt, mit großzügigen Portionen.</p></div>
+      <div class="faq-item"><h3>Gibt es gehobene Küche in Vernal?</h3><p>Vernal ist eher zwanglos unterwegs, aber Swain's Steakhouse und Red Canyon Lodge in der Nähe von Flaming Gorge bieten gehobene Erlebnisse mit Bedienung, die einen Besuch wert sind.</p></div>
+    </section>
+
+    <!-- CTA -->
+    <div class="article-cta" style="border-radius:25px">
+      <h3>Bereit, Vernal zu erkunden?</h3>
+      <p>Buche eine geführte UTV-Tour durch uralte Petroglyphen, Red-Rock-Canyons und Wüstenpisten — und schalte danach exklusive Restaurant-Rabatte bei jedem Restaurant auf dieser Seite frei.</p>
+      <a href="/de/booking/" class="cta-btn">Buche deine Tour</a>
+      <a href="tel:+14352199447" class="cta-phone">📞 (435) 219-9447</a>
+    </div>
+
+    <!-- Related -->
+    <div class="related-articles">
+      <h3>Weitere Reiseführer für Vernal</h3>
+      <div class="related-grid">
+        <a href="/de/utv/best-utv-trails-vernal/" class="related-card"><h4>Beste UTV-Pisten in der Nähe von Vernal</h4><p>Top-Offroad-Pisten im Uintah Basin — für Einsteiger bis Profis.</p></a>
+        <a href="/de/guides/vernal-weather-guide/" class="related-card"><h4>Wetterführer für Vernal</h4><p>Plane deine Outdoor-Aktivitäten rund um das saisonale Wetter in Vernal.</p></a>
+        <a href="/de/guides/what-to-wear-utv-tour/" class="related-card"><h4>Was du bei einer UTV-Tour anziehen solltest</h4><p>Schichten, Sonnenschutz und Schuhwerk für Wüstentouren.</p></a>
+        <a href="/de/dinosaur-national-monument/petroglyphs-rock-art-vernal/" class="related-card"><h4>Petroglyphen &amp; Felskunst</h4><p>Uralte Felskunst der Fremont und Ute auf unseren geführten Touren.</p></a>
+      </div>
+    </div>
+  </main>
+
+  <script is:inline>
+    document.querySelectorAll('.filter-btn').forEach(function(btn){btn.addEventListener('click',function(){document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');var f=btn.dataset.filter;document.querySelectorAll('.restaurant-card').forEach(function(c){if(f==='all'||c.dataset.category===f){c.classList.remove('hidden');c.style.animation='fadeInUp 0.4s ease forwards'}else{c.classList.add('hidden')}})})});
+    function copyCoupon(btn,code){navigator.clipboard?navigator.clipboard.writeText(code).then(function(){btn.textContent='✓ Kopiert!';btn.classList.add('copied');setTimeout(function(){btn.textContent='Kopieren';btn.classList.remove('copied')},2000)}):function(){var e=document.createElement('textarea');e.value=code;document.body.appendChild(e);e.select();document.execCommand('copy');document.body.removeChild(e);btn.textContent='✓ Kopiert!';btn.classList.add('copied');setTimeout(function(){btn.textContent='Kopieren';btn.classList.remove('copied')},2000)}()}
+    function showCouponModal(r,c,d){document.getElementById('modalRestaurant').textContent=r;document.getElementById('modalCode').textContent=c;document.getElementById('modalDiscount').textContent=d;document.getElementById('couponModal').classList.add('visible');document.body.style.overflow='hidden'}
+    document.getElementById('couponModalClose').addEventListener('click',function(){document.getElementById('couponModal').classList.remove('visible');document.body.style.overflow=''});
+    document.getElementById('couponModal').addEventListener('click',function(e){if(e.target===e.currentTarget){document.getElementById('couponModal').classList.remove('visible');document.body.style.overflow=''}});
+  </script>
+`;
+
 const FR = `
 
   <!-- Coupon Modal -->
@@ -1699,5 +2036,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'it') return IT;
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
+  if (locale === 'de') return DE;
   return bodyHtml;
 }

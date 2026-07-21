@@ -1,0 +1,173 @@
+---
+// de/faq.astro — German FAQ page (P9-inline batch, mirrors fr/faq.astro).
+// Mirrors src/pages/faq.astro. FAQPage schema mirrors the visible German
+// FAQ below (translated name/text for all 15 questions), matching the
+// existing "schema mirrors visible FAQ verbatim" convention.
+import { getBodyHtml } from '../../page-content/faq';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../config/site';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Kann ich meine eigene Maschine für die Touren mitbringen?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ja! Wenn du deine eigene Maschine mitbringst, sind individuellere und sogar extremere Touren möglich. Adventure Tours Vernal stellt Walkie-Talkies zur Verfügung und bietet auf den anspruchsvollsten Streckenabschnitten einfachere Alternativen an. Ruf uns an oder schreib uns eine E-Mail und beschreibe, welche Art von Tour du machen möchtest. Sicherheit hat oberste Priorität, dicht gefolgt vom Spaß."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Kann ich eine Gruppe zu den ATV-Touren in Vernal mitbringen?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Auf jeden Fall! Adventure Tours Vernal heißt Gruppentouren jeder Größe herzlich willkommen. Kontaktiere uns, um die Bedürfnisse deiner Gruppe zu besprechen — einschließlich zusätzlicher Ausflugsziele, Restaurants, Hotelunterkünfte, Bars, Nachtleben und Aktivitäten für Kinder im Uintah Basin. Ruf an: (435) 219-9447."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wie sieht es mit dem Wetter während der ATV-Touren aus?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal fährt bei Sonne wie bei Regen. Bei extremen Wetterbedingungen oder unvorhergesehenen Umständen hast du jedoch die Möglichkeit, deinen Termin zu verschieben oder eine vollständige Erstattung zu erhalten."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was sollte ich für eine ATV-Tour in Vernal mitbringen?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Bring Sonnenbrille, Hut, Kamera, Jacke und geschlossene Schuhe mit. Zieh dich im Zwiebellook an, da die Temperatur schwanken kann. Adventure Tours Vernal stellt Wasser und einen kleinen Snack sowie Helme und Sicherheitsausrüstung bereit. Sonnencreme, Insektenschutzmittel und Lippenbalsam werden empfohlen."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wann sollte ich zu meiner ATV-Tour ankommen?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Komm 30 Minuten vor der Abfahrtszeit zu jeder Tour. Wir starten erst, wenn die komplette Sicherheitseinweisung abgeschlossen ist. Wenn du zu Beginn der Einweisung nicht anwesend bist, kannst du deinen Platz auf der Tour verlieren — eine Erstattung ist in diesem Fall nicht möglich."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wie alt muss ich für die ATV-Touren sein?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Um die Fahrzeuge von Adventure Tours Vernal zu fahren, musst du mindestens 18 Jahre alt sein. Als Mitfahrer musst du mindestens 2 Jahre alt sein."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wie lauten die Stornierungsbedingungen für die ATV-Touren?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal hat detaillierte Stornierungsbedingungen. Besuch die Seite mit den Stornierungsbedingungen auf adventuretoursvernal.com oder ruf (435) 219-9447 an, um alle Details zu Stornierungen und Anzahlungen zu erfahren."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was kosten die ATV-Touren in Vernal, Utah?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal bietet eine geführte 3-stündige Tour auf Kawasaki-KRX-1000-Side-by-Sides an: $349 pro Fahrzeug, mit Platz für 2 Mitfahrer. Du kannst einen dritten Mitfahrer für $125 hinzubuchen oder die Tour für $99 pro Stunde und Fahrzeug verlängern. Es gilt ein Minimum von 3 Personen, Gruppen bis zu 12 Gästen (6 Fahrzeuge) sind willkommen. Ruf (435) 219-9447 an, um die Verfügbarkeit zu erfahren."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Brauche ich Erfahrung, um ein ATV in Vernal zu fahren?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Für die Touren in Vernal ist keine ATV-Vorerfahrung nötig. Adventure Tours Vernal heißt absolute Anfänger herzlich willkommen und bietet vor jeder Tour eine vollständige Sicherheitseinweisung an. Erfahrene Guides begleiten dich Schritt für Schritt bei der Bedienung der Kawasaki-KRX-1000-Side-by-Sides. Alle Erfahrungsstufen sind willkommen."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Kann man während einer ATV-Tour das Dinosaur National Monument besuchen?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ja. Die geführte 3-stündige UTV-Tour von Adventure Tours Vernal erkundet Backcountry-Pisten in der Nähe des Dinosaur National Monument, einschließlich uralter Felsformationen und Petroglyphen. Die berühmte Wand aus Dinosaurierknochen des Monuments ist eine eigenständige Sehenswürdigkeit des National Park Service; viele Besucher kombinieren einen Vormittag im Monument mit einer nachmittäglichen UTV-Tour durch das umliegende Backcountry des Landes der Dinosaurier."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was ist das beste ATV-Tourunternehmen in Vernal, Utah?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal ist das einzige Unternehmen für geführte Kawasaki-KRX-1000-Touren in Vernal, Utah. Wir bieten exklusiven Zugang zu versteckten Pisten, Petroglyphen, den Verstecken von Butch Cassidy und Panoramabögen. Erfahrene lokale Guides, professionelle Sicherheitsausrüstung, und alle Erfahrungsstufen sind willkommen. Täglich von 7 bis 19 Uhr geöffnet. Ruf an: (435) 219-9447."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wie lange dauern die ATV-Touren in Vernal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal bietet eine geführte Standardtour von etwa 3 Stunden an. Möchtest du mehr Zeit auf der Piste? Du kannst deine Tour für $99 pro Stunde und Fahrzeug verlängern. Ruf (435) 219-9447 an, um eine längere Tour zu organisieren."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Sind die ATV-Touren in Vernal familienfreundlich?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ja. Die geführte Tour ist familienfreundlich, mit einer vollständigen Sicherheitseinweisung vor jeder Abfahrt und Mitfahrern ab 2 Jahren. Jeder Kawasaki KRX 1000 bietet Platz für 2 Mitfahrer, daher buchen Familien oft mehrere Fahrzeuge, um gemeinsam zu fahren — bis zu 6 Fahrzeuge und 12 Gäste pro Tour. Erfahrung ist nicht nötig — eine vollständige Sicherheitseinweisung ist inbegriffen."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wie sind die Öffnungszeiten von Adventure Tours Vernal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal ist täglich von 7:00 bis 19:00 Uhr Rocky-Mountain-Zeit geöffnet, 7 Tage die Woche. Ruf (435) 219-9447 an, um deine ATV-Tour zu buchen, oder besuch adventuretoursvernal.com."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Welche Touren bietet Adventure Tours Vernal an?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal bietet eine geführte 3-stündige Tour auf Kawasaki-KRX-1000-Side-by-Sides in Vernal, Utah, mit Auswahl aus fünf Pistennetzen — Doc's Beach, Moonshine Arch, Ashley Gorge, Outlaw Trail und Asphalt Ridge — die bei der Buchung ausgewählt werden. Jede Tour beinhaltet erfahrene lokale Guides, eine vollständige Sicherheitseinweisung und Sicherheitsausrüstung."
+        }
+      }
+    ]
+  }
+`;
+---
+<BaseLayout bodyClass="faq-page-body">
+  <Fragment slot="head">
+    <Seo
+      title="FAQ | UTV-Touren in Vernal, Utah | Adventure Tours Vernal"
+      description="Antworten auf häufig gestellte Fragen zu geführten UTV-Touren in Vernal, Utah. Mindestalter, Preise, was mitzubringen ist, Wetter und mehr. Ruf an: (435) 219-9447."
+      path="/de/faq/"
+      type="website"
+      ogTitle="Häufig gestellte Fragen — Adventure Tours Vernal | Geführte UTV-Touren in Utah"
+      ogDescription="Alles, was du vor deiner geführten Kawasaki-KRX-1000-UTV-Tour in Vernal, Utah, wissen musst. Altersgrenzen, Preise, was mitzubringen ist und mehr."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="faq" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.faq', lang) }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: t('footer.quickLinks', lang),
+      links: [
+        { href: '/de/#tours', label: t('footer.link.ourTours', lang) },
+        { href: '/de/#vehicles', label: t('footer.link.ourFleet', lang) },
+        { href: '/de/#gallery', label: t('footer.link.photoGallery', lang) },
+        { href: '/de/booking/', label: t('cta.bookNow', lang) },
+      ],
+    }}
+  />
+</BaseLayout>

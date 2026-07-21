@@ -1,0 +1,173 @@
+---
+// de/index.astro — German homepage (P9-inline batch, mirrors fr/index.astro).
+// Mirrors src/pages/index.astro exactly; only Seo/schema copy and the
+// page-content locale differ. lang is URL-derived ('de'), same as every
+// other page — no new routing/lang-prop mechanism introduced.
+import { getBodyHtml } from "../../page-content/home";
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import { SITE } from '../../config/site';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+// TouristInformationCenter + OfferCatalog structured data — translated
+// name/description fields; business identity fields (name, url root,
+// address, geo, rating) stay byte-identical to the English page (same
+// business entity, not page-specific copy).
+const schema = `
+  {
+    "@context": "https://schema.org",
+    "@type": "TouristInformationCenter",
+    "name": "Adventure Tours Vernal",
+    "image": "https://adventuretoursvernal.com/images/logo.webp",
+    "telephone": "+1-435-219-9447",
+    "email": "adventuretoursvernal@gmail.com",
+    "url": "https://adventuretoursvernal.com",
+    "priceRange": "$$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1935 S 1500 E",
+      "addressLocality": "Vernal",
+      "addressRegion": "UT",
+      "postalCode": "84078",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 40.4555,
+      "longitude": -109.5287
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"
+      ],
+      "opens": "07:00",
+      "closes": "19:00"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "82",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "employee": {
+      "@type": "Person",
+      "name": "Dave Wilson",
+      "jobTitle": "Inhaber und Chef-Guide",
+      "description": "Dave Wilson ist Inhaber und Chef-Guide von Adventure Tours Vernal, einem lokal geführten UTV-Tour-Unternehmen im Uintah Basin. Dave kennt sich bestens mit den Backcountry-Pisten von Vernal, dem Dinosaur National Monument und dem Hochwüstengelände von Utah aus.",
+      "url": "https://adventuretoursvernal.com/de/about/"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Geführte UTV- und Side-by-Side-Touren — Vernal, Utah",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "UTV-Tour zu Doc's Beach",
+            "description": "Geführtes Side-by-Side-Abenteuer zu Doc's Beach, mit Offroad-Pisten, sandigem Wüstengelände und Panoramablicken auf das Uintah Basin in der Nähe von Vernal, Utah.",
+            "provider": { "@type": "LocalBusiness", "name": "Adventure Tours Vernal" },
+            "areaServed": "Vernal, Utah"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "UTV-Tour zu Moonshine Arch",
+            "description": "Geführte Kawasaki-KRX-1000-Tour zu Moonshine Arch, durch die roten Felscanyons und Hochwüsten-Plateaus von Utah in der Nähe von Vernal, Utah.",
+            "provider": { "@type": "LocalBusiness", "name": "Adventure Tours Vernal" },
+            "areaServed": "Vernal, Utah"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "UTV-Tour zur Ashley Gorge",
+            "description": "Geführte Side-by-Side-Tour durch den spektakulären Canyon-Korridor der Ashley Gorge, mit imposanten Sandsteinwänden und Flusstal-Landschaft in der Nähe von Vernal, Utah.",
+            "provider": { "@type": "LocalBusiness", "name": "Adventure Tours Vernal" },
+            "areaServed": "Vernal, Utah"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "UTV-Tour auf dem Outlaw Trail",
+            "description": "Geführte UTV-Tour durchs Backcountry entlang des historischen Outlaw Trail von Utah, durch Canyon-Gelände, das einst von Butch Cassidys Wild Bunch genutzt wurde, in der Nähe von Vernal, Utah.",
+            "provider": { "@type": "LocalBusiness", "name": "Adventure Tours Vernal" },
+            "areaServed": "Vernal, Utah"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "UTV-Tour auf Asphalt Ridge",
+            "description": "Geführte Kawasaki-KRX-1000-Tour entlang des Kamms von Asphalt Ridge, mit Panoramablicken auf das Land der Dinosaurier und die Uintah Mountains in der Nähe von Vernal, Utah.",
+            "provider": { "@type": "LocalBusiness", "name": "Adventure Tours Vernal" },
+            "areaServed": "Vernal, Utah"
+          }
+        }
+      ]
+    }
+  }
+`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Geführte UTV-Touren in Vernal, Utah | Adventure Tours Vernal"
+      description="Adventure Tours Vernal bietet geführte Kawasaki-KRX-1000-UTV-Touren durch das Land der Dinosaurier. 5 Sterne. Täglich geöffnet, 7-19 Uhr. Ruf an: (435) 219-9447."
+      path="/de/"
+      type="website"
+      ogTitle="Adventure Tours Vernal | Geführte UTV-Touren im Land der Dinosaurier in Utah"
+      ogDescription="Geführte Kawasaki-KRX-1000-Touren durchs Backcountry von Vernal, Utah. 5.0 Sterne, 82 Bewertungen. Ruf an: (435) 219-9447, um zu buchen."
+      twitterTitle="Adventure Tours Vernal | Geführte UTV-Touren in Utah"
+      twitterDescription="Geführte Kawasaki-KRX-1000-Touren durchs Backcountry von Vernal. 5.0 Sterne, 82 Bewertungen."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="home" />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: t('footer.ourTrails', lang),
+      links: [
+        { href: '#tours', label: "Doc's Beach" },
+        { href: '#tours', label: 'Moonshine Arch' },
+        { href: '#tours', label: 'Ashley Gorge' },
+        { href: '#tours', label: 'Outlaw Trail' },
+        { href: '#tours', label: 'Asphalt Ridge' },
+        { href: '/de/booking/', label: t('cta.bookNow', lang), class: 'nav-book-btn' },
+      ],
+    }}
+    contact={{ emailAsLink: true }}
+    info={{
+      heading: t('footer.information', lang),
+      links: [
+        { href: '/de/cancellation-policy/', label: t('nav.cancellationPolicy', lang) },
+        { href: '/de/privacy-policy/', label: t('nav.privacyPolicy', lang) },
+        { href: '/de/faq/', label: t('nav.faq', lang) },
+        { href: '/de/safety-guidelines/', label: t('nav.safetyGuidelines', lang) },
+        { href: '/de/guides/what-to-bring/', label: t('nav.whatToBring', lang) },
+      ],
+      secondHeading: t('section.exploreVernal', lang),
+      secondLinks: [
+        { href: '/de/utv/', label: t('footer.link.utvTrailsTours', lang) },
+        { href: '/de/things-to-do/', label: t('footer.link.thingsToDo', lang) },
+        { href: '/de/dinosaur-national-monument/', label: t('footer.link.dinosaurNationalMonument', lang) },
+        { href: '/de/guides/', label: t('footer.link.guides', lang) },
+        { href: '/de/from/salt-lake-city/', label: t('footer.link.visitingFromSLC', lang) },
+      ],
+    }}
+  />
+</BaseLayout>

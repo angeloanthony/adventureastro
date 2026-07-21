@@ -301,6 +301,12 @@ const DE_SLUGS = new Set([
   'things-to-do/vernal-utah-attractions', 'things-to-do/fun-things-to-do-vernal-utah-kids',
   'dinosaur-national-monument/visiting-dinosaur-national-monument',
   'dinosaur-national-monument/petroglyphs-rock-art-vernal',
+  // P9-inline — German inline pages (home, commercial, activity-hub pillars,
+  // gateway pages). Mirrors the FR P8-P6 / PT P7-P6 / IT P6 inline batch.
+  '', 'booking', 'about', 'faq', 'privacy-policy', 'cancellation-policy', 'safety-guidelines', 'utv',
+  'dinosaur-national-monument',
+  'hiking', 'fishing', 'camping', 'scenic-drives', 'things-to-do', 'guides', 'itineraries',
+  'atv-trails-vernal-utah', 'jeep-trails-vernal-utah', 'from/salt-lake-city', 'things-to-do/best-restaurants-vernal-utah',
 ]);
 
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {

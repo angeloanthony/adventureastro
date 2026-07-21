@@ -635,14 +635,144 @@ const FR: Dict = {
   'hub.guides': 'Guides de Destination',
 };
 
-// One entry per locale. es (P3A), it (P6), pt (P7A), and fr (P8-P6) are all
-// real dictionaries now — every registered locale has a translated UI chrome.
+// German chrome dictionary (P9-inline). Informal "du" register (locked
+// against the existing German MDX corpus — 59x du/21x dich/13x dir vs. 1
+// stray formal hit — mirrors Portuguese's informal "tu", not the formal
+// ES/IT/FR precedent). Keys mirror EN 1:1 — master-fallback in t() covers
+// any key added to EN before its German counterpart lands. Brand, NAP,
+// prices, fleet, place names, and people stay in the English value (never
+// present here) per the multilingual handoff's proper-noun policy.
+// "Dinosaur National Monument" / "Dinosaur Monument" kept English (official
+// park name), matching the IT/PT/FR precedent. "Trail" follows the locked
+// German MDX split: Pisten for UTV/ATV/Jeep (off-road), Wandern/Wanderweg
+// for hiking — never one blanket term. "Dinosaur Country" → "Land der
+// Dinosaurier" and "Key Takeaways" → "Das Wichtigste in Kürze" reuse the
+// exact locked phrases from the P9 MDX batches, not new translations.
+const DE: Dict = {
+  'nav.home': 'Startseite',
+  'nav.about': 'Über uns',
+  'nav.trails': 'Pisten',
+  'nav.thingsToDo': 'Aktivitäten',
+  'nav.dinosaurMonument': 'Dinosaur Monument',
+  'nav.guides': 'Guides',
+  'nav.food': 'Restaurants',
+  'nav.info': 'Informationen',
+  'nav.cancellationPolicy': 'Stornierungsbedingungen',
+  'nav.privacyPolicy': 'Datenschutzerklärung',
+  'nav.faq': 'Häufige Fragen',
+  'nav.safetyGuidelines': 'Sicherheitshinweise',
+  'nav.whatToBring': 'Packliste',
+  'nav.itineraries': 'Reisepläne',
+
+  'cta.bookNow': 'Jetzt Buchen',
+  'cta.bookYourAdventure': 'Buche Dein Abenteuer',
+
+  'a11y.toggleMenu': 'Menü umschalten',
+  'a11y.breadcrumb': 'Brotkrümelnavigation',
+  'a11y.relatedArticles': 'Verwandte Artikel',
+  'a11y.allArticlesInHub': 'Alle Artikel dieser Kategorie',
+  'a11y.keyTakeaways': 'Das Wichtigste in Kürze',
+  'a11y.relatedGuides': 'Verwandte Guides',
+
+  'section.faq': 'Häufige Fragen',
+  'section.exploreThisHub': 'Diese Kategorie Entdecken',
+  'section.youMightAlsoLike': 'Das Könnte Dir Auch Gefallen',
+  'section.keyTakeaways': 'Das Wichtigste in Kürze',
+  'section.exploreVernal': 'Vernal Entdecken',
+  'section.moreVernalGuides': 'Weitere Guides zu Vernal',
+
+  'footer.tagline': 'Erlebe das Abenteuer deines Lebens im Land der Dinosaurier in Utah.',
+  'footer.ourTrails': 'Unsere Pisten',
+  'footer.information': 'Informationen',
+  'footer.contactInfo': 'Kontaktinformationen',
+  'footer.copyrightSuffix': ' - Alle Rechte vorbehalten.',
+  'footer.link.utvTrailsTours': 'UTV-Touren und Pisten',
+  'footer.link.thingsToDo': 'Aktivitäten',
+  'footer.link.dinosaurNationalMonument': 'Dinosaur National Monument',
+  'footer.link.guides': 'Guides',
+  'footer.link.visitingFromSLC': 'Anreise ab Salt Lake City',
+  'footer.quickLinks': 'Schnellzugriff',
+  'footer.link.ourTours': 'Unsere Touren',
+  'footer.link.ourFleet': 'Unsere Fahrzeugflotte',
+  'footer.link.photoGallery': 'Fotogalerie',
+
+  'tour.value.family': 'So beenden die meisten Familien ihren Vernal-Trip.',
+  'tour.value.adventure': 'Geführte Touren im Kawasaki KRX 1000 durchs Land der Dinosaurier.',
+  'tour.value.sunset': 'Pisten bei Sonnenuntergang, Petroglyphen und Aussichtspunkte im Backcountry.',
+  'tour.value.generic': 'Geführte UTV-Touren durchs Land der Dinosaurier.',
+  'tour.callForPricing': 'Ruf an für Preise',
+  'tour.threeHours': '3 Stunden',
+  'tour.upToRiders': 'bis zu {n} Personen',
+
+  'reviews.googleReviews': 'Google-Bewertungen',
+  'reviews.ratedAria': 'Bewertet mit {value} von 5 basierend auf {count} Google-Bewertungen',
+
+  'author.writtenBy': 'Geschrieben von',
+  'author.updated': 'Aktualisiert',
+  'author.areasOfExpertise': 'Fachgebiete',
+  'author.credentials': 'Qualifikationen und Erfahrung',
+  'author.aboutBusiness': 'Über Adventure Tours Vernal',
+  'author.articlesBy': 'Artikel von {name}',
+
+  'time.morning': 'Morgen',
+  'time.lunch': 'Mittagessen',
+  'time.afternoon': 'Nachmittag',
+  'time.dinner': 'Abendessen',
+  'time.evening': 'Abend',
+  'itinerary.weatherBackup': 'Ausweichplan bei schlechtem Wetter',
+
+  'gateway.heading': 'Von auswärts unterwegs? Starte mit deiner Anreiseroute.',
+  'gateway.note.saltLakeCity': 'Die klassische, rund 3-stündige Fahrt durch die Uintas.',
+  'gateway.note.denver': 'Ein halbtägiger Ausflug durch die Rocky Mountains.',
+  'gateway.note.grandJunction': 'Das nächstgelegene Tor von Colorado aus.',
+  'gateway.seeAllItineraries': 'Alle Reisepläne für Vernal ansehen',
+
+  'decision.heading': 'Nicht sicher, welche Tour die richtige ist? Fang hier an.',
+  'decision.intro': 'Sag uns, was dir am wichtigsten ist, und wir zeigen dir den passenden Guide.',
+  'decision.q.firstTime': 'Ist es dein erstes Mal am Steuer?',
+  'decision.a.firstTime': 'Starte mit dem Guide für Einsteiger',
+  'decision.q.children': 'Reist du mit Kindern?',
+  'decision.a.children': 'Sieh dir den UTV-Guide für Familien an',
+  'decision.q.couple': 'Reist du als Paar?',
+  'decision.a.couple': 'Buche eine private Tour für zwei',
+  'decision.q.scenery': 'Suchst du atemberaubende Landschaften?',
+  'decision.a.scenery': 'Vergleiche die schönsten Panoramastrecken',
+  'decision.q.history': 'Interessierst du dich für Geschichte?',
+  'decision.a.history': 'Entdecke Petroglyphen und Felskunst',
+  'decision.q.adventure': 'Willst du das volle Abenteuer?',
+  'decision.a.adventure': 'Geh mit einer abgelegenen Tour ins Backcountry',
+  'decision.q.shortTime': 'Wenig Zeit?',
+  'decision.a.shortTime': 'Buche die nächste 3-Stunden-Tour',
+  'decision.q.group': 'Große Gruppe?',
+  'decision.a.group': 'Plane eine Gruppentour',
+
+  'city.driveTime': 'Fahrzeit',
+  'city.distance': 'Entfernung',
+  'city.route': 'Route',
+  'city.nearestAirport': 'Nächster Flughafen',
+
+  'hub.utv': 'UTV-Touren und Pisten',
+  'hub.atv': 'ATV-Pisten',
+  'hub.jeep': 'Jeep-Pisten',
+  'hub.dinosaur-national-monument': 'Dinosaur National Monument',
+  'hub.things-to-do': 'Aktivitäten in Vernal',
+  'hub.hiking': 'Wandern',
+  'hub.camping': 'Camping',
+  'hub.fishing': 'Angeln',
+  'hub.scenic-drives': 'Panoramastraßen',
+  'hub.guides': 'Guides',
+};
+
+// One entry per locale. es (P3A), it (P6), pt (P7A), fr (P8-P6), and de
+// (P9-inline) are all real dictionaries now — every registered locale has a
+// translated UI chrome.
 const UI_STRINGS: Partial<Record<Locale, Dict>> = {
   en: EN,
   es: ES,
   it: IT,
   pt: PT,
   fr: FR,
+  de: DE,
 };
 
 /**

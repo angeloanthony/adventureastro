@@ -1,0 +1,355 @@
+---
+// de/camping/index.astro — German Camping hub PILLAR (inline batch,
+// mirrors structure of fr/camping/index.astro and pt/camping/index.astro).
+// Mirrors src/pages/camping/index.astro exactly: content written directly as
+// Astro markup + Article/FAQPage JSON-LD; HubIndex lists spokes as they are
+// added. Author kept as Organization to match the English pillar's existing
+// entity.
+//
+// By the time this German wrapper lands, all German spokes (57/57) already
+// exist. So every link to a specific spoke (e.g. /camping/camping-at-flaming-gorge/)
+// and every link to another same-batch pillar (/fishing/, /scenic-drives/,
+// /things-to-do/, /guides/*, /dinosaur-national-monument/*, /booking/,
+// /from/salt-lake-city/) is rewritten to its /de/ equivalent below — no
+// English-fallback links remain for in-scope destinations.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import TrustBadge from '../../../components/content/TrustBadge.astro';
+import Header from '../../../components/layout/Header.astro';
+import Footer from '../../../components/layout/Footer.astro';
+import Seo from '../../../components/seo/Seo.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import HubIndex from '../../../components/content/HubIndex.astro';
+import { getLangFromUrl } from '../../../lib/i18n';
+import { t } from '../../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+
+const schema = `{
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "Der ultimative Camping-Guide für das Land der Dinosaurier",
+        "description": "Der Plan eines lokalen Guides zum Campen bei Vernal, Utah und im gesamten Land der Dinosaurier — Flaming Gorge, Ashley National Forest, Red Fleet, Steinaker und die Zone des Dinosaur National Monument — mit Tipps, wo du campen solltest, welcher Stil zu deiner Reise passt, und wie du ein Ziel mit deinen Zielen in Einklang bringst.",
+        "author": {"@type": "Organization", "name": "Adventure Tours Vernal"},
+        "publisher": {"@type": "Organization", "name": "Adventure Tours Vernal", "logo": {"@type": "ImageObject", "url": "https://adventuretoursvernal.com/images/logo.webp"}},
+        "datePublished": "2026-07-11",
+        "dateModified": "2026-07-11",
+        "mainEntityOfPage": "https://adventuretoursvernal.com/de/camping/"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type": "Question", "name": "Wo ist der beste Ort zum Campen bei Vernal, Utah?", "acceptedAnswer": {"@type": "Answer", "text": "Das hängt von der Reise ab, die du machen willst. Für Wasser, Bootfahren und Landschaften am großen Stausee campst du am Flaming Gorge, etwa eine Stunde nördlich. Für kühlen Bergwald und alpine Seen geht es hinauf zum Ashley National Forest und den Uinta Mountains. Für einfaches, familienfreundliches Camping nur wenige Minuten von der Stadt entfernt sind Red Fleet und der Steinaker State Park kaum zu schlagen. Für eine Basis nahe den Fossilien und Flusscanyons campst du in der Zone des Dinosaur National Monument. Und wenn du Restaurants, Duschen und Nachschub in Reichweite willst, nutze Vernal als Basislager und unternimm Tagesausflüge. Das Ziel mit deinen Zielen in Einklang zu bringen ist der Sinn dieses Guides."}},
+          {"@type": "Question", "name": "Brauchst du eine Reservierung, um bei Vernal zu campen?", "acceptedAnswer": {"@type": "Answer", "text": "Das ist von Campingplatz zu Campingplatz unterschiedlich. Viele ausgebaute Campingplätze am Flaming Gorge, im Ashley National Forest, in den State Parks und in der Zone des Dinosaur National Monument akzeptieren Reservierungen, und manche Stellplätze werden ohne Reservierung, nach Verfügbarkeit vergeben; die gefragtesten Plätze sind an Sommerwochenenden und Feiertagen ausgebucht. Freies Camping auf Flächen des National Forest erfordert in der Regel keine Reservierung, hat aber eigene Regeln. Reservierungssysteme, Verfügbarkeit und Zeitfenster ändern sich, buche also früh für den Sommer und PRÜFE BEI DER OFFIZIELLEN QUELLE (die zuständige Behörde oder der offizielle Reservierungsdienst), bevor du dich auf einen Stellplatz verlässt."}},
+          {"@type": "Question", "name": "Kannst du bei Vernal, Utah kostenlos campen?", "acceptedAnswer": {"@type": "Answer", "text": "Freies Camping (Dispersed Camping) ist auf einem Großteil des Ashley National Forest und anderer öffentlicher Flächen generell erlaubt, meist ohne Gebühr, sofern du die Regeln der zuständigen Behörde befolgst — in erlaubten Zonen campen, Aufenthaltsgrenzen einhalten, alles wieder mitnehmen und Leave-No-Trace-Praktiken befolgen. Ausgebaute Campingplätze mit Einrichtungen verlangen eine Gebühr. Die Regeln für kostenloses Camping, Sperrungen und Feuerbeschränkungen ändern sich und variieren je nach Gebiet, PRÜFE BEI DER OFFIZIELLEN QUELLE (Ashley National Forest oder die zuständige Behörde) also immer die aktuellen Regeln für freies Camping, bevor du losfährst."}},
+          {"@type": "Question", "name": "Gibt es Wohnmobil-Camping im Land der Dinosaurier?", "acceptedAnswer": {"@type": "Answer", "text": "Ja. Es gibt ausgebaute Campingplätze mit Stellplätzen für Wohnmobile am Flaming Gorge, in den State Parks, in Teilen des Ashley National Forest und in der Zone von Vernal und dem Dinosaur National Monument, und private Wohnmobil-Parks in und um Vernal ergänzen das Angebot um Optionen mit vollem Anschluss. Ob ein bestimmter Campingplatz Anschlüsse, eine Entsorgungsstation oder Durchfahrtsstellplätze bietet oder Längenbegrenzungen hat, variiert je nach Ort und ändert sich mit der Zeit, PRÜFE BEI DER OFFIZIELLEN QUELLE also die Ausstattung und Stellplatzgrößen jedes Campingplatzes, bevor du mit deinem Wohnwagen hinfährst."}},
+          {"@type": "Question", "name": "Was ist die beste Zeit zum Campen bei Vernal?", "acceptedAnswer": {"@type": "Answer", "text": "Vom späten Frühling bis in den Herbst erstreckt sich die Hauptcampingsaison. Der Sommer ist heiß und zuverlässig und das beste Zeitfenster für das Hochgebirge der Uintas, auch wenn er zugleich die geschäftigste Zeit ist und Nachmittagsgewitter mit sich bringt. Der frühe Herbst ist bei vielen Einheimischen der Favorit — kühlere Nächte, weniger Andrang und schöne Waldfarben. Das Hochgebirge hat eine kurze Saison und kann bis in den Frühsommer Schnee halten und ihn im Herbst erneut sehen; tiefer gelegene Campingplätze nahe der Stadt haben ein längeres Zeitfenster. Wintercamping ist möglich, aber kalt und begrenzt. Prüfe die aktuellen saisonalen Öffnungszeiten und Bedingungen, bevor du um ein bestimmtes Datum herum planst."}},
+          {"@type": "Question", "name": "Welches Camping eignet sich am besten für Familien bei Vernal?", "acceptedAnswer": {"@type": "Answer", "text": "Red Fleet und der Steinaker State Park bieten das einfachste und familienfreundlichste Camping der Region — nahe der Stadt, mit ausgebauten Einrichtungen, Schwimmen und Paddeln direkt am Camp, und kurzen, einfachen Anfahrten. Ausgebaute Campingplätze am Flaming Gorge und mit dem Auto erreichbare Stellplätze im Ashley National Forest funktionieren ebenfalls gut für Familien, die etwas mehr Natur wollen, ohne auf Komfort zu verzichten. Heb dir freies Camping und Backcountry-Camping für später auf, wenn die Kinder älter und die Gruppe erfahrener ist."}},
+          {"@type": "Question", "name": "Sind Lagerfeuer beim Campen nahe Vernal erlaubt?", "acceptedAnswer": {"@type": "Answer", "text": "Manchmal — das hängt vollständig von den aktuell geltenden Feuerbeschränkungen ab, die sich im Lauf der Saison je nach Bedingungen ändern. In trockenen Zeiten verhängen die Behörden häufig Feuerverbote, die offene Feuer untersagen, und die Regeln unterscheiden sich zwischen ausgebauten Campingplätzen, freien Stellplätzen und Zuständigkeitsbereichen. Geh nie davon aus, dass ein Feuer erlaubt ist. Prüfe vor jedem Feuer immer die aktuell geltenden Feuerbeschränkungen für das genaue Gebiet bei der zuständigen Behörde, benutze nur vorhandene Feuerstellen, wo erlaubt, und lösche jedes Feuer vollständig mit Wasser. PRÜFE BEI DER OFFIZIELLEN QUELLE."}},
+          {"@type": "Question", "name": "Wie plane ich einen Campingausflug ins Land der Dinosaurier?", "acceptedAnswer": {"@type": "Answer", "text": "Entscheide, welche Erfahrung du willst — Wasser, Berge, Fossilien oder ein einfaches Familienwochenende — und wähle das dazu passende Ziel, wobei du Vernal als deine Nachschub-Basis nutzt. Wähle deinen Stil (Wohnmobil, Zelt oder freies Camping), reserviere dann früh für den Sommer einen ausgebauten Stellplatz oder lerne die Regeln für freies Camping, falls du dich für primitives Camping entscheidest. Prüfe Gebühren, Ausstattung, saisonale Öffnungszeiten und aktuell geltende Feuerbeschränkungen bei der zuständigen Behörde, sieh dir die Vorhersage sowohl für Hitze als auch Kälte an, und rüste dich für ein Spektrum an Bedingungen von der Hochwüste bis zum Gebirge aus."}}
+        ]
+      }
+    ]
+  }`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Camping im Land der Dinosaurier | Vernal & Flaming Gorge"
+      description="Wo du bei Vernal, Utah campen kannst — Flaming Gorge, Ashley National Forest, Red Fleet, Steinaker und Dinosaur National Monument. Wähle Ziel und Stil."
+      path="/de/camping/"
+      type="article"
+      ogTitle="Der ultimative Camping-Guide für das Land der Dinosaurier"
+      ogDescription="Flaming Gorge, Ashley National Forest, Red Fleet, Steinaker und Dinosaur National Monument — wie du dein Camping-Ziel bei Vernal und deinen Stil wählst."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('hub.camping', lang) }]} />
+
+  <p slot="body" class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">Der ultimative Camping-Guide für das Land der Dinosaurier ist ein praktischer Reiseplanungs-Guide zum Campen bei Vernal, Utah, im Nordosten Utahs. Er hilft Besuchern zu entscheiden, wo sie campen sollten, welcher Camping-Stil zu ihrer Reise passt und welches Ziel am besten zu ihren Zielen passt. Er behandelt Camping am Flaming Gorge, im Ashley National Forest und den Uinta Mountains, im Red Fleet State Park, im Steinaker State Park, in der Zone des Dinosaur National Monument, und Vernal als Basislager. Er vergleicht Wohnmobil-, Zelt- und freies Camping; Campingplätze in State Parks, im National Forest und in der Zone des Monuments; Familiencamping, Fotografie, Sicherheit gegenüber Wildtieren, Barrierefreiheit und saisonale Planung; sowie Ein-Nacht-, Wochenend- und Ein-Wochen-Routen. Die Verfügbarkeit von Campingplätzen, Reservierungssysteme, die Anzahl der Stellplätze, Gebühren, Anschlüsse, Entsorgungsstationen, saisonale Öffnungsdaten, Feuerbeschränkungen und Genehmigungsanforderungen ändern sich und werden vom U.S. Forest Service, dem National Park Service und den Utah State Parks festgelegt — prüfe bei offiziellen Quellen. Adventure Tours Vernal bietet geführte UTV-Touren für $349 pro Fahrzeug, bis zu 2 Passagiere, 3 Stunden. Ruf an unter (435) 219-9447.</p>
+
+  <main class="article-page" slot="body">
+    <header class="article-header">
+      <h1 class="article-title">Der ultimative Camping-Guide für das Land der Dinosaurier</h1>
+      <p class="article-meta">Aktualisiert im Juli 2026 · Adventure Tours Vernal</p>
+      <TrustBadge align="left" />
+    </header>
+
+    <div class="article-body">
+
+      <div class="article-summary-box"><strong>Kurzantwort:</strong> das Land der Dinosaurier — diese Ecke im Nordosten Utahs rund um Vernal — ist einer der besten und am wenigsten überlaufenen Orte zum Campen im Westen, und der Trick besteht darin, das Ziel mit der Reise abzustimmen, die du willst. Suchst du Wasser, Bootfahren und Landschaften mit roten Canyons? Camp am <a href="/de/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge</a>, etwa eine Stunde nördlich. Suchst du kühlen Bergwald und alpine Seen? Fahr hinauf zum <a href="/de/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest</a> und den Uintas. Suchst du einfaches, familienfreundliches Camping nur wenige Minuten von der Stadt entfernt? <a href="/de/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a> und der <a href="/de/guides/ultimate-guide-to-steinaker-state-park/">Steinaker State Park</a> sind genau dafür gemacht. Willst du nahe den Fossilien und Flusscanyons schlafen? Camp in der Zone des <a href="/de/dinosaur-national-monument/visiting-dinosaur-national-monument/">Dinosaur National Monument</a>. Hast du lieber Duschen und Restaurants in der Nähe? Richte dich in <a href="/de/guides/ultimate-guide-to-vernal-utah/">Vernal</a> ein und unternimm Tagesausflüge. Dieser Guide hilft dir, dein Ziel <em>und</em> deinen Stil zu wählen — Wohnmobil, Zelt oder freies Camping — und verweist dich dann auf eine ausführliche Vertiefung zu jedem Ort. Reserviere früh für den Sommer, und prüfe immer die aktuell geltenden Gebühren, Öffnungszeiten und Feuerregeln, bevor du losfährst.</div>
+
+      <div class="key-takeaways">
+        <h2>Das Wichtigste in Kürze</h2>
+        <ul>
+          <li><strong>Fünf große Ziele, eine einzige Nachschub-Stadt.</strong> Flaming Gorge, Ashley National Forest, Red Fleet, Steinaker und die Zone des Dinosaur National Monument sind alle in Tagesausflugsreichweite von Vernal, und jedes bietet eine wirklich andere Art von Camping.</li>
+          <li><strong>Wähle das Ziel nach deinem Ziel.</strong> Wasser und Bootfahren, Hochgebirgswald, einfache Familienwochenenden, oder Fossilien und Canyons — jedes hat hier sein ideales Zuhause, und dieser Guide soll dir bei der Wahl helfen.</li>
+          <li><strong>Passe den Stil an die Reise an.</strong> Wohnmobil-, Zelt- und freies Camping passen zu unterschiedlichen Reisenden und Komfortansprüchen; du kannst sie auf einer längeren Reise sogar kombinieren.</li>
+          <li><strong>Leicht für Anfänger, wild für Erfahrene.</strong> Du kannst ein Wohnmobil in eine ausgebaute Schleife eines State Parks nur wenige Minuten von der Stadt bringen, oder einen ruhigen freien Stellplatz unter Kiefern finden, kilometerweit ohne jemanden in der Nähe.</li>
+          <li><strong>Prüfe immer die Details.</strong> Die Verfügbarkeit von Campingplätzen, Reservierungen, Gebühren, Anschlüsse, saisonale Öffnungszeiten, Feuerbeschränkungen und Genehmigungen werden von den zuständigen Behörden festgelegt und ändern sich — bestätige die aktuellen Einzelheiten vor jeder Reise.</li>
+        </ul>
+      </div>
+
+      <h2>Warum im Land der Dinosaurier campen</h2>
+      <p>Die meisten Leute kennen diese Region wegen ihrer Dinosaurier und roten Felsen, nicht wegen des Campings — und genau deshalb ist das Camping hier so gut. Während sich Camper in den berühmten Parks des Westens drängen und Monate im Voraus buchen, bietet das Land der Dinosaurier still und leise ein Camping-Spektrum, das anderswo ein herausragendes Ziel wäre: ein 91 Meilen langer Stausee, gesäumt von Campingplätzen, ein ganzer National Forest aus Kiefern und Espen mit Hunderten Seen, zwei einfache Seen-State-Parks nur wenige Minuten von der Stadt entfernt, und ein Nationaldenkmal aus Fossilien und Flusscanyons — alles etwa eine Stunde von einer einzigen Nachschub-Stadt entfernt.</p>
+      <p>Der eigentliche Vorteil hier ist die <em>Vielfalt auf engem Raum</em>. Von einer einzigen Region aus kannst du eine Nacht am Ufer eines Stausees aus rotem Fels verbringen, die nächste in einem kühlen Fichtenwald an einem alpinen See, und die übernächste nur wenige Schritte von einem Badestrand mit den Kindern — ohne je weit zu fahren. Wenige Orte vereinen Camping am großen Wasser, Hochgebirgswald, einfache familienfreundliche Stauseen und Canyons im Land der Fossilien auf so engem Raum.</p>
+      <p>Und das tut die Region ohne die Menschenmassen. Dies ist aktives, wenig überlaufenes Territorium, in dem du noch immer einen ruhigen Stellplatz oder einen ganzen Waldabschnitt für dich allein finden kannst, besonders unter der Woche und in den Zwischensaisons. Für einen Überblick über die Region und wie du eine Reise planst, beginne mit unserem <a href="/de/guides/ultimate-guide-to-vernal-utah/">ultimativen Vernal-Guide</a>; für alles, was es zwischen Campingnächten zu tun gibt, sieh dir <a href="/de/things-to-do/">Unternehmungen in Vernal</a>, <a href="/de/fishing/">Angeln im Land der Dinosaurier</a>, und die <a href="/de/scenic-drives/">Panoramastraßen</a> der Region an.</p>
+
+      <h2>Wie du das richtige Camping-Ziel wählst</h2>
+      <p>Denk beim Camping im Land der Dinosaurier an fünf unterschiedliche Ziele, jedes mit eigenem Charakter. Du musst dich nicht auf eines festlegen — viele Reisen kombinieren zwei oder drei — aber zu wissen, was jedes bietet, ist der Schlüssel zu einem guten Plan.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Ziel</th><th>Umgebung</th><th>Bekannt für</th><th>Entfernung von Vernal</th><th>Ideal für</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Flaming Gorge</td><td>Stausee und roter Canyon</td><td>Bootfahren, Angeln, Aussichten am großen Wasser, ausgebaute Campingplätze</td><td>~1 Stunde nördlich</td><td>Wasserliebhaber, Wohnmobil-Reisende, Angler</td></tr>
+            <tr><td>Ashley National Forest / Uintas</td><td>Bergwald und alpine Seen</td><td>Kühler Kiefernwald, Hunderte Seen, Einsamkeit, freies Camping</td><td>~30–90 Min. nördlich</td><td>Zeltcamper, freie Camper, alle, die der Sommerhitze entkommen wollen</td></tr>
+            <tr><td>Red Fleet State Park</td><td>Kleiner Stausee, roter Sandstein</td><td>Schwimmen, Paddeln, eine Dinosaurier-Fährte, einfacher Zugang</td><td>~15 Min. nördlich</td><td>Familien, Anfänger, kurze Reisen</td></tr>
+            <tr><td>Steinaker State Park</td><td>Kleiner Stausee nahe der Stadt</td><td>Schwimmen, Angeln, das Camping am nächsten zu Vernal</td><td>~5–10 Min. nördlich</td><td>Familien, spontane Übernachtungen</td></tr>
+            <tr><td>Zone des Dinosaur National Monument</td><td>Fossilien- und Flusscanyons</td><td>Fossilien im Quarry, Petroglyphen, Canyons der Flüsse Green und Yampa</td><td>~20 Min. östlich (Quarry-Zone)</td><td>Geschichts- und Geologie-Reisende, Flusscanyon-Camper</td></tr>
+            <tr><td>Vernal (Basislager)</td><td>Stadt</td><td>Hotels, private Wohnmobil-Parks, Restaurants, Duschen, Nachschub</td><td>—</td><td>Komfortliebhaber, Wohnmobil-Reisende, die Anschlüsse suchen, Ausweichoption für verregnete Wochen</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><em>Die Entfernungen sind ungefähr und hängen von deinem genauen Ziel innerhalb jeder Zone ab. Die Verfügbarkeit von Campingplätzen, die Ausstattung und der Zugang ändern sich mit der Zeit. <strong>PRÜFE BEI DER OFFIZIELLEN QUELLE</strong> (dem Forest Service, dem National Park Service oder den Utah State Parks) nach den aktuellen Campingplätzen, Stellplätzen und Bedingungen jedes Ziels.</em></p>
+      <p>Bei so vielen guten Optionen ist die eigentliche Frage, welche zu <em>deiner</em> Reise passt. Nutze diese schnelle Entscheidungshilfe, um dich zum richtigen Ziel zu orientieren, und lies dann vor der Abreise den dazugehörigen Referenz-Guide für diesen Ort.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Wenn du willst…</th><th>Camp bei…</th><th>Warum</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Wasser, Bootfahren und große Landschaften</td><td>Flaming Gorge</td><td>Ein 91 Meilen langer Stausee mit ausgebauten Campingplätzen und Marinas</td></tr>
+            <tr><td>Kühler Wald und Bergseen</td><td>Ashley National Forest / Uintas</td><td>Kiefern und Espen in der Höhe, und Hunderte Seen; entkommt der Hitze</td></tr>
+            <tr><td>Einsamkeit und kostenloses, primitives Camping</td><td>Ashley National Forest (freies Camping)</td><td>Weitläufige öffentliche Flächen, auf denen freies Camping generell erlaubt ist</td></tr>
+            <tr><td>Ein einfaches Familienwochenende nahe der Stadt</td><td>Red Fleet oder Steinaker</td><td>Ausgebaute Stellplätze am See, Schwimmen und kurze Anfahrten</td></tr>
+            <tr><td>Fossilien, Petroglyphen und Flusscanyons</td><td>Zone des Dinosaur National Monument</td><td>Camp nahe dem Quarry, den Flüssen und der Geologie</td></tr>
+            <tr><td>Duschen, Restaurants und volle Anschlüsse</td><td>Vernal (Basislager)</td><td>Städtischer Komfort, jedes Ziel einen Tagesausflug entfernt</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Camping-Stile: Welcher passt zu deiner Reise</h2>
+      <p>Bevor du einen Campingplatz wählst, hilft es zu entscheiden, <em>wie</em> du campen willst. Die drei Hauptstile — Wohnmobil, Zelt und freies Camping — passen zu sehr unterschiedlichen Reisenden, und jedes Ziel oben begünstigt manche Stile mehr als andere.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Stil</th><th>Komfort und Ausstattung</th><th>Ideal für</th><th>Wo er hier glänzt</th><th>Worauf achten</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Wohnmobil / Wohnwagen</td><td>Am höchsten — bring dein Bett, deine Küche und Klimakontrolle mit</td><td>Familien, längere Aufenthalte, Komfortliebhaber, Zwischensaisons</td><td>Flaming Gorge, die State Parks, die privaten Wohnmobil-Parks in Vernal</td><td>Stellplatz-Längenbegrenzungen, Verfügbarkeit von Anschlüssen, enge Waldstraßen</td></tr>
+            <tr><td>Zelt (ausgebauter Campingplatz)</td><td>Moderat — ein ausgewiesener Stellplatz mit Einrichtungen in der Nähe</td><td>Die meisten Camper, Camping-Neulinge in Familien, Bergreisen</td><td>Alle ausgebauten Campingplätze; Waldcampingplätze für kühle Nächte</td><td>Wetterexponiert, Sommerwochenenden ausgebucht</td></tr>
+            <tr><td>Freies Camping / primitiv</td><td>Am niedrigsten — keine Einrichtungen, du bringst und nimmst alles mit</td><td>Erfahrene, selbstversorgende Camper auf der Suche nach Einsamkeit</td><td>Das Backcountry und die Waldstraßen des Ashley National Forest</td><td>Kein Wasser, keine Toiletten, keine Müllabholung; strenge Regeln; Feuerverbote; Straßen-/Wetterrisiken</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Du kannst die Stile auch auf einer längeren Reise kombinieren — ein ausgebauter Wohnmobil-Stellplatz am Flaming Gorge zum Auftakt, ein paar Nächte Zeltcamping im Wald, und eine Nacht freies Camping unter den Sternen zum Abschluss. Die folgenden Abschnitte gehen näher auf jeden davon ein.</p>
+
+      <h2>Wohnmobil-Camping im Land der Dinosaurier</h2>
+      <p>Das Land der Dinosaurier ist einladend für Wohnmobil-Reisende, und die Region bietet dir das komplette Spektrum, von Vollservice-Stadtparks bis zu rustikaleren Waldschleifen. Ausgebaute Campingplätze am <a href="/de/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge</a> und in den State Parks umfassen in der Regel für Wohnmobile geeignete Stellplätze, private Wohnmobil-Parks in und um <a href="/de/guides/ultimate-guide-to-vernal-utah/">Vernal</a> ergänzen den Komfort voller Anschlüsse, und manche Teile des <a href="/de/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest</a> haben Campingplätze, die kleinere Fahrzeuge und Wohnwagen aufnehmen.</p>
+      <p>Die wichtigsten Variablen für Wohnmobil-Reisende sind genau jene, die sich am häufigsten ändern und die wir dir niemals ausdenken werden: ob ein bestimmter Campingplatz <strong>Anschlüsse</strong> (Strom, Wasser, Abwasser) bietet, ob er eine <strong>Entsorgungsstation</strong> und Trinkwasser hat, seine <strong>maximale Stellplatzlänge</strong>, und ob er <strong>Durchfahrtsstellplätze</strong> hat. Diese Punkte variieren je nach Campingplatz und Saison, und die Zufahrtsstraßen zu manchen Hochgebirgs-Campingplätzen sind eng und kurvenreich. Bestätige die Stellplatzgröße und den Zugang, bevor du irgendetwas auf einer Waldstraße abschleppst.</p>
+      <div class="article-tip"><strong>Realitätscheck für Wohnmobile:</strong> die größten und am besten ausgebauten Wohnmobil-Stellplätze findest du am Flaming Gorge, in den State Parks und in den privaten Parks in Vernal; der Wald ist rustikaler und besser für kleinere Fahrzeuge geeignet. Für Anschlüsse, Entsorgungsstation, Längenbegrenzungen und die Verfügbarkeit von Durchfahrtsstellplätzen eines bestimmten Campingplatzes <strong>PRÜFE BEI DER OFFIZIELLEN QUELLE</strong> (die zuständige Behörde oder den Park) — und reserviere früh für den Sommer, wenn die besten Wohnmobil-Stellplätze zuerst ausgebucht sind.</div>
+
+      <h2>Zeltcamping im Land der Dinosaurier</h2>
+      <p>Für Zeltcamper ist diese Region ein Geschenk: du kannst dein Zelt am Ufer eines Stausees aus rotem Fels aufschlagen, unter hohen Kiefern nahe einem Bergsee, oder in einer warmen Badestrand-Schleife mit den Kindern — alles weniger als eine Stunde voneinander entfernt. Ausgebautes Zeltcamping ist an allen Zielen verfügbar, und die Erfahrung ändert sich mit der Höhe drastisch — warme Hochwüstennächte nahe den Stauseen und der Stadt, und wirklich kalte Nächte oben im <a href="/de/guides/ultimate-guide-to-ashley-national-forest/">Uinta-Wald</a>, selbst mitten im Sommer.</p>
+      <p>Genau diese Höhenspanne musst du bei deiner Planung berücksichtigen. Sommernächte nahe Vernal, Red Fleet und Steinaker sind mild; dieselbe Nacht auf einem Waldcampingplatz in der Höhe kann sich dem Gefrierpunkt nähern. Bring einen wärmeren Schlafsack mit, als die tägliche Hitze nahelegt, sichere dein Zelt gut gegen Wind und Nachmittagsgewitter, und wähle deine Höhe nach der Vorhersage. Bei einer Hitzewelle zieh in den Wald hinauf; bei einem Kälteeinbruch zieh zurück in Richtung Stadt.</p>
+      <p>Zeltcamping ist die flexibelste und günstigste Art, mehrere Ziele auf einer Reise zu erleben, und die klassische Art, das Gebirge zu erleben. Pack nach der Umgebung — sieh dir unseren <a href="/de/guides/what-to-bring/">Was-mitbringen-Guide</a> an — und wähle den richtigen Zeitpunkt mit dem <a href="/de/guides/vernal-weather-guide/">Vernal-Wetterguide</a>.</p>
+
+      <h2>Überblick zum freien Camping</h2>
+      <p>Jenseits der ausgebauten Campingplätze liegt eines der bestgehüteten Geheimnisse der Region: <strong>freies Camping (Dispersed Camping)</strong> — primitives Camping ohne Einrichtungen auf öffentlichem Land, das auf einem Großteil des <a href="/de/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest</a> generell erlaubt ist. Für selbstversorgende Camper bedeutet das Einsamkeit, keine Reservierung, und oft keine Gebühr, in einem Gebiet, das die meisten Besucher nie zu Gesicht bekommen.</p>
+      <p>Es bedeutet auch kein Wasser, keine Toiletten, keine Müllabholung und kein Sicherheitsnetz. Freies Camping bringt echte Verantwortung und echte Regeln mit sich — wo du campen darfst, wie weit von Wasser und Straßen entfernt, wie lange du bleiben darfst, und welche Feuerbeschränkungen gelten — und diese Regeln variieren je nach Gebiet und ändern sich im Lauf der Saison. Dieser Guide ist ein Planungsüberblick, keine Vorschrift: ein eigener Artikel zum freien Camping ist geplant, um die Einzelheiten abzudecken.</p>
+      <ul>
+        <li><strong>Informier dich, bevor du losfährst.</strong> Zonen für freies Camping, Aufenthaltsgrenzen und Sperrungen werden von der zuständigen Behörde festgelegt und ändern sich. <strong>PRÜFE BEI DER OFFIZIELLEN QUELLE</strong> (Ashley National Forest) die aktuellen Regeln, bevor du dich auf einen Stellplatz verlässt.</li>
+        <li><strong>Sei vollständig selbstversorgend.</strong> Bring dein gesamtes Wasser mit, eine Möglichkeit, menschliche Abfälle zu handhaben, und alles, was du brauchst, um jeden Krümel Müll wieder mitzunehmen.</li>
+        <li><strong>Feuer ist das große Thema.</strong> Feuerbeschränkungen ändern sich je nach Bedingungen und gelten häufig; geh nie davon aus, dass ein Feuer erlaubt ist, und bestätige die aktuellen Regeln für dieses genaue Gebiet.</li>
+        <li><strong>Leave No Trace (hinterlasse keine Spuren).</strong> Nutze vorhandene Stellplätze, wo es sie gibt, camp auf widerstandsfähigen Untergründen, halte deutlichen Abstand zu Wasserquellen, und hinterlass den Ort besser, als du ihn vorgefunden hast.</li>
+        <li><strong>Achte auf Straßen und Wetter.</strong> Waldstraßen können holprig, bei Regen schlammig und bei Schnee unpassierbar sein; die Mobilfunkabdeckung ist lückenhaft. Sag jemandem, was dein Plan ist.</li>
+      </ul>
+
+      <h2>Camping in den State Parks: Red Fleet und Steinaker</h2>
+      <p>Für das einfachste und familienfreundlichste Camping der Region sind die beiden State Parks nur wenige Minuten nördlich der Stadt die Antwort. Beide kombinieren ausgebaute Campingplätze mit Schwimmen, Angeln und Paddeln direkt am Camp, und beide sind nur eine kurze, einfache Fahrt vom Nachschub und den Dienstleistungen in Vernal entfernt.</p>
+      <p>Der <a href="/de/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet State Park</a> liegt inmitten spektakulären roten Sandsteins und ist vor allem für seinen Stausee und seine berühmte <strong>Dinosaurier-Fährte</strong> bekannt — ein echtes Abenteuer, das du zu Fuß oder mit dem Paddel erreichst. Hier zu campen verbindet eine Nacht am See mit Schwimmen, Angeln vom Ufer und der Fährte, was es zu einer bemerkenswerten Wahl für Familien macht, die Natur und einen echten Höhepunkt ohne lange Anfahrt wollen. Camping im Red Fleet State Park ist eine der einfachsten Familiencamping-Erfahrungen im Land der Dinosaurier — lies unseren <a href="/de/camping/camping-at-red-fleet-state-park/">vollständigen Guide zum Camping in Red Fleet</a>.</p>
+      <p>Der <a href="/de/guides/ultimate-guide-to-steinaker-state-park/">Steinaker State Park</a> ist das Camping am nächsten zu Vernal — nur fünf bis zehn Minuten nördlich —, was ihn zur idealen Wahl für eine spontane Übernachtung oder eine erste Familiencamping-Reise macht. Sein Stausee ist im Sommer ein Ort zum Schwimmen, Paddeln und Angeln, und die kurze Entfernung zur Stadt bedeutet, dass du nie weit von vergessenem Nachschub entfernt bist.</p>
+      <div class="article-tip"><strong>Plane die Parks gut:</strong> die beiden eigenen Guides — <a href="/de/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a> und <a href="/de/guides/ultimate-guide-to-steinaker-state-park/">Steinaker</a> — behandeln Zugang, Freizeitaktivitäten und Camping im Detail. Campingplätze in Utahs State Parks akzeptieren in der Regel Reservierungen und sind an Sommerwochenenden ausgebucht. Für aktuelle Stellplätze, Gebühren, Anschlüsse und Reservierungsfenster <strong>PRÜFE BEI DER OFFIZIELLEN QUELLE</strong> (Utah State Parks) und reserviere früh.</div>
+
+      <h2>Camping im National Forest: Ashley und die Uintas</h2>
+      <p>Nördlich und westlich von Vernal steigt das Gelände zu den Uinta Mountains und dem <a href="/de/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest</a> an — und mit ihm das weitläufigste Camping der Region. Das ist kühles Hochgebirgscamping zwischen Kiefern und Espen, nahe Hunderten Seen und Bächen, und hierhin fliehen die Einheimischen vor der Sommerhitze.</p>
+      <p>Der Wald bietet zwei sehr unterschiedliche Erfahrungen. <strong>Ausgebaute Waldcampingplätze</strong> geben dir einen ausgewiesenen Stellplatz, meist mit einfacher Grundausstattung, in wunderschöner Umgebung nahe Seen und Tälern — stell dir ein mit dem Auto erreichbares Bergcamping mit Picknicktisch und Feuerstelle vor, wo erlaubt. <strong>Freies Camping</strong> auf einem Großteil des Waldes bietet Einsamkeit und primitive Stellplätze für Selbstversorger (siehe Abschnitt oben). Zwischen beiden dient der Wald allen, von einer Familie im kleinen Wohnwagen bis zum Wanderer, der sich in die High Uintas Wilderness aufmacht.</p>
+      <p>Der Kompromiss sind Saison und Zugang. Das Hochgebirge hat eine <strong>kurze Saison</strong>, kann bis in den Frühsommer Schnee halten und ihn bereits im frühen Herbst wieder sehen, und wird über Straßen erreicht, die von asphaltierter Autobahn bis zu grobem Schotter reichen. Die Nächte sind kalt, Nachmittagsgewitter sind häufig, Dienstleistungen sind weit weg und die Mobilfunkabdeckung ist schwach. Das ist der Preis für die beste Landschaft und die frischeste Luft der Region.</p>
+      <p>Suchst du Bergcamping? Unser vollständiger Guide zum <a href="/de/camping/camping-in-ashley-national-forest/">Camping im Ashley National Forest</a> beschreibt die Camping-Zonen des Waldes, ausgebaute Plätze gegenüber freiem Camping, alpines und Familiencamping, und wie du einen Campingplatz als Basislager für mehrtägiges Wandern nutzt.</p>
+      <div class="article-tip"><strong>Realität des Hochgebirges:</strong> sieh dir den <a href="/de/guides/ultimate-guide-to-ashley-national-forest/">Ashley-National-Forest-Guide</a> für Zugang und Planung an. Öffnungszeiten der Waldcampingplätze, Straßenzustand, Gebühren und Feuerbeschränkungen ändern sich jährlich und je nach Gebiet — <strong>PRÜFE BEI DER OFFIZIELLEN QUELLE</strong> (Ashley National Forest) die aktuellen Bedingungen, bevor du hinauffährst.</div>
+
+      <h2>Camping am Flaming Gorge</h2>
+      <p>Wenn das Land der Dinosaurier einen Camping-Star hat, dann ist es der <a href="/de/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge</a> — ein 91 Meilen langer Stausee, der sich über die Grenze zwischen Utah und Wyoming erstreckt, gesäumt von Erholungsgebieten, Marinas und Campingplätzen, gerahmt von feuerroten Canyonwänden. Es ist das Vorzeigeziel der Region, um <strong>Camping mit Wasser zu verbinden</strong>: Bootfahren, Weltklasse-Angeln, Paddeln, Schwimmen und Landschaften unter offenem Himmel, mit ausgebauten Campingplätzen, die von Wohnmobil-Stellplätzen bis zu primitiveren Uferplätzen reichen.</p>
+      <p>Hier zu campen bringt dich nur wenige Schritte vom Wasser für einen Morgen auf dem Stausee entfernt — auf der Jagd nach Seeforellen und trophäenwürdigen Bachforellen (siehe <a href="/de/fishing/">Angeln im Land der Dinosaurier</a>), beim Zu-Wasser-Lassen eines Boots, oder einfach beim Beobachten, wie sich das Licht über den Canyon bewegt. Die ausgebauten Campingplätze der Gegend und die nahen Dienstleistungen eignen sich sowohl für Wohnmobil-Reisende als auch für Zeltcamper, und das verbindet sich mit den besten <a href="/de/scenic-drives/">Panoramastraßen</a> der Region entlang des Flaming Gorge–Uintas Byway.</p>
+      <p>Da der Flaming Gorge beliebt ist und jedes seiner Erholungsgebiete eigene Campingplätze hat, können Stellplätze im Hochsommer ausgebucht sein, und die Ausstattung unterscheidet sich von Gebiet zu Gebiet. Bootsfahrer sollten außerdem Utahs Regeln gegen invasive Arten (reinigen, entleeren, trocknen) und mögliche Kontrollen beachten.</p>
+      <p>Planst du, dort zu übernachten? Unser vollständiger Guide zum <a href="/de/camping/camping-at-flaming-gorge/">Camping am Flaming Gorge</a> beschreibt die Camping-Zonen des Stausees, Wohnmobil- gegenüber Zelt- und Uferstellplätze, und wie du direkt vom Camp aus angeln und Boot fahren kannst.</p>
+      <div class="article-tip"><strong>Plane den Gorge:</strong> der <a href="/de/guides/ultimate-guide-to-flaming-gorge/">ultimative Flaming-Gorge-Guide</a> behandelt Erholungsgebiete, Marinas, Bootsrampen und Zugang im Detail. Die Verfügbarkeit von Campingplätzen, Gebühren, Anschlüsse, Entsorgungsstationen und Reservierungsoptionen variieren je nach Gebiet und ändern sich — <strong>PRÜFE BEI DER OFFIZIELLEN QUELLE</strong> (den Forest Service und den offiziellen Reservierungsdienst) vor deiner Reise, und reserviere früh für Sommerwochenenden.</div>
+
+      <h2>Campingplätze nahe Dinosaur National Monument</h2>
+      <p>Um nahe den Fossilien und Flusscanyons aufzuwachen, camp in der Zone des <a href="/de/dinosaur-national-monument/visiting-dinosaur-national-monument/">Dinosaur National Monument</a>. Das Monument erstreckt sich über die Grenze zwischen Utah und Colorado und schützt das berühmte Fossilien-<strong>Quarry</strong>, uralte <strong>Petroglyphen</strong>, und die spektakulären Canyons der Flüsse Green und Yampa — und hier zu campen erlaubt dir, früh am Quarry zu sein und die Geologie und das Flussgebiet im besten Tageslicht zu erkunden.</p>
+      <p>Die Zone des Monuments bietet Campingplätze in beeindruckender Canyon- und Flusslandschaft, und Vernal — etwa zwanzig Minuten westlich des Utah-Eingangs — bietet die nächstgelegenen Vollservice-Einrichtungen als Basislager-Alternative. Camping nahe dem Monument lässt sich natürlich mit den <a href="/de/dinosaur-national-monument/petroglyphs-rock-art-vernal/">Petroglyphen und Felskunst</a>, der <a href="/de/scenic-drives/cub-creek-road-tour-of-the-tilted-rocks/">Panoramastraße Cub Creek Road</a> und den Flusscanyons verbinden, was es zur bevorzugten Basis für Reisende macht, die wegen Geschichte und Geologie kommen.</p>
+      <div class="article-tip"><strong>Plane das Monument:</strong> siehe <a href="/de/dinosaur-national-monument/visiting-dinosaur-national-monument/">Besuch des Dinosaur National Monument</a> für Quarry, Gebühren und Zugang. Campingplätze des National Park Service variieren je nach Saison, Ausstattung, und ob sie Reservierungen akzeptieren oder ohne Reservierung, nach Verfügbarkeit vergeben werden, und manche haben nur saisonal Wasser. Das Monument erhebt außerdem eine Eintrittsgebühr. <strong>PRÜFE BEI DER OFFIZIELLEN QUELLE</strong> (den National Park Service) nach aktuellen Campingplätzen, Gebühren und Öffnungszeiten, bevor du losfährst.</div>
+
+      <h2>Vernal als Basislager</h2>
+      <p>Ein großer Campingausflug bedeutet nicht zwangsläufig, auf dem Boden zu schlafen. Für viele Besucher — besonders Familien mit kleinen Kindern, Reisende, die einer verregneten Phase begegnen, oder alle, die am Ende des Tages eine warme Dusche und ein Restaurant wollen — ist die klügste Wahl, sich in <a href="/de/guides/ultimate-guide-to-vernal-utah/">Vernal</a> einzurichten und Tagesausflüge zu den oben genannten Zielen zu unternehmen. Die Stadt hat Hotels, private Wohnmobil-Parks, Restaurants, Tankstellen, Lebensmittelgeschäfte und Outdoor-Ausrüstung, und jedes Camping-Ziel dieses Guides liegt etwa eine Autostunde entfernt.</p>
+      <p>Ein Basislager zu nutzen ermöglicht auch einen ausgezeichneten Hybrid-Ansatz: camp in Nächten mit gutem Wetter, zieh dich in die Stadt zurück, wenn ein Sturm aufzieht oder die Gruppe eine Pause braucht, und halte die Reise komfortabel, ohne auf das Terrain zu verzichten. Das ist die einfachste Art, den Flaming Gorge, den Wald, die State Parks und das Monument auf einer einzigen Reise zu erleben. Kommst du aus einem anderen Bundesstaat? Unser <a href="/de/from/salt-lake-city/">Guide von Salt Lake City nach Vernal</a> deckt die Anreise ab, und sobald du hier bist, füllen <a href="/de/things-to-do/">Unternehmungen in Vernal</a> die Tage zwischen den Zielen.</p>
+
+      <h2>Familiencamping</h2>
+      <p>Das ist womöglich die beste Familiencamping-Region Utahs, über die niemand spricht, aus einem einfachen Grund: sie macht Camping <em>leicht</em> zum Erfolg. <a href="/de/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a> und <a href="/de/guides/ultimate-guide-to-steinaker-state-park/">Steinaker</a> geben Familien einen ausgebauten Stellplatz am See, Schwimmen und Paddeln am Camp, kurze, einfache Anfahrten, und die Stadt nur wenige Minuten entfernt für das unvermeidliche vergessene Teil. Füg die Dinosaurier-Fährte in Red Fleet hinzu, und du hast einen Campingausflug mit einem echten Abenteuer verbunden, an das sich die Kinder erinnern werden.</p>
+      <p>Für Familien, die bereit für etwas mehr Natur sind, fügen ausgebaute Campingplätze am Flaming Gorge und mit dem Auto erreichbare Stellplätze im Wald Landschaft und Raum hinzu, während Einrichtungen in der Nähe bleiben. Heb dir freies Camping und Backcountry-Camping für später auf, wenn die Kinder älter und die Gruppe erfahrener ist — das Fehlen von Wasser, Toiletten und einem Sicherheitsnetz erhöht die Einsätze.</p>
+      <p>Die Formel für einen großartigen Familiencampingausflug hier: wähle einen ausgebauten Campingplatz mit Wasser am Camp, halte den ersten Ausflug kurz und nah (Steinaker oder Red Fleet), lass den Tag zwischen Schwimmen, Erkunden und Camp-Zeit pendeln, und rüste dich sowohl für Hochwüstenhitze als auch kalte Nächte aus. Für weitere kinderorientierte Ideen in der Stadt siehe <a href="/de/things-to-do/fun-things-to-do-vernal-utah-kids/">Spaß mit Kindern in Vernal</a>, und pack mit unserem <a href="/de/guides/what-to-bring/">Was-mitbringen-Guide</a>.</p>
+
+      <h2>Fotomöglichkeiten</h2>
+      <p>Ein Campingausflug hier ist auch ein Fotoausflug, und Camping bringt dich zur richtigen Zeit an die richtigen Orte — Morgendämmerung und Abenddämmerung, wenn das Licht am besten und die meisten Tagesbesucher bereits abgereist sind.</p>
+      <ul>
+        <li><strong>Halte die goldenen Stunden vom Camp aus fest.</strong> Camping bedeutet, dass du für Sonnenauf- und -untergang schon vor Ort bist — das warme, flache Licht auf den roten Canyonwänden am Flaming Gorge und in Red Fleet ist unschlagbar.</li>
+        <li><strong>Fang die Spiegelungen ein.</strong> Ruhiges Morgenwasser auf Stauseen und Bergseen spiegelt roten Fels und Gipfel; steh auf, bevor der Wind aufkommt.</li>
+        <li><strong>Jag den dunklen Himmel.</strong> Fern der Stadt bieten Hochwüste und Wald hervorragende Sternenfotografie und Gelegenheiten, die Milchstraße in klaren, mondlosen Nächten festzuhalten.</li>
+        <li><strong>Rahme die Waldfarben ein.</strong> Im frühen Herbst werden die Espen der Uintas golden — plane ein Waldcamp rund um diesen Wechsel.</li>
+        <li><strong>Schütze deine Ausrüstung.</strong> Staub, Nachmittagsgewitter und Tau sind stets präsent; eine wasserdichte Tasche und ein Objektivtuch zahlen sich aus.</li>
+        <li><strong>Behalte Gewitter im Blick.</strong> Dramatische Himmel machen tolle Fotos, aber gefährliche Bedingungen — verlass exponierte Grate und offenes Wasser, wenn Blitze drohen.</li>
+      </ul>
+
+      <h2>Sicherheit gegenüber Wildtieren</h2>
+      <p>Camping bringt dich ins Wildtiergebiet, und ein paar Gewohnheiten halten dich und die Tiere sicher. Bei Weitem am wichtigsten ist die <strong>Lagerung von Lebensmitteln</strong>: verstau alle Lebensmittel, Abfälle und duftenden Gegenstände sicher — in einem hartwandigen Fahrzeug oder gemäß den ausgehängten Regeln des Campingplatzes — niemals in deinem Zelt, um keine Tiere ins Camp zu locken. Räum nach jeder Mahlzeit gründlich auf und nimm alle Reste wieder mit.</p>
+      <p>Über Lebensmittel hinaus halte respektvollen Abstand zu allen Wildtieren — Hirschen, Wapitis, Elchen, Gabelböcken und kleineren Tieren — und nähere dich ihnen niemals oder füttere sie; ein Elch im Wald verdient besonderen Raum. Achte in der Morgen- und Abenddämmerung auf Tiere auf der Straße, wenn du zum oder vom Camp fährst. Im Hochgebirge bleib wachsam gegenüber Gewittern und Kälte; in der Hochwüste achte an heißen Tagen darauf, wohin du Hände und Füße setzt, und schüttle Schuhe und Ausrüstung aus.</p>
+      <div class="article-tip"><strong>Hinweis:</strong> die genauen Anforderungen an Wildtiersicherheit und Lebensmittellagerung können je nach Campingplatz und Gebiet variieren und sich mit den Bedingungen ändern. Befolge alle ausgehängten Regeln an deinem Campingplatz, und <strong>PRÜFE BEI DER OFFIZIELLEN QUELLE</strong> (die zuständige Behörde) die aktuellen Anforderungen an dem Ort, an dem du campst.</div>
+
+      <h2>Camping nach Saison</h2>
+      <p>Eine der Stärken der Region ist, dass <em>es immer einen guten Ort zum Campen gibt</em>, solange du das Ziel mit der Saison abstimmst. So verläuft das Jahr.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Saison</th><th>Beste Ziele</th><th>Was dich erwartet</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Frühling</td><td>State Parks, Flaming Gorge, Basislager in Vernal</td><td>Wärmer werdende Tage, kühle Nächte, wenig Andrang; das Hochgebirge noch verschneit und matschig</td></tr>
+            <tr><td>Sommer</td><td>Ashley National Forest / Uintas, Flaming Gorge, alle Ziele</td><td>Beste Saison im Hochgebirge und frischeste Luft; geschäftigste Wochenenden; Nachmittagsgewitter</td></tr>
+            <tr><td>Herbst</td><td>Ashley NF (früh in der Saison), Flaming Gorge, State Parks, Monument</td><td>Favorit vieler Einheimischer — kühle Nächte, goldene Espen, weniger Menschen; das Hochgebirge schließt, wenn der Schnee zurückkehrt</td></tr>
+            <tr><td>Winter</td><td>Sehr begrenzt; Basislager in Vernal für Unterkunft</td><td>Kalt, verschneit, die meisten Campingplätze geschlossen; Camping ist nur für gut Vorbereitete</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><em>Die saisonalen Zeitfenster sind allgemein und variieren mit Wetter und Höhe von Jahr zu Jahr. Öffnungs- und Schließzeiten von Campingplätzen ändern sich jährlich. <strong>PRÜFE BEI DER OFFIZIELLEN QUELLE</strong> die aktuellen Öffnungszeiten, Bedingungen und den Zugang vor einer Reise.</em> Für das monatliche Wetter der Region siehe unseren <a href="/de/guides/vernal-weather-guide/">Vernal-Wetterguide</a>.</p>
+
+      <h3>Sommer gegenüber Herbst: Ein genauerer Blick</h3>
+      <p>Die beiden Camping-Hochsaisons verdienen einen direkten Vergleich, denn jede belohnt andere Prioritäten.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Faktor</th><th>Sommer</th><th>Herbst (früh)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Zugang zum Hochgebirge</td><td>Vollständig offen und zuverlässig</td><td>Früh in der Saison offen, schließt, wenn der Schnee zurückkehrt</td></tr>
+            <tr><td>Andrang</td><td>Am größten; reserviere weit im Voraus</td><td>Geringer; leichter, Stellplätze zu finden</td></tr>
+            <tr><td>Temperaturen</td><td>Milde/heiße Tage, milde bis kalte Nächte je nach Höhe</td><td>Kühlere Tage, kalte Nächte; Frost in der Höhe möglich</td></tr>
+            <tr><td>Landschaft</td><td>Grüner Wald, volle Seen, lange Tage</td><td>Goldene Espen, warmes, flaches Licht, Ruhe</td></tr>
+            <tr><td>Wetterrisiko</td><td>Nachmittagsgewitter</td><td>Frühere Stürme und erster Schnee in der Höhe</td></tr>
+            <tr><td>Ideal für</td><td>Wasser, Bergseen, Familien in den Schulferien</td><td>Fotografen, Paare, alle auf der Suche nach Einsamkeit</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Camping nach Reisetyp</h2>
+      <p>Mit wem du campst, verändert den besten Plan ebenso sehr wie die Saison. So passt sich die Region an unterschiedliche Reisende an.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Reisender</th><th>Beste Ziele und Stil</th><th>Warum es funktioniert</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Familien</td><td>Red Fleet oder Steinaker; ausgebaute Stellplätze; Wohnmobil oder Zelt</td><td>Schwimmen am Camp, kurze Anfahrten, Stadt in der Nähe, wenig Stress</td></tr>
+            <tr><td>Paare</td><td>Flaming Gorge oder ein ruhiger Waldcampingplatz; Zelt oder kleines Wohnmobil</td><td>Landschaft, Sonnenuntergänge und Einsamkeit ohne lange Anfahrt</td></tr>
+            <tr><td>Abenteuerreisende</td><td>Ashley NF freies Camping oder Backcountry; Zone des Monuments</td><td>Einsamkeit, Selbstversorgung und Zugang zu Wanderwegen, Wasser und Canyons</td></tr>
+            <tr><td>Wohnmobil-Reisende</td><td>Flaming Gorge, State Parks, private Parks in Vernal</td><td>Die besten Stellplatzgrößen und Dienstleistungen; Anschlüsse, wo verfügbar</td></tr>
+            <tr><td>Anfänger</td><td>Steinaker oder ein ausgebauter Waldcampingplatz</td><td>Einrichtungen, einfacher Zugang und Hilfe in der Nähe</td></tr>
+            <tr><td>Internationale Besucher und Roadtrip-Reisende</td><td>Basislager in Vernal plus ein oder zwei Ziele</td><td>Komfort und Nachschub mit einfachen Ausflügen zu den Highlights</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Barrierefreiheit</h2>
+      <p>Das barrierefreieste Camping der Region findet sich in den ausgebauten State Parks und größeren Campingplätzen. <a href="/de/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a> und <a href="/de/guides/ultimate-guide-to-steinaker-state-park/">Steinaker</a> bieten als ausgebaute State Parks Utahs in der Regel barrierefreie Parkplätze, Einrichtungen und Tagesbereiche nahe dem Camp, was sie zu den einfachsten Orten zum Campen für Besucher mit Mobilitätsbedürfnissen macht. Ausgebaute Campingplätze am Flaming Gorge und in der Zone des Monuments neigen ebenfalls dazu, besser zugängliche Einrichtungen zu haben als primitive Stellplätze.</p>
+      <p>Im Gegensatz dazu sind freie Stellplätze, Backcountry-Camps, unbefestigte Waldstraßen und das unebene Gelände des Hochgebirges rau und nicht durchgehend barrierefrei. Da genaue barrierefreie Stellplätze und Einrichtungen je nach Campingplatz variieren und sich mit der Zeit ändern, <strong>PRÜFE BEI DER OFFIZIELLEN QUELLE</strong> (Utah State Parks, Ashley National Forest oder den National Park Service) die aktuellen Barrierefreiheits-Angaben vor einem Besuch, falls du besondere Bedürfnisse hast.</p>
+
+      <h2>Ein-Nacht-Camping-Route</h2>
+      <p>Hast du nur eine einzige Nacht? Bleib nah und einfach, und du kannst trotzdem einen echten Eindruck vom Camping im Land der Dinosaurier bekommen.</p>
+      <p><strong>Die einfache Nacht (Steinaker oder Red Fleet).</strong> Verlass <a href="/de/guides/ultimate-guide-to-vernal-utah/">Vernal</a> am Nachmittag, richte dich in <a href="/de/guides/ultimate-guide-to-steinaker-state-park/">Steinaker</a> oder <a href="/de/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a> ein — beide nur wenige Minuten von der Stadt entfernt —, schwimm oder angle am Abend, mach das Abendessen, während sich das Licht über dem roten Fels weichzeichnet, und genieß eine ruhige Nacht nahe der Zivilisation. Am Morgen füg die Dinosaurier-Fährte in Red Fleet oder einen Bootsstart vom Ufer hinzu, bevor eine einfache Rückfahrt ansteht. Das ist der perfekte erste Campingausflug, eine Nacht mit geringem Aufwand, oder ein Test für neue Ausrüstung.</p>
+
+      <h2>Wochenend-Camping-Route</h2>
+      <p>Mit zwei oder drei Tagen kannst du ein Vorzeigeziel wählen und dich dort einrichten, oder zwei kennenlernen.</p>
+      <p><strong>Das Flaming-Gorge-Wochenende.</strong> Camp zwei Nächte am <a href="/de/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge</a>: verbring den ersten Tag auf dem Wasser — Bootfahren, <a href="/de/fishing/">Angeln</a> oder Paddeln — und den zweiten Tag auf dem <a href="/de/scenic-drives/flaming-gorge-uintas-scenic-byway/">Flaming Gorge–Uintas Scenic Byway</a> und seinen Aussichtspunkten, wobei du zum Camp für Sonnenuntergänge über dem Canyon zurückkehrst. Das ist das klassische Wasser-und-Landschaft-Wochenende.</p>
+      <p><strong>Das Familienwochenende.</strong> Zwei Nächte in <a href="/de/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a> oder <a href="/de/guides/ultimate-guide-to-steinaker-state-park/">Steinaker</a>: Schwimmen, Angeln vom Ufer, die Dinosaurier-Fährte, und kurze Fahrten in die Stadt für Nachschub und ein Restaurantessen — Camping mit Sicherheitsnetz, gedacht für Kinder.</p>
+      <p><strong>Das Bergwochenende.</strong> Entkomm der Hitze mit zwei Nächten im <a href="/de/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest</a>: ein ausgebauter Waldcampingplatz nahe einem See, kühle Nächte, eine Tageswanderung oder eine Paddeltour, und sternenübersäte Himmel. Bring warme Schichten mit, selbst im Juli. Kommst du aus dem Westen? Sieh dir unseren <a href="/de/from/salt-lake-city/">Guide von Salt Lake City nach Vernal</a> an.</p>
+
+      <h2>Eine-Woche-Camping-Reise</h2>
+      <p>Mit einer ganzen Woche kannst du die gesamte Region erleben — zwischen den Zielen wechseln, um Wasser, Berge, Fossilien und Familienspaß zu genießen, wobei du <a href="/de/guides/ultimate-guide-to-vernal-utah/">Vernal</a> nutzt, um dich unterwegs zu versorgen. Eine natürliche Abfolge:</p>
+      <ul>
+        <li><strong>Nächte 1–2 — Flaming Gorge.</strong> Beginn sanft mit dem Camping am großen Wasser am <a href="/de/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge</a>: Bootfahren, Angeln und die Aussichtspunkte des Byway.</li>
+        <li><strong>Nächte 3–4 — Ashley National Forest.</strong> Fahr hinauf in die <a href="/de/guides/ultimate-guide-to-ashley-national-forest/">Uintas</a> für kühles Waldcamping, alpine Seen, und — für Erfahrene und gut Vorbereitete — einen Vorgeschmack auf freies Camping und Einsamkeit.</li>
+        <li><strong>Nacht 5 — Basislager in Vernal.</strong> Fahr zurück in die Stadt, um dich zu versorgen, zu duschen, Wäsche zu waschen und ein Restaurantessen zu genießen; erkunde <a href="/de/things-to-do/">Unternehmungen in Vernal</a>.</li>
+        <li><strong>Nächte 6–7 — Dinosaur National Monument und State Parks.</strong> Schließ nahe den Fossilien ab: camp in der <a href="/de/dinosaur-national-monument/visiting-dinosaur-national-monument/">Zone des Monuments</a> für das Quarry, die Petroglyphen und die Flusscanyons, oder beende die Reise mit einer einfachen Familiennacht in <a href="/de/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a>.</li>
+      </ul>
+      <p>Kehr die Reihenfolge um, um gutem Wetter zu folgen, und halte immer eine oder zwei Nächte flexibel — Berggewitter und ausgebuchte Campingplätze gehören dazu. Zwischen Campingtagen ist eine <a href="/de/booking/">geführte Backcountry-UTV-Tour mit Adventure Tours Vernal</a> eine großartige Möglichkeit, Terrain zu sehen, das du von einem Campingplatz aus nie erreichen würdest.</p>
+
+      <h2>Planungstipps</h2>
+      <ul>
+        <li><strong>Wähle zuerst das Ziel, dann den Stil.</strong> Entscheide, ob du Wasser, Berge, Fossilien oder ein einfaches Familienwochenende willst, und wähle dann entsprechend Wohnmobil, Zelt oder freies Camping — die Tabellen oben sind genau dafür gemacht.</li>
+        <li><strong>Reserviere früh für den Sommer.</strong> Die besten ausgebauten Stellplätze am Flaming Gorge, in den State Parks und auf beliebten Waldcampingplätzen sind an Sommerwochenenden und Feiertagen ausgebucht. <strong>PRÜFE BEI DER OFFIZIELLEN QUELLE</strong> die Reservierungsfenster und buche im Voraus.</li>
+        <li><strong>Prüfe Gebühren, Ausstattung und Öffnungszeiten deines genauen Campingplatzes.</strong> Anschlüsse, Entsorgungsstationen, Wasser, Stellplatzlängen und saisonale Öffnungszeiten unterscheiden sich je nach Campingplatz und ändern sich von Jahr zu Jahr — geh nie davon aus.</li>
+        <li><strong>Prüfe immer die aktuell geltenden Feuerbeschränkungen.</strong> Feuerverbote sind in trockenen Zeiten üblich und unterscheiden sich je nach Zuständigkeitsbereich; geh nie davon aus, dass ein Lagerfeuer erlaubt ist, und bestätige die Regel für dieses genaue Gebiet, bevor du ein Feuer entfachst.</li>
+        <li><strong>Pack sowohl für die Hochwüste ALS AUCH das Gebirge.</strong> Heiße Tage, kalte Nächte, starke Sonne, Nachmittagsgewitter und Wind sind alle im Spiel; bring Schichten, Sonnenschutz und mehr Wasser mit, als du denkst.</li>
+        <li><strong>Nutze Vernal als Basis für Nachschub.</strong> Treibstoff, Lebensmittel und Outdoor-Ausrüstung gibt es in der Stadt, und jedes Ziel liegt einen Tagesausflug entfernt — eine großartige Rückfalloption, wenn das Wetter umschlägt.</li>
+        <li><strong>Respektiere das Terrain und die Wildtiere.</strong> Lager Lebensmittel richtig, befolge Leave No Trace, halte Abstand zu Tieren, und nimm alles wieder mit — besonders beim freien Camping.</li>
+        <li><strong>Lern die Regeln des freien Camping, bevor du primitiv losziehst.</strong> Kostenloses Camping ist ein Privileg mit echten Regeln; bestätige zuerst die aktuellen Vorschriften für freies Camping beim Forest Service.</li>
+      </ul>
+
+      <p>Das Land der Dinosaurier belohnt den Camper, der um die Erfahrung herum plant, statt zufällig darüber zu stolpern. Wähle das Ziel, das zu deinem Ziel, deiner Gruppe und deiner Saison passt; wähle den Stil, der zu deinem Komfort passt; lies den eigenen Guide für dieses Ziel; reserviere früh oder lern die Regeln des freien Camping; prüfe die aktuell geltenden Gebühren, Öffnungszeiten und Feuerbeschränkungen; und gib dir Zeit, eine der wirklich am meisten unterschätzten Camping-Regionen des Westens zu genießen. Wenn du den Stellplatz gegen ein geführtes Backcountry-Abenteuer zwischen zwei Nächten draußen tauschen willst, <a href="/de/booking/">buch eine UTV-Tour mit Adventure Tours Vernal</a> und lass Dave und Trudy dir das Terrain jenseits des Campingplatzes zeigen.</p>
+
+      <div class="article-faq">
+        <h2>Häufig gestellte Fragen</h2>
+        <div class="faq-item">
+          <h3>Wo ist der beste Ort zum Campen bei Vernal, Utah?</h3>
+          <p>Das hängt von der Reise ab, die du machen willst. Für Wasser, Bootfahren und Landschaften am großen Stausee campst du am Flaming Gorge, etwa eine Stunde nördlich. Für kühlen Bergwald und alpine Seen geht es hinauf zum Ashley National Forest und den Uinta Mountains. Für einfaches, familienfreundliches Camping nur wenige Minuten von der Stadt entfernt sind Red Fleet und der Steinaker State Park kaum zu schlagen. Für eine Basis nahe den Fossilien und Flusscanyons campst du in der Zone des Dinosaur National Monument. Und wenn du Restaurants, Duschen und Nachschub in Reichweite willst, nutze Vernal als Basislager und unternimm Tagesausflüge.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Brauchst du eine Reservierung, um bei Vernal zu campen?</h3>
+          <p>Das ist von Campingplatz zu Campingplatz unterschiedlich. Viele ausgebaute Campingplätze am Flaming Gorge, im Ashley National Forest, in den State Parks und in der Zone des Dinosaur National Monument akzeptieren Reservierungen, und manche Stellplätze werden ohne Reservierung, nach Verfügbarkeit vergeben; die gefragtesten Plätze sind an Sommerwochenenden und Feiertagen ausgebucht. Freies Camping auf Flächen des National Forest erfordert in der Regel keine Reservierung, hat aber eigene Regeln. Reservierungssysteme und Verfügbarkeit ändern sich, buche also früh für den Sommer und prüfe bei der zuständigen Behörde, bevor du dich auf einen Stellplatz verlässt.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Kannst du bei Vernal, Utah kostenlos campen?</h3>
+          <p>Freies Camping (Dispersed Camping) ist auf einem Großteil des Ashley National Forest und anderer öffentlicher Flächen generell erlaubt, meist ohne Gebühr, sofern du die Regeln der zuständigen Behörde befolgst — in erlaubten Zonen campen, Aufenthaltsgrenzen einhalten, alles wieder mitnehmen und Leave-No-Trace-Praktiken befolgen. Ausgebaute Campingplätze mit Einrichtungen verlangen eine Gebühr. Die Regeln für kostenloses Camping, Sperrungen und Feuerbeschränkungen ändern sich und variieren je nach Gebiet, prüfe also immer die aktuellen Regeln für freies Camping bei Ashley National Forest, bevor du losfährst.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Gibt es Wohnmobil-Camping im Land der Dinosaurier?</h3>
+          <p>Ja. Es gibt ausgebaute Campingplätze mit Stellplätzen für Wohnmobile am Flaming Gorge, in den State Parks, in Teilen des Ashley National Forest und in der Zone von Vernal und dem Dinosaur National Monument, und private Wohnmobil-Parks in und um Vernal ergänzen das Angebot um Optionen mit vollem Anschluss. Ob ein bestimmter Campingplatz Anschlüsse, eine Entsorgungsstation oder Durchfahrtsstellplätze bietet oder Längenbegrenzungen hat, variiert je nach Ort und ändert sich mit der Zeit, prüfe also die Ausstattung und Stellplatzgrößen jedes Campingplatzes, bevor du mit deinem Wohnwagen hinfährst.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Was ist die beste Zeit zum Campen bei Vernal?</h3>
+          <p>Vom späten Frühling bis in den Herbst erstreckt sich die Hauptcampingsaison. Der Sommer ist heiß, zuverlässig, und das beste Zeitfenster für das Hochgebirge der Uintas, auch wenn er zugleich die geschäftigste Zeit ist und Nachmittagsgewitter mit sich bringt. Der frühe Herbst ist bei vielen Einheimischen der Favorit — kühlere Nächte, weniger Andrang und schöne Farben. Das Hochgebirge hat eine kurze Saison und kann bis in den Frühsommer Schnee halten und ihn im Herbst erneut sehen; tiefer gelegene Campingplätze nahe der Stadt haben ein längeres Zeitfenster. Wintercamping ist möglich, aber kalt und begrenzt.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Welches Camping eignet sich am besten für Familien bei Vernal?</h3>
+          <p>Red Fleet und der Steinaker State Park bieten das einfachste und familienfreundlichste Camping der Region — nahe der Stadt, mit ausgebauten Einrichtungen, Schwimmen und Paddeln direkt am Camp, und kurzen, einfachen Anfahrten. Ausgebaute Campingplätze am Flaming Gorge und mit dem Auto erreichbare Stellplätze im Ashley National Forest funktionieren ebenfalls gut für Familien, die etwas mehr Natur wollen, ohne auf Komfort zu verzichten. Heb dir freies Camping und Backcountry-Camping für später auf, wenn die Kinder älter und die Gruppe erfahrener ist.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Sind Lagerfeuer beim Campen nahe Vernal erlaubt?</h3>
+          <p>Manchmal — das hängt vollständig von den aktuell geltenden Feuerbeschränkungen ab, die sich im Lauf der Saison je nach Bedingungen ändern. In trockenen Zeiten verhängen die Behörden häufig Feuerverbote, die offene Feuer untersagen, und die Regeln unterscheiden sich zwischen ausgebauten Campingplätzen, freien Stellplätzen und Zuständigkeitsbereichen. Geh nie davon aus, dass ein Feuer erlaubt ist. Prüfe vor jedem Feuer immer die aktuell geltenden Feuerbeschränkungen für das genaue Gebiet bei der zuständigen Behörde, benutze nur vorhandene Feuerstellen, wo erlaubt, und lösche jedes Feuer vollständig mit Wasser.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Wie plane ich einen Campingausflug ins Land der Dinosaurier?</h3>
+          <p>Entscheide, welche Erfahrung du willst — Wasser, Berge, Fossilien oder ein einfaches Familienwochenende — und wähle das dazu passende Ziel, wobei du Vernal als deine Nachschub-Basis nutzt. Wähle deinen Stil (Wohnmobil, Zelt oder freies Camping), reserviere dann früh für den Sommer einen ausgebauten Stellplatz oder lerne die Regeln für freies Camping, falls du dich für primitives Camping entscheidest. Prüfe Gebühren, Ausstattung, saisonale Öffnungszeiten und aktuell geltende Feuerbeschränkungen bei der zuständigen Behörde, sieh dir die Vorhersage sowohl für Hitze als auch Kälte an, und rüste dich für ein Spektrum an Bedingungen von der Hochwüste bis zum Gebirge aus.</p>
+        </div>
+      </div>
+
+      <div class="article-tip"><strong>Bevor du losfährst:</strong> die Verfügbarkeit von Campingplätzen, Reservierungen, Gebühren, Anschlüsse, Entsorgungsstationen, saisonale Öffnungszeiten, Feuerbeschränkungen und Genehmigungsanforderungen jedes Ziels dieses Guides werden vom U.S. Forest Service, dem National Park Service und den Utah State Parks festgelegt und ändern sich von Jahr zu Jahr. Alles, was hier über das Wo und Wie des Campens gesagt wird, bleibt saisonübergreifend gültig; es sind die genauen Einzelheiten, die sich ändern. <strong>PRÜFE BEI DER OFFIZIELLEN QUELLE</strong>, bevor du losfährst.</div>
+
+    </div>
+  </main>
+
+  <HubIndex slot="body" collection="camping" heading="Alle Camping-Guides" />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

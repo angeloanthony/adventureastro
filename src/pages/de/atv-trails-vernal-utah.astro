@@ -1,0 +1,32 @@
+---
+// de/atv-trails-vernal-utah.astro — German ATV trails landing page.
+// Mirrors src/pages/pt/atv-trails-vernal-utah.astro.
+import { getBodyHtml } from '../../page-content/atv-trails';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"ATV-Pisten in der Nähe von Vernal, Utah","description":"Leitfaden zu ATV- und UTV-Pisten in der Nähe von Vernal, Utah, mit geführten Kawasaki KRX 1000 Touren auf fünf Pistensystemen.","author":{"@type":"Organization","name":"Adventure Tours Vernal"},"publisher":{"@type":"Organization","name":"Adventure Tours Vernal","logo":{"@type":"ImageObject","url":"https://adventuretoursvernal.com/images/logo.webp"}},"datePublished":"2026-04-08","dateModified":"2026-04-08","mainEntityOfPage":"https://adventuretoursvernal.com/de/atv-trails-vernal-utah/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Gibt es ATV-Pisten in der Nähe von Vernal, Utah?","acceptedAnswer":{"@type":"Answer","text":"Ja. Das Uintah Basin rund um Vernal bietet ausgedehnte Pistensysteme im Backcountry, darunter Doc's Beach, Moonshine Arch, Ashley Gorge, Outlaw Trail und Asphalt Ridge — alle über geführte UTV-Touren mit Adventure Tours Vernal zugänglich."}},{"@type":"Question","name":"Kann man mit dem ATV in der Nähe des Dinosaur National Monument fahren?","acceptedAnswer":{"@type":"Answer","text":"Innerhalb des Dinosaur National Monument sind motorisierte Fahrzeuge nicht erlaubt, aber die Backcountry-Pisten rund um Vernal und das Monumentgebiet bieten ausgedehnte UTV-Routen durch ähnliches Schluchten- und Wüstengelände, zugänglich über geführte Touren."}},{"@type":"Question","name":"Brauche ich mein eigenes ATV, um die Pisten in der Nähe von Vernal zu fahren?","acceptedAnswer":{"@type":"Answer","text":"Nein. Adventure Tours Vernal stellt Kawasaki KRX 1000 Side-by-Sides, Helme, Sicherheitsausrüstung und erfahrene Guides bereit. Die Touren kosten $349 pro Fahrzeug für 3 Stunden, mit bis zu 2 Mitfahrern pro Fahrzeug."}}]}]}`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="ATV-Pisten in Vernal, Utah | Geführte UTV-Touren"
+      description="Entdecke die besten ATV- und UTV-Pisten in der Nähe von Vernal, Utah. Geführte Kawasaki KRX 1000 Touren durch Schluchten und Backcountry. Jetzt buchen."
+      path="/de/atv-trails-vernal-utah/"
+      type="article"
+      ogTitle="ATV-Pisten in Vernal, Utah | Geführte UTV-Touren"
+      ogDescription="Die besten ATV- und UTV-Pisten in der Nähe von Vernal — geführte Kawasaki KRX 1000 Touren durch Schluchten, Felskunst-Stätten und Backcountry."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.trails', lang), href: '/de/utv/' }, { label: 'ATV-Pisten Vernal' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

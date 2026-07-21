@@ -1,0 +1,32 @@
+---
+// de/jeep-trails-vernal-utah.astro — German Jeep trails landing page (German
+// inline-pages batch). Mirrors src/pages/pt/jeep-trails-vernal-utah.astro.
+import { getBodyHtml } from '../../page-content/jeep-trails';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Jeep-Pisten in der Nähe von Vernal, Utah","description":"Guide zu Jeep-Pisten und Offroad-Routen in der Nähe von Vernal, Utah, einschließlich Backcountry-Routen und geführten UTV-Tour-Optionen.","author":{"@type":"Organization","name":"Adventure Tours Vernal"},"publisher":{"@type":"Organization","name":"Adventure Tours Vernal","logo":{"@type":"ImageObject","url":"https://adventuretoursvernal.com/images/logo.webp"}},"datePublished":"2026-04-08","dateModified":"2026-04-08","mainEntityOfPage":"https://adventuretoursvernal.com/de/jeep-trails-vernal-utah/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Gibt es Jeep-Pisten in der Nähe von Vernal, Utah?","acceptedAnswer":{"@type":"Answer","text":"Ja. Das BLM-Land und das Backcountry rund um Vernal bieten ausgedehnte Offroad-Routen, die für Jeeps und 4x4-Fahrzeuge geeignet sind, sowie fünf geführte UTV-Pistensysteme, die über Adventure Tours Vernal zugänglich sind."}},{"@type":"Question","name":"Kann ich eine geführte Offroad-Tour machen, statt meinen eigenen Jeep zu fahren?","acceptedAnswer":{"@type":"Answer","text":"Ja. Adventure Tours Vernal bietet geführte Kawasaki-KRX-1000-UTV-Touren auf fünf Pistensystemen mit erfahrenen Guides, sodass du kein eigenes Fahrzeug brauchst. $349 pro Fahrzeug für 3 Stunden."}},{"@type":"Question","name":"Wie schneidet Vernal im Vergleich zu Moab fürs Offroad-Fahren ab?","acceptedAnswer":{"@type":"Answer","text":"Vernal bietet ähnliches Canyon- und Wüstengelände bei deutlich weniger Andrang. Die Pisten sind weniger kommerzialisiert, das Backcountry ist abgelegener, und die Preise für geführte Touren sind wettbewerbsfähig mit den Anbietern in Moab, teils sogar besser."}}]}]}`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Jeep-Pisten bei Vernal, Utah | Offroad- und UTV-Guide"
+      description="Jeep-Pisten und Offroad-Routen in der Nähe von Vernal, Utah. Backcountry-Canyons, Wüstengelände und historische Routen per Jeep oder geführter UTV-Tour."
+      path="/de/jeep-trails-vernal-utah/"
+      type="article"
+      ogTitle="Jeep-Pisten bei Vernal, Utah | Offroad-Guide"
+      ogDescription="Offroad-Pisten bei Vernal für Jeeps, 4x4 und geführte Kawasaki-KRX-1000-UTV-Touren durch Wüstencanyons und abgelegenes Backcountry-Gelände."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.trails', lang), href: '/de/utv/' }, { label: 'Jeep-Pisten' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

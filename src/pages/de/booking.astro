@@ -1,0 +1,53 @@
+---
+// de/booking.astro — German booking page (mirrors pt/booking.astro structurally;
+// informal "du" register per German inline-pages batch).
+// Mirrors src/pages/booking.astro; LocalBusiness schema fields are
+// business-identity data (name/address/hours), not page copy, so only
+// the page-specific "url" changes to this page's own /de/ address.
+import { getBodyHtml } from '../../page-content/booking';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Adventure Tours Vernal",
+    "url": "https://adventuretoursvernal.com/de/booking/",
+    "image": "https://adventuretoursvernal.com/images/logo.webp",
+    "telephone": "+1-435-219-9447",
+    "email": "adventuretoursvernal@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1935 S 1500 E",
+      "addressLocality": "Vernal",
+      "addressRegion": "UT",
+      "postalCode": "84078",
+      "addressCountry": "US"
+    },
+    "openingHours": "Mo-Su 07:00-19:00"
+  }
+`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Buche deine UTV-Tour | Adventure Tours Vernal"
+      description="Buche eine geführte Kawasaki KRX 1000 UTV-Tour in Vernal, Utah. Wähle aus fünf Panorama-Pisten. Täglich geöffnet von 7 bis 19 Uhr."
+      path="/de/booking/"
+      type="website"
+      ogDescription="Geführte Kawasaki KRX 1000 UTV-Tour in Vernal, Utah. Live-Kalender, Sofortbuchung. Täglich geöffnet, 7 bis 19 Uhr. Ruf an: (435) 219-9447."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Buche deine Tour' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer slot="body" />
+</BaseLayout>

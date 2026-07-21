@@ -1213,9 +1213,251 @@ const FR = `
 </div>
 `;
 
+const DE = `
+<!-- SEITENZUSAMMENFASSUNG -->
+<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+  Sicherheitshinweise von Adventure Tours Vernal für geführte UTV-Touren in Vernal, Utah. Fahrer müssen mindestens 18 Jahre alt sein. Mitfahrer müssen mindestens 2 Jahre alt sein. Sicherheitsgurt Pflicht. Nulltoleranz bei Alkohol oder Drogen. Vollständige Sicherheitseinweisung vor jeder Tour. Ruf uns an unter (435) 219-9447.
+</p>
+
+<section class="policy-section">
+  <div class="container">
+    <div class="section-header">
+      <h1 class="section-title">Sicherheitshinweise</h1>
+      <p class="section-subtitle">Deine Sicherheit ist unsere oberste Priorität. Bitte lies dir diese Hinweise vor deinem Abenteuer durch.</p>
+    </div>
+
+    <div class="policy-container">
+
+      <!-- VOR DEINER TOUR -->
+      <div class="policy-card">
+        <div class="policy-icon">📋</div>
+        <h2 class="policy-heading">Vor deiner Tour</h2>
+        <div class="policy-list">
+          <h3>Ankunft & Anmeldung:</h3>
+          <ul>
+            <li>Komm <strong>30 Minuten vorher</strong> für die Einweisung und die Sicherheitsbesprechung</li>
+            <li>Bring einen gültigen Führerschein mit (für alle Fahrer erforderlich)</li>
+            <li>Fülle alle erforderlichen Haftungsausschlüsse und Vereinbarungen aus</li>
+            <li>Nimm an der verpflichtenden Sicherheitseinweisung teil</li>
+          </ul>
+          <h3>Gesundheits- und Fitnessanforderungen:</h3>
+          <ul>
+            <li>Alle Teilnehmer müssen bei guter körperlicher Gesundheit sein</li>
+            <li>Informiere deinen Guide über gesundheitliche Beschwerden, Verletzungen oder Bedenken</li>
+            <li>Schwangere sollten vor der Teilnahme ihren Arzt konsultieren</li>
+            <li>Wenn du Rücken-, Nacken- oder Herzprobleme hast, informiere uns bitte im Voraus</li>
+          </ul>
+          <h3>Alkohol- und Drogenrichtlinie:</h3>
+          <ul>
+            <li><strong>Nulltoleranz</strong> bei Alkohol oder Drogen</li>
+            <li>Du darfst nicht fahren, wenn du unter Einfluss stehst</li>
+            <li>Bei Verstößen werden keine Rückerstattungen gewährt</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ALTERSANFORDERUNGEN -->
+      <div class="policy-card">
+        <div class="policy-icon">👥</div>
+        <h2 class="policy-heading">Altersanforderungen</h2>
+        <div class="policy-table">
+          <div class="policy-row">
+            <div class="policy-timeframe">Zum Fahren</div>
+            <div class="policy-refund refund-full">18+ Jahre</div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-timeframe">Als Mitfahrer</div>
+            <div class="policy-refund refund-full">2+ Jahre</div>
+          </div>
+        </div>
+        <div class="policy-note">
+          <strong>Wichtig:</strong> Alle Fahrer müssen einen gültigen Führerschein vorlegen. Eltern/Erziehungsberechtigte müssen die Haftungsausschlüsse für Minderjährige unterschreiben.
+        </div>
+      </div>
+
+      <!-- FAHRZEUGBEDIENUNG -->
+      <div class="policy-card">
+        <div class="policy-icon">🚙</div>
+        <h2 class="policy-heading">Fahrzeugbedienung & Sicherheit</h2>
+        <div class="policy-list">
+          <h3>Beim Fahren des Fahrzeugs:</h3>
+          <ul>
+            <li>Trage immer deinen Sicherheitsgurt - keine Ausnahmen</li>
+            <li>Halte Hände und Arme jederzeit im Fahrzeug</li>
+            <li>Steh niemals auf, während das Fahrzeug in Bewegung ist</li>
+            <li>Befolge jederzeit die Anweisungen deines Guides</li>
+            <li>Halte einen sicheren Abstand zu anderen Fahrzeugen</li>
+            <li>Nutze das Walkie-Talkie, um mit deinem Guide zu kommunizieren</li>
+          </ul>
+          <h3>Sicherheitsausrüstung (Pflicht):</h3>
+          <ul>
+            <li>Der Sicherheitsgurt muss von allen Mitfahrern getragen werden</li>
+            <li>Helme (auf Anfrage erhältlich)</li>
+            <li>Schutzbrille oder Sonnenbrille empfohlen</li>
+          </ul>
+          <h3>Verbotene Handlungen:</h3>
+          <ul>
+            <li>Rennen fahren oder rasen</li>
+            <li>Rücksichtsloses Fahren oder Stunts</li>
+            <li>Die vorgegebene Piste verlassen</li>
+            <li>Das Fahrzeug unter Einfluss fahren</li>
+            <li>Anweisungen des Guides ignorieren</li>
+          </ul>
+        </div>
+        <div class="policy-warning">
+          <strong>⚠️ Warnung:</strong> Bei Nichteinhaltung der Sicherheitsregeln kann deine Tour ohne Rückerstattung sofort beendet werden. Rücksichtsloses Verhalten macht sämtliche Versicherungs- und Schadensverzichtserklärungen ungültig.
+        </div>
+      </div>
+
+      <!-- GELÄNDE- & PISTENSICHERHEIT -->
+      <div class="policy-card">
+        <div class="policy-icon">⛰️</div>
+        <h2 class="policy-heading">Gelände- & Pistensicherheit</h2>
+        <div class="policy-list">
+          <h3>Pistenverhältnisse:</h3>
+          <ul>
+            <li>Die Pisten können Felsen, steile Anstiege, Wasserdurchquerungen und unwegsames Gelände umfassen</li>
+            <li>Das Wetter kann sich schnell ändern - sei vorbereitet</li>
+            <li>Staub und Schmutz sind üblich - bring einen Augenschutz mit</li>
+            <li>Der Handyempfang kann in abgelegenen Gebieten eingeschränkt sein</li>
+          </ul>
+          <h3>Bleib auf der Piste:</h3>
+          <ul>
+            <li>Verlasse nie die vorgegebenen Pisten</li>
+            <li>Respektiere Privatgrundstücke und ausgewiesene Schilder</li>
+            <li>Befolge die Leave-No-Trace-Prinzipien</li>
+            <li>Störe keine Wildtiere oder Pflanzen</li>
+          </ul>
+          <h3>Notfallsituationen:</h3>
+          <ul>
+            <li>Informiere deinen Guide sofort, wenn du dich unsicher fühlst</li>
+            <li>Nutze das Walkie-Talkie zur Kommunikation</li>
+            <li>Erste-Hilfe-Kits sind bei jeder Tour verfügbar</li>
+            <li>Dein Guide ist in Erster Hilfe in der Wildnis ausgebildet</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- WETTER & UMWELTSICHERHEIT -->
+      <div class="policy-card">
+        <div class="policy-icon">🌦️</div>
+        <h2 class="policy-heading">Wetter & Umweltsicherheit</h2>
+        <div class="policy-list">
+          <h3>Wettervorbereitung:</h3>
+          <ul>
+            <li>Wir sind bei den meisten Wetterbedingungen unterwegs</li>
+            <li>Bei extremem Wetter können Touren abgesagt oder verschoben werden</li>
+            <li>Die Temperaturen können stark schwanken - zieh dich in mehreren Schichten an</li>
+            <li>Bring Regenkleidung mit, wenn das Wetter unsicher aussieht</li>
+          </ul>
+          <h3>Sonnenschutz:</h3>
+          <ul>
+            <li>Die Sonne in Utah ist intensiv - trage Sonnencreme (LSF 30+)</li>
+            <li>Bring eine Sonnenbrille mit UV-Schutz mit</li>
+            <li>Trage einen Hut oder ein Bandana</li>
+            <li>Bleib hydriert - Wasser wird bereitgestellt</li>
+          </ul>
+          <h3>Wildtiersicherheit:</h3>
+          <ul>
+            <li>Nähere dich Wildtieren nicht und füttere sie nicht</li>
+            <li>Halte zu allen Tieren einen sicheren Abstand</li>
+            <li>Achte auf Schlangen, besonders in den wärmeren Monaten</li>
+            <li>Melde deinem Guide jede Wildtiersichtung</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- KOMMUNIKATION -->
+      <div class="policy-card">
+        <div class="policy-icon">📡</div>
+        <h2 class="policy-heading">Kommunikation & Gruppensicherheit</h2>
+        <div class="policy-list">
+          <h3>In Verbindung bleiben:</h3>
+          <ul>
+            <li>Walkie-Talkie für jedes Fahrzeug vorhanden</li>
+            <li>Halte das Walkie-Talkie jederzeit eingeschaltet</li>
+            <li>Informiere den Guide sofort, wenn du anhalten musst</li>
+            <li>Verlasse die Gruppe nie, ohne deinen Guide zu informieren</li>
+          </ul>
+          <h3>Wenn du Probleme hast:</h3>
+          <ul>
+            <li>Halte sicher an und nutze das Walkie-Talkie</li>
+            <li>Versuche nicht, mechanische Probleme selbst zu beheben</li>
+            <li>Warte auf die Hilfe des Guides</li>
+            <li>Fahr nie weiter, wenn das Fahrzeug unsicher erscheint</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SCHÄDEN & HAFTUNG -->
+      <div class="policy-card">
+        <div class="policy-icon">🛡️</div>
+        <h2 class="policy-heading">Schäden & Haftung</h2>
+        <div class="policy-list">
+          <h3>Verzichtserklärung für Fahrzeugschäden:</h3>
+          <ul>
+            <li>Für alle Touren erforderlich</li>
+            <li>Begrenzt deine Haftung auf den Selbstbehalt</li>
+            <li>Ungültig bei rücksichtslosem Fahren</li>
+            <li>Ungültig, wenn Alkohol/Drogen im Spiel sind</li>
+          </ul>
+          <h3>Vorgehen bei Unfällen:</h3>
+          <ul>
+            <li>Sofort anhalten und Verletzungen prüfen</li>
+            <li>Guide per Walkie-Talkie kontaktieren</li>
+            <li>Verletzte Personen nicht bewegen, außer bei unmittelbarer Gefahr</li>
+            <li>Den Vorfall wenn möglich mit Fotos dokumentieren</li>
+          </ul>
+        </div>
+        <div class="deductible-info">
+          <h3>Wichtige Versicherungsinformationen:</h3>
+          <p>Du bist über unsere Haftpflichtversicherung mit einem <strong>Selbstbehalt von $1,000 pro Unfall</strong> versichert. Dies gilt unabhängig vom Verschulden. Die Verzichtserklärung für Fahrzeugschäden kann helfen, deine Kosten für Fahrzeugschäden zu begrenzen.</p>
+        </div>
+      </div>
+
+      <!-- DEINE VERANTWORTLICHKEITEN -->
+      <div class="policy-card">
+        <div class="policy-icon">✅</div>
+        <h2 class="policy-heading">Deine Verantwortlichkeiten</h2>
+        <div class="policy-list">
+          <h3>Als Teilnehmer erklärst du dich einverstanden mit Folgendem:</h3>
+          <ul>
+            <li>Alle Anweisungen des Guides befolgen</li>
+            <li>Das Fahrzeug sicher und verantwortungsvoll bedienen</li>
+            <li>Andere Teilnehmer und die Umwelt respektieren</li>
+            <li>Bedenken sofort mitteilen</li>
+            <li>Alle erforderlichen Unterlagen wahrheitsgemäß ausfüllen</li>
+            <li>Die persönliche Verantwortung für deine eigene Sicherheit übernehmen</li>
+          </ul>
+        </div>
+        <div class="policy-warning">
+          <strong>Denk daran:</strong> ATV-/UTV-Fahren birgt inhärente Risiken. Auch wenn wir alle Vorkehrungen für deine Sicherheit treffen, nimmst du auf eigenes Risiko teil. Bitte lies alle Haftungsausschlüsse durch und verstehe sie, bevor du sie unterschreibst.
+        </div>
+      </div>
+
+      <!-- KONTAKT CTA -->
+      <div class="policy-cta">
+        <h3>Fragen zur Sicherheit?</h3>
+        <p>Wenn du vor deiner Tour Sicherheitsbedenken oder Fragen hast, kontaktiere uns. Wir sind da, um dir ein sicheres und großartiges Abenteuer zu ermöglichen!</p>
+        <div class="cta-buttons">
+          <a href="tel:435-219-9447" class="cta-button primary">📞 Ruf an (435) 219-9447</a>
+          <a href="/de/booking/" class="cta-button secondary">Buche dein sicheres Abenteuer</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Mobiler Sticky-CTA -->
+<div class="mobile-sticky-cta">
+  <button onclick="location.href='/de/booking/'">Jetzt deine Tour buchen</button>
+</div>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3A, Italian P6,
- * French P8-P6).
+ * French P8-P6, German P9).
  * Every locale without a committed variant falls back to English. Callers
  * that don't need locale awareness keep importing `bodyHtml` directly.
  */
@@ -1224,5 +1466,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'it') return IT;
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
+  if (locale === 'de') return DE;
   return bodyHtml;
 }

@@ -358,6 +358,77 @@ const FR = `
   </main>
 `;
 
+const DE = `
+
+
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    Zu den ATV- und UTV-Pisten in der Nähe von Vernal, Utah, gehören Doc's Beach, Moonshine Arch, Ashley Gorge, Outlaw Trail und Asphalt Ridge. Adventure Tours Vernal bietet geführte Kawasaki KRX 1000 Side-by-Side-Touren auf allen fünf Pistensystemen. $349/Fahrzeug für 3 Stunden, bis zu 2 Mitfahrer. Helme, Sicherheitsausrüstung und erfahrene Guides inklusive. Ruf an unter (435) 219-9447.
+  </p>
+
+  <main class="article-page">
+    <header class="article-header">
+      <div class="article-breadcrumb">
+        <a href="/de/">Start</a><span class="sep">›</span><a href="/de/utv/">Pisten</a><span class="sep">›</span><span>ATV-Pisten Vernal</span>
+      </div>
+      <h1 class="article-title">ATV-Pisten in der Nähe von Vernal, Utah</h1>
+      <p class="article-meta">Aktualisiert im April 2026 · Adventure Tours Vernal</p>
+    </header>
+
+    <div class="article-body">
+      <div class="article-summary-box">
+        Das Uintah Basin rund um Vernal bietet eines der besten Offroad-Geländes in Utah — rote Felsschluchten, sandige Wüstenwaschungen, Panoramen von Bergkämmen und historische Routen im Backcountry, die die meisten Besucher nie zu Gesicht bekommen. So erlebst du das alles bei geführten UTV-Touren, ganz ohne eigenes ATV.
+      </div>
+
+      <h2>Warum Vernal für ATV- und UTV-Touren</h2>
+      <p>Südutah macht die Schlagzeilen, aber das Backcountry von Vernal bietet Gelände derselben Klasse — nur mit einem Bruchteil des Verkehrs. Die Strecken hier reichen von weiten, sandigen Ebenen entlang des Green-River-Korridors bis zu engen Serpentinen in Schluchten und Pisten auf Bergkämmen mit 360-Grad-Aussicht auf die Berge. Und weil die Gegend weniger kommerzialisiert ist als Moab oder Sand Hollow, hast du die Pisten oft ganz für dich.</p>
+      <p>Die Region bietet außerdem etwas, das die meisten ATV-Ziele nicht bieten können: uralte Petroglyphen der Fremont- und Ute-Kultur, Verstecke von Gesetzlosen aus dem Wilden Westen und natürliche Sandsteinbögen sind über die gesamten Pistensysteme verteilt — jede Fahrt wird so zu einem Mix aus Abenteuer und Geschichtsstunde.</p>
+
+      <h2>Die Fünf Pistensysteme</h2>
+      <p><strong>Doc's Beach</strong> — Sandige Wüstenwaschungen und offenes Gelände entlang des Green-River-Korridors. Breit, schnell und für alle Erfahrungsstufen geeignet. Die beliebteste Piste für Erstfahrer.</p>
+      <p><strong>Moonshine Arch</strong> — Rote Felsschluchten, die zu einem versteckten natürlichen Sandsteinbogen führen. Abwechslungsreiches, landschaftlich reizvolles Gelände mit lohnendem Ziel. Ein Favorit bei Fotografen und Familien.</p>
+      <p><strong>Ashley Gorge</strong> — Ein dramatischer Schluchtenkorridor mit hoch aufragenden Sandsteinwänden und Ausblicken auf das Flusstal. Engeres Gelände, das sich auf die bestmögliche Weise immersiv und eingeschlossen anfühlt.</p>
+      <p><strong>Outlaw Trail</strong> — Historische Backcountry-Route, die von Butch Cassidy and the Wild Bunch genutzt wurde. Robustes Gelände, Gesetzlosen-Geschichte und abgelegene Schluchtenlandschaften. Die abenteuerlichste Option.</p>
+      <p><strong>Asphalt Ridge</strong> — Piste auf dem Bergkamm mit Panoramablick auf das Land der Dinosaurier und die Uinta Mountains. Die Höhe gibt dir einen Überblick über das gesamte Ausmaß des Beckens.</p>
+
+      <h2>Geführte Touren vs. Eigenständiges Fahren</h2>
+      <p>Wenn du dein eigenes ATV oder UTV mitbringst, bietet das BLM-Land rund um Vernal offene Fahrbereiche und ausgewiesene Routen. Die besten Pisten — die mit Felskunst, Bögen und Schluchtenzugang — erkundest du aber am besten mit einem lokalen Guide, der die Routen, die Geschichte und die Geländebedingungen kennt.</p>
+      <p>Adventure Tours Vernal stellt alles bereit: Kawasaki KRX 1000 Zweisitzer-Side-by-Sides mit FOX 2.5 PODIUM LSC-Federung, Helme, Sicherheitseinweisung und erfahrene Guides. Dave und Trudy Wilson fahren jeweils ihr eigenes Fahrzeug und begleiten deine Gruppe während der gesamten dreistündigen Tour.</p>
+
+      <h2>Was du vor der Fahrt wissen solltest</h2>
+      <p>Die Touren finden ganzjährig statt, wetterabhängig. Frühling (April–Mai) und Herbst (September–Oktober) sind die besten Jahreszeiten — angenehme Temperaturen, trockene Pisten und goldenes Licht. Sommertouren starten früh, um der Hitze auszuweichen. Wintertouren sind an klaren Tagen mit einer völlig anderen Kulisse möglich.</p>
+      <p>Vorkenntnisse im Gelände sind nicht nötig. Der KRX 1000 verfügt über Servolenkung, Automatikgetriebe und einen vollständigen Überrollkäfig. Dave und Trudy passen das Tempo an das Komfortniveau deiner Gruppe an — von entspannter Panoramafahrt bis zu intensiverem Backcountry-Fahren.</p>
+
+      <div class="article-tip">
+        <strong>Tipp zur Pistenwahl:</strong> Wenn es dein erstes Mal ist, starte mit Doc's Beach oder Moonshine Arch. Wenn du das abgelegenste, robusteste Erlebnis suchst, frag nach dem Outlaw Trail. Dave hilft dir bei der Buchung, die passende Piste für deine Gruppe zu wählen.
+      </div>
+
+      <div class="article-faq">
+        <h2>Häufig Gestellte Fragen</h2>
+        <div class="faq-item"><h3>Gibt es ATV-Pisten in der Nähe von Vernal, Utah?</h3><p>Ja — fünf verschiedene Pistensysteme mit Schluchten, Wüstenwaschungen und Bergkammrouten, alle über geführte UTV-Touren zugänglich.</p></div>
+        <div class="faq-item"><h3>Kann man mit dem ATV in der Nähe des Dinosaur National Monument fahren?</h3><p>Nicht innerhalb des Monuments, aber das umliegende Backcountry bietet ausgedehnte UTV-Pistensysteme durch ähnliches Gelände mit geführtem Zugang.</p></div>
+        <div class="faq-item"><h3>Brauche ich mein eigenes ATV, um die Pisten in der Nähe von Vernal zu fahren?</h3><p>Nein. Adventure Tours Vernal stellt Kawasaki KRX 1000 Fahrzeuge, Helme, Ausrüstung und Guides. $349 pro Fahrzeug für 3 Stunden.</p></div>
+      </div>
+
+      <div class="article-cta">
+        <h3>Auf die Pisten</h3>
+        <p>Geführte Kawasaki KRX 1000 Touren · $349/Fahrzeug · 5 Pistensysteme · Alle Erfahrungsstufen</p>
+        <a href="/de/booking/" class="cta-btn">Tour Buchen</a>
+        <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
+      </div>
+    </div>
+
+    <div class="related-articles">
+      <h3>Weitere Pisten-Guides</h3>
+      <div class="related-grid">
+        <a href="/de/utv/best-utv-trails-vernal/" class="related-card"><h4>Beste UTV-Pisten in der Nähe von Vernal</h4><p>Detaillierte Übersicht aller 5 Pistensysteme.</p></a>
+        <a href="/de/jeep-trails-vernal-utah/" class="related-card"><h4>Jeep-Pisten in der Nähe von Vernal</h4><p>Offroad-Optionen für Jeep- und 4x4-Fans.</p></a>
+        <a href="/de/utv/side-by-side-rentals-vernal-utah/" class="related-card"><h4>Side-by-Side-Touren vs. Mietwagen</h4><p>Warum geführte Touren besser sind als eigenständige Mietwagen.</p></a>
+        <a href="/de/guides/what-to-wear-utv-tour/" class="related-card"><h4>Was du anziehen solltest</h4><p>Ausrüstungsguide für UTV-Touren in der Wüste.</p></a>
+      </div>
+    </div>
+  </main>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3D). Every
  * locale without a committed variant falls back to English. Callers that
@@ -368,5 +439,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'it') return IT;
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
+  if (locale === 'de') return DE;
   return bodyHtml;
 }
