@@ -381,6 +381,20 @@ export function localizedPath(slug: string, locale: string = DEFAULT_LOCALE): st
 }
 
 /**
+ * Existence-aware href for a normalized page slug: stay in `locale` if that
+ * locale actually has the page, otherwise fall back to English. This is what
+ * keeps site chrome (nav, footer) inside the reader's language — a hardcoded
+ * '/about/' silently dropped a Spanish reader back to English on every click.
+ * Never 404s: the fallback target is always the English master, which exists
+ * for every slug by definition.
+ */
+export function localeHref(slug: string, locale: string = DEFAULT_LOCALE): string {
+  const clean = slug.replace(/^\/+|\/+$/g, '');
+  const target = getAvailableLocales(clean).includes(locale as Locale) ? locale : DEFAULT_LOCALE;
+  return localizedPath(clean, target);
+}
+
+/**
  * Swap the locale prefix on a full current path (for the language switcher).
  * '/es/hiking/' + 'en' -> '/hiking/'; '/hiking/' + 'es' -> '/es/hiking/'.
  */

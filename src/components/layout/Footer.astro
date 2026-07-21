@@ -17,7 +17,7 @@
 // Pages that pass custom trails/info/columns links MUST do the same —
 // never relative, never .html.
 import { SITE } from '../../config/site';
-import { getLangFromUrl, getAvailableLocales, localizedPath, DEFAULT_LOCALE } from '../../lib/i18n';
+import { getLangFromUrl, localeHref } from '../../lib/i18n';
 import { t } from '../../lib/ui';
 
 interface LinkItem { href: string; label: string; class?: string }
@@ -47,10 +47,13 @@ interface Props {
 }
 
 const lang = getLangFromUrl(Astro.url);
-// Existence-aware: link to the booking page in the current locale only if
-// it exists there, otherwise fall back to English (P3A.1 — same pattern
-// BaseLayout/LanguageSwitcher already use, just applied to a CTA href).
-const bookingHref = localizedPath('booking', getAvailableLocales('booking').includes(lang) ? lang : DEFAULT_LOCALE);
+// Existence-aware hrefs (localeHref): keep the reader in their locale where
+// the page is translated, fall back to English where it is not. Same rule the
+// nav follows — chrome links must never silently reset the chosen language.
+const fh = (slug: string) => localeHref(slug, lang);
+const bookingHref = fh('booking');
+// Home + hash anchor: the '#tours' fragment rides on the localized home URL.
+const toursHref = `${fh('')}#tours`;
 const {
   variant = 'full',
   showSocial = true,
@@ -61,11 +64,11 @@ const {
     heading: t('footer.ourTrails', lang),
     // Trail names are place names — kept verbatim, never translated.
     links: [
-      { href: '/#tours', label: "Doc's Beach" },
-      { href: '/#tours', label: 'Moonshine Arch' },
-      { href: '/#tours', label: 'Ashley Gorge' },
-      { href: '/#tours', label: 'Outlaw Trail' },
-      { href: '/#tours', label: 'Asphalt Ridge' },
+      { href: toursHref, label: "Doc's Beach" },
+      { href: toursHref, label: 'Moonshine Arch' },
+      { href: toursHref, label: 'Ashley Gorge' },
+      { href: toursHref, label: 'Outlaw Trail' },
+      { href: toursHref, label: 'Asphalt Ridge' },
       { href: bookingHref, label: t('cta.bookNow', lang), class: 'nav-book-btn' },
     ],
   },
@@ -73,22 +76,22 @@ const {
   info = {
     heading: t('footer.information', lang),
     links: [
-      { href: '/cancellation-policy/', label: t('nav.cancellationPolicy', lang) },
-      { href: '/privacy-policy/', label: t('nav.privacyPolicy', lang) },
-      { href: '/faq/', label: t('nav.faq', lang) },
-      { href: '/safety-guidelines/', label: t('nav.safetyGuidelines', lang) },
-      { href: '/guides/what-to-bring/', label: t('nav.whatToBring', lang) },
+      { href: fh('cancellation-policy'), label: t('nav.cancellationPolicy', lang) },
+      { href: fh('privacy-policy'), label: t('nav.privacyPolicy', lang) },
+      { href: fh('faq'), label: t('nav.faq', lang) },
+      { href: fh('safety-guidelines'), label: t('nav.safetyGuidelines', lang) },
+      { href: fh('guides/what-to-bring'), label: t('nav.whatToBring', lang) },
     ],
     // Active authority hubs (Task 3, Build Guide §2.2) — the default
     // footer's second column, so every collection spoke page (SpokeLayout
     // renders a bare <Footer /> with no props) links out to every hub.
     secondHeading: t('section.exploreVernal', lang),
     secondLinks: [
-      { href: '/utv/', label: t('footer.link.utvTrailsTours', lang) },
-      { href: '/things-to-do/', label: t('footer.link.thingsToDo', lang) },
-      { href: '/dinosaur-national-monument/', label: t('footer.link.dinosaurNationalMonument', lang) },
-      { href: '/guides/', label: t('footer.link.guides', lang) },
-      { href: '/from/salt-lake-city/', label: t('footer.link.visitingFromSLC', lang) },
+      { href: fh('utv'), label: t('footer.link.utvTrailsTours', lang) },
+      { href: fh('things-to-do'), label: t('footer.link.thingsToDo', lang) },
+      { href: fh('dinosaur-national-monument'), label: t('footer.link.dinosaurNationalMonument', lang) },
+      { href: fh('guides'), label: t('footer.link.guides', lang) },
+      { href: fh('from/salt-lake-city'), label: t('footer.link.visitingFromSLC', lang) },
     ],
   },
   columns,
@@ -115,7 +118,7 @@ const phoneHref = contactConfig && contactConfig.phoneFormat === 'plus' ? SITE.p
 ---
 {variant === 'compact' ? (
   <footer style="background:var(--charcoal);color:rgba(255,255,255,0.6);text-align:center;padding:30px 20px;font-size:0.9rem;">
-    <p>&copy; 2026 {SITE.name} &middot; <a href="/privacy-policy/" style="color:var(--burnt-orange);">Privacy Policy</a> &middot; <a href="/cancellation-policy/" style="color:var(--burnt-orange);">Cancellation Policy</a></p>
+    <p>&copy; 2026 {SITE.name} &middot; <a href={fh('privacy-policy')} style="color:var(--burnt-orange);">{t('nav.privacyPolicy', lang)}</a> &middot; <a href={fh('cancellation-policy')} style="color:var(--burnt-orange);">{t('nav.cancellationPolicy', lang)}</a></p>
     <p style="margin-top:8px;">{`${SITE.address.street}, ${SITE.address.city}, ${SITE.address.region} ${SITE.address.postalCode}`} &middot; <a href={SITE.phoneHrefDash} style="color:var(--burnt-orange);">{SITE.phoneDisplay}</a></p>
   </footer>
 ) : (
