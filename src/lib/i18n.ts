@@ -35,6 +35,7 @@ export const LOCALES = [
   { code: 'pt', name: 'Português',  dir: 'ltr', ogLocale: 'pt_PT', hreflang: 'pt-PT' },
   { code: 'fr', name: 'Français',   dir: 'ltr', ogLocale: 'fr_FR', hreflang: 'fr-FR' },
   { code: 'de', name: 'Deutsch',    dir: 'ltr', ogLocale: 'de_DE', hreflang: 'de-DE' },
+  { code: 'ja', name: '日本語',      dir: 'ltr', ogLocale: 'ja_JP', hreflang: 'ja-JP' },
 ] as const satisfies readonly LocaleMeta[];
 
 export const DEFAULT_LOCALE = 'en';
@@ -309,12 +310,26 @@ const DE_SLUGS = new Set([
   'atv-trails-vernal-utah', 'jeep-trails-vernal-utah', 'from/salt-lake-city', 'things-to-do/best-restaurants-vernal-utah',
 ]);
 
+// Japanese translations, added batch by batch exactly as the prior five
+// locales were. P10A registration ships an EMPTY set: `ja` is registered and
+// type-visible, but no `/ja/` route, hreflang, or switcher option is emitted
+// until a slug lands here — proving the registry pattern needs zero other code
+// changes for a new locale (byte-identical build vs. the 465-page baseline).
+const JA_SLUGS = new Set<string>([
+  // P10B — Japanese UTV hub batch (7 spokes). Compound slug = `utv/<base-id>`
+  // (the translated file is `utv/<base-id>.ja.mdx`).
+  'utv/backcountry-tours-vernal-utah', 'utv/beginners-guide-to-utv-tours-vernal',
+  'utv/best-utv-trails-vernal', 'utv/family-utv-guide-vernal', 'utv/group-utv-tours-vernal',
+  'utv/private-utv-tours-vernal', 'utv/side-by-side-rentals-vernal-utah',
+]);
+
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {
   es: ES_SLUGS,
   it: IT_SLUGS,
   pt: PT_SLUGS,
   fr: FR_SLUGS,
   de: DE_SLUGS,
+  ja: JA_SLUGS,
 };
 
 /**
