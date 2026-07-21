@@ -26,8 +26,11 @@ an architecture change, stop and flag it — do not improvise one.
   `prefixDefaultLocale: false`. Existence-aware: a localized route/hreflang/switcher option/
   internal link is emitted **only** if that translation exists; otherwise it falls back to
   English. Nothing 404s.
-- **Language order:** 🇪🇸 Spanish complete first → 🇮🇹 Italian → 🇵🇹 Portuguese. Finish one
-  language fully before starting the next; the workflow improvements compound.
+- **Language order:** 🇪🇸 Spanish complete first → 🇮🇹 Italian → 🇵🇹 Portuguese → 🇫🇷 French →
+  🇩🇪 German. Finish one language fully before starting the next; the workflow improvements
+  compound. Status: ES/IT/PT/FR/DE all feature-complete and tagged (`i18n-<locale>-complete`)
+  as of 2026-07-20; DE additionally needs a native-speaker consistency pass before it's
+  considered fully closed out (see §6 below).
 
 ---
 
