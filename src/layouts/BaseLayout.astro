@@ -76,6 +76,15 @@ const showHreflang = available.length > 1;
       <link rel="icon" type="image/webp" href="/images/logo1.webp" />
     </Fragment>
   )}
+  <!-- Google tag (gtag.js) -->
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-MVCDESQ5GN"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-MVCDESQ5GN');
+  </script>
 </head>
 <body class={bodyClass}>
   <slot name="body" />
