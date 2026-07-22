@@ -9,7 +9,7 @@
 //
 // Styling mirrors the site's existing cards (burnt-orange accents, rounded
 // corners) via the same CSS variables TourCta uses, with hard-coded fallbacks.
-import { getLangFromUrl, getAvailableLocales, localizedPath, DEFAULT_LOCALE } from '../../lib/i18n';
+import { getLangFromUrl, localeHref } from '../../lib/i18n';
 import { t } from '../../lib/ui';
 
 interface Props {
@@ -17,24 +17,21 @@ interface Props {
 }
 const lang = getLangFromUrl(Astro.url);
 const { heading = t('decision.heading', lang) } = Astro.props;
-// Existence-aware: link to the booking page in the current locale only if
-// it exists there, otherwise fall back to English (P3A.1 — same pattern
-// BaseLayout/LanguageSwitcher already use, just applied to a CTA href).
-const bookingHref = localizedPath('booking', getAvailableLocales('booking').includes(lang) ? lang : DEFAULT_LOCALE);
-
 // Question → the single best existing page for that visitor. Targets are all
-// distinct; if you add a row, keep the target unique. hrefs are language-
-// invariant (except the booking card, which is existence-aware); only the
-// visible q/a localize.
+// distinct; if you add a row, keep the target unique. Slugs stay English (URL
+// policy); every href is existence-aware via localeHref() — the reader stays in
+// their locale where the target is translated and falls back to English where
+// it isn't. Previously only the booking row did this, so a localized visitor
+// was dropped into English by the other seven (P11.1).
 const CHOICES = [
-  { q: t('decision.q.firstTime', lang), a: t('decision.a.firstTime', lang), href: '/utv/beginners-guide-to-utv-tours-vernal/' },
-  { q: t('decision.q.children', lang), a: t('decision.a.children', lang), href: '/utv/family-utv-guide-vernal/' },
-  { q: t('decision.q.couple', lang), a: t('decision.a.couple', lang), href: '/utv/private-utv-tours-vernal/' },
-  { q: t('decision.q.scenery', lang), a: t('decision.a.scenery', lang), href: '/utv/best-utv-trails-vernal/' },
-  { q: t('decision.q.history', lang), a: t('decision.a.history', lang), href: '/dinosaur-national-monument/petroglyphs-rock-art-vernal/' },
-  { q: t('decision.q.adventure', lang), a: t('decision.a.adventure', lang), href: '/utv/backcountry-tours-vernal-utah/' },
-  { q: t('decision.q.shortTime', lang), a: t('decision.a.shortTime', lang), href: bookingHref },
-  { q: t('decision.q.group', lang), a: t('decision.a.group', lang), href: '/utv/group-utv-tours-vernal/' },
+  { q: t('decision.q.firstTime', lang), a: t('decision.a.firstTime', lang), href: localeHref('utv/beginners-guide-to-utv-tours-vernal', lang) },
+  { q: t('decision.q.children', lang), a: t('decision.a.children', lang), href: localeHref('utv/family-utv-guide-vernal', lang) },
+  { q: t('decision.q.couple', lang), a: t('decision.a.couple', lang), href: localeHref('utv/private-utv-tours-vernal', lang) },
+  { q: t('decision.q.scenery', lang), a: t('decision.a.scenery', lang), href: localeHref('utv/best-utv-trails-vernal', lang) },
+  { q: t('decision.q.history', lang), a: t('decision.a.history', lang), href: localeHref('dinosaur-national-monument/petroglyphs-rock-art-vernal', lang) },
+  { q: t('decision.q.adventure', lang), a: t('decision.a.adventure', lang), href: localeHref('utv/backcountry-tours-vernal-utah', lang) },
+  { q: t('decision.q.shortTime', lang), a: t('decision.a.shortTime', lang), href: localeHref('booking', lang) },
+  { q: t('decision.q.group', lang), a: t('decision.a.group', lang), href: localeHref('utv/group-utv-tours-vernal', lang) },
 ];
 ---
 <section class="tour-decision-guide" aria-labelledby="tdg-heading">

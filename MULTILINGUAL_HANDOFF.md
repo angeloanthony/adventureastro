@@ -281,27 +281,59 @@ re-run after any new locale lands.
 **Result:** `astro check` 0 errors · build 542 pages (unchanged) · `validate-site` ✔ links
 resolve, no orphans, hub structure intact.
 
-### Residual downgrade paths — OUT of P11 scope, still open
+## 9. P11.1 — eliminating the remaining route downgrades (COMPLETE, 2026-07-22)
 
-P11's scope was MDX bodies only. Auditing built `dist/` HTML afterwards (excluding
-`hreflang`-bearing links, which are *supposed* to point at the English master) found **742
-remaining links that drop a reader into English on a page their locale does have**. None
-originate in MDX. Three sources, all one-line-ish fixes:
+P11 fixed MDX bodies only. Auditing built `dist/` HTML afterwards — excluding `hreflang`-bearing
+links, which are *supposed* to point at the English master — found links outside MDX that still
+dropped a reader into English on a page their locale does have. P11.1 removed all of them.
+
+**Result: 0 downgrades across all six locales.** Verified by a sweep of **33,596 attributes on
+462 localized pages** (broader than `<a href>` — any `href`/`src`/`action`/`data-*`), plus a
+regression check that the English master gained **0** locale prefixes. `astro check` 0 errors ·
+build 542 pages · `validate-site` ✔.
 
 | # | Source | Links | Locales | Fix |
 |---|--------|-------|---------|-----|
-| 1 | `src/components/content/TourCta.astro:32` — `href={SITE.booking.path}` | 348 | all 6 | `localeHref('booking', lang)`; `lang` is already computed on line 15 for `t()` |
-| 2 | `src/pages/es/**` — 223 hardcoded English hrefs in inline `.astro` pages | ~284 | **es only** | route through `localeHref()` |
-| 3 | `src/components/content/GatewayRoutes.astro:59` — `href="/itineraries/"` | ~60 | all 6 | `localeHref('itineraries', lang)` |
+| 1 | `components/content/TourCta.astro` — `href={SITE.booking.path}` | 348 | all 6 | `localeHref(SITE.booking.path, lang)` — `localeHref` normalizes the leading/trailing slashes, so `site.ts` stays the single source |
+| 2 | `components/content/TourDecisionGuide.astro` — 7 of 8 `CHOICES` hardcoded | 42 | all 6 | `localeHref(slug, lang)`; the file already did this for the booking row only |
+| 3 | `pages/es/**` + `page-content/*.ts` ES blocks | 273 | **es** (+2 `fr`) | literal `/es/` prefix, matching what `it`/`pt`/`fr`/`de`/`ja` already do |
+| 4 | `layouts/CityLayout.astro` — `pillarHref(hub)` (no locale param) | 24 | all 6 | `localeHref(hub, lang)`; `pillarHref` is exactly `` `/${hub}/` `` |
+| 5 | `components/content/GatewayRoutes.astro` — 3 `ROUTES` + hub link | ~60 | all 6 | `localeHref(slug, lang)` |
 
-Source 2 is the important one architecturally: **Spanish has 223 such hrefs; `it`/`pt`/`fr`/
-`de`/`ja` each have exactly 0.** Spanish inline pages were authored in P3A–P3D, before the
-`localeHref()` discipline existed; every later locale was built with it. Spanish is therefore
-*not* a trustworthy template for inline pages despite being the first locale finished — quote
-`de` or `ja` instead.
+**Intentional English remaining: 354** — all author bios (`/about/dave/` ×348, `/about/trudy/`
+×6). Correct; no localized author pages exist.
 
-**Genuinely-intentional English links remaining: 354**, all author bios (`/about/dave/` ×348,
-`/about/trudy/` ×6). Correct — no localized author pages exist.
+### Two lessons that cost real rework
+
+**1. `href="/…"` is NOT the only link form — and the others are invisible to that regex.**
+The first P11.1 residual count (742) was too low because the scan only matched `href="…"`.
+Three further forms carry internal routes in this repo, and every one of them was hiding
+downgrades:
+- `href: '/guides/'` — TS/JS **object-property** form in `Footer`/`Breadcrumbs`/`CHOICES` link arrays
+- `pillarHref(hub)` / `spokeHref(...)` — **helper calls**, where the literal never appears at all
+- `](/guides/…)` — markdown links inside MDX
+
+Any future link audit must scan all four forms, or it will report a clean bill of health while
+downgrades remain. Prefer auditing **built `dist/` HTML** over source: rendered output is form-
+agnostic and catches helper-generated links that no source regex can see.
+
+**2. Match the locale-consistency convention, don't introduce a second one.** Localized inline
+pages and `page-content` locale blocks hardcode a literal `/<locale>/` prefix (Gate 4b);
+components and layouts call `localeHref()`. Spanish was fixed by adding the literal prefix —
+routing `es` alone through `localeHref()` would have re-diverged the very inconsistency being
+removed. Use `LOCALE_SLUGS` as the authority for *deciding* whether to rewrite; match the
+surrounding file's convention for *how*.
+
+**Verification note — symmetric normalization.** P11's "reverse the transform on the added line"
+check breaks on files where some links were *already* prefixed (it strips those too, producing
+false mismatches). The correct form used here: strip locale prefixes from **both** sides and
+require equality, plus assert no existing prefix was ever removed. 0 content mismatches across
+286 rewrites.
+
+**Architectural note that outlives this phase:** Spanish carried 223 hardcoded hrefs while
+`it`/`pt`/`fr`/`de`/`ja` each had 0, because `es` inline pages were authored in P3A–P3D before
+the `localeHref()` discipline existed. **Despite being the first locale finished, `es` is not a
+trustworthy template — quote `de` or `ja` when building the next locale.**
 
 ---
 

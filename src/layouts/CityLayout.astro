@@ -12,8 +12,7 @@ import Footer from '../components/layout/Footer.astro';
 import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
 import QuickFacts from '../components/content/QuickFacts.astro';
 import TourCta from '../components/content/TourCta.astro';
-import { pillarHref } from '../lib/hubs';
-import { getLangFromUrl } from '../lib/i18n';
+import { getLangFromUrl, localeHref } from '../lib/i18n';
 import { t, hubName } from '../lib/ui';
 import type { CollectionEntry } from 'astro:content';
 
@@ -73,7 +72,7 @@ const quickFacts = [
         <ul class="hub-index-list">
           {ACTIVE_HUBS.map((hub) => (
             <li class="hub-index-item">
-              <a href={pillarHref(hub)}>{hubName(hub, lang)}</a>
+              <a href={localeHref(hub, lang)}>{hubName(hub, lang)}</a>
             </li>
           ))}
         </ul>
