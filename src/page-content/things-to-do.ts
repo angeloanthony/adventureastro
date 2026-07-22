@@ -1931,7 +1931,7 @@ const JA = `
 
       <h2>食事はどこで：バーナルのレストラン</h2>
       <p>バーナルは高級料理の中心地を気取ったりしません。それも魅力のうちです。あるのは正直で、しっかりして、気取らない料理——外で長い一日を過ごした後に沁みる、西部の町の料理です。古典的なアメリカのダイナーとステーキハウス、この地域の文化を映すメキシコ料理店の充実した顔ぶれ、食欲旺盛な方のためのバーベキューとバーガー、そしてトレイルへ出る前の朝を始める地元のコーヒーショップとベーカリーが見つかります。</p>
-      <p>中心街のMain Streetが自然と食べ歩きの場になり、ほとんどの店は気軽でご家族向けです。具体的な店名、料理のジャンル、そしてそれぞれの得意分野まで含めた最新の厳選リストは、姉妹編のガイド<a href="/things-to-do/best-restaurants-vernal-utah/">ユタ州バーナルのおすすめレストラン</a>をご覧ください。</p>
+      <p>中心街のMain Streetが自然と食べ歩きの場になり、ほとんどの店は気軽でご家族向けです。具体的な店名、料理のジャンル、そしてそれぞれの得意分野まで含めた最新の厳選リストは、姉妹編のガイド<a href="/ja/things-to-do/best-restaurants-vernal-utah/">ユタ州バーナルのおすすめレストラン</a>をご覧ください。</p>
       <!-- VERIFY WITH OWNER / OFFICIAL SOURCE: do not publish specific restaurant names, hours, or menus in this cornerstone — they change. All specifics live in the maintained best-restaurants guide, which is the single source of truth for that list. -->
 
       <h2>穴場と地元の秘密</h2>
@@ -1987,7 +1987,7 @@ const JA = `
       <p><strong>1日目——Dinosaur National Monumentをまるごと。</strong> 国定公園に丸一日をあててください。開館と同時にQuarry Exhibit Hall、Fossil Discovery Walk、岩絵の立ち寄り先をすべて含むCub Creekのドライブ全線、そしてJosie Morrisの小屋。公園でピクニックするか町に戻ります。まだ元気があれば、夕方遅くにSplit Mountain周辺の短いハイキングを足しましょう。</p>
       <p><strong>2日目——UTVツアーと州立公園。</strong> 午前はガイド付きUTVツアーでバックカントリーへ、昼食はバーナルで、午後はSteinakerかRed Fleetで水遊び、パドリング、恐竜の足跡群、そしてのんびりした湖畔の時間を。アドレナリンと休息のバランスが取れた、ゆったりと活動的な一日です。</p>
       <p><strong>3日目——Flaming Gorgeと山。</strong> Flaming Gorgeの絶景バイウェイを北へ、Ashley National Forestと峡谷の赤い岩へ。釣り、ボート、展望地点でのピクニック、あるいは高地のひと区間のハイキング。秋ならアスペンの色を追いかけましょう。この地域の高地側を見せてくれる丸一日の周遊で、最初の2日間の砂漠との完璧な対比になります。</p>
-      <p>遠方からお越しですか。バーナルはSalt Lake Cityから車でおよそ3時間です——ルートと旅の計画の詳細は<a href="/from/salt-lake-city/">Salt Lake Cityからバーナルへの旅行ガイド</a>をご覧ください。さらに、1日、週末、ご家族、冒険、写真、釣り、キャンプといった出来合いの計画は、<a href="/ja/itineraries/">恐竜の国 究極の旅程ガイド</a>をどうぞ。</p>
+      <p>遠方からお越しですか。バーナルはSalt Lake Cityから車でおよそ3時間です——ルートと旅の計画の詳細は<a href="/ja/from/salt-lake-city/">Salt Lake Cityからバーナルへの旅行ガイド</a>をご覧ください。さらに、1日、週末、ご家族、冒険、写真、釣り、キャンプといった出来合いの計画は、<a href="/ja/itineraries/">恐竜の国 究極の旅程ガイド</a>をどうぞ。</p>
 
       <h2>バーナルへの持ち物</h2>
       <p>訪問者が犯す最大の間違いは、高地砂漠と高い標高の条件への備え不足です。バーナルは標高5,000フィートを超え、日差しは強く、空気は乾き、気温は日中と夜で大きく振れます。その現実に合わせて荷造りしてください。</p>

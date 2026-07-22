@@ -3834,7 +3834,7 @@ const JA = `
           </div>
           <div class="feature-content">
             <h3 class="feature-title">Dinosaur National Monument</h3>
-            <p class="feature-description">かつて太古の巨大生物が歩き回った先史時代の風景を走り抜け、世界有数の化石産地へ足を延ばせます。 <a href="/dinosaur-national-monument/" style="color:var(--burnt-orange);font-weight:600;">モニュメント周辺のUTVツアー →</a></p>
+            <p class="feature-description">かつて太古の巨大生物が歩き回った先史時代の風景を走り抜け、世界有数の化石産地へ足を延ばせます。 <a href="/ja/dinosaur-national-monument/" style="color:var(--burnt-orange);font-weight:600;">モニュメント周辺のUTVツアー →</a></p>
           </div>
         </div>
         <div class="feature-card">
@@ -4104,7 +4104,7 @@ const JA = `
         <p class="section-subtitle">地元ガイドの情報で旅を計画しましょう — ユタ州バーナルで知っておきたいことをまとめました</p>
       </div>
       <div class="related-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;max-width:1000px;margin:0 auto;">
-        <a href="/things-to-do/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+        <a href="/ja/things-to-do/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">バーナルの楽しみ方</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">アクティビティと見どころの完全ガイドです。</p>
         </a>
@@ -4116,11 +4116,11 @@ const JA = `
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">ファミリー向けアクティビティ</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">バーナルで子ども連れで楽しめること。</p>
         </a>
-        <a href="/things-to-do/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+        <a href="/ja/things-to-do/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">アウトドアアクティビティ</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">ハイキング、釣り、UTVツアーなど。</p>
         </a>
-        <a href="/atv-trails-vernal-utah/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+        <a href="/ja/atv-trails-vernal-utah/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">バーナル周辺のATVトレイル</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">オフロードのトレイルシステムと地形ガイド。</p>
         </a>
@@ -4128,7 +4128,7 @@ const JA = `
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">サイドバイサイド：ツアーとレンタルの比較</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">ガイド付きツアーがセルフレンタルより優れている理由。</p>
         </a>
-        <a href="/dinosaur-national-monument/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+        <a href="/ja/dinosaur-national-monument/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">Dinosaur National Monumentのツアー</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">モニュメント周辺のUTVツアー。</p>
         </a>

@@ -519,10 +519,10 @@ const JA = `
     <div class="related-articles">
       <h3>旅の計画を立てる</h3>
       <div class="related-grid">
-        <a href="/things-to-do/" class="related-card"><h4>バーナルの楽しみ方</h4><p>国定公園の先まで見渡す完全ガイド。</p></a>
+        <a href="/ja/things-to-do/" class="related-card"><h4>バーナルの楽しみ方</h4><p>国定公園の先まで見渡す完全ガイド。</p></a>
         <a href="/ja/things-to-do/vernal-utah-attractions/" class="related-card"><h4>バーナルの主な見どころ</h4><p>この地域で見逃せない名所のすべて。</p></a>
         <a href="/ja/dinosaur-national-monument/petroglyphs-rock-art-vernal/" class="related-card"><h4>岩絵とロックアート</h4><p>トレイル沿いにも、その外にもある古代の芸術の跡。</p></a>
-        <a href="/things-to-do/best-restaurants-vernal-utah/" class="related-card"><h4>バーナルの食事どころ</h4><p>冒険のあとに、しっかり腹ごしらえを。</p></a>
+        <a href="/ja/things-to-do/best-restaurants-vernal-utah/" class="related-card"><h4>バーナルの食事どころ</h4><p>冒険のあとに、しっかり腹ごしらえを。</p></a>
       </div>
     </div>
   </main>

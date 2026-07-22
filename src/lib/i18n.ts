@@ -365,6 +365,10 @@ const JA_SLUGS = new Set<string>([
   'utv', 'dinosaur-national-monument',
   // P10K Batch C — the 7 activity-hub pillars.
   'hiking', 'fishing', 'camping', 'scenic-drives', 'things-to-do', 'guides', 'itineraries',
+  // P10K Batch D — gateway + legacy landing pages. FINAL ja inline batch;
+  // with these 20 slugs the Japanese locale reaches inline-page parity with de.
+  'atv-trails-vernal-utah', 'jeep-trails-vernal-utah', 'from/salt-lake-city',
+  'things-to-do/best-restaurants-vernal-utah',
 ]);
 
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {
