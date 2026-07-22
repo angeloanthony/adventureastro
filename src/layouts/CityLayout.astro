@@ -33,18 +33,25 @@ interface Props {
   heroImage?: string;
   breadcrumbs: { label: string; href?: string }[];
   city: CollectionEntry<'cities'>['data'];
+  /** Localized override for the English-only `routeSummary` collection field.
+   *  The `cities` collection is English-only by design (P3D), so a localized
+   *  page passes its own route sentence here; road numbers and place names
+   *  stay English per the frozen never-translate list. `nearestAirport` needs
+   *  no override — an airport's official name is a proper noun in every
+   *  locale's shipped prose. */
+  routeSummary?: string;
   /** Curated links to relevant existing spokes/pillars — every city page
    *  supplies its own (RelatedArticles isn't reusable here: cities aren't
    *  a hub collection, so there's no tag-matching entry to key off). */
   relatedLinks?: RelatedLink[];
 }
-const { title, description, path, heroImage, breadcrumbs, city, relatedLinks = [] } = Astro.props;
+const { title, description, path, heroImage, breadcrumbs, city, routeSummary, relatedLinks = [] } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 
 const quickFacts = [
-  { label: t('city.driveTime', lang), value: `${city.driveTimeHours} hours` },
-  { label: t('city.distance', lang), value: `${city.driveMiles} miles` },
-  { label: t('city.route', lang), value: city.routeSummary },
+  { label: t('city.driveTime', lang), value: t('city.driveTimeValue', lang, { n: city.driveTimeHours }) },
+  { label: t('city.distance', lang), value: t('city.distanceValue', lang, { n: city.driveMiles }) },
+  { label: t('city.route', lang), value: routeSummary ?? city.routeSummary },
   ...(city.nearestAirport ? [{ label: t('city.nearestAirport', lang), value: city.nearestAirport }] : []),
 ];
 ---

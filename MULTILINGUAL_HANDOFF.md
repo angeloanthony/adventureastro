@@ -210,6 +210,29 @@ follows this pipeline with no special-casing unless a genuine bug forces a fix
    "is a spoke" test: `/from/salt-lake-city/` and
    `/things-to-do/best-restaurants-vernal-utah/` are inline pages, not spokes —
    name them explicitly in every batch brief.
+
+   **Gate 4c — corpus beats brief (BLOCKING).** *When a translator challenges a
+   brief's terminology using objective corpus evidence, verify the corpus before
+   enforcing the brief.* The brief is a summary written ahead of the work; the
+   shipped corpus is the ground truth readers actually see. In P10K the Batch A
+   brief froze `Vernal`/`Utah` as English while the shipped `ja` corpus had
+   バーナル 1679 / bare `Vernal` 0 — two agents grepped, contradicted the brief,
+   and were right. Procedure when a challenge arrives: grep the corpus for both
+   forms, count; if the corpus wins, update the glossary, sweep every file
+   already shipped under the wrong rule (it is never just the challenger's file),
+   and re-brief the remaining agents. Do not resolve these locally per file —
+   that is how cross-batch drift is created.
+
+   **Gate 4d — cross-locale body-link audit (BLOCKING).** *Once a locale reaches
+   full route coverage, no internal body link in that locale may still point at
+   the English route.* Until coverage is complete, English hrefs are the correct
+   existence-aware fallback (Gate 4b); the moment coverage lands, every one of
+   them is a pure downgrade — it drops the reader out of their language and
+   splits internal-link equity across two URL sets. Run the §8 whitelist pass and
+   assert zero residual: for each `src/content/**/*.<locale>.mdx`, every
+   root-relative `href="/…"` and `](/…)` whose slug is in that locale's
+   `LOCALE_SLUGS` set must already carry the `/<locale>/` prefix. Deliberate
+   exceptions must be named explicitly in the phase doc, not left implicit.
 5. **Runtime verification.** Verify in the actual built `dist/` output, not source:
    the Gate 4a UI-chrome key-set diff, hreflang reciprocity (full alternate set +
    x-default, on both the new locale's
@@ -222,6 +245,63 @@ follows this pipeline with no special-casing unless a genuine bug forces a fix
    reference implementation (`git tag -a i18n-<locale>-complete`) and treat it as
    the template — future locales' briefs should quote its locked glossary/rules
    directly rather than re-deriving them.
+
+---
+
+## 8. P11 — cross-locale internal link localization (COMPLETE for MDX, 2026-07-22)
+
+This is the "central link-upgrade pass" that Gate 4b defers to. It ran once, after `ja`
+reached parity, across all six completed locales at the same time.
+
+**What ran.** Every root-relative internal link in every localized MDX *body*
+(`src/content/**/*.{es,it,pt,fr,de,ja}.mdx`, 342 files) was re-prefixed to the reader's own
+locale. 11,432 links rewritten, 0 unresolved, 0 left English.
+
+**The rule that made it safe — whitelist, never blacklist.** A link is rewritten *only* when
+its normalized slug is present in that locale's `LOCALE_SLUGS` set in `src/lib/i18n.ts`. That
+direction is what makes the pass structurally incapable of touching anything else: asset paths
+(`/images/…`), `tel:`, `mailto:`, external URLs, `#anchor` links, and any not-yet-translated
+route can never appear in a slug registry, so they are left alone without needing a rule of
+their own. Never invert this into "rewrite everything except <exclusion list>" — the exclusion
+list is unbounded and will silently corrupt asset paths.
+
+**Frontmatter is never touched.** The transform splits frontmatter off and rewrites only the
+body, so `heroImage`, `related`, and every routing/schema field are out of reach by
+construction. (Verified: the corpus has zero internal links in frontmatter anyway.)
+
+**How it was verified — reverse-the-transform diffing.** Byte-diffing 342 files by eye is not
+a check. Instead, every added line had its locale prefixes programmatically *removed* and was
+compared to the line it replaced: 5,709 hunks, 11,432 prefixes, **0 mismatches**. That proves
+no prose, number, asset path, or external URL moved anywhere in the corpus. Reuse this
+technique for any future mechanical corpus-wide pass — it is far stronger than spot-checking.
+
+**Idempotent.** Re-running localizes 0 and classifies all 11,432 as already-localized. Safe to
+re-run after any new locale lands.
+
+**Result:** `astro check` 0 errors · build 542 pages (unchanged) · `validate-site` ✔ links
+resolve, no orphans, hub structure intact.
+
+### Residual downgrade paths — OUT of P11 scope, still open
+
+P11's scope was MDX bodies only. Auditing built `dist/` HTML afterwards (excluding
+`hreflang`-bearing links, which are *supposed* to point at the English master) found **742
+remaining links that drop a reader into English on a page their locale does have**. None
+originate in MDX. Three sources, all one-line-ish fixes:
+
+| # | Source | Links | Locales | Fix |
+|---|--------|-------|---------|-----|
+| 1 | `src/components/content/TourCta.astro:32` — `href={SITE.booking.path}` | 348 | all 6 | `localeHref('booking', lang)`; `lang` is already computed on line 15 for `t()` |
+| 2 | `src/pages/es/**` — 223 hardcoded English hrefs in inline `.astro` pages | ~284 | **es only** | route through `localeHref()` |
+| 3 | `src/components/content/GatewayRoutes.astro:59` — `href="/itineraries/"` | ~60 | all 6 | `localeHref('itineraries', lang)` |
+
+Source 2 is the important one architecturally: **Spanish has 223 such hrefs; `it`/`pt`/`fr`/
+`de`/`ja` each have exactly 0.** Spanish inline pages were authored in P3A–P3D, before the
+`localeHref()` discipline existed; every later locale was built with it. Spanish is therefore
+*not* a trustworthy template for inline pages despite being the first locale finished — quote
+`de` or `ja` instead.
+
+**Genuinely-intentional English links remaining: 354**, all author bios (`/about/dave/` ×348,
+`/about/trudy/` ×6). Correct — no localized author pages exist.
 
 ---
 

@@ -136,6 +136,10 @@ const EN: Dict = {
   'city.distance': 'Distance',
   'city.route': 'Route',
   'city.nearestAirport': 'Nearest airport',
+  // Unit-bearing VALUES, not just labels: a localized label over an English
+  // value ("Fahrzeit → 3 hours") is the leak Gate 4a part (b) exists to catch.
+  'city.driveTimeValue': '{n} hours',
+  'city.distanceValue': '{n} miles',
 
   // — Hub display names (single source for hubName(); mirror src/lib/hubs.ts) —
   'hub.utv': 'UTV Trails & Tours',
@@ -257,6 +261,8 @@ const ES: Dict = {
   'city.distance': 'Distancia',
   'city.route': 'Ruta',
   'city.nearestAirport': 'Aeropuerto más cercano',
+  'city.driveTimeValue': '{n} horas',
+  'city.distanceValue': '{n} millas',
 
   'hub.utv': 'Senderos y Tours en UTV',
   'hub.atv': 'Senderos para ATV',
@@ -377,6 +383,8 @@ const IT: Dict = {
   'city.distance': 'Distanza',
   'city.route': 'Percorso',
   'city.nearestAirport': 'Aeroporto più vicino',
+  'city.driveTimeValue': '{n} ore',
+  'city.distanceValue': '{n} miglia',
 
   'hub.utv': 'Sentieri e Tour in UTV',
   'hub.atv': 'Sentieri per ATV',
@@ -499,6 +507,8 @@ const PT: Dict = {
   'city.distance': 'Distância',
   'city.route': 'Rota',
   'city.nearestAirport': 'Aeroporto mais próximo',
+  'city.driveTimeValue': '{n} horas',
+  'city.distanceValue': '{n} milhas',
 
   'hub.utv': 'Trilhos e Tours em UTV',
   'hub.atv': 'Trilhos para ATV',
@@ -622,6 +632,8 @@ const FR: Dict = {
   'city.distance': 'Distance',
   'city.route': 'Itinéraire',
   'city.nearestAirport': 'Aéroport le plus proche',
+  'city.driveTimeValue': '{n} heures',
+  'city.distanceValue': '{n} miles',
 
   'hub.utv': 'Sentiers et Circuits en UTV',
   'hub.atv': 'Sentiers pour ATV',
@@ -750,6 +762,8 @@ const DE: Dict = {
   'city.distance': 'Entfernung',
   'city.route': 'Route',
   'city.nearestAirport': 'Nächster Flughafen',
+  'city.driveTimeValue': '{n} Stunden',
+  'city.distanceValue': '{n} Meilen',
 
   'hub.utv': 'UTV-Touren und Pisten',
   'hub.atv': 'ATV-Pisten',
@@ -873,6 +887,8 @@ const JA: Dict = {
   'city.distance': '距離',
   'city.route': 'ルート',
   'city.nearestAirport': '最寄りの空港',
+  'city.driveTimeValue': '{n}時間',
+  'city.distanceValue': '{n}マイル',
 
   'hub.utv': 'UTVトレイルとツアー',
   'hub.atv': 'ATVトレイル',
