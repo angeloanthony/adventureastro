@@ -1,0 +1,42 @@
+---
+// ja/safety-guidelines.astro — Japanese safety guidelines (P10K Japanese
+// inline batch, mirrors German P9). Mirrors
+// src/pages/safety-guidelines.astro.
+import { getBodyHtml } from '../../page-content/safety';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+---
+<BaseLayout bodyClass="policy-page-body">
+  <Fragment slot="head">
+    <Seo
+      title="安全ガイドライン | Adventure Tours Vernal — Vernal, Utah"
+      description="ユタ州バーナルのガイドUTVツアーの安全ガイドラインです。運転は18歳以上、同乗は2歳以上、シートベルト着用は必須で、飲酒・薬物は厳禁です。トレイルでの安全、必要な装備、天候への備え、緊急時の対応まで、出発前に必ずご確認ください。お電話は (435) 219-9447 まで。"
+      path="/ja/safety-guidelines/"
+      type="website"
+      ogTitle="安全ガイドライン | Adventure Tours Vernal"
+      ogDescription="ユタ州バーナルのKawasaki KRX 1000で行くUTVツアーの安全ガイドラインです。年齢制限、車両の操作ルール、トレイルでの安全対策をご確認ください。お電話は (435) 219-9447 まで。"
+    />
+  </Fragment>
+  <Header slot="body" active="safety-guidelines" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.safetyGuidelines', lang) }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: t('footer.quickLinks', lang),
+      links: [
+        { href: '/ja/#tours', label: t('footer.link.ourTours', lang) },
+        { href: '/ja/#vehicles', label: t('footer.link.ourFleet', lang) },
+        { href: '/ja/#gallery', label: t('footer.link.photoGallery', lang) },
+        { href: '/ja/booking/', label: t('cta.bookNow', lang) },
+      ],
+    }}
+  />
+</BaseLayout>

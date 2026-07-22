@@ -1517,9 +1517,261 @@ const DE = `
 </div>
 `;
 
+const JA = `
+<!-- ================================================
+     ページ要約ブロック — Google AI Overviews と
+     Bing Copilot 向け。コンテンツ冒頭に配置。
+     ================================================ -->
+<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+  Adventure Tours Vernalは、Dave WilsonとTrudy Wilsonが立ち上げた、ユタ州バーナルの地元経営のUTVツアー会社です。Dave Wilsonがオーナー兼チーフガイドを務め、Kawasaki KRX 1000のサイドバイサイドでUintah Basinをめぐるガイド付きツアーをご提供しています。Googleのレビュー82件で5.0の評価をいただいています。お電話は(435) 219-9447まで。
+</p>
+
+<!-- ヒーローセクション -->
+<section class="about-hero" style="position:relative; overflow:hidden;">
+  <div class="about-hero-video-bg">
+    <iframe
+      src="https://www.youtube.com/embed/LsqbwVkwrbw?autoplay=1&mute=1&loop=1&playlist=LsqbwVkwrbw&controls=0&rel=0&playsinline=1"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+  </div>
+  <div class="about-hero-overlay"></div>
+  <div class="about-hero-content">
+    <h1 class="about-hero-title">ユタ州バーナルのUTVツアー — 冒険から生まれた会社</h1>
+    <p class="about-hero-subtitle">Uintah Basin最高の冒険への入口です</p>
+    <p class="about-hero-subtitle" style="font-weight:600;">★★★★★ Googleのレビュー82件で5.0の評価 — すべてのツアーをDave &amp; Trudy Wilsonが自ら案内します</p>
+  </div>
+</section>
+
+<!-- 本文セクション -->
+<section class="about-main">
+  <div class="container">
+
+    <!-- ミッション -->
+    <div class="about-card mission-card">
+      <div class="mission-content">
+        <h2 class="about-heading">最初の一社。最高の一社。究極のUTV体験。</h2>
+        <p class="lead-text">私たちが目指しているのは、Uintah Basinで最初のUTVツアー会社になることだけではありません。最高の一社になることです。Adventure Tours Vernalは、最高の<strong>Kawasaki</strong> KRXサイドバイサイドを使い、いちばん安全で、いちばんスリルのある冒険をご提供しています。</p>
+        <p>私たちのアドベンチャーツアーでは、景観の美しい峡谷と、高台に刻まれた歴史をたどる素晴らしいトレイルをご覧いただけます。たとえば、こんな地元の宝物をめぐります。</p>
+
+        <div class="highlights-grid">
+          <div class="highlight-item">
+            <div class="highlight-icon">🏞️</div>
+            <div class="highlight-text">
+              <strong>Flaming Gorge</strong>
+              <p>息をのむような赤い岩の峡谷と、澄みきった水</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/tktE4GbS9gQ?si=PwYv9yMUs-yYAM4U"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🦕</div>
+            <div class="highlight-text">
+              <strong>Dinosaur Monument</strong>
+              <p>太古の化石層と、先史時代の風景</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/PoCN4Lo9Lkk?si=OYkfE56RP_uMcHoF"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🛶</div>
+            <div class="highlight-text">
+              <strong>Green River</strong>
+              <p>世界有数のラフティングとフィッシングの舞台</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/p05cObabbjg?si=gjsw6MKCJHx6s6Vq"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🗿</div>
+            <div class="highlight-text">
+              <strong>古代の岩絵</strong>
+              <p>何千年にもわたる先住民の歴史</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/fwzaXWfuFdk?si=Xt1_DCIPRzqx7QDL"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">⛰️</div>
+            <div class="highlight-text">
+              <strong>ユインタ山脈</strong>
+              <p>雄大な峰々と、高山の原野</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/AanVVzP0_oM?si=5GOFOiI5MBc5dm1D"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🌈</div>
+            <div class="highlight-text">
+              <strong>Fantasy Canyon</strong>
+              <p>この世のものとは思えない岩の造形と、砂漠の美しさ</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/m64J-ovzTf4?si=FLULmmhzbq8zDzV2"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 私たちの歩み -->
+    <div class="our-story-section">
+      <div class="story-content">
+        <h2 class="section-title">私たちの歩み</h2>
+        <div class="story-text">
+          <p class="story-intro">冒険は、私たちが「していること」ではありません。私たちそのものです。</p>
+
+          <p>Salt Lake Valleyで育ち、若いころをWasatchとOquirrhの山々を歩きまわって過ごすうちに、これは一生ものの情熱だと気づきました。自由に走りまわれた80年代の子どもだった私と兄弟は、マウンテンバイク、ジープ、ハイキング、スノーモービル、スキー、キャンプ、乗馬、ラッペリング、崖からの飛び込み、洞窟探検……と、思いつくかぎりのことをやってきました。家族の山小屋で過ごした忘れられない週末も、数えきれないほどあります。</p>
+
+          <p>幼いころから、自分が求めているのはアドレナリンの高鳴りなのだと分かっていました。骨を何本か折り、たぶんアクスルも1本や2本は折りましたが、それでもアウトドアへの気持ちが冷めることはありませんでした。</p>
+
+          <p>美しくて、すごくて、ゴージャスで、最高で、素晴らしい妻であり親友でもある Trudy と私は、ユタ州バーナルに移り住みました。引っ越してからというもの、私たちはUintah Basinという土地にすっかり惚れ込み、この情熱を、心から愛するようになった自然の驚異を友人や家族、そして訪れる方々と分かち合うことに向けようと決めたのです。</p>
+        </div>
+      </div>
+
+      <!-- 家族写真セクション -->
+      <div class="family-section">
+        <div class="family-photo-container">
+          <img src="/images/wilson-family.webp" alt="Adventure Tours Vernalのオーナーである Dave Wilson と Trudy Wilson、そして家族" class="family-photo">
+          <div class="family-photo-caption">
+            <h3>Wilson一家のご紹介</h3>
+            <p>Dave WilsonとTrudy Wilson、4人の子どもたち、そして孫</p>
+            <p class="family-names">8 Boys、Ansley、Trinity、Scott、Chandler - Little Z-man</p>
+            <p class="guide-profile-links">ガイドのご紹介： <a href="/about/dave/">Dave Wilson</a> &amp; <a href="/about/trudy/">Trudy Wilson</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 私たちのこれから -->
+    <div class="about-card future-card">
+      <h2 class="about-heading">私たちのこれから</h2>
+      <div class="future-content">
+        <p class="lead-text">Adventure Tours Vernalは、体験することへの私たちの愛情から生まれました。</p>
+
+        <p>家族でこの土地に移り住んでから、私たちは家族の思い出に投資しはじめました。この一生ものの情熱が、ATV、マウンテンバイク、スノーモービル、ボート、キャンプ・ハンティング・フィッシングの道具の購入につながり、そして何より、広がっていく友人と家族というコミュニティへの投資につながっていきました。</p>
+
+        <p>気がつけば私たちは、自分たちの裏庭で見つけたこの美しさをぜひ見に来てほしいと、周りの人たちにほとんど懇願していました。プライベートで出かけるたびに、洞窟を見つけ、トレイルを見つけ、歴史に触れ、想像をはるかに超える景色を楽しんできました。</p>
+
+        <p>今日では、そこで得た知識を一回一回のツアーでお伝えしています。人里離れた峡谷や岩絵の遺跡をめぐる<a href="/ja/utv/backcountry-tours-vernal-utah/">ガイド付きバックカントリーツアー</a>から、<a href="/ja/utv/best-utv-trails-vernal/">バーナル近郊で運行している5つのトレイルシステム</a>まで。どれも私たち自身が歩きまわってきた土地であり、いまはそれを下見し、地図に落とし込み、直接ご案内しています。</p>
+
+        <p>この「裏庭」は、ひとつの町にはおさまりません。複数の州にまたがる広大な地域です。Dinosaur National Monumentはユタ州からコロラド州へと広がり、Flaming Gorgeは北のワイオミング州へ、High Uintasは西にそびえています。そして、そのちょうど真ん中にバーナルがあります。</p>
+
+        <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+          <img src="/images/maps/vernal-dinosaur-country-overview.svg" alt="Adventure Tours Vernalが拠点とする、複数の州にまたがる地域「恐竜の国」の概念図。ベースキャンプであるユタ州バーナルを中心に、4つのエリアが示されています。Dinosaur National Monument（ユタ州とコロラド州にまたがる）、Flaming Gorge（ユタ州からワイオミング州へと広がる）、High UintasとAshley National Forest、そして周囲に広がるUintah Basinです。地域どうしの位置関係のみを示したもので、縮尺・距離・方位は正確ではありません。州名は広がりを示すものであり、地図上の境界線ではありません。" width="1600" height="1200" loading="lazy" decoding="async" />
+          <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">私たちが言う「裏庭」とは、コロラド州とワイオミング州にまで届く、複数の州にまたがる地域のこと。その中心にバーナルがあります。方位図であり、縮尺は正確ではありません。</figcaption>
+        </figure>
+
+        <div class="vision-box">
+          <h3>私たちのビジョン</h3>
+          <p>A.T.V.は、この裏庭に広がる雄大な景色を思いきり味わっていただくためにあります。ゆっくりして、少し長く滞在してみてください。後悔はさせません。</p>
+          <p>Uintah Basinでの忘れられない思い出とともに、美しい写真、興味深い歴史、そして友人に話したくなるエピソードを持ち帰っていただけたら、これほど嬉しいことはありません。</p>
+          <p><strong>きっとまた来たくなります。これは保証します！</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 選ばれる理由 -->
+    <div class="why-choose-section">
+      <h2 class="section-title">Adventure Tours Vernalが選ばれる理由</h2>
+      <div class="why-grid">
+        <div class="why-item">
+          <div class="why-icon">🏆</div>
+          <h3>最初にして最高</h3>
+          <p>Uintah Basin随一のUTVツアー会社です</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🛡️</div>
+          <h3>安全が第一</h3>
+          <p>最高水準の装備と、経験豊富なガイド</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🌟</div>
+          <h3>地元を知り尽くしたガイド</h3>
+          <p>この土地のことなら、手のひらのように分かります</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">❤️</div>
+          <h3>家族の情熱</h3>
+          <p>冒険への愛情を、皆さまと分かち合います</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🏔️</div>
+          <h3>知られざる名所</h3>
+          <p>ほかの人が知らないトレイルと眺めへご案内します</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">✨</div>
+          <h3>忘れられない一日</h3>
+          <p>一生ものの思い出になります</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTAセクション -->
+    <div class="about-cta">
+      <h2>冒険に出かける準備はできましたか？</h2>
+      <p>Wilson一家と一緒に、ユタ州バーナルが究極のアウトドアの遊び場である理由を確かめてください。</p>
+      <div class="cta-buttons">
+        <a href="/ja/booking/" class="cta-button primary">冒険を予約する</a>
+        <a href="tel:435-219-9447" class="cta-button secondary">📞 (435) 219-9447に電話する</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- モバイル用固定CTA -->
+<div class="mobile-sticky-cta">
+  <button onclick="location.href='/ja/booking/'">今すぐツアーを予約する</button>
+</div>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3A, Italian P6,
- * French added P8, German added P9).
+ * French added P8, German added P9, Japanese added P10K).
  * Every locale without a committed variant falls back to English. Callers
  * that don't need locale awareness keep importing `bodyHtml` directly.
  */
@@ -1529,5 +1781,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
   if (locale === 'de') return DE;
+  if (locale === 'ja') return JA;
   return bodyHtml;
 }

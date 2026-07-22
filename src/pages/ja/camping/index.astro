@@ -1,0 +1,360 @@
+---
+// ja/camping/index.astro — 日本語版 Camping ハブ PILLAR（P10K 日本語インライン
+// バッチ、丁寧体 です・ます）。src/pages/camping/index.astro を構造どおりに写し、
+// src/pages/de/camping/index.astro と同じ形をとります。本文は Astro マークアップ
+// として直接記述し、Article / FAQPage の JSON-LD を添えます。HubIndex は追加され
+// たスポーク記事を順に一覧表示します。author は他のピラーと同じエンティティに
+// そろえて Organization のままです。これは計画のための資料であり、キャンプ場
+// ディレクトリではありません。各目的地は概要にとどめ、詳細は各コーナーストーン
+// 記事へ送ります。キャンプ場の空き状況、予約システム、サイト数、料金、電源・水道
+// 設備、ダンプステーション、シーズンの開設日、焚き火禁止（制限）、許可証の要件は
+// 一切創作せず、変わりやすい事実・場所固有の事実にはすべて
+// 「公式情報をご確認ください」を付しています。
+//
+// 日本語スポーク記事（57/57）はこのラッパーが入る時点ですべて存在するため、
+// 個別スポークへのリンク（例 /ja/camping/camping-at-flaming-gorge/）と、同じ
+// バッチで公開されるピラー（/ja/fishing/、/ja/scenic-drives/、/ja/things-to-do/、
+// /ja/guides/*、/ja/dinosaur-national-monument/*、/ja/booking/）はすべて /ja/ に
+// 書き換えています。/from/salt-lake-city/ のみ日本語版が未着のため英語パスの
+// ままです（既定のフォールバック）。
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import TrustBadge from '../../../components/content/TrustBadge.astro';
+import Header from '../../../components/layout/Header.astro';
+import Footer from '../../../components/layout/Footer.astro';
+import Seo from '../../../components/seo/Seo.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import HubIndex from '../../../components/content/HubIndex.astro';
+import { getLangFromUrl } from '../../../lib/i18n';
+import { t } from '../../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+
+const schema = `{
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "恐竜の国キャンプ完全ガイド",
+        "description": "ユタ州バーナル近郊と恐竜の国全域でキャンプするための、地元ガイドによる計画術です。Flaming Gorge、Ashley National Forest、Red Fleet、Steinaker、そしてDinosaur National Monument周辺について、どこでキャンプするか、どのスタイルが旅に合うか、目的にどう目的地を合わせるかをご案内します。",
+        "author": {"@type": "Organization", "name": "Adventure Tours Vernal"},
+        "publisher": {"@type": "Organization", "name": "Adventure Tours Vernal", "logo": {"@type": "ImageObject", "url": "https://adventuretoursvernal.com/images/logo.webp"}},
+        "datePublished": "2026-07-11",
+        "dateModified": "2026-07-11",
+        "mainEntityOfPage": "https://adventuretoursvernal.com/ja/camping/"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type": "Question", "name": "ユタ州バーナル近郊でキャンプするなら、どこがおすすめですか？", "acceptedAnswer": {"@type": "Answer", "text": "どんな旅にしたいかによります。水辺やボート遊び、広大な貯水湖の景色を求めるなら、北へ約1時間のFlaming Gorgeでキャンプしてください。涼しい山の森とアルパインの湖を求めるなら、Ashley National ForestとUinta Mountainsへ向かいましょう。町から数分の気軽なファミリーキャンプなら、Red FleetとSteinakerのステートパークに勝るものはありません。化石と川の峡谷のそばを拠点にしたいなら、Dinosaur National Monument周辺でキャンプしてください。レストランやシャワー、買い出しをすぐそばに置きたい方は、バーナルをベースキャンプにして日帰りで出かけるのがおすすめです。目的に目的地を合わせること——本ガイドはそのお手伝いのために作られています。"}},
+          {"@type": "Question", "name": "バーナル近郊でキャンプするのに予約は必要ですか？", "acceptedAnswer": {"@type": "Answer", "text": "キャンプ場によります。Flaming Gorge、Ashley National Forest、ステートパーク、Dinosaur National Monument周辺の整備されたキャンプ場の多くは予約を受け付けており、一部のサイトは先着順です。人気のサイトは夏の週末や祝日に埋まります。国有林での分散キャンプは基本的に予約不要ですが、独自のルールがあります。予約システムや空き状況、受付期間は変わるため、夏は早めに予約したうえで、特定のサイトをあてにする前に（管理機関または公式予約サービスで）公式情報をご確認ください。"}},
+          {"@type": "Question", "name": "ユタ州バーナル近郊で無料でキャンプできますか？", "acceptedAnswer": {"@type": "Answer", "text": "分散（原始的な）キャンプは、Ashley National Forestをはじめとする公有地の広い範囲で一般に認められており、通常は無料です。ただし、許可されたエリアでキャンプする、滞在日数の上限を守る、ゴミをすべて持ち帰る、リーブ・ノー・トレースを実践するといった、機関のルールに従うことが前提です。設備のある整備されたキャンプ場は有料です。無料キャンプのルールや閉鎖情報、焚き火禁止（制限）は変わりやすく地域によっても異なるため、出発前に必ず現在の分散キャンプのルールについて（Ashley National Forestまたは管理機関で）公式情報をご確認ください。"}},
+          {"@type": "Question", "name": "恐竜の国にRVキャンプはできますか？", "acceptedAnswer": {"@type": "Answer", "text": "はい。Flaming Gorge、ステートパーク（Red FleetとSteinaker）、Ashley National Forestの一部、そしてバーナルとDinosaur National Monument周辺には、RVに適したサイトを備えた整備されたキャンプ場があります。さらにバーナルとその周辺の民間RVパークがフルフックアップの選択肢を加えてくれます。特定のキャンプ場が電源・水道設備、ダンプステーション、プルスルーサイトを備えているか、サイト長の制限があるかは場所によって異なり、時期によっても変わります。牽引して向かう前に、各キャンプ場の設備とサイトの大きさについて公式情報をご確認ください。"}},
+          {"@type": "Question", "name": "バーナル近郊でキャンプするのに最適な時期はいつですか？", "acceptedAnswer": {"@type": "Answer", "text": "主なキャンプシーズンは晩春から秋にかけてです。夏は暖かく安定していて、高地のUinta方面には最適の時期ですが、最も混み合い、午後の雷雨も増えます。初秋は地元の多くの人にとってお気に入りの季節です——涼しい夜、少ない人出、そして森の美しい色。高地はシーズンが短く、初夏まで雪が残ることも、秋に再び雪が降ることもあります。町に近い低地のキャンプ場はもう少し長く使えます。冬のキャンプも不可能ではありませんが、寒く、選択肢は限られます。特定の日程を軸に計画を立てる前に、現在の季節ごとの開設状況とコンディションを確認してください。"}},
+          {"@type": "Question", "name": "バーナル近郊で家族連れに最適なキャンプはどこですか？", "acceptedAnswer": {"@type": "Answer", "text": "Red FleetとSteinakerのステートパークは、この地域で最も気軽で家族向きのキャンプです——町から近く、設備が整っていて、水遊びやパドリングがキャンプ地のすぐそばででき、道のりも短くて優しいのが魅力です。Flaming Gorgeの整備されたキャンプ場や、Ashley National Forestの車で乗り付けられるサイトも、設備を保ちつつもう少し自然を感じたい家族によく合います。分散キャンプやバックカントリーキャンプは、子どもが大きくなり、グループに経験が積めてからにとっておきましょう。"}},
+          {"@type": "Question", "name": "バーナル近郊のキャンプで焚き火は許可されていますか？", "acceptedAnswer": {"@type": "Answer", "text": "場合によります。すべては現在の焚き火禁止（制限）次第で、これは状況に応じてシーズン中も変わります。乾燥した時期には、機関が野外での焚き火を禁じる措置を出すことが多く、整備されたキャンプ場、分散サイト、管轄によってルールが異なります。焚き火が許可されていると思い込まないでください。火をおこす前に必ず、その正確なエリアの現在の焚き火禁止（制限）を管理機関で確認し、許可されている場所では既存のファイヤーリングのみを使い、火は水をかけて完全に消し止めてください。公式情報をご確認ください。"}},
+          {"@type": "Question", "name": "恐竜の国へのキャンプ旅行はどう計画すればよいですか？", "acceptedAnswer": {"@type": "Answer", "text": "まず、どんな体験がしたいかを決めてください——水辺、山、化石、それとも気軽な家族の週末か。そのうえで目的に合う目的地を選び、バーナルを買い出しの拠点にします。次にスタイル（RV、テント、分散キャンプ）を決め、夏なら整備されたサイトを早めに予約するか、原始的なキャンプに出るなら分散キャンプのルールを学んでください。現在の料金、設備、季節ごとの開設状況、焚き火禁止（制限）を管理機関で確認し、暑さと寒さの両方を見据えて天気を調べ、高地砂漠から山岳までの幅広いコンディションに備えて荷造りしましょう。各目的地のガイドが、それぞれのキャンプを詳しく解説しています。"}}
+        ]
+      }
+    ]
+  }`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="恐竜の国でのキャンプ | バーナル＆Flaming Gorgeガイド"
+      description="ユタ州バーナル近郊でキャンプするならどこか。Flaming Gorge、Ashley National Forest、Red Fleet、Steinaker、Dinosaur National Monument周辺まで、地元ガイドが目的地とキャンプスタイルの選び方をご案内します。"
+      path="/ja/camping/"
+      type="article"
+      ogTitle="恐竜の国キャンプ完全ガイド"
+      ogDescription="Flaming Gorge、Ashley National Forest、Red Fleet、Steinaker、Dinosaur National Monument——ユタ州バーナル近郊でキャンプ地とスタイルをどう選ぶか、地元の視点でご案内します。"
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('hub.camping', lang) }]} />
+
+  <p slot="body" class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">恐竜の国キャンプ完全ガイドは、ユタ州北東部、ユタ州バーナル近郊でのキャンプのための実践的な旅行計画ガイドです。どこでキャンプするか、どのキャンプスタイルが旅に合うか、どの目的地が目的に最も合うかを決める手助けをします。本ガイドでは、Flaming Gorge、Ashley National ForestとUinta Mountains、Red Fleet State Park、Steinaker State Park、Dinosaur National Monument周辺、そしてベースキャンプとしてのバーナルでのキャンプを取り上げます。RV、テント、分散キャンプの比較、ステートパーク・国有林・国定公園周辺のキャンプ場、ファミリーキャンプ、写真撮影、野生動物への安全対策、アクセシビリティ、シーズンごとの計画、そして一泊、週末、一週間の旅程を扱います。キャンプ場の空き状況、予約システム、サイト数、料金、電源・水道設備、ダンプステーション、シーズンの開設日、焚き火禁止（制限）、許可証の要件は変更されることがあり、U.S. Forest Service、National Park Service、Utah State Parksが定めています — 公式の情報源でご確認ください。Adventure Tours Vernalでは、1台$349（最大2名、3時間）のガイド付きUTVツアーを提供しています。お電話は(435) 219-9447まで。</p>
+
+  <main class="article-page" slot="body">
+    <header class="article-header">
+      <h1 class="article-title">恐竜の国キャンプ完全ガイド</h1>
+      <p class="article-meta">2026年7月更新 · Adventure Tours Vernal</p>
+      <TrustBadge align="left" />
+    </header>
+
+    <div class="article-body">
+
+      <div class="article-summary-box"><strong>先に結論:</strong> 恐竜の国——バーナルを中心としたユタ州北東部の一角——は、西部でも屈指の、そして最も混み合わないキャンプ地のひとつです。そしてコツは、したい旅に目的地を合わせること。水辺とボート遊び、赤い峡谷の風景をお望みですか。それなら北へ約1時間の<a href="/ja/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge</a>でキャンプを。涼しい山の森とアルパインの湖をお望みですか。それなら<a href="/ja/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest</a>とUintasへ登りましょう。町から数分の気軽な家族向けキャンプをお望みですか。<a href="/ja/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a>と<a href="/ja/guides/ultimate-guide-to-steinaker-state-park/">Steinaker</a>のステートパークはまさにそのために作られています。化石と川の峡谷のそばで眠りたいですか。それなら<a href="/ja/dinosaur-national-monument/visiting-dinosaur-national-monument/">Dinosaur National Monument</a>周辺でキャンプを。シャワーやレストランが近いほうがよいですか。<a href="/ja/guides/ultimate-guide-to-vernal-utah/">バーナル</a>を拠点に日帰りで出かけましょう。本ガイドは、目的地<em>と</em>スタイル——RV、テント、分散キャンプ——の両方を選ぶお手伝いをし、そのうえで各地の詳細ガイドへご案内します。夏は早めに予約し、出発前には必ず現在の料金、開設状況、焚き火のルールを確認してください。</div>
+
+      <div class="key-takeaways">
+        <h2>この記事のポイント</h2>
+        <ul>
+          <li><strong>五つの素晴らしい目的地と、ひとつの補給の町。</strong> Flaming Gorge、Ashley National Forest、Red Fleet、Steinaker、そしてDinosaur National Monument周辺は、いずれもバーナルから日帰りできる距離にあり、それぞれがまったく違う種類のキャンプを届けてくれます。</li>
+          <li><strong>目的地は目的で選びましょう。</strong> 水辺とボート遊び、高地の山の森、気軽な家族の週末、あるいは化石と峡谷——そのどれにも、ここには最適の場所があります。本ガイドは、その選択のために作られています。</li>
+          <li><strong>スタイルは旅に合わせて。</strong> RV、テント、分散キャンプは、それぞれ向く旅行者と快適さのレベルが異なります。長めの旅なら組み合わせることもできます。</li>
+          <li><strong>初心者にも優しく、経験者には野性的に。</strong> 町から数分のステートパークの整備されたループにRVを乗り入れることもできますし、何マイルも人のいない松林の下に静かな分散サイトを見つけることもできます。</li>
+          <li><strong>詳細は必ず確認を。</strong> キャンプ場の空き状況、予約、料金、電源・水道設備、シーズンの開設状況、焚き火禁止（制限）、許可証は管理機関が定めており、変わります。旅のたびに最新の詳細を確かめてください。</li>
+        </ul>
+      </div>
+
+      <h2>恐竜の国でキャンプする理由</h2>
+      <p>この地域を恐竜と赤い岩で知る人は多くても、キャンプ地として知る人はあまりいません——だからこそ、ここのキャンプはこんなにも良いのです。キャンパーが西部の有名な公園に押し寄せ、何か月も前から予約を埋めていく一方で、恐竜の国は静かに、よそなら看板になるような幅広いキャンプを差し出しています。キャンプ場が点在する全長91マイルの貯水湖、何百もの湖を抱く松とアスペンの国有林まるごとひとつ、町から数分の湖畔のステートパーク二つ、そして化石と川の峡谷の国定公園——それらすべてが、ひとつの補給の町から1時間ほどの範囲に収まっています。</p>
+      <p>ここの本当の強みは、<em>狭い範囲に詰まった多様さ</em>です。ひとつの地域を拠点に、ある夜は赤い岩の貯水湖の岸辺で、次の夜はアルパインの湖のそばの涼しいトウヒの森で、その次の夜は子どもたちと水遊びのできるビーチから数歩の場所で過ごせます——長距離を走ることなく。大きな水辺のキャンプ、高地の森、気軽な家族向けの貯水湖、そして化石の国の峡谷を、これほど狭い範囲に収めている場所はそう多くありません。</p>
+      <p>しかも人混みがありません。ここは今も働く、混み合わない土地で、特に平日やショルダーシーズンには、静かなサイトや森のひと区画をまるごと独り占めできます。地域の全体像と旅の組み立て方については、まず<a href="/ja/guides/ultimate-guide-to-vernal-utah/">バーナル完全ガイド</a>からどうぞ。キャンプの合間にできることは、<a href="/ja/things-to-do/">バーナルの楽しみ方</a>、<a href="/ja/fishing/">恐竜の国での釣り</a>、そして地域の<a href="/ja/scenic-drives/">シーニックドライブ</a>をご覧ください。</p>
+
+      <h2>キャンプの目的地の選び方</h2>
+      <p>恐竜の国のキャンプは、それぞれ個性の異なる五つの目的地と考えてください。ひとつに絞る必要はありません——二つ三つを組み合わせる旅も多いのです——が、それぞれが何を提供するかを知ることが、良い計画の鍵になります。</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>目的地</th><th>環境</th><th>知られていること</th><th>バーナルからの距離</th><th>向いている人</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Flaming Gorge</td><td>貯水湖と赤い峡谷</td><td>ボート遊び、釣り、大きな水辺の眺め、整備されたキャンプ場</td><td>北へ約1時間</td><td>水辺好き、RV派、釣り人</td></tr>
+            <tr><td>Ashley National Forest / Uintas</td><td>山の森とアルパインの湖</td><td>涼しい松林、何百もの湖、静けさ、分散キャンプ</td><td>北へ約30〜90分</td><td>テント派、分散キャンプ派、夏の暑さを逃れたい人</td></tr>
+            <tr><td>Red Fleet State Park</td><td>小さな貯水湖、赤い砂岩</td><td>水遊び、パドリング、恐竜の足跡、行きやすさ</td><td>北へ約15分</td><td>家族連れ、初めての人、短い旅</td></tr>
+            <tr><td>Steinaker State Park</td><td>町に近い小さな貯水湖</td><td>水遊び、釣り、バーナルから最も近いキャンプ</td><td>北へ約5〜10分</td><td>家族連れ、思い立っての一泊</td></tr>
+            <tr><td>Dinosaur National Monument周辺</td><td>化石の峡谷と川</td><td>Quarryの化石、岩絵、Green RiverとYampa川の峡谷</td><td>東へ約20分（Quarryエリア）</td><td>歴史・地質に惹かれる旅行者、川の峡谷でキャンプしたい人</td></tr>
+            <tr><td>バーナル（ベースキャンプ）</td><td>町</td><td>ホテル、民間RVパーク、レストラン、シャワー、買い出し</td><td>—</td><td>快適さを求める人、フックアップを求めるRV派、雨続きの週の備え</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><em>距離は目安で、各エリア内のどこを目指すかによって変わります。キャンプ場の空き状況、設備、アクセスは時期によって変わります。各目的地の現在のキャンプ場、サイト、コンディションについては、<strong>公式情報をご確認ください</strong>（Forest Service、National Park Service、またはUtah State Parks）。</em></p>
+      <p>良い選択肢が多いだけに、本当の問いは「どれが<em>あなたの</em>旅に合うか」です。この早見表で目的地の見当をつけ、出発前にその場所の専門ガイドをお読みください。</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>求めるもの</th><th>キャンプ地</th><th>理由</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>水辺、ボート遊び、雄大な景色</td><td>Flaming Gorge</td><td>整備されたキャンプ場とマリーナを備えた全長91マイルの貯水湖</td></tr>
+            <tr><td>涼しい森と山の湖</td><td>Ashley National Forest / Uintas</td><td>高地の松とアスペン、何百もの湖。暑さから逃れられます</td></tr>
+            <tr><td>静けさと無料の原始的なキャンプ</td><td>Ashley National Forest（分散キャンプ）</td><td>分散キャンプが一般に認められている広大な公有地</td></tr>
+            <tr><td>町に近い気軽な家族の週末</td><td>Red FleetまたはSteinaker</td><td>湖畔の整備されたサイト、水遊び、短い道のり</td></tr>
+            <tr><td>化石、岩絵、川の峡谷</td><td>Dinosaur National Monument周辺</td><td>Quarry、川、地質のそばでキャンプできます</td></tr>
+            <tr><td>シャワー、レストラン、フルフックアップ</td><td>バーナル（ベースキャンプ）</td><td>町の快適さと、日帰りで届くすべての目的地</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>キャンプのスタイル：どれが旅に合うか</h2>
+      <p>キャンプ場を選ぶ前に、<em>どう</em>キャンプしたいかを決めておくと役立ちます。主な三つのスタイル——RV、テント、分散キャンプ——は向く旅行者が大きく異なり、上の各目的地にも得意・不得意があります。</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>スタイル</th><th>快適さと設備</th><th>向いている人</th><th>ここで真価を発揮する場所</th><th>注意点</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>RV / トレーラー</td><td>最も高い——ベッド、キッチン、空調を持ち込めます</td><td>家族連れ、長期滞在、快適さを求める人、ショルダーシーズン</td><td>Flaming Gorge、ステートパーク、バーナルの民間RVパーク</td><td>サイト長の制限、電源・水道設備の有無、狭い林道</td></tr>
+            <tr><td>テント（整備されたキャンプ場）</td><td>ほどほど——設備が近くにある指定サイト</td><td>大半のキャンパー、キャンプに慣れていない家族、山の旅</td><td>すべての整備されたキャンプ場。涼しい夜には森のキャンプ場</td><td>天候にさらされること、夏の週末は満杯になること</td></tr>
+            <tr><td>分散キャンプ / 原始的なキャンプ</td><td>最も低い——設備はなく、すべて持ち込み持ち帰り</td><td>静けさを求める、経験豊富で自立したキャンパー</td><td>Ashley National Forestのバックカントリーと林道</td><td>水もトイレもゴミ処理もなし、厳しいルール、焚き火禁止、道路と天候のリスク</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>長めの旅では、スタイルを組み合わせることもできます——まずFlaming Gorgeの整備されたRVサイトから始め、森で数泊テントを張り、最後は星空の下で分散キャンプ。以下の各セクションで、それぞれをさらに詳しく見ていきます。</p>
+
+      <h2>恐竜の国でのRVキャンプ</h2>
+      <p>恐竜の国はRV派に優しく、フルサービスの町のパークから素朴な森のループまで、幅広い選択肢がそろっています。<a href="/ja/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge</a>やステートパークの整備されたキャンプ場には、たいていRVに適したサイトがあります。<a href="/ja/guides/ultimate-guide-to-vernal-utah/">バーナル</a>とその周辺の民間RVパークはフルフックアップの便利さを加えてくれますし、<a href="/ja/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest</a>の一部にも、小型の車両やトレーラーを受け入れられるキャンプ場があります。</p>
+      <p>RVの旅で鍵になるのは、最も変わりやすく、私たちが決して創作しない項目です。そのキャンプ場に<strong>電源・水道設備</strong>（電気、給水、下水）があるか、<strong>ダンプステーション</strong>と飲用水があるか、<strong>最大サイト長</strong>はどれくらいか、<strong>プルスルー</strong>サイトがあるか。これらはキャンプ場ごと、シーズンごとに異なり、標高の高いキャンプ場へのアクセス道路には狭く曲がりくねった区間もあります。林道を牽引して上る前に、サイトの大きさとアクセスを確かめてください。</p>
+      <div class="article-tip"><strong>RVの現実チェック:</strong> 最も大きく設備の整ったRVサイトは、Flaming Gorge、ステートパーク、バーナルの民間パークにあります。森はより素朴で、小型の車両に向いています。特定のキャンプ場の電源・水道設備、ダンプステーション、サイト長の制限、プルスルーサイトの有無については、<strong>公式情報をご確認ください</strong>（管理機関または各パーク）。そして、良いRVサイトから先に埋まる夏は、早めに予約を。</div>
+
+      <h2>恐竜の国でのテントキャンプ</h2>
+      <p>テント派にとって、この地域は贈り物のような場所です。赤い岩の貯水湖のそばに、山の湖のほとりの高い松の下に、あるいは子どもたちと過ごす暖かい水遊びビーチのループに——それらすべてが互いに1時間以内の距離で張れるのです。整備されたテントキャンプは各目的地にあり、体験は標高によって大きく変わります。貯水湖や町の近くでは高地砂漠の暖かい夜、<a href="/ja/guides/ultimate-guide-to-ashley-national-forest/">Uintaの森</a>の上では真夏でも本当に冷え込む夜になります。</p>
+      <p>その標高差こそ、計画で押さえるべき点です。バーナル、Red Fleet、Steinaker近くの夏の夜は穏やかですが、同じ夜でも高地の森のキャンプ場では氷点近くまで下がることがあります。日中の暑さから想像するより暖かい寝袋を持参し、午後の風と雷雨に備えてしっかりペグを打ち、予報に合わせて標高を選んでください。猛暑なら森へ登り、寒波なら町の方へ下りましょう。</p>
+      <p>テントキャンプは、ひとつの旅で複数の目的地を味わうのに最も柔軟で費用のかからない方法であり、山を体験する王道でもあります。環境に合わせた荷造りは<a href="/ja/guides/what-to-bring/">持ち物ガイド</a>を、時期選びは<a href="/ja/guides/vernal-weather-guide/">バーナル天候ガイド</a>をご覧ください。</p>
+
+      <h2>分散キャンプの概要</h2>
+      <p>整備されたキャンプ場の向こうには、この地域屈指の穴場があります——<strong>分散キャンプ</strong>、すなわち公有地での設備のない原始的なキャンプで、<a href="/ja/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest</a>の広い範囲で一般に認められています。自立したキャンパーにとっては、静けさ、予約不要、そして多くの場合無料という意味になります。しかも、ほとんどの訪問者が目にすることのない土地で。</p>
+      <p>同時にそれは、水もトイレもゴミ回収もなく、安全網もないという意味でもあります。分散キャンプには本物の責任とルールが伴います——どこでキャンプしてよいか、水辺や道路からどれだけ離れるか、何日まで滞在できるか、どんな焚き火禁止（制限）がかかっているか——そしてそのルールは地域ごとに異なり、シーズン中も変わります。本ガイドは計画の概観であって規則集ではありません。詳細は、分散キャンプ専門のスポーク記事で扱う予定です。</p>
+      <ul>
+        <li><strong>出かける前に知っておきましょう。</strong> 分散キャンプが可能なエリア、滞在日数の上限、閉鎖情報は機関が定めており、変わります。特定の場所を当てにする前に、現在のルールについて<strong>公式情報をご確認ください</strong>（Ashley National Forest）。</li>
+        <li><strong>完全に自立してください。</strong> 水はすべて持参し、し尿を処理する方法と、ゴミを一片残らず持ち帰るための道具をそろえてください。</li>
+        <li><strong>焚き火が最大の論点です。</strong> 焚き火禁止（制限）は状況に応じて変わり、発令されていることも多くあります。焚き火が許可されていると思い込まず、その正確なエリアの現在のルールを確かめてください。</li>
+        <li><strong>リーブ・ノー・トレース。</strong> 既存のサイトがあればそれを使い、傷みにくい地面にキャンプし、水源から十分に離れ、来たときよりきれいにして去りましょう。</li>
+        <li><strong>道路と天候に注意を。</strong> 林道は荒れていることがあり、雨でぬかるみ、雪では通行できなくなります。携帯電話の電波も途切れがちです。行き先を誰かに伝えておいてください。</li>
+      </ul>
+
+      <h2>ステートパークでのキャンプ：Red FleetとSteinaker</h2>
+      <p>この地域で最も気軽で家族向きのキャンプをお求めなら、町の北へ数分の二つのステートパークが答えです。どちらも整備されたキャンプ場に、水遊び、釣り、パドリングがキャンプ地のすぐそばで楽しめる環境を組み合わせており、バーナルの買い出しやサービスからも短く優しい道のりです。</p>
+      <p><a href="/ja/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet State Park</a>は、迫力ある赤い砂岩の中にあり、貯水湖と有名な<strong>恐竜の足跡</strong>で知られています——トレイルでもパドルでも行ける、本物の冒険です。ここでのキャンプは、湖畔の一夜に水遊び、岸釣り、そして足跡見学を組み合わせてくれます。長距離を走らずに自然と本物の見どころの両方を求める家族にとって、際立った選択肢です。Red Fleet State Parkでのキャンプは恐竜の国で最も気軽なファミリーキャンプ体験のひとつです——<a href="/ja/camping/camping-at-red-fleet-state-park/">Red Fleetでのキャンプ完全ガイド</a>をどうぞ。</p>
+      <p><a href="/ja/guides/ultimate-guide-to-steinaker-state-park/">Steinaker State Park</a>はバーナルから最も近いキャンプ地です——北へわずか5分から10分——ですから、思い立っての一泊や、初めての家族キャンプの定番になります。貯水湖は夏の水遊び、パドリング、釣りの場で、町までの距離が短いので、忘れ物をしてもすぐに買い足せます。</p>
+      <div class="article-tip"><strong>ステートパークはしっかり計画を:</strong> 二つの専門ガイド——<a href="/ja/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a>と<a href="/ja/guides/ultimate-guide-to-steinaker-state-park/">Steinaker</a>——が、アクセス、レクリエーション、キャンプを詳しく解説しています。ユタ州のステートパークのキャンプ場は一般に予約を受け付けており、夏の週末は満杯になります。現在のサイト、料金、電源・水道設備、予約受付期間については<strong>公式情報をご確認ください</strong>（Utah State Parks）。そして早めのご予約を。</div>
+
+      <h2>国有林でのキャンプ：Ashleyとthe Uintas</h2>
+      <p>バーナルの北と西では、土地がUinta Mountainsと<a href="/ja/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest</a>へと登っていきます——そしてそこには、この地域で最も広大なキャンプが広がっています。松とアスペンに囲まれた涼しい高地のキャンプで、何百もの湖や渓流のそば。地元の人が夏の暑さを逃れる場所です。</p>
+      <p>森は、まったく異なる二つの体験を用意しています。<strong>整備された森のキャンプ場</strong>は、湖や谷の近くの美しい環境に、基本設備を備えた指定サイトを提供します——ピクニックテーブルと、許可されている場所ではファイヤーリングのある、車で乗り付けられる山のキャンプです。森の広い範囲での<strong>分散キャンプ</strong>は、自立したキャンパーに静けさと原始的なサイトを届けます（上のセクションをご覧ください）。この二つによって、森は小さなトレーラーの家族からHigh Uintas Wildernessへ向かうバックパッカーまで、あらゆる人に応えてくれます。</p>
+      <p>その代償はシーズンとアクセスです。高地は<strong>シーズンが短く</strong>、初夏まで雪が残ることも、初秋に再び雪が降ることもあり、そこへ至る道は舗装路から荒れたダートまでさまざまです。夜は冷え、午後の雷雨は珍しくなく、サービスは遠く、携帯電話の電波も弱い。それが、この地域で最高の景色と最も涼しい空気の対価です。</p>
+      <p>山のキャンプをお探しですか。<a href="/ja/camping/camping-in-ashley-national-forest/">Ashley National Forestでのキャンプ完全ガイド</a>では、森のキャンプエリア、整備されたサイトと分散サイトの違い、アルパインキャンプとファミリーキャンプ、そしてキャンプ場をバックパッキングの拠点として使う方法を解説しています。</p>
+      <div class="article-tip"><strong>高地の現実:</strong> アクセスと計画については<a href="/ja/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forestガイド</a>をご覧ください。森のキャンプ場の開設状況、道路の状態、料金、焚き火禁止（制限）は毎年、そしてエリアごとに変わります——山へ上がる前に、現在のコンディションについて<strong>公式情報をご確認ください</strong>（Ashley National Forest）。</div>
+
+      <h2>Flaming Gorgeでのキャンプ</h2>
+      <p>恐竜の国にキャンプの主役がいるとすれば、それは<a href="/ja/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge</a>です——ユタ州とワイオミング州の州境にまたがる全長91マイルの貯水湖で、レクリエーションエリア、マリーナ、キャンプ場が周囲に点在し、燃えるような赤い峡谷の壁を背にしています。<strong>キャンプと水辺を組み合わせる</strong>なら、ここが地域随一の目的地です。ボート遊び、世界屈指の釣り、パドリング、水遊び、そして大空の景色。整備されたキャンプ場もRV向きのものから、より原始的な湖畔サイトまでそろっています。</p>
+      <p>ここでのキャンプなら、貯水湖で朝を過ごすために水辺から数歩の場所にいられます——トロフィークラスのレイクトラウトやブラウントラウトを追ったり（<a href="/ja/fishing/">恐竜の国での釣り</a>をご覧ください）、ボートを出したり、あるいは光が峡谷を移ろうのをただ眺めたり。周辺の整備されたキャンプ場と近隣のサービスは、RV派にもテント派にも使いやすく、Flaming Gorge–Uintas Bywayに沿った地域屈指の<a href="/ja/scenic-drives/">シーニックドライブ</a>にもつながっています。</p>
+      <p>Flaming Gorgeは人気があり、各レクリエーションエリアがそれぞれのキャンプ場を持つため、真夏はサイトが埋まることがあり、設備もエリアによって異なります。ボートで訪れる方は、ユタ州のクリーン・ドレイン・ドライの外来種対策ルールと、検査が行われる可能性にもご留意ください。</p>
+      <p>宿泊をお考えですか。<a href="/ja/camping/camping-at-flaming-gorge/">Flaming Gorgeでのキャンプ完全ガイド</a>では、貯水湖のキャンプエリア、RVとテントおよび湖畔サイトの違い、そしてキャンプ地からそのまま釣りやボートに出る方法を解説しています。</p>
+      <div class="article-tip"><strong>Gorgeの計画:</strong> <a href="/ja/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge完全ガイド</a>が、レクリエーションエリア、マリーナ、ボートランプ、アクセスを詳しく扱っています。キャンプ場の空き状況、料金、電源・水道設備、ダンプステーション、予約の可否はエリアによって異なり、変わります——旅の前に<strong>公式情報をご確認ください</strong>（Forest Serviceおよび公式予約サービス）。そして夏の週末は早めのご予約を。</div>
+
+      <h2>Dinosaur National Monument近くのキャンプ場</h2>
+      <p>化石と川の峡谷のそばで目覚めたいなら、<a href="/ja/dinosaur-national-monument/visiting-dinosaur-national-monument/">Dinosaur National Monument</a>周辺でキャンプしましょう。この国定公園はユタ州とコロラド州の州境にまたがり、有名な化石の<strong>Quarry</strong>、古代の<strong>岩絵</strong>、そしてGreen RiverとYampa川の壮大な峡谷を守っています——ここでキャンプすれば、朝早くQuarryに立ち、一日で最も美しい光の中で地質と川の国を歩けます。</p>
+      <p>国定公園周辺には、峡谷と川の印象的な風景の中にキャンプ場があります。またユタ側入口から西へ約20分のバーナルは、ベースキャンプの代替として最も近いフルサービスを提供します。国定公園近くでのキャンプは、<a href="/ja/dinosaur-national-monument/petroglyphs-rock-art-vernal/">岩絵とロックアート</a>、<a href="/ja/scenic-drives/cub-creek-road-tour-of-the-tilted-rocks/">Cub Creekのシーニックドライブ</a>、そして川の峡谷と自然に組み合わさり、歴史と地質を目当てに来た旅行者にとって第一の拠点になります。</p>
+      <div class="article-tip"><strong>国定公園の計画:</strong> Quarry、料金、アクセスについては<a href="/ja/dinosaur-national-monument/visiting-dinosaur-national-monument/">Dinosaur National Monumentを訪ねる</a>をご覧ください。National Park Serviceのキャンプ場はシーズン、設備、予約制か先着順かが場所によって異なり、水が季節限定のところもあります。またこの国定公園には入園料がかかります。出発前に、現在のキャンプ場、料金、開設状況について<strong>公式情報をご確認ください</strong>（National Park Service）。</div>
+
+      <h2>ベースキャンプとしてのバーナル</h2>
+      <p>素晴らしいキャンプ旅行が、いつも土の上で眠ることを意味するわけではありません。多くの旅行者にとって——特に小さな子ども連れの家族、雨続きに当たってしまった方、一日の終わりに熱いシャワーとレストランを望む方にとって——最も賢い手は、<a href="/ja/guides/ultimate-guide-to-vernal-utah/">バーナル</a>を拠点に、上記の目的地へ日帰りで出かけることです。町にはホテル、民間RVパーク、レストラン、燃料、食料品店、アウトドア用品がそろっており、本ガイドのすべてのキャンプ目的地は車で約1時間以内にあります。</p>
+      <p>ベースキャンプ方式は、良いハイブリッドにもなります。天気の良い夜はキャンプし、嵐が来たときやグループに休息が必要なときは町へ戻る——土地を諦めることなく、旅を快適に保てます。Flaming Gorge、森、ステートパーク、国定公園をひとつの旅で味わうのに、最も摩擦の少ない方法です。州外からお越しですか。<a href="/from/salt-lake-city/">Salt Lake Cityからバーナルへのガイド</a>が道中を解説していますし、着いてからは<a href="/ja/things-to-do/">バーナルの楽しみ方</a>が目的地の合間の時間を埋めてくれます。</p>
+
+      <h2>ファミリーキャンプ</h2>
+      <p>ここは、誰も語らないユタ州随一のファミリーキャンプ地かもしれません。理由は単純で、キャンプを<em>成功させやすい</em>のです。<a href="/ja/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a>と<a href="/ja/guides/ultimate-guide-to-steinaker-state-park/">Steinaker</a>は、家族に湖畔の整備されたサイト、キャンプ地での水遊びとパドリング、短く優しい道のり、そして必ず出る忘れ物のために数分の距離にある町を用意してくれます。そこにRed Fleetの恐竜の足跡を加えれば、キャンプ旅行が、子どもの記憶に残る本物の冒険と結びつきます。</p>
+      <p>もう少し自然に踏み込む準備のできた家族には、Flaming Gorgeの整備されたキャンプ場や森の車で乗り付けられるサイトが、設備を近くに保ちながら景色と広さを加えてくれます。分散キャンプやバックカントリーキャンプは、子どもが大きくなり、グループに経験が積めてからにとっておきましょう——水もトイレも安全網もないぶん、賭け金が上がります。</p>
+      <p>ここで良いファミリーキャンプにするための公式はこうです。キャンプ地に水のある整備されたキャンプ場を選ぶ。最初の旅は短く近く（SteinakerかRed Fleet）にする。一日は水遊び、探検、キャンプの時間の間を自由に行き来させる。そして高地砂漠の暑さと冷える夜の両方に備える。町での子ども向けのアイデアは<a href="/ja/things-to-do/fun-things-to-do-vernal-utah-kids/">バーナルで子どもと楽しめること</a>を、荷造りは<a href="/ja/guides/what-to-bring/">持ち物ガイド</a>をご覧ください。</p>
+
+      <h2>写真撮影のチャンス</h2>
+      <p>ここでのキャンプ旅行は、そのまま撮影旅行にもなります。キャンプは、最も良い時間帯——日帰り客が去った夜明けと夕暮れ——に、最も良い場所にあなたを置いてくれるからです。</p>
+      <ul>
+        <li><strong>キャンプ地からゴールデンアワーを撮る。</strong> キャンプしていれば、日の出と日の入りにはもう現場にいます。Flaming GorgeやRed Fleetの赤い峡谷の壁に当たる暖かく低い光は、他に代えがたいものです。</li>
+        <li><strong>映り込みを狙う。</strong> 貯水湖や山の湖の穏やかな朝の水面は、赤い岩と峰を鏡のように映します。風が立つ前に起きましょう。</li>
+        <li><strong>暗い空を追う。</strong> 町から離れた高地砂漠と森は、晴れて月のない夜に、素晴らしい星の写真と天の川の機会を届けてくれます。</li>
+        <li><strong>森の色を切り取る。</strong> 初秋、Uintasのアスペンが黄金色に変わります。その色づきに合わせて森のキャンプを計画しましょう。</li>
+        <li><strong>機材を守る。</strong> 砂ぼこり、午後の雷雨、夜露はいずれも起こり得ます。ドライバッグとレンズクロスは十分に元が取れます。</li>
+        <li><strong>雷雨に目を配る。</strong> 劇的な空は良い写真になりますが、危険な状況でもあります。雷の気配があれば、むき出しの尾根や開けた水面から離れてください。</li>
+      </ul>
+
+      <h2>野生動物への安全対策</h2>
+      <p>キャンプは、あなたを野生動物の生息地に置きます。いくつかの習慣が、あなたと動物の双方を守ります。最も大切なのは<strong>食料の保管</strong>です。食料、ゴミ、匂いのするものはすべて安全に——ハードトップの車内か、キャンプ場の掲示のルールに従って——しまい、テントの中には決して置かないでください。動物をキャンプ地に呼び寄せないためです。毎食後は徹底的に片付け、残りかすはすべて持ち帰りましょう。</p>
+      <p>食料以外では、すべての野生動物——シカ、エルク、ムース、プロングホーン、そして小さな動物たち——から敬意ある距離を保ち、近づいたり餌を与えたりしないでください。森のムースにはとりわけ広い距離が必要です。キャンプ地への行き帰りは、夜明けと夕暮れに道路上の動物に注意してください。高地では雷雨と冷え込みに、高地砂漠では暑い日に手足を置く場所に気を配り、靴や道具は振ってから使いましょう。</p>
+      <div class="article-tip"><strong>ご注意:</strong> 野生動物への安全対策や食料保管の具体的な要件は、キャンプ場やエリアによって異なり、状況に応じて変わることがあります。キャンプ場の掲示のルールにはすべて従い、滞在先の現在の要件については<strong>公式情報をご確認ください</strong>（管理機関）。</div>
+
+      <h2>シーズンごとのキャンプ</h2>
+      <p>この地域の強みのひとつは、季節に目的地を合わせさえすれば<em>いつでもどこかが良い</em>ということです。一年の流れをご紹介します。</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>季節</th><th>おすすめの目的地</th><th>予想されること</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>春</td><td>ステートパーク、Flaming Gorge、バーナル拠点</td><td>暖かくなる日中、涼しい夜、少ない人出。高地はまだ雪とぬかるみ</td></tr>
+            <tr><td>夏</td><td>Ashley National Forest / Uintas、Flaming Gorge、すべての目的地</td><td>高地のベストシーズンで最も涼しい空気。週末は最も混雑。午後の雷雨</td></tr>
+            <tr><td>秋</td><td>Ashley NF（初秋）、Flaming Gorge、ステートパーク、国定公園</td><td>地元で人気——涼しい夜、黄金のアスペン、少ない人出。高地は雪の戻りとともに閉鎖へ</td></tr>
+            <tr><td>冬</td><td>ごく限られる。宿泊はバーナル拠点で</td><td>寒く雪深く、大半のキャンプ場は閉鎖。しっかり備えた人だけのキャンプ</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><em>季節の目安は一般論で、年ごとに天候と標高によって前後します。キャンプ場の開設・閉鎖は毎年変わります。旅の前に、現在の開設状況、コンディション、アクセスについて<strong>公式情報をご確認ください</strong>。</em> 地域の月ごとの天候については、<a href="/ja/guides/vernal-weather-guide/">バーナル天候ガイド</a>をご覧ください。</p>
+
+      <h3>夏と秋：もう少し詳しく</h3>
+      <p>キャンプのピークとなる二つの季節は、報いてくれる優先順位が違うため、直接比べてみる価値があります。</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>要素</th><th>夏</th><th>秋（初秋）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>高地へのアクセス</td><td>完全に開いていて安定</td><td>初めは開いているが、雪の戻りとともに閉鎖へ</td></tr>
+            <tr><td>人出</td><td>最も多い。かなり早めに予約を</td><td>少なめ。サイトを見つけやすい</td></tr>
+            <tr><td>気温</td><td>暖かい〜暑い日中、標高により穏やかから冷え込む夜</td><td>涼しい日中、冷える夜。高地では霜も</td></tr>
+            <tr><td>景色</td><td>緑の森、満水の湖、長い日照</td><td>黄金のアスペン、低く暖かい光、静けさ</td></tr>
+            <tr><td>天候リスク</td><td>午後の雷雨</td><td>早い時期の嵐と、高地の初雪</td></tr>
+            <tr><td>向いている人</td><td>水辺、高地の湖、学校が休みの家族</td><td>写真家、カップル、静けさを求める人</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>旅行者タイプ別のキャンプ</h2>
+      <p>誰とキャンプするかは、季節と同じくらい最適な計画を左右します。この地域が旅行者ごとにどう合うかをご紹介します。</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>旅行者</th><th>おすすめの目的地とスタイル</th><th>合う理由</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>家族連れ</td><td>Red FleetまたはSteinaker、整備されたサイト、RVかテント</td><td>キャンプ地での水遊び、短い道のり、近い町、低いストレス</td></tr>
+            <tr><td>カップル</td><td>Flaming Gorgeまたは静かな森のキャンプ場、テントか小型RV</td><td>長い道のりなしで景色、夕日、静けさが手に入ります</td></tr>
+            <tr><td>アドベンチャー志向の旅行者</td><td>Ashley NFの分散キャンプかバックカントリー、国定公園周辺</td><td>静けさ、自立、そしてトレイル・水辺・峡谷へのアクセス</td></tr>
+            <tr><td>RVの旅行者</td><td>Flaming Gorge、ステートパーク、バーナルの民間パーク</td><td>最良のサイトの大きさとサービス。可能な場所では電源・水道設備も</td></tr>
+            <tr><td>初心者</td><td>Steinakerまたは整備された森のキャンプ場</td><td>設備、優しいアクセス、そしてすぐそばにある助け</td></tr>
+            <tr><td>海外からの旅行者・ロードトリップ派</td><td>バーナル拠点に目的地を一つか二つ</td><td>快適さと補給を保ちつつ、見どころへ気軽に日帰りできます</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>アクセシビリティ</h2>
+      <p>この地域で最もアクセスしやすいキャンプは、整備されたステートパークと大きめのキャンプ場にあります。<a href="/ja/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a>と<a href="/ja/guides/ultimate-guide-to-steinaker-state-park/">Steinaker</a>は整備されたユタ州のステートパークとして、一般にキャンプ地の近くにアクセシブルな駐車場、設備、デイユースエリアを備えており、移動に配慮が必要な方にとって比較的キャンプしやすい場所です。Flaming Gorgeや国定公園周辺の整備されたキャンプ場も、原始的なサイトよりはアクセシブルな設備が整っている傾向があります。</p>
+      <p>一方で、分散サイト、バックカントリーのキャンプ地、未舗装の林道、高地の凸凹した地面は険しく、一律にアクセシブルではありません。アクセシブルなサイトや設備の具体的な内容はキャンプ場によって異なり、時期によっても変わるため、特別な配慮が必要な場合は、訪問前に現在のアクセシビリティの提供内容について<strong>公式情報をご確認ください</strong>（Utah State Parks、Ashley National Forest、またはNational Park Service）。</p>
+
+      <h2>一泊のキャンプ旅程</h2>
+      <p>一晩しかありませんか。近くで簡単に済ませても、恐竜の国のキャンプを本当に味わうことはできます。</p>
+      <p><strong>気軽な一泊（SteinakerまたはRed Fleet）。</strong> 午後に<a href="/ja/guides/ultimate-guide-to-vernal-utah/">バーナル</a>を出て、どちらも町から数分の<a href="/ja/guides/ultimate-guide-to-steinaker-state-park/">Steinaker</a>か<a href="/ja/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a>で設営し、夕方は泳ぐか釣りをして、赤い岩に光が柔らかく落ちる中で夕食を作り、文明のすぐそばで静かな夜を過ごしましょう。朝はRed Fleetの恐竜の足跡か、岸からのひと投げを加えてから、気楽に帰路につけます。初めてのキャンプ旅行にも、負担の少ない一泊にも、新しい道具の試運転にもぴったりです。</p>
+
+      <h2>週末のキャンプ旅程</h2>
+      <p>二日か三日あれば、看板となる目的地をひとつ選んで腰を落ち着けることも、二つを味わうこともできます。</p>
+      <p><strong>Flaming Gorgeの週末。</strong> <a href="/ja/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge</a>で二泊します。初日は水の上で——ボート、<a href="/ja/fishing/">釣り</a>、パドリング——二日目は<a href="/ja/scenic-drives/flaming-gorge-uintas-scenic-byway/">Flaming Gorge–Uintas Scenic Byway</a>と展望ポイントを巡り、峡谷に沈む夕日を見にキャンプ地へ戻ります。水と景色の王道の週末です。</p>
+      <p><strong>家族の週末。</strong> <a href="/ja/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a>または<a href="/ja/guides/ultimate-guide-to-steinaker-state-park/">Steinaker</a>で二泊。水遊び、岸釣り、恐竜の足跡、そして買い出しと外食のための短い町への往復——安全網つきの、子どものためのキャンプです。</p>
+      <p><strong>山の週末。</strong> <a href="/ja/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest</a>で二泊して暑さから逃れましょう。湖の近くの整備された森のキャンプ場、涼しい夜、日帰りハイクかパドリング、そして星でいっぱいの空。7月でも暖かい重ね着をお持ちください。西から入られますか。<a href="/from/salt-lake-city/">Salt Lake Cityからバーナルへのガイド</a>をご覧ください。</p>
+
+      <h2>一週間のキャンプ旅行</h2>
+      <p>丸一週間あれば、地域全体を体験できます——水辺、山、化石、家族の楽しみを求めて目的地を移りながら、<a href="/ja/guides/ultimate-guide-to-vernal-utah/">バーナル</a>で道中の補給を。自然な流れの一例です。</p>
+      <ul>
+        <li><strong>1〜2泊目 — Flaming Gorge。</strong> <a href="/ja/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge</a>の大きな水辺のキャンプで肩慣らし。ボート、釣り、そしてBywayの展望ポイントを。</li>
+        <li><strong>3〜4泊目 — Ashley National Forest。</strong> <a href="/ja/guides/ultimate-guide-to-ashley-national-forest/">Uintas</a>へ登り、涼しい森のキャンプとアルパインの湖を。そして経験を積み備えのある方には、分散キャンプと静けさの入口を。</li>
+        <li><strong>5泊目 — バーナル拠点。</strong> 町へ下りて補給、シャワー、洗濯、そしてレストランでの食事を。<a href="/ja/things-to-do/">バーナルの楽しみ方</a>も探してみてください。</li>
+        <li><strong>6〜7泊目 — Dinosaur National Monumentとステートパーク。</strong> 化石のそばで締めくくります。<a href="/ja/dinosaur-national-monument/visiting-dinosaur-national-monument/">国定公園周辺</a>でキャンプしてQuarry、岩絵、川の峡谷を巡るか、<a href="/ja/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a>での気軽な家族の一夜で結びましょう。</li>
+      </ul>
+      <p>良い天気を追って順番を入れ替えても構いませんし、いつも一泊か二泊は自由に残しておいてください——山の嵐と満杯のキャンプ場は織り込み済みです。キャンプの合間には、<a href="/ja/booking/">Adventure Tours VernalのガイドつきUTVツアー</a>が、キャンプ場からは決してたどり着けない土地を見せてくれます。</p>
+
+      <h2>計画のヒント</h2>
+      <ul>
+        <li><strong>まず目的地、次にスタイル。</strong> 水辺、山、化石、気軽な家族の週末のどれを望むかを決め、それに合わせてRV、テント、分散キャンプを選んでください——上の表はまさにそのために作られています。</li>
+        <li><strong>夏は早めに予約を。</strong> Flaming Gorge、ステートパーク、人気の森のキャンプ場の良い整備されたサイトは、夏の週末と祝日に埋まります。予約受付期間については<strong>公式情報をご確認ください</strong>。そして前もってご予約を。</li>
+        <li><strong>目的のキャンプ場の料金、設備、開設状況を確認してください。</strong> 電源・水道設備、ダンプステーション、水、サイト長、季節ごとの開設状況はキャンプ場ごとに異なり、年によっても変わります——決して思い込まないでください。</li>
+        <li><strong>現在の焚き火禁止（制限）を必ず確認してください。</strong> 乾燥した時期の焚き火禁止は珍しくなく、管轄によってルールも異なります。焚き火が許可されていると思い込まず、火をおこす前にその正確なエリアのルールを確かめてください。</li>
+        <li><strong>高地砂漠と山の両方に備えて荷造りを。</strong> 暑い日中、冷える夜、強い日差し、午後の雷雨、風——どれも起こり得ます。重ね着、日焼け対策、そして思っているより多めの水を。</li>
+        <li><strong>補給はバーナルを拠点に。</strong> 燃料、食料品、アウトドア用品は町にそろい、どの目的地も日帰り圏内です——天候が崩れたときの心強い逃げ道にもなります。</li>
+        <li><strong>土地と野生動物に敬意を。</strong> 食料は適切に保管し、リーブ・ノー・トレースを守り、動物とは距離を保ち、すべて持ち帰ってください——特に分散キャンプでは。</li>
+        <li><strong>原始的なキャンプに出る前に分散キャンプのルールを学びましょう。</strong> 無料のキャンプは、本物のルールを伴う特権です。まずForest Serviceで現在の分散キャンプの規則を確かめてください。</li>
+      </ul>
+
+      <p>恐竜の国は、偶然たどり着くのではなく、体験を軸に計画するキャンパーに報いてくれます。目的、同行者、季節に合う目的地を選び、快適さに合うスタイルを選び、その目的地の専門ガイドを読み、早めに予約するか分散キャンプのルールを学び、現在の料金、開設状況、焚き火禁止（制限）を確かめ、西部でも本当に過小評価されたキャンプ地のひとつを楽しむ時間をたっぷり取ってください。キャンプの合間にサイトを離れてガイドつきのバックカントリー冒険に出たくなったら、<a href="/ja/booking/">Adventure Tours VernalのUTVツアーをご予約ください</a>。DaveとTrudyが、キャンプ場の向こうの土地をご案内します。</p>
+
+      <div class="article-faq">
+        <h2>よくあるご質問</h2>
+        <div class="faq-item">
+          <h3>ユタ州バーナル近郊でキャンプするなら、どこがおすすめですか？</h3>
+          <p>どんな旅にしたいかによります。水辺やボート遊び、広大な貯水湖の景色を求めるなら、北へ約1時間のFlaming Gorgeでキャンプしてください。涼しい山の森とアルパインの湖を求めるなら、Ashley National ForestとUinta Mountainsへ向かいましょう。町から数分の気軽なファミリーキャンプなら、Red FleetとSteinakerのステートパークに勝るものはありません。化石と川の峡谷のそばを拠点にしたいなら、Dinosaur National Monument周辺でキャンプしてください。レストランやシャワー、買い出しをすぐそばに置きたい方は、バーナルをベースキャンプにして日帰りで出かけるのがおすすめです。</p>
+        </div>
+        <div class="faq-item">
+          <h3>バーナル近郊でキャンプするのに予約は必要ですか？</h3>
+          <p>キャンプ場によります。Flaming Gorge、Ashley National Forest、ステートパーク、Dinosaur National Monument周辺の整備されたキャンプ場の多くは予約を受け付けており、一部のサイトは先着順です。人気のサイトは夏の週末や祝日に埋まります。国有林での分散キャンプは基本的に予約不要ですが、独自のルールがあります。予約システムや空き状況は変わるため、夏は早めに予約したうえで、特定のサイトをあてにする前に管理機関にご確認ください。</p>
+        </div>
+        <div class="faq-item">
+          <h3>ユタ州バーナル近郊で無料でキャンプできますか？</h3>
+          <p>分散（原始的な）キャンプは、Ashley National Forestをはじめとする公有地の広い範囲で一般に認められており、通常は無料です。ただし、許可されたエリアでキャンプする、滞在日数の上限を守る、ゴミをすべて持ち帰る、リーブ・ノー・トレースを実践するといった、機関のルールに従うことが前提です。設備のある整備されたキャンプ場は有料です。無料キャンプのルールや閉鎖情報、焚き火禁止（制限）は変わりやすく地域によっても異なるため、出発前に必ず現在の分散キャンプのルールをAshley National Forestで確かめてください。</p>
+        </div>
+        <div class="faq-item">
+          <h3>恐竜の国にRVキャンプはできますか？</h3>
+          <p>はい。Flaming Gorge、ステートパーク、Ashley National Forestの一部、そしてバーナルとDinosaur National Monument周辺には、RVに適したサイトを備えた整備されたキャンプ場があります。さらにバーナルとその周辺の民間RVパークがフルフックアップの選択肢を加えてくれます。特定のキャンプ場が電源・水道設備、ダンプステーション、プルスルーサイトを備えているか、サイト長の制限があるかは場所によって異なり、時期によっても変わります。牽引して向かう前に、各キャンプ場の設備とサイトの大きさをご確認ください。</p>
+        </div>
+        <div class="faq-item">
+          <h3>バーナル近郊でキャンプするのに最適な時期はいつですか？</h3>
+          <p>主なキャンプシーズンは晩春から秋にかけてです。夏は暖かく安定していて、高地のUinta方面には最適の時期ですが、最も混み合い、午後の雷雨も増えます。初秋は地元の多くの人にとってお気に入りの季節です——涼しい夜、少ない人出、そして美しい色。高地はシーズンが短く、初夏まで雪が残ることも、秋に再び雪が降ることもあります。町に近い低地のキャンプ場はもう少し長く使えます。冬のキャンプも不可能ではありませんが、寒く、選択肢は限られます。</p>
+        </div>
+        <div class="faq-item">
+          <h3>バーナル近郊で家族連れに最適なキャンプはどこですか？</h3>
+          <p>Red FleetとSteinakerのステートパークは、この地域で最も気軽で家族向きのキャンプです——町から近く、設備が整っていて、水遊びやパドリングがキャンプ地のすぐそばででき、道のりも短くて優しいのが魅力です。Flaming Gorgeの整備されたキャンプ場や、Ashley National Forestの車で乗り付けられるサイトも、設備を保ちつつもう少し自然を感じたい家族によく合います。分散キャンプやバックカントリーキャンプは、子どもが大きくなり、グループに経験が積めてからにとっておきましょう。</p>
+        </div>
+        <div class="faq-item">
+          <h3>バーナル近郊のキャンプで焚き火は許可されていますか？</h3>
+          <p>場合によります。すべては現在の焚き火禁止（制限）次第で、これは状況に応じてシーズン中も変わります。乾燥した時期には、機関が野外での焚き火を禁じる措置を出すことが多く、整備されたキャンプ場、分散サイト、管轄によってルールが異なります。焚き火が許可されていると思い込まないでください。火をおこす前に必ず、その正確なエリアの現在の焚き火禁止（制限）を管理機関で確認し、許可されている場所では既存のファイヤーリングのみを使い、火は水をかけて完全に消し止めてください。</p>
+        </div>
+        <div class="faq-item">
+          <h3>恐竜の国へのキャンプ旅行はどう計画すればよいですか？</h3>
+          <p>まず、どんな体験がしたいかを決めてください——水辺、山、化石、それとも気軽な家族の週末か。そのうえで目的に合う目的地を選び、バーナルを買い出しの拠点にします。次にスタイル（RV、テント、分散キャンプ）を決め、夏なら整備されたサイトを早めに予約するか、原始的なキャンプに出るなら分散キャンプのルールを学んでください。現在の料金、設備、季節ごとの開設状況、焚き火禁止（制限）を管理機関で確認し、暑さと寒さの両方を見据えて天気を調べ、高地砂漠から山岳までの幅広いコンディションに備えて荷造りしましょう。</p>
+        </div>
+      </div>
+
+      <div class="article-tip"><strong>出発前に:</strong> 本ガイドのすべての目的地について、キャンプ場の空き状況、予約、料金、電源・水道設備、ダンプステーション、シーズンの開設状況、焚き火禁止（制限）、許可証の要件はU.S. Forest Service、National Park Service、Utah State Parksが定めており、年ごとに変わります。ここに書いたどこでどうキャンプするかという話はシーズンをまたいで変わりませんが、細部は動きます。旅のたびに<strong>公式情報をご確認ください</strong>。</div>
+
+    </div>
+  </main>
+
+  <HubIndex slot="body" collection="camping" heading="キャンプガイド一覧" />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

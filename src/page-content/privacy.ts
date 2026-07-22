@@ -1547,9 +1547,266 @@ const DE = `
 
 `;
 
+const JA = `
+<section class="policy-section">
+    <div class="container">
+        <div class="section-header">
+            <h1 class="section-title">プライバシーポリシー</h1>
+            <p class="section-subtitle">お客様のプライバシーは私たちにとって大切なものです。当社が情報をどのように収集し、利用し、保護しているかをご確認ください。</p>
+            <p class="policy-effective-date">発効日: February 2026</p>
+        </div>
+
+        <div class="policy-container">
+
+            <!-- はじめに -->
+            <div class="policy-card">
+                <div class="policy-icon">🔒</div>
+                <h2 class="policy-heading">プライバシーへの取り組み</h2>
+                <p><strong>adventuretoursvernal.com</strong> からアクセスいただける Adventure Tours Vernal では、訪問者の皆さまのプライバシーを最も重要な事項の一つと考えています。本プライバシーポリシーは、Adventure Tours Vernal が収集し記録する情報の種類と、その利用方法について記載したものです。</p>
+                <p>本プライバシーポリシーについてさらにご質問がある場合、または詳しい情報が必要な場合は、遠慮なく当社までご連絡ください。</p>
+                <div class="policy-note">
+                    <strong>適用範囲:</strong> 本プライバシーポリシーはオンライン上の活動にのみ適用され、共有および／または収集される情報に関して、当社ウェブサイトの訪問者に対して有効です。本ポリシーは、オフラインで収集された情報、または当ウェブサイト以外の経路で収集された情報には適用されません。
+                </div>
+            </div>
+
+            <!-- 同意 -->
+            <div class="policy-card">
+                <div class="policy-icon">✅</div>
+                <h2 class="policy-heading">同意</h2>
+                <p>当社ウェブサイトをご利用いただくことにより、お客様は本プライバシーポリシーに同意し、その条項を承諾したものとみなされます。</p>
+            </div>
+
+            <!-- 当社が収集する情報 -->
+            <div class="policy-card">
+                <div class="policy-icon">📋</div>
+                <h2 class="policy-heading">当社が収集する情報</h2>
+
+                <p>ご提供をお願いする個人情報、およびその提供をお願いする理由については、お客様に個人情報のご提供をお願いする時点で明確にお伝えします。</p>
+
+                <div class="policy-list">
+                    <h3>直接お問い合わせいただく場合:</h3>
+                    <p>お客様が直接お問い合わせくださった場合、当社は次のようなお客様に関する追加情報を受け取ることがあります。</p>
+                    <ul>
+                        <li>お名前</li>
+                        <li>メールアドレス</li>
+                        <li>電話番号</li>
+                        <li>お送りいただくメッセージの内容および／または添付ファイル</li>
+                        <li>その他、お客様がご提供を選ばれた情報</li>
+                    </ul>
+
+                    <h3>ご購入またはご予約をされる場合:</h3>
+                    <p>当社は、次のような連絡先情報をお伺いすることがあります。</p>
+                    <ul>
+                        <li>お名前</li>
+                        <li>会社名（該当する場合）</li>
+                        <li>ご住所</li>
+                        <li>メールアドレス</li>
+                        <li>電話番号</li>
+                        <li>クレジットカード情報（ご購入手続きを完了するため）</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 情報の利用方法 -->
+            <div class="policy-card">
+                <div class="policy-icon">🔧</div>
+                <h2 class="policy-heading">お客様の情報の利用方法</h2>
+
+                <p>当社は、収集した情報を次のようなさまざまな方法で利用します。</p>
+
+                <div class="usage-grid">
+                    <div class="usage-item">
+                        <div class="usage-icon">🌐</div>
+                        <div class="usage-text">
+                            <strong>ウェブサイトの提供と運営</strong>
+                            <p>お客様へのサービスを維持し、提供するため</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">📈</div>
+                        <div class="usage-text">
+                            <strong>改善とパーソナライズ</strong>
+                            <p>お客様の体験を向上させ、サービスを拡充するため</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">📊</div>
+                        <div class="usage-text">
+                            <strong>利用状況の分析</strong>
+                            <p>お客様が当社ウェブサイトをどのようにご利用になるかを把握するため</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">💡</div>
+                        <div class="usage-text">
+                            <strong>新しい機能の開発</strong>
+                            <p>新しい製品、サービス、機能を生み出すため</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">💬</div>
+                        <div class="usage-text">
+                            <strong>お客様とのご連絡</strong>
+                            <p>カスタマーサービス、最新情報、マーケティング</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">📧</div>
+                        <div class="usage-text">
+                            <strong>メールでの最新情報の送信</strong>
+                            <p>宣伝目的および情報提供目的のメッセージ</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">🛡️</div>
+                        <div class="usage-text">
+                            <strong>不正行為の防止</strong>
+                            <p>不正な行為を発見し、防止するため</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ログファイル -->
+            <div class="policy-card">
+                <div class="policy-icon">📁</div>
+                <h2 class="policy-heading">ログファイル</h2>
+
+                <p>Adventure Tours Vernal は、ログファイルを使用するという標準的な手順に従っています。これらのファイルは、訪問者がウェブサイトを訪れた際にその記録を残します。すべてのホスティング会社は、ホスティングサービスの分析機能の一環としてこれを行っています。</p>
+
+                <div class="info-box">
+                    <h3>ログファイルによって収集される情報:</h3>
+                    <div class="info-items">
+                        <span class="info-tag">IPアドレス</span>
+                        <span class="info-tag">ブラウザの種類</span>
+                        <span class="info-tag">インターネットサービスプロバイダ（ISP）</span>
+                        <span class="info-tag">日付と時刻</span>
+                        <span class="info-tag">参照元／離脱ページ</span>
+                        <span class="info-tag">クリック数</span>
+                    </div>
+                </div>
+
+                <p class="policy-disclaimer">これらの情報は、個人を特定できるいかなる情報とも紐づけられていません。この情報の目的は、傾向の分析、サイトの管理、ウェブサイト上でのユーザーの動きの追跡、および人口統計情報の収集です。</p>
+            </div>
+
+            <!-- COOKIE -->
+            <div class="policy-card">
+                <div class="policy-icon">🍪</div>
+                <h2 class="policy-heading">Cookie とウェブビーコン</h2>
+
+                <p>他のウェブサイトと同様に、Adventure Tours Vernal は「Cookie」を使用しています。これらの Cookie は、訪問者の設定や、訪問者がアクセスまたは閲覧したウェブサイト上のページなどの情報を保存するために使用されます。この情報は、訪問者のブラウザの種類および／またはその他の情報に基づいてウェブページの内容をカスタマイズすることで、ユーザーの体験を最適化するために利用されます。</p>
+
+                <div class="policy-warning">
+                    <strong>お客様の選択:</strong> お客様は、ご自身のブラウザの設定から Cookie を無効にすることを選べます。特定のウェブブラウザでの Cookie の管理に関するより詳しい情報は、各ブラウザのウェブサイトでご確認いただけます。
+                </div>
+            </div>
+
+            <!-- CCPA の権利 -->
+            <div class="policy-card">
+                <div class="policy-icon">⚖️</div>
+                <h2 class="policy-heading">CCPA に基づくプライバシーの権利（個人情報を販売しないこと）</h2>
+
+                <p>California Consumer Privacy Act（CCPA、カリフォルニア州消費者プライバシー法）に基づき、カリフォルニア州の消費者には、他の権利に加えて次の権利があります。</p>
+
+                <div class="rights-list">
+                    <div class="right-item">
+                        <div class="right-number">1</div>
+                        <div class="right-content">
+                            <strong>データの開示を請求する権利</strong>
+                            <p>消費者の個人データを収集する事業者に対し、その事業者が消費者について収集した個人データのカテゴリーおよび具体的な項目を開示するよう請求すること。</p>
+                        </div>
+                    </div>
+                    <div class="right-item">
+                        <div class="right-number">2</div>
+                        <div class="right-content">
+                            <strong>データの削除を請求する権利</strong>
+                            <p>事業者に対し、その事業者が収集した消費者に関する個人データを削除するよう請求すること。</p>
+                        </div>
+                    </div>
+                    <div class="right-item">
+                        <div class="right-number">3</div>
+                        <div class="right-content">
+                            <strong>データ販売のオプトアウト</strong>
+                            <p>消費者の個人データを販売する事業者に対し、その消費者の個人データを販売しないよう請求すること。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="policy-note">
+                    <strong>回答までの期間:</strong> お客様からご請求をいただいた場合、当社には回答までに1か月の期間があります。これらの権利のいずれかを行使されたい場合は、当社までご連絡ください。
+                </div>
+            </div>
+
+            <!-- GDPR の権利 -->
+            <div class="policy-card">
+                <div class="policy-icon">🇪🇺</div>
+                <h2 class="policy-heading">GDPR に基づくデータ保護の権利</h2>
+
+                <p>当社は、お客様がご自身のデータ保護に関する権利をすべて十分にご理解いただけるようにしたいと考えています。すべてのユーザーには、次の権利があります。</p>
+
+                <div class="gdpr-rights">
+                    <div class="gdpr-right">
+                        <h3>アクセスの権利</h3>
+                        <p>お客様には、ご自身の個人データの写しを請求する権利があります。当社は、このサービスについて少額の手数料を申し受ける場合があります。</p>
+                    </div>
+                    <div class="gdpr-right">
+                        <h3>訂正の権利</h3>
+                        <p>お客様には、正確でないとお考えの情報を当社が訂正するよう請求する権利があります。また、不完全だとお考えの情報を当社が補完するよう請求する権利もあります。</p>
+                    </div>
+                    <div class="gdpr-right">
+                        <h3>消去の権利</h3>
+                        <p>お客様には、一定の条件の下で、当社がご自身の個人データを消去するよう請求する権利があります。</p>
+                    </div>
+                    <div class="gdpr-right">
+                        <h3>処理の制限を求める権利</h3>
+                        <p>お客様には、一定の条件の下で、当社がご自身の個人データの処理を制限するよう請求する権利があります。</p>
+                    </div>
+                    <div class="gdpr-right">
+                        <h3>処理に異議を唱える権利</h3>
+                        <p>お客様には、一定の条件の下で、当社によるご自身の個人データの処理に異議を唱える権利があります。</p>
+                    </div>
+                    <div class="gdpr-right">
+                        <h3>データポータビリティの権利</h3>
+                        <p>お客様には、一定の条件の下で、当社が収集したデータを他の組織へ、またはお客様ご自身へ直接移転するよう請求する権利があります。</p>
+                    </div>
+                </div>
+
+                <div class="policy-note">
+                    <strong>回答までの期間:</strong> お客様からご請求をいただいた場合、当社には回答までに1か月の期間があります。これらの権利のいずれかを行使されたい場合は、当社までご連絡ください。
+                </div>
+            </div>
+
+            <!-- お子さまに関する情報 -->
+            <div class="policy-card">
+                <div class="policy-icon">👶</div>
+                <h2 class="policy-heading">お子さまに関する情報</h2>
+
+                <p>Adventure Tours Vernal は、13歳未満のお子さまから個人を特定できる情報を故意に収集することはありません。</p>
+
+                <div class="policy-warning">
+                    <strong>⚠️ 重要:</strong> お子さまが当社ウェブサイトでこの種の情報を提供したとお考えの場合は、直ちに当社までご連絡くださいますよう強くお願いいたします。当社は、そのような情報を速やかに記録から削除するよう最善を尽くします。
+                </div>
+            </div>
+
+            <!-- お問い合わせ CTA -->
+            <div class="policy-cta">
+                <h3>プライバシーポリシーについてご質問はありますか。</h3>
+                <p>当社によるお客様のデータの取り扱いについてご質問やご不安がある場合は、遠慮なくご連絡ください。</p>
+                <div class="cta-buttons">
+                    <a href="tel:435-219-9447" class="cta-button primary">📞 (435) 219-9447 に電話する</a>
+                    <a href="mailto:adventuretoursvernal@gmail.com" class="cta-button secondary">✉️ メールでお問い合わせ</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3A, Italian P6,
- * French P8-P6, German P9-P6).
+ * French P8-P6, German P9-P6, Japanese P10K).
  * Every locale without a committed variant falls back to English. Callers
  * that don't need locale awareness keep importing `bodyHtml` directly.
  */
@@ -1559,5 +1816,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
   if (locale === 'de') return DE;
+  if (locale === 'ja') return JA;
   return bodyHtml;
 }

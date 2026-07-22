@@ -1265,6 +1265,216 @@ const DE = `
 </script>
 `;
 
+const JA = `
+
+  <!-- ページ -->
+  <div class="booking-page">
+
+    <!-- ヘッダー -->
+    <div class="page-header">
+      <h1 class="page-title">アドベンチャーをご予約ください</h1>
+      <p class="page-subtitle">すべてのツアーでKawasaki KRX 1000のサイド・バイ・サイドを使用し、地元を知り尽くしたガイドがご案内します — ご予約時にお好きなトレイルをお選びください！</p>
+      <div style="text-align:center;margin-top:12px;"><span style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border:1px solid rgba(212,118,78,0.35);border-radius:999px;background:rgba(212,118,78,0.08);font-size:0.95rem;color:#4a4139;"><span aria-hidden="true" style="color:#e6a817;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count}件のGoogleレビュー</span></span></div>
+      <div class="calendar-badge">
+        📅 リアルタイムカレンダー &bull; 即時予約 &bull; 空き時間を確認
+      </div>
+
+      <!-- CAL.COM インライン埋め込み -->
+<div id="cal-booking-inline" style="width:100%; min-height:700px; margin-top:30px; border-radius:12px; overflow:hidden;"></div>
+    </div>
+
+    <!-- トレイルのセクション -->
+    <section class="tours-section">
+      <div class="section-intro">
+        <h2>探索できる5つのトレイル</h2>
+        <p>下のトレイルをご覧いただき、<strong>「アドベンチャーをご予約ください」</strong>から日付・時間・トレイルをまとめてお選びください。</p>
+      </div>
+
+      <p style="max-width:820px;margin:1rem auto 0;padding:0 1rem;text-align:center;line-height:1.7;">下のどのトレイルをお選びいただいても、ガイド付きツアーはすべてバーナルの同じ集合場所から出発します。この図は、ご予約時にお選びいただける5つのトレイルシステムを示しています。</p>
+
+      <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+        <img src="/images/maps/vernal-utv-trail-systems.svg" alt="Vernal, Utah周辺でゲストがお選びいただける5つのUTVトレイルシステム — Doc's Beach、Moonshine Arch、Ashley Gorge、Asphalt Ridge、Outlaw Trail — を示す予約用の概略図。すべてのツアーが始まるVernalの唯一の集合場所から放射状に伸びる、ラベル付きの線としてそれぞれを表示しています。縮尺は正確ではありません。ルート、距離、方角、トレイルヘッドは示していません。" width="1600" height="1200" loading="lazy" decoding="async" />
+        <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">ご予約時に5つのトレイルシステムのいずれかをお選びください — すべてのツアーはVernalの1か所の集合場所から出発します。概略図のみで、縮尺は正確ではありません。</figcaption>
+      </figure>
+
+      <div class="tours-grid">
+
+        <!-- Doc's Beach -->
+        <div class="tour-card">
+          <div class="tour-image" style="background-image: url('/images/Docs Beach.webp');">
+            <span class="difficulty-badge trail-badge">Doc's Beach</span>
+          </div>
+          <div class="tour-content">
+            <h3 class="tour-title">Doc's Beach</h3>
+            <p class="tour-description">バーナルで最も愛されている川沿いの目的地のひとつまで下っていきます。砂地の砂漠のワッシュ、開けた地形、そしてGreen River沿いの見事な眺めが、あらゆるスキルレベルの方に人気の理由です。</p>
+            <div class="tour-details">
+              <div class="tour-detail">
+                <span class="tour-detail-icon">📍</span>
+                <span>Green Riverエリア</span>
+              </div>
+              <div class="tour-detail">
+                <span class="tour-detail-icon">⭐</span>
+                <span>あらゆるスキルレベル</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Moonshine Arch -->
+        <div class="tour-card">
+          <div class="tour-image" style="background-image: url('/images/Moonshine Arch.webp');">
+            <span class="difficulty-badge trail-badge">Moonshine Arch</span>
+          </div>
+          <div class="tour-content">
+            <h3 class="tour-title">Moonshine Arch</h3>
+            <p class="tour-description">荒々しい赤い岩のキャニオンを縫うように進み、バックカントリーの奥深くに隠れた見事な天然の砂岩アーチへ向かいます。ユタ州で最も有名な国立公園にも引けを取らない景観を持ちながら、混雑とは無縁の忘れられない目的地です。</p>
+            <div class="tour-details">
+              <div class="tour-detail">
+                <span class="tour-detail-icon">📍</span>
+                <span>レッドロックキャニオン</span>
+              </div>
+              <div class="tour-detail">
+                <span class="tour-detail-icon">⭐</span>
+                <span>景観 &amp; 歴史</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ashley Gorge -->
+        <div class="tour-card">
+          <div class="tour-image" style="background-image: url('/images/50a.webp');">
+            <span class="difficulty-badge trail-badge">Ashley Gorge</span>
+          </div>
+          <div class="tour-content">
+            <h3 class="tour-title">Ashley Gorge</h3>
+            <p class="tour-description">そびえ立つ砂岩の壁が曲がりくねった川の谷を縁取る、迫力あるAshley Gorgeのキャニオン地帯へと下っていきます。Uintah Basin全体でも屈指の、目を見張るライドです。</p>
+            <div class="tour-details">
+              <div class="tour-detail">
+                <span class="tour-detail-icon">📍</span>
+                <span>Ashley National Forest</span>
+              </div>
+              <div class="tour-detail">
+                <span class="tour-detail-icon">⭐</span>
+                <span>キャニオンアドベンチャー</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Outlaw Trail -->
+        <div class="tour-card">
+          <div class="tour-image" style="background-image: url('/images/51a.webp');">
+            <span class="difficulty-badge trail-badge">Outlaw Trail</span>
+          </div>
+          <div class="tour-content">
+            <h3 class="tour-title">Outlaw Trail</h3>
+            <p class="tour-description">かつてButch Cassidyとthe Wild Bunchが使ったルートを走ります。この歴史あるバックカントリートレイルは、無法者たちがかつて荒野へと姿を消したキャニオン地帯と、広々とした高地砂漠の台地を貫いています。</p>
+            <div class="tour-details">
+              <div class="tour-detail">
+                <span class="tour-detail-icon">📍</span>
+                <span>キャニオンカントリー</span>
+              </div>
+              <div class="tour-detail">
+                <span class="tour-detail-icon">⭐</span>
+                <span>歴史あるルート</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Asphalt Ridge -->
+        <div class="tour-card">
+          <div class="tour-image" style="background-image: url('/images/52a.webp');">
+            <span class="difficulty-badge trail-badge">Asphalt Ridge</span>
+          </div>
+          <div class="tour-content">
+            <h3 class="tour-title">Asphalt Ridge</h3>
+            <p class="tour-description">Asphalt Ridgeの頂上まで登り、Dinosaur Country、Uintah Mountains、そして眼下に広がる広大な高地砂漠の360度の眺望を楽しみます。バーナル周辺で味わえる、尾根の上での究極のUTV体験です。</p>
+            <div class="tour-details">
+              <div class="tour-detail">
+                <span class="tour-detail-icon">📍</span>
+                <span>Uintah Basinの尾根</span>
+              </div>
+              <div class="tour-detail">
+                <span class="tour-detail-icon">⭐</span>
+                <span>パノラマの眺め</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    <div style="text-align:center; margin-top:50px; padding:20px 0;">
+      <p style="font-size:1.05rem; color:#666; font-family:var(--font-body);">上のカレンダーから、日付とトレイルをお選びください。</p>
+    </div>
+
+    </section>
+
+    <!-- ヘルプのセクション -->
+    <section class="help-section">
+      <h3>ご予約でお困りですか？</h3>
+      <p>お電話ください。ぴったりのトレイル選びと、ご都合の良い時間探しを私たちが直接お手伝いします。</p>
+      <a href="tel:435-219-9447" class="phone-cta">(435) 219-9447</a>
+      <p class="hours">年中無休 &bull; 7am – 7pm マウンテンタイム</p>
+    </section>
+
+  </div>
+
+  <!-- モバイル固定CTA -->
+  <div class="mobile-sticky-cta">
+    <button onclick="window.open('https://cal.com/adventuretoursvernal/trails', '_blank')">今すぐツアーを予約する</button>
+  </div>
+
+  <!-- Cal.com インライン埋め込みスクリプト -->
+<script is:inline type="text/javascript">
+  (function (C, A, L) {
+    let p = function (a, ar) { a.q.push(ar); };
+    let d = C.document;
+    C.Cal = C.Cal || function () {
+      let cal = C.Cal; let ar = arguments;
+      if (!cal.loaded) {
+        cal.ns = {}; cal.q = cal.q || [];
+        d.head.appendChild(d.createElement("script")).src = A;
+        cal.loaded = true;
+      }
+      if (ar[0] === L) {
+        const api = function () { p(api, arguments); };
+        const namespace = ar[1];
+        api.q = api.q || [];
+        if (typeof namespace === "string") {
+          cal.ns[namespace] = cal.ns[namespace] || api;
+          p(cal.ns[namespace], ar);
+          p(cal, [L, namespace, ar[2]]);
+        } else p(cal, ar);
+        return;
+      }
+      p(cal, ar);
+    };
+  })(window, "https://app.cal.com/embed/embed.js", "init");
+
+  Cal("init", { origin: "https://cal.com" });
+
+  Cal("inline", {
+  elementOrSelector: "#cal-booking-inline",
+  calLink: "adventuretoursvernal/trails",
+  layout: "month_view",
+  config: {
+    duration: 180,
+    overlayCalendar: true
+  }
+});
+
+  Cal("ui", {
+    theme: "light",
+    styles: { branding: { brandColor: "#d4764e" } },
+    hideEventTypeDetails: false,
+    layout: "month_view"
+  });
+</script>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3A). Every
  * locale without a committed variant falls back to English. Callers that
@@ -1276,5 +1486,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
   if (locale === 'de') return DE;
+  if (locale === 'ja') return JA;
   return bodyHtml;
 }

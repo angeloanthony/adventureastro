@@ -763,9 +763,132 @@ const DE: Dict = {
   'hub.guides': 'Guides',
 };
 
-// One entry per locale. es (P3A), it (P6), pt (P7A), fr (P8-P6), and de
-// (P9-inline) are all real dictionaries now — every registered locale has a
-// translated UI chrome.
+// Japanese chrome dictionary (P10K). Polite です・ます register, matching the
+// locked register of the 57 ja MDX spokes. Keys mirror EN 1:1. Official park
+// names ("Dinosaur National Monument" / "Dinosaur Monument") stay English,
+// matching the IT/PT/FR/DE precedent. Every term here reuses a phrase already
+// locked during the P10 MDX batches rather than inventing a new one:
+// "Key Takeaways" → 要点まとめ, "Dinosaur Country" → 恐竜の国, "scenic drives"
+// → 絶景ドライブ, hiking → ハイキング, camping → キャンプ, fishing → 釣り,
+// trail → トレイル, backcountry → バックカントリー, petroglyphs → 岩絵.
+const JA: Dict = {
+  'nav.home': 'ホーム',
+  'nav.about': '私たちについて',
+  'nav.trails': 'トレイル',
+  'nav.thingsToDo': '楽しみ方',
+  'nav.dinosaurMonument': 'Dinosaur Monument',
+  'nav.guides': 'ガイド',
+  'nav.food': 'レストラン',
+  'nav.info': 'ご案内',
+  'nav.cancellationPolicy': 'キャンセルポリシー',
+  'nav.privacyPolicy': 'プライバシーポリシー',
+  'nav.faq': 'よくあるご質問',
+  'nav.safetyGuidelines': '安全ガイドライン',
+  'nav.whatToBring': '持ち物',
+  'nav.itineraries': '旅程',
+
+  'cta.bookNow': '今すぐ予約',
+  'cta.bookYourAdventure': '冒険を予約する',
+
+  'a11y.toggleMenu': 'メニューの開閉',
+  'a11y.breadcrumb': 'パンくずリスト',
+  'a11y.relatedArticles': '関連記事',
+  'a11y.allArticlesInHub': 'このハブのすべての記事',
+  'a11y.keyTakeaways': '要点まとめ',
+  'a11y.relatedGuides': '関連ガイド',
+
+  'section.faq': 'よくあるご質問',
+  'section.exploreThisHub': 'このハブを見る',
+  'section.youMightAlsoLike': 'こちらもおすすめ',
+  'section.keyTakeaways': '要点まとめ',
+  'section.exploreVernal': 'バーナルを知る',
+  'section.moreVernalGuides': 'バーナルのガイドをもっと見る',
+
+  'footer.tagline': 'ユタ州の恐竜の国で、一生に一度の冒険を。',
+  'footer.ourTrails': 'トレイル一覧',
+  'footer.information': 'ご案内',
+  'footer.contactInfo': 'お問い合わせ',
+  'footer.copyrightSuffix': ' - 無断転載を禁じます。',
+  'footer.link.utvTrailsTours': 'UTVトレイルとツアー',
+  'footer.link.thingsToDo': '楽しみ方',
+  'footer.link.dinosaurNationalMonument': 'Dinosaur National Monument',
+  'footer.link.guides': 'ガイド',
+  'footer.link.visitingFromSLC': 'Salt Lake Cityからお越しの方',
+  'footer.quickLinks': 'クイックリンク',
+  'footer.link.ourTours': 'ツアー一覧',
+  'footer.link.ourFleet': '車両紹介',
+  'footer.link.photoGallery': 'フォトギャラリー',
+
+  'tour.value.family': '多くのご家族が、バーナルの旅をこれで締めくくります。',
+  'tour.value.adventure': 'Kawasaki KRX 1000で行く、恐竜の国のガイド付きツアー。',
+  'tour.value.sunset': '黄金の光のトレイル、岩絵、そしてバックカントリーの展望ポイント。',
+  'tour.value.generic': '恐竜の国を巡るガイド付きUTVツアー。',
+  'tour.callForPricing': '料金はお電話で',
+  'tour.threeHours': '3時間',
+  'tour.upToRiders': '最大{n}名まで',
+
+  'reviews.googleReviews': 'Googleレビュー',
+  'reviews.ratedAria': 'Googleレビュー{count}件で、5段階中{value}の評価',
+
+  'author.writtenBy': '執筆',
+  'author.updated': '更新',
+  'author.areasOfExpertise': '専門分野',
+  'author.credentials': '経歴と実績',
+  'author.aboutBusiness': 'Adventure Tours Vernalについて',
+  'author.articlesBy': '{name}の記事',
+
+  'time.morning': '午前',
+  'time.lunch': '昼食',
+  'time.afternoon': '午後',
+  'time.dinner': '夕食',
+  'time.evening': '夕方',
+  'itinerary.weatherBackup': '悪天候時の代替プラン',
+
+  'gateway.heading': '遠方からお越しですか。まずは玄関口のルートから。',
+  'gateway.note.saltLakeCity': 'Uintasを越える、定番の約3時間の道のり。',
+  'gateway.note.denver': 'Rocky Mountainsを西へ、半日がかりのロードトリップ。',
+  'gateway.note.grandJunction': 'コロラド側から最も近い玄関口。',
+  'gateway.seeAllItineraries': 'バーナルの旅程をすべて見る',
+
+  'decision.heading': 'どのツアーか迷ったら、ここから。',
+  'decision.intro': '何を大切にされたいかをお聞かせください。ぴったりのガイドをご案内します。',
+  'decision.q.firstTime': '初めてのご乗車ですか。',
+  'decision.a.firstTime': '初心者向けガイドから始める',
+  'decision.q.children': 'お子さま連れですか。',
+  'decision.a.children': 'ファミリー向けUTVガイドを見る',
+  'decision.q.couple': 'カップルでのご旅行ですか。',
+  'decision.a.couple': '二人だけのプライベートツアーを予約する',
+  'decision.q.scenery': '景色を楽しみたいですか。',
+  'decision.a.scenery': '最も景観の良いトレイルを比べる',
+  'decision.q.history': '歴史に触れたいですか。',
+  'decision.a.history': '岩絵とロックアートを訪ねる',
+  'decision.q.adventure': '冒険を最大限に味わいたいですか。',
+  'decision.a.adventure': 'バックカントリーツアーで奥地へ',
+  'decision.q.shortTime': 'お時間が限られていますか。',
+  'decision.a.shortTime': '次の3時間ツアーを予約する',
+  'decision.q.group': '大人数のグループですか。',
+  'decision.a.group': 'グループツアーを計画する',
+
+  'city.driveTime': '所要時間',
+  'city.distance': '距離',
+  'city.route': 'ルート',
+  'city.nearestAirport': '最寄りの空港',
+
+  'hub.utv': 'UTVトレイルとツアー',
+  'hub.atv': 'ATVトレイル',
+  'hub.jeep': 'Jeepトレイル',
+  'hub.dinosaur-national-monument': 'Dinosaur National Monument',
+  'hub.things-to-do': 'バーナルの楽しみ方',
+  'hub.hiking': 'ハイキング',
+  'hub.camping': 'キャンプ',
+  'hub.fishing': '釣り',
+  'hub.scenic-drives': '絶景ドライブ',
+  'hub.guides': 'ガイド',
+};
+
+// One entry per locale. es (P3A), it (P6), pt (P7A), fr (P8-P6), de
+// (P9-inline), and ja (P10K) are all real dictionaries now — every registered
+// locale has a translated UI chrome.
 const UI_STRINGS: Partial<Record<Locale, Dict>> = {
   en: EN,
   es: ES,
@@ -773,6 +896,7 @@ const UI_STRINGS: Partial<Record<Locale, Dict>> = {
   pt: PT,
   fr: FR,
   de: DE,
+  ja: JA,
 };
 
 /**

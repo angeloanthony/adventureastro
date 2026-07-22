@@ -1,0 +1,37 @@
+---
+// ja/dinosaur-national-monument/index.astro — Japanese DNM hub pillar
+// (P10K Japanese inline batch, mirrors German P9 / src/pages/de/dinosaur-national-monument/index.astro).
+// Japanese spoke articles for this hub already exist (visiting-dinosaur-national-monument,
+// petroglyphs-rock-art-vernal — see JA_SLUGS in src/lib/i18n.ts), so HubIndex renders
+// Japanese titles/links directly, matching the German/French/Portuguese/Italian/Spanish rollout pattern.
+import { getBodyHtml } from '../../../page-content/dnm';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE } from '../../../config/site';
+import Header from '../../../components/layout/Header.astro';
+import Footer from '../../../components/layout/Footer.astro';
+import Seo from '../../../components/seo/Seo.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import HubIndex from '../../../components/content/HubIndex.astro';
+import { getLangFromUrl } from '../../../lib/i18n';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Dinosaur National Monument近郊のUTVツアー","description":"ユタ州バーナル、Dinosaur National Monumentを取り巻くバックカントリーを巡るガイド付きUTVツアー。","author":{"@type":"Organization","name":"Adventure Tours Vernal"},"publisher":{"@type":"Organization","name":"Adventure Tours Vernal","logo":{"@type":"ImageObject","url":"https://adventuretoursvernal.com/images/logo.webp"}},"datePublished":"2026-04-08","dateModified":"2026-04-08","mainEntityOfPage":"https://adventuretoursvernal.com/ja/dinosaur-national-monument/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Dinosaur National Monumentの近くでUTVツアーはできますか？","acceptedAnswer":{"@type":"Answer","text":"はい。Adventure Tours Vernalは、国定公園を取り巻くバックカントリーを巡るKawasaki KRX 1000のガイド付きツアーをご提供しています。国定公園の中では動力車両の乗り入れが認められていませんが、すぐ外側のトレイルでは、同じ峡谷の地形、岩絵、地質の造形をご覧いただけます。"}},{"@type":"Question","name":"Adventure Tours VernalからDinosaur National Monumentまでどのくらいですか？","acceptedAnswer":{"@type":"Answer","text":"Adventure Tours Vernalの拠点はユタ州バーナルで、国定公園のQuarry Exhibit Hallから西へおよそ20分です。多くの方が同じ旅程でUTVツアーと国定公園の見学を組み合わせています。"}},{"@type":"Question","name":"UTVツアーとDinosaur National Monumentを組み合わせる一番よい方法は？","acceptedAnswer":{"@type":"Answer","text":"UTVツアーを午前に予約して午後に国定公園を見学するか、その逆にしてください。3時間のガイド付きUTVツアーに国定公園での半日を足せば、峡谷の国を味わうまる一日の冒険になります。"}}]}]}`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Dinosaur National Monument近郊のUTVツアー｜Adventure Tours"
+      description="ユタ州バーナルのDinosaur National Monument近郊で楽しむガイド付きUTVツアー。国定公園からわずか数分のバックカントリーで、峡谷、古代の岩絵、砂漠の地形を巡ります。Kawasaki KRX 1000で3時間、1台$349。今すぐご予約ください。"
+      path="/ja/dinosaur-national-monument/"
+      type="article"
+      ogTitle="Dinosaur National Monument近郊のUTVツアー"
+      ogDescription="Dinosaur National Monumentを取り巻くバックカントリーを巡る、Kawasaki KRX 1000のガイド付きツアー——峡谷、岩絵、そして砂漠の冒険。"
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="dinosaur-national-monument" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Dinosaur Monumentツアー' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <HubIndex slot="body" collection="dinosaur-national-monument" heading="Dinosaur Monumentガイド一覧" />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

@@ -158,8 +158,41 @@ follows this pipeline with no special-casing unless a genuine bug forces a fix
    (`src/pages/<locale>/<page>.astro`) — there is no shared/dynamic route for
    these pages. Brief both halves explicitly (see the PT_P6 lesson below — a
    brief that only asks for the content block silently ships ~90 broken links).
+
+   **Gate 4a — UI-chrome parity (BLOCKING).** *A locale is not complete until its
+   UI chrome matches a finished locale with zero unintended English fallbacks.*
+   `t()` fails soft by design: a missing key silently returns the English master,
+   so the pages render, the build passes, the validator passes, and the locale
+   ships looking finished while every nav label, button, and breadcrumb is in
+   English. Nothing in the pipeline catches this — only a key-set diff does.
+   Before declaring any locale done, diff `UI_STRINGS.<locale>`'s key set against
+   a **finished** locale's (not against `EN` — `EN` is the fallback, so a
+   locale with an empty dictionary trivially "matches" at render time), and
+   confirm every key present, every value actually translated, and no value left
+   identical to its English string unless that string is a frozen proper noun.
+   Discovered 2026-07-22: all 57 Japanese MDX spokes shipped and passed every
+   build/validator/audit gate while rendering **100% English chrome**, because
+   `ui.ts` had no `ja` dictionary. Add the key-set diff to stage 5, and run it
+   the moment the first page of a new locale lands, not at the end.
+
+   **Gate 4b — dependency-root ordering (BLOCKING).** *Translate dependency roots
+   before dependents. Never create an internal link to a locale route that does
+   not yet exist.* The `page-content/*.ts` blocks and inline hub pillars hardcode
+   `/<locale>/` link prefixes in raw HTML — they do **not** route through the
+   existence-aware `localeHref()`, so a link written ahead of its target is a hard
+   validator failure (`broken link:`), not a graceful English fallback. When the
+   20 inline pages are split across parallel batches, fix the order —
+   commercial/core (booking first) → UTV + DNM pillars → the 7 activity hubs →
+   gateway/legacy/restaurant — and give every batch an explicit allow-list of the
+   `/<locale>/` routes that are live *for that batch*. Anything not on the list
+   keeps its English path, and a central link-upgrade pass re-prefixes those
+   fallbacks once the final batch lands. Two-segment paths are not a reliable
+   "is a spoke" test: `/from/salt-lake-city/` and
+   `/things-to-do/best-restaurants-vernal-utah/` are inline pages, not spokes —
+   name them explicitly in every batch brief.
 5. **Runtime verification.** Verify in the actual built `dist/` output, not source:
-   hreflang reciprocity (full alternate set + x-default, on both the new locale's
+   the Gate 4a UI-chrome key-set diff, hreflang reciprocity (full alternate set +
+   x-default, on both the new locale's
    pages and the English pages that should now list it), breadcrumb resolution
    (existence-aware fallback firing correctly), `og:locale`/`inLanguage`, sitemap
    coverage, language-switcher correctness, and a cross-locale internal-link-set

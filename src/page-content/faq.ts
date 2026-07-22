@@ -1952,6 +1952,329 @@ document.addEventListener('DOMContentLoaded', function() {
 
 `;
 
+const JA = `
+
+<!-- ================================================
+     ページ要約ブロック — Google AI Overviews 向け
+     ================================================ -->
+<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+  Adventure Tours Vernalが、ユタ州バーナルのガイド付きUTVツアーについてよくあるご質問にお答えします。料金、年齢制限、持ち物、天候時の対応、グループツアー、ツアーの選択肢などを扱っています。年中無休、午前7時〜午後7時営業。お電話は(435) 219-9447まで。
+</p>
+
+<section id="faq" class="faq-section">
+  <div class="faq-watermark">INTEL</div>
+
+  <div class="container">
+    <div class="section-header">
+      <span class="status-badge">ミッション準備</span>
+      <h1 class="section-title" style="font-size:clamp(1.8rem,3.5vw,2.8rem);">UTVツアーのよくあるご質問 — Adventure Tours Vernal</h1>
+      <p class="section-subtitle">ユタ州のバックカントリーへ出発する前に、知っておきたい情報をひととおり押さえておきましょう。</p>
+      <p style="display:inline-flex;align-items:center;gap:8px;margin:14px auto 0;padding:7px 15px;border:1px solid rgba(212,118,78,0.5);border-radius:999px;background:#ffffff;box-shadow:0 1px 4px rgba(0,0,0,0.08);font-size:0.95rem;color:#4a4139;"><span aria-hidden="true" style="color:#e6a817;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count}件のGoogleレビュー</span></p>
+    </div>
+
+    <div class="faq-container">
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq1" class="faq-toggle">
+        <label for="faq1" class="faq-question">
+          <span class="faq-index">01</span> 自分のマシンを持ち込めますか？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p><strong>もちろんです！</strong> ご自分のマシンをお持ち込みいただくと、よりご希望に沿った、さらには過激なライドも可能になります。オンラインでのご予約もできますが、マシンの持ち込みやカスタムライドをご希望の場合は、まずお電話かメールでどのような走りをしたいかをお聞かせいただくのが一番です。</p>
+            <p>トランシーバーをお貸しし、皆さまが快適に、そして思いきり楽しめるよう全力を尽くします。トレイルのより「ハードコア」な区間では、より易しい迂回ルートも喜んでご案内します。私たちはこのエリアを知り尽くしていること、そして楽しみ方が何通りもあることを誇りにしています。</p>
+            <p>ツアーガイドには何でも遠慮なくお伝えください。トレイルのある区間を走ることに不安を感じたら、どうぞそうおっしゃってください。安全が最優先事項の1番で、その次に大切なのが楽しむことです。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq2" class="faq-toggle">
+        <label for="faq2" class="faq-question">
+          <span class="faq-index">02</span> グループで参加できますか？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>もちろんです。グループツアーについてはぜひご連絡ください。人数と、ご覧になりたいものをお知らせください。ご用意している選択肢は数多くありますので、立ち寄って見学したい追加のスポット、レストランやホテルの宿泊、バー、ナイトライフ、お子さま向けのアクティビティなど、グループのご要望について一緒に検討できます。美しいUintah Basinへのご滞在中、皆さまのグループアクティビティの一員になれましたら嬉しく思います。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq3" class="faq-toggle">
+        <label for="faq3" class="faq-question">
+          <span class="faq-index">03</span> 天候はどうなりますか？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>晴れでも雨でもツアーは催行します。ただし、荒天の場合や、その他予期せぬ事情により中止せざるを得ない場合は、日程の変更または全額返金をお選びいただけます。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq4" class="faq-toggle">
+        <label for="faq4" class="faq-question">
+          <span class="faq-index">04</span> 何を持っていけばよいですか？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>数時間屋外で過ごしますので、ご自身の判断で必要なものをご用意ください。どのツアーでも、非常用のトイレットペーパーやその他の必需品はできる限り常備しています。とはいえ、必要になりそうだと思うものは、お持ちいただくのが一番です。日焼け止め、虫よけスプレー、リップクリームは決して無駄になりません。</p>
+            <p><strong>サングラス、帽子、カメラ、ジャケット、つま先の覆われた靴</strong>のご持参をおすすめします。必須ではありません（とはいえ、持っていて使わないほうが安心ですよね）。気温が変動することがありますので、重ね着できる服装もよいでしょう。水と軽いスナックは無料でご用意しています。アレルギーのある方は、ご自身の食事制限に合ったものをお持ちいただくことをおすすめします。サイドバイサイドの後部に積めるスペースには限りがありますので、何を持っていくか迷われたら、お気軽にお尋ねください。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq5" class="faq-toggle">
+        <label for="faq5" class="faq-question">
+          <span class="faq-index">05</span> 集合場所には何時に着けばよいですか？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>すべてのツアーで、出発時刻の<strong>30分前</strong>にはお越しください。ご予約のツアー時刻が、実際の出発時刻です。安全講習がすべて終わり、車両に慣れていただくまでは出発しません。出発前に、免責同意書やギアの選定など、オリエンテーションと安全対策のすべてを確認します。</p>
+            <p>ご予約が完了しますと、お選びいただいたツアーに関する重要な情報を記載した確認メールが届きます。よくお読みになり、内容に従ってください。オリエンテーション開始時に、手続きがすべて済みギアの選定も終えた状態でその場にいらっしゃらない場合、ツアーの参加枠を失うことがあり、その場合は返金いたしかねます。スクールバスに乗るのと同じで、決められた時刻にその場にいなければ、置いていかれてしまいます。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq6" class="faq-toggle">
+        <label for="faq6" class="faq-question">
+          <span class="faq-index">06</span> 年齢制限はありますか？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>当社のマシンを運転するには、<strong>18歳以上</strong>である必要があります。当社のマシンに同乗するには、<strong>2歳以上</strong>である必要があります。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq7" class="faq-toggle">
+        <label for="faq7" class="faq-question">
+          <span class="faq-index">07</span> キャンセルとデポジットについて
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>キャンセルポリシーの全文は<a href="/ja/cancellation-policy/" class="faq-link">こちら</a>をご覧ください。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq8" class="faq-toggle">
+        <label for="faq8" class="faq-question">
+          <span class="faq-index">08</span> ATVツアーの料金はいくらですか？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Kawasaki KRX 1000のサイドバイサイドで走る、ガイド付き3時間ツアーを1種類ご用意しています。</p>
+            <ul>
+              <li><strong>1台あたり$349</strong> — 最大2名まで乗車できます</li>
+              <li><strong>同乗$125</strong> — ガイドの車両に3人目を同乗者として追加できます</li>
+              <li><strong>1時間あたり$99</strong> — 1台につき、ツアーの延長料金です</li>
+            </ul>
+            <p>最少催行人数は3名で、最大12名（6台）までのグループを歓迎します。<strong>空き状況は<a href="tel:435-219-9447" class="faq-link">(435) 219-9447</a>までお電話でお問い合わせください。</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq9" class="faq-toggle">
+        <label for="faq9" class="faq-question">
+          <span class="faq-index">09</span> ATVの経験は必要ですか？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p><strong>ATVの経験は一切必要ありません。</strong> Adventure Tours Vernalはまったくの初心者の方も歓迎しており、すべてのツアーの前に安全講習を一通り行います。</p>
+            <p>経験豊富なガイドが、Kawasaki KRX 1000のサイドバイサイドの操作を一つひとつ手ほどきします。初めての方からベテランライダーまで、あらゆるレベルの方を歓迎します。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq10" class="faq-toggle">
+        <label for="faq10" class="faq-question">
+          <span class="faq-index">10</span> Dinosaur National Monumentを訪れることはできますか？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p><strong>はい！</strong> ガイド付きの<strong>3時間UTVツアー</strong>では、Dinosaur National Monument近くのバックカントリートレイルを走り、古代の岩層や岩絵を巡ります。</p>
+            <p>モニュメントで有名な恐竜の骨の壁は、National Park Serviceが管理する別の施設です。午前中をモニュメントで過ごし、午後は周辺のDinosaur Countryのバックカントリーを走るUTVツアーに参加される方が多くいらっしゃいます。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq11" class="faq-toggle">
+        <label for="faq11" class="faq-question">
+          <span class="faq-index">11</span> なぜAdventure Tours Vernalなのですか？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Adventure Tours Vernalは、<strong>ユタ州バーナルで唯一の、Kawasaki KRX 1000によるガイド付きツアー会社です。</strong> 次のような場所へ、独占的にご案内します。</p>
+            <ul>
+              <li>地元の人しか知らない隠れたトレイル</li>
+              <li>古代の岩絵とロックアート</li>
+              <li>Butch Cassidyの隠れ家</li>
+              <li>景観の美しいアーチや岩層</li>
+            </ul>
+            <p>地元を知り尽くしたガイド、プロ仕様の安全装備、そしてあらゆるレベルの方を歓迎します。<strong>年中無休、午前7時〜午後7時営業。</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq12" class="faq-toggle">
+        <label for="faq12" class="faq-question">
+          <span class="faq-index">12</span> ツアーの所要時間はどのくらいですか？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>標準のガイド付きツアーの所要時間は約<strong>3時間</strong>で、グループや経験レベルに合わせて5つのトレイルシステムからお選びいただけます。</p>
+            <ul>
+              <li><strong>Doc's Beach</strong>、<strong>Moonshine Arch</strong>、<strong>Ashley Gorge</strong>、<strong>Outlaw Trail</strong>、<strong>Asphalt Ridge</strong></li>
+              <li>トレイルシステムはご予約時にお選びいただきます</li>
+              <li>もっと走りたい方は、1台1時間あたり$99で延長できます</li>
+            </ul>
+            <p>すべてのツアーに、安全装備、講習、水、スナックが含まれます。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq13" class="faq-toggle">
+        <label for="faq13" class="faq-question">
+          <span class="faq-index">13</span> ファミリー向けのツアーですか？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p><strong>もちろんです！</strong> ガイド付きツアーは、お子さま連れのご家族にぴったりです。特長は次のとおりです。</p>
+            <ul>
+              <li>緩やかな地形の走りやすいトレイル</li>
+              <li>息をのむような砂漠の眺望</li>
+              <li>写真撮影にぴったりのスポット</li>
+              <li>2人乗りのサイドバイサイド。ご家族は複数台をご予約いただき、一緒に走ります</li>
+            </ul>
+            <p>経験は不要です。安全講習を一通り行います。同乗者としてご参加いただくには、お子さまは2歳以上である必要があります。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq14" class="faq-toggle">
+        <label for="faq14" class="faq-question">
+          <span class="faq-index">14</span> 営業時間を教えてください
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Adventure Tours Vernalは、Mountain Timeで<strong>毎日午前7:00から午後7:00まで</strong>、週7日営業しています。</p>
+            <p>ATVツアーのご予約は<strong><a href="tel:435-219-9447" class="faq-link">(435) 219-9447</a>までお電話</strong>いただくか、<a href="https://adventuretoursvernal.com" class="faq-link">adventuretoursvernal.com</a>をご覧ください。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq15" class="faq-toggle">
+        <label for="faq15" class="faq-question">
+          <span class="faq-index">15</span> どのようなツアーがありますか？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Adventure Tours Vernalでは、Kawasaki KRX 1000のサイドバイサイドで走るガイド付き3時間ツアーを1種類ご用意しており、ご予約時に5つのトレイルシステムからお選びいただけます。</p>
+            <ul>
+              <li>Doc's Beach</li>
+              <li>Moonshine Arch</li>
+              <li>Ashley Gorge</li>
+              <li>Outlaw Trail</li>
+              <li>Asphalt Ridge</li>
+            </ul>
+            <p>すべてのツアーに、Kawasaki KRX 1000のサイドバイサイド、地元を知り尽くしたガイド、安全装備、講習、水、スナックが含まれます。</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end .faq-container -->
+  </div>
+</section>
+
+<!-- モバイル用の固定CTAボタン -->
+<div class="mobile-sticky-cta">
+  <button onclick="location.href='/ja/booking/'">今すぐツアーを予約</button>
+</div>
+
+<script is:inline>
+document.addEventListener('DOMContentLoaded', function() {
+
+  // Auto-close other FAQs when one opens
+  const faqToggles = document.querySelectorAll('.faq-toggle');
+  faqToggles.forEach(toggle => {
+    toggle.addEventListener('change', function() {
+      if (this.checked) {
+        faqToggles.forEach(otherToggle => {
+          if (otherToggle !== this && otherToggle.checked) {
+            otherToggle.checked = false;
+          }
+        });
+        setTimeout(() => {
+          this.parentElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 300);
+      }
+    });
+  });
+
+  // Keyboard navigation
+  const faqQuestions = document.querySelectorAll('.faq-question');
+  faqQuestions.forEach((question, index) => {
+    question.setAttribute('tabindex', '0');
+    question.setAttribute('role', 'button');
+    question.setAttribute('aria-expanded', 'false');
+    question.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const checkbox = this.previousElementSibling;
+        checkbox.checked = !checkbox.checked;
+        this.setAttribute('aria-expanded', checkbox.checked);
+        checkbox.dispatchEvent(new Event('change'));
+      }
+      if (e.key === 'ArrowDown') { e.preventDefault(); if (faqQuestions[index + 1]) faqQuestions[index + 1].focus(); }
+      if (e.key === 'ArrowUp') { e.preventDefault(); if (faqQuestions[index - 1]) faqQuestions[index - 1].focus(); }
+    });
+    question.addEventListener('click', function() {
+      const checkbox = this.previousElementSibling;
+      setTimeout(() => { this.setAttribute('aria-expanded', checkbox.checked); }, 10);
+    });
+  });
+
+  // URL hash linking
+  if (window.location.hash) {
+    const targetId = window.location.hash.substring(1);
+    const targetCheckbox = document.getElementById(targetId);
+    if (targetCheckbox && targetCheckbox.classList.contains('faq-toggle')) {
+      targetCheckbox.checked = true;
+      setTimeout(() => {
+        targetCheckbox.parentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 500);
+    }
+  }
+
+  // Smooth load animation
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach((item, index) => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+      item.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+      item.style.opacity = '1';
+      item.style.transform = 'translateY(0)';
+    }, 100 * index);
+  });
+});
+</script>
+
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3A). Every
  * locale without a committed variant falls back to English. Callers that
@@ -1963,5 +2286,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
   if (locale === 'de') return DE;
+  if (locale === 'ja') return JA;
   return bodyHtml;
 }

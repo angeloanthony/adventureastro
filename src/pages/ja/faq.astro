@@ -1,0 +1,173 @@
+---
+// ja/faq.astro — Japanese FAQ page (P10K-inline batch, mirrors de/faq.astro).
+// Mirrors src/pages/faq.astro. FAQPage schema mirrors the visible Japanese
+// FAQ below (translated name/text for all 15 questions), matching the
+// existing "schema mirrors visible FAQ verbatim" convention.
+import { getBodyHtml } from '../../page-content/faq';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../config/site';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "ツアーに自分のATVマシンを持ち込めますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい。ご自分のマシンをお持ち込みいただくと、よりご希望に沿った、さらには過激なライドも可能になります。Adventure Tours Vernalではトランシーバーをお貸しし、ハードコアなトレイル区間ではより易しい迂回ルートもご案内します。どのような走りをしたいかを、お電話またはメールでお聞かせください。安全が最優先事項の1番で、その次に大切なのが楽しむことです。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "バーナルのATVツアーにグループで参加できますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "もちろんです。Adventure Tours Vernalは、規模を問わずグループツアーを歓迎します。Uintah Basinでの追加のスポット、レストラン、ホテルの宿泊、バー、ナイトライフ、お子さま向けのアクティビティなど、グループのご要望についてご相談ください。お電話は(435) 219-9447まで。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "ATVツアー中の天候はどうなりますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernalは晴れでも雨でもツアーを催行します。ただし、荒天の場合や予期せぬ事情が生じた場合は、日程の変更または全額返金をお選びいただけます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "バーナルのATVツアーには何を持っていけばよいですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "サングラス、帽子、カメラ、ジャケット、つま先の覆われた靴をお持ちください。気温が変動することがありますので、重ね着できる服装がおすすめです。Adventure Tours Vernalでは、水と軽いスナックを無料でご用意し、ヘルメットと安全装備もお貸しします。日焼け止め、虫よけスプレー、リップクリームもおすすめです。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "ATVツアーには何時に到着すればよいですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "すべてのツアーで、出発時刻の30分前にお越しください。安全講習がすべて終わるまでは出発しません。オリエンテーション開始時にその場にいらっしゃらない場合、ツアーの参加枠を失うことがあり、その場合は返金いたしかねます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "ATVツアーに年齢制限はありますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernalのマシンを運転するには、18歳以上である必要があります。同乗者としてご参加いただくには、2歳以上である必要があります。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "ATVツアーのキャンセルポリシーはどうなっていますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernalには詳細なキャンセルポリシーがあります。キャンセルとデポジットに関する詳細は、adventuretoursvernal.comのキャンセルポリシーのページをご覧いただくか、(435) 219-9447までお電話ください。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "ユタ州バーナルのATVツアーの料金はいくらですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernalでは、Kawasaki KRX 1000のサイドバイサイドで走るガイド付き3時間ツアーを1種類ご用意しています。1台あたり$349で、最大2名まで乗車できます。3人目は同乗者として$125で追加でき、ツアーは1台1時間あたり$99で延長できます。最少催行人数は3名で、最大12名（6台）までのグループを歓迎します。空き状況は(435) 219-9447までお電話でお問い合わせください。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "バーナルでATVに乗るのに経験は必要ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "VernalのツアーにATVの経験は必要ありません。Adventure Tours Vernalはまったくの初心者の方も歓迎しており、すべてのツアーの前に安全講習を一通り行います。経験豊富なガイドが、Kawasaki KRX 1000のサイドバイサイドの操作を一つひとつ手ほどきします。あらゆるレベルの方を歓迎します。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "ATVツアーでDinosaur National Monumentを訪れることはできますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい。Adventure Tours Vernalのガイド付き3時間UTVツアーでは、Dinosaur National Monument近くのバックカントリートレイルを走り、古代の岩層や岩絵を巡ります。モニュメントで有名な恐竜の骨の壁は、National Park Serviceが管理する別の施設です。午前中をモニュメントで過ごし、午後は周辺のDinosaur Countryのバックカントリーを走るUTVツアーに参加される方が多くいらっしゃいます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "ユタ州バーナルで最高のATVツアー会社はどこですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernalは、ユタ州バーナルで唯一の、Kawasaki KRX 1000によるガイド付きツアー会社です。隠れたトレイル、岩絵、Butch Cassidyの隠れ家、景観の美しいアーチへ、独占的にご案内します。地元を知り尽くしたガイド、プロ仕様の安全装備、そしてあらゆるレベルの方を歓迎します。年中無休、午前7時〜午後7時営業。お電話は(435) 219-9447まで。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "バーナルのATVツアーの所要時間はどのくらいですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernalでは、所要時間が約3時間の標準ガイド付きツアーを1種類ご用意しています。トレイルでもっと長く走りたい方は、1台1時間あたり$99でツアーを延長できます。長めのライドをご希望の場合は、(435) 219-9447までお電話ください。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "バーナルのATVツアーはファミリー向けですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい。ガイド付きツアーはファミリー向けで、走行前には毎回安全説明を行い、同乗者は2歳から参加できます。Kawasaki KRX 1000は1台につき最大2名まで乗車できますので、ご家族は複数台をご予約いただき一緒に走ります。1回のツアーで最大6台、12名までご参加いただけます。経験は不要で、安全講習を一通り行います。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Adventure Tours Vernalの営業時間は何時から何時までですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernalは、Mountain Timeで毎日午前7:00から午後7:00まで、週7日営業しています。ATVツアーのご予約は(435) 219-9447までお電話いただくか、adventuretoursvernal.comをご覧ください。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Adventure Tours Vernalではどのようなツアーを提供していますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernalでは、ユタ州バーナルでKawasaki KRX 1000のサイドバイサイドで走るガイド付き3時間ツアーを1種類ご用意しており、Doc's Beach、Moonshine Arch、Ashley Gorge、Outlaw Trail、Asphalt Ridgeという5つのトレイルシステムから、ご予約時にお選びいただけます。すべてのツアーに、地元を知り尽くしたガイド、安全説明、安全装備が含まれます。"
+        }
+      }
+    ]
+  }
+`;
+---
+<BaseLayout bodyClass="faq-page-body">
+  <Fragment slot="head">
+    <Seo
+      title="よくあるご質問 | ユタ州バーナルのUTVツアー | Adventure Tours Vernal"
+      description="ユタ州バーナルのガイド付きUTVツアーに関するよくあるご質問にお答えします。年齢制限、料金、持ち物、天候時の対応、集合時間、グループでのご参加、ツアーの選び方まで、ご予約前に知っておきたいことをまとめました。ご予約・お問い合わせは(435) 219-9447まで。"
+      path="/ja/faq/"
+      type="website"
+      ogTitle="よくあるご質問 — Adventure Tours Vernal | Utahのガイド付きUTVツアー"
+      ogDescription="ユタ州バーナルでのKawasaki KRX 1000ガイド付きUTVツアーの前に知っておきたいことをすべて。年齢制限、料金、持ち物などをご案内します。"
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="faq" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.faq', lang) }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: t('footer.quickLinks', lang),
+      links: [
+        { href: '/ja/#tours', label: t('footer.link.ourTours', lang) },
+        { href: '/ja/#vehicles', label: t('footer.link.ourFleet', lang) },
+        { href: '/ja/#gallery', label: t('footer.link.photoGallery', lang) },
+        { href: '/ja/booking/', label: t('cta.bookNow', lang) },
+      ],
+    }}
+  />
+</BaseLayout>

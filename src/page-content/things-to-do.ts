@@ -1794,9 +1794,305 @@ const DE = `
 
 `;
 
+const JA = `
+
+  <!-- AI Summary Block -->
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    ユタ州バーナルの楽しみ方には、Dinosaur National MonumentとそのWall of Bonesの見学、Adventure Tours VernalのガイドによるKawasaki KRX 1000のUTVツアー、McConkie RanchとDry Fork CanyonでのFremontの岩絵の見学、Red Fleet State Parkの恐竜の足跡群を歩くこと、Utah Field House of Natural Historyの恐竜庭園、SteinakerとFlaming Gorgeでのボートと釣り、Ashley National ForestとUinta Mountainsでのハイキング、そして西部開拓時代の無法者の歴史をたどることがあります。バーナルはユタ州の恐竜の国——アウトドアレクリエーション、バックカントリーの冒険、そして古代の歴史への玄関口であり、ユタ州南部よりはるかに人が少ないのが魅力です。ガイド付きUTVツアーは3時間、1台$349（乗車2名まで）。お電話は(435) 219-9447まで。
+  </p>
+
+  <main class="article-page">
+    <header class="article-header">
+      <div class="article-breadcrumb">
+        <a href="/ja/">ホーム</a><span class="sep">›</span><span>バーナルの楽しみ方</span>
+      </div>
+      <h1 class="article-title">ユタ州バーナルの楽しみ方</h1>
+      <p class="article-meta">2026年7月更新 · Adventure Tours Vernal</p>
+      <p style="display:inline-flex;align-items:center;gap:8px;margin:12px 0;padding:7px 15px;border:1px solid rgba(212,118,78,0.5);border-radius:999px;background:#ffffff;box-shadow:0 1px 4px rgba(0,0,0,0.08);font-size:0.95rem;color:#4a4139;"><span aria-hidden="true" style="color:#e6a817;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count}件のGoogleレビュー</span></p>
+    </header>
+
+    <div class="article-body">
+      <div class="article-summary-box"><strong>結論から言うと：</strong> ユタ州バーナルは、Dinosaur National Monumentへの玄関口であり、ユタ州のUintah Basinの中心にある町です。1億4,900万年前の本物の恐竜の化石に手を触れ、ガイド付きUTVツアーで赤い岩の峡谷を走り、千年前の岩絵のすぐ前まで歩き、高地の貯水湖で釣り糸を垂れる——そのすべてが中心街から1時間以内に収まる、凝縮された冒険の拠点です。2〜3日をあててください。1日は国定公園と岩絵に、1日はバックカントリーのUTVツアーと州立公園に、そして任意の3日目をFlaming Gorge、釣り、あるいは高地のUintasに。最適な月は5〜6月と9〜10月です。ユタ州南部に人を惹きつけるものの多くを、ごくわずかな混雑で味わえます。</div>
+
+      <div class="key-takeaways">
+        <h2>要点まとめ</h2>
+        <ul>
+          <li><strong>Dinosaur National Monumentが一番の目玉です。</strong> Quarry Exhibit HallのWall of Bones——およそ1,500点の化石が今も岩に埋まったまま残されています——は中心街から東へ20分、州内のほかのどこにもないものです。</li>
+          <li><strong>バックカントリーは隠れたもう半分です。</strong> バーナルを取り巻く峡谷、アーチ、人里離れた岩絵は、舗装路では行き着けません。ガイド付きUTVツアーが、それらを見る最も早く、最も深く入り込める方法です。</li>
+          <li><strong>正真正銘のファミリー向け目的地です。</strong> 子どもたちは化石に触れ、恐竜の足跡の上を歩き、2歳から同乗してツアーに参加できます。見どころの大半は短い歩きだけで済みます。</li>
+          <li><strong>2〜3日がちょうど良い長さです。</strong> 1日では国定公園だけで手いっぱいです。長めの週末があれば、地域全体を急がずに回れます。</li>
+          <li><strong>季節の変わり目にお越しください。</strong> 晩春と初秋は気温が快適で、野生動物が活発、人出もまばらです。夏は暑く、水辺に最適。冬は静かですが、できることは限られます。</li>
+          <li><strong>車が必要です。</strong> バーナルの見どころは周囲の田園地帯に点在していて、それらを結ぶ本格的な公共交通はありません。</li>
+        </ul>
+      </div>
+
+      <p>バーナルが拠点としてこれほどよく機能する理由は、一枚の図が説明してくれます。この地域の見どころは車輪のスポークのように町から放射状に広がっていて、それぞれが行って帰るだけの気軽な日帰り旅になります。</p>
+
+      <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+        <img src="/images/maps/vernal-regional-hub-and-spoke.svg" alt="恐竜の国の模式的なハブ・アンド・スポーク図。中心にユタ州バーナルを置き、そこから5つの目的地——Dinosaur National Monument、Flaming Gorge、Ashley National Forest、Red Fleet State Park、Steinaker State Park——がラベル付きのスポークとして放射状に伸びています。地域どうしの関係のみを示すもので、縮尺、距離、方位は正確ではありません。" width="1600" height="1200" loading="lazy" decoding="async" />
+        <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">中心にバーナル、スポークの先に地域の目的地。模式図であり、縮尺、距離、方位は正確ではありません。</figcaption>
+      </figure>
+
+      <h2>なぜユタ州バーナルを訪れるのか</h2>
+      <p>多くの旅行者は、偶然バーナルを知ります。Salt Lake CityとColorado Rockiesのちょうど中ほどにある地図上の地名として、あるいは子どもがどうしても見たいとせがんだ恐竜の国定公園に一番近い町として。そして実際に着いてみると、この町は静かに期待を上回ります。バーナルはUintah Basinの縁に位置し、北はUinta Mountains、南と東は峡谷地帯に囲まれ、ごく狭い範囲にありえないほどの多様性を詰め込んだ風景のただ中にあります。</p>
+      <p>長い週末が一度あれば、化石化した骨で埋まったジュラ紀の川床の前に立ち、Fremontの人々が千年以上前に崖の面に刻んだ岩絵を目でたどり、サイドバイサイドで隠れた赤い岩の峡谷を走り、燃えるような赤い峡谷で大物のマスを釣り上げ、そして文字どおり恐竜の足跡の上を歩くことができます。深い時間、古代の文化、西部開拓時代の歴史、そして本格的なアウトドアレクリエーション——それらが幾重にも重なり合うこの幅広さこそ、バーナルを特別にしているものです。好奇心が報われる、そういう場所です。</p>
+      <p>しかもそのすべてが、混雑と無縁です。Moab、Zion、Archesが記録的な来訪者数にあえぐ一方で、バーナルはユタ州でも本当に人の少ない一角であり続けています。展望地点も、トレイルヘッドも、岩絵のパネルも、まるごと独り占めできることが珍しくありません。駐車場の取り合いに疲れたご家族にも、人のいない光を求める写真家にも、少しの余白を大切にするすべての方にとって、これはささやかな役得どころか、魅力のすべてです。</p>
+
+      <h2>バーナルが違うところ</h2>
+      <p>国定公園や良質なトレイル網を誇れる町はいくらでもあります。バーナルを際立たせているのは<em>組み合わせ</em>であり、そしてその多くが驚くほど行きやすいという事実です。</p>
+      <p>第一に、ここはほかのどこにも名乗れない意味で<strong>恐竜の国</strong>です。ここの化石は、遠くの博物館でガラス越しに並ぶ複製ではありません。埋まったときのままの崖に残る本物の骨で、しかも手を触れることが許されている場所があります。そこにRed Fleetの恐竜の足跡群、Field Houseの屋外のDinosaur Garden、そしてこの地域を有名にしたMorrison層の岩が加わり、地球上でも指折りに人を惹きつける主題を軸にした目的地ができあがっています。</p>
+      <p>第二に、バーナルには<strong>フロントカントリーとバックカントリー</strong>があり、その違いを知っていることが素晴らしい旅の鍵になります。フロントカントリーは車で行けるすべて——国定公園、州立公園、博物館、中心街です。バックカントリーは、それらすべてを取り巻く広大な公有地、峡谷、オフロードトレイルの網目で、舗装路では行き着けないために大半の訪問者が目にすることのない土地です。この町のガイド付きUTVツアーは、その隔たりを埋めるために存在しています。バーナルの旅が、通り過ぎるだけの一日ではなく遠征のように感じられるのは、そのおかげです。</p>
+      <p>第三に、ここは観光のためにつくられたリゾートではなく、<strong>実際に働いている本物の町</strong>です。それは、正直な値段、気取らない食事、本物の地元の知識、そして旅行者がいてもいなくても自分の営みを続けるMain Streetを意味します。ある種の旅行者にとって、その本物らしさはどんな設備よりも価値があります。</p>
+
+      <p>選択肢がこれだけあると、いちばん早い計画の立て方は、ご自分が楽しいと思うものから始めることです。下の図は、興味を体験の候補リストに変えてくれます。それぞれこのページの下の方で詳しくご紹介しています。</p>
+
+      <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+        <img src="/images/graphics/vernal-adventure-decision-tree.svg" alt="ユタ州バーナルの見どころを興味別に振り分ける決定木の図。「今どんな気分ですか？」という出発点から、4つの興味の枝——名所と化石、体を動かす、自分のペースで味わう、家族向け——が7つの体験へとつながります。恐竜、UTVの冒険、ハイキング、釣り、絶景ドライブ、写真、そしてファミリーアクティビティです。興味と楽しみ方を結びつける計画の手助けであり、決まりごとではありません。" width="1600" height="1200" loading="lazy" decoding="async" />
+        <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">今どんな気分かから始めて、下の該当する体験へ飛んでください。計画の手助けです——多くの方は少しずつ全部を楽しんでいます。</figcaption>
+      </figure>
+
+      <h2>バーナルの主な楽しみ方（一覧）</h2>
+      <p>時間が限られていて手短なリストだけが欲しいという方に、この地域を凝縮しました。それぞれ下に独立した詳しい節を設けていますし、姉妹編の<a href="/ja/things-to-do/vernal-utah-attractions/">バーナルとその周辺の主な見どころ</a>のガイドでは、訪問の段取りとあわせて順に並べています。</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>見どころ</th><th>内容</th><th>バーナルからの距離</th><th>向いている方</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Dinosaur National Monument</td><td>岩に埋まったままの本物の化石1,500点以上。峡谷地帯</td><td>東へ約20分</td><td>どなたにも。初めての方に</td></tr>
+            <tr><td>ガイド付きUTVツアー</td><td>バックカントリーの峡谷、アーチ、人里離れた岩絵</td><td>バーナル発</td><td>冒険を求める方、ご家族</td></tr>
+            <tr><td>McConkie Ranchの岩絵</td><td>Fremontの主要な岩絵パネル</td><td>北へ約15〜20分</td><td>歴史、写真</td></tr>
+            <tr><td>Red Fleet State Park</td><td>恐竜の足跡群＋赤い岩の貯水湖</td><td>北へ約15分</td><td>ご家族、水遊び</td></tr>
+            <tr><td>Utah Field House of Natural History</td><td>博物館＋屋外の恐竜庭園</td><td>中心街</td><td>お子さん、雨の日</td></tr>
+            <tr><td>Steinaker State Park</td><td>水遊び、ボート、パドリング、キャンプ</td><td>北へ約5〜10分</td><td>夏、ご家族</td></tr>
+            <tr><td>Flaming Gorge</td><td>大物狙いの釣り、赤い峡谷の貯水湖</td><td>北へ約1時間</td><td>釣り人、絶景ドライブ</td></tr>
+            <tr><td>Ashley National Forest / Uintas</td><td>高地のハイキング、キャンプ、湖</td><td>北へ約30〜60分</td><td>ハイカー、涼しい夏の日</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Dinosaur National Monument</h2>
+      <p>多くの方が最初にバーナルを地図に書き込む理由がこれで、その一番手という位置づけは伊達ではありません。Jensen近く、東へおよそ20分の<strong>Quarry Exhibit Hall</strong>は、およそ1,500点の恐竜の骨を抱いた崖の面の真上に建てられた空調付きの建物です。<em>Allosaurus</em>、<em>Stegosaurus</em>、<em>Diplodocus</em>、<em>Apatosaurus</em>といった動物の頭骨、四肢、脊椎が、およそ1億4,900万年前にジュラ紀の川が埋めたそのままの位置で、今も岩の中に残っています。壁の本物の化石に手を触れてよい場所があり、その瞬間が子ども（あるいは大人）の心に届くのを見るのは、何度立ち会っても飽きません。</p>
+      <p>採石場の先にも、この国定公園はGreen RiverとYampa川沿いに200,000エーカーを超える峡谷地帯へと広がっています。<strong>Cub Creekの絶景ドライブ</strong>（Tour of the Tilted Rocks）は、傾いた地層、道路沿いの岩絵、そしておよそ半世紀にわたりほぼ独りで暮らしたJosie Bassett Morrisの開拓地の家の前を通ります。短いトレイル、化石を見つけながら歩けるコース、そして豊かな野生動物が訪問を締めくくります。少なくとも半日、ハイキングとColorado側の峡谷も加えるなら丸一日をあててください。</p>
+      <div class="article-tip"><strong>国定公園の計画はきちんと立ててください：</strong> 営業時間、料金、そして季節運行のQuarry行きシャトルは年間を通じて変わります。独立した完全版の<a href="/ja/dinosaur-national-monument/visiting-dinosaur-national-monument/">Dinosaur National Monument訪問ガイド</a>が、訪問のすべて——何を優先すべきか、おすすめのドライブとハイキング、季節ごとのアドバイス、そしてご家族向け・バリアフリーのヒント——をご案内します。お出かけ前にお読みいただき、最新の運営状況は必ずNational Park Serviceでご確認ください。</p>
+
+      <h2>ガイド付きUTVの冒険</h2>
+      <p>ここは初めての訪問者がまるごと見落としがちな部分です。国定公園は化石と道路沿いの展望を見せてくれますが、バーナルを取り巻く野生のバックカントリー——隠れた峡谷、天然のアーチ、そして舗装された絶景ドライブでは届かない人里離れた岩絵のパネル——は見せてくれません。まさにそこでガイド付きUTVツアーの出番になります。この風景を唯一無二にしているものを体感するには、これがいちばん深く入り込める方法です。</p>
+      <p>Adventure Tours Vernalは、それぞれに個性のある五つのトレイルシステムで、ガイド付きの<strong>Kawasaki KRX 1000</strong>ツアーを催行しています。<strong>Doc's Beach</strong>の砂の涸れ谷、隠れた砂岩のアーチで終わる<strong>Moonshine Arch</strong>の赤い岩の峡谷、<strong>Ashley Gorge</strong>の迫力ある峡谷の回廊、<strong>Outlaw Trail</strong>の無法者の隠れ家の土地、そして<strong>Asphalt Ridge</strong>の見晴らしのよい尾根の眺め。道中では、FremontとUteの岩絵、天然のアーチ、そして大半の訪問者が目にすることのない西部開拓時代の名所に立ち寄ります。</p>
+      <p>車両は2人乗りで、フルロールケージ、パワーステアリング、そして荒れた路面でも快適に走るためのFOX 2.5 PODIUM LSCサスペンションを備えています。ツアーはおよそ3時間、<strong>1台$349</strong>で乗車2名まで、ヘルメットと安全装備一式込みです。DaveとTrudy Wilsonがすべてのツアーを自らご案内しますので、どんな地図にも載っていない地元の知識が付いてきます。同乗者は保護者同伴で2歳からご参加いただけます。運転は18歳以上です。人数が奇数のグループには、3人目の方がガイドの車に同乗できるオプションがあります。</p>
+      <div class="article-tip"><strong>どのトレイルを選べばよいでしょうか。</strong> 小さなお子さん連れのご家族には、Doc's Beach（広く、親しみやすく、砂地）とMoonshine Arch（最後にご褒美が待つ本格的な峡谷の冒険）が人気です。<a href="/ja/utv/">UTVツアーハブ</a>で五つを並べて比べてから、<a href="/ja/booking/">ツアーをご予約</a>いただくか、<strong>(435) 219-9447</strong>までお電話ください。グループに合ったトレイルをご一緒に選びます。</p>
+
+      <h2>博物館と屋内の見どころ</h2>
+      <p>天気が崩れたときや、ご家族が日差しから少し離れたいときのために、バーナル中心街には確かな拠り所があります。<strong>Utah Field House of Natural History State Park Museum</strong>です。屋外の<strong>Dinosaur Garden</strong>には歩いて回れる実物大のレプリカが並び、お子さんには間違いなく喜ばれます。屋内の展示室では、Uintah Basinの地質、古生物学、文化史を扱っています。1〜2時間をご予定ください。この地域で雨の日に最良の選択肢であり、国定公園の前後の予習・復習としても申し分ありません。</p>
+      <p>中心街はゆっくり歩くだけでも報われます。バーナルのMain Streetには、この地域おなじみのピンクの恐竜のモチーフ、地元の店、小さなギャラリーが並び、冒険と冒険の合間に一息つくのに心地よい場所です。季節ごとの地域のイベントや、周辺の西部の遺産を紹介する展示にも目を留めてみてください。</p>
+      <!-- VERIFY WITH OFFICIAL SOURCE: Utah Field House hours, admission fees, and current exhibit list change seasonally — confirm on the Utah State Parks site before quoting specifics. Do not publish set hours/prices here. -->
+
+      <h2>岩絵と古代のロックアート</h2>
+      <p>バーナル周辺は、アメリカ西部でも屈指の岩絵の密集地です。<strong>Fremontの人々</strong>は何世紀にもわたってこれらの峡谷で暮らし、耕し、精緻な岩絵——砂漠のニスに覆われた岩に打ち刻まれた人物、動物、抽象的な意匠——を残しました。のちに<strong>Ute</strong>が自分たちのものを描き加えています。千年前のパネルの前に、ほかに誰もいない静かな峡谷で立つことは、この地域でも指折りに心を動かされる体験です。</p>
+      <p>最も行きやすい代表格は、町の北、Dry Fork Canyonの<strong>McConkie Ranch</strong>です。峡谷の壁沿いに整備されたトレイルから、大きく細部まで鮮明なパネルを見ることができます。見学は無料で、主要な図像を見るのにおよそ1時間。国定公園の中では、有名なトカゲのパネルを含む<strong>Cub Creekの岩絵</strong>が、道路沿いの外せない立ち寄り先です。さらに奥、周囲のバックカントリーに点在する人里離れたパネルには、徒歩かガイド付きの<a href="/ja/utv/">UTVツアー</a>でしかたどり着けません。</p>
+      <p>岩絵はかけがえのないもので、法律で保護されています。パネルには決して触れないでください——皮脂が劣化を早めます——そして敬意ある距離から撮影してください。専用の<a href="/ja/dinosaur-national-monument/petroglyphs-rock-art-vernal/">バーナル近郊の岩絵とロックアートのガイド</a>では、その文化、マナー、そして見応えのある場所をご紹介しています。</p>
+
+      <h2>西部開拓時代の歴史と地元の遺産</h2>
+      <p>ここでの人の物語は、Fremontで終わりではありません。バーナルの東と南に広がる険しい峡谷は、一世紀前、アメリカ西部でも屈指に有効な隠れ家の土地であり、正真正銘の無法者の評判を得ていました。ここは<strong>Butch Cassidy and the Wild Bunch</strong>の土地です。Outlaw Trail沿いの人里離れた峡谷の迷路は、彼らが仕事の合間に姿を消せる場所を与えました。そして彼らを捕まえにくくしたその地形こそ、今日バックカントリーの探索をこれほど印象深いものにしている地形です。</p>
+      <p>その辺境の過去は、今も肌で感じられます。国定公園のCub Creek Roadの終点には<strong>Josie Bassett Morris</strong>の開拓地の家が立っています。町から遠く離れた行き止まりの峡谷で、家畜を育て畑を作りながら、およそ50年をほぼ独りで暮らした注目すべき女性です。その小屋と付属の建物は、この地域で最も静かで、最も人間味のある見どころの一つです。バーナル自体も牧畜の町として、のちにエネルギーの町として育ちました。その働く西部の気質は今もMain Street、ロデオやカウンティフェアの伝統、そして着いた瞬間に気づく気取らない親しみやすさの中に流れています。</p>
+      <p>ガイド付き<a href="/ja/utv/">UTVツアー</a>のルートのいくつかは、この無法者と開拓者の土地を直接たどり、歴史とそれを形づくった風景を結び合わせます。バーナルでは、遠い過去と近い過去が肩を並べて存在し、どちらも同じ岩に書き込まれているのだと気づかされます。</p>
+
+      <h2>絶景ドライブ</h2>
+      <p>この地域で最良の体験のいくつかは、フロントガラス越しに訪れます。バーナル周辺のドライブは、それ自体が目的地に値します。いずれも舗装されていて普通の車で走れますが、山のルートは季節限定です。</p>
+      <ul>
+        <li><strong>Dinosaur National MonumentのCub Creek Road（Tour of the Tilted Rocks）。</strong> 傾いた岩、道路沿いの岩絵、そしてJosie Morrisの小屋がおよそ10マイル続き、Visitor Centerでセルフガイドのオートツアー冊子が手に入ります。この地域で最良の短いドライブです。</li>
+        <li><strong>Flaming Gorge – Uintas National Scenic Byway（US-191を北へ）。</strong> ユタ州を代表するドライブの一つで、砂漠からAshley National Forestを抜けてFlaming Gorgeの赤い峡谷まで登り、途中には迫力ある展望地点が続きます。往復に半日から丸一日をご予定ください。</li>
+        <li><strong>Red Cloud Loop。</strong> バーナルの北からUintasのアスペンと森へ入るバックカントリーの山道です。特に秋は美しいのですが、一部が未舗装で季節限定です。出発前に路面状況をご確認ください。</li>
+        <li><strong>Dry Fork Canyon。</strong> McConkie Ranchの岩絵へ向かう道は、それ自体が牧場と峡谷の土地を抜ける美しい短いドライブです。</li>
+      </ul>
+      <!-- VERIFY WITH OFFICIAL SOURCE: Red Cloud Loop pavement status and seasonal closures vary; the Flaming Gorge byway length/overlooks should be confirmed against Ashley National Forest / UDOT before adding exact mileages. -->
+      <div class="article-tip"><strong>山のドライブのコツ：</strong> Uintasへ登る高いルートは雪とともに開通し、また閉ざされます。初夏まで、そして秋には再び、凍結が残ることがあります。山の周遊路を走るなら、バーナルで燃料を満タンにし、水と重ね着できる衣類を積み、まず最新の道路状況をご確認ください。</div>
+
+      <h2>ファミリーアクティビティ</h2>
+      <p>バーナルはユタ州でも指折りに過小評価されているファミリー向けの目的地です。というのも、目玉の見どころが、子どもたちが本当に心を動かされるもの——恐竜、足跡、峡谷、そして船——だからです。本物の化石化した骨に触れ、恐竜の足跡の上に立ち、サイドバイサイドで峡谷地帯を走る。それが一つの週末で叶う場所が、ほかにあるでしょうか。</p>
+      <p>ご家族に外せないのは、国定公園の<strong>Quarry Exhibit Hall</strong>と無料のJunior Rangerプログラム、短くほぼ平坦な歩きでたどり着ける<a href="/ja/guides/ultimate-guide-to-red-fleet-state-park/"><strong>Red Fleet State Parkの恐竜の足跡群</strong></a>、中心街の<strong>Utah Field Houseの恐竜庭園</strong>、<strong>Steinaker貯水湖</strong>での水遊びとパドリング、そして2歳から同乗できるご家族のペースの<strong>UTVツアー</strong>です。その大半は短い歩きだけで済み、ペースはすべてご自分で決められます。</p>
+      <p>年齢の目安、雨の日の代替案、そして小さな旅仲間の機嫌を保つコツまで含めた、お子さん中心の完全なまとめは、専用のガイド<a href="/ja/things-to-do/fun-things-to-do-vernal-utah-kids/">子ども連れで楽しむバーナル</a>をご覧ください。</p>
+
+      <h2>アウトドアレクリエーション</h2>
+      <p>恐竜を取り除いても、バーナルは一流のアウトドアの町であり続けます。高地砂漠の峡谷地帯と、標高13,000フィートのHigh Uintas——ユタ州で最も高い山脈——の間に位置しているため、手の届く範囲に珍しいほど幅広い地形とアクティビティが広がっています。</p>
+      <p><strong>釣り。</strong> ここは<a href="/ja/fishing/">本格的な釣りの土地</a>です。北へおよそ1時間の<a href="/ja/guides/ultimate-guide-to-flaming-gorge/"><strong>Flaming Gorge</strong></a>は西部随一の漁場の一つで、大物のレイクトラウトとヒメマスで知られています。ダム下流の<strong>Green River</strong>は伝説的なマスの流れです。町に近いところでは、<strong>Steinaker</strong>と<strong>Red Fleet</strong>の貯水湖が気軽な岸釣りとボート釣りを楽しませてくれ、高地のUintaの湖にはブルックトラウトとカットスロートトラウトがいます。</p>
+      <p><strong>ハイキングとバックパッキング。</strong> <a href="/ja/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest</a>は町の北の山々を覆い、のどかな谷歩きから標高10,000フィートを超える険しい高地のルートまでそろっています。<strong>Uinta Highline Trail</strong>は経験者向けの、いつかは歩きたい高地のバックパッキングルートです。低いところでは、国定公園と峡谷が展望地点、アーチ、岩絵へ向かう短い砂漠のハイキングを用意しています。</p>
+      <p><strong>絶景ドライブ。</strong> ここでの最良の景色見物のいくつかは、フロントガラス越しに訪れます。<a href="/ja/scenic-drives/">バーナル周辺の絶景ドライブ</a>は、高地砂漠から森を抜けて赤い岩の貯水湖まで登る<strong>Flaming Gorge–Uintas National Scenic Byway</strong>から、荒々しい<strong>Red Cloud Loop</strong>、地質の見どころが詰まった<strong>Sheep Creek Loop</strong>、そして岩絵と恐竜の国を通り抜けるDinosaur National Monumentの<strong>Cub Creek Road</strong>まで。すべてを自分の足で歩かずに多くを見たいときに最適です。</p>
+      <p><strong>キャンプ。</strong> フルフックアップのRVサイトから原始的な森の静けさまで、ここは素晴らしい<a href="/ja/camping/">キャンプの土地</a>です。<a href="/ja/guides/ultimate-guide-to-flaming-gorge/"><strong>Flaming Gorge</strong></a>は貯水湖をキャンプ場で取り囲み、<a href="/ja/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest</a>は涼しい山のサイトと、数百の湖の間に広がる分散キャンプを用意しています。そして<strong>Red Fleet</strong>と<strong>Steinaker</strong>の州立公園は、町から数分の湖畔に、気軽でご家族向けのキャンプを届けてくれます。</p>
+      <p><strong>水辺と冬。</strong> 夏は貯水湖での水遊び、パドルボード、カヤック、ボートの季節です。Green RiverとYampa川は、国定公園の峡谷を抜ける数日がかりの急流下りで有名です。雪が来れば、Uintasはスノーモービル、クロスカントリースキー、アイスフィッシングの舞台になります。</p>
+      <div class="article-tip"><strong>公有地の現実：</strong> この多くは人里離れていて、携帯電話の電波もなく、水もなく、サービスとサービスの間隔も長くなります。必要だと思う以上の水を携行し、行き先を誰かに伝え、地図をオフラインで保存し、出発前に状況をご確認ください。特に高地や未舗装路へ向かう場合は必ずお願いします。</div>
+
+      <p>地域の体験が出そろったところで、それらを見比べる手早い方法をご紹介します。下のマトリクスは、バーナルの旅を組み立てるときの中心になる五つを並べ、それぞれについて当サイトが実際に扱っている内容——ご家族に向くか、ここで予約できるガイド付きツアーか、手間の少ない外出として成り立つか、雨の日の屋内の選択肢があるか、通年で楽しめるか、そして写真好きに報いるか——を示しています。</p>
+
+      <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+        <img src="/images/graphics/vernal-adventure-comparison-matrix.svg" alt="バーナル周辺の五つの楽しみ方——恐竜、UTVの冒険、ハイキング、釣り、絶景ドライブ——を、六つの計画上の観点に照らして並べた比較マトリクス。観点は、ご家族に向く、当サイトで予約できるガイド付きツアー、のんびり手間が少ない、雨の日の屋内の選択肢、通年でのアクセス、写真に向く、の六つです。塗りつぶしのチェックはその体験について当サイトが扱っている観点を、白抜きの丸は扱いの中心ではない観点を示します。" width="1600" height="1200" loading="lazy" decoding="async" />
+        <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">バーナルの中心となる五つの体験を、一日の予定を左右する観点で並べたもの。当サイトが扱っている内容だけから作られた計画の手助けであり、順位付けではありません。</figcaption>
+      </figure>
+
+      <h2>食事はどこで：バーナルのレストラン</h2>
+      <p>バーナルは高級料理の中心地を気取ったりしません。それも魅力のうちです。あるのは正直で、しっかりして、気取らない料理——外で長い一日を過ごした後に沁みる、西部の町の料理です。古典的なアメリカのダイナーとステーキハウス、この地域の文化を映すメキシコ料理店の充実した顔ぶれ、食欲旺盛な方のためのバーベキューとバーガー、そしてトレイルへ出る前の朝を始める地元のコーヒーショップとベーカリーが見つかります。</p>
+      <p>中心街のMain Streetが自然と食べ歩きの場になり、ほとんどの店は気軽でご家族向けです。具体的な店名、料理のジャンル、そしてそれぞれの得意分野まで含めた最新の厳選リストは、姉妹編のガイド<a href="/things-to-do/best-restaurants-vernal-utah/">ユタ州バーナルのおすすめレストラン</a>をご覧ください。</p>
+      <!-- VERIFY WITH OWNER / OFFICIAL SOURCE: do not publish specific restaurant names, hours, or menus in this cornerstone — they change. All specifics live in the maintained best-restaurants guide, which is the single source of truth for that list. -->
+
+      <h2>穴場と地元の秘密</h2>
+      <p>目玉の見どころを回り終えたら、次は地元の人が愛する静かな一角です。良い旅を忘れられない旅に変えてくれるものたちをご紹介します。</p>
+      <ul>
+        <li><strong>人里離れたバックカントリーの岩絵。</strong> McConkie RanchとCub Creekの先、バーナル周辺の峡谷に隠れたパネルには、訪れる人がほとんどいません。多くは徒歩かガイド付きUTVでしか行けません。その前に独りで立つ時間は忘れがたいものです。</li>
+        <li><strong>Moonshine Arch。</strong> 町の北の赤い岩に潜む、印象的な天然の砂岩のアーチです。本物のご褒美であり、人気の撮影スポットであり、UTVツアーの目的地の一つでもあります。</li>
+        <li><strong>Josie Morrisの小屋と行き止まりの峡谷。</strong> 国定公園のCub Creek Roadの終点にあるこの穏やかな開拓地の家と、日陰の広がる脇の峡谷は、急ぐ訪問者には素通りされ、ゆっくり過ごす方には愛されています。</li>
+        <li><strong>傾いた岩に差す日の出と日の入りの光。</strong> 国定公園の地層とこの地域の峡谷は、低く斜めに差す光の中で息を吹き返します。日帰りの多くの方はそれを逃します。早起きの方と夕方まで粘る方が報われます。</li>
+        <li><strong>高地のUintaの湖。</strong> 山へ少し車を走らせれば、高地の湖と涼しい森にたどり着きます。下の砂漠とはまったく別の世界で、暑い夏の午後の完璧な逃げ場です。</li>
+      </ul>
+
+      <h2>季節ごとのバーナル</h2>
+      <p>バーナルは正真正銘の四季の目的地で、いつ来るのが正解かは何をしたいかで決まります。一年がどう移ろうかをご紹介します。最新の状況と持ち物の詳細は、<a href="/ja/guides/vernal-weather-guide/">バーナルの天気ガイド</a>とあわせてご覧ください。</p>
+
+      <h3>春（4〜6月）</h3>
+      <p>おそらく最も素晴らしい季節です。気温は快適で、ワイルドフラワーが咲き、野生動物は活発、砂漠の土地は夏の暑さが来る前のいちばん緑の濃い時期です。国定公園と標高の低いトレイルには理想的で、UTVツアーも穏やかな空気の中で格別です。高い山のルートはまだ雪を落としている最中なので、Uintasは後に取っておいてください。晩春——5月から6月にかけて——は、夏のピーク前のちょうど良い時期です。</p>
+
+      <h3>夏（7〜8月）</h3>
+      <p>ハイシーズンであり、暑さのピークでもあります。砂漠の日中は90°F台になることが多くなります。すべてが開いていて日は長く、水辺の絶好の季節です。<a href="/ja/guides/ultimate-guide-to-steinaker-state-park/">Steinaker</a>とRed Fleetでの水遊びとボート、Flaming Gorgeでの涼み、そして空気がありがたいほど涼しい高地のUintasへの避暑。きつい活動は朝のうちに済ませ、水をたっぷり持ち、本格的な日差し対策をして、午後の雷雨に注意してください。</p>
+
+      <h3>秋（9〜10月）</h3>
+      <p>春に並ぶ季節で、地元の方の多くが一番好きな時期です。気温はやわらぎ、人出は減り、コットンウッドとアスペンが黄金色に染まり、光は長く暖かくなります——写真家の季節です。初秋は、アスペンが色づく中で国定公園、UTVツアー、そして山の絶景ドライブを組み合わせるのに理想的です。素晴らしく、混雑のない訪問時期です。</p>
+
+      <h3>冬（11〜3月）</h3>
+      <p>静かで、荒涼としていて、雪に覆われるとしばしば美しい——ただしできることは限られます。町、国定公園の主要な見どころ、そしてField Houseは引き続き行けますが、一部の季節営業の施設、Quarry行きのシャトル、高地や未舗装の道路は閉鎖されるか営業時間が短くなります。静けさ、スノーモービル、クロスカントリースキー、そして山でのアイスフィッシングの季節です。冬の訪問は魔法のようになり得ます。ただ出発前に何が開いているかをご確認いただき、本物の寒さに備えた装備をご用意ください。</p>
+      <!-- VERIFY WITH OFFICIAL SOURCE: seasonal date ranges above are typical, not guaranteed. Snowpack shifts mountain access by weeks year to year. UTV tour winter availability: VERIFY WITH OWNER before implying year-round operation. -->
+
+      <h2>訪れるのに最適な時期</h2>
+      <p>手短に言えば、<strong>5〜6月と9〜10月</strong>が総合的に最良の時期です。過ごしやすい天気、すべてが開いていること、そして人出の少なさがそろいます。水辺と高い山が優先なら夏が最良です。冬は静けさとスノースポーツのための季節です。この表にまとめました。</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>季節</th><th>天気</th><th>混雑</th><th>向いていること</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>春（4〜6月）</td><td>穏やか、緑づく、ときどき風</td><td>少なめ〜ふつう</td><td>国定公園、UTVツアー、ワイルドフラワー、幅広く</td></tr>
+            <tr><td>夏（7〜8月）</td><td>砂漠は暑く、山は涼しい</td><td>最も多い</td><td>ウォータースポーツ、高地のUintas、長い一日</td></tr>
+            <tr><td>秋（9〜10月）</td><td>涼しくなる、黄金色、格別な光</td><td>少なめ</td><td>写真、絶景ドライブ、幅広く</td></tr>
+            <tr><td>冬（11〜3月）</td><td>寒く、降雪の可能性。アクセスは限定的</td><td>とても少ない</td><td>静けさ、スノースポーツ、アイスフィッシング</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>完璧なバーナルの週末（2日間の旅程）</h2>
+      <p>2日あれば、急がずに要点を押さえられます。この計画は、バーナルに滞在し、車があることを前提にしています。</p>
+      <p><strong>1日目——恐竜と岩絵。</strong> 朝早く<strong>Dinosaur National Monument</strong>から。Quarry Exhibit HallとWall of Bones、それからCub Creekの絶景ドライブで道路沿いの岩絵とJosie Morrisの小屋へ。バーナルに戻ってMain Streetで昼食。午後は<strong>McConkie Ranch</strong>のあるDry Fork Canyonまで上がってFremontの岩絵のパネルを見るか、<strong>Steinaker</strong>か<strong>Red Fleet</strong>でひと泳ぎして涼みましょう。Red Fleetならお子さんが恐竜の足跡群を歩けます。夕食は町で。</p>
+      <p><strong>2日目——バックカントリーの冒険。</strong> 午前はガイド付き<strong>UTVツアー</strong>で峡谷へ。隠れたアーチ、人里離れた岩絵、そしてほかの方法では行き着けない地形が待っています。昼食の後は締めくくりを選んでください。のんびりした午後なら<strong>Utah Field House</strong>と恐竜庭園、あるいは短いハイキング、あるいは黄金の時間の展望を狙ってFlaming Gorgeの絶景ドライブの入り口まで。充実した週末を、出発前のしっかりした夕食で締めましょう。</p>
+      <div class="article-tip"><strong>予約の順番が大切です：</strong> まずUTVツアーを押さえ、週末の残りをその周りに組み立ててください。ツアーの時間が一日の軸になり、国定公園と州立公園はその周りで柔軟に動かせます。<a href="/ja/booking/">空き状況はこちらでご確認ください</a>。</div>
+
+      <h2>バーナル3日間の旅程</h2>
+      <p>3日目があれば、ペースを落として、この地域のより大きな遠出を加えられます。</p>
+      <p><strong>1日目——Dinosaur National Monumentをまるごと。</strong> 国定公園に丸一日をあててください。開館と同時にQuarry Exhibit Hall、Fossil Discovery Walk、岩絵の立ち寄り先をすべて含むCub Creekのドライブ全線、そしてJosie Morrisの小屋。公園でピクニックするか町に戻ります。まだ元気があれば、夕方遅くにSplit Mountain周辺の短いハイキングを足しましょう。</p>
+      <p><strong>2日目——UTVツアーと州立公園。</strong> 午前はガイド付きUTVツアーでバックカントリーへ、昼食はバーナルで、午後はSteinakerかRed Fleetで水遊び、パドリング、恐竜の足跡群、そしてのんびりした湖畔の時間を。アドレナリンと休息のバランスが取れた、ゆったりと活動的な一日です。</p>
+      <p><strong>3日目——Flaming Gorgeと山。</strong> Flaming Gorgeの絶景バイウェイを北へ、Ashley National Forestと峡谷の赤い岩へ。釣り、ボート、展望地点でのピクニック、あるいは高地のひと区間のハイキング。秋ならアスペンの色を追いかけましょう。この地域の高地側を見せてくれる丸一日の周遊で、最初の2日間の砂漠との完璧な対比になります。</p>
+      <p>遠方からお越しですか。バーナルはSalt Lake Cityから車でおよそ3時間です——ルートと旅の計画の詳細は<a href="/from/salt-lake-city/">Salt Lake Cityからバーナルへの旅行ガイド</a>をご覧ください。さらに、1日、週末、ご家族、冒険、写真、釣り、キャンプといった出来合いの計画は、<a href="/ja/itineraries/">恐竜の国 究極の旅程ガイド</a>をどうぞ。</p>
+
+      <h2>バーナルへの持ち物</h2>
+      <p>訪問者が犯す最大の間違いは、高地砂漠と高い標高の条件への備え不足です。バーナルは標高5,000フィートを超え、日差しは強く、空気は乾き、気温は日中と夜で大きく振れます。その現実に合わせて荷造りしてください。</p>
+      <ul>
+        <li><strong>水、それもたっぷりと</strong> — 活動する日は一人あたり最低でも半ガロン、夏はさらに多めに。</li>
+        <li><strong>日差し対策</strong> — つばの広い帽子、サングラス、SPFの高い日焼け止め、リップクリーム。日陰はほとんどありません。</li>
+        <li><strong>重ね着</strong> — 午後が暑い日でも朝晩は冷えることがあります。薄手のジャケットかフリースは一年を通じて持つ価値があり、冬には本格的な防寒装備を。</li>
+        <li><strong>丈夫なつま先の覆われた靴</strong> — 岩の多いトレイル、スリックロック、そして足跡群のために。</li>
+        <li><strong>満タンの燃料</strong> — 町で給油してください。バックカントリーと山ではサービスがまばらです。</li>
+        <li><strong>カメラと双眼鏡</strong> — 野生動物、展望、岩絵の細部のために。</li>
+        <li><strong>オフラインの地図と保存した情報</strong> — この地域の多くで携帯電話の電波は当てにならないか、まったく届きません。</li>
+      </ul>
+      <p>季節ごとの詳細——そしてUTVツアーの日に向けた具体的なアドバイス——は、詳しい<a href="/ja/guides/what-to-bring/">持ち物ガイド</a>をご覧いただき、荷物を仕上げる前に<a href="/ja/guides/vernal-weather-guide/">バーナルの天気ガイド</a>もご確認ください。</p>
+
+      <h2>実用的な計画のヒント</h2>
+      <p><strong>行き方。</strong> バーナルはSalt Lake CityからUS-40を東へ車でおよそ3時間、最寄りの主要空港はSalt Lake Cityです。この地域は東でColoradoにもつながっています。着いてからは車が欠かせません。見どころは田園地帯に点在し、それらを結ぶ本格的な公共交通はありません。</p>
+      <p><strong>滞在日数。</strong> 2日で要点は押さえられます。3日あれば、急がずにFlaming Gorgeと山を加えられます。1日だけでは国定公園か、ほかの目玉の一つしかできません。もっといればよかったと思う訪問者がほとんどです。</p>
+      <p><strong>拠点の選び方。</strong> バーナル中心街が実用的な拠点です。宿、レストラン、燃料、ガイドサービスがここに集まり、ほかはすべて少し車を走らせた先にあります。自然のそばに泊まりたい方には、州立公園やAshley National Forestの中にキャンプ場とキャビンがあります。</p>
+      <p><strong>軸になるアクティビティから予約してください。</strong> UTVツアーと川下りは、特に夏と週末は前もって押さえ、それから柔軟に動かせる見どころを周りに当てはめてください。</p>
+      <p><strong>詳細はご確認ください。</strong> 営業時間、料金、シャトルの運行、道路とトレイルの状況はすべて季節で変わります。お出かけ前には必ずNational Park Service、Utah State Parks、Ashley National Forestで最新の運営状況をご確認ください。計画に役立つ資料をひととおりご覧になるなら、<a href="/ja/guides/">バーナルの旅行ガイド</a>をどうぞ。</p>
+      <div class="article-tip"><strong>私が皆さんにお伝えしている一つのこと：</strong> バーナルを、どこか別の場所へ向かう途中の通過点として扱わないでください。2日か3日をここにあて、舗装された見どころだけでなくバックカントリーにも時間を割いた方は、ここに住む私たちがなぜ飽きることがないのかを理解して帰っていきます。</div>
+
+      <!-- FAQ Section -->
+      <div class="article-faq">
+        <h2>よくあるご質問</h2>
+        <div class="faq-item">
+          <h3>ユタ州バーナルの主な楽しみ方は何ですか？</h3>
+          <p>バーナルの主な楽しみ方は、ガイド付きのバックカントリーUTVツアー、Dinosaur National MonumentとWall of Bonesの見学、McConkie RanchとDry Fork CanyonでのFremontの岩絵の見学、Red Fleet State Parkの恐竜の足跡群を歩くこと、Utah Field House of Natural Historyの恐竜庭園、そしてSteinaker、Red Fleet、Flaming Gorgeでの釣りやボートです。</p>
+        </div>
+        <div class="faq-item">
+          <h3>ユタ州バーナルには何日必要ですか？</h3>
+          <p>2〜3日が理想的です。1日はDinosaur National Monumentと岩絵に、1日はガイド付きUTVツアーと州立公園に、そして任意の3日目をFlaming Gorge、釣り、あるいはUinta Mountainsでのハイキングに。1日だけでは、国定公園かほかの目玉の一つ分の時間しかありません。</p>
+        </div>
+        <div class="faq-item">
+          <h3>ユタ州バーナルは訪れる価値がありますか？</h3>
+          <p>あります。バーナルはDinosaur National Monumentへの玄関口で、本物の恐竜の化石、古代の岩絵、赤い岩の峡谷、西部開拓時代の歴史、そして世界水準のアウトドアレクリエーションを、狭く混雑のない範囲に詰め込んでいます。ユタ州南部に人を惹きつけるものの多くを、混雑なしで味わえます。</p>
+        </div>
+        <div class="faq-item">
+          <h3>バーナルで一番おすすめの過ごし方は何ですか？</h3>
+          <p>Adventure Tours Vernalのガイド付きバックカントリーUTVツアーが、最も深く入り込める体験です。オフロードの冒険、岩絵、天然のアーチ、そして舗装路からはたどり着けない峡谷の景観が、3時間の体験に一つにまとまっています。外せない見どころの第一はDinosaur National Monumentです。</p>
+        </div>
+        <div class="faq-item">
+          <h3>ユタ州バーナルは子ども連れのご家族に向いていますか？</h3>
+          <p>とても向いています。お子さんはDinosaur National Monumentで本物の恐竜の化石に触れ、Red Fleet State Parkで恐竜の足跡群まで歩き、Utah Field Houseの恐竜庭園を巡り、保護者同伴で2歳からガイド付きUTVツアーに同乗できます。見どころの大半は短い歩きだけで済みます。</p>
+        </div>
+        <div class="faq-item">
+          <h3>ユタ州バーナルを訪れるのに最適な時期はいつですか？</h3>
+          <p>晩春（5〜6月）と初秋（9〜10月）が、最も過ごしやすい気温、活発な野生動物、そして少なめの人出に恵まれます。夏は暑く、すべてが開いていて、水辺の活動に最適です。冬は静かで景色も美しいのですが寒く、一部の季節営業の施設や道路が閉まります。</p>
+        </div>
+        <div class="faq-item">
+          <h3>バーナルはSalt Lake Cityからどのくらいの距離ですか？</h3>
+          <p>バーナルはSalt Lake CityからUS-40を東へ車でおよそ3時間、最寄りの主要空港はSalt Lake Cityです。景色の良いルートはUinta Mountainsを越え、Daniels SummitとStrawberry Reservoirの一帯を通ります。</p>
+        </div>
+        <div class="faq-item">
+          <h3>ユタ州バーナルは何で知られていますか？</h3>
+          <p>バーナルはユタ州の恐竜の国として知られています。Uintah BasinのDinosaur National Monumentの縁に位置し、赤い岩の峡谷、FremontとUteの岩絵、西部開拓時代の無法者の歴史、そして公有地でのアウトドアレクリエーションに囲まれています。</p>
+        </div>
+        <div class="faq-item">
+          <h3>バーナルを訪れるのに車は必要ですか？</h3>
+          <p>必要です。バーナルの見どころは周囲の田園地帯に点在していて——国定公園は東へ20分、州立公園と峡谷は5〜60分——それらを結ぶ本格的な公共交通はないため、自家用車が欠かせません。トレイルに出てからの移動は、ガイド付きUTVツアーが引き受けます。</p>
+        </div>
+        <div class="faq-item">
+          <h3>バーナルはMoabの代わりになりますか？</h3>
+          <p>多くの旅行者にとっては、なります。バーナルには赤い岩の峡谷、オフロードの冒険、そしてMoabに通じる趣の迫力ある景観がありながら、人出ははるかに少なく、さらにMoabにはない恐竜の化石と岩絵があります。混雑なしで冒険を求める方には有力な選択肢です。</p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="article-cta">
+        <h3>バーナルのバックカントリーへ出かけませんか</h3>
+        <p>Kawasaki KRX 1000のガイド付きツアー——1台$349（乗車2名まで）、3時間。5つのトレイルを、DaveとTrudy Wilsonが自らご案内します。</p>
+        <a href="/ja/booking/" class="cta-btn">ツアーを予約する</a>
+        <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
+      </div>
+    </div>
+
+    <!-- Related Articles -->
+    <div class="related-articles">
+      <h3>バーナルのガイドをもっと見る</h3>
+      <div class="related-grid">
+        <a href="/ja/dinosaur-national-monument/visiting-dinosaur-national-monument/" class="related-card">
+          <h4>Dinosaur National Monument訪問ガイド</h4>
+          <p>化石、ドライブ、峡谷についての完全な地元ガイド。</p>
+        </a>
+        <a href="/ja/things-to-do/vernal-utah-attractions/" class="related-card">
+          <h4>バーナルの主な見どころ</h4>
+          <p>バーナルとその周辺で訪れるべき名所と場所。</p>
+        </a>
+        <a href="/ja/things-to-do/fun-things-to-do-vernal-utah-kids/" class="related-card">
+          <h4>子ども連れで楽しむ過ごし方</h4>
+          <p>バーナルのご家族向けアクティビティと冒険。</p>
+        </a>
+        <a href="/ja/utv/" class="related-card">
+          <h4>ガイド付きUTVツアー</h4>
+          <p>5つのトレイルシステムすべてを、地形とトレイルの個性の解説とともに。</p>
+        </a>
+      </div>
+    </div>
+  </main>
+
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3C, Italian P6,
- * French P8-P6, German P9-P6).
+ * French P8-P6, German P9-P6, Japanese P10K).
  * Every locale without a committed variant falls back to English. Callers
  * that don't need locale awareness keep importing `bodyHtml` directly.
  */
@@ -1806,5 +2102,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
   if (locale === 'de') return DE;
+  if (locale === 'ja') return JA;
   return bodyHtml;
 }

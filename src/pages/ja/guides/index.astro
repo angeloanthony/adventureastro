@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import TrustBadge from '../../../components/content/TrustBadge.astro';
+import Header from '../../../components/layout/Header.astro';
+import Footer from '../../../components/layout/Footer.astro';
+import Seo from '../../../components/seo/Seo.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import HubIndex from '../../../components/content/HubIndex.astro';
+import { getLangFromUrl } from '../../../lib/i18n';
+import { t } from '../../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+// ja/guides/index.astro — Japanese Guides hub pillar (P10K Batch C), mirrors
+// src/pages/de/guides/index.astro and the French/Portuguese equivalents.
+// Mirrors src/pages/guides/index.astro exactly (structure, classes, ids).
+//
+// All nine Japanese guides spokes already exist as translated MDX by the time
+// this pillar lands — so, per the rollout's internal-link rule, every spoke
+// link below points at its /ja/ prefixed path instead of falling back to
+// English.
+const schema = `{
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "ユタ州バーナル旅行ガイド——UTVの旅を計画する",
+        "description": "ユタ州バーナルへの旅を計画するためのガイド集です。目的地の全体像、服装、持ち物、季節ごとの天気、バーナルとMoabの比較、そしてFlaming Gorge、Red Fleet State Park、Steinaker State Park、Ashley National Forestの詳細ガイドをそろえています。",
+        "author": {"@type": "Organization", "name": "Adventure Tours Vernal"},
+        "publisher": {"@type": "Organization", "name": "Adventure Tours Vernal", "logo": {"@type": "ImageObject", "url": "https://adventuretoursvernal.com/images/logo.webp"}},
+        "datePublished": "2026-07-10",
+        "dateModified": "2026-07-11",
+        "mainEntityOfPage": "https://adventuretoursvernal.com/ja/guides/"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type": "Question", "name": "Adventure Tours Vernalは旅行計画向けにどんなガイドを公開していますか？", "acceptedAnswer": {"@type": "Answer", "text": "Adventure Tours Vernalでは、旅行計画に役立つ9本のガイドを公開しています。バーナルという目的地の全体像をまとめた完全ガイド、季節ごとの天気ガイド、服装ガイド、持ち物チェックリスト、Moabから訪れる方向けの比較ガイド、そして近隣4つの目的地——Flaming Gorge、Red Fleet State Park、Steinaker State Park、Ashley National Forest——の詳細ガイドです。いずれも、バーナル近郊のガイド付きKawasaki KRX 1000 UTVツアーの前に知っておきたいことを扱っています。"}},
+          {"@type": "Question", "name": "UTVツアーを予約する前に、これらのガイドを読む必要はありますか？", "acceptedAnswer": {"@type": "Answer", "text": "いいえ、必須ではありませんが、準備の助けになります。ほとんどのお客様に必要なのは、つま先の覆われた靴と有効な運転免許証だけです——ヘルメットと安全装備はAdventure Tours Vernalがご用意します。ガイドでは服装、持ち物、季節ごとの天気、目的地の概要、そしてバーナルのツアーがMoabと比べてどうなのかを扱っています。"}}
+        ]
+      }
+    ]
+  }`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="ユタ州バーナル旅行ガイド | Adventure Tours Vernal"
+      description="ユタ州バーナルへの旅を計画するための9本のガイド集です。目的地の全体像、服装、持ち物、季節ごとの天気、Flaming Gorgeなど周辺の目的地、そしてバーナル近郊のガイド付きUTVツアーがMoabと比べてどうなのかまで、出発前に知っておきたいことをまとめてご案内します。"
+      path="/ja/guides/"
+      type="article"
+      ogTitle="ユタ州バーナル旅行ガイド | Adventure Tours Vernal"
+      ogDescription="ユタ州バーナル近郊のガイド付きUTVツアーを計画するために必要なすべて——服装、持ち物、季節ごとの天気、そしてMoabとの比較まで。"
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="guides" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.guides', lang) }]} />
+  <main class="article-page" slot="body">
+    <header class="article-header">
+      <h1 class="article-title">ユタ州バーナル旅行ガイド</h1>
+      <p class="article-meta">Adventure Tours Vernal</p>
+      <TrustBadge align="left" />
+    </header>
+    <div class="article-body">
+      <div class="article-summary-box">
+        ガイド付きKawasaki KRX 1000 UTVツアーの準備は簡単です——ほとんどのお客様に必要なのは、有効な運転免許証とつま先の覆われた靴だけです。ここに集めたガイドが、それ以外のすべてを扱います。何を着るか、何を持っていくか、バーナルの高地砂漠の天気が季節ごとにどう変わるか、そしてMoabと比べたときにバーナルのツアーがどう位置づけられるか、です。
+      </div>
+
+      <div class="article-tip"><strong>初めての訪問を計画中ですか？</strong><a href="/ja/dinosaur-national-monument/visiting-dinosaur-national-monument/">Dinosaur National Monument完全ガイド</a>をご覧ください——化石、岩絵、絶景ドライブ、ハイキング、そして訪れるのに最適な季節までを網羅した完全プランです。</div>
+
+      <h2>まずは目的地そのものから</h2>
+      <p>バーナルのことはまったく初めてですか？<a href="/ja/guides/ultimate-guide-to-vernal-utah/">ユタ州バーナルの完全ガイド</a>では、初めて訪れる方に必要な基本をひと通り押さえています——バーナルがどこにあるのか、どのようにして恐竜の国になったのか、行き方と町の中での移動方法、宿泊先と食事の選び方、そして地域のハイライトを軸に旅をどう組み立てるか。まずはそこから始めて、その後は下のガイドでトレイルに向けた準備を整えてください。</p>
+
+      <h2>ツアーに向けた準備</h2>
+      <p>ご予約の前に、バーナル周辺の地形と気候が実際にどんなものかを知っておくと役に立ちます。<a href="/ja/guides/what-to-wear-utv-tour/">砂漠UTVツアーの服装ガイド</a>では、オープンエアのサイドバイサイドで走る3時間のライドに向けて、靴、重ね着、日焼け対策を解説しています。<a href="/ja/guides/what-to-bring/">持ち物ガイド</a>のチェックリストが荷造りの仕上げです——必須のもの、当社がご用意するもの、そして家に置いてくるものをまとめています。</p>
+
+      <h2>訪れる時期を選ぶ</h2>
+      <p>バーナルはユタ州の高地砂漠、標高5,331フィートに位置し、朝と午後で30–40°Fもの気温差が生じることがあります。<a href="/ja/guides/vernal-weather-guide/">バーナル天気ガイド</a>は季節ごとに気象条件を分解して解説しているので、旅に最適な時期を選べます——真夏や冬の入り口に走る場合、何が待っているのかも分かります。</p>
+
+      <h2>バーナルとMoabを比べる</h2>
+      <p>バーナルとMoabのUTVツアーを天秤にかけているなら、<a href="/ja/guides/moab-utv-tours/">Moab UTVツアーの代替案</a>ガイドが正直な比較をお見せします——トレイルの混雑具合、夏の気温、料金、そしてバーナルにはあってMoabにはないトレイルや見どころ（Moonshine ArchやDinosaur National Monumentなど）です。</p>
+
+      <h2>この地域の目的地を掘り下げる</h2>
+      <p>どこで一日を過ごすか、さらに掘り下げてみませんか？4本の詳細な目的地ガイドが、バーナルから放射状に広がるこの土地を扱っています——<a href="/ja/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge完全ガイド</a>、<a href="/ja/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet State Park完全ガイド</a>、<a href="/ja/guides/ultimate-guide-to-steinaker-state-park/">Steinaker State Park完全ガイド</a>、そして<a href="/ja/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest完全ガイド</a>。それぞれに独自の景観、水辺、トレイルがあり、いずれも町から気軽に足を延ばせる距離です。</p>
+
+      <div class="article-tip">
+        <strong>どこから始めればいいか迷っていますか？</strong>DaveまたはTrudyまで<a href="tel:435-219-9447">(435) 219-9447</a>へお電話ください——ご旅行の日程とグループの人数に合わせて、何が待っているのかをご説明します。あるいは、準備が整いましたら<a href="/ja/booking/">空き状況を確認してオンラインでご予約ください</a>。
+      </div>
+    </div>
+  </main>
+  <HubIndex slot="body" collection="guides" heading="ガイド一覧" />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

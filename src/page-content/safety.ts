@@ -1455,9 +1455,251 @@ const DE = `
 </div>
 `;
 
+const JA = `
+<!-- ページ要約ブロック -->
+<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+  ユタ州バーナルのガイド付きUTVツアーに関するAdventure Tours Vernalの安全ガイドラインです。運転する方は18歳以上である必要があります。同乗する方は2歳以上である必要があります。シートベルトの着用は必須です。アルコールおよび薬物に対しては一切の例外を認めません。すべてのツアーの前に完全な安全説明を行います。お電話は (435) 219-9447 まで。
+</p>
+
+<section class="policy-section">
+  <div class="container">
+    <div class="section-header">
+      <h1 class="section-title">安全ガイドライン</h1>
+      <p class="section-subtitle">お客様の安全が私たちの最優先事項です。冒険に出発する前に、必ずこのガイドラインをお読みください。</p>
+    </div>
+
+    <div class="policy-container">
+
+      <!-- ツアーの前に -->
+      <div class="policy-card">
+        <div class="policy-icon">📋</div>
+        <h2 class="policy-heading">ツアーの前に</h2>
+        <div class="policy-list">
+          <h3>到着とチェックイン：</h3>
+          <ul>
+            <li>オリエンテーションと安全説明のため、<strong>30分前</strong>にお越しください</li>
+            <li>有効な運転免許証をお持ちください（運転する方全員に必須です）</li>
+            <li>必要な免責同意書と契約書にすべてご記入ください</li>
+            <li>義務付けられている安全オリエンテーションに必ずご参加ください</li>
+          </ul>
+          <h3>健康状態と身体的な条件：</h3>
+          <ul>
+            <li>参加される方は全員、良好な健康状態である必要があります</li>
+            <li>持病、けが、気になる点がある場合は、必ずガイドにお知らせください</li>
+            <li>妊娠中の方は、参加前に必ず医師にご相談ください</li>
+            <li>腰、首、心臓に疾患がある方は、事前に必ずお知らせください</li>
+          </ul>
+          <h3>アルコール・薬物に関する方針：</h3>
+          <ul>
+            <li>アルコールおよび薬物については<strong>一切の例外を認めません</strong></li>
+            <li>影響下にある方は乗車していただけません</li>
+            <li>違反があった場合、返金は一切ありません</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 年齢制限 -->
+      <div class="policy-card">
+        <div class="policy-icon">👥</div>
+        <h2 class="policy-heading">年齢制限</h2>
+        <div class="policy-table">
+          <div class="policy-row">
+            <div class="policy-timeframe">運転する場合</div>
+            <div class="policy-refund refund-full">18歳以上</div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-timeframe">同乗者として乗車する場合</div>
+            <div class="policy-refund refund-full">2歳以上</div>
+          </div>
+        </div>
+        <div class="policy-note">
+          <strong>重要：</strong>運転する方は全員、有効な運転免許証をご提示ください。未成年者の免責同意書には、保護者の署名が必要です。
+        </div>
+      </div>
+
+      <!-- 車両の操作 -->
+      <div class="policy-card">
+        <div class="policy-icon">🚙</div>
+        <h2 class="policy-heading">車両の操作と安全</h2>
+        <div class="policy-list">
+          <h3>車両を操作するとき：</h3>
+          <ul>
+            <li>シートベルトは常に着用してください - 例外はありません</li>
+            <li>手や腕は常に車内に入れておいてください</li>
+            <li>車両の走行中に立ち上がることは絶対にしないでください</li>
+            <li>ガイドの指示には常に従ってください</li>
+            <li>他の車両とは安全な車間距離を保ってください</li>
+            <li>ガイドとの連絡にはトランシーバーをお使いください</li>
+          </ul>
+          <h3>安全装備（必須）：</h3>
+          <ul>
+            <li>シートベルトは同乗者全員が着用しなければなりません</li>
+            <li>ヘルメット（ご希望に応じてお貸しします）</li>
+            <li>ゴーグルまたはサングラスの着用を推奨します</li>
+          </ul>
+          <h3>禁止事項：</h3>
+          <ul>
+            <li>競走やスピードの出し過ぎは禁止です</li>
+            <li>無謀な運転やスタント行為は禁止です</li>
+            <li>指定されたトレイルから外れることは禁止です</li>
+            <li>影響下での車両の運転は禁止です</li>
+            <li>ガイドの指示を無視することは禁止です</li>
+          </ul>
+        </div>
+        <div class="policy-warning">
+          <strong>⚠️ 警告：</strong>安全規則に従わない場合、ツアーを即時中止とし、返金は行いません。無謀な行為があった場合、すべての保険および損害免責の適用が無効になります。
+        </div>
+      </div>
+
+      <!-- 地形とトレイルの安全 -->
+      <div class="policy-card">
+        <div class="policy-icon">⛰️</div>
+        <h2 class="policy-heading">地形とトレイルの安全</h2>
+        <div class="policy-list">
+          <h3>トレイルの状況：</h3>
+          <ul>
+            <li>トレイルには岩、急な上り坂、渡渉箇所、荒れた地形が含まれることがあります</li>
+            <li>天候は急変することがあります - 備えておいてください</li>
+            <li>砂ぼこりや土は日常的です - 目を保護するものをお持ちください</li>
+            <li>人里離れた場所では携帯電話の電波が届きにくいことがあります</li>
+          </ul>
+          <h3>トレイルから外れないでください：</h3>
+          <ul>
+            <li>指定されたトレイルから絶対に外れないでください</li>
+            <li>私有地と掲示された標識を尊重してください</li>
+            <li>Leave No Traceの原則に従ってください</li>
+            <li>野生動物や植物を乱さないでください</li>
+          </ul>
+          <h3>緊急時の対応：</h3>
+          <ul>
+            <li>危険を感じたら、すぐにガイドにお知らせください</li>
+            <li>連絡にはトランシーバーをお使いください</li>
+            <li>救急セットはすべてのツアーに常備しています</li>
+            <li>ガイドはウィルダネス・ファーストエイドの訓練を受けています</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 天候と自然環境 -->
+      <div class="policy-card">
+        <div class="policy-icon">🌦️</div>
+        <h2 class="policy-heading">天候と自然環境の安全</h2>
+        <div class="policy-list">
+          <h3>天候への備え：</h3>
+          <ul>
+            <li>ほとんどの天候ではツアーを実施しています</li>
+            <li>荒天の場合、ツアーを中止または日程変更することがあります</li>
+            <li>気温は大きく変動することがあります - 重ね着でお越しください</li>
+            <li>天候が不安定な場合は、雨具をお持ちください</li>
+          </ul>
+          <h3>日差し対策：</h3>
+          <ul>
+            <li>ユタ州の日差しは強烈です - 日焼け止め（SPF 30+）を塗ってください</li>
+            <li>UVカット機能のあるサングラスをお持ちください</li>
+            <li>帽子またはバンダナを着用してください</li>
+            <li>水分補給を欠かさないでください - 水はご用意しています</li>
+          </ul>
+          <h3>野生動物への対応：</h3>
+          <ul>
+            <li>野生動物に近づいたり、餌を与えたりしないでください</li>
+            <li>すべての動物とは安全な距離を保ってください</li>
+            <li>特に暖かい時期はヘビにご注意ください</li>
+            <li>野生動物を見かけたら、ガイドにお知らせください</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 通信 -->
+      <div class="policy-card">
+        <div class="policy-icon">📡</div>
+        <h2 class="policy-heading">通信とグループの安全</h2>
+        <div class="policy-list">
+          <h3>連絡を保つために：</h3>
+          <ul>
+            <li>トランシーバーは車両ごとにご用意しています</li>
+            <li>トランシーバーは常に電源を入れたままにしてください</li>
+            <li>停止する必要があるときは、すぐにガイドにお知らせください</li>
+            <li>ガイドに知らせずにグループから離れることは絶対にしないでください</li>
+          </ul>
+          <h3>問題が起きた場合：</h3>
+          <ul>
+            <li>安全な場所に停止し、トランシーバーをお使いください</li>
+            <li>機械的な不具合をご自身で直そうとしないでください</li>
+            <li>ガイドの助けをお待ちください</li>
+            <li>車両に不安がある状態で走行を続けることは絶対にしないでください</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 損害と賠償責任 -->
+      <div class="policy-card">
+        <div class="policy-icon">🛡️</div>
+        <h2 class="policy-heading">損害と賠償責任</h2>
+        <div class="policy-list">
+          <h3>車両損害免責（Vehicle Damage Waiver）：</h3>
+          <ul>
+            <li>すべてのツアーで必須です</li>
+            <li>お客様の負担を免責金額までに限定します</li>
+            <li>無謀な運転が原因の場合は無効となります</li>
+            <li>アルコール・薬物が関係する場合は無効となります</li>
+          </ul>
+          <h3>事故発生時の手順：</h3>
+          <ul>
+            <li>直ちに停止し、けがの有無を確認してください</li>
+            <li>トランシーバーでガイドに連絡してください</li>
+            <li>差し迫った危険がある場合を除き、けが人を動かさないでください</li>
+            <li>可能であれば、写真で状況を記録してください</li>
+          </ul>
+        </div>
+        <div class="deductible-info">
+          <h3>保険に関する重要なお知らせ：</h3>
+          <p>お客様は当社の賠償責任保険の対象となり、<strong>1事故あたり $1,000 の免責金額</strong>が適用されます。これは過失の有無にかかわらず適用されます。車両損害免責（Vehicle Damage Waiver）をご利用いただくと、車両の損害に対するお客様の自己負担額を抑えることができます。</p>
+        </div>
+      </div>
+
+      <!-- お客様の責任 -->
+      <div class="policy-card">
+        <div class="policy-icon">✅</div>
+        <h2 class="policy-heading">お客様の責任</h2>
+        <div class="policy-list">
+          <h3>参加者として、以下に同意していただきます：</h3>
+          <ul>
+            <li>ガイドの指示にすべて従うこと</li>
+            <li>車両を安全かつ責任を持って操作すること</li>
+            <li>他の参加者と自然環境を尊重すること</li>
+            <li>気になる点があれば直ちに伝えること</li>
+            <li>必要な書類にすべて正直に記入すること</li>
+            <li>ご自身の安全について個人としての責任を負うこと</li>
+          </ul>
+        </div>
+        <div class="policy-warning">
+          <strong>ご注意ください：</strong>ATV・UTVでの走行には本質的な危険が伴います。私たちは安全のためにあらゆる予防措置を講じていますが、参加はお客様ご自身の責任において行っていただきます。署名する前に、すべての免責同意書を必ずお読みになり、内容をご理解ください。
+        </div>
+      </div>
+
+      <!-- お問い合わせ CTA -->
+      <div class="policy-cta">
+        <h3>安全についてのご質問は？</h3>
+        <p>ツアーの前に安全に関するご心配やご質問がありましたら、お気軽にお問い合わせください。安全で素晴らしい冒険をお届けするために、私たちがサポートします。</p>
+        <div class="cta-buttons">
+          <a href="tel:435-219-9447" class="cta-button primary">📞 お電話 (435) 219-9447</a>
+          <a href="/ja/booking/" class="cta-button secondary">安全な冒険を予約する</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- モバイル固定CTA -->
+<div class="mobile-sticky-cta">
+  <button onclick="location.href='/ja/booking/'">今すぐツアーを予約</button>
+</div>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3A, Italian P6,
- * French P8-P6, German P9).
+ * French P8-P6, German P9, Japanese P10K).
  * Every locale without a committed variant falls back to English. Callers
  * that don't need locale awareness keep importing `bodyHtml` directly.
  */
@@ -1467,5 +1709,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
   if (locale === 'de') return DE;
+  if (locale === 'ja') return JA;
   return bodyHtml;
 }

@@ -454,6 +454,80 @@ const DE = `
   </main>
 `;
 
+const JA = `
+
+
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    Dinosaur National Monument近郊のUTVツアーは、Adventure Tours Vernalがガイド付きのKawasaki KRX 1000サイドバイサイドでご提供しています。5つのトレイルシステムが、峡谷、岩絵、天然のアーチ、砂漠の地形を擁する国定公園周辺のバックカントリーを巡ります。拠点はユタ州バーナル、国定公園から20分です。3時間で1台$349。お電話は(435) 219-9447まで。
+  </p>
+
+  <main class="article-page">
+    <header class="article-header">
+      <div class="article-breadcrumb"><a href="/ja/">ホーム</a><span class="sep">›</span><span>Dinosaur Monumentツアー</span></div>
+      <h1 class="article-title">Dinosaur National Monument近郊のUTVツアー</h1>
+      <p class="article-meta">2026年4月更新 · Adventure Tours Vernal</p>
+      <p style="display:inline-flex;align-items:center;gap:8px;margin:12px 0;padding:7px 15px;border:1px solid rgba(212,118,78,0.5);border-radius:999px;background:#ffffff;box-shadow:0 1px 4px rgba(0,0,0,0.08);font-size:0.95rem;color:#4a4139;"><span aria-hidden="true" style="color:#e6a817;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count}件のGoogleレビュー</span></p>
+    </header>
+
+    <div class="article-body">
+      <div class="article-summary-box">
+        Dinosaur National Monumentには、ジュラ紀の化石をひと目見ようと世界中から人が訪れます——けれど国定公園を取り囲むバックカントリーには、まったく別の層の冒険が眠っています。ガイド付きUTVツアーなら、国定公園を訪れる方の多くが車で素通りしてしまう峡谷の地形、古代の岩絵、砂漠の風景のただ中へ入っていけます。
+      </div>
+
+      <div class="article-tip"><strong>まずはこちらから：</strong> 国定公園への旅を計画するのは初めてですか？ <a href="/ja/dinosaur-national-monument/visiting-dinosaur-national-monument/">Dinosaur National Monument完全ガイド</a>をお読みください——化石、岩絵、絶景ドライブ、ハイキング、そして訪れるのに最適な時期までを網羅した、まるごとの計画です。</div>
+
+      <h2>国定公園の外に広がるバックカントリー</h2>
+      <p>Dinosaur National Monumentの中では動力車両の乗り入れが認められていませんが、国定公園を取り巻くBLMの土地とバックカントリーには、同じ地質の造形、同じ峡谷の連なり、そして同じ古代のロックアートが広がっています——しかも、国定公園の絶景ドライブではほのめかす程度にしか触れられない地形の奥深くまで、オフロードのトレイルで入っていけます。</p>
+      <p>Adventure Tours Vernalは、この土地に5つのトレイルシステムを走らせています。Outlaw Trailは、Butch CassidyのWild Bunchが使った歴史ある経路をたどり、人里離れた峡谷の国を貫きます。Moonshine Archは赤い岩の峡谷を縫って、隠れた天然の砂岩のアーチへと続きます。Ashley Gorgeは、そそり立つ壁に挟まれた劇的な回廊を走り抜けます。地形も地質も、国定公園の中で目にするものとひと続きです——同じ太古の風景の上を走っていることになります。</p>
+
+      <h2>岩絵、ロックアート、そして古代の歴史</h2>
+      <p>国定公園の中に岩絵やピクトグラフを残したFremontとUteの人々は、その周囲のバックカントリー一帯にも同じものを残しました。Adventure Tours Vernalのトレイル経路のいくつかは、舗装路からはたどり着けないロックアートのパネルのすぐそばを通ります——どこを見ればよいか知っているガイドがいなければ、まず見つけられない場所です。国定公園の文化史と、それを取り巻く生きた風景とのつながりは、ガイド付きツアーで最も心を打つ部分のひとつです。</p>
+
+      <h2>UTVツアーと国定公園の見学を組み合わせる</h2>
+      <p>いちばん人気の組み立ては、午前にUTVツアーを予約し、午後にQuarry Exhibit Hallを見学する形、あるいはその逆です。Adventure Tours Vernalは国定公園の主要入口から西へ20分のところにありますので、段取りは簡単です。3時間のガイド付きツアーに採石場での半日を足せば、化石の記録と生きたバックカントリーの両方を味わう、まる一日の恐竜の国めぐりになります。</p>
+      <p>数日滞在される方なら、国定公園の旅程にUTVツアーを一つ加えるだけで、ありふれた国立公園の旅がずっと忘れがたいものに変わります。お子さんは、ビジターセンターよりもUTVに乗った時間のほうを長く覚えているはずです。</p>
+
+      <p>国定公園そのものがどう成り立っているかを知っておくと役に立ちます。実のところ二つの地区に分かれていて、バーナルに近いユタ側の化石地帯——ツアーと組み合わせるならこちらです——と、州境を越えたコロラド側の峡谷地帯があり、後者はそれだけで別の旅になります。</p>
+
+      <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+        <img src="/images/maps/dinosaur-national-monument-orientation.svg" alt="Dinosaur National Monumentの二つの地区を示す、模式的な位置関係図。ユタ州バーナルに近い化石側——Quarry Exhibit HallとWall of Bones、Cub Creek Roadとその岩絵、Josie Morrisの小屋、そしてSplit Mountain——が、バーナルを拠点とするUTVツアーと自然に組み合わせられる側です。コロラド州Dinosaurに近いコロラド側の峡谷地帯——Harpers Corner Scenic Drive、GreenとYampaの川の峡谷、そしてEcho Park——は化石のない、別立ての行程です。二つで一つの国定公園を成し、それぞれ別の入口から入ります。この図は位置関係のみを示すもので、縮尺、距離、方角は正確ではありません。" width="1600" height="1200" loading="lazy" decoding="async" />
+        <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">国定公園の成り立ち：バーナルに近い化石側がUTVツアーと組み合わせる側で、コロラド側の峡谷地帯はそれだけで別の旅です。位置関係の図で、縮尺は正確ではありません。</figcaption>
+      </figure>
+
+      <h2>ツアーに含まれるもの</h2>
+      <p>FOX 2.5 PODIUM LSCサスペンションを備えた2人乗りのKawasaki KRX 1000サイドバイサイド、ヘルメット、安全装備、そして熟練のガイド。Dave WilsonとTrudy Wilsonが自分たちの車両でグループに並走します。3時間、1台$349で2名まで乗車いただけます。どの習熟度の方も歓迎です——オフロードの経験は一切必要ありません。</p>
+
+      <div class="article-tip">
+        <strong>時間帯のヒント：</strong> 週末や祝日に国定公園を訪ねるなら、UTVツアーは午前に予約してください——採石場は昼ごろから混み合います。平日なら、どちらの順番でも構いません。(435) 219-9447にお電話いただければ、Daveが国定公園の予定に合わせて計画をお手伝いします。
+      </div>
+
+      <div class="article-faq">
+        <h2>よくあるご質問</h2>
+        <div class="faq-item"><h3>Dinosaur National Monumentの近くでUTVツアーはできますか？</h3><p>はい。Adventure Tours Vernalは、峡谷、岩絵、よく似た地質を備えた国定公園周辺のバックカントリーを、ガイド付きツアーで巡っています。</p></div>
+        <div class="faq-item"><h3>Adventure Tours Vernalから国定公園までどのくらいですか？</h3><p>およそ20分です。拠点はユタ州バーナル、国定公園のQuarry Exhibit Hall入口のすぐ西にあります。</p></div>
+        <div class="faq-item"><h3>ツアーと国定公園を組み合わせる一番よい方法は？</h3><p>午前にUTVツアー、午後に国定公園の見学（またはその逆）で、恐竜の国を味わうまる一日の冒険になります。</p></div>
+      </div>
+
+      <div class="article-cta">
+        <h3>国定公園の旅に冒険を足しませんか</h3>
+        <p>ガイド付きKRX 1000ツアー · 1台$349 · 国定公園から20分 · 星5.0</p>
+        <a href="/ja/booking/" class="cta-btn">ツアーを予約する</a>
+        <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
+      </div>
+    </div>
+
+    <div class="related-articles">
+      <h3>旅の計画を立てる</h3>
+      <div class="related-grid">
+        <a href="/things-to-do/" class="related-card"><h4>バーナルの楽しみ方</h4><p>国定公園の先まで見渡す完全ガイド。</p></a>
+        <a href="/ja/things-to-do/vernal-utah-attractions/" class="related-card"><h4>バーナルの主な見どころ</h4><p>この地域で見逃せない名所のすべて。</p></a>
+        <a href="/ja/dinosaur-national-monument/petroglyphs-rock-art-vernal/" class="related-card"><h4>岩絵とロックアート</h4><p>トレイル沿いにも、その外にもある古代の芸術の跡。</p></a>
+        <a href="/things-to-do/best-restaurants-vernal-utah/" class="related-card"><h4>バーナルの食事どころ</h4><p>冒険のあとに、しっかり腹ごしらえを。</p></a>
+      </div>
+    </div>
+  </main>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3B). Every
  * locale without a committed variant falls back to English. Callers that
@@ -465,5 +539,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
   if (locale === 'de') return DE;
+  if (locale === 'ja') return JA;
   return bodyHtml;
 }

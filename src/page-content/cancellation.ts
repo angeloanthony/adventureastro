@@ -1053,9 +1053,184 @@ const DE = `
 
 `;
 
+const JA = `
+
+<!-- ================================================
+     ページ要約ブロック — Google AI Overviews 用
+     ================================================ -->
+<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+  ユタ州バーナルのガイド付きUTVツアーに関するAdventure Tours Vernalのキャンセルポリシーです。72時間以上前のキャンセルは全額返金となります。72時間未満は50%の返金です。48時間未満は返金なしとなります。ご質問は (435) 219-9447 までお電話ください。
+</p>
+
+<section class="policy-section">
+  <div class="container">
+    <div class="section-header">
+      <h1 class="section-title">キャンセルポリシー</h1>
+      <p class="section-subtitle">冒険をご予約になる前に、当社の規約と条件をご確認ください</p>
+    </div>
+
+    <div class="policy-container">
+
+      <!-- キャンセルと返金 -->
+      <div class="policy-card">
+        <div class="policy-icon">📅</div>
+        <h2 class="policy-heading">キャンセルと返金</h2>
+
+        <div class="policy-table">
+          <div class="policy-row">
+            <div class="policy-timeframe">48時間未満</div>
+            <div class="policy-refund refund-none">返金なし</div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-timeframe">72時間未満</div>
+            <div class="policy-refund refund-partial">50%返金</div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-timeframe">72時間以上前</div>
+            <div class="policy-refund refund-full">100%返金</div>
+          </div>
+          <div class="policy-row highlight">
+            <div class="policy-timeframe">5台以上の車両のグループ</div>
+            <div class="policy-refund refund-full">2週間前まで: 100%返金<br>2週間を過ぎてから: 返金なし</div>
+          </div>
+        </div>
+
+        <div class="policy-note">
+          <strong>ご注意:</strong> キャンセルの時間はすべて、ご予約いただいたツアーの出発予定時刻を基準に計算されます。
+        </div>
+      </div>
+
+      <!-- 天候に関するポリシー -->
+      <div class="policy-card">
+        <div class="policy-icon">🌦️</div>
+        <h2 class="policy-heading">天候に関するポリシー</h2>
+        <p>当社は晴天でも雨天でもツアーを実施いたします。ただし、極端な悪天候の場合、またはAdventure Tours Vernalがその他の予期せぬ事情により中止せざるを得ない場合には、日程の変更、または全額返金のいずれかをお選びいただけます。</p>
+        <p><strong>重要:</strong> 雨を理由にお客様がご参加されないことを選ばれた場合は、返金に関する当社の通常のキャンセルポリシーが適用されます。当社が異常気象により中止した場合は、全額返金いたします。</p>
+      </div>
+
+      <!-- 必要な同意書 -->
+      <div class="policy-card">
+        <div class="policy-icon">📝</div>
+        <h2 class="policy-heading">必要な同意書および免責同意書</h2>
+        <p>アクティビティにご参加いただくには、すべてのお客様に<strong>参加同意書・免責および危険引受同意書(Participant Agreement, Release and Assumption of Risk)</strong>へのご署名をお願いしております。未成年のお子様については、保護者または法定後見人の方にご署名いただきます。さらに、UTVツアーの運転者の方には<strong>運転者同意書(Driver Agreement)</strong>へのご署名もお願いしております。</p>
+
+        <div class="policy-warning">
+          <strong>⚠️ 重要:</strong> これらの同意書にご署名いただけない場合、冒険にご参加いただくことはできません。ご署名されないという選択は返金の理由とはならず、当社のキャンセルポリシーが適用されます。
+        </div>
+      </div>
+
+      <!-- 車両損害補償 -->
+      <div class="policy-card">
+        <div class="policy-icon">🛡️</div>
+        <h2 class="policy-heading">車両損害補償</h2>
+        <p class="required-badge">すべてのツアーで必須です</p>
+
+        <p>車両損害補償は、事故が発生した場合に当社の装備に生じた損害について、お客様のご負担額を免責金額+税に限定するものです。</p>
+
+        <div class="policy-list">
+          <h3>損害補償が無効となる場合:</h3>
+          <ul>
+            <li>損害が無謀な運転の結果である場合</li>
+            <li>ガイドの指示に従わなかった場合</li>
+            <li>損害発生時に、お客様の体内にアルコールまたは薬物が少しでもあったと判明した場合</li>
+          </ul>
+        </div>
+
+        <div class="deductible-info">
+          <h3>免責金額について:</h3>
+          <p>当社のガイド付きツアーの同意書にご署名いただくと、お客様は保険証券のすべての条件に従うことを前提に、当社の賠償責任保険の被保険運転者となります。この補償には<strong>1事故あたり $1,000 の免責金額</strong>が設定されているため、他の人、車両、または財物との事故に関与された場合、事故における過失の有無にかかわらず、事故発生時に当社へ $1,000 をお支払いいただくことに同意していただきます。</p>
+        </div>
+      </div>
+
+      <!-- 賠償責任補償 -->
+      <div class="policy-card">
+        <div class="policy-icon">📋</div>
+        <h2 class="policy-heading">賠償責任補償</h2>
+        <p>当社の補償には、以下の賠償責任限度額が設定されています:</p>
+
+        <div class="coverage-details">
+          <div class="coverage-item">
+            <span class="coverage-label">対人賠償(1名あたり):</span>
+            <span class="coverage-amount">詳細はお問い合わせください</span>
+          </div>
+          <div class="coverage-item">
+            <span class="coverage-label">対物賠償:</span>
+            <span class="coverage-amount">詳細はお問い合わせください</span>
+          </div>
+          <div class="coverage-item">
+            <span class="coverage-label">1事故あたりの合計:</span>
+            <span class="coverage-amount">詳細はお問い合わせください</span>
+          </div>
+        </div>
+
+        <div class="policy-disclaimer">
+          <p><strong>保険に関する免責事項:</strong> 保険に必要な内容は人それぞれ異なるため、当社の賠償責任限度額がお客様にとって十分であるという保証はいたしかねます。当社は保険ブローカー、保険代理店、保険提供者ではありません。補償内容についてご不明な点がある場合は、ご自身の保険代理店またはブローカーにお問い合わせいただくことをお勧めします。</p>
+        </div>
+      </div>
+
+      <!-- ルールと参加条件 -->
+      <div class="policy-card">
+        <div class="policy-icon">⚖️</div>
+        <h2 class="policy-heading">ルールと参加条件</h2>
+
+        <div class="policy-list">
+          <h3>時間厳守について:</h3>
+          <ul>
+            <li>グループの一部の方が時間どおりにお越しの場合、ご予約された方がその場にいらっしゃらなくても、免責同意書に正しくご署名いただいた時間どおりの参加者の皆さまをご案内いたします。</li>
+            <li>冒険の集合時間に間に合わなかったお客様への返金はいたしません。</li>
+          </ul>
+
+          <h3>アルコールと薬物に関するポリシー:</h3>
+          <ul>
+            <li>冒険にアルコール類を持ち込むことは一切できません。</li>
+            <li>合法・違法を問わず、アルコールまたは薬物の影響下にあるとガイドが判断した場合、ご参加いただけません。</li>
+            <li>アルコールまたは薬物の使用によりご参加いただけない場合、返金はいたしません。</li>
+          </ul>
+
+          <h3>ガイドの指示:</h3>
+          <ul>
+            <li>ガイドは、お客様に安全な冒険をお楽しみいただくためにおります。</li>
+            <li>お客様には、常にガイドのすべての指示に従っていただく必要があります。</li>
+          </ul>
+
+          <h3>行程の変更:</h3>
+          <ul>
+            <li>行程はあくまで目安であり、契約ではありません。</li>
+            <li>行程は、冒険の前または最中に、いつでも変更される場合があります。</li>
+            <li>行程の変更は返金の理由とはなりません。</li>
+          </ul>
+
+          <h3>返金の処理:</h3>
+          <ul>
+            <li>該当する返金は、最初にご予約をされた方にお返しいたします。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- お問い合わせCTA -->
+      <div class="policy-cta">
+        <h3>ポリシーについてご質問がありますか。</h3>
+        <p>当社のキャンセルポリシーや規約についてご不明な点がございましたら、ご予約の前にお気軽にお問い合わせください。</p>
+        <div class="cta-buttons">
+          <a href="tel:435-219-9447" class="cta-button primary">📞 (435) 219-9447 にお電話</a>
+          <a href="/ja/booking/" class="cta-button secondary">ツアーを予約する</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- モバイル用固定CTA -->
+<div class="mobile-sticky-cta">
+  <button onclick="location.href='/ja/booking/'">今すぐライドを予約</button>
+</div>
+
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3A, Italian P6,
- * French P8-P6, German inline batch).
+ * French P8-P6, German inline batch, Japanese P10K).
  * Every locale without a committed variant falls back to English. Callers
  * that don't need locale awareness keep importing `bodyHtml` directly.
  */
@@ -1065,5 +1240,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
   if (locale === 'de') return DE;
+  if (locale === 'ja') return JA;
   return bodyHtml;
 }

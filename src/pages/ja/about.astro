@@ -1,0 +1,100 @@
+---
+// ja/about.astro — Japanese about page (P10K inline-page translation batch,
+// mirrors German P9 / French P8-P6 / Portuguese P7-P6 / Italian P6 structurally).
+// Person + TouristInformationCenter schema: translated jobTitle/description/
+// knowsAbout (visible structured content); business-identity fields
+// (name/address/rating) stay byte-identical.
+import { getBodyHtml } from '../../page-content/about';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Dave Wilson",
+      "jobTitle": "オーナー兼チーフガイド",
+      "description": "Dave Wilsonは、Uintah Basinを代表するUTVツアー会社Adventure Tours Vernalのオーナー兼チーフガイドです。WasatchとOquirrhの山々を歩きまわって育ったDaveは、生涯変わらないアウトドアへの情熱を育みました。妻のTrudyとともにユタ州バーナルへ移り住んだのち、Dinosaur National MonumentからFlaming Gorgeまで、Uintah Basinの自然の驚異を訪れる方々や地元の人たちと分かち合うためにAdventure Tours Vernalを立ち上げました。",
+      "url": "https://adventuretoursvernal.com/ja/about/",
+      "image": "https://adventuretoursvernal.com/images/wilson-family.webp",
+      "worksFor": {
+        "@type": "TouristInformationCenter",
+        "name": "Adventure Tours Vernal",
+        "url": "https://adventuretoursvernal.com"
+      },
+      "knowsAbout": [
+        "ユタ州バーナルのUTVツアー",
+        "Dinosaur National Monument",
+        "Flaming Gorge",
+        "Uintah Basinのバックカントリートレイル",
+        "Kawasaki KRX 1000 サイドバイサイドUTVツアー",
+        "ユタ州のアウトドアアドベンチャー"
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristInformationCenter",
+      "name": "Adventure Tours Vernal",
+      "image": "https://adventuretoursvernal.com/images/logo.webp",
+      "telephone": "+1-435-219-9447",
+      "email": "adventuretoursvernal@gmail.com",
+      "url": "https://adventuretoursvernal.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1935 S 1500 E",
+        "addressLocality": "Vernal",
+        "addressRegion": "UT",
+        "postalCode": "84078",
+        "addressCountry": "US"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "82",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Dave Wilson"
+      }
+    }
+  ]
+`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="私たちについて｜Adventure Tours Vernal — Dave & Trudy Wilson"
+      description="ユタ州バーナルの地元経営のUTVツアー会社Adventure Tours Vernalのオーナー、Dave WilsonとTrudy Wilsonをご紹介します。Kawasaki KRX 1000のガイド付きツアー。Googleのレビュー82件で5.0の評価。お電話は(435) 219-9447まで。"
+      path="/ja/about/"
+      type="website"
+      image="https://adventuretoursvernal.com/images/wilson-family.webp"
+      ogTitle="Adventure Tours Vernalについて｜Wilson一家のご紹介"
+      ogDescription="DaveとTrudy WilsonがUintah Basinへの情熱を、ユタ州バーナルのKawasaki KRX 1000ガイド付きUTVツアーでお届けします。Googleのレビュー82件で5.0の評価。お電話は(435) 219-9447まで。"
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="about" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.about', lang) }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: t('footer.quickLinks', lang),
+      links: [
+        { href: '/ja/#tours', label: t('footer.link.ourTours', lang) },
+        { href: '/ja/#vehicles', label: t('footer.link.ourFleet', lang) },
+        { href: '/ja/#gallery', label: t('footer.link.photoGallery', lang) },
+        { href: '/ja/booking/', label: t('cta.bookNow', lang) },
+      ],
+    }}
+  />
+</BaseLayout>

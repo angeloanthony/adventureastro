@@ -1,0 +1,50 @@
+---
+// ja/privacy-policy.astro — Japanese privacy policy (P10K inline batch).
+// Mirrors src/pages/de/privacy-policy.astro.
+import { getBodyHtml } from '../../page-content/privacy';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+---
+<BaseLayout bodyClass="policy-page-body">
+  <Fragment slot="head">
+    <Seo
+      title="プライバシーポリシー | Adventure Tours Vernal"
+      description="ユタ州バーナルの Adventure Tours Vernal のプライバシーポリシーです。お客様の情報の収集・利用・保護の方法、Cookie、ログファイル、CCPA と GDPR に基づく権利をご説明します。お電話は (435) 219-9447 まで。"
+      path="/ja/privacy-policy/"
+      type="website"
+      ogDescription="ユタ州バーナルでガイド付きUTVツアーをご予約いただく際に、Adventure Tours Vernal がお客様のデータをどのように収集し、利用し、保護しているかをご説明します。"
+    />
+  </Fragment>
+  <Header slot="body" active="privacy-policy" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.privacyPolicy', lang) }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: t('footer.quickLinks', lang),
+      links: [
+        { href: '/ja/#tours', label: t('footer.link.ourTours', lang) },
+        { href: '/ja/#vehicles', label: t('footer.link.ourFleet', lang) },
+        { href: '/ja/#gallery', label: t('footer.link.photoGallery', lang) },
+        { href: '/ja/booking/', label: t('cta.bookNow', lang) },
+      ],
+    }}
+    contact={{ showStreet: false }}
+    info={{
+      heading: t('footer.information', lang),
+      links: [
+        { href: '/ja/cancellation-policy/', label: t('nav.cancellationPolicy', lang) },
+        { href: '/ja/privacy-policy/', label: t('nav.privacyPolicy', lang) },
+        { href: '/ja/faq/', label: t('nav.faq', lang) },
+        { href: '/ja/safety-guidelines/', label: t('nav.safetyGuidelines', lang) },
+      ],
+    }}
+  />
+</BaseLayout>

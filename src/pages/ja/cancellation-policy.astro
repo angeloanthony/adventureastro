@@ -1,0 +1,40 @@
+---
+// ja/cancellation-policy.astro — Japanese cancellation policy (P10K inline
+// batch). Mirrors src/pages/de/cancellation-policy.astro.
+import { getBodyHtml } from '../../page-content/cancellation';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+---
+<BaseLayout bodyClass="policy-page-body">
+  <Fragment slot="head">
+    <Seo
+      title="キャンセルポリシー | Adventure Tours Vernal — Vernal, Utah"
+      description="ユタ州バーナルのガイド付きUTVツアーに関するAdventure Tours Vernalのキャンセル・返金ポリシー。72時間以上前のキャンセルは全額返金、72時間未満は50%、48時間未満は返金なし。天候規定や必要な同意書についてもご確認ください。お電話は (435) 219-9447 まで。"
+      path="/ja/cancellation-policy/"
+      type="website"
+      ogTitle="キャンセルポリシー | Adventure Tours Vernal"
+      ogDescription="ユタ州バーナルのガイド付きUTVツアーのキャンセルポリシーをご覧ください。72時間以上前のキャンセルは全額返金。お電話は (435) 219-9447 まで。"
+    />
+  </Fragment>
+  <Header slot="body" active="cancellation-policy" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'キャンセルポリシー' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: 'クイックリンク',
+      links: [
+        { href: '/ja/#tours', label: 'ツアー一覧' },
+        { href: '/ja/#vehicles', label: '車両紹介' },
+        { href: '/ja/#gallery', label: 'フォトギャラリー' },
+        { href: '/ja/booking/', label: '今すぐ予約' },
+      ],
+    }}
+  />
+</BaseLayout>

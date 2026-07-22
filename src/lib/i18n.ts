@@ -321,6 +321,50 @@ const JA_SLUGS = new Set<string>([
   'utv/backcountry-tours-vernal-utah', 'utv/beginners-guide-to-utv-tours-vernal',
   'utv/best-utv-trails-vernal', 'utv/family-utv-guide-vernal', 'utv/group-utv-tours-vernal',
   'utv/private-utv-tours-vernal', 'utv/side-by-side-rentals-vernal-utah',
+  // P10C — Japanese hiking hub batch (16 spokes).
+  'hiking/alpine-lakes-hiking-high-uintas', 'hiking/beginner-hiking-guide-near-vernal',
+  'hiking/best-hikes-in-dinosaur-national-monument', 'hiking/bird-watching-near-vernal',
+  'hiking/dog-friendly-hiking-near-vernal', 'hiking/fall-hiking-near-vernal',
+  'hiking/family-hiking-near-vernal', 'hiking/high-uintas-backpacking-guide',
+  'hiking/high-uintas-day-hikes', 'hiking/kings-peak-hiking-guide',
+  'hiking/photography-hikes-near-vernal', 'hiking/spring-hiking-near-vernal',
+  'hiking/summer-hiking-near-vernal', 'hiking/wildflower-hiking-near-vernal',
+  'hiking/wildlife-hiking-guide-near-vernal', 'hiking/winter-hiking-near-vernal',
+  // P10D — Japanese fishing hub batch (4 spokes).
+  'fishing/fishing-flaming-gorge', 'fishing/fishing-red-fleet-reservoir',
+  'fishing/fishing-steinaker-reservoir', 'fishing/green-river-fly-fishing',
+  // P10E — Japanese camping hub batch (4 spokes).
+  'camping/camping-at-flaming-gorge', 'camping/camping-at-red-fleet-state-park',
+  'camping/camping-at-steinaker-state-park', 'camping/camping-in-ashley-national-forest',
+  // P10F — Japanese scenic-drives hub batch (4 spokes).
+  'scenic-drives/cub-creek-road-tour-of-the-tilted-rocks', 'scenic-drives/flaming-gorge-uintas-scenic-byway',
+  'scenic-drives/red-cloud-loop-scenic-drive', 'scenic-drives/sheep-creek-geological-loop',
+  // P10G — Japanese guides hub batch (9 spokes).
+  'guides/ultimate-guide-to-vernal-utah', 'guides/ultimate-guide-to-flaming-gorge',
+  'guides/ultimate-guide-to-ashley-national-forest', 'guides/ultimate-guide-to-red-fleet-state-park',
+  'guides/ultimate-guide-to-steinaker-state-park', 'guides/moab-utv-tours',
+  'guides/vernal-weather-guide', 'guides/what-to-bring', 'guides/what-to-wear-utv-tour',
+  // P10H — Japanese itineraries hub batch (9 spokes).
+  'itineraries/2-day-family-itinerary', 'itineraries/3-day-adventure-itinerary',
+  'itineraries/one-day-adventure-vernal', 'itineraries/photography-weekend-vernal',
+  'itineraries/romantic-weekend-dinosaur-country', 'itineraries/weekend-fishing-trip-vernal',
+  'itineraries/weekend-road-trip-from-denver', 'itineraries/weekend-road-trip-from-grand-junction',
+  'itineraries/weekend-road-trip-from-salt-lake-city',
+  // P10I — Japanese things-to-do hub batch (2 spokes).
+  'things-to-do/fun-things-to-do-vernal-utah-kids', 'things-to-do/vernal-utah-attractions',
+  // P10J — Japanese dinosaur-national-monument hub batch (2 spokes). FINAL ja MDX batch.
+  'dinosaur-national-monument/petroglyphs-rock-art-vernal',
+  'dinosaur-national-monument/visiting-dinosaur-national-monument',
+  // P10K Batch A — Japanese inline commercial/core pages. Registered as a batch
+  // once all 7 route files exist, per the dependency-root rule (handoff §7 Gate
+  // 4b): these pages hardcode `/ja/` hrefs, so a slug may only land here after
+  // its route file does, or the validator reports a broken link.
+  '', 'booking', 'about', 'faq', 'privacy-policy', 'cancellation-policy', 'safety-guidelines',
+  // P10K Batch B — the two pillar roots. Registered after Batch A because the
+  // spoke breadcrumb hierarchy resolves through them.
+  'utv', 'dinosaur-national-monument',
+  // P10K Batch C — the 7 activity-hub pillars.
+  'hiking', 'fishing', 'camping', 'scenic-drives', 'things-to-do', 'guides', 'itineraries',
 ]);
 
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {

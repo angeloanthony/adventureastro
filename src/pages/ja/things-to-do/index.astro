@@ -1,0 +1,81 @@
+---
+// ja/things-to-do/index.astro — Japanese Things to Do hub pillar (P10K
+// Japanese inline batch, mirrors src/pages/de/things-to-do/index.astro,
+// which in turn mirrors the PT/FR/IT/ES/English originals).
+//
+// Japanese spoke articles for this hub (vernal-utah-attractions,
+// fun-things-to-do-vernal-utah-kids) already exist as translated MDX (see
+// JA_SLUGS in src/lib/i18n.ts), so HubIndex renders Japanese titles/links
+// directly, and internal links to specific spokes and to other pillar/hub
+// pages already live under /ja/ use the /ja/ prefix.
+//
+// NOTE: like its DE/PT/FR/IT/ES siblings, this route file is NOT
+// locale-agnostic boilerplate — it carries its own hardcoded, per-locale Seo
+// title/description/ogDescription and Article+FAQPage JSON-LD, translated
+// from the English source (polite です・ます register). It is authored
+// directly rather than copied from de/, because copying would have shipped
+// German meta tags and schema on a Japanese URL.
+import { getBodyHtml } from '../../../page-content/things-to-do';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE } from '../../../config/site';
+import Header from '../../../components/layout/Header.astro';
+import Footer from '../../../components/layout/Footer.astro';
+import Seo from '../../../components/seo/Seo.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import HubIndex from '../../../components/content/HubIndex.astro';
+import { getLangFromUrl } from '../../../lib/i18n';
+import { t } from '../../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+// Cornerstone Article + expanded FAQ structured data. Mirrors the
+// English/Italian/Portuguese/French/German schema graph; author kept as
+// Organization to match the pillar's existing entity. FAQPage mirrors the
+// visible FAQ below verbatim.
+const schema = `{
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "ユタ州バーナルの楽しみ方——完全な地元ガイド",
+        "description": "ユタ州バーナルの楽しみ方をまとめた、地元ガイドによる完全な計画——Dinosaur National Monument、ガイド付きUTVツアー、岩絵、絶景ドライブ、州立公園、レストラン、季節ごとのアドバイス、そして出来合いの旅程。",
+        "author": {"@type": "Organization", "name": "Adventure Tours Vernal"},
+        "publisher": {"@type": "Organization", "name": "Adventure Tours Vernal", "logo": {"@type": "ImageObject", "url": "https://adventuretoursvernal.com/images/logo.webp"}},
+        "datePublished": "2026-04-08",
+        "dateModified": "2026-07-10",
+        "mainEntityOfPage": "https://adventuretoursvernal.com/ja/things-to-do/"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type": "Question", "name": "ユタ州バーナルの主な楽しみ方は何ですか？", "acceptedAnswer": {"@type": "Answer", "text": "バーナルの主な楽しみ方は、ガイド付きのバックカントリーUTVツアー、Dinosaur National MonumentとWall of Bonesの見学、McConkie RanchとDry Fork CanyonでのFremontの岩絵の見学、Red Fleet State Parkの恐竜の足跡群を歩くこと、Utah Field House of Natural Historyの恐竜庭園、そしてSteinaker、Red Fleet、Flaming Gorgeでの釣りやボートです。"}},
+          {"@type": "Question", "name": "ユタ州バーナルには何日必要ですか？", "acceptedAnswer": {"@type": "Answer", "text": "2〜3日が理想的です。1日はDinosaur National Monumentと岩絵に、1日はガイド付きUTVツアーと州立公園に、そして任意の3日目をFlaming Gorge、釣り、あるいはUinta Mountainsでのハイキングに。1日だけでは、国定公園かほかの目玉の一つ分の時間しかありません。"}},
+          {"@type": "Question", "name": "ユタ州バーナルは訪れる価値がありますか？", "acceptedAnswer": {"@type": "Answer", "text": "あります。バーナルはDinosaur National Monumentへの玄関口で、本物の恐竜の化石、古代の岩絵、赤い岩の峡谷、西部開拓時代の歴史、そして世界水準のアウトドアレクリエーションを、狭く混雑のない範囲に詰め込んでいます。ユタ州南部に人を惹きつけるものの多くを、混雑なしで味わえます。"}},
+          {"@type": "Question", "name": "バーナルで一番おすすめの過ごし方は何ですか？", "acceptedAnswer": {"@type": "Answer", "text": "Adventure Tours Vernalのガイド付きバックカントリーUTVツアーが、最も深く入り込める体験です。オフロードの冒険、岩絵、天然のアーチ、そして舗装路からはたどり着けない峡谷の景観が、3時間の体験に一つにまとまっています。外せない見どころの第一はDinosaur National Monumentです。"}},
+          {"@type": "Question", "name": "ユタ州バーナルは子ども連れのご家族に向いていますか？", "acceptedAnswer": {"@type": "Answer", "text": "とても向いています。お子さんはDinosaur National Monumentで本物の恐竜の化石に触れ、Red Fleet State Parkで恐竜の足跡群まで歩き、Utah Field Houseの恐竜庭園を巡り、保護者同伴で2歳からガイド付きUTVツアーに同乗できます。見どころの大半は短い歩きだけで済みます。"}},
+          {"@type": "Question", "name": "ユタ州バーナルを訪れるのに最適な時期はいつですか？", "acceptedAnswer": {"@type": "Answer", "text": "晩春（5〜6月）と初秋（9〜10月）が、最も過ごしやすい気温、活発な野生動物、そして少なめの人出に恵まれます。夏は暑く、すべてが開いていて、水辺の活動に最適です。冬は静かで景色も美しいのですが寒く、一部の季節営業の施設や道路が閉まります。"}},
+          {"@type": "Question", "name": "バーナルはSalt Lake Cityからどのくらいの距離ですか？", "acceptedAnswer": {"@type": "Answer", "text": "バーナルはSalt Lake CityからUS-40を東へ車でおよそ3時間、最寄りの主要空港はSalt Lake Cityです。景色の良いルートはUinta Mountainsを越え、Daniels SummitとStrawberry Reservoirの一帯を通ります。"}},
+          {"@type": "Question", "name": "ユタ州バーナルは何で知られていますか？", "acceptedAnswer": {"@type": "Answer", "text": "バーナルはユタ州の恐竜の国として知られています。Uintah BasinのDinosaur National Monumentの縁に位置し、赤い岩の峡谷、FremontとUteの岩絵、西部開拓時代の無法者の歴史、そして公有地でのアウトドアレクリエーションに囲まれています。"}},
+          {"@type": "Question", "name": "バーナルを訪れるのに車は必要ですか？", "acceptedAnswer": {"@type": "Answer", "text": "必要です。バーナルの見どころは周囲の田園地帯に点在していて——国定公園は東へ20分、州立公園と峡谷は5〜60分——それらを結ぶ本格的な公共交通はないため、自家用車が欠かせません。トレイルに出てからの移動は、ガイド付きUTVツアーが引き受けます。"}},
+          {"@type": "Question", "name": "バーナルはMoabの代わりになりますか？", "acceptedAnswer": {"@type": "Answer", "text": "多くの旅行者にとっては、なります。バーナルには赤い岩の峡谷、オフロードの冒険、そしてMoabに通じる趣の迫力ある景観がありながら、人出ははるかに少なく、さらにMoabにはない恐竜の化石と岩絵があります。混雑なしで冒険を求める方には有力な選択肢です。"}}
+        ]
+      }
+    ]
+  }`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="ユタ州バーナルの楽しみ方｜おすすめツアーと見どころ"
+      description="ユタ州バーナルの楽しみ方を地元ガイドがご紹介します。ガイド付きUTVツアー、Dinosaur National Monument、ハイキング、釣り、岩絵、絶景ドライブ、州立公園、そして季節ごとのおすすめと2〜3日のモデル旅程まで。バーナルの冒険を今すぐ計画してください。"
+      path="/ja/things-to-do/"
+      type="article"
+      ogDescription="ユタ州バーナルでできる最良のことを見つけてください——ガイド付きUTVツアーから、恐竜の化石、岩絵、そしてUintah Basinでのアウトドアレクリエーションまで。"
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="things-to-do" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('hub.things-to-do', lang) }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <HubIndex slot="body" collection="things-to-do" heading="バーナルの楽しみ方ガイド一覧" />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>
