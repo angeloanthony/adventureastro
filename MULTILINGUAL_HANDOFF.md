@@ -175,6 +175,26 @@ follows this pipeline with no special-casing unless a genuine bug forces a fix
    `ui.ts` had no `ja` dictionary. Add the key-set diff to stage 5, and run it
    the moment the first page of a new locale lands, not at the end.
 
+   **The key-set diff is necessary but NOT sufficient — also scan rendered
+   output.** English leaks downstream of the dictionary in two ways a key diff
+   cannot see, because every key exists and is correctly translated:
+     1. **Interpolated unit words baked into a value.** `CityLayout.astro:45-48`
+        builds `value: \`${city.driveTimeHours} hours\`` and
+        `\`${city.driveMiles} miles\``, so the gateway page renders a localized
+        label against an English value — `Fahrzeit → 3 hours`,
+        `Entfernung → 175 miles`. Confirmed present in es/it/pt/fr/de as of
+        2026-07-22 (found during the JA P10K rollout, pre-existing, not fixed).
+     2. **English-only content-collection fields rendered as display values.**
+        The same layout passes `city.routeSummary` and `city.nearestAirport`
+        straight through, so every locale shows
+        `I-80 E to US-40 E through Heber City, Duchesne, and Roosevelt`.
+   So Gate 4a has two parts: (a) key-set parity against a finished locale, and
+   (b) a rendered-output scan of `dist/<locale>/**` for runs of Latin-script
+   prose outside the frozen proper-noun list. Part (b) is what catches the
+   value-side leaks. For a non-Latin-script locale like `ja` this scan is cheap
+   and high-signal; for Latin-script locales, diff visible text against the
+   English page and expect near-zero identical non-proper-noun strings.
+
    **Gate 4b — dependency-root ordering (BLOCKING).** *Translate dependency roots
    before dependents. Never create an internal link to a locale route that does
    not yet exist.* The `page-content/*.ts` blocks and inline hub pillars hardcode

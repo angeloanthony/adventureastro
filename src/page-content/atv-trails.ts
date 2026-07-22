@@ -429,6 +429,77 @@ const DE = `
   </main>
 `;
 
+const JA = `
+
+
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    ユタ州バーナル近郊のATV・UTVトレイルには、Doc's Beach、Moonshine Arch、Ashley Gorge、Outlaw Trail、Asphalt Ridgeがあります。Adventure Tours Vernalは、この5つのトレイルシステムすべてを巡るKawasaki KRX 1000サイドバイサイドのガイド付きツアーをご提供しています。3時間で1台$349、最大2名乗車。ヘルメット、安全装備、熟練ガイド付き。お電話は(435) 219-9447まで。
+  </p>
+
+  <main class="article-page">
+    <header class="article-header">
+      <div class="article-breadcrumb">
+        <a href="/ja/">ホーム</a><span class="sep">›</span><a href="/ja/utv/">トレイル</a><span class="sep">›</span><span>バーナルのATVトレイル</span>
+      </div>
+      <h1 class="article-title">ユタ州バーナル近郊のATVトレイル</h1>
+      <p class="article-meta">2026年4月更新 · Adventure Tours Vernal</p>
+    </header>
+
+    <div class="article-body">
+      <div class="article-summary-box">
+        バーナルを取り巻くUintah Basinには、ユタ州でも屈指のオフロード地形が広がっています——赤い岩の峡谷、砂地の涸れ川、尾根から見渡すパノラマ、そして訪れる方のほとんどが目にすることのない歴史あるバックカントリールート。ここでは、ご自分のATVをお持ちでなくてもガイド付きUTVツアーでそのすべてに触れる方法をご紹介します。
+      </div>
+
+      <h2>なぜバーナルでATV・UTVに乗るのか</h2>
+      <p>見出しを飾るのはユタ州南部ですが、バーナルのバックカントリーは同じ水準の地形を、ごくわずかな交通量で味わわせてくれます。ここでの走りは、Green River沿いの回廊に広がる開けた砂地の平原から、峡谷のタイトなつづら折り、山々を360度見渡せる尾根のトレイルまで多岐にわたります。しかもMoabやSand Hollowほど商業化されていないため、トレイルを自分たちだけで独占できることも少なくありません。</p>
+      <p>この一帯には、ほかの多くのATVの目的地には真似のできないものもあります。FremontとUteの人々が残した古代の岩絵、西部開拓時代の無法者たちの隠れ家、天然の砂岩アーチがトレイルシステムのあちこちに点在し、一度の走行が冒険であると同時に歴史の授業にもなるのです。</p>
+
+      <h2>5つのトレイルシステム</h2>
+      <p><strong>Doc's Beach</strong> — Green River沿いの回廊に広がる砂地の涸れ川と開けた地形。道幅が広く、スピードも出せて、あらゆる技術レベルの方が楽しめます。初めて乗る方に最も人気のトレイルです。</p>
+      <p><strong>Moonshine Arch</strong> — 隠れた天然の砂岩アーチへと続く赤い岩の峡谷。変化に富んだ景観と、たどり着く価値のある目的地。写真好きの方やご家族に人気です。</p>
+      <p><strong>Ashley Gorge</strong> — そびえ立つ砂岩の壁と川の渓谷の景観が広がる、迫力ある峡谷回廊。道幅は狭めで、いい意味で包み込まれるような没入感があります。</p>
+      <p><strong>Outlaw Trail</strong> — Butch CassidyとWild Bunchが使った歴史あるバックカントリールート。険しい地形、無法者の歴史、そして人里離れた峡谷の風景。最も冒険心をかき立てる選択肢です。</p>
+      <p><strong>Asphalt Ridge</strong> — 恐竜の国とUinta Mountainsを一望できる尾根のトレイル。標高が、この盆地の全体像をつかむ視点を与えてくれます。</p>
+
+      <h2>ガイド付きツアーと自走の違い</h2>
+      <p>ご自分のATVやUTVをお持ちの場合、バーナルを取り巻くBLMの土地には開放された走行エリアと指定ルートがあります。ただし最良のトレイル——ロックアート、アーチ、峡谷へのアクセスがあるもの——は、ルートも歴史も地形の状態も知り尽くした地元ガイドと一緒に走るのがいちばんです。</p>
+      <p>Adventure Tours Vernalはすべてをご用意しています。FOX 2.5 PODIUM LSCサスペンションを備えた2人乗りのKawasaki KRX 1000サイドバイサイド、ヘルメット、安全説明、そして熟練のガイド。Dave WilsonとTrudy Wilsonがそれぞれ自分の車両を運転し、3時間のツアーのあいだずっとグループに並走します。</p>
+
+      <h2>走る前に知っておきたいこと</h2>
+      <p>ツアーは天候が許すかぎり通年で催行しています。春（4月–5月）と秋（9月–10月）が最盛期で、気温が快適でトレイルも乾いており、光も黄金色です。夏は暑さを避けるため早い時間に出発します。冬も晴れた日には走れて、まったく違う景色が広がります。</p>
+      <p>オフロードの経験は一切必要ありません。KRX 1000にはパワーステアリング、オートマチックトランスミッション、そしてフルロールケージが備わっています。DaveとTrudyは、のんびりした景色重視の走りから、もう少し攻めたバックカントリー走行まで、グループの快適なペースに合わせてくれます。</p>
+
+      <div class="article-tip">
+        <strong>トレイル選びのヒント：</strong> 初めての方は、Doc's BeachかMoonshine Archから始めてください。最も人里離れた、荒々しい体験をお求めなら、Outlaw Trailをご指名ください。ご予約の際に、Daveがグループに合わせて選ぶお手伝いをします。
+      </div>
+
+      <div class="article-faq">
+        <h2>よくあるご質問</h2>
+        <div class="faq-item"><h3>ユタ州バーナルの近くにATVトレイルはありますか？</h3><p>はい——峡谷、砂地の涸れ川、尾根のルートを含む5つの異なるトレイルシステムがあり、いずれもガイド付きUTVツアーでご利用いただけます。</p></div>
+        <div class="faq-item"><h3>Dinosaur National Monumentの近くでATVに乗れますか？</h3><p>国定公園の中では乗れませんが、周囲のバックカントリーには似た地形を巡る広大なUTVトレイルシステムがあり、ガイド付きでご案内できます。</p></div>
+        <div class="faq-item"><h3>バーナル近郊のトレイルを走るには自分のATVが必要ですか？</h3><p>いいえ。Adventure Tours VernalがKawasaki KRX 1000の車両、ヘルメット、装備、ガイドをご用意します。3時間で1台$349です。</p></div>
+      </div>
+
+      <div class="article-cta">
+        <h3>トレイルへ繰り出しましょう</h3>
+        <p>ガイド付きKawasaki KRX 1000ツアー · 1台$349 · 5つのトレイルシステム · あらゆる技術レベル</p>
+        <a href="/ja/booking/" class="cta-btn">ツアーを予約する</a>
+        <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
+      </div>
+    </div>
+
+    <div class="related-articles">
+      <h3>その他のトレイルガイド</h3>
+      <div class="related-grid">
+        <a href="/ja/utv/best-utv-trails-vernal/" class="related-card"><h4>バーナル周辺のベストUTVトレイル</h4><p>5つのトレイルシステムすべてを詳しく解説。</p></a>
+        <a href="/ja/jeep-trails-vernal-utah/" class="related-card"><h4>バーナル近郊のJeepトレイル</h4><p>Jeepや4x4愛好家向けのオフロードの選択肢。</p></a>
+        <a href="/ja/utv/side-by-side-rentals-vernal-utah/" class="related-card"><h4>サイドバイサイド：ツアーとレンタルの比較</h4><p>ガイド付きツアーが自走レンタルに勝る理由。</p></a>
+        <a href="/ja/guides/what-to-wear-utv-tour/" class="related-card"><h4>服装ガイド</h4><p>砂漠でのUTVライドのための装備ガイド。</p></a>
+      </div>
+    </div>
+  </main>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3D). Every
  * locale without a committed variant falls back to English. Callers that
@@ -440,5 +511,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
   if (locale === 'de') return DE;
+  if (locale === 'ja') return JA;
   return bodyHtml;
 }

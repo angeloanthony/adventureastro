@@ -1,0 +1,32 @@
+---
+// ja/atv-trails-vernal-utah.astro — Japanese ATV trails landing page.
+// Mirrors src/pages/de/atv-trails-vernal-utah.astro.
+import { getBodyHtml } from '../../page-content/atv-trails';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"ユタ州バーナル近郊のATVトレイル","description":"ユタ州バーナル近郊のATV・UTVトレイルガイド。5つのトレイルシステムを巡るKawasaki KRX 1000のガイド付きツアーをご紹介します。","author":{"@type":"Organization","name":"Adventure Tours Vernal"},"publisher":{"@type":"Organization","name":"Adventure Tours Vernal","logo":{"@type":"ImageObject","url":"https://adventuretoursvernal.com/images/logo.webp"}},"datePublished":"2026-04-08","dateModified":"2026-04-08","mainEntityOfPage":"https://adventuretoursvernal.com/ja/atv-trails-vernal-utah/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ユタ州バーナルの近くにATVトレイルはありますか？","acceptedAnswer":{"@type":"Answer","text":"はい。バーナルを取り巻くUintah Basinには、Doc's Beach、Moonshine Arch、Ashley Gorge、Outlaw Trail、Asphalt Ridgeを含む広大なバックカントリーのトレイルシステムがあり、いずれもAdventure Tours Vernalのガイド付きUTVツアーでご利用いただけます。"}},{"@type":"Question","name":"Dinosaur National Monumentの近くでATVに乗れますか？","acceptedAnswer":{"@type":"Answer","text":"Dinosaur National Monumentの中では動力車両の乗り入れが認められていませんが、バーナルと国定公園周辺のバックカントリートレイルには、よく似た峡谷と砂漠の地形を巡る広大なUTVルートがあり、ガイド付きツアーでご利用いただけます。"}},{"@type":"Question","name":"バーナル近郊のトレイルを走るには自分のATVが必要ですか？","acceptedAnswer":{"@type":"Answer","text":"いいえ。Adventure Tours VernalがKawasaki KRX 1000サイドバイサイド、ヘルメット、安全装備、熟練のガイドをご用意します。ツアーは3時間で1台$349、1台につき2名まで乗車いただけます。"}}]}]}`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="ユタ州バーナルのATVトレイル | ガイド付きUTVツアー"
+      description="ユタ州バーナル近郊で最高のATV・UTVトレイルへ。Kawasaki KRX 1000サイドバイサイドのガイド付きツアーで、赤い岩の峡谷、砂地の涸れ川、尾根のパノラマ、そして人里離れたバックカントリーの地形を巡ります。3時間で1台$349、最大2名乗車。今すぐご予約ください。"
+      path="/ja/atv-trails-vernal-utah/"
+      type="article"
+      ogTitle="ユタ州バーナルのATVトレイル | ガイド付きUTVツアー"
+      ogDescription="バーナル近郊で最高のATV・UTVトレイル——峡谷、ロックアートの遺跡、バックカントリーの地形を巡るKawasaki KRX 1000のガイド付きツアー。"
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.trails', lang), href: '/ja/utv/' }, { label: 'バーナルのATVトレイル' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

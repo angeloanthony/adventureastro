@@ -386,9 +386,74 @@ const DE = `
   </main>
 `;
 
+const JA = `
+
+
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    ユタ州バーナル近郊のJeepトレイルとオフロードルートには、BLMのバックカントリーの道と、Adventure Tours VernalがKawasaki KRX 1000サイドバイサイドで運行するガイド付きUTVトレイルシステム5つがあります。トレイルでは峡谷、砂漠の涸れ谷、岩絵、そして西部開拓時代の歴史あるルートを巡ります。バーナルなら、Moabとよく似た地形をはるかに少ない人出でお楽しみいただけます。3時間のガイド付きツアーは1台$349。お電話は(435) 219-9447まで。
+  </p>
+
+  <main class="article-page">
+    <header class="article-header">
+      <div class="article-breadcrumb"><a href="/ja/">ホーム</a><span class="sep">›</span><a href="/ja/utv/">トレイル</a><span class="sep">›</span><span>Jeepトレイル</span></div>
+      <h1 class="article-title">ユタ州バーナル近郊のJeepトレイル</h1>
+      <p class="article-meta">2026年4月更新 · Adventure Tours Vernal</p>
+    </header>
+
+    <div class="article-body">
+      <div class="article-summary-box">
+        バーナルは、ユタ州でも指折りのオフロード地形のただ中にあります。Moabを有名にしたのと同じ峡谷地帯、砂漠の涸れ谷、バックカントリーのルートが、人混みも割高な料金もなしに広がっています。ご自分のJeepを持ち込まれる方にも、ガイド付きUTVでトレイルを味わいたい方にも、ここに何があるのかをご紹介します。
+      </div>
+
+      <h2>バーナル周辺のオフロード地形</h2>
+      <p>Uintah BasinはBLMの土地に囲まれ、ならされた砂利道から岩の多いテクニカルなルートまで、舗装されていない道とトレイルの網が広がっています。町の南から東にかけて——Dinosaur National MonumentとBook Cliffsの方向——が、最も迫力のある峡谷とメサの土地の始まりです。赤い岩の造形、深い涸れ谷、スリックロックの棚、そして人里離れたメサ上の道が、Jeepや4x4を走らせる方にたっぷりの変化を用意しています。</p>
+      <p>町の北側、Ashley National ForestとUinta Mountainsへ登っていく道は、趣がまったく違います。アスペンと松の林を抜ける森林局の林道で、山の眺めと季節による渡渉が待っています。Diamond Mountain一帯はJeepでのキャンプやオーバーランドに人気です。</p>
+
+      <h2>ガイド付きUTVツアー——Jeepは要りません</h2>
+      <p>4x4をお持ちでない方や、走るのに土地勘の要るトレイルへ入ってみたい方には、Adventure Tours Vernalがバーナルのバックカントリーの精髄をたどる5つのトレイルシステムを、ガイド付きのKawasaki KRX 1000でご案内しています。KRX 1000は、ノーマルのJeepの多くが手を焼くような地形——砂の涸れ谷、岩場の登り、狭い峡谷のルート——をこなしますし、DaveとTrudy Wilsonは曲がり角の一つひとつ、岩絵のパネルの一枚一枚、展望地点のすべてを知り尽くしています。</p>
+      <p>Jeep愛好家の多くは、下見を兼ねてガイド付きUTVツアーを予約されます。まずDaveと一緒に走って土地を覚え、次はご自分の車両で戻ってきてさらに奥へ——という流れです。最良のトレイルに標識がなく、GPSの電波も途切れがちなこの地域では、賢いやり方です。</p>
+
+      <h2>オフロードで比べるバーナルとMoab</h2>
+      <p>知名度ではMoabですが、バーナルは同じ水準の地形を、はるかに低い費用と少ない混雑でお届けします。ここではトレイルの順番待ちはありません。キャンプサイトを取り合うこともありません。そして風景——峡谷の壁、天然のアーチ、岩絵、無法者の歴史——も引けを取りません。唯一の引き換えはサービスの少なさです。バーナルにはMoabほどのレンタルの受け皿がなく、だからこそガイドツアーがその隙間をこれほど的確に埋めているのです。</p>
+
+      <h2>オフロード旅行の計画の立て方</h2>
+      <p>ご自分のJeepを持ち込まれる場合は、BLM Vernal Field Officeで最新の地図とルートの状況を入手できます。舗装路を離れると携帯の電波はすぐに届かなくなりますので、出発前にオフラインの地図をダウンロードしておいてください。給油は町で済ませてください——バックカントリーに入ってしまえば何もありません。春と秋が最良の季節です。夏も走れますが暑く、冬の雪と泥の季節には閉鎖されるルートもあります。</p>
+
+      <div class="article-tip">
+        <strong>Jeepオーナーへのヒント：</strong>初日にガイド付きUTVツアーを予約して、土地の下見をなさってください。Daveが、お持ちの車両の性能とご覧になりたいものに合わせて、Jeepで入れるおすすめのルートを教えてくれます。新しいオフロードエリアを覚えるには、これが一番の早道です。
+      </div>
+
+      <div class="article-faq">
+        <h2>よくあるご質問</h2>
+        <div class="faq-item"><h3>バーナル近郊にJeepトレイルはありますか。</h3><p>はい——BLMの広大なバックカントリールートに加えて、ガイド付きUTVトレイルシステムが5つあります。地形はならされた砂利道から、テクニカルな峡谷とメサのルートまでさまざまです。</p></div>
+        <div class="faq-item"><h3>自分のJeepを運転する代わりに、ガイドツアーに参加できますか。</h3><p>はい。Adventure Tours VernalがKRX 1000の車両、ガイド、装備をご用意し、5つのトレイルシステムを3時間、1台$349でご案内します。</p></div>
+        <div class="faq-item"><h3>バーナルはMoabと比べてどうですか。</h3><p>地形の質は同等で、人出は格段に少なく、料金にも競争力があります。レンタルの受け皿が少ない分、ガイドツアーが最良の選択になります。</p></div>
+      </div>
+
+      <div class="article-cta">
+        <h3>ガイドと一緒にトレイルを下見しませんか</h3>
+        <p>ガイド付きKRX 1000ツアー · 1台$349 · 5つのトレイルシステム · 地元ならではの知識</p>
+        <a href="/ja/booking/" class="cta-btn">ツアーを予約する</a>
+        <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
+      </div>
+    </div>
+
+    <div class="related-articles">
+      <h3>オフロードのガイドをもっと読む</h3>
+      <div class="related-grid">
+        <a href="/ja/atv-trails-vernal-utah/" class="related-card"><h4>バーナル近郊のATVトレイル</h4><p>5つのUTVトレイルシステムを地形ごとに解説。</p></a>
+        <a href="/ja/guides/moab-utv-tours/" class="related-card"><h4>バーナル：Moabに代わる選択肢</h4><p>オフロードの冒険でバーナルがMoabに勝る理由。</p></a>
+        <a href="/ja/utv/backcountry-tours-vernal-utah/" class="related-card"><h4>バックカントリーツアー</h4><p>奥深いバックカントリーを行くガイド付きUTV体験。</p></a>
+        <a href="/ja/utv/best-utv-trails-vernal/" class="related-card"><h4>おすすめのUTVトレイル</h4><p>あらゆるレベルに向けたトレイル別ガイド。</p></a>
+      </div>
+    </div>
+  </main>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3D; Italian
- * populated P6; French populated P8-P6; German populated inline-pages batch).
+ * populated P6; French populated P8-P6; German populated inline-pages batch;
+ * Japanese populated P10K).
  * Every locale without a committed variant falls back to English. Callers
  * that don't need locale awareness keep importing `bodyHtml` directly.
  */
@@ -398,5 +463,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
   if (locale === 'de') return DE;
+  if (locale === 'ja') return JA;
   return bodyHtml;
 }

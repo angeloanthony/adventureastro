@@ -1,0 +1,32 @@
+---
+// ja/jeep-trails-vernal-utah.astro — Japanese Jeep trails landing page (P10K
+// inline-pages batch). Mirrors src/pages/de/jeep-trails-vernal-utah.astro.
+import { getBodyHtml } from '../../page-content/jeep-trails';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"ユタ州バーナル近郊のJeepトレイル","description":"ユタ州バーナル近郊のJeepトレイルとオフロードルートのガイド。バックカントリーのルートとガイド付きUTVツアーの選択肢をご紹介します。","author":{"@type":"Organization","name":"Adventure Tours Vernal"},"publisher":{"@type":"Organization","name":"Adventure Tours Vernal","logo":{"@type":"ImageObject","url":"https://adventuretoursvernal.com/images/logo.webp"}},"datePublished":"2026-04-08","dateModified":"2026-04-08","mainEntityOfPage":"https://adventuretoursvernal.com/ja/jeep-trails-vernal-utah/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ユタ州バーナル近郊にJeepトレイルはありますか。","acceptedAnswer":{"@type":"Answer","text":"はい。バーナルを取り囲むBLMの土地とバックカントリーには、Jeepや4x4の車両に適した広大なオフロードルートがあり、さらにAdventure Tours Vernalを通じてご利用いただけるガイド付きUTVトレイルシステムが5つあります。"}},{"@type":"Question","name":"自分のJeepを運転する代わりに、ガイド付きのオフロードツアーに参加できますか。","acceptedAnswer":{"@type":"Answer","text":"はい。Adventure Tours Vernalは、経験豊富なガイドがご案内するKawasaki KRX 1000のUTVツアーを5つのトレイルシステムでご提供していますので、ご自分の車両は必要ありません。3時間で1台$349です。"}},{"@type":"Question","name":"オフロードにおいてバーナルはMoabと比べてどうですか。","acceptedAnswer":{"@type":"Answer","text":"バーナルはよく似た峡谷と砂漠の地形を、格段に少ない人出でお楽しみいただけます。トレイルは商業化が進んでおらず、バックカントリーはより人里離れていて、ガイド付きツアーの料金もMoabの事業者と同等か、それより手頃です。"}}]}]}`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="ユタ州バーナル近郊のJeepトレイル｜オフロード＆UTVガイド"
+      description="ユタ州バーナル近郊のJeepトレイルとオフロードルートのご案内です。BLMのバックカントリーの道、峡谷や砂漠の地形、西部開拓時代の歴史あるルートを、ご自分のJeepで、あるいは5つのトレイルシステムを巡るガイド付きKawasaki KRX 1000のUTVツアーでお楽しみください。"
+      path="/ja/jeep-trails-vernal-utah/"
+      type="article"
+      ogTitle="ユタ州バーナル近郊のJeepトレイル｜オフロードガイド"
+      ogDescription="バーナル近郊のオフロードトレイルを、Jeepや4x4、そしてガイド付きKawasaki KRX 1000のUTVツアーで。峡谷地帯と人里離れたバックカントリーの地形を巡ります。"
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.trails', lang), href: '/ja/utv/' }, { label: 'Jeepトレイル' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

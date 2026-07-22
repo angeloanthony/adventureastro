@@ -1,0 +1,101 @@
+---
+// ja/from/salt-lake-city.astro — Japanese city landing page (P10K Batch D,
+// mirrors src/pages/de/from/salt-lake-city.astro / src/pages/es/from/salt-lake-city.astro).
+// The `cities` content collection (src/content/cities/salt-lake-city.json)
+// is English-only and is NOT modified here — only the locale-neutral
+// numeric facts (driveTimeHours, driveMiles, routeSummary, nearestAirport)
+// are reused from the entry; title/description are hardcoded Japanese
+// literals instead of city.title/city.description.
+import CityLayout from '../../../layouts/CityLayout.astro';
+import GatewayRoutes from '../../../components/content/GatewayRoutes.astro';
+import FaqAccordion from '../../../components/content/FaqAccordion.astro';
+import { getEntry } from 'astro:content';
+import { SITE } from '../../../config/site';
+
+const cityEntry = await getEntry('cities', 'salt-lake-city');
+if (!cityEntry) throw new Error('cities/salt-lake-city.json entry not found');
+const city = cityEntry.data;
+
+const faq = [
+  {
+    q: 'ユタ州バーナルはSalt Lake Cityからどのくらい離れていますか。',
+    a: `バーナルはSalt Lake Cityの東、約${city.driveTimeHours}時間（${city.driveMiles}マイル）の距離にあり、I-80 EからUS-40 Eへと進みます。ルートはHeber City、Duchesne、Rooseveltを通り抜け、その先でバーナルに到着します。`,
+  },
+  {
+    q: 'バーナルのUTVツアーに参加するには、どの空港を利用すればよいですか。',
+    a: 'Salt Lake City International Airport（SLC）が、定期便の就航する最寄りの主要空港です。そこからバーナルまでは、I-80とUS-40を東へ走るわかりやすい道のりです——バーナル自体には商業空港はありません。',
+  },
+  {
+    q: 'Salt Lake Cityからの日帰りでバーナルのUTVツアーに参加できますか。',
+    a: `可能ではありますが、かなり慌ただしくなります——片道およそ${city.driveTimeHours}時間の運転に3時間のガイド付きツアーが加わるため、Salt Lake Cityからお越しの多くのお客様は、丸一日を移動で使い切る長い行程を避けてバーナルで1泊されています。`,
+  },
+];
+---
+<CityLayout
+  title="ユタ州バーナル周辺のUTVツアー — Salt Lake Cityからの旅行ガイド"
+  description="Salt Lake Cityからユタ州バーナルへ、Kawasaki KRX 1000で行くガイド付きUTVツアーの旅を。I-80とUS-40を東へ進むルート、所要時間と距離、SLC空港を起点にした日程の組み立て方、そして出発前に確認しておきたいことまで、地元ガイドが実践的にご案内します。"
+  path="/ja/from/salt-lake-city/"
+  breadcrumbs={[{ label: 'Salt Lake City' }]}
+  city={city}
+  relatedLinks={[
+    {
+      title: 'バーナル周辺のベストUTVトレイル',
+      description: '5つのガイド付きトレイルシステムを、地形と難易度とあわせてご紹介します。',
+      href: '/ja/utv/best-utv-trails-vernal/',
+    },
+    {
+      title: 'ユタ州バーナルの天気ガイド',
+      description: '旅行の日程を選ぶための、月ごとの天候の目安をまとめました。',
+      href: '/ja/guides/vernal-weather-guide/',
+    },
+    {
+      title: 'UTVツアーの持ち物',
+      description: 'ツアー当日に備えるための、完全な持ち物チェックリストです。',
+      href: '/ja/guides/what-to-bring/',
+    },
+    {
+      title: 'Dinosaur National Monument周辺のUTVツアー',
+      description: 'ツアーとQuarry Exhibit Hallの見学を組み合わせてお楽しみください。',
+      href: '/ja/dinosaur-national-monument/',
+    },
+  ]}
+>
+  <h1>ユタ州バーナル周辺のUTVツアー — Salt Lake Cityからお越しの方へのガイド</h1>
+
+  <div class="article-summary-box">
+    Salt Lake Cityから車でお越しですか。バーナルはI-80とUS-40を東へ約{city.driveTimeHours}時間、Heber City、Duchesne、Rooseveltを抜けてユタ州の恐竜の国へと入る、景色の良いドライブの先にあります。Adventure Tours Vernalでは、Dinosaur National Monumentを取り囲むバックカントリーを巡る、Kawasaki KRX 1000サイドバイサイドのガイド付きツアーをご案内しています。
+  </div>
+
+  <h2>東へ向かうドライブ</h2>
+  <p>
+    Salt Lake Cityからバーナルへのルートは、I-80 EをSilver Creek Junctionまで進み、そこからUS-40 Eに入ってHeber City、Duchesne、Rooseveltを通り抜け、バーナルに到着します。距離は約{city.driveMiles}マイル、運転時間はおよそ{city.driveTimeHours}時間で、その大半はユタ州の開けた高地砂漠と山岳の風景の中を走ります。空港のある街から東へ向かう気軽な日帰りドライブとしても、より長いUintah Basinの旅の最初の一区間としても、ちょうど良い道のりです。
+  </p>
+
+  <h2>Salt Lake Cityからの旅行者がバーナルを選ぶ理由</h2>
+  <p>
+    Salt Lake City International Airport（SLC）は、定期便が就航しているなかでバーナルに最も近い主要空港です。そのため、ユタ州へ空路でお越しの方にとって、バーナルは無理なく旅程に加えられる目的地になります。バーナルに着けば、Adventure Tours Vernalが5つのガイド付きトレイルシステム——Doc's Beach、Moonshine Arch、Ashley Gorge、Outlaw Trail、Asphalt Ridge——をご案内しますし、町からわずか20分の<a href="/ja/dinosaur-national-monument/">Dinosaur National Monument</a>へも気軽に足を運べます。もう1日余裕があれば、北へ1時間ほど足を延ばして<a href="/ja/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge</a>まで旅を延長し、貯水湖での釣りやボート、赤い峡谷の絶景ドライブを楽しむ価値があります。
+  </p>
+  <p>
+    ツアーはすべて、オーナーのDaveとTrudy Wilsonが、FOX 2.5 PODIUM LSCサスペンションを備えたKawasaki KRX 1000サイドバイサイドでご案内します。UTVの経験は必要ありません——出発前の安全説明と安全装備一式はすべて含まれています。ご準備が整いましたら<a href="/ja/booking/">空き状況を確認してツアーをご予約ください</a>。出発前に服装や持ち物、季節ごとの天候を知っておきたい方は、<a href="/ja/guides/">旅行ガイド</a>をご覧ください。
+  </p>
+
+  <h2>東へ出発する前に</h2>
+  <p>
+    旅程にDinosaur National Monumentが入っているなら、Salt Lake Cityを発つ前に<a href="/ja/dinosaur-national-monument/visiting-dinosaur-national-monument/">Dinosaur National Monument完全ガイド</a>をお読みください。どれくらいの時間を見込んでおくべきか、絶景ドライブや岩絵の見どころはどこか、そして国定公園の見学とガイド付きUTVツアーをどう組み合わせるかまでご説明しています。
+  </p>
+
+  <div class="article-tip">
+    <strong>プランニングのヒント：</strong>Salt Lake Cityから出発される前に、DaveまたはTrudyまで<a href={SITE.phoneHrefDash}>{SITE.phoneDisplay}</a>までお電話いただき、路面状況とスケジュールをご確認ください。特に繁忙期を外した時期は事前のご確認をおすすめします（<a href="/ja/guides/vernal-weather-guide/">ユタ州バーナルの天気ガイド</a>もあわせてご覧ください）。
+  </div>
+
+  <!-- TODO (owner input): Salt-Lake-specific visitor tips (e.g. best
+       departure time to avoid I-80/US-40 traffic, recommended overnight
+       stop) and original photography of the drive route are not yet
+       available. Add once supplied — do not invent. Mirrors the English
+       source's TODO verbatim; not user-facing. -->
+
+  <GatewayRoutes />
+
+  <h2>よくあるご質問</h2>
+  <FaqAccordion faq={faq} />
+</CityLayout>
