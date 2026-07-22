@@ -19,8 +19,8 @@ const { Content } = await render(entry as any);
 const d = entry.data;
 const lang = getLangFromUrl(Astro.url);
 const { baseId } = parseEntryLocale(entry.id);
-// Existence-aware breadcrumb ancestors — see SpokeArticle.astro.
-const homeLocale = getAvailableLocales('').includes(lang) ? lang : DEFAULT_LOCALE;
+// Existence-aware breadcrumb ancestor — see SpokeArticle.astro. The Home crumb
+// is NOT passed: Breadcrumbs.astro owns and localizes it.
 const itinLocale = getAvailableLocales('itineraries').includes(lang) ? lang : DEFAULT_LOCALE;
 ---
 <ItineraryLayout
@@ -32,7 +32,6 @@ const itinLocale = getAvailableLocales('itineraries').includes(lang) ? lang : DE
   publishDate={d.publishDate}
   updatedDate={d.updatedDate}
   breadcrumbs={[
-    { label: t('nav.home', lang), href: localizedPath('', homeLocale) },
     { label: t('nav.itineraries', lang), href: localizedPath('itineraries', itinLocale) },
     { label: d.title },
   ]}

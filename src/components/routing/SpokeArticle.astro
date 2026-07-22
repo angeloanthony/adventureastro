@@ -26,12 +26,12 @@ const { Content } = await render(entry as any);
 const d = entry.data;
 const lang = getLangFromUrl(Astro.url);
 const { baseId } = parseEntryLocale(entry.id);
-// Existence-aware breadcrumb ancestors: link to the localized home/hub pillar
-// only when that page actually exists in `lang`; otherwise fall back to the
-// English page (same pattern as the Header/Footer booking link). Lets a hub's
-// MDX spokes ship in a new locale before its inline pillar/home are translated
-// without emitting links to pages that don't exist yet.
-const homeLocale = getAvailableLocales('').includes(lang) ? lang : DEFAULT_LOCALE;
+// Existence-aware breadcrumb ancestor: link to the localized hub pillar only
+// when that page actually exists in `lang`; otherwise fall back to the English
+// page (same pattern as the Header/Footer booking link). Lets a hub's MDX
+// spokes ship in a new locale before its inline pillar is translated without
+// emitting links to pages that don't exist yet. The Home crumb is NOT passed —
+// Breadcrumbs.astro owns it and localizes it the same way.
 const hubLocale = getAvailableLocales(hub).includes(lang) ? lang : DEFAULT_LOCALE;
 ---
 <SpokeLayout
@@ -43,7 +43,6 @@ const hubLocale = getAvailableLocales(hub).includes(lang) ? lang : DEFAULT_LOCAL
   publishDate={d.publishDate}
   updatedDate={d.updatedDate}
   breadcrumbs={[
-    { label: t('nav.home', lang), href: localizedPath('', homeLocale) },
     { label: hubName(hub, lang), href: localizedPath(hub, hubLocale) },
     { label: d.title },
   ]}

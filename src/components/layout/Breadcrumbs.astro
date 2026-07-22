@@ -5,9 +5,8 @@
 // `schemaOnly` emits just the BreadcrumbList JSON-LD and no visible markup:
 // used on legacy pages that already ship their own styled `.article-breadcrumb`
 // trail, so they gain the structured data without a duplicate visible trail.
-import { SITE } from '../../config/site';
 import { absoluteUrl } from '../../lib/urls';
-import { getLangFromUrl } from '../../lib/i18n';
+import { getLangFromUrl, localeHref, LOCALE_CODES } from '../../lib/i18n';
 import { t } from '../../lib/ui';
 
 // Crumb hrefs should be ROOT-RELATIVE ('/utv/') so the visible trail
@@ -18,12 +17,22 @@ interface Props { items: Crumb[]; schemaOnly?: boolean }
 const { items, schemaOnly = false } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 
+// The Home node belongs to this component: emitted once, in the reader's
+// language, and existence-aware (localeHref falls back to '/' for a locale
+// with no home page yet). A caller that ALSO passes a Home crumb — the spoke
+// and itinerary routers did — otherwise rendered `Home > Home > ...` with the
+// first link dropping localized readers onto the English homepage. Drop a
+// leading crumb that is itself a home path rather than trusting 140+ callers.
+const homeHref = localeHref('', lang);
+const HOME_PATHS = new Set(['/', ...LOCALE_CODES.map((code) => `/${code}/`)]);
+const crumbs = items[0]?.href && HOME_PATHS.has(items[0].href) ? items.slice(1) : items;
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: t('nav.home', lang), item: `${SITE.url}/` },
-    ...items.map((crumb, i) => ({
+    { '@type': 'ListItem', position: 1, name: t('nav.home', lang), item: absoluteUrl(homeHref) },
+    ...crumbs.map((crumb, i) => ({
       '@type': 'ListItem',
       position: i + 2,
       name: crumb.label,
@@ -34,8 +43,8 @@ const jsonLd = {
 ---
 {!schemaOnly && (
   <nav class="breadcrumbs" aria-label={t('a11y.breadcrumb', lang)}>
-    <a href="/">{t('nav.home', lang)}</a>
-    {items.map((crumb) => (
+    <a href={homeHref}>{t('nav.home', lang)}</a>
+    {crumbs.map((crumb) => (
       <Fragment>
         <span class="sep">&rsaquo;</span>
         {crumb.href ? <a href={crumb.href}>{crumb.label}</a> : <span aria-current="page">{crumb.label}</span>}

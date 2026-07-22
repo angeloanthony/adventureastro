@@ -244,7 +244,7 @@ const PT = `
       <div class="article-breadcrumb"><a href="/pt/">Início</a><span class="sep">›</span><span>Tours ao Monumento dos Dinossauros</span></div>
       <h1 class="article-title">Tours em UTV Perto do Dinosaur National Monument</h1>
       <p class="article-meta">Atualizado em abril de 2026 · Adventure Tours Vernal</p>
-      <p style="display:inline-flex;align-items:center;gap:8px;margin:12px 0;padding:7px 15px;border:1px solid rgba(212,118,78,0.5);border-radius:999px;background:#ffffff;box-shadow:0 1px 4px rgba(0,0,0,0.08);font-size:0.95rem;color:#4a4139;"><span aria-hidden="true" style="color:#e6a817;letter-spacing:1px;">★★★★★</span> <span><strong>\${SITE.rating.value}</strong> &middot; \${SITE.rating.count} avaliações do Google</span></p>
+      <p style="display:inline-flex;align-items:center;gap:8px;margin:12px 0;padding:7px 15px;border:1px solid rgba(212,118,78,0.5);border-radius:999px;background:#ffffff;box-shadow:0 1px 4px rgba(0,0,0,0.08);font-size:0.95rem;color:#4a4139;"><span aria-hidden="true" style="color:#e6a817;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count} avaliações do Google</span></p>
     </header>
 
     <div class="article-body">
