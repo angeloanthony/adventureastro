@@ -661,10 +661,10 @@ const ES = `
     <div class="related-articles">
       <h3>Más Guías de Viaje de Vernal</h3>
       <div class="related-grid">
-        <a href="/utv/best-utv-trails-vernal/" class="related-card"><h4>Mejores Senderos para UTV Cerca de Vernal</h4><p>Los mejores senderos todoterreno de la Cuenca de Uintah — de principiante a experto.</p></a>
-        <a href="/guides/vernal-weather-guide/" class="related-card"><h4>Guía del Clima de Vernal</h4><p>Planifique actividades al aire libre según el clima estacional de Vernal.</p></a>
-        <a href="/guides/what-to-wear-utv-tour/" class="related-card"><h4>Qué Ponerse en un Tour en UTV</h4><p>Capas de ropa, protección solar y calzado para tours en el desierto.</p></a>
-        <a href="/dinosaur-national-monument/petroglyphs-rock-art-vernal/" class="related-card"><h4>Petroglifos y Arte Rupestre</h4><p>Antiguo arte rupestre Fremont y Ute en nuestros tours guiados.</p></a>
+        <a href="/es/utv/best-utv-trails-vernal/" class="related-card"><h4>Mejores Senderos para UTV Cerca de Vernal</h4><p>Los mejores senderos todoterreno de la Cuenca de Uintah — de principiante a experto.</p></a>
+        <a href="/es/guides/vernal-weather-guide/" class="related-card"><h4>Guía del Clima de Vernal</h4><p>Planifique actividades al aire libre según el clima estacional de Vernal.</p></a>
+        <a href="/es/guides/what-to-wear-utv-tour/" class="related-card"><h4>Qué Ponerse en un Tour en UTV</h4><p>Capas de ropa, protección solar y calzado para tours en el desierto.</p></a>
+        <a href="/es/dinosaur-national-monument/petroglyphs-rock-art-vernal/" class="related-card"><h4>Petroglifos y Arte Rupestre</h4><p>Antiguo arte rupestre Fremont y Ute en nuestros tours guiados.</p></a>
       </div>
     </div>
   </main>

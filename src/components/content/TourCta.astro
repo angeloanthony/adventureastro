@@ -5,7 +5,7 @@
 // SITE.pricing.baseTour is ever unset again. Never render more than 2 of
 // these on one page.
 import { SITE } from '../../config/site';
-import { getLangFromUrl } from '../../lib/i18n';
+import { getLangFromUrl, localeHref } from '../../lib/i18n';
 import { t } from '../../lib/ui';
 
 interface Props {
@@ -29,7 +29,7 @@ const priceDisplay = SITE.pricing.baseTour != null ? `$${SITE.pricing.baseTour}/
   <p class="tour-cta-details">
     {priceDisplay ?? t('tour.callForPricing', lang)} &middot; {t('tour.threeHours', lang)} &middot; {t('tour.upToRiders', lang, { n: SITE.fleet.seatsPerMachine })}
   </p>
-  <a href={SITE.booking.path} class="tour-cta-button">{t('cta.bookYourAdventure', lang)}</a>
+  <a href={localeHref(SITE.booking.path, lang)} class="tour-cta-button">{t('cta.bookYourAdventure', lang)}</a>
 </div>
 
 <style>

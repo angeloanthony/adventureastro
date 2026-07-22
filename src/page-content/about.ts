@@ -435,7 +435,7 @@ const ES = `
 
         <p>Nuestra familia descubrió que prácticamente le rogábamos a la gente que viniera a visitar la belleza que habíamos encontrado en nuestro propio patio trasero. En nuestras salidas personales descubrimos cuevas, senderos, vivimos historia y disfrutamos de paisajes hermosos más allá de nuestras expectativas.</p>
 
-        <p>Hoy compartimos ese conocimiento de primera mano en cada recorrido — desde nuestros <a href="/utv/backcountry-tours-vernal-utah/">tours guiados por la zona agreste</a> a través de cañones remotos y sitios de petroglifos, hasta los <a href="/utv/best-utv-trails-vernal/">cinco sistemas de senderos que operamos cerca de Vernal</a>. Es el mismo territorio que nosotros mismos exploramos, ahora explorado, mapeado y guiado en persona.</p>
+        <p>Hoy compartimos ese conocimiento de primera mano en cada recorrido — desde nuestros <a href="/es/utv/backcountry-tours-vernal-utah/">tours guiados por la zona agreste</a> a través de cañones remotos y sitios de petroglifos, hasta los <a href="/es/utv/best-utv-trails-vernal/">cinco sistemas de senderos que operamos cerca de Vernal</a>. Es el mismo territorio que nosotros mismos exploramos, ahora explorado, mapeado y guiado en persona.</p>
 
         <p>Ese "patio trasero" es más grande que un solo pueblo. Es una región multiestatal — Dinosaur National Monument se extiende desde Utah hasta Colorado, Flaming Gorge se adentra al norte en Wyoming, las High Uintas se elevan al oeste — con Vernal justo en el centro.</p>
 
@@ -1191,7 +1191,7 @@ const FR = `
 
         <p>Notre famille s'est rendu compte que nous suppliions pratiquement les gens de venir découvrir la beauté que nous avions trouvée dans notre propre arrière-cour&nbsp;! Lors de nos sorties personnelles, nous avons découvert des grottes, des pistes, vécu l'histoire et profité de paysages magnifiques au-delà de nos attentes.</p>
 
-        <p>Aujourd'hui, nous partageons cette connaissance directe à chaque sortie — de nos <a href="/utv/backcountry-tours-vernal-utah/">tours guidés en backcountry</a> à travers des canyons isolés et des sites de pétroglyphes jusqu'aux <a href="/utv/best-utv-trails-vernal/">cinq réseaux de pistes que nous exploitons près de Vernal</a>. C'est le même territoire que nous avons exploré nous-mêmes, désormais reconnu, cartographié et guidé en personne.</p>
+        <p>Aujourd'hui, nous partageons cette connaissance directe à chaque sortie — de nos <a href="/fr/utv/backcountry-tours-vernal-utah/">tours guidés en backcountry</a> à travers des canyons isolés et des sites de pétroglyphes jusqu'aux <a href="/fr/utv/best-utv-trails-vernal/">cinq réseaux de pistes que nous exploitons près de Vernal</a>. C'est le même territoire que nous avons exploré nous-mêmes, désormais reconnu, cartographié et guidé en personne.</p>
 
         <p>Cette "arrière-cour" est plus grande qu'une seule ville. C'est une région multi-états — Dinosaur National Monument s'étendant de l'Utah au Colorado, Flaming Gorge se prolongeant au nord jusqu'au Wyoming, les High Uintas s'élevant à l'ouest — avec Vernal en plein centre.</p>
 

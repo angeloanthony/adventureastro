@@ -136,10 +136,10 @@ const ES = `
     <div class="related-articles">
       <h3>Más Guías de Senderos</h3>
       <div class="related-grid">
-        <a href="/utv/best-utv-trails-vernal/" class="related-card"><h4>Mejores Senderos para UTV Cerca de Vernal</h4><p>Desglose detallado de los 5 sistemas de senderos.</p></a>
+        <a href="/es/utv/best-utv-trails-vernal/" class="related-card"><h4>Mejores Senderos para UTV Cerca de Vernal</h4><p>Desglose detallado de los 5 sistemas de senderos.</p></a>
         <a href="/es/jeep-trails-vernal-utah/" class="related-card"><h4>Senderos para Jeep Cerca de Vernal</h4><p>Opciones todoterreno para entusiastas de Jeep y 4x4.</p></a>
-        <a href="/utv/side-by-side-rentals-vernal-utah/" class="related-card"><h4>Tours en Side-by-Side vs. Alquileres</h4><p>Por qué los tours guiados superan a los alquileres independientes.</p></a>
-        <a href="/guides/what-to-wear-utv-tour/" class="related-card"><h4>Qué Llevar</h4><p>Guía de equipo para andar en UTV por el desierto.</p></a>
+        <a href="/es/utv/side-by-side-rentals-vernal-utah/" class="related-card"><h4>Tours en Side-by-Side vs. Alquileres</h4><p>Por qué los tours guiados superan a los alquileres independientes.</p></a>
+        <a href="/es/guides/what-to-wear-utv-tour/" class="related-card"><h4>Qué Llevar</h4><p>Guía de equipo para andar en UTV por el desierto.</p></a>
       </div>
     </div>
   </main>

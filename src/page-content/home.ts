@@ -749,7 +749,7 @@ const ES = `
           </div>
           <div class="feature-content">
             <h3 class="feature-title">Dinosaur National Monument</h3>
-            <p class="feature-description">Recorra paisajes prehistóricos donde alguna vez deambularon gigantes antiguos, con acceso a yacimientos fósiles de clase mundial. <a href="/dinosaur-national-monument/" style="color:var(--burnt-orange);font-weight:600;">Tours en UTV cerca del monumento →</a></p>
+            <p class="feature-description">Recorra paisajes prehistóricos donde alguna vez deambularon gigantes antiguos, con acceso a yacimientos fósiles de clase mundial. <a href="/es/dinosaur-national-monument/" style="color:var(--burnt-orange);font-weight:600;">Tours en UTV cerca del monumento →</a></p>
           </div>
         </div>
         <div class="feature-card">
@@ -758,7 +758,7 @@ const ES = `
           </div>
           <div class="feature-content">
             <h3 class="feature-title">Evidencia de Civilización Antigua</h3>
-            <p class="feature-description">Descubra petroglifos, arte rupestre y ruinas — miles de años de historia indígena preservados en la piedra y los cañones de la Cuenca de Uintah. <a href="/dinosaur-national-monument/petroglyphs-rock-art-vernal/" style="color:var(--burnt-orange);font-weight:600;">Explore los sitios de arte rupestre →</a></p>
+            <p class="feature-description">Descubra petroglifos, arte rupestre y ruinas — miles de años de historia indígena preservados en la piedra y los cañones de la Cuenca de Uintah. <a href="/es/dinosaur-national-monument/petroglyphs-rock-art-vernal/" style="color:var(--burnt-orange);font-weight:600;">Explore los sitios de arte rupestre →</a></p>
           </div>
         </div>
         <div class="feature-card">
@@ -767,7 +767,7 @@ const ES = `
           </div>
           <div class="feature-content">
             <h3 class="feature-title">Senderos Ocultos</h3>
-            <p class="feature-description">Acceda a rutas secretas y favoritos locales conocidos solo por los habitantes de Vernal — paisajes que no encontrará en ningún otro lugar. <a href="/utv/backcountry-tours-vernal-utah/" style="color:var(--burnt-orange);font-weight:600;">Detalles del tour por la zona agreste →</a></p>
+            <p class="feature-description">Acceda a rutas secretas y favoritos locales conocidos solo por los habitantes de Vernal — paisajes que no encontrará en ningún otro lugar. <a href="/es/utv/backcountry-tours-vernal-utah/" style="color:var(--burnt-orange);font-weight:600;">Detalles del tour por la zona agreste →</a></p>
           </div>
         </div>
         <div class="feature-card">
@@ -776,7 +776,7 @@ const ES = `
           </div>
           <div class="feature-content">
             <h3 class="feature-title">Arcos Escénicos</h3>
-            <p class="feature-description">Descubra arcos y formaciones naturales de piedra arenisca que rivalizan con los parques más famosos de Utah, sin las multitudes. <a href="/utv/best-utv-trails-vernal/" style="color:var(--burnt-orange);font-weight:600;">Vea los 5 sistemas de senderos →</a></p>
+            <p class="feature-description">Descubra arcos y formaciones naturales de piedra arenisca que rivalizan con los parques más famosos de Utah, sin las multitudes. <a href="/es/utv/best-utv-trails-vernal/" style="color:var(--burnt-orange);font-weight:600;">Vea los 5 sistemas de senderos →</a></p>
           </div>
         </div>
       </div>
@@ -1019,39 +1019,39 @@ const ES = `
         <p class="section-subtitle">Planifique su viaje con nuestros guías locales — todo lo que necesita saber sobre Vernal, Utah</p>
       </div>
       <div class="related-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;max-width:1000px;margin:0 auto;">
-        <a href="/things-to-do/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+        <a href="/es/things-to-do/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">Qué Hacer en Vernal</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">La guía completa de actividades y atracciones.</p>
         </a>
-        <a href="/things-to-do/vernal-utah-attractions/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+        <a href="/es/things-to-do/vernal-utah-attractions/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">Las Mejores Atracciones de Vernal</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">Lugares y sitios imprescindibles para visitar.</p>
         </a>
-        <a href="/things-to-do/fun-things-to-do-vernal-utah-kids/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+        <a href="/es/things-to-do/fun-things-to-do-vernal-utah-kids/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">Actividades Familiares</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">Actividades divertidas para hacer con niños en Vernal.</p>
         </a>
-        <a href="/things-to-do/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+        <a href="/es/things-to-do/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">Actividades al Aire Libre</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">Senderismo, pesca, tours en UTV y más.</p>
         </a>
-        <a href="/atv-trails-vernal-utah/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+        <a href="/es/atv-trails-vernal-utah/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">Senderos para ATV Cerca de Vernal</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">Sistemas de senderos todo terreno y guía del terreno.</p>
         </a>
-        <a href="/utv/side-by-side-rentals-vernal-utah/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+        <a href="/es/utv/side-by-side-rentals-vernal-utah/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">Tours en UTV vs. Alquileres</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">Por qué los tours guiados son mejores que los alquileres por cuenta propia.</p>
         </a>
-        <a href="/dinosaur-national-monument/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+        <a href="/es/dinosaur-national-monument/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">Tours al Monumento a los Dinosaurios</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">Tours en UTV cerca del monumento.</p>
         </a>
-        <a href="/dinosaur-national-monument/visiting-dinosaur-national-monument/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+        <a href="/es/dinosaur-national-monument/visiting-dinosaur-national-monument/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">Guía Definitiva de Dinosaur National Monument</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">La guía completa para planificar su viaje — fósiles, petroglifos, rutas y más.</p>
         </a>
-        <a href="/utv/group-utv-tours-vernal/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+        <a href="/es/utv/group-utv-tours-vernal/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">Tours Grupales y Privados</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">Familias, reuniones y salidas corporativas.</p>
         </a>

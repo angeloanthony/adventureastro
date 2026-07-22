@@ -123,9 +123,9 @@ const ES = `
       <h3>Más Guías Todoterreno</h3>
       <div class="related-grid">
         <a href="/es/atv-trails-vernal-utah/" class="related-card"><h4>Senderos para ATV Cerca de Vernal</h4><p>Los cinco sistemas de senderos para UTV con desglose de terreno.</p></a>
-        <a href="/guides/moab-utv-tours/" class="related-card"><h4>Vernal: La Alternativa a Moab</h4><p>Por qué Vernal supera a Moab para la aventura todoterreno.</p></a>
-        <a href="/utv/backcountry-tours-vernal-utah/" class="related-card"><h4>Tours de Zona Agreste</h4><p>Experiencias guiadas en UTV de zona agreste profunda.</p></a>
-        <a href="/utv/best-utv-trails-vernal/" class="related-card"><h4>Mejores Senderos para UTV</h4><p>Guía sendero por sendero para todos los niveles.</p></a>
+        <a href="/es/guides/moab-utv-tours/" class="related-card"><h4>Vernal: La Alternativa a Moab</h4><p>Por qué Vernal supera a Moab para la aventura todoterreno.</p></a>
+        <a href="/es/utv/backcountry-tours-vernal-utah/" class="related-card"><h4>Tours de Zona Agreste</h4><p>Experiencias guiadas en UTV de zona agreste profunda.</p></a>
+        <a href="/es/utv/best-utv-trails-vernal/" class="related-card"><h4>Mejores Senderos para UTV</h4><p>Guía sendero por sendero para todos los niveles.</p></a>
       </div>
     </div>
   </main>

@@ -104,7 +104,7 @@ const ES = `
         Dinosaur National Monument atrae a visitantes de todo el mundo para ver fósiles de la era jurásica — pero la zona agreste que rodea el monumento ofrece una capa de aventura completamente distinta. Los tours guiados en UTV lo llevan al centro de un terreno de cañones, petroglifos antiguos y paisajes desérticos que la mayoría de los visitantes del monumento pasan por alto.
       </div>
 
-      <div class="article-tip"><strong>Comience Aquí:</strong> ¿Es nuevo planificando un viaje al monumento? Lea nuestra <a href="/dinosaur-national-monument/visiting-dinosaur-national-monument/">Guía Definitiva de Dinosaur National Monument</a> — el plan completo que cubre fósiles, petroglifos, rutas panorámicas, caminatas y la mejor época para visitar.</div>
+      <div class="article-tip"><strong>Comience Aquí:</strong> ¿Es nuevo planificando un viaje al monumento? Lea nuestra <a href="/es/dinosaur-national-monument/visiting-dinosaur-national-monument/">Guía Definitiva de Dinosaur National Monument</a> — el plan completo que cubre fósiles, petroglifos, rutas panorámicas, caminatas y la mejor época para visitar.</div>
 
       <h2>La Zona Agreste Más Allá del Monumento</h2>
       <p>No se permiten vehículos motorizados dentro de Dinosaur National Monument, pero las tierras de la BLM (Oficina de Manejo de Tierras) y la zona agreste que rodean el monumento presentan las mismas formaciones geológicas, sistemas de cañones y arte rupestre antiguo — además de acceso a senderos todo terreno que lo llevan a lo profundo de un terreno que las rutas panorámicas del monumento apenas insinúan.</p>
@@ -149,10 +149,10 @@ const ES = `
     <div class="related-articles">
       <h3>Planifique Su Visita</h3>
       <div class="related-grid">
-        <a href="/things-to-do/" class="related-card"><h4>Qué Hacer en Vernal</h4><p>Guía completa más allá del monumento.</p></a>
-        <a href="/things-to-do/vernal-utah-attractions/" class="related-card"><h4>Las Mejores Atracciones de Vernal</h4><p>Todos los sitios imprescindibles de la zona.</p></a>
-        <a href="/dinosaur-national-monument/petroglyphs-rock-art-vernal/" class="related-card"><h4>Petroglifos y Arte Rupestre</h4><p>Sitios de arte antiguo dentro y fuera de los senderos.</p></a>
-        <a href="/things-to-do/best-restaurants-vernal-utah/" class="related-card"><h4>Dónde Comer en Vernal</h4><p>Reponga energías después de su aventura.</p></a>
+        <a href="/es/things-to-do/" class="related-card"><h4>Qué Hacer en Vernal</h4><p>Guía completa más allá del monumento.</p></a>
+        <a href="/es/things-to-do/vernal-utah-attractions/" class="related-card"><h4>Las Mejores Atracciones de Vernal</h4><p>Todos los sitios imprescindibles de la zona.</p></a>
+        <a href="/es/dinosaur-national-monument/petroglyphs-rock-art-vernal/" class="related-card"><h4>Petroglifos y Arte Rupestre</h4><p>Sitios de arte antiguo dentro y fuera de los senderos.</p></a>
+        <a href="/es/things-to-do/best-restaurants-vernal-utah/" class="related-card"><h4>Dónde Comer en Vernal</h4><p>Reponga energías después de su aventura.</p></a>
       </div>
     </div>
   </main>
