@@ -12,20 +12,24 @@ All three locales are feature-complete (57 MDX spokes + 20 inline pages each,
 scan cannot make. This document exists so a reviewer decides a short list of
 questions, not so they read 171 files.
 
-**Decided so far — 2 of 10:**
+**Decided — 3 of 10:**
 
 | Item | Decision | State |
 |---|---|---|
 | **A1** German register | **informal `du` confirmed**; `Sie` flip cancelled | ✅ decided 2026-07-25 — **DE review unblocked**. Consistency residual (~18 formal leaks, `Du`/`du` caps) still open |
-| **C1** `官方渠道` vs `官方来源` | **`官方渠道`** is the standard | ✅ decided **and applied** 2026-07-25 — 962/0 |
+| **C1** `官方渠道` vs `官方来源` | **`官方渠道`** is the standard | ✅ decided **and applied** 2026-07-25 |
+| **C6** locked-phrase policy | caveat is locked by **intent, not byte sequence** | ✅ decided **and fully applied** 2026-07-25 — 27 seam defects across 13 files fixed, disclaimer count conserved at 994 |
 
-**Open — 8:**
+**Open — 7:**
 
 | Locale | Open items | Highest-impact |
 |---|---|---|
-| `de` | A1-residual, A2, A3, A4 | A2 — 135 title-cased headings across 28 files |
+| `de` | **A1-residual**, A2, A3, A4 | A1-residual, then A2 — 135 title-cased headings across 28 files |
 | `ja` | B1 | B1 `モアブ` vs `Moab` |
-| `zh` | C2, C3, C4, **C6** | **C6** — 13 duplicated-`请` defects, 3 of which would bend the 962-instance locked caveat |
+| `zh` | C2, C3, C4 | C2 — `登山口` (228) for trailheads with no mountain |
+
+**Priority order** (owner-set 2026-07-25): ~~C6~~ → **A1-residual** → A2, A3, A4,
+B1, C2, C3.
 
 ---
 
@@ -213,7 +217,7 @@ This item is closed; the earlier note was stale.
 
 ---
 
-## C. Simplified Chinese (`zh`) — C1 decided & applied; C2/C3/C4/C6 open; register clean
+## C. Simplified Chinese (`zh`) — C1 + C6 decided & applied; C2/C3/C4 open; register clean
 
 Counted across all 57 `.zh.mdx` spokes **and** the 20 `src/pages/zh/**` inline
 pages. Register needs no decision: **你 3,668 / 您 0 / 咱们 0** — informal `你`
@@ -397,13 +401,99 @@ the reviewer:
 
 ---
 
-### C6. Duplicated `请` before the locked caveat — 13 instances, 5 files. OPEN.
+### C6. Duplicated `请` before the caveat — ✅ DECIDED & FULLY APPLIED 2026-07-25
+
+> **✅ OWNER POLICY DECISION (2026-07-25) — the caveat is locked by INTENT, not by
+> byte sequence.**
+>
+> The lock is no longer defined as the exact string `请向官方渠道核实`. It is defined
+> as an **editorial intent**:
+>
+> > *"Direct the reader to verify the information through official channels."*
+>
+> Minor grammatical adaptation is permitted — required, even — where the exact
+> string would produce unnatural Chinese. All of these satisfy the lock:
+>
+> ```
+> ✅ 请向官方渠道核实。
+> ✅ 详情请向官方渠道核实。
+> ✅ 预订前，请向官方渠道核实。
+> ✅ 请致电，并向官方渠道核实。
+> ```
+>
+> **Rationale: natural, grammatical Chinese outranks byte-for-byte uniformity.**
+> Standardise where possible; do not sacrifice correctness for mechanical
+> uniformity.
+>
+> **This policy formalised what the corpus already did.** A prefix census of all
+> 994 disclaimer instances found the "962-instance lock" was never byte-uniform —
+> it already carried dozens of grammatical adaptations, including 16 with no `请`
+> at all (`>向官方渠道核实`), plus `一定要向官方渠道核实`, `都要向官方渠道核实`, and
+> `请始终向官方渠道核实`. The policy documents reality rather than loosening a rule.
+
+**What was found and fixed.** The defect class was **twice as large as first
+reported.** The caveat had been mechanically appended to heterogeneous sentence
+openings, producing three distinct seam defects — **27 instances across 13 files**
+(1 fixed earlier with C1, 26 in this pass):
+
+| Seam | Shape | Count | Fix applied |
+|---|---|---|---|
+| `请…请向` | `请在预订时请向官方渠道核实` — two `请` inside one clause, no boundary | 14 | drop the redundant `请` → `请在预订时向官方渠道核实` |
+| `并请向` | `请查看最新预报，并请向官方渠道核实` — `并` coordinating straight into a second `请` | 12 | `并请向` → `并向`, matching the endorsed `请致电，并向官方渠道核实` |
+| `先请向` | `…算进计划前先请向官方渠道核实` | 1 | `先请向` → `先向` |
+
+**All 27 are resolved** (the 14th `请…请向` was the C1 instance, fixed earlier).
+
+**Conservation check — the disclaimer was never dropped, only adapted:**
+
+| | Before | After |
+|---|---|---|
+| `官方渠道核实` (total instances) | **994** | **994** ✔ |
+| `请向官方渠道核实` | 962 | 936 |
+| `并向官方渠道核实` | 4 | 16 |
+| `或向官方渠道核实` | 0 | 1 |
+| `先向官方渠道核实` | 0 | 1 |
+| `请…请向` / `并请向` / `先请向` seams | 27 | **0** ✔ |
+
+Verified: `astro check` 0 errors / 0 warnings · build **619 pages** · validator ✔
+links resolve, no orphans · `您` 0 · `——` 5,222 · 14 `连接号` intact.
+
+**Category B — the three that needed individual rewrites**, per the policy's
+exceptions clause:
+
+| Shipped | Rewritten | Why it was not mechanical |
+|---|---|---|
+| `预订前请致电请向官方渠道核实` | `预订前请致电，并向官方渠道核实` | two clauses collapsed into one verb phrase |
+| `请尽早预订并请向官方渠道核实` | `请尽早预订，并向官方渠道核实` | the *second* `请` was the one to drop |
+| `请直接向我们请向官方渠道核实` | `请直接联系我们，或向官方渠道核实` | two competing `向` targets (*us* vs *official channels*); `联系` resolves the first so the caveat survives intact |
+
+**Five `请…请向` hits remain by design and must not be "fixed".** They are
+grammatical `请A，请B` coordinate clauses — each `请` governs its own clause across
+a comma boundary, which is standard polite Chinese:
+
+```
+请尽早预订住宿，空房情况请向官方渠道核实
+请查询当前的道路、天气和山口通行情况，请向官方渠道核实
+请尽早预订，并在指望某个具体营位之前请向官方渠道核实
+请尽早预订，并在把某个营位算进计划前请向官方渠道核实
+请尽早预订住宿，并就空房情况请向官方渠道核实
+```
+
+The defect was never "two `请` in a sentence" — it was **two `请` inside one clause
+with no boundary between them.** A future scan must encode that distinction or it
+will flag these five.
+
+---
+
+<details>
+<summary>Original finding, preserved for the record</summary>
 
 Surfaced while applying the C1 grammar fix. The wildflower instance was **not**
-isolated: the locked caveat `请向官方渠道核实` was mechanically appended to
+isolated: the caveat `请向官方渠道核实` was mechanically appended to
 sentences that already opened with `请`, producing `请…请向官方渠道核实` — *please …
-please verify with official channels* — in **14** places. One is fixed (C1); **13
-remain.**
+please verify with official channels* — in 14 places. One was fixed with C1; 13
+remained at the time of the report, and 13 more `并请向`/`先请向` instances were
+found afterwards.
 
 | File | Lines | Shipped text |
 |---|---|---|
@@ -418,26 +508,12 @@ remain.**
 | `utv/family-utv-guide-vernal.zh.mdx` | 136 | `请致电请向官方渠道核实` |
 | ″ | 178 | `请直接向我们请向官方渠道核实` |
 
-**They do not all take the same fix, which is why this is a decision and not a
-sweep.** Ten follow the rule already applied at C1 — drop the *leading* `请`, add a
-comma, leave the locked phrase byte-identical (`请在预订时…` → `在预订时，请向官方渠道核实`).
-Three cannot:
+They did not all take the same fix, which is what made this a policy decision
+rather than a sweep: ten were mechanical, three needed individual rewrites, and
+resolving them required deciding whether the caveat was locked by string or by
+intent. The owner chose intent — see the decision block above.
 
-- `请致电请向官方渠道核实` — *please call please verify*. The two clauses collapse
-  into one verb phrase; dropping either `请` still leaves `致电请向…` or `请致电向…`,
-  so the **locked phrase itself has to bend** (e.g. `请致电或向官方渠道核实`).
-- `请直接向我们请向官方渠道核实` — same problem, two competing `向` targets (*us*
-  vs *official channels*); it needs a real rewrite, not a deletion.
-- `请尽早预订并请向官方渠道核实` — here the *second* `请` is the one to drop
-  (`请尽早预订，并向官方渠道核实`), which again breaks the locked string.
-
-> **Question C6:** Approve the 10 mechanical fixes (leading `请` → comma, locked
-> phrase untouched)? And for the 3 that require bending
-> `请向官方渠道核实` — permit a local variant at those sites, or rewrite the
-> surrounding sentence so the locked phrase survives intact?
-
-*Nothing beyond the single C1 instance has been changed. This is reported, not
-fixed, because 3 of the 13 would silently break the 962-instance lock.*
+</details>
 
 ---
 
@@ -480,8 +556,12 @@ plus a corpus re-count of the changed term (old form must reach 0) and:
 - **any `de` change** — re-run the register and heading scans in A1/A2, so a fix
   in one place cannot silently reintroduce the pattern somewhere else;
 - **any `zh` change** — re-run the C5 scans (`您` must stay 0, ASCII-punct-after-Han
-  must stay 0, the 14 `连接号` single dashes must survive untouched) and re-count
-  `——` at 5,222;
+  must stay 0 outside the `keywords` meta list, the 14 `连接号` single dashes must
+  survive untouched) and re-count `——` at 5,222;
+- **any change touching the caveat** — per Gate 4e, assert the **core** count
+  `官方渠道核实` is conserved at **994** (prefixes may vary, instances may not
+  disappear) and all three seams stay at 0: `请…请向`, `并请向`, `先请向`. The five
+  grammatical `请A，请B` coordinate clauses listed in C6 must survive;
 - **any change at all** — confirm the sweep touched one locale only. Per the Z5
   lesson, a `page-content/*.ts` file holds all eight locales' blocks in one file;
   isolate the target locale's template literal and never transform the file whole.

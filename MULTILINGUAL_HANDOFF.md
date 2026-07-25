@@ -29,7 +29,7 @@ it in §1.
 | **Seven locales feature-complete** | `es` `it` `pt` `fr` `de` `ja` `zh` — each at **77/77 registered routes** (57 MDX spokes + 20 inline pages) |
 | **Route parity** | `zh` = `ja` = `de` = 77/77, verified identical route sets |
 | **Six-stage locale lifecycle** | §7 — proven across all seven, no per-locale special-casing |
-| **Standing release gates** | §7 Gates **4a** (UI-chrome parity, two parts), **4b** (dependency-root ordering), **4c** (corpus beats brief), **4d** (cross-locale body-link audit) — all BLOCKING |
+| **Standing release gates** | §7 Gates **4a** (UI-chrome parity, two parts), **4b** (dependency-root ordering), **4c** (corpus beats brief), **4d** (cross-locale body-link audit), **4e** (locked-phrase seam check) — all BLOCKING |
 | **Anchor-integrity check** | every `#anchor` has a matching explicit `id=` — added at Z3, now permanent |
 | **Internal-link localization** | §8 (P11) + §9 (P11.1) + Z5 — **0 route downgrades in every locale**; only 354 intentional author-bio links remain English |
 | **Release-tag policy** | §1 — `i18n-<locale>-complete`, annotated; 8 tags on origin (7 locales + `v1.0-content`) |
@@ -286,6 +286,39 @@ first; see §10.2.
    already shipped under the wrong rule (it is never just the challenger's file),
    and re-brief the remaining agents. Do not resolve these locally per file —
    that is how cross-batch drift is created.
+
+   **Gate 4e — locked-phrase seam check (BLOCKING).** *A phrase frozen in the
+   glossary is locked by editorial INTENT, not by byte sequence — and every place
+   it was joined to surrounding prose must be checked at the seam, not just
+   counted.* Appending a fixed string to heterogeneous sentence openings is its own
+   defect generator: the phrase is present and correct everywhere a term-count
+   verifies, while the *joins* are ungrammatical. Discovered 2026-07-25 in `zh`,
+   where the locked caveat `请向官方渠道核实` had been appended to sentences already
+   opening with `请`, producing `请…请向官方渠道核实` — *please … please verify with
+   official channels* — in **27 places across 13 files**. Every terminology grep,
+   `astro check`, the build, and the validator passed the whole time, because the
+   locked phrase itself was never wrong.
+
+   So for each locked phrase, do two things:
+   1. **Grep the seam, not just the phrase.** Search the phrase's leading token
+      repeated in the preceding clause (here: `请[\p{Han}]{1,12}请向…`, plus the
+      conjunction variants `并请向` / `先请向`). Encode the boundary: `请A，请B`
+      across a comma is *correct* Chinese and must not be flagged — the defect is
+      two imperatives inside **one** clause.
+   2. **Census the prefixes before assuming uniformity.** Counting the exact
+      string reported 962 instances and implied a byte-uniform lock; counting the
+      *core* (`官方渠道核实`) found **994** with dozens of grammatical variants
+      already shipped, including 16 with no `请` at all. The lock had never been
+      byte-uniform, so a "restore the exact string" sweep would have been the
+      wrong fix.
+
+   **Policy: intent over uniformity.** Define a locked phrase by what it must
+   convey ("direct the reader to verify through official channels"), permit minor
+   grammatical adaptation at the joins, and require the *core* count to be
+   conserved across any sweep — 994 before, 994 after, only the prefixes changed.
+   Standardise where possible; never sacrifice grammaticality for mechanical
+   uniformity. Applies to every locale: the same hazard exists wherever a brief
+   freezes a full sentence rather than a term.
 
    **Gate 4d — cross-locale body-link audit (BLOCKING).** *Once a locale reaches
    full route coverage, no internal body link in that locale may still point at
