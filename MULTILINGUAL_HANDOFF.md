@@ -414,6 +414,24 @@ about running the batches reliably. Reuse verbatim; don't rediscover them.
    stop retrying via agent and translate it directly in the main thread — that
    pattern (not the specific error message) is the signal to stop delegating.
 
+11. **Never run a repository-wide search-and-replace or typography normalization
+    across mixed code and markup.** Restrict bulk transforms to extracted text
+    nodes or an explicitly parsed/isolated content region. If a change touches
+    frontmatter, JSX/Astro, JSON-LD, or JavaScript, use targeted edits instead of
+    a whole-file transformation. Two independent incidents proved this: (a) a
+    quote-normalizer that split on `<`/`>` to find "text nodes" reordered a `>`
+    ahead of buffered text AND treated frontmatter JS as prose, corrupting every
+    `const schema` and mangling an arrow function (zh Z4); (b) a locale link pass
+    is only safe because it (i) whitelists against `LOCALE_SLUGS` — never a
+    blacklist — and (ii) isolates the target region first: MDX splits frontmatter
+    off and rewrites body only; `page-content/*.ts` holds EVERY locale's block in
+    one file, so the pass must extract just the `const ZH = ` template literal and
+    leave en/es/it/pt/fr/de/ja untouched. Always verify a bulk pass by
+    reverse-transforming every changed line back to its original and asserting
+    equality (§8), plus confirming every changed hunk falls inside the intended
+    region. Prefer leaving a cosmetic nit for the native-review sweep over a
+    clever global transform.
+
 ---
 
 ## Appendix — Infrastructure corrections during the localized-MDX phase (P4)
