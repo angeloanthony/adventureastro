@@ -1925,7 +1925,7 @@ const ZH = `
         <p>如果你在行程前有任何安全方面的顾虑或疑问，请与我们联系。我们随时为你保驾护航，让你的探险既安全又精彩！</p>
         <div class="cta-buttons">
           <a href="tel:435-219-9447" class="cta-button primary">📞 致电 (435) 219-9447</a>
-          <a href="/booking/" class="cta-button secondary">预订你的安全探险</a>
+          <a href="/zh/booking/" class="cta-button secondary">预订你的安全探险</a>
         </div>
       </div>
 

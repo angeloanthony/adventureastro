@@ -2380,7 +2380,7 @@ const ZH = `
         </label>
         <div class="faq-answer">
           <div class="answer-content">
-            <p>点击<a href="/cancellation-policy/" class="faq-link">这里</a>查看完整的取消政策。</p>
+            <p>点击<a href="/zh/cancellation-policy/" class="faq-link">这里</a>查看完整的取消政策。</p>
           </div>
         </div>
       </div>

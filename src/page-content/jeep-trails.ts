@@ -459,7 +459,7 @@ const ZH = `
 
   <main class="article-page">
     <header class="article-header">
-      <div class="article-breadcrumb"><a href="/">Home</a><span class="sep">›</span><a href="/utv/">越野路线</a><span class="sep">›</span><span>Jeep 越野路线</span></div>
+      <div class="article-breadcrumb"><a href="/zh/">Home</a><span class="sep">›</span><a href="/zh/utv/">越野路线</a><span class="sep">›</span><span>Jeep 越野路线</span></div>
       <h1 class="article-title">Vernal 附近的 Jeep 越野路线</h1>
       <p class="article-meta">2026 年 4 月更新 · Adventure Tours Vernal</p>
     </header>
@@ -497,7 +497,7 @@ const ZH = `
       <div class="article-cta">
         <h3>跟着向导探探这些路线</h3>
         <p>导览游 KRX 1000 之旅 · 每台车 $349 · 5 套越野路线系统 · 本地专业知识</p>
-        <a href="/booking/" class="cta-btn">预订行程</a>
+        <a href="/zh/booking/" class="cta-btn">预订行程</a>
         <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
       </div>
     </div>
@@ -505,10 +505,10 @@ const ZH = `
     <div class="related-articles">
       <h3>更多越野攻略</h3>
       <div class="related-grid">
-        <a href="/atv-trails-vernal-utah/" class="related-card"><h4>Vernal 附近的 ATV 越野路线</h4><p>五套 UTV 越野路线系统及地形详解。</p></a>
-        <a href="/guides/moab-utv-tours/" class="related-card"><h4>Vernal：Moab 的替代之选</h4><p>越野探险为何 Vernal 胜过 Moab。</p></a>
-        <a href="/utv/backcountry-tours-vernal-utah/" class="related-card"><h4>荒野之旅</h4><p>深入荒野的导览游 UTV 体验。</p></a>
-        <a href="/utv/best-utv-trails-vernal/" class="related-card"><h4>最佳 UTV 越野路线</h4><p>面向各种水平的逐条路线攻略。</p></a>
+        <a href="/zh/atv-trails-vernal-utah/" class="related-card"><h4>Vernal 附近的 ATV 越野路线</h4><p>五套 UTV 越野路线系统及地形详解。</p></a>
+        <a href="/zh/guides/moab-utv-tours/" class="related-card"><h4>Vernal：Moab 的替代之选</h4><p>越野探险为何 Vernal 胜过 Moab。</p></a>
+        <a href="/zh/utv/backcountry-tours-vernal-utah/" class="related-card"><h4>荒野之旅</h4><p>深入荒野的导览游 UTV 体验。</p></a>
+        <a href="/zh/utv/best-utv-trails-vernal/" class="related-card"><h4>最佳 UTV 越野路线</h4><p>面向各种水平的逐条路线攻略。</p></a>
       </div>
     </div>
   </main>

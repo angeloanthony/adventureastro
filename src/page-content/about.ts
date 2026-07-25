@@ -1947,7 +1947,7 @@ const ZH = `
 
         <p>我们一家人发现，自己几乎是在恳求身边的人来看看我们在自家后院里发现的这份美。在一次次私人出行中，我们找到了洞穴、越野路线，触摸了历史，也饱览了远超预期的绝美风光。</p>
 
-        <p>如今，我们把这份亲身积累的知识融进每一趟行程 — 从穿越偏远峡谷和岩画遗址的<a href="/utv/backcountry-tours-vernal-utah/">导览荒野之旅</a>，到<a href="/utv/best-utv-trails-vernal/">我们在 Vernal 附近运营的五套越野路线</a>。这些都是我们亲身探索过的土地，如今经过实地踏勘、绘制路线，再由我们亲自带队。</p>
+        <p>如今，我们把这份亲身积累的知识融进每一趟行程 — 从穿越偏远峡谷和岩画遗址的<a href="/zh/utv/backcountry-tours-vernal-utah/">导览荒野之旅</a>，到<a href="/zh/utv/best-utv-trails-vernal/">我们在 Vernal 附近运营的五套越野路线</a>。这些都是我们亲身探索过的土地，如今经过实地踏勘、绘制路线，再由我们亲自带队。</p>
 
         <p>这个"后院"可不止一座小镇那么大。它是一片横跨多州的广袤区域 — Dinosaur National Monument 从犹他州一直延伸进科罗拉多州，Flaming Gorge 向北探入怀俄明州，High Uintas 在西侧高高耸起 — 而 Vernal 恰恰坐落在正中央。</p>
 
@@ -2007,7 +2007,7 @@ const ZH = `
       <h2>准备好体验这场冒险了吗？</h2>
       <p>加入 Wilson 一家，一起发现犹他州 Vernal 为何是极致的户外乐园。</p>
       <div class="cta-buttons">
-        <a href="/booking/" class="cta-button primary">预订你的冒险</a>
+        <a href="/zh/booking/" class="cta-button primary">预订你的冒险</a>
         <a href="tel:435-219-9447" class="cta-button secondary">📞 致电 (435) 219-9447</a>
       </div>
     </div>

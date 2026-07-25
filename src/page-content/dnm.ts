@@ -537,7 +537,7 @@ const ZH = `
 
   <main class="article-page">
     <header class="article-header">
-      <div class="article-breadcrumb"><a href="/">首页</a><span class="sep">›</span><span>Dinosaur Monument 行程</span></div>
+      <div class="article-breadcrumb"><a href="/zh/">首页</a><span class="sep">›</span><span>Dinosaur Monument 行程</span></div>
       <h1 class="article-title">Dinosaur National Monument 近郊的 UTV 行程</h1>
       <p class="article-meta">2026 年 4 月更新 · Adventure Tours Vernal</p>
       <p style="display:inline-flex;align-items:center;gap:8px;margin:12px 0;padding:7px 15px;border:1px solid rgba(212,118,78,0.5);border-radius:999px;background:#ffffff;box-shadow:0 1px 4px rgba(0,0,0,0.08);font-size:0.95rem;color:#4a4139;"><span aria-hidden="true" style="color:#e6a817;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count} 条 Google 评价</span></p>
@@ -548,7 +548,7 @@ const ZH = `
         Dinosaur National Monument 吸引着世界各地的游客前来观赏侏罗纪时代的化石——但纪念地周边的荒野却藏着一层截然不同的冒险。有向导带队的 UTV 行程会把你带到峡谷地形、古老岩画和沙漠景观的中心，而大多数纪念地的游客都只是开车路过这些地方。
       </div>
 
-      <div class="article-tip"><strong>从这里开始：</strong>第一次规划纪念地之旅？读一读我们的 <a href="/dinosaur-national-monument/visiting-dinosaur-national-monument/">Dinosaur National Monument 终极攻略</a>——一份完整的计划，涵盖化石、岩画、景观自驾、徒步路线以及最佳到访时节。</div>
+      <div class="article-tip"><strong>从这里开始：</strong>第一次规划纪念地之旅？读一读我们的 <a href="/zh/dinosaur-national-monument/visiting-dinosaur-national-monument/">Dinosaur National Monument 终极攻略</a>——一份完整的计划，涵盖化石、岩画、景观自驾、徒步路线以及最佳到访时节。</div>
 
       <h2>纪念地之外的荒野</h2>
       <p>Dinosaur National Monument 内部不允许动力车辆通行，但环绕纪念地的 BLM 土地和荒野拥有同样的地质构造、峡谷系统和古老岩画——还提供越野路线通道，带你深入纪念地景观自驾路线只能略微展现的地形深处。</p>
@@ -585,7 +585,7 @@ const ZH = `
       <div class="article-cta">
         <h3>为你的纪念地之旅加点冒险</h3>
         <p>有向导带队的 KRX 1000 行程 · 每台车 $349 · 距纪念地 20 分钟 · 5.0 星</p>
-        <a href="/booking/" class="cta-btn">预订行程</a>
+        <a href="/zh/booking/" class="cta-btn">预订行程</a>
         <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
       </div>
     </div>
@@ -593,10 +593,10 @@ const ZH = `
     <div class="related-articles">
       <h3>规划你的行程</h3>
       <div class="related-grid">
-        <a href="/things-to-do/" class="related-card"><h4>Vernal 玩什么</h4><p>纪念地之外的完整攻略。</p></a>
-        <a href="/things-to-do/vernal-utah-attractions/" class="related-card"><h4>Vernal 热门景点</h4><p>本地区所有不容错过的景致。</p></a>
-        <a href="/dinosaur-national-monument/petroglyphs-rock-art-vernal/" class="related-card"><h4>岩画与岩石艺术</h4><p>越野路线沿途与路线之外的古老艺术遗址。</p></a>
-        <a href="/things-to-do/best-restaurants-vernal-utah/" class="related-card"><h4>Vernal 何处用餐</h4><p>冒险之后补充能量。</p></a>
+        <a href="/zh/things-to-do/" class="related-card"><h4>Vernal 玩什么</h4><p>纪念地之外的完整攻略。</p></a>
+        <a href="/zh/things-to-do/vernal-utah-attractions/" class="related-card"><h4>Vernal 热门景点</h4><p>本地区所有不容错过的景致。</p></a>
+        <a href="/zh/dinosaur-national-monument/petroglyphs-rock-art-vernal/" class="related-card"><h4>岩画与岩石艺术</h4><p>越野路线沿途与路线之外的古老艺术遗址。</p></a>
+        <a href="/zh/things-to-do/best-restaurants-vernal-utah/" class="related-card"><h4>Vernal 何处用餐</h4><p>冒险之后补充能量。</p></a>
       </div>
     </div>
   </main>

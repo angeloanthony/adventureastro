@@ -1388,7 +1388,7 @@ const ZH = `
         <p>如果你对我们的取消政策或条款有任何疑问，欢迎在预订前随时与我们联系。</p>
         <div class="cta-buttons">
           <a href="tel:435-219-9447" class="cta-button primary">📞 致电 (435) 219-9447</a>
-          <a href="/booking/" class="cta-button secondary">预订你的行程</a>
+          <a href="/zh/booking/" class="cta-button secondary">预订你的行程</a>
         </div>
       </div>
 

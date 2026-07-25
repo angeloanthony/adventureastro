@@ -510,7 +510,7 @@ const ZH = `
   <main class="article-page">
     <header class="article-header">
       <div class="article-breadcrumb">
-        <a href="/">Home</a><span class="sep">›</span><a href="/utv/">越野路线</a><span class="sep">›</span><span>Vernal ATV 越野路线</span>
+        <a href="/zh/">Home</a><span class="sep">›</span><a href="/zh/utv/">越野路线</a><span class="sep">›</span><span>Vernal ATV 越野路线</span>
       </div>
       <h1 class="article-title">犹他州 Vernal 附近的 ATV 越野路线</h1>
       <p class="article-meta">2026 年 4 月更新 · Adventure Tours Vernal</p>
@@ -554,7 +554,7 @@ const ZH = `
       <div class="article-cta">
         <h3>出发上路吧</h3>
         <p>Kawasaki KRX 1000 导览游 · 每台车 $349 · 5 套越野路线系统 · 各种技术水平</p>
-        <a href="/booking/" class="cta-btn">预订行程</a>
+        <a href="/zh/booking/" class="cta-btn">预订行程</a>
         <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
       </div>
     </div>
@@ -562,10 +562,10 @@ const ZH = `
     <div class="related-articles">
       <h3>更多越野路线攻略</h3>
       <div class="related-grid">
-        <a href="/utv/best-utv-trails-vernal/" class="related-card"><h4>Vernal 附近最佳 UTV 越野路线</h4><p>全部 5 套越野路线系统的详细解析。</p></a>
-        <a href="/jeep-trails-vernal-utah/" class="related-card"><h4>Vernal 附近的 Jeep 越野路线</h4><p>适合 Jeep 和 4x4 爱好者的越野选择。</p></a>
-        <a href="/utv/side-by-side-rentals-vernal-utah/" class="related-card"><h4>并排越野车：导览游与租赁的比较</h4><p>为何导览游胜过自驾租赁。</p></a>
-        <a href="/guides/what-to-wear-utv-tour/" class="related-card"><h4>穿什么</h4><p>沙漠 UTV 骑行的装备攻略。</p></a>
+        <a href="/zh/utv/best-utv-trails-vernal/" class="related-card"><h4>Vernal 附近最佳 UTV 越野路线</h4><p>全部 5 套越野路线系统的详细解析。</p></a>
+        <a href="/zh/jeep-trails-vernal-utah/" class="related-card"><h4>Vernal 附近的 Jeep 越野路线</h4><p>适合 Jeep 和 4x4 爱好者的越野选择。</p></a>
+        <a href="/zh/utv/side-by-side-rentals-vernal-utah/" class="related-card"><h4>并排越野车：导览游与租赁的比较</h4><p>为何导览游胜过自驾租赁。</p></a>
+        <a href="/zh/guides/what-to-wear-utv-tour/" class="related-card"><h4>穿什么</h4><p>沙漠 UTV 骑行的装备攻略。</p></a>
       </div>
     </div>
   </main>

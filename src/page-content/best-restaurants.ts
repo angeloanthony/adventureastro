@@ -2380,7 +2380,7 @@ const ZH = `
     <!-- Hero -->
     <div class="dining-hero"><div class="dining-hero-bg"></div><div class="dining-hero-overlay"></div>
       <div class="dining-hero-content">
-        <nav aria-label="面包屑导航"><a href="/">首页</a><span>›</span><span style="color:rgba(255,255,255,0.9)">Vernal 最佳餐厅</span></nav>
+        <nav aria-label="面包屑导航"><a href="/zh/">首页</a><span>›</span><span style="color:rgba(255,255,255,0.9)">Vernal 最佳餐厅</span></nav>
         <h1>在犹他州 Vernal 像本地人一样吃</h1>
         <p>我们的客人每周都会问：<em>「我们该去哪儿吃?」</em>在这里生活多年后，这些就是我们最真诚的推荐——而且<strong>只要预订一次行程，你在每一家都能享受专属折扣</strong>。</p>
       </div>
@@ -2391,7 +2391,7 @@ const ZH = `
       <div class="discount-banner-icon">🎟️</div>
       <div class="discount-banner-text">
         <h2>行程客人专属餐饮折扣</h2>
-        <p>预订一次 <a href="/booking/" style="color:var(--desert-gold);font-weight:700">Adventure Tours Vernal 的 UTV 行程</a>，即可解锁下列餐厅的<strong>专属优惠码</strong>。在任意卡片上点按<strong>「出示给服务员」</strong>，即可在手机上调出全屏优惠券。</p>
+        <p>预订一次 <a href="/zh/booking/" style="color:var(--desert-gold);font-weight:700">Adventure Tours Vernal 的 UTV 行程</a>，即可解锁下列餐厅的<strong>专属优惠码</strong>。在任意卡片上点按<strong>「出示给服务员」</strong>，即可在手机上调出全屏优惠券。</p>
       </div>
     </div>
 
@@ -2654,7 +2654,7 @@ const ZH = `
     <section>
       <div class="section-header"><h2 class="section-title">在 Vernal 用餐的小贴士</h2><p class="section-subtitle">出门吃饭前，有几件事值得先知道。</p></div>
       <div class="rest-tips-grid">
-        <div class="rest-tip-card"><div class="rest-tip-icon">⏰</div><h3>围绕行程时间来安排</h3><p>我们的 <a href="/utv/" style="color:var(--burnt-orange);font-weight:600">UTV 行程</a>大约 3 小时。上午出发的人到下午早些时候就饿了。傍晚的行程呢?直接去 Swain's 或 Plaza Mexicana 吧。</p></div>
+        <div class="rest-tip-card"><div class="rest-tip-icon">⏰</div><h3>围绕行程时间来安排</h3><p>我们的 <a href="/zh/utv/" style="color:var(--burnt-orange);font-weight:600">UTV 行程</a>大约 3 小时。上午出发的人到下午早些时候就饿了。傍晚的行程呢?直接去 Swain's 或 Plaza Mexicana 吧。</p></div>
         <div class="rest-tip-card"><div class="rest-tip-icon">📅</div><h3>周末很热闹</h3><p>热门餐厅在周五和周六晚上会坐满——夏天尤其如此。人多的话，记得提前打电话给 Swain's 或 7-11 Ranch 订位。</p></div>
         <div class="rest-tip-card"><div class="rest-tip-icon">💵</div><h3>现金依然管用</h3><p>大多数餐厅都收卡，但少数小咖啡馆更乐意收现金。在犹他州乡下游玩时，随身备一点现金。</p></div>
         <div class="rest-tip-card"><div class="rest-tip-icon">🦕</div><h3>要去 Monument 吗?</h3><p>在向东开往 <a href="https://www.nps.gov/dino" target="_blank" rel="noopener" style="color:var(--burnt-orange);font-weight:600">Dinosaur National Monument</a> 之前，先在市中心的 Main Street 上吃一顿。La Cabaña 和 Plaza Mexicana 都是出发路上又快又实在的落脚点。</p></div>
@@ -2675,7 +2675,7 @@ const ZH = `
     <div class="article-cta" style="border-radius:25px">
       <h3>准备好探索 Vernal 了吗?</h3>
       <p>预订一次穿越古老岩画、红岩峡谷与沙漠越野路线的 UTV 导览游——然后在本页每一家餐厅解锁专属餐饮折扣。</p>
-      <a href="/booking/" class="cta-btn">预订你的行程</a>
+      <a href="/zh/booking/" class="cta-btn">预订你的行程</a>
       <a href="tel:+14352199447" class="cta-phone">📞 (435) 219-9447</a>
     </div>
 
@@ -2683,10 +2683,10 @@ const ZH = `
     <div class="related-articles">
       <h3>更多 Vernal 旅行攻略</h3>
       <div class="related-grid">
-        <a href="/utv/best-utv-trails-vernal/" class="related-card"><h4>Vernal 周边最佳 UTV 越野路线</h4><p>Uintah Basin 顶级越野路线——从初学者到高手。</p></a>
-        <a href="/guides/vernal-weather-guide/" class="related-card"><h4>Vernal 天气攻略</h4><p>围绕 Vernal 的季节天气来安排户外活动。</p></a>
-        <a href="/guides/what-to-wear-utv-tour/" class="related-card"><h4>UTV 行程穿什么</h4><p>沙漠行程的分层穿搭、防晒与鞋履。</p></a>
-        <a href="/dinosaur-national-monument/petroglyphs-rock-art-vernal/" class="related-card"><h4>岩画 &amp; 岩石艺术</h4><p>在我们的导览游中探访古老的 Fremont 与 Ute 岩画。</p></a>
+        <a href="/zh/utv/best-utv-trails-vernal/" class="related-card"><h4>Vernal 周边最佳 UTV 越野路线</h4><p>Uintah Basin 顶级越野路线——从初学者到高手。</p></a>
+        <a href="/zh/guides/vernal-weather-guide/" class="related-card"><h4>Vernal 天气攻略</h4><p>围绕 Vernal 的季节天气来安排户外活动。</p></a>
+        <a href="/zh/guides/what-to-wear-utv-tour/" class="related-card"><h4>UTV 行程穿什么</h4><p>沙漠行程的分层穿搭、防晒与鞋履。</p></a>
+        <a href="/zh/dinosaur-national-monument/petroglyphs-rock-art-vernal/" class="related-card"><h4>岩画 &amp; 岩石艺术</h4><p>在我们的导览游中探访古老的 Fremont 与 Ute 岩画。</p></a>
       </div>
     </div>
   </main>

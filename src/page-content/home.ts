@@ -4391,7 +4391,7 @@ const ZH = `
             <li>FOX 2.5 PODIUM LSC 减震器</li>
             <li>完整安全讲解与装备</li>
           </ul>
-          <a href="/booking/" class="tour-book-btn" style="display:block;text-align:center;text-decoration:none;">立即预订</a>
+          <a href="/zh/booking/" class="tour-book-btn" style="display:block;text-align:center;text-decoration:none;">立即预订</a>
         </div>
         <div class="pricing-card">
           <div class="pricing-label">同乘加购</div>
@@ -4405,7 +4405,7 @@ const ZH = `
             <li>每次行程有 2 个同乘名额</li>
             <li>尽享冒险，无需驾驶</li>
           </ul>
-          <a href="/booking/" class="tour-book-btn" style="display:block;text-align:center;text-decoration:none;">立即预订</a>
+          <a href="/zh/booking/" class="tour-book-btn" style="display:block;text-align:center;text-decoration:none;">立即预订</a>
         </div>
         <div class="pricing-card">
           <div class="pricing-label">团体</div>
@@ -4426,7 +4426,7 @@ const ZH = `
 
       <!-- Single Book Button below all trails -->
       <div style="text-align:center;margin-top:50px;">
-        <a href="/booking/" class="btn btn-primary" style="font-size:1.25rem;padding:22px 70px;">
+        <a href="/zh/booking/" class="btn btn-primary" style="font-size:1.25rem;padding:22px 70px;">
           📅 预订你的冒险
         </a>
         <p style="margin-top:14px;font-size:0.95rem;color:var(--charcoal);opacity:0.65;font-family:var(--font-body);">
@@ -4451,7 +4451,7 @@ const ZH = `
           </div>
           <div class="feature-content">
             <h3 class="feature-title">Dinosaur National Monument</h3>
-            <p class="feature-description">穿行在史前的景观中，这里曾是远古巨兽的家园，还能抵达世界级的化石遗址。 <a href="/dinosaur-national-monument/" style="color:var(--burnt-orange);font-weight:600;">纪念碑周边的 UTV 导览游 →</a></p>
+            <p class="feature-description">穿行在史前的景观中，这里曾是远古巨兽的家园，还能抵达世界级的化石遗址。 <a href="/zh/dinosaur-national-monument/" style="color:var(--burnt-orange);font-weight:600;">纪念碑周边的 UTV 导览游 →</a></p>
           </div>
         </div>
         <div class="feature-card">
@@ -4460,7 +4460,7 @@ const ZH = `
           </div>
           <div class="feature-content">
             <h3 class="feature-title">古代文明的印记</h3>
-            <p class="feature-description">探寻岩画、岩石艺术与遗迹 — Uintah Basin 的岩石与峡谷中，保存着数千年的原住民历史。 <a href="/dinosaur-national-monument/petroglyphs-rock-art-vernal/" style="color:var(--burnt-orange);font-weight:600;">探索岩画遗址 →</a></p>
+            <p class="feature-description">探寻岩画、岩石艺术与遗迹 — Uintah Basin 的岩石与峡谷中，保存着数千年的原住民历史。 <a href="/zh/dinosaur-national-monument/petroglyphs-rock-art-vernal/" style="color:var(--burnt-orange);font-weight:600;">探索岩画遗址 →</a></p>
           </div>
         </div>
         <div class="feature-card">
@@ -4469,7 +4469,7 @@ const ZH = `
           </div>
           <div class="feature-content">
             <h3 class="feature-title">隐秘越野路线</h3>
-            <p class="feature-description">前往只有 Vernal 本地人才知道的秘密路线和当地人的最爱 — 别处见不到的风景。 <a href="/utv/backcountry-tours-vernal-utah/" style="color:var(--burnt-orange);font-weight:600;">荒野行程详情 →</a></p>
+            <p class="feature-description">前往只有 Vernal 本地人才知道的秘密路线和当地人的最爱 — 别处见不到的风景。 <a href="/zh/utv/backcountry-tours-vernal-utah/" style="color:var(--burnt-orange);font-weight:600;">荒野行程详情 →</a></p>
           </div>
         </div>
         <div class="feature-card">
@@ -4478,7 +4478,7 @@ const ZH = `
           </div>
           <div class="feature-content">
             <h3 class="feature-title">壮丽的拱门</h3>
-            <p class="feature-description">发现媲美犹他州最著名公园的天然砂岩拱门和奇岩，却没有人潮。 <a href="/utv/best-utv-trails-vernal/" style="color:var(--burnt-orange);font-weight:600;">查看全部 5 套越野路线 →</a></p>
+            <p class="feature-description">发现媲美犹他州最著名公园的天然砂岩拱门和奇岩，却没有人潮。 <a href="/zh/utv/best-utv-trails-vernal/" style="color:var(--burnt-orange);font-weight:600;">查看全部 5 套越野路线 →</a></p>
           </div>
         </div>
       </div>
@@ -4650,7 +4650,7 @@ const ZH = `
 
           <!-- Online Booking Button -->
           <div style="margin-bottom:35px;">
-            <a href="/booking/" class="btn btn-primary" style="font-size:1.2rem;padding:20px 60px;">
+            <a href="/zh/booking/" class="btn btn-primary" style="font-size:1.2rem;padding:20px 60px;">
               📅 在线预订你的冒险
             </a>
             <p style="margin-top:12px;font-size:0.95rem;color:var(--charcoal);opacity:0.7;font-family:var(--font-body);">
@@ -4688,7 +4688,7 @@ const ZH = `
         <h2 class="section-title">认识 Wilson 一家</h2>
         <p class="section-subtitle">本地经营，注重安全，从第一天起就以冒险为驱动</p>
         <p>了解我们的故事、我们对 Uintah Basin 的热爱，以及为什么 Adventure Tours Vernal 是犹他州 Vernal 首屈一指的 UTV 导览游公司。</p>
-        <a href="/about/" class="cta-button primary">了解我们的故事</a>
+        <a href="/zh/about/" class="cta-button primary">了解我们的故事</a>
       </div>
     </div>
   </section>
@@ -4721,39 +4721,39 @@ const ZH = `
         <p class="section-subtitle">用我们的本地攻略规划行程 — 关于犹他州 Vernal 你需要知道的一切</p>
       </div>
       <div class="related-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;max-width:1000px;margin:0 auto;">
-        <a href="/things-to-do/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+        <a href="/zh/things-to-do/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">Vernal 有什么好玩的</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">活动与景点的完整攻略。</p>
         </a>
-        <a href="/things-to-do/vernal-utah-attractions/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+        <a href="/zh/things-to-do/vernal-utah-attractions/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">Vernal 热门景点</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">不容错过的景致与游览之地。</p>
         </a>
-        <a href="/things-to-do/fun-things-to-do-vernal-utah-kids/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+        <a href="/zh/things-to-do/fun-things-to-do-vernal-utah-kids/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">家庭活动</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">在 Vernal 带孩子一起玩的乐事。</p>
         </a>
-        <a href="/things-to-do/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+        <a href="/zh/things-to-do/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">户外活动</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">徒步、钓鱼、UTV 导览游等等。</p>
         </a>
-        <a href="/atv-trails-vernal-utah/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+        <a href="/zh/atv-trails-vernal-utah/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">Vernal 周边的 ATV 越野路线</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">越野路线系统与地形攻略。</p>
         </a>
-        <a href="/utv/side-by-side-rentals-vernal-utah/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+        <a href="/zh/utv/side-by-side-rentals-vernal-utah/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">并排越野车：导览游 vs. 租车</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">为什么导览游胜过自助租车。</p>
         </a>
-        <a href="/dinosaur-national-monument/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+        <a href="/zh/dinosaur-national-monument/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">Dinosaur National Monument 导览游</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">纪念碑周边的 UTV 导览游。</p>
         </a>
-        <a href="/dinosaur-national-monument/visiting-dinosaur-national-monument/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+        <a href="/zh/dinosaur-national-monument/visiting-dinosaur-national-monument/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">Dinosaur National Monument 终极攻略</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">完整的行程规划攻略 — 化石、岩画、景观自驾等等。</p>
         </a>
-        <a href="/utv/group-utv-tours-vernal/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+        <a href="/zh/utv/group-utv-tours-vernal/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
           <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">团体与私人行程</h4>
           <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">家庭、亲友聚会、企业出游。</p>
         </a>

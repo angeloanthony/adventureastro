@@ -2805,7 +2805,7 @@ const ZH = `
     <div class="trail-hero-overlay"></div>
     <div class="trail-hero-content">
       <nav class="trail-breadcrumb" aria-label="Breadcrumb">
-        <a href="/">首页</a>
+        <a href="/zh/">首页</a>
         <span>&#8250;</span>
         <span class="current">越野路线</span>
       </nav>
@@ -3047,7 +3047,7 @@ const ZH = `
           <li><span class="hl-icon">&#127754;</span><span>Green River 美景</span></li>
           <li><span class="hl-icon">&#128106;</span><span>适合全家</span></li>
         </ul>
-        <a href="/booking/" class="tour-book-btn" style="display:block;text-align:center;margin-bottom:12px;">预订越野路线</a>
+        <a href="/zh/booking/" class="tour-book-btn" style="display:block;text-align:center;margin-bottom:12px;">预订越野路线</a>
         <a href="tel:435-219-9447" class="call-sidebar-btn">&#128222; (435) 219-9447</a>
       </div>
     </div>
@@ -3096,7 +3096,7 @@ const ZH = `
       <h3>准备好出发上路了吗？</h3>
       <p>五个传奇目的地。今天就预订你的导览游，让 Dave 和 Trudy Wilson 带你领略 Vernal 荒野的全部魅力。</p>
       <div class="cta-buttons">
-        <a href="/booking/" class="cta-button primary">预订你的冒险</a>
+        <a href="/zh/booking/" class="cta-button primary">预订你的冒险</a>
         <a href="tel:435-219-9447" class="cta-button secondary">&#128222; (435) 219-9447</a>
       </div>
     </div>
