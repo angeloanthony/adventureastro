@@ -43,7 +43,7 @@ are kept because their lessons are reusable, not because anything in them is out
 
 | Item | Where it lives | Blocking? |
 |---|---|---|
-| **Native-speaker editorial review** (`de`, `ja`, `zh`) | `NATIVE_REVIEW.md` — 12 items with corpus counts; **6 decided** (A1, A2, A5, A6, C1, C6), **6 open** (A3, A4, B1, C2, C3, C4) | Not for engineering. **All structural German work is closed** — A1 register, A1-residual (P12), A2 sentence case (P13), A5 heading localization (P14), A6 `Leave No Trace` lock (P15). What remains for `de` is terminology only (A3, A4) |
+| **Native-speaker editorial review** (`de`, `ja`, `zh`) | `NATIVE_REVIEW.md` — 12 items with corpus counts; **7 decided** (A1, A2, A3, A5, A6, C1, C6), **5 open** (**A4**, B1, C2, C3, C4) | Not for engineering. German is **one item from complete**: A1 register, A1-residual (P12), A2 sentence case (P13), A5 heading localization (P14), A6 `Leave No Trace` lock (P15), A3 `Piste` retained (P16). Only A4 remains for `de` |
 | **`es` / `it` never reviewed** | `NATIVE_REVIEW.md` §D — their tags are retroactive markers, not review sign-off | No |
 | **RTL infrastructure (Arabic Stage 0)** | §10 — a **new engineering initiative**, not an extension of this rollout | No |
 | **Additional LTR locales** | §10 — the pipeline is ready; each is execution, not design | No |
@@ -466,8 +466,27 @@ Sequence, in order:
    locked programme name.
    **A6 DONE 2026-07-25 (P15)** — the `Leave No Trace` lock aligned across the German
    corpus: 8 sites in 6 files, 9 descriptive-prose uses deliberately left in German.
-   **All structural German review work is now closed**; `de` continues at A3/A4, which
-   are terminology decisions rather than consistency defects.
+   **All structural German review work is now closed.**
+   **A3 DECIDED 2026-07-25 (P16)** — `Piste` is correct German for a UTV trail and was
+   **retained** (239 of 251 occurrences unchanged); only a 12-instance compound drift
+   was normalised. `de` now has **only A4** outstanding.
+
+**Terminology lesson from P16 (the right answer to a terminology question is often
+"keep it", and that still requires the full census).** A3 asked whether `Piste` was a
+mistranslation. It was not — but only a census could show why: the corpus's own
+off-road compounds (`Wüstenpiste`, `Waschbrettpiste`, `Offroad-Piste`) proved the
+register was deliberate, the hub distribution proved the motorised/hiking split was
+clean (zero contamination in either direction), and a cross-locale check showed `fr`
+independently chose the same cognate while `es`/`it`/`pt` *lost* the distinction by
+using their generic path word for both senses. **Do not treat "the corpus disagrees
+with a peer locale" as evidence of error** — here German was more precise than three
+of its peers. Two further rules this phase confirmed: check the flagged oddity before
+assuming it is a defect (`Pistenpräparierung` turned out to render the master's
+"grooming" in an avalanche context, and was correct), and **never sweep the bare stem**
+— `Strecke`/`Strecken` (168) is overwhelmingly the *distance* and *road* sense, so a
+`Strecke → Piste` sweep would have corrupted the corpus. The real defect a terminology
+census usually finds is not the term itself but **drift in its compounds**: the same
+concept ("the five trail systems") carried three different German forms, split by file.
 
 **Glossary lesson from P15 (a locked name and an ordinary phrase can be the same words).**
 `Leave No Trace` is both a programme name and a plain-English instruction, and the

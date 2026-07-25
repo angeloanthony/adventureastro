@@ -16,7 +16,7 @@ All three locales are feature-complete (57 MDX spokes + 20 inline pages each,
 scan cannot make. This document exists so a reviewer decides a short list of
 questions, not so they read 171 files.
 
-**Decided — 6 of 12:**
+**Decided — 7 of 12:**
 
 | Item | Decision | State |
 |---|---|---|
@@ -24,24 +24,22 @@ questions, not so they read 171 files.
 | **A2** German heading capitalisation | **German sentence case** confirmed; nominalised forms preserved | ✅ decided **and fully applied** 2026-07-25 (P13) — 297 replacements across 55 files; mid-sentence pronoun capitals **44 → 0** |
 | **A5** German missing heading localization | **translate the 16**; `Leave No Trace` stays English | ✅ decided **and applied** 2026-07-25 (P14) — 16 headings localized, 1 retained, line numbers and heading levels unchanged |
 | **A6** `Leave No Trace` lock alignment | **English programme name**; lowercase prose stays German | ✅ decided **and applied** 2026-07-25 (P15) — 8 sites aligned across 6 files, 9 descriptive uses deliberately kept German |
+| **A3** `Piste` for UTV trails | **`Piste` is CORRECT — retained**; only the `-system` compound normalised | ✅ decided 2026-07-25 (P16) — 251 occurrences reviewed, **239 unchanged**, 12 compound-drift replacements |
 | **C1** `官方渠道` vs `官方来源` | **`官方渠道`** is the standard | ✅ decided **and applied** 2026-07-25 |
 | **C6** locked-phrase policy | caveat is locked by **intent, not byte sequence** | ✅ decided **and fully applied** 2026-07-25 — 27 seam defects across 13 files fixed, disclaimer count conserved at 994 |
 
-**Open — 6:**
+**Open — 5:**
 
 | Locale | Open items | Highest-impact |
 |---|---|---|
-| `de` | A3, A4 | **A3** — `Piste` for UTV trails, 196 occurrences |
+| `de` | **A4 only** | A4 — ~6 generic `Trail` uses; proper names stay English |
 | `ja` | B1 | B1 `モアブ` vs `Moab` |
 | `zh` | C2, C3, C4 | C2 — `登山口` (228) for trailheads with no mountain |
 
-**Priority order** (owner-set 2026-07-25, revised at P15 once A6 was applied):
-~~C6~~ → ~~A1-residual~~ → ~~A2~~ → ~~A5~~ → ~~A6~~ → **A3, A4** → B1, C2, C3, C4.
+**Priority order** (owner-set 2026-07-25, revised at P16 once A3 was decided):
+~~C6~~ → ~~A1-residual~~ → ~~A2~~ → ~~A5~~ → ~~A6~~ → ~~A3~~ → **A4** → B1, C2, C3, C4.
 
-*All **structural** German review work is now closed (register, capitalisation,
-missing localization, glossary lock). A3 and A4 are the first purely
-**terminological** German items — judgement calls about word choice, not
-consistency defects a corpus scan can settle on its own.*
+*German is one item from complete. A4 is the last German item, and it is small.*
 
 ---
 
@@ -280,7 +278,75 @@ headings use explicit `id=` attributes and are untouched by any heading edit.*
 
 ---
 
-### A3. `Piste` (motorised) vs `Wanderweg` (hiking) — confirm the split is idiomatic
+### A3. `Piste` for UTV trails — ✅ DECIDED 2026-07-25 (P16): **KEEP `Piste`**
+
+> **✅ Decision: `Piste` is the correct and canonical German term for a UTV trail and
+> is retained. 239 of 251 occurrences are unchanged.** The only change is a
+> consistency fix inside the same terminology family: **12 replacements** normalising
+> the compound that names the five UTV trail systems. Verified: `astro check`
+> 0 errors / 0 warnings · build **619 pages** (exit 0) · validator ✔ (exit 0) ·
+> 3 files changed.
+>
+> **This is a "leave it alone" decision, and the evidence is what produced it.**
+> Four independent lines:
+>
+> 1. **Not a mistranslation.** German `Piste` carries an established *unpaved
+>    off-road track* sense alongside the familiar ski sense. The corpus proves the
+>    translator was working in that register deliberately: it uses the idiomatic
+>    off-road compounds **`Wüstenpiste`** (2), **`Waschbrettpiste`** (2, = washboard
+>    track) and **`Offroad-Piste`**. Those are not words a ski-sense confusion produces.
+> 2. **The motorised/non-motorised split is perfectly clean.** Of 251 occurrences:
+>    utv 148, guides 48, inline pages 51, scenic-drives 2, itineraries 2 — and
+>    **zero in the hiking, camping or fishing hubs**, against `Wanderweg`/`Wanderwege`
+>    416 which never appear in `utv`. German encodes a real distinction here that
+>    **`es`, `it` and `pt` lose**: at the same lines they use their generic path word
+>    for both senses (`sendero`, `sentiero`, `trilho`).
+> 3. **French independently chose the cognate.** At the 164 German lines containing a
+>    `Piste*` form, `fr` uses `piste`/`pistes` **158** times for the same content.
+>    Two of five peer locales converge on the piste family.
+> 4. **The single ski-sense use is correct.** `Pistenpräparierung`
+>    ([`ultimate-guide-to-ashley-national-forest:234`](src/content/guides/ultimate-guide-to-ashley-national-forest.de.mdx#L234))
+>    renders the English master's *"check current road access, **grooming**, and
+>    avalanche information"* — a genuine winter context where `Pistenpräparierung` is
+>    exactly the right German word. Flagged during the census, verified, kept.
+>
+> Replacing 251 occurrences would have been a large sweep that destroyed a
+> distinction the German corpus makes *better* than its peers. The A3 question
+> ("does `Piste` read as a ski slope?") is answered: in context — UTV tours, Kawasaki
+> KRX 1000, red-rock desert backcountry — it does not, and the corpus's own
+> `Wüstenpiste`/`Waschbrettpiste`/`Offroad-Piste` compounds anchor the off-road sense.
+>
+> **What *was* fixed — cross-batch compound drift.** The identical concept, *the five
+> UTV trail systems*, was rendered three ways. The English master uses one term,
+> `trail systems`, **33** times; the German split was by **file**, not by meaning:
+>
+> | Form | Count | Files | Action |
+> |---|---|---|---|
+> | `Pistensystem*` | 26 | 9 files | **canonical — kept** |
+> | `Streckensystem*` | 11 | `backcountry-tours-vernal-utah`, `side-by-side-rentals-vernal-utah` | → `Pistensystem*` |
+> | `Pistennetzen` | 1 | [`de/faq.astro`](src/pages/de/faq.astro) | → `Pistensystemen` |
+>
+> Result: `Pistensysteme` 25 + `Pistensystemen` 13 = **38**, with `Streckensystem`
+> and `Pistennetz` both at **0**.
+>
+> **Occurrences by context** (all 251): body prose 160 · frontmatter metadata 42 ·
+> FAQ 23 · image alt 11 · table 7 · HTML heading 4 · page-summary 3 · markdown heading 1.
+> **By sense:** UTV/motorised 246 · off-road surface compound 4 · winter grooming 1 ·
+> **non-motorised contamination 0**.
+>
+> **Intentional exceptions — documented, not swept:**
+> - **Bare `Strecke` (110) and `Strecken` (58)** are untouched. In `utv` all four uses
+>   are the *distance* sense (`die ganze Strecke`, `auf halber Strecke`,
+>   `mehr Strecke zurücklegen`), not the trail sense; elsewhere they are roads and
+>   scenic routes. A `Strecke → Piste` sweep would have been a serious error.
+> - `Wüstenpiste`, `Waschbrettpiste`, `Offroad-Piste` — idiomatic, kept.
+> - `Pistenpräparierung` — correct winter term, kept.
+> - `Wanderweg`/`Wanderwege` (416) — the hiking counterpart, untouched.
+> - Generic English `Trail` residue — **out of scope, belongs to A4.**
+
+The original finding is preserved:
+
+### A3 (original finding). `Piste` (motorised) vs `Wanderweg` (hiking)
 
 This was flagged as a possible inconsistency. It is not — the corpus shows a
 clean, deliberate semantic split by hub:
@@ -298,8 +364,10 @@ question is whether **`Piste` is the right German word for a UTV/side-by-side
 trail**, or whether it reads as a ski slope or rally stage to a German ear
 (alternatives: `Offroad-Strecke`, `Trail`, `Route`).
 
-> **Question A3:** Is `Piste` correct for a UTV trail? If not, what replaces it
-> across 196 occurrences?
+> ~~**Question A3:** Is `Piste` correct for a UTV trail?~~
+> **ANSWERED 2026-07-25 (P16): yes — `Piste` is retained.** See the decision block at
+> the top of A3. The true corpus figure is **251** occurrences, not 196; the earlier
+> number was a per-hub subtotal that omitted the 20 inline pages and the compounds.
 
 ---
 
