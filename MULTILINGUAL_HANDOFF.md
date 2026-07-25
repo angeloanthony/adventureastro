@@ -11,6 +11,49 @@ doc wins because it reflects the actual repo.
 
 ---
 
+## 0. Project status — the LTR framework is COMPLETE (2026-07-25)
+
+**This document has changed character.** It began as an implementation playbook for a
+single localization push. It is now the **maintained release process** for a finished
+left-to-right localization framework. Read §0 before anything else: it tells you what is
+done and closed versus what is open, so nothing below §0 gets mistaken for pending work.
+
+### ✅ Complete — the LTR localization framework
+
+Validated end-to-end through Simplified Chinese. The pipeline is no longer provisional;
+it shipped seven locales without an architecture change, which was the point of freezing
+it in §1.
+
+| Deliverable | State |
+|---|---|
+| **Seven locales feature-complete** | `es` `it` `pt` `fr` `de` `ja` `zh` — each at **77/77 registered routes** (57 MDX spokes + 20 inline pages) |
+| **Route parity** | `zh` = `ja` = `de` = 77/77, verified identical route sets |
+| **Six-stage locale lifecycle** | §7 — proven across all seven, no per-locale special-casing |
+| **Standing release gates** | §7 Gates **4a** (UI-chrome parity, two parts), **4b** (dependency-root ordering), **4c** (corpus beats brief), **4d** (cross-locale body-link audit) — all BLOCKING |
+| **Anchor-integrity check** | every `#anchor` has a matching explicit `id=` — added at Z3, now permanent |
+| **Internal-link localization** | §8 (P11) + §9 (P11.1) + Z5 — **0 route downgrades in every locale**; only 354 intentional author-bio links remain English |
+| **Release-tag policy** | §1 — `i18n-<locale>-complete`, annotated; 8 tags on origin (7 locales + `v1.0-content`) |
+| **77-route completion criterion** | §1 — an explicit engineering rule, not institutional knowledge. **Registration in `LOCALE_SLUGS` is load-bearing**; file presence alone mis-identifies the completion commit |
+| **Build baseline** | `astro check` 0/0 · `npm run build` **619 pages** · `npm run validate` ✔ |
+
+Sections **§8**, **§9**, and the Z-phase work they describe are **closed history**. They
+are kept because their lessons are reusable, not because anything in them is outstanding.
+
+### ⏳ Open — tracked elsewhere, deliberately not in this document
+
+| Item | Where it lives | Blocking? |
+|---|---|---|
+| **Native-speaker editorial review** (`de`, `ja`, `zh`) | `NATIVE_REVIEW.md` — 9 decisions with corpus counts | Not for engineering. **`de` review cannot start until the `du`/`Sie` call is made** (A1) |
+| **`es` / `it` never reviewed** | `NATIVE_REVIEW.md` §D — their tags are retroactive markers, not review sign-off | No |
+| **RTL infrastructure (Arabic Stage 0)** | §10 — a **new engineering initiative**, not an extension of this rollout | No |
+| **Additional LTR locales** | §10 — the pipeline is ready; each is execution, not design | No |
+
+**The boundary, stated plainly:** everything in this document except §10 describes a
+completed and tagged system. Do not reopen §1–§9 to add a locale — follow §7. Do not
+extend this document to cover RTL — see §10 for why that is a separate project.
+
+---
+
 ## 1. The architecture is FROZEN
 
 Do not redesign routing, layouts, schemas, the hub/spoke system, or the URL policy.
@@ -34,16 +77,21 @@ an architecture change, stop and flag it — do not improvise one.
   convention began with **Portuguese**; `i18n-pt-complete` and `i18n-fr-complete` were both
   created on the same commit (`9f360f3`, 2026-07-18) when the policy was adopted. **Spanish
   and Italian were completed before the policy existed and were never tagged
-  contemporaneously.** Their tags, if present, are retroactive markers reconstructed from
-  structural evidence (see below) — not contemporaneous release gates, and not build-verified
-  at those commits. Definition of complete used throughout: **77 registered routes**
+  contemporaneously.** `i18n-es-complete` and `i18n-it-complete` were created on 2026-07-25
+  as **retroactive markers** reconstructed from structural evidence (see below) — their
+  annotations say so. They are not contemporaneous release gates, are not build-verified at
+  those commits, and are not editorial sign-off. Verified state as of 2026-07-25: 8 annotated
+  tags (7 `i18n-*-complete` + `v1.0-content`) present **both locally and on origin**.
+  Definition of complete used throughout: **77 registered routes**
   (57 MDX spokes + 20 inline pages) present in the tree *and* registered in the locale's
   `*_SLUGS` set in `src/lib/i18n.ts`. Registration is load-bearing — Italian reached 57 MDX +
   20 inline pages at `7bff110` with only 58/77 slugs registered, leaving a third of its routes
   dark (no hreflang, no switcher entry, validator orphans). Historical completion points:
   **es → `aab144b`**, **it → `0ab5581`** (both 2026-07-16).
-- DE additionally needs a native-speaker consistency pass before it's considered fully closed
-  out (see §6 below); JA and ZH carry the same open native-review item.
+- **Engineering-complete ≠ editorially closed.** DE, JA and ZH each carry an open
+  native-speaker review, tracked in `NATIVE_REVIEW.md` and sequenced in **§10.1** — not in
+  §6, which is about running a translation batch. The German `du`/`Sie` call gates the DE
+  review; see §10.1.
 
 ---
 
@@ -142,9 +190,12 @@ not sufficient).
 
 ## 7. Locale lifecycle (six stages — the definition of "done")
 
-Proven across five locales (es/it/pt/fr, plus the en master). Every future locale
-follows this pipeline with no special-casing unless a genuine bug forces a fix
-(see appendix below — fix once centrally, don't redesign per locale).
+**This is the standing process for any new LTR locale — the one section of this
+document that is still live.** Proven across all seven locales (es/it/pt/fr/de/ja/zh,
+plus the en master) with no architecture change. Every future LTR locale follows
+this pipeline with no special-casing unless a genuine bug forces a fix (see appendix
+below — fix once centrally, don't redesign per locale). An RTL locale needs Stage 0
+first; see §10.2.
 
 1. **Registration & infrastructure.** Add the locale to `LOCALES` in `src/lib/i18n.ts`
    with an empty slug set in `LOCALE_SLUGS`. Confirm the build stays byte-identical
@@ -347,6 +398,63 @@ require equality, plus assert no existing prefix was ever removed. 0 content mis
 `it`/`pt`/`fr`/`de`/`ja` each had 0, because `es` inline pages were authored in P3A–P3D before
 the `localeHref()` discipline existed. **Despite being the first locale finished, `es` is not a
 trustworthy template — quote `de` or `ja` when building the next locale.**
+
+---
+
+## 10. Future work — what is NOT part of the completed framework
+
+Three things remain, and none of them belongs in §1–§9. Recorded here so a reader a year
+from now can tell the finished system from the roadmap without reading the git log.
+
+### 10.1 Editorial / native-speaker review — `de`, `ja`, `zh`
+
+Owned by `NATIVE_REVIEW.md`, not by this document. Nine decisions, each backed by corpus
+counts rather than "please proofread" — the review is evidence-based by construction, and
+must stay that way.
+
+Sequence, in order:
+
+1. **Make the German `du`/`Sie` call** (`NATIVE_REVIEW.md` A1). It is a brand-voice
+   decision, not a language one, and it is the largest possible change in the corpus —
+   4,085 informal forms across 77 routes. **Do not assign the German review before it is
+   answered**, or the reviewer works against a register that may be about to flip.
+2. Run `de` / `ja` / `zh` review, collect answers.
+3. Apply each accepted change as **one corpus-wide sweep**, per Gate 4c — never
+   file-by-file. Piecemeal edits are how cross-batch drift was created originally.
+4. Re-verify per the `NATIVE_REVIEW.md` appendix, then **freeze the LTR framework**.
+
+`es` and `it` have never had a native review. Their `i18n-*-complete` tags are retroactive
+structural markers (§1) and must not be read as editorial sign-off.
+
+### 10.2 RTL infrastructure — Arabic Stage 0 (a separate initiative)
+
+**Arabic is not "locale #8 in this pipeline."** Every locale so far has been a *content*
+task against a frozen LTR architecture — which is exactly why §1 could stay frozen through
+seven of them. Arabic breaks that premise: the work is bidirectional-layout engineering
+first and translation second.
+
+Treat it as its own project, with its own doc and its own history, because Stage 0 touches
+the architecture this document declares frozen:
+
+- `dir="rtl"` propagation and per-locale direction resolution in the layouts
+- logical CSS properties throughout (`margin-inline-start` over `margin-left`, etc.)
+- directional icons, chevrons, breadcrumb separators and carousel affordances mirrored
+- bidi-safe interpolation — Latin proper nouns, `$349`, `(435) 219-9447`, and URLs embedded
+  in RTL prose need isolation (`&#8207;` / `<bdi>`) or they render in the wrong order
+- numeral policy (Western vs Eastern Arabic-Indic) locked before any content lands
+- `hreflang="ar"`, `og:locale`, and a switcher entry that flips page direction
+
+Only after Stage 0 ships and is verified does the §7 six-stage content pipeline apply
+normally. **Keeping this out of the LTR project is the point:** the LTR pipeline reaches a
+well-defined completion state, and RTL support begins as its own architectural milestone
+rather than as an open-ended extension of a released system.
+
+### 10.3 Additional LTR locales
+
+The pipeline is ready and requires no design work. Each new LTR locale is execution:
+register it per §7 stage 1, then run stages 2–6. Quote `de` or `ja` as the template —
+**never `es`** (§9: it predates the `localeHref()` discipline and carries 223 hardcoded
+hrefs where the others carry 0).
 
 ---
 

@@ -1,13 +1,22 @@
-# Native-Speaker Review — German (`de`) and Japanese (`ja`)
+# Native-Speaker Review — German (`de`), Japanese (`ja`), Simplified Chinese (`zh`)
 
-**Status:** open. Prepared 2026-07-22 against tag `i18n-ja-complete` (`65041fd`).
-**Scope:** `de` and `ja` only. No code or translation has been changed to produce
-this document — every number below is a count from the shipped corpus.
+**Status:** open.
+**Prepared:** `de`/`ja` on 2026-07-22 against `i18n-ja-complete` (`65041fd`);
+`zh` added 2026-07-25 against `i18n-zh-complete` (`41b3482`).
+**Scope:** `de`, `ja`, `zh`. `es` and `it` have never had a native review — see
+§D. No code or translation has been changed to produce this document — every
+number below is a count from the shipped corpus.
 
-Both locales are feature-complete (57 MDX spokes + 20 inline pages each, 77/77
-routes, validator green). What remains is judgement a corpus scan cannot make.
-This document exists so a reviewer decides **five questions**, not so they read
-114 files.
+All three locales are feature-complete (57 MDX spokes + 20 inline pages each,
+77/77 registered routes, validator green). What remains is judgement a corpus
+scan cannot make. This document exists so a reviewer decides **nine questions**,
+not so they read 171 files.
+
+| Locale | Decisions | Highest-impact item |
+|---|---|---|
+| `de` | A1–A4 | A1 register: `du` vs `Sie` — **blocks DE review assignment** |
+| `ja` | B1 | B1 `モアブ` vs `Moab` |
+| `zh` | C1–C4 | C1 官方渠道 vs 官方来源 (961 vs 1 — a live inconsistency) |
 
 ---
 
@@ -184,20 +193,187 @@ This item is closed; the earlier note was stale.
 
 ---
 
-## C. Out of scope here, but open
+## C. Simplified Chinese (`zh`) — four decisions; register and typography verified clean
+
+Counted across all 57 `.zh.mdx` spokes **and** the 20 `src/pages/zh/**` inline
+pages. Register needs no decision: **你 3,668 / 您 0 / 咱们 0** — informal `你`
+is applied without a single leak, exactly as the Z1 brief locked it.
+
+### C1. `官方渠道` vs `官方来源` — one instance diverges from 961. — HIGHEST IMPACT
+
+Every article carries the same standing caveat that hours, fees, road conditions
+and closures change and must be checked. The Chinese corpus renders it two ways:
+
+| Form | Literal sense | Count |
+|---|---|---|
+| `请向官方渠道核实` | "verify via official **channels**" | **961** |
+| `请向官方来源核实` | "verify with official **sources**" | **1** |
+
+The lone `来源` instance is [`src/pages/zh/itineraries/index.astro:65`](src/pages/zh/itineraries/index.astro#L65)
+— changed deliberately during Z5 on the judgement that 渠道 ("channels") reads as
+booking/contact channels rather than authoritative sources. That judgement may
+well be right, but it was applied to one page out of 77, so the corpus is now
+inconsistent either way. Separately, `官方来源` appears 4 times in ordinary prose,
+and two of those sit in the *same sentence* as the 渠道 caveat.
+
+One of those two is also a straightforward grammar defect, independent of the
+terminology call — [`wildflower-hiking-near-vernal.zh.mdx:278`](src/content/hiking/wildflower-hiking-near-vernal.zh.mdx#L278)
+reads `…由官方来源掌握，请就你要前往的海拔的当前预报请向官方渠道核实（…）`, with
+`请` twice in one clause. That should be fixed regardless of C1's outcome.
+
+> **Question C1:** Which form is correct for "official sources" in this caveat —
+> `官方渠道` or `官方来源`? Whichever wins is swept to 100%. If `来源` wins the
+> sweep is 961 replacements; if `渠道` wins it is 1, and the Z5 change is reverted.
+
+*Note for the reviewer: `VERIFY WITH OFFICIAL SOURCE` appears **0** times in the
+`zh` corpus. Earlier notes describing a locked all-caps English variant alongside
+a natural Chinese one do not describe what actually shipped — Chinese has one
+phrase, used 962 times, in two spellings.*
+
+---
+
+### C2. `登山口` for trailheads — is it right where there is no mountain?
+
+`登山口` (152 in hiking, 228 corpus-wide) literally means *mountain-climbing
+entrance*. Much of this region's hiking is desert bench, canyon rim and
+riverside — Fossil Discovery Trail, Sound of Silence, Desert Voices, the Cub
+Creek petroglyph pullouts. The neutral alternatives `步道起点` and `步道入口`
+appear **0** times, so there is currently no split to preserve.
+
+| Hub | `登山口` | `步道` |
+|---|---|---|
+| hiking | 152 | 845 |
+| camping | 17 | 9 |
+| guides | 17 | 42 |
+| utv | 9 | 0 |
+| itineraries | 6 | 68 |
+| scenic-drives | 1 | 10 |
+
+Note `步道` itself (1,156) is consistent and not in question — this is only about
+the *trailhead* compound. The `utv` row is worth a second look: 9 `登山口`
+against 0 `步道` in motorised content may be the weakest fit of all.
+
+> **Question C2:** Keep `登山口` throughout, or use `步道起点`/`步道入口` for
+> non-mountain trailheads? If split, state the rule that decides which is which
+> so it can be applied mechanically.
+
+---
+
+### C3. Five small synonym residues — confirm and sweep
+
+Each of these is a dominant term with a handful of stragglers. None is wrong in
+isolation; the issue is that one corpus uses both.
+
+| Concept | Dominant | Residue | Files affected |
+|---|---|---|---|
+| trail | `步道` 1,156 | `小径` 15 | 5 (4 hiking + 1 itinerary) |
+| camping | `露营` 896 | `野营` 4 | 2 |
+| fishing | `钓鱼` 773 | `垂钓` 22 | 10 |
+| scenic byway | `景观公路` 215 | `风景公路` 5, `景观道路` 1 | 2 |
+| the vehicle | `UTV` 676 | `越野车` 81 | 27 |
+
+The last row is the only one that may be deliberate: `越野车` ("off-road
+vehicle") could be functioning as a generic category term where `UTV` is the
+product, in which case it stays. The other four look like batch drift.
+
+Three words that are **not** residues and must not be swept:
+
+- `指南` (79) is not a stray synonym for the house term `攻略` (1,226). 4 of the
+  79 are `指南针` = *compass*, and the rest are generic "a guide/manual", mostly
+  inside negative-definition sentences (`这是一份规划与决策指南，不是钓法技巧文章`).
+- `导览` (378) means *guided* — 318 of them are `导览游` = *guided tour*. Different
+  word, different meaning.
+- `攻略` is the locked article-type term and is consistent.
+
+> **Question C3:** Confirm the four drift rows normalise to the dominant term,
+> and rule on whether `越野车` is a deliberate generic or should become `UTV`.
+
+---
+
+### C4. `恐龙之乡` vs `Dinosaur National Monument` — confirm the split holds
+
+Two different referents that must not be merged: `恐龙之乡` (486) is the
+regional/brand identity — *Dinosaurland*, the marketing name for the Vernal
+area — and `Dinosaur National Monument` (514) is the official NPS place name,
+glossary-locked to English in every locale. `恐龙国家纪念地` and `恐龙国家公园`
+both appear **0** times, so no unauthorised translation of the place name exists.
+
+| Hub | `恐龙之乡` | `Dinosaur National Monument` |
+|---|---|---|
+| itineraries | 128 | 97 |
+| hiking | 120 | 191 |
+| guides | 42 | 42 |
+| scenic-drives | 30 | 16 |
+| camping | 14 | 8 |
+| fishing | 13 | 1 |
+| utv | 11 | 0 |
+| dinosaur-national-monument | 6 | 31 |
+| things-to-do | 1 | 14 |
+
+The distribution is the shape you'd want — the DNM hub itself skews heavily to
+the official name, the region-wide planning hubs skew to the regional identity.
+`Dinosaur Monument` (4) is a short-form of the official name and is the only
+form worth a second look.
+
+> **Question C4:** Confirm `恐龙之乡` reads as a *region/destination identity* to
+> a Chinese reader and is not mistaken for the monument itself. If it is
+> ambiguous, the fix is a qualifier on first use per page, not a global rename.
+
+---
+
+### C5. Typography — verified clean, with one do-not-fix trap
+
+No decision needed here; recorded so the reviewer doesn't spend time on it, and
+so the trap is not "fixed" by a later sweep.
+
+Punctuation follows Simplified Chinese convention throughout: 20,310 `，` ·
+14,735 `。` · 11,727 `、` · 1,846 `：` · 764 `？` · 114 matched `“”` pairs · 37
+matched `《》` pairs. ASCII punctuation after a Han character is **0** for comma,
+period, colon and semicolon in all prose. CJK/Latin spacing is applied
+consistently — 5,569 `Han` + space + `Latin` and 7,336 `Latin` + space + `Han`,
+against 4 unspaced (all inside one non-rendered code comment).
+
+**⚠ Do not "fix" the 14 single em-dashes.** The corpus uses `——` (双破折号) 5,222
+times as the sentence-level dash, correctly. Fourteen places use a *single* `—`,
+which a regex would flag as inconsistent — but every one is a **连接号** joining a
+range or compound, where a single dash is the correct form: `犹他州—怀俄明州`
+(the Utah–Wyoming reciprocal fishing water) and `皮尼翁松—杜松林` (piñon–juniper
+woodland). This is the Chinese counterpart of the German nominalised-infinitive
+trap in A2 — the reason these passes need a human and not a script.
+
+Two items are engineering polish rather than language, and are not questions for
+the reviewer:
+
+- [`zh/things-to-do/best-restaurants-vernal-utah.astro:122`](src/pages/zh/things-to-do/best-restaurants-vernal-utah.astro#L122)
+  — 5 JSON-LD `FAQPage` question strings end in ASCII `?` where the visible page
+  uses `？`. Surfaces in rich results, so worth aligning.
+- [`zh/camping/index.astro`](src/pages/zh/camping/index.astro) and
+  [`zh/fishing/index.astro`](src/pages/zh/fishing/index.astro) still carry
+  Japanese-language `//` code comments left over from mirroring the `ja`
+  rollout, plus 11 `/ja/` provenance comments across the locale. None render.
+
+---
+
+## D. Out of scope here, but open
 
 Recorded so the reviewer knows what this document deliberately does *not* cover:
 
-- **`es` and `it` have never had a native review and were never tagged** (only
-  `pt`, `fr`, `de`, `ja` carry `i18n-*-complete` tags). Their own flagged terms
+- **`es` and `it` have never had a native review.** They now carry
+  `i18n-es-complete` / `i18n-it-complete`, but those are **retroactive** markers
+  created 2026-07-25 from structural evidence, not contemporaneous release gates
+  (see `MULTILINGUAL_HANDOFF.md` §1). Their own flagged terms
   are listed in the phase notes — Spanish: `berrendo`, `borrego cimarrón`,
   `apartadero`, `calamina`, `slickrock`, and `lubina`/`lobina` for bass;
   Italian: `pecora bighorn`, `antilocapra`, `pioppo tremulo`, `peak-bagger`,
   `distretto forestale` vs `dei ranger`, `traina`, `black bass`, and `trailhead`
   vs `inizio del sentiero`.
-- **~820 internal links outside MDX bodies still resolve to English routes** —
-  shared components plus hardcoded hrefs in `src/pages/es/**`. This is
-  engineering debt, not language, and is being addressed separately.
+- ~~**~820 internal links outside MDX bodies still resolve to English routes.**~~
+  **RESOLVED** — closed by P11.1 (2026-07-22, all locales) and Z5 (2026-07-25,
+  `zh`). Gate 4d now reports 0 route downgrades in every locale. Only 354
+  intentional author-bio links remain at English roots by design.
+- **RTL is not in scope anywhere in this document.** Arabic and any other
+  right-to-left locale is a separate engineering initiative
+  (`MULTILINGUAL_HANDOFF.md` §10), not an extension of this review.
 
 ---
 
@@ -208,10 +384,17 @@ re-verified with:
 
 ```
 npx astro check          # expect 0 errors, 0 warnings
-npm run build            # expect 542 pages, Complete!
+npm run build            # expect 619 pages, Complete!
 npm run validate         # expect links resolve, no orphans
 ```
 
-plus a corpus re-count of the changed term (old form must reach 0) and, for any
-change touching `de`, a re-run of the register and heading scans in A1/A2 so a
-fix in one place cannot silently reintroduce the pattern somewhere else.
+plus a corpus re-count of the changed term (old form must reach 0) and:
+
+- **any `de` change** — re-run the register and heading scans in A1/A2, so a fix
+  in one place cannot silently reintroduce the pattern somewhere else;
+- **any `zh` change** — re-run the C5 scans (`您` must stay 0, ASCII-punct-after-Han
+  must stay 0, the 14 `连接号` single dashes must survive untouched) and re-count
+  `——` at 5,222;
+- **any change at all** — confirm the sweep touched one locale only. Per the Z5
+  lesson, a `page-content/*.ts` file holds all eight locales' blocks in one file;
+  isolate the target locale's template literal and never transform the file whole.
