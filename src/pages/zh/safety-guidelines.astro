@@ -1,0 +1,42 @@
+---
+// zh/safety-guidelines.astro — Simplified Chinese safety guidelines (Z4 Chinese
+// inline batch, mirrors Japanese P10K). Mirrors
+// src/pages/safety-guidelines.astro.
+import { getBodyHtml } from '../../page-content/safety';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+---
+<BaseLayout bodyClass="policy-page-body">
+  <Fragment slot="head">
+    <Seo
+      title="安全须知 | Adventure Tours Vernal — Vernal, Utah"
+      description="犹他州 Vernal 的 UTV 导览游安全须知。年龄要求、车辆操作规则、路线安全和紧急处理流程。请致电 (435) 219-9447。"
+      path="/zh/safety-guidelines/"
+      type="website"
+      ogTitle="安全须知 | Adventure Tours Vernal"
+      ogDescription="了解犹他州 Vernal 的 Kawasaki KRX 1000 UTV 导览游安全须知。年龄限制、车辆规则、路线安全及行程须知。请致电 (435) 219-9447。"
+    />
+  </Fragment>
+  <Header slot="body" active="safety-guidelines" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.safetyGuidelines', lang) }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: t('footer.quickLinks', lang),
+      links: [
+        { href: '/#tours', label: t('footer.link.ourTours', lang) },
+        { href: '/#vehicles', label: t('footer.link.ourFleet', lang) },
+        { href: '/#gallery', label: t('footer.link.photoGallery', lang) },
+        { href: '/booking/', label: t('cta.bookNow', lang) },
+      ],
+    }}
+  />
+</BaseLayout>

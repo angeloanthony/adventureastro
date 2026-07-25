@@ -2090,6 +2090,302 @@ const JA = `
 
 `;
 
+const ZH = `
+
+  <!-- AI Summary Block -->
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    在犹他州 Vernal 的玩法包括：参观 Dinosaur National Monument 及其 Wall of Bones，跟随 Adventure Tours Vernal 体验一场 Kawasaki KRX 1000 的导览 UTV 行程，在 McConkie Ranch 和 Dry Fork Canyon 观赏 Fremont 岩画，在 Red Fleet State Park 走一走恐龙足迹，逛 Utah Field House of Natural History 的恐龙园，在 Steinaker 和 Flaming Gorge 划船钓鱼，在 Ashley National Forest 和 Uinta Mountains 徒步，以及追寻西部拓荒时代的无法之徒历史。Vernal 是犹他州的恐龙之乡——通往户外休闲、荒野冒险与远古历史的门户，而且人比犹他州南部少得多。导览 UTV 行程为时 3 小时，每台车 $349（最多 2 人乘坐）；电话 (435) 219-9447。
+  </p>
+
+  <main class="article-page">
+    <header class="article-header">
+      <div class="article-breadcrumb">
+        <a href="/">首页</a><span class="sep">›</span><span>Vernal 的玩法</span>
+      </div>
+      <h1 class="article-title">犹他州 Vernal 的玩法</h1>
+      <p class="article-meta">2026 年 7 月更新 · Adventure Tours Vernal</p>
+      <p style="display:inline-flex;align-items:center;gap:8px;margin:12px 0;padding:7px 15px;border:1px solid rgba(212,118,78,0.5);border-radius:999px;background:#ffffff;box-shadow:0 1px 4px rgba(0,0,0,0.08);font-size:0.95rem;color:#4a4139;"><span aria-hidden="true" style="color:#e6a817;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count} 条 Google 评价</span></p>
+    </header>
+
+    <div class="article-body">
+      <div class="article-summary-box"><strong>简短答案：</strong> 犹他州 Vernal 是通往 Dinosaur National Monument 的门户，也是犹他州 Uintah Basin 的心脏——一个紧凑的冒险枢纽，你可以在这里触摸 1.49 亿年前的真化石，坐上导览 UTV 行程驰骋红岩峡谷，走到近前观看千年岩画，还能在高山水库垂钓，而这一切都在市中心一小时车程之内。给它两到三天：一天留给国家保护区和岩画，一天留给荒野 UTV 行程和州立公园，再用可选的第三天去 Flaming Gorge、钓鱼，或深入 High Uintas。最佳月份是 5—6 月和 9—10 月。它把吸引人们前往犹他州南部的许多东西都给了你，而人流只有零头。</div>
+
+      <div class="key-takeaways">
+        <h2>要点速览</h2>
+        <ul>
+          <li><strong>Dinosaur National Monument 是重头戏。</strong> Quarry Exhibit Hall 的 Wall of Bones——约 1,500 块化石至今仍嵌在岩石里——就在市中心以东 20 分钟处，是州内其他任何地方都没有的景象。</li>
+          <li><strong>荒野是隐藏的另一半。</strong> Vernal 周围的峡谷、拱门和偏远岩画，铺装公路无法抵达。导览 UTV 行程是看到它们最快、最能身临其境的方式。</li>
+          <li><strong>它是货真价实的家庭目的地。</strong> 孩子可以触摸化石，走在恐龙足迹上，2 岁起就能同乘参加行程——大多数亮点都只需走几步路。</li>
+          <li><strong>两到三天是最佳时长。</strong> 一天勉强够看国家保护区；一个长周末则能让你不慌不忙地走遍整个地区。</li>
+          <li><strong>请在季节交替时来。</strong> 晚春和初秋气温宜人、野生动物活跃、人流稀疏。夏天温暖，最适合玩水；冬天安静但选择有限。</li>
+          <li><strong>你需要一辆车。</strong> Vernal 的景点分散在四周的乡野之中，彼此之间没有完善的公共交通。</li>
+        </ul>
+      </div>
+
+      <p>一张图就能说明 Vernal 为何如此适合作为大本营：这一地区的景点像车轮的辐条一样从镇上放射出去，每一处都是轻松的当日往返。</p>
+
+      <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+        <img src="/images/maps/vernal-regional-hub-and-spoke.svg" alt="恐龙之乡的示意性轮辐图，中心是犹他州 Vernal，五个目的地作为带标注的辐条从它向外放射——Dinosaur National Monument、Flaming Gorge、Ashley National Forest、Red Fleet State Park 和 Steinaker State Park。图中仅表示地区之间的关系，比例尺、距离和方位都不准确。" width="1600" height="1200" loading="lazy" decoding="async" />
+        <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">Vernal 居于轮毂，地区各目的地位于辐条。示意图——比例尺、距离和方位均不准确。</figcaption>
+      </figure>
+
+      <h2>为什么要来犹他州 Vernal</h2>
+      <p>多数旅行者是偶然发现 Vernal 的——它是 Salt Lake City 与 Colorado Rockies 之间半途的一个地名，或是孩子吵着要看的恐龙保护区最近的一座小镇。然后他们到了，这座小镇便悄悄地超出预期。Vernal 坐落在 Uintah Basin 的边缘，北面环抱 Uinta Mountains，南面和东面是峡谷地带，处在一片把惊人多样性塞进狭小半径的风景正中。</p>
+      <p>在一个长周末里，你可以站在满是化石骨骼的侏罗纪河床前，用目光描摹 Fremont 人一千多年前刻在崖壁上的岩画，开着并排越野车穿过隐秘的红岩峡谷，在一处火红的峡谷钓上大鳟鱼，还能真正踩着恐龙的足迹走上一段。这种跨度——远古时间、古老文化、西部拓荒历史，以及正经的户外休闲，层层叠叠地摞在一起——正是 Vernal 的特别之处。它是那种会回报好奇心的地方。</p>
+      <p>而且这一切都没有拥挤的人群。当 Moab、Zion 和 Arches 在创纪录的游客量下不堪重负时，Vernal 依然是犹他州真正人少的一角。你常常能把一处观景点、一个登山口或一面岩画独自占为己有。对于厌倦了抢车位的家庭、追逐无人光线的摄影师，以及所有珍惜一点喘息空间的人来说，这不是小小的额外好处——它就是全部魅力所在。</p>
+
+      <h2>Vernal 的不同之处</h2>
+      <p>号称拥有国家保护区或不错步道系统的小镇多的是。让 Vernal 与众不同的是<em>组合</em>，以及其中如此之多都异乎寻常地容易抵达这一事实。</p>
+      <p>首先，这里是别处都无法宣称的<strong>恐龙之乡</strong>。这里的化石不是遥远博物馆玻璃后的复制品——它们是真正的骨骼，仍嵌在被埋藏时的崖壁里，而且有一处地方真的邀请你伸手去摸一块。再加上 Red Fleet 的恐龙足迹、Field House 的户外恐龙园，以及让这一地区声名远扬的 Morrison 地层岩石，你便有了一个围绕地球上最引人入胜的主题之一而建的目的地。</p>
+      <p>其次，Vernal 有一片<strong>前乡野和一片荒野</strong>，懂得两者的区别正是一趟精彩旅程的关键。前乡野是你能开车抵达的一切：保护区、州立公园、博物馆、市中心。荒野则是环绕这一切的广袤公有土地、峡谷和越野路线之网——大多数游客从未见到的地方，因为铺装路根本到不了。镇上的导览 UTV 行程正是为弥合这道鸿沟而存在，也正因如此，一趟 Vernal 之旅才会感觉像一次远征，而不是走马观花。</p>
+      <p>第三，它是一座<strong>真实的、还在运转的小镇</strong>，而不是为旅游而建的度假区。这意味着实在的价格、不做作的食物、地道的本地见识，以及一条无论你在不在都照常营生的 Main Street。对某一类旅行者来说，这份真实胜过任何设施。</p>
+
+      <p>可选的东西这么多，最快的规划办法就是从你喜欢什么入手。下面的选择器会把一种兴趣变成一份体验候选清单——每一项都会在本页更靠下的部分详细介绍。</p>
+
+      <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+        <img src="/images/graphics/vernal-adventure-decision-tree.svg" alt="一张按兴趣给犹他州 Vernal 景点分类的决策树图。从一个「你现在想做什么？」的起点出发，四个兴趣分支——名胜与化石、动起来、按自己的节奏欣赏、适合全家——通向七种体验：恐龙、UTV 冒险、徒步、钓鱼、景观自驾、摄影和家庭活动。它把兴趣与玩法联系起来，作为规划的帮手，而非规则。" width="1600" height="1200" loading="lazy" decoding="async" />
+        <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">先从你此刻想做什么开始，再跳到下面对应的体验。这是规划的帮手——很多游客都会样样都玩一点。</figcaption>
+      </figure>
+
+      <h2>Vernal 的头号玩法（一览）</h2>
+      <p>如果你时间紧张，只想要一份精选清单，这里把整个地区浓缩了。下面每一项都有独立的详细章节，而我们的姊妹篇<a href="/things-to-do/vernal-utah-attractions/">Vernal 及周边的头号景点</a>攻略则会连同参观安排把它们逐一排序。</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>景点</th><th>是什么</th><th>距 Vernal 距离</th><th>适合谁</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Dinosaur National Monument</td><td>1,500 多块嵌在岩石里的真化石；峡谷地带</td><td>东行约 20 分钟</td><td>所有人；初次到访者</td></tr>
+            <tr><td>导览 UTV 行程</td><td>荒野峡谷、拱门、偏远岩画</td><td>从 Vernal 出发</td><td>爱冒险者、家庭</td></tr>
+            <tr><td>McConkie Ranch 岩画</td><td>重要的 Fremont 岩画壁</td><td>北行约 15—20 分钟</td><td>历史、摄影</td></tr>
+            <tr><td>Red Fleet State Park</td><td>恐龙足迹 + 红岩水库</td><td>北行约 15 分钟</td><td>家庭、游泳</td></tr>
+            <tr><td>Utah Field House of Natural History</td><td>博物馆 + 户外恐龙园</td><td>市中心</td><td>孩子、雨天</td></tr>
+            <tr><td>Steinaker State Park</td><td>游泳、划船、桨板、露营</td><td>北行约 5—10 分钟</td><td>夏天、家庭</td></tr>
+            <tr><td>Flaming Gorge</td><td>大鱼垂钓、红峡谷水库</td><td>北行约 1 小时</td><td>钓客、景观自驾</td></tr>
+            <tr><td>Ashley National Forest / Uintas</td><td>高山徒步、露营、湖泊</td><td>北行约 30—60 分钟</td><td>徒步者、凉爽的夏日</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Dinosaur National Monument</h2>
+      <p>这是多数人最初把 Vernal 标进地图的原因，它也当得起头牌位置。<strong>Quarry Exhibit Hall</strong> 位于 Jensen 附近、东行约 20 分钟处，是一座直接建在崖面之上的恒温建筑，崖面里藏着约 1,500 块恐龙骨骼——<em>Allosaurus</em>、<em>Stegosaurus</em>、<em>Diplodocus</em> 和 <em>Apatosaurus</em> 等动物的头骨、四肢和脊椎——至今仍嵌在岩石里，正是约 1.49 亿年前一条侏罗纪河流将它们埋下的位置。有一处地方邀请你去触摸崖壁上一块真正的化石，看着那一刻在孩子（或大人）心里落地，永远看不腻。</p>
+      <p>在采石场之外，这座保护区沿 Green River 和 Yampa 河铺展开 20 多万英亩的峡谷地带。<strong>Cub Creek 景观自驾</strong>（Tour of the Tilted Rocks）会经过倾斜的岩层、路边岩画，以及 Josie Bassett Morris 的拓荒农庄——她在那里大体独居了约半个世纪。短途步道、一段化石探寻步行路线，以及丰富的野生动物，让一趟行程更加圆满。至少给它半天；若想加上徒步和 Colorado 一侧的峡谷，就留出一整天。</p>
+      <div class="article-tip"><strong>把保护区好好规划一下：</strong> 开放时间、门票，以及季节性的采石场接驳车全年都会变化。我们完整、独立的<a href="/dinosaur-national-monument/visiting-dinosaur-national-monument/">Dinosaur National Monument 参观攻略</a>会带你走完整趟行程——该优先看什么、最佳的自驾与徒步、逐季建议，以及家庭和无障碍贴士。出发前先读一读，并请务必向 National Park Service 核实最新运营情况。</p>
+
+      <h2>导览 UTV 冒险</h2>
+      <p>这是多数初次到访者会整个错过的部分。保护区给你看化石和路边观景点，却不会给你看环绕 Vernal 的野性荒野——那些隐秘峡谷、天然拱门，以及任何铺装景观公路都到不了的偏远岩画壁。而那片土地，正是导览 UTV 行程的用武之地，也是体验这片风景独特之处最能身临其境的方式。</p>
+      <p>Adventure Tours Vernal 在五条各具个性的越野路线系统上运营导览<strong>Kawasaki KRX 1000</strong>行程：<strong>Doc's Beach</strong> 的沙质荒漠河床、<strong>Moonshine Arch</strong> 通往一处隐秘砂岩拱门的红岩峡谷、<strong>Ashley Gorge</strong> 壮观的峡谷走廊、<strong>Outlaw Trail</strong> 的无法之徒藏身之地，以及 <strong>Asphalt Ridge</strong> 的开阔山脊眺望。一路上你会在 Fremont 和 Ute 岩画、天然拱门，以及多数游客从未见过的西部拓荒地标处停留。</p>
+      <p>这些车辆是双座的，配有完整的防滚架、动力转向，以及为在崎岖地形上保持舒适而打造的 FOX 2.5 PODIUM LSC 悬挂。行程约 3 小时，<strong>每台车 $349</strong>，最多 2 人乘坐，头盔和全套安全装备都包含在内，而且 Dave 和 Trudy Wilson 亲自带领每一场行程——这意味着你在任何地图上都找不到的本地见识。乘客在家长陪同下 2 岁起即可同乘；驾驶者须年满 18 岁。如果你的一行人是单数，还有同乘（ride-along）选项，让第三个人作为乘客与向导同车。</p>
+      <div class="article-tip"><strong>你该选哪条越野路线？</strong> 带较小孩子的家庭往往钟爱 Doc's Beach（宽阔、好上手、多沙）和 Moonshine Arch（一次真正的峡谷冒险，终点还有惊喜）。在我们的 <a href="/utv/">UTV 行程中心</a>把五条并排对比，然后<a href="/booking/">预订行程</a>，或致电 <strong>(435) 219-9447</strong>，为你的一行人配一条合适的越野路线。</p>
+
+      <h2>博物馆与室内景点</h2>
+      <p>当天气转坏，或全家人需要暂避烈日时，Vernal 市中心有一个货真价实的落脚点：<strong>Utah Field House of Natural History State Park Museum</strong>。它的户外<strong>Dinosaur Garden</strong>陈列着可以在其间穿行的实物大小复制品——孩子必定喜欢——而室内展厅涵盖 Uintah Basin 的地质、古生物和文化史。安排一到两小时；这是本地区最好的雨天去处，也是保护区之行前后完美的预习或复习。</p>
+      <p>市中心也值得慢慢逛。Vernal 的 Main Street 承载着这一地区经典的粉色恐龙意象、本地商铺和小画廊，是在两场冒险之间重整旗鼓的舒适去处。留意季节性的社区活动，以及本地的西部遗产展示。</p>
+      <!-- VERIFY WITH OFFICIAL SOURCE: Utah Field House hours, admission fees, and current exhibit list change seasonally — confirm on the Utah State Parks site before quoting specifics. Do not publish set hours/prices here. -->
+
+      <h2>岩画与远古岩画艺术</h2>
+      <p>Vernal 一带拥有全美西部最密集的岩画之一。<strong>Fremont 人</strong>数百年间在这些峡谷里生活、耕作，留下了繁复的岩画——凿刻进覆有荒漠岩漆的岩石上的人物、动物和抽象图案——后来 <strong>Ute</strong> 又添上了他们自己的。站在一面千年之久的岩画壁前，在一处空无他人的静谧峡谷里，是这一地区最动人的体验之一。</p>
+      <p>最易抵达的代表是镇北 Dry Fork Canyon 里的 <strong>McConkie Ranch</strong>，从沿峡谷崖壁修好的步道上就能看到大幅、细致的岩画壁——参观免费，看完主要图像约需一小时。在保护区内，包括著名蜥蜴壁在内的 <strong>Cub Creek 岩画</strong>是不容错过的路边停靠点。再往深处，散布在四周荒野里的偏远岩画壁，只能靠步行或导览 <a href="/utv/">UTV 行程</a>才能抵达。</p>
+      <p>岩画无可替代，并受法律保护：切勿触摸岩画壁——皮肤油脂会加速其风化——请从恭敬的距离拍摄。我们专门的<a href="/dinosaur-national-monument/petroglyphs-rock-art-vernal/">Vernal 近郊岩画与岩画艺术</a>攻略会讲到这些文化、礼仪，以及去哪里能找到最好的地点。</p>
+
+      <h2>西部拓荒历史与本地遗产</h2>
+      <p>这里的人类故事并未止于 Fremont。一个世纪前，Vernal 东面和南面那些崎岖峡谷曾是全美西部最有效的藏身之地——它们赢得了货真价实的无法之徒名声。这里是 <strong>Butch Cassidy and the Wild Bunch</strong> 的地盘：Outlaw Trail 沿线偏远峡谷的迷宫，给了骑手们在两票买卖之间销声匿迹的去处，而让他们难以被追捕的那片地形，正是让今日探索荒野如此震撼的同一片地形。</p>
+      <p>那段边疆往事至今仍能触摸得到。在保护区 Cub Creek 路的尽头矗立着 <strong>Josie Bassett Morris</strong> 的拓荒农庄，这位了不起的女性在自己的箱形峡谷里大体独居了约五十年，远离任何城镇地养牲畜、种园圃——她的木屋和附属建筑是这一地区最静谧、最有人情味的亮点之一。Vernal 本身作为一座牧场镇、后来又作为能源镇成长起来，那份劳作的西部气质至今仍流淌在它的 Main Street、它的牛仔竞技和县集传统，以及你一到就会注意到的那份从容友善之中。</p>
+      <p>几条导览 <a href="/utv/">UTV 行程</a>路线会直接沿着这片无法之徒与拓荒者的土地行进，把历史与塑造它的风景结合在一起——提醒你在 Vernal，遥远的过去和不久的过去并肩而立，两者都写进了同一块岩石里。</p>
+
+      <h2>景观自驾</h2>
+      <p>这一地区最好的一些体验，是隔着挡风玻璃展开的，而 Vernal 周边的自驾本身就配得上作为目的地。以下每一条都已铺装，普通车辆即可通行，不过山区路线是季节性的。</p>
+      <ul>
+        <li><strong>Dinosaur National Monument 的 Cub Creek Road（Tour of the Tilted Rocks）。</strong> 约十英里的倾斜岩石、路边岩画和 Josie Morris 木屋，游客中心还提供一本自助导览手册。是本地区最好的一条短途自驾。</li>
+        <li><strong>Flaming Gorge – Uintas National Scenic Byway（US-191 向北）。</strong> 犹他州的经典自驾之一，从荒漠一路爬升，穿过 Ashley National Forest，直到 Flaming Gorge 的红色峡谷，沿途都是壮观的观景点。往返请留出半天到一整天。</li>
+        <li><strong>Red Cloud Loop。</strong> Vernal 以北进入 Uintas 白杨与森林的一条荒野山间自驾——尤其在秋天很美，但部分未铺装且季节性开放。出发前请确认路况。</li>
+        <li><strong>Dry Fork Canyon。</strong> 通往 McConkie Ranch 岩画的这条路，本身就是穿过牧场与峡谷地带的一段美丽短途自驾。</li>
+      </ul>
+      <!-- VERIFY WITH OFFICIAL SOURCE: Red Cloud Loop pavement status and seasonal closures vary; the Flaming Gorge byway length/overlooks should be confirmed against Ashley National Forest / UDOT before adding exact mileages. -->
+      <div class="article-tip"><strong>山区自驾贴士：</strong> 通往 Uintas 的高海拔路线随积雪开合，冰情可能持续到初夏，入秋后又再度出现。若你要跑一条山间环线，请在 Vernal 把油加满，带上水和可叠穿的衣物，并先查看最新路况。</div>
+
+      <h2>家庭活动</h2>
+      <p>Vernal 是犹他州最被低估的家庭目的地之一，恰恰因为它的头牌景点是孩子真正在意的东西——恐龙、足迹、峡谷和船。还有哪里能让你的孩子在一个周末里既触摸真正的化石骨骼，又踩进恐龙的足迹，还坐上并排越野车穿越峡谷地带？</p>
+      <p>家庭必做清单：保护区的 <strong>Quarry Exhibit Hall</strong> 及其免费的 Junior Ranger 项目；经一段短而大体平坦的步行即可抵达的<a href="/guides/ultimate-guide-to-red-fleet-state-park/"><strong>Red Fleet State Park 恐龙足迹</strong></a>；市中心的 <strong>Utah Field House 恐龙园</strong>；<strong>Steinaker 水库</strong>的游泳和桨板；以及乘客 2 岁起即可同乘、按家庭节奏进行的 <strong>UTV 行程</strong>。其中大部分只需走几步路，节奏完全由你自己定。</p>
+      <p>想要一份完整、以孩子为中心的拆解——包括年龄建议、雨天备选，以及如何让小旅伴保持开心——请看我们专门的攻略<a href="/things-to-do/fun-things-to-do-vernal-utah-kids/">带孩子在 Vernal 好玩的事</a>。</p>
+
+      <h2>户外休闲</h2>
+      <p>就算抹去恐龙，Vernal 依然是一流的户外小镇。它坐落在高海拔荒漠峡谷地带与 13,000 英尺的 High Uintas——犹他州最高的山脉——之间，这意味着触手可及的地形与活动种类异常丰富。</p>
+      <p><strong>钓鱼。</strong> 这里是<a href="/fishing/">正经的垂钓之乡</a>。北面约一小时车程的<a href="/guides/ultimate-guide-to-flaming-gorge/"><strong>Flaming Gorge</strong></a>是西部首屈一指的渔场之一，以大湖鳟和红鲑闻名，而大坝下游 <strong>Green River</strong> 的坝下河段是一条传奇般的鳟鱼溪流。离镇更近的 <strong>Steinaker</strong> 和 <strong>Red Fleet</strong> 水库提供轻松的岸钓和船钓，高处的 Uinta 湖群里则有溪红点鲑和割喉鳟。</p>
+      <p><strong>徒步与背包野营。</strong> <a href="/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest</a> 覆盖着镇北的群山，从轻松的谷地漫步到 10,000 英尺以上的崎岖高山路线一应俱全。<strong>Uinta Highline Trail</strong> 是一条面向资深徒步者的、值得列入愿望清单的高山背包路线。在更低处，保护区和峡谷提供通往观景点、拱门和岩画的较短荒漠徒步。</p>
+      <p><strong>景观自驾。</strong> 这里最好的一些观光是隔着挡风玻璃进行的。<a href="/scenic-drives/">Vernal 周边的景观自驾</a>，从由高海拔荒漠爬升到森林、再到红岩水库的 <strong>Flaming Gorge–Uintas National Scenic Byway</strong>，到崎岖的 <strong>Red Cloud Loop</strong>、地质看点满满的 <strong>Sheep Creek Loop</strong>，再到经过岩画和恐龙之乡的 Dinosaur National Monument <strong>Cub Creek Road</strong>——当你想看得多，又不想每一英里都靠脚走时，最为理想。</p>
+      <p><strong>露营。</strong> 从带全套接口的房车营位到原始的森林独处，这里是绝佳的<a href="/camping/">露营之乡</a>。<a href="/guides/ultimate-guide-to-flaming-gorge/"><strong>Flaming Gorge</strong></a>用一圈营地环绕着它的水库，<a href="/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest</a>提供凉爽的山间营位，以及在数百个湖泊之间的分散露营，而 <strong>Red Fleet</strong> 和 <strong>Steinaker</strong> 州立公园则把轻松、适合家庭的湖畔露营送到离镇几分钟的地方。</p>
+      <p><strong>玩水与冬季。</strong> 夏天带来在水库上游泳、划桨板、划皮划艇和乘船；Green River 和 Yampa 河则以穿越保护区峡谷的多日激流之旅闻名。等雪一来，Uintas 便向雪地摩托、越野滑雪和冰钓敞开。</p>
+      <div class="article-tip"><strong>公有土地的现实：</strong> 这里大部分地方偏远，没有手机信号、没有水源，各项服务之间相距甚远。带上比你以为需要的更多的水，把计划告诉别人，离线下载地图，并在出发前查看路况——尤其是任何进入高海拔地带或未铺装道路的行程。</div>
+
+      <p>各项地区体验都摆出来之后，这里有一个快速把它们互相权衡的办法。下面的矩阵把你会围绕其展开一趟 Vernal 之旅的五项排在一起，并逐项显示本站实际记录了哪些内容——它是否适合家庭、是否是你能在这里预订的导览行程、是否算一次省力的外出、有没有室内雨天选项、是否全年开放，以及是否对摄影者有回报。</p>
+
+      <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+        <img src="/images/graphics/vernal-adventure-comparison-matrix.svg" alt="一张把 Vernal 周边五项玩法——恐龙、UTV 冒险、徒步、钓鱼和景观自驾——对照六项规划属性排列的比较矩阵：适合家庭、可在本站预订的导览行程、轻松省力、室内雨天选项、全年开放，以及适合摄影。实心对勾标记本站为该体验记录了的属性；空心圆圈标记并非记录重点的属性。" width="1600" height="1200" loading="lazy" decoding="async" />
+        <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">Vernal 的五项核心体验，按决定一天行程的属性并排排列。这是一份仅根据本站记录内容做出的规划帮手——并非排名。</figcaption>
+      </figure>
+
+      <h2>去哪里吃：Vernal 的餐馆</h2>
+      <p>Vernal 不会假装自己是精致餐饮之都，而这正是它魅力的一部分。它提供的是实在、丰盛、不做作的食物——那种在户外辛苦一天之后最熨帖的西部小镇菜。你会找到经典的美式餐馆和牛排馆、映照这一地区文化的一批扎实的墨西哥餐厅、为大胃口打造的烧烤和汉堡，还有几家本地咖啡馆和面包房，供你在出发上路前开启清晨。</p>
+      <p>市中心的 Main Street 是自然而然的觅食去处，多数店家都随意且适合家庭。想要我们当下、经过甄选的推荐——连同具体的餐厅、菜系，以及各家最拿手的——请看姊妹篇攻略<a href="/things-to-do/best-restaurants-vernal-utah/">犹他州 Vernal 最好的餐馆</a>。</p>
+      <!-- VERIFY WITH OWNER / OFFICIAL SOURCE: do not publish specific restaurant names, hours, or menus in this cornerstone — they change. All specifics live in the maintained best-restaurants guide, which is the single source of truth for that list. -->
+
+      <h2>隐藏珍宝与本地秘密</h2>
+      <p>把头牌景点都逛完之后，这些便是本地人钟爱的更安静的角落——能把一趟好旅程变成一趟难忘旅程的东西。</p>
+      <ul>
+        <li><strong>偏远荒野岩画。</strong> 在 McConkie Ranch 和 Cub Creek 之外，藏在 Vernal 周边峡谷里的岩画壁几乎无人问津。许多只能靠步行或导览 UTV 抵达——独自站在它们面前的那一刻令人难忘。</li>
+        <li><strong>Moonshine Arch。</strong> 一座醒目的天然砂岩拱门，藏在镇北的红岩之中——是货真价实的犒赏，也是备受喜爱的拍照点，还是 UTV 行程目的地之一。</li>
+        <li><strong>Josie Morris 木屋与箱形峡谷。</strong> 在保护区 Cub Creek 路的尽头，这座宁静的拓荒农庄连同它荫凉的侧峡谷，被匆忙的游客略过，却被愿意慢下来的人所珍爱。</li>
+        <li><strong>倾斜岩石上的日出与日落之光。</strong> 保护区的岩层和这一地区的峡谷，在低斜掠射的光线里活了过来。多数当日往返的游客都会错过——早起的人和傍晚流连的人才会得到回报。</li>
+        <li><strong>高处的 Uinta 湖群。</strong> 往山里开一小段，就能抵达高山湖泊和清凉森林——与下面的荒漠截然不同的另一个世界，也是炎热夏日午后完美的避处。</li>
+      </ul>
+
+      <h2>四季中的 Vernal</h2>
+      <p>Vernal 是货真价实的四季目的地，什么时候来才对，取决于你想做什么。这里说说一年是如何铺展开的。想了解最新路况和打包细节，请把这一段与我们的<a href="/guides/vernal-weather-guide/">Vernal 天气攻略</a>配着看。</p>
+
+      <h3>春季（4—6 月）</h3>
+      <p>大概是最好的季节。气温宜人，野花绽放，野生动物活跃，荒漠地带在夏季酷热来临前正是最葱绿的时候。保护区和较低处的步道都很理想，UTV 行程在温和的空气里也格外出彩。高山路线还在抖落积雪，所以把 Uintas 留到晚些时候。晚春——5 月进入 6 月——是夏季高峰前的最佳时段。</p>
+
+      <h3>夏季（7—8 月）</h3>
+      <p>旺季，也是酷热的顶点，荒漠白天气温常常在 90 多华氏度。一切都开放，白昼漫长，这是玩水的黄金时段：在 <a href="/guides/ultimate-guide-to-steinaker-state-park/">Steinaker</a> 和 Red Fleet 游泳划船，在 Flaming Gorge 消暑，或逃往空气清爽宜人的 High Uintas。把剧烈活动安排在早晨，带足水，做好实打实的防晒，并留意午后的雷暴。</p>
+
+      <h3>秋季（9—10 月）</h3>
+      <p>与春季不相上下，也是许多本地人的最爱。气温回落，人流稀薄，三角叶杨和白杨转为金色，光线变得又长又暖——这是摄影者的季节。初秋最适合趁白杨转色时把保护区、一趟 UTV 行程和一段山间景观自驾组合起来。是一个绝佳、无拥挤的到访时机。</p>
+
+      <h3>冬季（11—3 月）</h3>
+      <p>安静、萧瑟，覆上白雪时往往很美——但选择有限。小镇、保护区的核心景点和 Field House 仍可到访，但一些季节性设施、采石场接驳车，以及高海拔和未铺装道路会关闭或缩短开放时间。这是属于独处、雪地摩托、越野滑雪和山中冰钓的季节。一趟冬季之旅可以充满魔力；只是开车前请确认哪些还开着，并按实打实的严寒来打包。</p>
+      <!-- VERIFY WITH OFFICIAL SOURCE: seasonal date ranges above are typical, not guaranteed. Snowpack shifts mountain access by weeks year to year. UTV tour winter availability: VERIFY WITH OWNER before implying year-round operation. -->
+
+      <h2>最佳到访时机</h2>
+      <p>简短版是这样：<strong>5—6 月和 9—10 月</strong>是综合来看最好的窗口——天气宜人、一切开放、人流稀薄。若玩水和高山是你的重点，夏天最佳。冬天则属于独处和雪上运动。这张表把它总结了一下。</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>季节</th><th>天气</th><th>人流</th><th>适合</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>春季（4—6 月）</td><td>温和、渐绿、偶有风</td><td>稀少至中等</td><td>保护区、UTV 行程、野花、样样皆宜</td></tr>
+            <tr><td>夏季（7—8 月）</td><td>荒漠炎热、山中凉爽</td><td>最繁忙</td><td>水上运动、High Uintas、漫长白昼</td></tr>
+            <tr><td>秋季（9—10 月）</td><td>转凉、金色、光线极佳</td><td>稀少</td><td>摄影、景观自驾、样样皆宜</td></tr>
+            <tr><td>冬季（11—3 月）</td><td>寒冷、可能降雪；通行受限</td><td>非常稀少</td><td>独处、雪上运动、冰钓</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>完美的 Vernal 周末（2 天行程）</h2>
+      <p>两天足够不慌不忙地拿下精华。这份计划假定你以 Vernal 为大本营并有一辆车。</p>
+      <p><strong>第 1 天——恐龙与岩画。</strong> 一大早从 <strong>Dinosaur National Monument</strong> 开始：Quarry Exhibit Hall 和 Wall of Bones，然后是带着路边岩画和 Josie Morris 木屋的 Cub Creek 景观自驾。回到 Vernal 在 Main Street 吃午饭。下午驱车上到 Dry Fork Canyon 的 <strong>McConkie Ranch</strong> 看 Fremont 岩画壁，或到 <strong>Steinaker</strong> 或 <strong>Red Fleet</strong> 游个泳消暑——在 Red Fleet 孩子还能走一走恐龙足迹。晚饭在镇上吃。</p>
+      <p><strong>第 2 天——荒野冒险。</strong> 上午来一趟导览 <strong>UTV 行程</strong>进入峡谷——隐秘拱门、偏远岩画，以及别无他法可达的地形。午饭后选择你的收尾：想要轻松的下午就去 <strong>Utah Field House</strong> 及其恐龙园，或来一段短途徒步，又或趁黄金时刻的观景启程走一段 Flaming Gorge 景观自驾。用一顿丰盛的晚饭犒劳这个充实的周末，再动身离开。</p>
+      <div class="article-tip"><strong>预订顺序很重要：</strong> 先把你的 UTV 行程订下来，再围绕它安排周末的其余部分——行程时间锚定了这一天，而保护区和公园可以灵活地围着它转。<a href="/booking/">在这里查看空档</a>。</div>
+
+      <h2>Vernal 三天行程</h2>
+      <p>多出一天，你就能放慢脚步，加上这一地区更大的远行。</p>
+      <p><strong>第 1 天——把 Dinosaur National Monument 完整走一遍。</strong> 给保护区好好留出一整天：开馆时的 Quarry Exhibit Hall、Fossil Discovery 步行路线、含每一处岩画停靠点的整条 Cub Creek 自驾全程，以及 Josie Morris 木屋。在公园里野餐，或回到镇上。如果还有精力，傍晚再加一段 Split Mountain 一带的短途徒步。</p>
+      <p><strong>第 2 天——UTV 行程与州立公园。</strong> 上午来一趟导览 UTV 行程深入荒野，午饭在 Vernal，下午到 Steinaker 或 Red Fleet 游泳、划桨板、走恐龙足迹，享受悠闲的湖畔时光。是一个平衡了肾上腺素与放松的、轻松而充实的一天。</p>
+      <p><strong>第 3 天——Flaming Gorge 与群山。</strong> 走 Flaming Gorge 景观公路向北，进入 Ashley National Forest 和峡谷的红岩。钓鱼、划船、在观景点野餐，或徒步走一段高地——若逢秋天，就追逐白杨的颜色。这是一整天的环线，向你展示这一地区的高山那一半，与头两天的荒漠形成完美对比。</p>
+      <p>从更远处赶来？Vernal 距 Salt Lake City 约三小时车程——路线和行程规划细节请看我们的<a href="/from/salt-lake-city/">Salt Lake City 到 Vernal 旅行攻略</a>。想要更多现成的计划——单日、周末、家庭、冒险、摄影、钓鱼和露营行程——请看我们的<a href="/itineraries/">恐龙之乡终极行程攻略</a>。</p>
+
+      <h2>Vernal 打包清单</h2>
+      <p>游客最大的失误，是没有为高海拔荒漠和高海拔条件做好准备。Vernal 海拔在 5,000 英尺以上，日照强烈，空气干燥，气温在正午与夜间之间剧烈起伏。请照着这份现实来打包：</p>
+      <ul>
+        <li><strong>水，而且要多</strong> — 任何活动的日子每人至少半加仑，夏天更多。</li>
+        <li><strong>防晒</strong> — 宽檐帽、太阳镜、高 SPF 防晒霜和润唇膏。这里荫凉稀少。</li>
+        <li><strong>叠穿衣物</strong> — 即便午后炎热，清晨和傍晚也可能凉爽；一件轻便夹克或抓绒全年都值得带，冬天则要带真正的御寒装备。</li>
+        <li><strong>结实的包头鞋</strong> — 应对多岩步道、光岩坡和恐龙足迹。</li>
+        <li><strong>加满的油箱</strong> — 在镇上加油；荒野和山里的服务很稀疏。</li>
+        <li><strong>相机和望远镜</strong> — 用于野生动物、观景点和岩画细节。</li>
+        <li><strong>离线地图和已保存的信息</strong> — 这一地区大部分地方手机信号不可靠，甚至完全没有。</li>
+      </ul>
+      <p>想要逐季的拆解——以及针对 UTV 行程当天的具体建议——请看我们详细的<a href="/guides/what-to-bring/">打包指南</a>，并在收拾好行李前查看<a href="/guides/vernal-weather-guide/">Vernal 天气攻略</a>。</p>
+
+      <h2>实用规划贴士</h2>
+      <p><strong>如何抵达。</strong> Vernal 在 Salt Lake City 以东、沿 US-40 约三小时车程，Salt Lake City 是最近的大型机场。这一地区向东也连着 Colorado。到了之后车是必需的——景点分散在乡野各处，彼此之间没有完善的公共交通。</p>
+      <p><strong>待多久。</strong> 两天覆盖精华；三天则能不慌不忙地加上 Flaming Gorge 和群山。仅一天只够看保护区或另一项头牌活动——多数游客都希望自己多待了几天。</p>
+      <p><strong>以何处为大本营。</strong> Vernal 市中心是实用的枢纽——住宿、餐馆、燃油和向导服务都聚在这里，其余一切都在稍开一段车的地方。想更靠近户外的人，可以在州立公园和 Ashley National Forest 里找到营地和小木屋。</p>
+      <p><strong>先订下锚定活动。</strong> UTV 行程和任何河上行程都要提前预订，尤其在夏天和周末，然后再把灵活的景点安排到它们周围。</p>
+      <p><strong>核实细节。</strong> 开放时间、门票、接驳车运营，以及道路和步道状况都会随季节变化——出发前请务必向 National Park Service、Utah State Parks 和 Ashley National Forest 核实最新运营情况。想要一整套规划资源，请浏览我们的<a href="/guides/">Vernal 旅行攻略</a>。</p>
+      <div class="article-tip"><strong>我对每个人都会说的一句话：</strong> 别把 Vernal 当成去别处路上的一个穿行点。那些给它两三天、并且不只看铺装景点、也为荒野腾出时间的游客，离开时便懂得了我们这些住在这里的人为何从不厌倦它。</div>
+
+      <!-- FAQ Section -->
+      <div class="article-faq">
+        <h2>常见问题</h2>
+        <div class="faq-item">
+          <h3>在犹他州 Vernal 最值得做的事有哪些？</h3>
+          <p>在 Vernal 最值得做的事是一趟导览荒野 UTV 行程，参观 Dinosaur National Monument 及其 Wall of Bones，在 McConkie Ranch 和 Dry Fork Canyon 观赏 Fremont 岩画，在 Red Fleet State Park 走一走恐龙足迹，逛 Utah Field House of Natural History 的恐龙园，以及在 Steinaker、Red Fleet 和 Flaming Gorge 钓鱼或划船。</p>
+        </div>
+        <div class="faq-item">
+          <h3>在犹他州 Vernal 需要待几天？</h3>
+          <p>两到三天最理想。一天留给 Dinosaur National Monument 和岩画，一天留给导览 UTV 行程和州立公园，再用可选的第三天去 Flaming Gorge、钓鱼，或在 Uinta Mountains 徒步。仅一天只够看保护区或另一项头牌活动。</p>
+        </div>
+        <div class="faq-item">
+          <h3>犹他州 Vernal 值得一去吗？</h3>
+          <p>值得。Vernal 是通往 Dinosaur National Monument 的门户，把真正的恐龙化石、远古岩画、红岩峡谷、西部拓荒历史和世界级的户外休闲，都装进了一个狭小、不拥挤的半径里。它把吸引人们前往犹他州南部的许多东西都给了你，却没有拥挤的人群。</p>
+        </div>
+        <div class="faq-item">
+          <h3>在 Vernal 最值得做的头号事情是什么？</h3>
+          <p>跟随 Adventure Tours Vernal 的一趟导览荒野 UTV 行程，是最能身临其境的单项活动——它把越野冒险、岩画、天然拱门，以及你从铺装公路无法抵达的峡谷风光，合成一段三小时的体验。Dinosaur National Monument 则是头号必看景点。</p>
+        </div>
+        <div class="faq-item">
+          <h3>犹他州 Vernal 适合带孩子的家庭吗？</h3>
+          <p>非常适合。孩子可以在 Dinosaur National Monument 触摸真正的恐龙化石，在 Red Fleet State Park 走到恐龙足迹跟前，逛 Utah Field House 的恐龙园，还能在家长陪同下从 2 岁起作为乘客同乘一趟导览 UTV 行程。大多数亮点都只需走几步路。</p>
+        </div>
+        <div class="faq-item">
+          <h3>一年中到访犹他州 Vernal 的最佳时节是什么时候？</h3>
+          <p>晚春（5—6 月）和初秋（9—10 月）气温最宜人、野生动物活跃、人流较稀。夏天温暖，全面开放，最适合水上活动。冬天安静而景色优美，但寒冷，部分季节性设施和道路会关闭。</p>
+        </div>
+        <div class="faq-item">
+          <h3>Vernal 距 Salt Lake City 有多远？</h3>
+          <p>Vernal 在 Salt Lake City 以东、沿 US-40 约三小时车程，Salt Lake City 是最近的大型机场。风景优美的路线翻越 Uinta Mountains，穿过 Daniels Summit 和 Strawberry Reservoir 一带。</p>
+        </div>
+        <div class="faq-item">
+          <h3>犹他州 Vernal 以什么闻名？</h3>
+          <p>Vernal 以犹他州的恐龙之乡闻名。它位于 Uintah Basin 中 Dinosaur National Monument 的边缘，四周环绕着红岩峡谷、Fremont 和 Ute 岩画、西部拓荒时代的无法之徒历史，以及公有土地上的户外休闲。</p>
+        </div>
+        <div class="faq-item">
+          <h3>到访 Vernal 需要开车吗？</h3>
+          <p>需要。Vernal 的景点分散在四周乡野——保护区在东面 20 分钟，州立公园和峡谷在 5 到 60 分钟车程外——彼此之间没有完善的公共交通，因此私家车必不可少。一旦上了越野路线，导览 UTV 行程会负责代步。</p>
+        </div>
+        <div class="faq-item">
+          <h3>Vernal 是 Moab 的好替代选择吗？</h3>
+          <p>对许多旅行者来说，是的。Vernal 提供红岩峡谷、越野冒险，以及神韵上与 Moab 相近的壮丽风光，但人流少得多，还有 Moab 无法比拟的恐龙化石和岩画。对想要冒险又不想拥堵的游客来说，它是一个有力的选择。</p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="article-cta">
+        <h3>准备好去探索 Vernal 的荒野了吗？</h3>
+        <p>导览 Kawasaki KRX 1000 行程——每台车 $349（最多 2 人乘坐），为时 3 小时。5 条越野路线，由 Dave &amp; Trudy Wilson 亲自带领。</p>
+        <a href="/booking/" class="cta-btn">预订行程</a>
+        <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
+      </div>
+    </div>
+
+    <!-- Related Articles -->
+    <div class="related-articles">
+      <h3>更多 Vernal 攻略</h3>
+      <div class="related-grid">
+        <a href="/dinosaur-national-monument/visiting-dinosaur-national-monument/" class="related-card">
+          <h4>Dinosaur National Monument 参观攻略</h4>
+          <p>关于化石、自驾和峡谷的完整本地攻略。</p>
+        </a>
+        <a href="/things-to-do/vernal-utah-attractions/" class="related-card">
+          <h4>Vernal 头号景点</h4>
+          <p>Vernal 及周边最好的风景和值得一去的地方。</p>
+        </a>
+        <a href="/things-to-do/fun-things-to-do-vernal-utah-kids/" class="related-card">
+          <h4>带孩子的玩法</h4>
+          <p>Vernal 适合家庭的活动与冒险。</p>
+        </a>
+        <a href="/utv/" class="related-card">
+          <h4>导览 UTV 行程</h4>
+          <p>全部 5 条越野路线系统，含地形拆解和路线个性。</p>
+        </a>
+      </div>
+    </div>
+  </main>
+
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3C, Italian P6,
  * French P8-P6, German P9-P6, Japanese P10K).
@@ -2097,6 +2393,7 @@ const JA = `
  * that don't need locale awareness keep importing `bodyHtml` directly.
  */
 export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
+  if (locale === 'zh') return ZH;
   if (locale === 'es') return ES;
   if (locale === 'it') return IT;
   if (locale === 'pt') return PT;

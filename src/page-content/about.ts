@@ -1769,6 +1769,258 @@ const JA = `
 </div>
 `;
 
+const ZH = `
+<!-- ================================================
+     PAGE SUMMARY BLOCK — feeds Google AI Overviews
+     and Bing Copilot. Placed at top of content.
+     ================================================ -->
+<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+  Adventure Tours Vernal 是一家位于犹他州 Vernal 的本地经营 UTV 越野游公司，由 Dave 和 Trudy Wilson 创办。Dave Wilson 是公司老板兼首席向导，驾驶 Kawasaki KRX 1000 并排越野车，带你穿越 Uintah Basin 的导览游。Google 82 条评价，5.0 星好评。致电 (435) 219-9447。
+</p>
+
+<!-- Hero Section — H1 now keyword-relevant while keeping brand voice -->
+<section class="about-hero" style="position:relative; overflow:hidden;">
+  <div class="about-hero-video-bg">
+    <iframe
+      src="https://www.youtube.com/embed/LsqbwVkwrbw?autoplay=1&mute=1&loop=1&playlist=LsqbwVkwrbw&controls=0&rel=0&playsinline=1"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+  </div>
+  <div class="about-hero-overlay"></div>
+  <div class="about-hero-content">
+    <h1 class="about-hero-title">犹他州 Vernal 的 UTV 越野游 — 由冒险精神打造</h1>
+    <p class="about-hero-subtitle">通往 Uintah Basin 最精彩冒险的入口</p>
+    <p class="about-hero-subtitle" style="font-weight:600;">★★★★★ Google 82 条评价，5.0 星好评 — 每一趟行程都由 Dave &amp; Trudy Wilson 亲自带队</p>
+  </div>
+</section>
+
+<!-- Main About Content -->
+<section class="about-main">
+  <div class="container">
+
+    <!-- Mission Statement -->
+    <div class="about-card mission-card">
+      <div class="mission-content">
+        <h2 class="about-heading">第一家。最好的一家。极致的 UTV 体验。</h2>
+        <p class="lead-text">我们不只是要成为 Uintah Basin 第一家 UTV 越野游公司，更要成为最好的一家！Adventure Tours Vernal 使用顶级的 <strong>Kawasaki</strong> KRX 并排越野车，为你带来最安全、最刺激的冒险。</p>
+        <p>我们的冒险行程会带你领略风景壮丽的峡谷越野路线，以及高地之上的历史印记。行程涵盖这些本地瑰宝：</p>
+
+        <div class="highlights-grid">
+          <div class="highlight-item">
+            <div class="highlight-icon">🏞️</div>
+            <div class="highlight-text">
+              <strong>Flaming Gorge</strong>
+              <p>震撼人心的红岩峡谷与澄澈的水域</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/tktE4GbS9gQ?si=PwYv9yMUs-yYAM4U"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🦕</div>
+            <div class="highlight-text">
+              <strong>Dinosaur Monument</strong>
+              <p>远古的化石层与史前风貌</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/PoCN4Lo9Lkk?si=OYkfE56RP_uMcHoF"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🛶</div>
+            <div class="highlight-text">
+              <strong>Green River</strong>
+              <p>世界级的漂流与钓鱼胜地</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/p05cObabbjg?si=gjsw6MKCJHx6s6Vq"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🗿</div>
+            <div class="highlight-text">
+              <strong>古老岩画</strong>
+              <p>数千年的原住民历史</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/fwzaXWfuFdk?si=Xt1_DCIPRzqx7QDL"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">⛰️</div>
+            <div class="highlight-text">
+              <strong>Uintah Mountains</strong>
+              <p>雄伟的山峰与高山荒野</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/AanVVzP0_oM?si=5GOFOiI5MBc5dm1D"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🌈</div>
+            <div class="highlight-text">
+              <strong>Fantasy Canyon</strong>
+              <p>宛如异世界的岩石造型与沙漠之美</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/m64J-ovzTf4?si=FLULmmhzbq8zDzV2"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Our Story -->
+    <div class="our-story-section">
+      <div class="story-content">
+        <h2 class="section-title">我们的历程</h2>
+        <div class="story-text">
+          <p class="story-intro">冒险不只是我们做的事，更是我们的本色。</p>
+
+          <p>我在 Salt Lake Valley 长大，年少时光都花在 Wasatch 和 Oquirrh 山间探索，那时我就知道自己找到了一生的热爱。作为 80 年代长大的孩子，我有着大把可以四处撒野的自由，我和兄弟们会去骑山地车、开吉普、徒步、玩雪地摩托、滑雪、露营、骑马、绳降、跳崖、探洞等等……我们在家里的小木屋度过了数不清的难忘周末。</p>
+
+          <p>从很小的时候起，我就知道自己渴望的正是那股肾上腺素飙升的感觉。摔断过几根骨头，也许还断过一两根车轴，但我对户外的那份热情从未消退。</p>
+
+          <p>我那位美丽、了不起、迷人、超棒、美好的妻子兼挚友 Trudy 和我搬到了犹他州 Vernal。落脚之后，我们深深爱上了 Uintah Basin 这片土地，于是决定把这份热情投注到一件事上：把我们如此挚爱的自然奇观，分享给朋友、家人和每一位来访的人。</p>
+        </div>
+      </div>
+
+      <!-- Family Photo Section -->
+      <div class="family-section">
+        <div class="family-photo-container">
+          <img src="/images/wilson-family.webp" alt="Adventure Tours Vernal 的老板 Dave Wilson 和 Trudy Wilson 与家人的合影" class="family-photo">
+          <div class="family-photo-caption">
+            <h3>认识 Wilson 一家</h3>
+            <p>Dave 和 Trudy Wilson 与他们的四个孩子和外孙</p>
+            <p class="family-names">8 Boys、Ansley、Trinity、Scott 和 Chandler - Little Z-man</p>
+            <p class="guide-profile-links">认识你的向导： <a href="/about/dave/">Dave Wilson</a> &amp; <a href="/about/trudy/">Trudy Wilson</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Our Future -->
+    <div class="about-card future-card">
+      <h2 class="about-heading">我们的未来</h2>
+      <div class="future-content">
+        <p class="lead-text">Adventure Tours Vernal 诞生于我们对各种体验的热爱。</p>
+
+        <p>家人搬来这里之后，我们开始为家庭回忆投入。这份一生的热爱，让我们添置了 ATV、山地车、雪地摩托、船，以及露营、狩猎和钓鱼装备，而最重要的，是对我们这个不断扩大的朋友与家人社群的投入。</p>
+
+        <p>我们一家人发现，自己几乎是在恳求身边的人来看看我们在自家后院里发现的这份美。在一次次私人出行中，我们找到了洞穴、越野路线，触摸了历史，也饱览了远超预期的绝美风光。</p>
+
+        <p>如今，我们把这份亲身积累的知识融进每一趟行程 — 从穿越偏远峡谷和岩画遗址的<a href="/utv/backcountry-tours-vernal-utah/">导览荒野之旅</a>，到<a href="/utv/best-utv-trails-vernal/">我们在 Vernal 附近运营的五套越野路线</a>。这些都是我们亲身探索过的土地，如今经过实地踏勘、绘制路线，再由我们亲自带队。</p>
+
+        <p>这个"后院"可不止一座小镇那么大。它是一片横跨多州的广袤区域 — Dinosaur National Monument 从犹他州一直延伸进科罗拉多州，Flaming Gorge 向北探入怀俄明州，High Uintas 在西侧高高耸起 — 而 Vernal 恰恰坐落在正中央。</p>
+
+        <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+          <img src="/images/maps/vernal-dinosaur-country-overview.svg" alt="恐龙之乡的示意方位图，展示 Adventure Tours Vernal 所在的这片横跨多州的区域。以作为大本营的犹他州 Vernal 为中心，标出四个区域：Dinosaur National Monument（横跨犹他州与科罗拉多州）、Flaming Gorge（从犹他州延伸进怀俄明州）、High Uintas 与 Ashley National Forest，以及周边的 Uintah Basin。图中仅示意各区域之间的相对关系，比例、距离和方位均不准确；州名标注表示延伸范围，而非实际测绘的边界。" width="1600" height="1200" loading="lazy" decoding="async" />
+          <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">我们所说的后院：一片延伸至科罗拉多州和怀俄明州的横跨多州区域，Vernal 就在它的心脏地带。此为方位示意图，比例并不准确。</figcaption>
+        </figure>
+
+        <div class="vision-box">
+          <h3>我们的愿景</h3>
+          <p>A.T.V. 就是要让你尽情享受我们后院里这片壮丽的风景。来放松一下，多待一会儿，你绝不会后悔！</p>
+          <p>我们希望你带走的，不只是 Uintah Basin 的难忘回忆，还有美丽的照片、引人入胜的历史，以及能讲给朋友听的故事。</p>
+          <p><strong>你一定会再回来，我们保证！</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Why Choose Us -->
+    <div class="why-choose-section">
+      <h2 class="section-title">为什么选择 Adventure Tours Vernal？</h2>
+      <div class="why-grid">
+        <div class="why-item">
+          <div class="why-icon">🏆</div>
+          <h3>第一，也是最好</h3>
+          <p>Uintah Basin 首屈一指的 UTV 越野游公司</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🛡️</div>
+          <h3>安全至上</h3>
+          <p>顶级装备与专业向导</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🌟</div>
+          <h3>本地专家</h3>
+          <p>这片土地，我们了如指掌</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">❤️</div>
+          <h3>家族的热情</h3>
+          <p>与你分享我们对冒险的热爱</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🏔️</div>
+          <h3>隐藏秘境</h3>
+          <p>带你前往别人不知道的越野路线和景致</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">✨</div>
+          <h3>难以忘怀</h3>
+          <p>一生难忘的回忆</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="about-cta">
+      <h2>准备好体验这场冒险了吗？</h2>
+      <p>加入 Wilson 一家，一起发现犹他州 Vernal 为何是极致的户外乐园。</p>
+      <div class="cta-buttons">
+        <a href="/booking/" class="cta-button primary">预订你的冒险</a>
+        <a href="tel:435-219-9447" class="cta-button secondary">📞 致电 (435) 219-9447</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Mobile Sticky CTA -->
+<div class="mobile-sticky-cta">
+  <button onclick="location.href='/booking/'">立即预订你的行程</button>
+</div>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3A, Italian P6,
  * French added P8, German added P9, Japanese added P10K).
@@ -1781,6 +2033,7 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
   if (locale === 'de') return DE;
+  if (locale === 'zh') return ZH;
   if (locale === 'ja') return JA;
   return bodyHtml;
 }

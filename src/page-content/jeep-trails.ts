@@ -450,6 +450,70 @@ const JA = `
   </main>
 `;
 
+const ZH = `
+
+
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    Vernal 附近的 Jeep 越野路线和越野线路包括 BLM 荒野土地上的道路，以及 Adventure Tours Vernal 用 Kawasaki KRX 1000 并排越野车运营的五套导览游越野路线系统。这些路线穿越峡谷、沙漠涸谷、岩画和西部拓荒时代的历史线路。Vernal 拥有与 Moab 相仿的地形，人流却少得多。3 小时导览游每台车 $349。请致电 (435) 219-9447。
+  </p>
+
+  <main class="article-page">
+    <header class="article-header">
+      <div class="article-breadcrumb"><a href="/">Home</a><span class="sep">›</span><a href="/utv/">越野路线</a><span class="sep">›</span><span>Jeep 越野路线</span></div>
+      <h1 class="article-title">Vernal 附近的 Jeep 越野路线</h1>
+      <p class="article-meta">2026 年 4 月更新 · Adventure Tours Vernal</p>
+    </header>
+
+    <div class="article-body">
+      <div class="article-summary-box">
+        Vernal 就坐落在犹他州最出色的一片越野地形之中——正是那些让 Moab 声名远扬的峡谷地带、沙漠涸谷和荒野线路，却没有人潮，也没有高昂的价格。无论你是带着自己的 Jeep 前来，还是想乘坐导览游 UTV 体验这些路线，这里都为你一一介绍。
+      </div>
+
+      <h2>Vernal 周边的越野地形</h2>
+      <p>Uintah Basin 四周环绕着 BLM 土地，一张未铺装道路和越野路线的路网从平整的砂石路一直延伸到技术性很强的岩石线路。城镇以南和以东的地形——朝着 Dinosaur National Monument 和 Book Cliffs 方向——正是最壮观的峡谷与台地地貌的起点。红色岩石造型、深邃的涸谷、光岩台阶，以及偏远的台地顶部道路，为驾驶 Jeep 和 4x4 的人带来丰富的变化。</p>
+      <p>城镇以北，攀升进入 Ashley National Forest 和 Uinta Mountains 的道路则别有一番气质——穿过白杨与松林的林务局道路，伴着山景和季节性的溪流涉水路段。Diamond Mountain 一带很受 Jeep 露营和越野穿越（overlanding）爱好者的欢迎。</p>
+
+      <h2>导览游 UTV 之旅——无需 Jeep</h2>
+      <p>如果你没有 4x4，或想进入那些需要本地知识才能穿行的路线，Adventure Tours Vernal 会带你乘坐导览游 Kawasaki KRX 1000，穿越五套越野路线系统，饱览 Vernal 荒野的精华。KRX 1000 能应对多数原装 Jeep 也会犯难的地形——沙质涸谷、岩石爬坡和狭窄的峡谷线路——而 Dave 和 Trudy Wilson 熟知每一个弯道、每一面岩画和每一处观景点。</p>
+      <p>许多 Jeep 爱好者会把导览游 UTV 之旅当作一次探路——先跟着 Dave 走一遍，熟悉这片区域，然后再开着自己的车回来深入探索。在这样一个最好的路线没有标记、GPS 信号又时断时续的地区，这是个聪明的办法。</p>
+
+      <h2>越野方面的 Vernal 与 Moab</h2>
+      <p>Moab 名气更响，但 Vernal 能以极低的成本和拥挤程度，提供同一水准的地形。在这里你不必排队等路线，也不必抢营地。而这里的风光——峡谷崖壁、天然拱门、岩画和无法者的历史——同样引人入胜。主要的取舍在于服务较少；Vernal 没有 Moab 那样的租赁配套，正因如此，导览游才如此有效地填补了这一空缺。</p>
+
+      <h2>规划你的越野之行</h2>
+      <p>如果你带着自己的 Jeep，BLM Vernal Field Office 可以提供最新的地图和线路状况。一旦驶离铺装路面，手机信号很快就会消失，所以出发前请下载离线地图。在镇上加满油——进入荒野之后就什么都没有了。春秋两季是最佳时节；夏天可以走，但很热，有些线路会在冬季的雪季和泥泞季关闭。</p>
+
+      <div class="article-tip">
+        <strong>Jeep 车主提示：</strong>第一天就预订一次导览游 UTV 之旅来探路。Dave 会根据你车辆的性能和你想看的东西，为你指出最适合 Jeep 通行的路线。这是熟悉一片新越野区域最快的方式。
+      </div>
+
+      <div class="article-faq">
+        <h2>常见问题</h2>
+        <div class="faq-item"><h3>Vernal 附近有 Jeep 越野路线吗？</h3><p>有——大量 BLM 荒野线路，外加五套导览游 UTV 越野路线系统。地形从平整的砂石路一直到技术性的峡谷与台地线路。</p></div>
+        <div class="faq-item"><h3>我可以参加导览游，而不自己开 Jeep 吗？</h3><p>可以。Adventure Tours Vernal 提供 KRX 1000 车辆、向导和装备，五套越野路线系统，3 小时每台车 $349。</p></div>
+        <div class="faq-item"><h3>Vernal 和 Moab 相比如何？</h3><p>地形质量相仿，人流少得多，价格也有竞争力。租赁配套较少，正因如此导览游才是首选。</p></div>
+      </div>
+
+      <div class="article-cta">
+        <h3>跟着向导探探这些路线</h3>
+        <p>导览游 KRX 1000 之旅 · 每台车 $349 · 5 套越野路线系统 · 本地专业知识</p>
+        <a href="/booking/" class="cta-btn">预订行程</a>
+        <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
+      </div>
+    </div>
+
+    <div class="related-articles">
+      <h3>更多越野攻略</h3>
+      <div class="related-grid">
+        <a href="/atv-trails-vernal-utah/" class="related-card"><h4>Vernal 附近的 ATV 越野路线</h4><p>五套 UTV 越野路线系统及地形详解。</p></a>
+        <a href="/guides/moab-utv-tours/" class="related-card"><h4>Vernal：Moab 的替代之选</h4><p>越野探险为何 Vernal 胜过 Moab。</p></a>
+        <a href="/utv/backcountry-tours-vernal-utah/" class="related-card"><h4>荒野之旅</h4><p>深入荒野的导览游 UTV 体验。</p></a>
+        <a href="/utv/best-utv-trails-vernal/" class="related-card"><h4>最佳 UTV 越野路线</h4><p>面向各种水平的逐条路线攻略。</p></a>
+      </div>
+    </div>
+  </main>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3D; Italian
  * populated P6; French populated P8-P6; German populated inline-pages batch;
@@ -463,6 +527,7 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
   if (locale === 'de') return DE;
+  if (locale === 'zh') return ZH;
   if (locale === 'ja') return JA;
   return bodyHtml;
 }

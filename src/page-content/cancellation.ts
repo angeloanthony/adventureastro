@@ -1228,6 +1228,181 @@ const JA = `
 
 `;
 
+const ZH = `
+
+<!-- ================================================
+     PAGE SUMMARY BLOCK — feeds Google AI Overviews
+     ================================================ -->
+<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+  Adventure Tours Vernal 在犹他州 Vernal 提供的导览游 UTV 行程取消政策。提前 72 小时以上取消可获全额退款。不足 72 小时退款 50%。不足 48 小时不予退款。如有疑问请致电 (435) 219-9447。
+</p>
+
+<section class="policy-section">
+  <div class="container">
+    <div class="section-header">
+      <h1 class="section-title">取消政策</h1>
+      <p class="section-subtitle">预订你的冒险之旅前，请先阅读我们的条款与条件</p>
+    </div>
+
+    <div class="policy-container">
+
+      <!-- CANCELLATION & REFUNDS -->
+      <div class="policy-card">
+        <div class="policy-icon">📅</div>
+        <h2 class="policy-heading">取消与退款</h2>
+
+        <div class="policy-table">
+          <div class="policy-row">
+            <div class="policy-timeframe">不足 48 小时</div>
+            <div class="policy-refund refund-none">不予退款</div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-timeframe">不足 72 小时</div>
+            <div class="policy-refund refund-partial">退款 50%</div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-timeframe">提前 72 小时以上</div>
+            <div class="policy-refund refund-full">退款 100%</div>
+          </div>
+          <div class="policy-row highlight">
+            <div class="policy-timeframe">5 台及以上车辆的团体</div>
+            <div class="policy-refund refund-full">提前 2 周：退款 100%<br>2 周之后：不予退款</div>
+          </div>
+        </div>
+
+        <div class="policy-note">
+          <strong>注意：</strong>所有取消时限均从你预定的行程出发时间起算。
+        </div>
+      </div>
+
+      <!-- WEATHER POLICY -->
+      <div class="policy-card">
+        <div class="policy-icon">🌦️</div>
+        <h2 class="policy-heading">天气政策</h2>
+        <p>无论晴天还是雨天，我们都照常出行。不过，如遇极端天气，或 Adventure Tours Vernal 因其他不可预见的情况必须取消时，你可以选择改期或获得全额退款。</p>
+        <p><strong>重要提示：</strong>如果你因下雨而选择不参加，我们将按照标准取消政策处理退款事宜。若我们因极端天气事件而取消，你将获得全额退款。</p>
+      </div>
+
+      <!-- REQUIRED AGREEMENTS -->
+      <div class="policy-card">
+        <div class="policy-icon">📝</div>
+        <h2 class="policy-heading">必需签署的协议与免责声明</h2>
+        <p>所有宾客均须签署一份<strong>参与协议、免责与风险自担声明（Participant Agreement, Release and Assumption of Risk）</strong>方可参加活动。未成年子女须由父母或法定监护人代为签署。此外，UTV 行程的驾驶者还须签署一份<strong>驾驶者协议（Driver Agreement）</strong>。</p>
+
+        <div class="policy-warning">
+          <strong>⚠️ 重要提示：</strong>如未签署这些协议，你将不被允许参加你的冒险之旅。选择不签署不构成退款理由，我们的取消政策将照常适用。
+        </div>
+      </div>
+
+      <!-- VEHICLE DAMAGE WAIVER -->
+      <div class="policy-card">
+        <div class="policy-icon">🛡️</div>
+        <h2 class="policy-heading">车辆损坏免责保障</h2>
+        <p class="required-badge">所有行程均需办理</p>
+
+        <p>车辆损坏免责保障可将你在发生事故、我方装备受损时的自付费用限制在免赔额加税额之内。</p>
+
+        <div class="policy-list">
+          <h3>以下情况损坏免责保障将失效：</h3>
+          <ul>
+            <li>损坏是鲁莽驾驶导致的</li>
+            <li>未遵守你的向导的指示</li>
+            <li>经查实损坏发生时你体内含有任何酒精或药物</li>
+          </ul>
+        </div>
+
+        <div class="deductible-info">
+          <h3>免赔额说明：</h3>
+          <p>当你签署我们导览游行程的协议后，你即成为我方责任保险的受保驾驶者，须遵守保单的全部条款与条件。此项保障设有<strong>每次事故 $1,000 的免赔额</strong>，因此，若你与任何他人、车辆或财物发生事故，无论事故中的过错方是谁，你都同意在事故发生时向我方支付 $1,000。</p>
+        </div>
+      </div>
+
+      <!-- LIABILITY COVERAGE -->
+      <div class="policy-card">
+        <div class="policy-icon">📋</div>
+        <h2 class="policy-heading">责任险保障</h2>
+        <p>我们的保障提供以下责任限额：</p>
+
+        <div class="coverage-details">
+          <div class="coverage-item">
+            <span class="coverage-label">每人人身伤害：</span>
+            <span class="coverage-amount">详情请联系我们</span>
+          </div>
+          <div class="coverage-item">
+            <span class="coverage-label">财产损失：</span>
+            <span class="coverage-amount">详情请联系我们</span>
+          </div>
+          <div class="coverage-item">
+            <span class="coverage-label">每次事故总额：</span>
+            <span class="coverage-amount">详情请联系我们</span>
+          </div>
+        </div>
+
+        <div class="policy-disclaimer">
+          <p><strong>保险免责声明：</strong>每个人的保险需求各不相同，我们不保证我方的责任限额足以满足你的需要。我们不是保险经纪人、代理人或提供者。若你对保障范围有疑问，建议你联系自己的保险代理人／经纪人。</p>
+        </div>
+      </div>
+
+      <!-- RULES & REQUIREMENTS -->
+      <div class="policy-card">
+        <div class="policy-icon">⚖️</div>
+        <h2 class="policy-heading">规则与要求</h2>
+
+        <div class="policy-list">
+          <h3>准时到达：</h3>
+          <ul>
+            <li>如果你团队中的部分成员准时到达，即使做出预订的一方未在场，我们也会带上所有已正确签署免责声明且准时到达的参与者。</li>
+            <li>对于未准时抵达参加冒险之旅的宾客，恕不退款。</li>
+          </ul>
+
+          <h3>酒精与药物政策：</h3>
+          <ul>
+            <li>绝对不得将酒精带入你的冒险之旅。</li>
+            <li>若你的向导认为你处于酒精或药物（无论合法或非法）的影响之下，你将不被允许参加。</li>
+            <li>若你因饮酒或使用药物而无法参加，恕不退款。</li>
+          </ul>
+
+          <h3>向导指示：</h3>
+          <ul>
+            <li>你的向导在场是为了确保你拥有一次安全的冒险之旅。</li>
+            <li>你须始终遵守向导的所有指示。</li>
+          </ul>
+
+          <h3>行程变更：</h3>
+          <ul>
+            <li>你的行程只是参考，并非合同。</li>
+            <li>行程可能在你的冒险之旅之前或之中随时变更。</li>
+            <li>行程的变更不构成退款理由。</li>
+          </ul>
+
+          <h3>退款处理：</h3>
+          <ul>
+            <li>任何应退的款项都将退还给最初做出预订的一方。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CONTACT CTA -->
+      <div class="policy-cta">
+        <h3>对我们的政策有疑问？</h3>
+        <p>如果你对我们的取消政策或条款有任何疑问，欢迎在预订前随时与我们联系。</p>
+        <div class="cta-buttons">
+          <a href="tel:435-219-9447" class="cta-button primary">📞 致电 (435) 219-9447</a>
+          <a href="/booking/" class="cta-button secondary">预订你的行程</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Mobile Sticky CTA -->
+<div class="mobile-sticky-cta">
+  <button onclick="location.href='/booking/'">立即预订你的行程</button>
+</div>
+
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3A, Italian P6,
  * French P8-P6, German inline batch, Japanese P10K).
@@ -1240,6 +1415,7 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
   if (locale === 'de') return DE;
+  if (locale === 'zh') return ZH;
   if (locale === 'ja') return JA;
   return bodyHtml;
 }

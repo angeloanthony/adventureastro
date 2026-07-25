@@ -528,6 +528,80 @@ const JA = `
   </main>
 `;
 
+const ZH = `
+
+
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    Dinosaur National Monument 近郊的 UTV 行程由 Adventure Tours Vernal 提供，使用有向导带队的 Kawasaki KRX 1000 并排越野车。五套越野路线系统带你探索国家纪念地周边的荒野，途经峡谷、岩画、天然拱门和沙漠地形。总部位于犹他州 Vernal，距纪念地 20 分钟车程。每台车 $349，3 小时。致电 (435) 219-9447。
+  </p>
+
+  <main class="article-page">
+    <header class="article-header">
+      <div class="article-breadcrumb"><a href="/">首页</a><span class="sep">›</span><span>Dinosaur Monument 行程</span></div>
+      <h1 class="article-title">Dinosaur National Monument 近郊的 UTV 行程</h1>
+      <p class="article-meta">2026 年 4 月更新 · Adventure Tours Vernal</p>
+      <p style="display:inline-flex;align-items:center;gap:8px;margin:12px 0;padding:7px 15px;border:1px solid rgba(212,118,78,0.5);border-radius:999px;background:#ffffff;box-shadow:0 1px 4px rgba(0,0,0,0.08);font-size:0.95rem;color:#4a4139;"><span aria-hidden="true" style="color:#e6a817;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count} 条 Google 评价</span></p>
+    </header>
+
+    <div class="article-body">
+      <div class="article-summary-box">
+        Dinosaur National Monument 吸引着世界各地的游客前来观赏侏罗纪时代的化石——但纪念地周边的荒野却藏着一层截然不同的冒险。有向导带队的 UTV 行程会把你带到峡谷地形、古老岩画和沙漠景观的中心，而大多数纪念地的游客都只是开车路过这些地方。
+      </div>
+
+      <div class="article-tip"><strong>从这里开始：</strong>第一次规划纪念地之旅？读一读我们的 <a href="/dinosaur-national-monument/visiting-dinosaur-national-monument/">Dinosaur National Monument 终极攻略</a>——一份完整的计划，涵盖化石、岩画、景观自驾、徒步路线以及最佳到访时节。</div>
+
+      <h2>纪念地之外的荒野</h2>
+      <p>Dinosaur National Monument 内部不允许动力车辆通行，但环绕纪念地的 BLM 土地和荒野拥有同样的地质构造、峡谷系统和古老岩画——还提供越野路线通道，带你深入纪念地景观自驾路线只能略微展现的地形深处。</p>
+      <p>Adventure Tours Vernal 在这片土地上经营着五套越野路线系统。Outlaw Trail 沿着 Butch Cassidy 的 Wild Bunch 当年使用过的历史路线，穿越偏远的峡谷之乡。Moonshine Arch 蜿蜒穿过红岩峡谷，通向一座隐秘的天然砂岩拱门。Ashley Gorge 则穿行于一条两壁高耸、气势磅礴的走廊。这里的地形和地质与你在纪念地内部看到的连成一片——你行驶其上的，正是同一片远古景观。</p>
+
+      <h2>岩画、岩石艺术与远古历史</h2>
+      <p>在纪念地内部留下岩画和彩绘的 Fremont 人和 Ute 人，也在周边的荒野各处留下了同样的印记。Adventure Tours Vernal 的好几条越野路线会直接经过一些岩画壁面，而这些地方从任何铺装公路都无法抵达——若没有一位知道该往哪儿看的向导，你根本找不到。纪念地的文化历史与环绕它的这片鲜活景观之间的联系，正是有向导带队行程中最动人的部分之一。</p>
+
+      <h2>把 UTV 行程与你的纪念地之行结合起来</h2>
+      <p>最受欢迎的安排是上午预订一趟 UTV 行程，下午游览 Quarry Exhibit Hall，或者反过来。Adventure Tours Vernal 位于纪念地主入口以西 20 分钟车程处，所以行程衔接十分方便。一趟 3 小时的向导行程，再加上在采石场的半天，就构成了探索恐龙之乡的完整一天，既涵盖化石遗迹，也涵盖鲜活的荒野。</p>
+      <p>对于停留多日的游客来说，在纪念地行程里加上一趟 UTV 行程，会把一次寻常的国家公园之旅变成难忘得多的体验。孩子们记住 UTV 骑行的时间，会比记住游客中心久得多。</p>
+
+      <p>了解一下纪念地本身的布局会很有帮助。它其实分为两个区域：靠近 Vernal 的犹他一端的化石区——也就是适合与行程搭配的那一侧——以及跨过州界、位于科罗拉多州的峡谷区，后者本身就是一趟独立的旅程。</p>
+
+      <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+        <img src="/images/maps/dinosaur-national-monument-orientation.svg" alt="Dinosaur National Monument 两个区域的示意方位图。靠近犹他州 Vernal 的化石一侧——Quarry Exhibit Hall 与 Wall of Bones、Cub Creek Road 及其岩画、Josie Morris 小屋，以及 Split Mountain——正是天然适合与以 Vernal 为起点的 UTV 行程搭配的一侧。靠近科罗拉多州 Dinosaur 的科罗拉多峡谷一侧——Harpers Corner Scenic Drive、Green River 与 Yampa River 的峡谷，以及 Echo Park——则是一趟没有化石的独立行程。两者合为一处纪念地，从不同的入口进入；此图仅示意相互关系，并非按比例、距离或方向绘制。" width="1600" height="1200" loading="lazy" decoding="async" />
+        <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">纪念地的布局：靠近 Vernal 的化石一侧是你与 UTV 行程搭配的那一侧；科罗拉多峡谷一侧则自成一趟旅程。方位示意图，非按比例绘制。</figcaption>
+      </figure>
+
+      <h2>行程包含什么</h2>
+      <p>配备 FOX 2.5 PODIUM LSC 悬挂的双座 Kawasaki KRX 1000 并排越野车、头盔、安全装备，以及经验丰富的向导。Dave 和 Trudy Wilson 会各自驾车，一路陪伴在你们这一组身边。3 小时，每台车 $349，最多可乘 2 人。欢迎各种熟练程度的游客——无需任何越野驾驶经验。</p>
+
+      <div class="article-tip">
+        <strong>时段小贴士：</strong>如果你在周末或节假日游览纪念地，请把 UTV 行程订在上午——采石场到中午前后就会热闹起来。工作日则先后顺序都行。致电 Dave，电话 (435) 219-9447，他会帮你围绕纪念地的行程来安排时间。
+      </div>
+
+      <div class="article-faq">
+        <h2>常见问题</h2>
+        <div class="faq-item"><h3>能在 Dinosaur National Monument 附近参加 UTV 行程吗？</h3><p>可以。Adventure Tours Vernal 提供有向导带队的行程，带你穿越纪念地周边的荒野，途经峡谷、岩画和相似的地质景观。</p></div>
+        <div class="faq-item"><h3>Adventure Tours Vernal 距纪念地有多远？</h3><p>大约 20 分钟车程。总部位于犹他州 Vernal，就在纪念地 Quarry Exhibit Hall 入口以西。</p></div>
+        <div class="faq-item"><h3>把行程与纪念地结合起来的最佳方式是什么？</h3><p>上午 UTV 行程 + 下午游览纪念地（或反过来），就是探索恐龙之乡的完整一天冒险。</p></div>
+      </div>
+
+      <div class="article-cta">
+        <h3>为你的纪念地之旅加点冒险</h3>
+        <p>有向导带队的 KRX 1000 行程 · 每台车 $349 · 距纪念地 20 分钟 · 5.0 星</p>
+        <a href="/booking/" class="cta-btn">预订行程</a>
+        <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
+      </div>
+    </div>
+
+    <div class="related-articles">
+      <h3>规划你的行程</h3>
+      <div class="related-grid">
+        <a href="/things-to-do/" class="related-card"><h4>Vernal 玩什么</h4><p>纪念地之外的完整攻略。</p></a>
+        <a href="/things-to-do/vernal-utah-attractions/" class="related-card"><h4>Vernal 热门景点</h4><p>本地区所有不容错过的景致。</p></a>
+        <a href="/dinosaur-national-monument/petroglyphs-rock-art-vernal/" class="related-card"><h4>岩画与岩石艺术</h4><p>越野路线沿途与路线之外的古老艺术遗址。</p></a>
+        <a href="/things-to-do/best-restaurants-vernal-utah/" class="related-card"><h4>Vernal 何处用餐</h4><p>冒险之后补充能量。</p></a>
+      </div>
+    </div>
+  </main>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3B). Every
  * locale without a committed variant falls back to English. Callers that
@@ -539,6 +613,7 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
   if (locale === 'de') return DE;
+  if (locale === 'zh') return ZH;
   if (locale === 'ja') return JA;
   return bodyHtml;
 }

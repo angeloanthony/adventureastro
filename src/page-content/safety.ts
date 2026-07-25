@@ -1697,6 +1697,248 @@ const JA = `
 </div>
 `;
 
+const ZH = `
+<!-- 页面摘要区块 -->
+<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+  Adventure Tours Vernal 为犹他州 Vernal 的 UTV 导览游制定的安全须知。驾驶者必须年满 18 岁。同乘者必须年满 2 岁。必须系好安全带。对酒精或毒品零容忍。每次行程出发前都会进行完整的安全讲解。请致电 (435) 219-9447。
+</p>
+
+<section class="policy-section">
+  <div class="container">
+    <div class="section-header">
+      <h1 class="section-title">安全须知</h1>
+      <p class="section-subtitle">你的安全是我们的头等大事。出发探险前，请务必阅读以下须知。</p>
+    </div>
+
+    <div class="policy-container">
+
+      <!-- BEFORE YOUR TOUR -->
+      <div class="policy-card">
+        <div class="policy-icon">📋</div>
+        <h2 class="policy-heading">行程之前</h2>
+        <div class="policy-list">
+          <h3>到达与登记：</h3>
+          <ul>
+            <li>请<strong>提前 30 分钟</strong>到达，以便进行行前介绍和安全讲解</li>
+            <li>携带有效的驾驶执照（所有驾驶者均必须出示）</li>
+            <li>填妥所有必需的免责声明和协议</li>
+            <li>参加强制性的安全行前介绍</li>
+          </ul>
+          <h3>健康与身体要求：</h3>
+          <ul>
+            <li>所有参加者都必须身体健康状况良好</li>
+            <li>如有任何健康状况、伤病或顾虑，请告知你的向导</li>
+            <li>孕妇参加前应先咨询医生</li>
+            <li>如有背部、颈部或心脏方面的问题，请提前告知我们</li>
+          </ul>
+          <h3>酒精与药物政策：</h3>
+          <ul>
+            <li>对酒精或毒品<strong>零容忍</strong></li>
+            <li>如处于酒精或药物影响之下，你将不被允许乘车</li>
+            <li>违反规定者不予退款</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- AGE REQUIREMENTS -->
+      <div class="policy-card">
+        <div class="policy-icon">👥</div>
+        <h2 class="policy-heading">年龄要求</h2>
+        <div class="policy-table">
+          <div class="policy-row">
+            <div class="policy-timeframe">驾驶</div>
+            <div class="policy-refund refund-full">年满 18 岁</div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-timeframe">作为同乘者乘车</div>
+            <div class="policy-refund refund-full">年满 2 岁</div>
+          </div>
+        </div>
+        <div class="policy-note">
+          <strong>重要提示：</strong>所有驾驶者都必须出示有效的驾驶执照。未成年人的免责声明须由父母／监护人签署。
+        </div>
+      </div>
+
+      <!-- VEHICLE OPERATION -->
+      <div class="policy-card">
+        <div class="policy-icon">🚙</div>
+        <h2 class="policy-heading">车辆操作与安全</h2>
+        <div class="policy-list">
+          <h3>操作车辆时：</h3>
+          <ul>
+            <li>始终系好安全带——没有例外</li>
+            <li>任何时候都要把手和手臂留在车内</li>
+            <li>车辆行驶时切勿站起身</li>
+            <li>始终听从向导的指示</li>
+            <li>与其他车辆保持安全距离</li>
+            <li>使用对讲机与你的向导沟通</li>
+          </ul>
+          <h3>安全装备（必备）：</h3>
+          <ul>
+            <li>所有同乘者都必须系好安全带</li>
+            <li>头盔（应要求提供）</li>
+            <li>建议佩戴护目镜或太阳镜</li>
+          </ul>
+          <h3>禁止的行为：</h3>
+          <ul>
+            <li>竞速或超速</li>
+            <li>鲁莽驾驶或特技动作</li>
+            <li>驶离指定越野路线</li>
+            <li>在酒精或药物影响下操作车辆</li>
+            <li>无视向导的指示</li>
+          </ul>
+        </div>
+        <div class="policy-warning">
+          <strong>⚠️ 警告：</strong>不遵守安全规则可能导致你的行程被立即终止且不予退款。鲁莽行为将使所有保险和损害免责失效。
+        </div>
+      </div>
+
+      <!-- TERRAIN & TRAIL SAFETY -->
+      <div class="policy-card">
+        <div class="policy-icon">⛰️</div>
+        <h2 class="policy-heading">地形与路线安全</h2>
+        <div class="policy-list">
+          <h3>路线状况：</h3>
+          <ul>
+            <li>越野路线可能包含岩石、陡坡、涉水路段和崎岖地形</li>
+            <li>天气可能骤变——请做好准备</li>
+            <li>灰尘和泥土很常见——请携带护眼装备</li>
+            <li>偏远地区手机信号可能有限</li>
+          </ul>
+          <h3>不要驶离路线：</h3>
+          <ul>
+            <li>切勿驶离指定的越野路线</li>
+            <li>尊重私有土地和张贴的标识</li>
+            <li>遵循 Leave No Trace（无痕山林）原则</li>
+            <li>不要惊扰野生动物或植物</li>
+          </ul>
+          <h3>紧急情况：</h3>
+          <ul>
+            <li>如果你感到不安全，请立即告知你的向导</li>
+            <li>使用对讲机进行沟通</li>
+            <li>每次行程都配备急救包</li>
+            <li>你的向导接受过荒野急救培训</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- WEATHER & ENVIRONMENTAL -->
+      <div class="policy-card">
+        <div class="policy-icon">🌦️</div>
+        <h2 class="policy-heading">天气与环境安全</h2>
+        <div class="policy-list">
+          <h3>天气准备：</h3>
+          <ul>
+            <li>大多数天气条件下我们都照常运营</li>
+            <li>遇到极端天气，行程可能取消或改期</li>
+            <li>气温可能变化很大——请分层穿衣</li>
+            <li>如果天气看起来不稳定，请携带雨具</li>
+          </ul>
+          <h3>防晒：</h3>
+          <ul>
+            <li>犹他州的日照强烈——请涂抹防晒霜（SPF 30+）</li>
+            <li>携带带 UV 防护的太阳镜</li>
+            <li>戴帽子或头巾</li>
+            <li>保持水分充足——我们提供饮用水</li>
+          </ul>
+          <h3>野生动物安全：</h3>
+          <ul>
+            <li>不要靠近或投喂野生动物</li>
+            <li>与所有动物保持安全距离</li>
+            <li>注意蛇类，尤其是在较温暖的月份</li>
+            <li>如发现任何野生动物，请告知你的向导</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- COMMUNICATION -->
+      <div class="policy-card">
+        <div class="policy-icon">📡</div>
+        <h2 class="policy-heading">通讯与团队安全</h2>
+        <div class="policy-list">
+          <h3>保持联系：</h3>
+          <ul>
+            <li>每台车都配备对讲机</li>
+            <li>任何时候都要保持对讲机开机</li>
+            <li>如需停车，请立即告知向导</li>
+            <li>未告知向导前，切勿离开团队</li>
+          </ul>
+          <h3>如果你遇到问题：</h3>
+          <ul>
+            <li>安全停车并使用对讲机</li>
+            <li>不要自行尝试修理机械故障</li>
+            <li>等待向导协助</li>
+            <li>如果车辆看起来不安全，切勿继续行驶</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DAMAGE & LIABILITY -->
+      <div class="policy-card">
+        <div class="policy-icon">🛡️</div>
+        <h2 class="policy-heading">损害与责任</h2>
+        <div class="policy-list">
+          <h3>车辆损害免责：</h3>
+          <ul>
+            <li>所有行程均必须办理</li>
+            <li>将你的责任限制在免赔额范围内</li>
+            <li>因鲁莽驾驶造成的损害则失效</li>
+            <li>涉及酒精／毒品则失效</li>
+          </ul>
+          <h3>事故处理流程：</h3>
+          <ul>
+            <li>立即停车并评估伤情</li>
+            <li>通过对讲机联系向导</li>
+            <li>除非处于紧迫危险中，否则不要移动伤者</li>
+            <li>如有可能，用照片记录事故经过</li>
+          </ul>
+        </div>
+        <div class="deductible-info">
+          <h3>重要的保险信息：</h3>
+          <p>你在我们的责任险保障范围内，<strong>每次事故的免赔额为 $1,000</strong>。无论过错在谁，此规定均适用。车辆损害免责有助于降低你在车辆损害方面的自付费用。</p>
+        </div>
+      </div>
+
+      <!-- YOUR RESPONSIBILITIES -->
+      <div class="policy-card">
+        <div class="policy-icon">✅</div>
+        <h2 class="policy-heading">你的责任</h2>
+        <div class="policy-list">
+          <h3>作为参加者，你同意：</h3>
+          <ul>
+            <li>听从向导的所有指示</li>
+            <li>安全、负责任地操作车辆</li>
+            <li>尊重其他参加者和自然环境</li>
+            <li>如有任何顾虑，立即沟通</li>
+            <li>如实填妥所有必需的表格文件</li>
+            <li>为自身安全承担个人责任</li>
+          </ul>
+        </div>
+        <div class="policy-warning">
+          <strong>请记住：</strong>驾乘 ATV／UTV 存在固有风险。尽管我们采取一切预防措施以确保你的安全，你仍需自担风险参加。签字前，请务必阅读并理解所有免责声明。
+        </div>
+      </div>
+
+      <!-- CONTACT CTA -->
+      <div class="policy-cta">
+        <h3>关于安全有疑问？</h3>
+        <p>如果你在行程前有任何安全方面的顾虑或疑问，请与我们联系。我们随时为你保驾护航，让你的探险既安全又精彩！</p>
+        <div class="cta-buttons">
+          <a href="tel:435-219-9447" class="cta-button primary">📞 致电 (435) 219-9447</a>
+          <a href="/booking/" class="cta-button secondary">预订你的安全探险</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Mobile Sticky CTA -->
+<div class="mobile-sticky-cta">
+  <button onclick="location.href='/booking/'">立即预订你的行程</button>
+</div>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3A, Italian P6,
  * French P8-P6, German P9, Japanese P10K).
@@ -1709,6 +1951,7 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
   if (locale === 'de') return DE;
+  if (locale === 'zh') return ZH;
   if (locale === 'ja') return JA;
   return bodyHtml;
 }

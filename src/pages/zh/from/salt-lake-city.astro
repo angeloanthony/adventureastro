@@ -1,0 +1,102 @@
+---
+// zh/from/salt-lake-city.astro — Simplified Chinese city landing page (Z4,
+// mirrors src/pages/ja/from/salt-lake-city.astro / src/pages/de/from/salt-lake-city.astro).
+// The `cities` content collection (src/content/cities/salt-lake-city.json)
+// is English-only and is NOT modified here — only the locale-neutral
+// numeric facts (driveTimeHours, driveMiles, routeSummary, nearestAirport)
+// are reused from the entry; title/description are hardcoded Simplified
+// Chinese literals instead of city.title/city.description.
+import CityLayout from '../../../layouts/CityLayout.astro';
+import GatewayRoutes from '../../../components/content/GatewayRoutes.astro';
+import FaqAccordion from '../../../components/content/FaqAccordion.astro';
+import { getEntry } from 'astro:content';
+import { SITE } from '../../../config/site';
+
+const cityEntry = await getEntry('cities', 'salt-lake-city');
+if (!cityEntry) throw new Error('cities/salt-lake-city.json entry not found');
+const city = cityEntry.data;
+
+const faq = [
+  {
+    q: '从盐湖城到犹他州的 Vernal 有多远？',
+    a: `Vernal 位于盐湖城以东约 ${city.driveTimeHours} 小时（${city.driveMiles} 英里）车程，走 I-80 E 转 US-40 E。这条线路会依次穿过 Heber City、Duchesne 和 Roosevelt，然后抵达 Vernal。`,
+  },
+  {
+    q: '参加 Vernal 的 UTV 行程，应该飞到哪个机场？',
+    a: '盐湖城国际机场（SLC）是有定期商业航班、距离最近的主要机场。从那里到 Vernal，沿 I-80 和 US-40 一路向东即可，路线简单明了——Vernal 本身没有商业机场。',
+  },
+  {
+    q: '可以从盐湖城当天往返参加 Vernal 的 UTV 行程吗？',
+    a: `可以，但会比较赶——单程大约 ${city.driveTimeHours} 小时车程，再加上 3 小时的导览游，多数从盐湖城出发的游客更愿意在 Vernal 住上一晚，避免一整天都耗在路上。`,
+  },
+];
+---
+<CityLayout
+  title="Vernal 周边的 UTV 行程 — 盐湖城出发旅行攻略"
+  description="从盐湖城前往犹他州 Vernal，开启 Kawasaki KRX 1000 导览 UTV 之旅。沿 I-80 与 US-40 东行的路线、所需车程与距离、以 SLC 机场为起点的行程安排，以及出发前需要确认的事项，本地向导为你实用讲解。"
+  path="/zh/from/salt-lake-city/"
+  breadcrumbs={[{ label: 'Salt Lake City' }]}
+  city={city}
+  routeSummary="I-80 E 转 US-40 E，途经 Heber City、Duchesne、Roosevelt"
+  relatedLinks={[
+    {
+      title: 'Vernal 周边最佳 UTV 越野路线',
+      description: '五套导览越野路线系统全介绍，逐一说明地形与难度。',
+      href: '/utv/best-utv-trails-vernal/',
+    },
+    {
+      title: '犹他州 Vernal 天气攻略',
+      description: '逐月天气概况，帮你挑选出行日期。',
+      href: '/guides/vernal-weather-guide/',
+    },
+    {
+      title: 'UTV 行程携带清单',
+      description: '为出行当天准备的完整打包清单。',
+      href: '/guides/what-to-bring/',
+    },
+    {
+      title: 'Dinosaur National Monument 周边的 UTV 行程',
+      description: '把行程和 Quarry Exhibit Hall 的参观搭配起来。',
+      href: '/dinosaur-national-monument/',
+    },
+  ]}
+>
+  <h1>Vernal 周边的 UTV 行程 — 盐湖城访客攻略</h1>
+
+  <div class="article-summary-box">
+    从盐湖城开车过来吗？Vernal 就在沿 I-80 和 US-40 东行约 {city.driveTimeHours} 小时车程的尽头，途中穿过 Heber City、Duchesne 和 Roosevelt，一路驶入犹他州的恐龙之乡，是一段风景优美的景观自驾。Adventure Tours Vernal 提供 Kawasaki KRX 1000 并排越野车导览游，带你穿行于环绕 Dinosaur National Monument 的荒野。
+  </div>
+
+  <h2>向东的自驾</h2>
+  <p>
+    从盐湖城前往 Vernal 的线路，先沿 I-80 E 行至 Silver Creek Junction，再转 US-40 E 穿过 Heber City、Duchesne 和 Roosevelt，最后抵达 Vernal。全程约 {city.driveMiles} 英里、{city.driveTimeHours} 小时车程，大部分路段都行驶在犹他州开阔的高地荒漠与山地风光之中——既可以作为从这座机场城市向东出发的轻松一日自驾，也可以作为更长的 Uintah Basin 之旅的第一段。
+  </p>
+
+  <h2>盐湖城游客为何选择 Vernal</h2>
+  <p>
+    盐湖城国际机场（SLC）是距离 Vernal 最近、有定期商业航班的主要机场，因此对飞抵犹他州的游客来说，Vernal 是很容易加进行程的一站。到了 Vernal，Adventure Tours Vernal 提供五套导览越野路线系统——Doc's Beach、Moonshine Arch、Ashley Gorge、Outlaw Trail 和 Asphalt Ridge——而且从镇上出发仅 20 分钟即可轻松抵达 <a href="/dinosaur-national-monument/">Dinosaur National Monument</a>。如果你还有多出来的一天，值得往北再延伸一个小时到 <a href="/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge</a>，在那里体验水库钓鱼、划船，以及红色峡谷的景观自驾。
+  </p>
+  <p>
+    每次行程都由店主 Dave 和 Trudy Wilson 亲自带队，驾驶配备 FOX 2.5 PODIUM LSC 减震器的 Kawasaki KRX 1000 并排越野车。无需任何 UTV 经验——出发前的完整安全讲解和全部安全装备均已包含在内。准备好了就 <a href="/booking/">查看可预约日期并预订你的行程</a>，出发前想了解穿什么、带什么以及各季节天气，也可以先看看我们的 <a href="/guides/">旅行攻略</a>。
+  </p>
+
+  <h2>向东出发之前</h2>
+  <p>
+    如果 Dinosaur National Monument 在你的行程里，那么在离开盐湖城之前，请先读读我们的 <a href="/dinosaur-national-monument/visiting-dinosaur-national-monument/">Dinosaur National Monument 终极攻略</a>。文章讲清了该预留多少时间、最值得走的景观自驾和岩画停靠点在哪里，以及如何把国家纪念地的参观与导览 UTV 行程搭配起来。
+  </p>
+
+  <div class="article-tip">
+    <strong>行程规划小贴士：</strong>从盐湖城出发之前，可以打电话给 Dave 或 Trudy（<a href={SITE.phoneHrefDash}>{SITE.phoneDisplay}</a>），确认越野路线状况和时间安排后再上路——尤其是在旺季之外的时段（另可参阅 <a href="/guides/vernal-weather-guide/">犹他州 Vernal 天气攻略</a>）。
+  </div>
+
+  <!-- TODO (owner input): Salt-Lake-specific visitor tips (e.g. best
+       departure time to avoid I-80/US-40 traffic, recommended overnight
+       stop) and original photography of the drive route are not yet
+       available. Add once supplied — do not invent. Mirrors the English
+       source's TODO verbatim; not user-facing. -->
+
+  <GatewayRoutes />
+
+  <h2>常见问题</h2>
+  <FaqAccordion faq={faq} />
+</CityLayout>

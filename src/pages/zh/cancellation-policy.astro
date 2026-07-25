@@ -1,0 +1,40 @@
+---
+// zh/cancellation-policy.astro — Simplified Chinese cancellation policy (Z4
+// inline batch). Mirrors src/pages/ja/cancellation-policy.astro.
+import { getBodyHtml } from '../../page-content/cancellation';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+---
+<BaseLayout bodyClass="policy-page-body">
+  <Fragment slot="head">
+    <Seo
+      title="取消政策 | Adventure Tours Vernal — Vernal, Utah"
+      description="Adventure Tours Vernal 在犹他州 Vernal 提供的导览游 UTV 行程取消与退款政策。提前 72 小时以上取消可获全额退款。有疑问？请致电 (435) 219-9447。"
+      path="/zh/cancellation-policy/"
+      type="website"
+      ogTitle="取消政策 | Adventure Tours Vernal"
+      ogDescription="查看犹他州 Vernal 导览游 UTV 行程的取消与退款政策。提前 72 小时以上通知可获全额退款。请致电 (435) 219-9447。"
+    />
+  </Fragment>
+  <Header slot="body" active="cancellation-policy" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: '取消政策' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: '快速链接',
+      links: [
+        { href: '/zh/#tours', label: '行程一览' },
+        { href: '/zh/#vehicles', label: '车辆介绍' },
+        { href: '/zh/#gallery', label: '照片图库' },
+        { href: '/zh/booking/', label: '立即预订' },
+      ],
+    }}
+  />
+</BaseLayout>

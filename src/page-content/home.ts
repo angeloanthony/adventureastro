@@ -4328,6 +4328,623 @@ const JA = `
 </script>
 `;
 
+const ZH = `
+
+  <!-- AI Summary Block -->
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    Adventure Tours Vernal 在犹他州 Vernal 提供 Kawasaki KRX 1000 并排越野车导览游。越野路线包括 Doc's Beach、Moonshine Arch、Ashley Gorge、Outlaw Trail 和 Asphalt Ridge。行程中可看到岩画、岩石艺术和古代遗迹。3 小时导览游每台车 $349（最多 2 名乘客）。同乘（ride-along）随向导每人 $125。最少 3 人成行。每次行程最多 12 位客人、6 台车。这是犹他州评价最高的 UTV 导览游运营商，Google 上 82 条评价，评分 5.0 星。每日 7am–7pm 营业。预订请拨打 (435) 219-9447。
+  </p>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="trail-hero-video-bg">
+  <iframe
+    src="https://www.youtube.com/embed/BHOABkrNnnE?autoplay=1&mute=1&loop=1&playlist=BHOABkrNnnE&controls=0&showinfo=0&rel=0&playsinline=1"
+    frameborder="0"
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+  </iframe>
+</div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-video-wrapper">
+      <div class="video-frame-3d">
+        <div class="video-frame-inner">
+          <div class="video-play-overlay" id="videoPlayOverlay" onclick="playHeroVideo()">
+            <img src="https://img.youtube.com/vi/eFfvKxkiyzU/maxresdefault.jpg" alt="观看 Adventure Tours Vernal 的精彩瞬间 — 犹他州 Vernal 的 UTV 导览游" class="video-thumbnail">
+            <div class="play-overlay-content">
+              <div class="play-icon-circle">▶</div>
+              <span class="play-overlay-text">点击观看视频</span>
+            </div>
+          </div>
+          <div id="heroVideoContainer"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-content">
+      <h1 class="hero-title" style="font-size:clamp(1.8rem,4vw,3rem);font-weight:800;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,0.5);margin-bottom:0.5rem;">
+        犹他州 Vernal 的 UTV 导览游
+      </h1>
+      <p class="hero-subtitle">跟着 Kawasaki KRX 1000 并排越野车的向导之旅，感受犹他州荒野的刺激</p>
+      <div style="margin-top:14px;"><span style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border:1px solid rgba(255,255,255,0.5);border-radius:999px;background:rgba(0,0,0,0.35);font-size:0.95rem;color:#fff;"><span aria-hidden="true" style="color:#f5c451;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count} 条 Google 评价</span></span></div>
+    </div>
+
+    <div class="scroll-indicator"><span></span></div>
+  </div>
+
+    <!-- PRICING CARDS -->
+    <div class="pricing-section">
+      <h2>简单透明的价格</h2>
+      <p>没有隐藏费用 — 只有冒险。每次行程最少 3 人成行。</p>
+      <div class="pricing-grid">
+        <div class="pricing-card featured">
+          <div class="pricing-label">每台车</div>
+          <div class="pricing-title">1–2 名乘客，1 台 KRX 1000</div>
+          <div class="pricing-amount">$349</div>
+          <div class="pricing-per">每台车 / 3 小时导览游</div>
+          <ul class="pricing-features">
+            <li>Kawasaki KRX 1000 双座</li>
+            <li>每台车最多 2 名乘客</li>
+            <li>资深本地向导（Dave &amp; Trudy）</li>
+            <li>5 套越野路线任选</li>
+            <li>FOX 2.5 PODIUM LSC 减震器</li>
+            <li>完整安全讲解与装备</li>
+          </ul>
+          <a href="/booking/" class="tour-book-btn" style="display:block;text-align:center;text-decoration:none;">立即预订</a>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-label">同乘加购</div>
+          <div class="pricing-title">与 Dave 或 Trudy 同乘</div>
+          <div class="pricing-amount">$125</div>
+          <div class="pricing-per">每位乘客 / 3 小时导览游</div>
+          <ul class="pricing-features">
+            <li>为你的团队增加第 3 人</li>
+            <li>作为乘客随向导同乘</li>
+            <li>需至少租用 1 台车</li>
+            <li>每次行程有 2 个同乘名额</li>
+            <li>尽享冒险，无需驾驶</li>
+          </ul>
+          <a href="/booking/" class="tour-book-btn" style="display:block;text-align:center;text-decoration:none;">立即预订</a>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-label">团体</div>
+          <div class="pricing-title">最多 12 位客人</div>
+          <div class="pricing-amount">来电咨询</div>
+          <div class="pricing-per">团体定制价格</div>
+          <ul class="pricing-features">
+            <li>最多可提供 6 台车</li>
+            <li>5 台车载 10 人 + 2 名同乘</li>
+            <li>Dave &amp; Trudy 一同带队</li>
+            <li>非常适合家庭与亲友聚会</li>
+            <li>延长时间每台车 $99/hour</li>
+          </ul>
+          <a href="tel:435-219-9447" class="tour-book-btn" style="display:block;text-align:center;text-decoration:none;">📞 (435) 219-9447</a>
+        </div>
+      </div>
+    </div>
+
+      <!-- Single Book Button below all trails -->
+      <div style="text-align:center;margin-top:50px;">
+        <a href="/booking/" class="btn btn-primary" style="font-size:1.25rem;padding:22px 70px;">
+          📅 预订你的冒险
+        </a>
+        <p style="margin-top:14px;font-size:0.95rem;color:var(--charcoal);opacity:0.65;font-family:var(--font-body);">
+          你将在预订时选择越野路线 — 每日 7am–7pm 营业
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Why Vernal Section -->
+  <section id="why-vernal">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">为什么选择 Vernal？</h2>
+        <p class="section-subtitle">发现犹他州这一角为何是越野天堂</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-image" style="background:#000;">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/PoCN4Lo9Lkk?si=CMj5hK0r2l5GeKFM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="display:block;width:100%;height:100%;border:0;"></iframe>
+          </div>
+          <div class="feature-content">
+            <h3 class="feature-title">Dinosaur National Monument</h3>
+            <p class="feature-description">穿行在史前的景观中，这里曾是远古巨兽的家园，还能抵达世界级的化石遗址。 <a href="/dinosaur-national-monument/" style="color:var(--burnt-orange);font-weight:600;">纪念碑周边的 UTV 导览游 →</a></p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-image" style="background:#000;">
+            <iframe title="Video Embed" src="https://www.nps.gov/media/video/embed.htm?id=CD297DBD-5955-4AA8-BC53-1798793EC221" width="480" height="306" frameborder="0" scrolling="auto" allowfullscreen style="display:block;width:100%;height:100%;border:0;"></iframe>
+          </div>
+          <div class="feature-content">
+            <h3 class="feature-title">古代文明的印记</h3>
+            <p class="feature-description">探寻岩画、岩石艺术与遗迹 — Uintah Basin 的岩石与峡谷中，保存着数千年的原住民历史。 <a href="/dinosaur-national-monument/petroglyphs-rock-art-vernal/" style="color:var(--burnt-orange);font-weight:600;">探索岩画遗址 →</a></p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-image" style="background:#000;">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/2fdxwBHky_Y?si=Mio585KlceDKRTHT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="display:block;width:100%;height:100%;border:0;"></iframe>
+          </div>
+          <div class="feature-content">
+            <h3 class="feature-title">隐秘越野路线</h3>
+            <p class="feature-description">前往只有 Vernal 本地人才知道的秘密路线和当地人的最爱 — 别处见不到的风景。 <a href="/utv/backcountry-tours-vernal-utah/" style="color:var(--burnt-orange);font-weight:600;">荒野行程详情 →</a></p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-image" style="background:#000;">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/hmKWG8GZBiw?si=Nq5dULfRSYvpRsAQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="display:block;width:100%;height:100%;border:0;"></iframe>
+          </div>
+          <div class="feature-content">
+            <h3 class="feature-title">壮丽的拱门</h3>
+            <p class="feature-description">发现媲美犹他州最著名公园的天然砂岩拱门和奇岩，却没有人潮。 <a href="/utv/best-utv-trails-vernal/" style="color:var(--burnt-orange);font-weight:600;">查看全部 5 套越野路线 →</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vehicles Section -->
+  <section id="vehicles">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">我们的车队</h2>
+        <p class="section-subtitle">6 台 Kawasaki KRX 1000 可供选择 — 为安全与性能而精心维护</p>
+      </div>
+      <div class="vehicles-grid">
+        <div class="vehicle-card">
+          <div class="vehicle-image" data-bg="/images/9.webp"></div>
+          <div class="vehicle-content">
+            <h3 class="vehicle-name">Kawasaki KRX 1000</h3>
+            <ul class="vehicle-specs">
+              <li><span class="spec-label">车队规模：</span><span class="spec-value">6 台车可供选择</span></li>
+              <li><span class="spec-label">乘客：</span><span class="spec-value">双座</span></li>
+              <li><span class="spec-label">悬挂：</span><span class="spec-value">FOX 2.5 PODIUM LSC 减震器</span></li>
+              <li><span class="spec-label">最适合：</span><span class="spec-value">攀岩越野与舒适性</span></li>
+              <li><span class="spec-label">安全：</span><span class="spec-value">全防滚架 + 助力转向</span></li>
+              <li><span class="spec-label">容量：</span><span class="spec-value">每次行程最多 12 位客人</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ <!-- Gallery Section -->
+  <section id="gallery">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">照片画廊</h2>
+        <p class="section-subtitle">看看等待你的冒险</p>
+      </div>
+      <div class="carousel-container">
+        <div class="carousel-main">
+          <button class="carousel-btn carousel-prev" aria-label="上一张图片"><span>‹</span></button>
+          <div class="carousel-track-container">
+            <div class="carousel-track">
+              <div class="carousel-slide active"><img src="/images/1a.webp" alt="Side-by-side UTV parked in a sandstone alcove on an Adventure Tours Vernal UTV tour"><div class="carousel-caption">Exploring a Sandstone Alcove</div></div>
+              <div class="carousel-slide"><img src="/images/1.webp" alt="Lineup of Kawasaki KRX 1000 side-by-sides staged before a guided UTV tour in Vernal Utah"><div class="carousel-caption">UTV Lineup Staging</div></div>
+              <div class="carousel-slide"><img src="/images/2.webp" alt="Blue side-by-side UTV kicking up dust on a desert trail near Vernal Utah"><div class="carousel-caption">Kicking Up Dust</div></div>
+              <div class="carousel-slide"><img src="/images/3.webp" alt="Group riding side-by-side UTVs on a backcountry trail near Vernal Utah"><div class="carousel-caption">Group on the Trail</div></div>
+              <div class="carousel-slide"><img src="/images/4.webp" alt="Riders resting under a sandstone overhang at sunset on an Adventure Tours Vernal UTV tour"><div class="carousel-caption">Sunset Rock Overhang</div></div>
+              <div class="carousel-slide"><img src="/images/5.webp" alt="Looking out from inside a sandstone cave on a guided UTV tour near Vernal Utah"><div class="carousel-caption">Inside a Sandstone Cave</div></div>
+              <div class="carousel-slide"><img src="/images/6.webp" alt="Family posing inside a sandstone cave on an Adventure Tours Vernal UTV tour"><div class="carousel-caption">Family Cave Photo</div></div>
+              <div class="carousel-slide"><img src="/images/7.webp" alt="UTV tire perched on a canyon rim overlooking Ashley Gorge near Vernal Utah"><div class="carousel-caption">On the Canyon's Edge</div></div>
+              <div class="carousel-slide"><img src="/images/3a.webp" alt="Desert badlands landscape at sunset on a backcountry UTV tour near Vernal Utah"><div class="carousel-caption">Desert Badlands Sunset</div></div>
+              <div class="carousel-slide"><img src="/images/8.webp" alt="Side-by-side UTV climbing a slickrock ridge on a guided tour near Vernal Utah"><div class="carousel-caption">Climbing a Slickrock Ridge</div></div>
+              <div class="carousel-slide"><img src="/images/8a.webp" alt="Blue side-by-side UTV speeding through the high desert near Vernal Utah"><div class="carousel-caption">Speeding Through the Desert</div></div>
+              <div class="carousel-slide"><img src="/images/9.webp" alt="Kawasaki KRX 1000 side-by-sides lined up under a rock overhang near Vernal Utah"><div class="carousel-caption">Lineup Under the Overhang</div></div>
+              <div class="carousel-slide"><img src="/images/6a.webp" alt="Group stopped with their side-by-side UTVs along a backcountry trail near Vernal Utah"><div class="carousel-caption">Trailside Group Stop</div></div>
+              <div class="carousel-slide"><img src="/images/10.webp" alt="Side-by-side UTV beside a slickrock canyon vista on a guided tour near Vernal Utah"><div class="carousel-caption">Slickrock Canyon Vista</div></div>
+              <div class="carousel-slide"><img src="/images/11.webp" alt="Side-by-side UTV parked inside a sandstone cave near Vernal Utah"><div class="carousel-caption">UTV Inside the Cave</div></div>
+              <div class="carousel-slide"><img src="/images/12.webp" alt="Towering sandstone cave wall on an Adventure Tours Vernal backcountry tour"><div class="carousel-caption">Towering Cave Wall</div></div>
+              <div class="carousel-slide"><img src="/images/13.webp" alt="Rider leaping off a cliff into the water on an Adventure Tours Vernal outing near Vernal Utah"><div class="carousel-caption">Cliff Jumping Splash</div></div>
+              <div class="carousel-slide"><img src="/images/14.webp" alt="Convoy of side-by-side UTVs on a mountain trail during a guided tour near Vernal Utah"><div class="carousel-caption">Convoy on the Mountain Trail</div></div>
+              <div class="carousel-slide"><img src="/images/15a.webp" alt="Side-by-side UTV on slickrock at dusk near Dinosaur National Monument, Vernal Utah"><div class="carousel-caption">Dusk Desert Ride</div></div>
+              <div class="carousel-slide"><img src="/images/35a.webp" alt="Three Kawasaki KRX 1000 side-by-sides silhouetted against a sunburst at sunset near Vernal Utah"><div class="carousel-caption">Sunset Trio Silhouette</div></div>
+              <div class="carousel-slide"><img src="/images/16a.webp" alt="Riders standing atop slickrock beside their Kawasaki KRX 1000 side-by-sides near Vernal Utah"><div class="carousel-caption">Riders Atop the Slickrock</div></div>
+              <div class="carousel-slide"><img src="/images/17a.webp" alt="Two side-by-side UTVs parked on slickrock near Vernal Utah"><div class="carousel-caption">Two UTVs on Slickrock</div></div>
+              <div class="carousel-slide"><img src="/images/18a.webp" alt="Mud-covered side-by-side UTVs on slickrock after a guided tour near Vernal Utah"><div class="carousel-caption">Muddy UTVs on the Rock</div></div>
+              <div class="carousel-slide"><img src="/images/19a.webp" alt="Muddy side-by-side UTV on a rock dome at an overlook near Vernal Utah"><div class="carousel-caption">Muddy UTV at the Overlook</div></div>
+              <div class="carousel-slide"><img src="/images/20.webp" alt="Blue side-by-side UTV on slickrock high above the canyon near Vernal Utah"><div class="carousel-caption">Blue UTV on Slickrock</div></div>
+              <div class="carousel-slide"><img src="/images/21a.webp" alt="Side-by-side UTVs silhouetted at sunset on a guided tour near Vernal Utah"><div class="carousel-caption">UTVs at Sunset</div></div>
+              <div class="carousel-slide"><img src="/images/22a.webp" alt="Side-by-side UTV silhouetted against a sunburst on a sunset ride through the Utah desert backcountry"><div class="carousel-caption">Sunburst Silhouette</div></div>
+              <div class="carousel-slide"><img src="/images/23a.webp" alt="Two side-by-side UTVs perched on a boulder on a backcountry tour near Vernal Utah"><div class="carousel-caption">Twin UTVs on a Boulder</div></div>
+              <div class="carousel-slide"><img src="/images/23.webp" alt="Hikers exploring a sandstone arch on an Adventure Tours Vernal outing in Vernal Utah"><div class="carousel-caption">Hikers at the Sandstone Arch</div></div>
+              <div class="carousel-slide"><img src="/images/24.webp" alt="Side-by-side UTVs atop a large boulder with a desert view near Vernal Utah"><div class="carousel-caption">UTVs Atop the Boulder</div></div>
+              <div class="carousel-slide"><img src="/images/25.webp" alt="Muddy side-by-side UTVs overlooking the valley on a backcountry trail near Vernal Utah"><div class="carousel-caption">Muddy UTVs With a View</div></div>
+              <div class="carousel-slide"><img src="/images/26.webp" alt="Side-by-side UTVs on a ridgetop at dusk near Vernal Utah"><div class="carousel-caption">Ridgetop UTVs at Dusk</div></div>
+              <div class="carousel-slide"><img src="/images/27.webp" alt="Side-by-side UTVs on a rock ridge formation on a guided tour in Vernal Utah"><div class="carousel-caption">UTVs on the Rock Ridge</div></div>
+              <div class="carousel-slide"><img src="/images/28.webp" alt="Side-by-side UTVs in the high desert on a backcountry tour near Vernal Utah"><div class="carousel-caption">UTVs in the High Desert</div></div>
+              <div class="carousel-slide"><img src="/images/29.webp" alt="Side-by-side UTV at a slickrock dome overlook near Vernal Utah"><div class="carousel-caption">Slickrock Dome Overlook</div></div>
+              <div class="carousel-slide"><img src="/images/30.webp" alt="Canyon country overlook on a backcountry UTV tour near Vernal Utah"><div class="carousel-caption">Canyon Country Overlook</div></div>
+              <div class="carousel-slide"><img src="/images/31.webp" alt="Side-by-side UTV climbing the slickrock on a guided tour near Vernal Utah"><div class="carousel-caption">Climbing the Slickrock</div></div>
+              <div class="carousel-slide"><img src="/images/32.webp" alt="Side-by-side UTV descending a steep rock face on a guided tour near Vernal Utah"><div class="carousel-caption">UTV Descending the Rock</div></div>
+              <div class="carousel-slide"><img src="/images/33.webp" alt="Side-by-side UTV cresting boulders on a backcountry trail near Vernal Utah"><div class="carousel-caption">UTV Cresting the Boulders</div></div>
+              <div class="carousel-slide"><img src="/images/34.webp" alt="Green side-by-side UTV on a desert trail near Vernal Utah"><div class="carousel-caption">Green UTV on the Trail</div></div>
+              <div class="carousel-slide"><img src="/images/35.webp" alt="Side-by-side UTVs climbing slickrock on a guided tour near Vernal Utah"><div class="carousel-caption">UTVs Climbing Slickrock</div></div>
+              <div class="carousel-slide"><img src="/images/36.webp" alt="Side-by-side UTVs on the slickrock on a backcountry tour near Vernal Utah"><div class="carousel-caption">UTVs on the Slickrock</div></div>
+              <div class="carousel-slide"><img src="/images/37.webp" alt="Side-by-side UTVs climbing a sandstone ridge near Vernal Utah"><div class="carousel-caption">Climbing a Sandstone Ridge</div></div>
+              <div class="carousel-slide"><img src="/images/39a.webp" alt="Side-by-side UTV parked below a desert butte near Vernal Utah"><div class="carousel-caption">Parked at the Butte</div></div>
+              <div class="carousel-slide"><img src="/images/39.webp" alt="View through a rock arch toward a desert butte near Vernal Utah"><div class="carousel-caption">Through the Rock Arch</div></div>
+              <div class="carousel-slide"><img src="/images/40.webp" alt="Muddy side-by-side UTV climbing rocks on a backcountry tour near Vernal Utah"><div class="carousel-caption">Muddy Rig Climbing</div></div>
+              <div class="carousel-slide"><img src="/images/41.webp" alt="Side-by-side UTVs parked under a natural rock arch near Vernal Utah"><div class="carousel-caption">Side-by-Sides Under the Arch</div></div>
+              <div class="carousel-slide"><img src="/images/42.webp" alt="Two side-by-side UTVs on a canyon trail through the Utah backcountry"><div class="carousel-caption">Canyon Trail Duo</div></div>
+              <div class="carousel-slide"><img src="/images/43.webp" alt="Side-by-side UTV on a steep slickrock descent near Vernal Utah"><div class="carousel-caption">Steep Slickrock Descent</div></div>
+              <div class="carousel-slide"><img src="/images/44.webp" alt="Guided side-by-side UTV rock crawl through a sandstone wash near Vernal Utah"><div class="carousel-caption">Guided Rock Crawl</div></div>
+              <div class="carousel-slide"><img src="/images/45.webp" alt="Desert overlook at dusk on a backcountry UTV tour near Vernal Utah"><div class="carousel-caption">Overlook at Dusk</div></div>
+              <div class="carousel-slide"><img src="/images/46.webp" alt="Side-by-side UTV tackling a deep rut on a backcountry trail near Vernal Utah"><div class="carousel-caption">Tackling the Rut</div></div>
+              <div class="carousel-slide"><img src="/images/47.webp" alt="Side-by-side UTV splashing through a river crossing near Vernal Utah"><div class="carousel-caption">Splashing River Crossing</div></div>
+              <div class="carousel-slide"><img src="/images/48.webp" alt="Doc's Beach trailhead sign on an Adventure Tours Vernal UTV tour near Vernal Utah"><div class="carousel-caption">Doc's Beach Trails</div></div>
+              <div class="carousel-slide"><img src="/images/49.webp" alt="Fleet of Kawasaki KRX 1000 side-by-sides staged for a guided tour in Vernal Utah"><div class="carousel-caption">Staged Fleet Lineup</div></div>
+              <div class="carousel-slide"><img src="/images/50.webp" alt="Tour group stopped with their side-by-side UTVs near Vernal Utah"><div class="carousel-caption">Group Trail Stop</div></div>
+              <div class="carousel-slide"><img src="/images/51.webp" alt="Tour group with Kawasaki KRX 1000 side-by-sides on a ridge near Vernal Utah"><div class="carousel-caption">Tour Group Photo</div></div>
+              <div class="carousel-slide"><img src="/images/52.webp" alt="Long line of side-by-side UTVs staged and ready for a guided tour near Vernal Utah"><div class="carousel-caption">Lined Up and Ready</div></div>
+              <div class="carousel-slide"><img src="/images/53.webp" alt="Fleet of side-by-side UTVs staged on a hilltop near Vernal Utah"><div class="carousel-caption">Fleet at the Hilltop</div></div>
+              <div class="carousel-slide"><img src="/images/54a.webp" alt="Side-by-side UTV charging through a muddy backcountry trail near Vernal Utah"><div class="carousel-caption">Muddy Trail Charge</div></div>
+              <div class="carousel-slide"><img src="/images/55.webp" alt="Green Kawasaki side-by-side UTV crossing a muddy rut near Vernal Utah"><div class="carousel-caption">Green Machine in the Mud</div></div>
+              <div class="carousel-slide"><img src="/images/56.webp" alt="Tour group gathered under a rock overhang with their side-by-side UTVs near Vernal Utah"><div class="carousel-caption">Group Under the Overhang</div></div>
+              <div class="carousel-slide"><img src="/images/57a.webp" alt="Side-by-side UTVs parked at a cliffside on a guided tour near Vernal Utah"><div class="carousel-caption">UTVs at the Cliffside</div></div>
+              <div class="carousel-slide"><img src="/images/58a.webp" alt="Rocky trail vista on a backcountry UTV tour near Vernal Utah"><div class="carousel-caption">Rock Trail Vista</div></div>
+              <div class="carousel-slide"><img src="/images/58.webp" alt="Rider jumping off a cliff for a cool-down on an Adventure Tours Vernal outing near Vernal Utah"><div class="carousel-caption">Cliff Jump Cool Down</div></div>
+              <div class="carousel-slide"><img src="/images/59.webp" alt="Side-by-side UTVs staged below a slickrock dome near Vernal Utah"><div class="carousel-caption">UTVs Staged Below</div></div>
+              <div class="carousel-slide"><img src="/images/60.webp" alt="Blue side-by-side UTV conquering a slickrock dome with a guide near Vernal Utah"><div class="carousel-caption">Conquering the Slickrock</div></div>
+              <div class="carousel-slide"><img src="/images/61.webp" alt="Three side-by-side UTVs rock crawling through the Utah backcountry"><div class="carousel-caption">Rock Crawling Trio</div></div>
+              <div class="carousel-slide"><img src="/images/62a.webp" alt="Riders exploring cliff dwellings on an Adventure Tours Vernal UTV tour"><div class="carousel-caption">Exploring Cliff Dwellings</div></div>
+              <div class="carousel-slide"><img src="/images/42a.webp" alt="Large natural sandstone arch above the valley on a guided UTV tour near Vernal Utah"><div class="carousel-caption">Natural Sandstone Arch</div></div>
+              <div class="carousel-slide"><img src="/images/63.webp" alt="Tour group at a rock arch at sunset near Vernal Utah"><div class="carousel-caption">Sunset Arch Crew</div></div>
+              <div class="carousel-slide"><img src="/images/64.webp" alt="Inside a sandstone cave on an Adventure Tours Vernal backcountry tour"><div class="carousel-caption">Inside the Cave</div></div>
+              <div class="carousel-slide"><img src="/images/65a.webp" alt="Side-by-side UTV on a slickrock summit climb near Vernal Utah"><div class="carousel-caption">Slickrock Summit Climb</div></div>
+              <div class="carousel-slide"><img src="/images/65.webp" alt="Side-by-side UTV on a river crossing adventure near Vernal Utah"><div class="carousel-caption">River Crossing Adventure</div></div>
+              <div class="carousel-slide"><img src="/images/66.webp" alt="Side-by-side UTV parked at a canyon overlook near Vernal Utah"><div class="carousel-caption">Parked Machine Profile</div></div>
+              <div class="carousel-slide"><img src="/images/67.webp" alt="Side-by-side UTV sending it over a sand dune near Vernal Utah"><div class="carousel-caption">Sand Dune Send</div></div>
+              <div class="carousel-slide"><img src="/images/68.webp" alt="Side-by-side UTV parked beside a sandstone arch near Vernal Utah"><div class="carousel-caption">Parked at the Arch</div></div>
+              <div class="carousel-slide"><img src="/images/70.webp" alt="Golden sandstone arch on a backcountry UTV tour near Vernal Utah"><div class="carousel-caption">Golden Rock Arch</div></div>
+              <div class="carousel-slide"><img src="/images/71.webp" alt="Window opening in a sandstone cave near Vernal Utah"><div class="carousel-caption">Sandstone Cave Window</div></div>
+              <div class="carousel-slide"><img src="/images/72.webp" alt="Trail along a towering canyon wall near Vernal Utah"><div class="carousel-caption">Canyon Wall Trail</div></div>
+              <div class="carousel-slide"><img src="/images/73.webp" alt="Side-by-side UTVs parked under a sandstone arch near Vernal Utah"><div class="carousel-caption">UTVs Under the Arch</div></div>
+              <div class="carousel-slide"><img src="/images/74.webp" alt="Interior of a sandstone cave on an Adventure Tours Vernal tour near Vernal Utah"><div class="carousel-caption">Cave Interior View</div></div>
+              <div class="carousel-slide"><img src="/images/75.webp" alt="Towering rock overhang on a backcountry UTV tour near Vernal Utah"><div class="carousel-caption">Towering Rock Overhang</div></div>
+              <div class="carousel-slide"><img src="/images/76.webp" alt="Three side-by-side UTVs on the canyon rim near Vernal Utah"><div class="carousel-caption">Three UTVs on the Canyon Rim</div></div>
+              <div class="carousel-slide"><img src="/images/77.webp" alt="Couple posing at a cliff edge overlooking the canyon near Vernal Utah"><div class="carousel-caption">Couple at the Cliff Edge</div></div>
+              <div class="carousel-slide"><img src="/images/78.webp" alt="Autumn canyon overlook on a backcountry UTV trail near Vernal Utah"><div class="carousel-caption">Autumn Canyon Overlook</div></div>
+              <div class="carousel-slide"><img src="/images/79.webp" alt="Side-by-side UTV on an aspen-lined trail near Vernal Utah"><div class="carousel-caption">Aspen Trail Ride</div></div>
+              <div class="carousel-slide"><img src="/images/80.webp" alt="Side-by-side UTV on a slickrock descent near Vernal Utah"><div class="carousel-caption">Slickrock Descent</div></div>
+              <div class="carousel-slide"><img src="/images/81.webp" alt="Golden aspen trail on a guided side-by-side adventure near Vernal Utah"><div class="carousel-caption">Golden Aspen Trail</div></div>
+              <div class="carousel-slide"><img src="/images/82.webp" alt="Side-by-side UTVs above the canyon on a backcountry tour near Vernal Utah"><div class="carousel-caption">UTVs Above the Canyon</div></div>
+              <div class="carousel-slide"><img src="/images/83.webp" alt="View through a sandstone arch on an Adventure Tours Vernal tour near Vernal Utah"><div class="carousel-caption">Through the Arch</div></div>
+              <div class="carousel-slide"><img src="/images/84.webp" alt="Side-by-side UTVs on slickrock under a stormy sky near Vernal Utah"><div class="carousel-caption">Slickrock Under the Storm</div></div>
+              <div class="carousel-slide"><img src="/images/38.webp" alt="Blue side-by-side UTV kicking up dust on a desert trail near Vernal Utah"><div class="carousel-caption">Desert Dust Trail</div></div>
+              <div class="carousel-slide"><img src="/images/85.webp" alt="Inside a sandstone cave looking out a window opening near Vernal Utah"><div class="carousel-caption">Inside a Sandstone Cave</div></div>
+              <div class="carousel-slide"><img src="/images/86.webp" alt="Side-by-side UTVs at a mountaintop staging point near Vernal Utah"><div class="carousel-caption">Mountaintop Staging Point</div></div>
+              <div class="carousel-slide"><img src="/images/87.webp" alt="Three side-by-side UTVs lined up on a guided tour near Vernal Utah"><div class="carousel-caption">Three UTVs Lined Up</div></div>
+              <div class="carousel-slide"><img src="/images/99.webp" alt="Slickrock ridge view on a backcountry UTV tour near Vernal Utah"><div class="carousel-caption">Slickrock Ridge View</div></div>
+              <div class="carousel-slide"><img src="/images/90.webp" alt="Side-by-side UTV climbing the slickrock near Vernal Utah"><div class="carousel-caption">Climbing the Slickrock</div></div>
+              <div class="carousel-slide"><img src="/images/91.webp" alt="Side-by-side UTV on a slickrock climb under a stormy sky near Vernal Utah"><div class="carousel-caption">Stormy Slickrock Climb</div></div>
+              <div class="carousel-slide"><img src="/images/92.webp" alt="Side-by-side UTV throwing dust on a desert trail near Vernal Utah"><div class="carousel-caption">Airborne Dust Trail</div></div>
+              <div class="carousel-slide"><img src="/images/93.webp" alt="Side-by-side UTV on a steep ledge climb near Vernal Utah"><div class="carousel-caption">Steep Ledge Climb</div></div>
+              <div class="carousel-slide"><img src="/images/94.webp" alt="Side-by-side UTV spraying sand through a turn near Vernal Utah"><div class="carousel-caption">Sand Spray Turn</div></div>
+              <div class="carousel-slide"><img src="/images/95.webp" alt="Side-by-side UTV flying an American flag at rest near Vernal Utah"><div class="carousel-caption">American Flag UTV</div></div>
+              <div class="carousel-slide"><img src="/images/96.webp" alt="Side-by-side UTV at a cliff edge at dusk near Vernal Utah"><div class="carousel-caption">Cliff Edge at Dusk</div></div>
+              <div class="carousel-slide"><img src="/images/97.webp" alt="Side-by-side UTV on a ridgeline at twilight in the Utah desert backcountry"><div class="carousel-caption">Ridgeline at Twilight</div></div>
+            </div>
+          </div>
+          <button class="carousel-btn carousel-next" aria-label="下一张图片"><span>›</span></button>
+        </div>
+        <div class="carousel-indicators"></div>
+        <div class="carousel-thumbnails"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Section -->
+  <section id="booking">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">准备好冒险了吗？</h2>
+        <p class="section-subtitle">即刻在线预订，或来电联系我们 — 我们每日 7am–7pm 为你服务</p>
+      </div>
+      <div class="booking-container">
+        <div class="phone-cta-wrapper">
+
+          <!-- Online Booking Button -->
+          <div style="margin-bottom:35px;">
+            <a href="/booking/" class="btn btn-primary" style="font-size:1.2rem;padding:20px 60px;">
+              📅 在线预订你的冒险
+            </a>
+            <p style="margin-top:12px;font-size:0.95rem;color:var(--charcoal);opacity:0.7;font-family:var(--font-body);">
+              选择你的越野路线、日期和时间 — 即时确认
+            </p>
+          </div>
+
+          <!-- Divider -->
+          <div style="display:flex;align-items:center;gap:20px;margin:10px 0 30px;">
+            <div style="flex:1;height:1px;background:rgba(212,118,78,0.15);"></div>
+            <span style="font-family:var(--font-heading);font-weight:700;color:var(--charcoal);opacity:0.5;font-size:0.9rem;">或致电我们</span>
+            <div style="flex:1;height:1px;background:rgba(212,118,78,0.15);"></div>
+          </div>
+
+          <!-- Phone -->
+          <div class="phone-icon">📞</div>
+          <h3 class="phone-cta-title">致电预订你的行程</h3>
+          <a href="tel:435-219-9447" class="phone-number-display">(435) 219-9447</a>
+          <p class="phone-cta-subtitle">每日营业 • 7am - 7pm 山区时间</p>
+
+          <div class="phone-benefits">
+            <div class="phone-benefit"><span class="benefit-icon">✓</span><span>即时确认</span></div>
+            <div class="phone-benefit"><span class="benefit-icon">✓</span><span>资深本地向导</span></div>
+            <div class="phone-benefit"><span class="benefit-icon">✓</span><span>灵活的时间安排</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About CTA Section -->
+  <section id="about">
+    <div class="container">
+      <div class="about-cta-simple">
+        <h2 class="section-title">认识 Wilson 一家</h2>
+        <p class="section-subtitle">本地经营，注重安全，从第一天起就以冒险为驱动</p>
+        <p>了解我们的故事、我们对 Uintah Basin 的热爱，以及为什么 Adventure Tours Vernal 是犹他州 Vernal 首屈一指的 UTV 导览游公司。</p>
+        <a href="/about/" class="cta-button primary">了解我们的故事</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="about-features">
+    <div class="about-feature">
+      <div class="about-feature-icon">✅</div>
+      <span class="about-feature-text">经验丰富、深谙本地的向导</span>
+    </div>
+    <div class="about-feature">
+      <div class="about-feature-icon">🏅</div>
+      <span class="about-feature-text">专业的安全培训与装备</span>
+    </div>
+    <div class="about-feature">
+      <div class="about-feature-icon">🛡️</div>
+      <span class="about-feature-text">欢迎各种水平的参与者</span>
+    </div>
+    <div class="about-feature">
+      <div class="about-feature-icon">🌟</div>
+      <span class="about-feature-text">证照齐全、投保完善</span>
+    </div>
+  </div>
+  <div class="about-image"></div>
+
+  <!-- Explore Vernal Guides Section -->
+  <section id="explore-guides" style="padding:var(--section-padding);background:var(--light-sand);">
+    <div class="container" style="max-width:var(--container-max);margin:0 auto;">
+      <div class="section-header">
+        <h2 class="section-title">探索 Vernal</h2>
+        <p class="section-subtitle">用我们的本地攻略规划行程 — 关于犹他州 Vernal 你需要知道的一切</p>
+      </div>
+      <div class="related-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;max-width:1000px;margin:0 auto;">
+        <a href="/things-to-do/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+          <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">Vernal 有什么好玩的</h4>
+          <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">活动与景点的完整攻略。</p>
+        </a>
+        <a href="/things-to-do/vernal-utah-attractions/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+          <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">Vernal 热门景点</h4>
+          <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">不容错过的景致与游览之地。</p>
+        </a>
+        <a href="/things-to-do/fun-things-to-do-vernal-utah-kids/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+          <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">家庭活动</h4>
+          <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">在 Vernal 带孩子一起玩的乐事。</p>
+        </a>
+        <a href="/things-to-do/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+          <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">户外活动</h4>
+          <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">徒步、钓鱼、UTV 导览游等等。</p>
+        </a>
+        <a href="/atv-trails-vernal-utah/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+          <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">Vernal 周边的 ATV 越野路线</h4>
+          <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">越野路线系统与地形攻略。</p>
+        </a>
+        <a href="/utv/side-by-side-rentals-vernal-utah/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+          <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">并排越野车：导览游 vs. 租车</h4>
+          <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">为什么导览游胜过自助租车。</p>
+        </a>
+        <a href="/dinosaur-national-monument/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+          <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">Dinosaur National Monument 导览游</h4>
+          <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">纪念碑周边的 UTV 导览游。</p>
+        </a>
+        <a href="/dinosaur-national-monument/visiting-dinosaur-national-monument/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+          <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">Dinosaur National Monument 终极攻略</h4>
+          <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">完整的行程规划攻略 — 化石、岩画、景观自驾等等。</p>
+        </a>
+        <a href="/utv/group-utv-tours-vernal/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+          <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">团体与私人行程</h4>
+          <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">家庭、亲友聚会、企业出游。</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mobile Sticky CTA -->
+  <div class="mobile-sticky-cta">
+    <button onclick="location.href='/booking/'">立即预订你的行程</button>
+  </div>
+
+  <script is:inline src="https://player.vimeo.com/api/player.js"></script>
+  <script is:inline>
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Background images from data attributes
+    document.querySelectorAll('[data-bg]').forEach(element => {
+      element.style.backgroundImage = \`url('\${element.getAttribute('data-bg')}')\`;
+      element.style.backgroundSize = 'cover';
+      element.style.backgroundPosition = 'center';
+    });
+
+    // Scroll indicator fade
+    window.addEventListener('scroll', () => {
+      const scrollIndicator = document.querySelector('.scroll-indicator');
+      if (scrollIndicator) scrollIndicator.style.opacity = window.pageYOffset > 100 ? '0' : '1';
+    });
+
+    // Carousel
+    class Carousel {
+      constructor() {
+        this.track = document.querySelector('.carousel-track');
+        this.slides = Array.from(document.querySelectorAll('.carousel-slide'));
+        this.prevBtn = document.querySelector('.carousel-prev');
+        this.nextBtn = document.querySelector('.carousel-next');
+        this.indicatorsContainer = document.querySelector('.carousel-indicators');
+        this.currentIndex = 0;
+        this.autoPlayInterval = null;
+        this.isTransitioning = false;
+        this.init();
+      }
+      init() {
+        this.createIndicators();
+        this.prevBtn.addEventListener('click', () => this.prevSlide());
+        this.nextBtn.addEventListener('click', () => this.nextSlide());
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft') this.prevSlide();
+          if (e.key === 'ArrowRight') this.nextSlide();
+        });
+        this.addTouchSupport();
+        this.startAutoPlay();
+        this.track.parentElement.parentElement.addEventListener('mouseenter', () => this.stopAutoPlay());
+        this.track.parentElement.parentElement.addEventListener('mouseleave', () => this.startAutoPlay());
+      }
+      createIndicators() {
+        this.slides.forEach((_, index) => {
+          const indicator = document.createElement('button');
+          indicator.classList.add('carousel-indicator');
+          if (index === 0) indicator.classList.add('active');
+          indicator.addEventListener('click', () => this.goToSlide(index));
+          this.indicatorsContainer.appendChild(indicator);
+        });
+        this.indicators = Array.from(this.indicatorsContainer.querySelectorAll('.carousel-indicator'));
+      }
+      updateCarousel() {
+        if (this.isTransitioning) return;
+        this.isTransitioning = true;
+        this.track.style.transform = \`translateX(-\${this.currentIndex * 100}%)\`;
+        this.slides.forEach((slide, index) => slide.classList.toggle('active', index === this.currentIndex));
+        this.indicators.forEach((indicator, index) => indicator.classList.toggle('active', index === this.currentIndex));
+        setTimeout(() => { this.isTransitioning = false; }, 500);
+      }
+      nextSlide() { this.currentIndex = (this.currentIndex + 1) % this.slides.length; this.updateCarousel(); }
+      prevSlide() { this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length; this.updateCarousel(); }
+      goToSlide(index) { this.currentIndex = index; this.updateCarousel(); }
+      startAutoPlay() { this.autoPlayInterval = setInterval(() => this.nextSlide(), 5000); }
+      stopAutoPlay() { if (this.autoPlayInterval) { clearInterval(this.autoPlayInterval); this.autoPlayInterval = null; } }
+      addTouchSupport() {
+        let touchStartX = 0;
+        this.track.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
+        this.track.addEventListener('touchend', (e) => {
+          const diff = touchStartX - e.changedTouches[0].screenX;
+          if (Math.abs(diff) > 50) diff > 0 ? this.nextSlide() : this.prevSlide();
+        });
+      }
+    }
+    if (document.querySelector('.carousel-track')) new Carousel();
+
+    // Floating video
+    function closeFloatingVideo() {
+      document.getElementById('floatingVideo').style.display = 'none';
+    }
+    window.addEventListener('scroll', () => {
+      const floatingVideo = document.getElementById('floatingVideo');
+      if (window.pageYOffset > 300 && floatingVideo) floatingVideo.classList.add('visible');
+    });
+
+    // Scroll spy
+    function updateActiveNavLink() {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-menu > li > a[href^="#"]:not(.dropdown-toggle)');
+      let currentSection = '';
+      const scrollPosition = window.pageYOffset + 200;
+      sections.forEach(section => {
+        if (scrollPosition >= section.offsetTop && scrollPosition < section.offsetTop + section.offsetHeight) {
+          currentSection = section.getAttribute('id');
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === \`#\${currentSection}\`) link.classList.add('active');
+      });
+    }
+    window.addEventListener('scroll', updateActiveNavLink);
+    window.addEventListener('load', updateActiveNavLink);
+
+    // Hero video play
+    function playHeroVideo() {
+      document.getElementById('videoPlayOverlay').classList.add('hidden');
+      document.getElementById('heroVideoContainer').innerHTML = '<iframe src="https://www.youtube.com/embed/eFfvKxkiyzU?si=rAXO-MccKZ1-6GgK&autoplay=1" title="Adventure Tours Vernal — Guided UTV Tours in Vernal Utah" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+    }
+  </script>
+
+
+  <!-- Best Western Lodging Promo -->
+  <a href="https://bestwesternvernal.com" target="_blank" rel="noopener" class="bw-promo-badge" id="bwPromoBadge">
+    <div class="bw-promo-badge-inner">
+      <button class="bw-badge-close" onclick="event.preventDefault();event.stopPropagation();dismissBwBadge();return false;" aria-label="关闭促销">&times;</button>
+      <div class="bw-badge-text-wrap">
+        <div class="bw-badge-eyebrow">
+          <span class="pulse-dot"></span>
+          住宿＆骑行优惠
+        </div>
+        <div class="bw-badge-offer">
+          <span class="highlight">10% 优惠</span> 住宿
+        </div>
+        <p class="bw-badge-detail">
+          在 <strong>Best Western Vernal</strong> 预订 &mdash; 来电时请提及 <strong>&ldquo;Adventure Tours&rdquo;</strong>。
+        </p>
+        <div class="bw-badge-cta-row">
+          <span class="bw-badge-button">预订住宿 &rarr;</span>
+          <span class="bw-badge-logo-text">bestwesternvernal.com</span>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <!-- High Class Limousine Promo -->
+  <a href="https://highclasslimousineservices.com/" target="_blank" rel="noopener" class="hcl-promo-badge" id="hclPromoBadge">
+    <div class="hcl-promo-badge-inner">
+      <button class="hcl-badge-close" onclick="event.preventDefault();event.stopPropagation();dismissHclBadge();return false;" aria-label="关闭促销">&times;</button>
+      <div class="hcl-badge-text-wrap">
+        <div class="hcl-badge-eyebrow">
+          <span class="pulse-dot"></span>
+          尊贵抵达
+        </div>
+        <div class="hcl-badge-offer">
+          <span class="highlight">High Class</span> Limousine
+        </div>
+        <p class="hcl-badge-detail">
+          婚礼、毕业舞会、机场接送以及 Basin 一带的夜间出行。<strong>格调从未消失。</strong>
+        </p>
+        <div class="hcl-badge-cta-row">
+          <span class="hcl-badge-button">尊享出行 &rarr;</span>
+          <span class="hcl-badge-logo-text">highclasslimousineservices.com</span>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <script is:inline>
+    // Dismiss badge for this session
+    function dismissBwBadge() {
+  var badge = document.getElementById('bwPromoBadge');
+  if (badge) badge.classList.add('dismissed');
+}
+    function dismissHclBadge() {
+  var badge = document.getElementById('hclPromoBadge');
+  if (badge) badge.classList.add('dismissed');
+}
+</script>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3A). Every
  * locale without a committed variant falls back to English. Callers that
@@ -4339,6 +4956,7 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
   if (locale === 'de') return DE;
+  if (locale === 'zh') return ZH;
   if (locale === 'ja') return JA;
   return bodyHtml;
 }

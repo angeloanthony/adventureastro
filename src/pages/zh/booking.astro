@@ -1,0 +1,52 @@
+---
+// zh/booking.astro — Simplified Chinese booking page (mirrors ja/booking.astro
+// structurally). Mirrors src/pages/booking.astro; LocalBusiness schema fields are
+// business-identity data (name/address/hours), not page copy, so only
+// the page-specific "url" changes to this page's own /zh/ address.
+import { getBodyHtml } from '../../page-content/booking';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Adventure Tours Vernal",
+    "url": "https://adventuretoursvernal.com/zh/booking/",
+    "image": "https://adventuretoursvernal.com/images/logo.webp",
+    "telephone": "+1-435-219-9447",
+    "email": "adventuretoursvernal@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1935 S 1500 E",
+      "addressLocality": "Vernal",
+      "addressRegion": "UT",
+      "postalCode": "84078",
+      "addressCountry": "US"
+    },
+    "openingHours": "Mo-Su 07:00-19:00"
+  }
+`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="预订你的 UTV 行程 | Adventure Tours Vernal"
+      description="在 Utah 的 Vernal 预订一次由向导带队的 Kawasaki KRX 1000 UTV 行程。可从 Doc's Beach、Moonshine Arch、Ashley Gorge、Outlaw Trail 或 Asphalt Ridge 中选择。每日 7am–7pm 营业。"
+      path="/zh/booking/"
+      type="website"
+      ogDescription="在 Utah 的 Vernal 预订由向导带队的 Kawasaki KRX 1000 UTV 行程。实时日历，即时预订。每日 7am–7pm 营业。致电 (435) 219-9447。"
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: '预订你的行程' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer slot="body" />
+</BaseLayout>

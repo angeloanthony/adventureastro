@@ -500,6 +500,77 @@ const JA = `
   </main>
 `;
 
+const ZH = `
+
+
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    Vernal 附近的 ATV 和 UTV 越野路线包括 Doc's Beach、Moonshine Arch、Ashley Gorge、Outlaw Trail 和 Asphalt Ridge。Adventure Tours Vernal 提供 Kawasaki KRX 1000 并排越野车导览游，带你走遍全部五套越野路线系统。每台车 3 小时 $349，最多可乘 2 人。含头盔、安全装备和资深向导。致电 (435) 219-9447。
+  </p>
+
+  <main class="article-page">
+    <header class="article-header">
+      <div class="article-breadcrumb">
+        <a href="/">Home</a><span class="sep">›</span><a href="/utv/">越野路线</a><span class="sep">›</span><span>Vernal ATV 越野路线</span>
+      </div>
+      <h1 class="article-title">犹他州 Vernal 附近的 ATV 越野路线</h1>
+      <p class="article-meta">2026 年 4 月更新 · Adventure Tours Vernal</p>
+    </header>
+
+    <div class="article-body">
+      <div class="article-summary-box">
+        环绕 Vernal 的 Uintah Basin 拥有犹他州最出色的越野地形之一——红岩峡谷、沙质的沙漠涸河、山脊之巅的全景，以及大多数游客从未见过的历史悠久的荒野路线。下面就告诉你如何通过 UTV 导览游领略这一切，无需自备 ATV。
+      </div>
+
+      <h2>为什么选 Vernal 骑 ATV 和 UTV</h2>
+      <p>抢占头条的是犹他州南部，但 Vernal 的荒野提供同等级别的地形，人流量却只有其一小部分。这里的骑行体验丰富多样，从 Green River 走廊沿线开阔的沙质平原，到峡谷里的急弯回头路，再到能 360 度饱览群山的山脊路线。而且这里的商业化程度不及 Moab 或 Sand Hollow，你常常能独享整条越野路线。</p>
+      <p>这一带还有大多数 ATV 目的地无法媲美的东西：古老的 Fremont 和 Ute 岩画、狂野西部的亡命之徒藏身处，以及天然砂岩拱门散布在各套越野路线系统之间，让每一次骑行既是冒险，也是一堂历史课。</p>
+
+      <h2>五套越野路线系统</h2>
+      <p><strong>Doc's Beach</strong> — Green River 走廊沿线的沙质沙漠涸河与开阔地形。宽阔、畅快，适合各种技术水平。是初次骑行者最热门的越野路线。</p>
+      <p><strong>Moonshine Arch</strong> — 通往一处隐秘天然砂岩拱门的红岩峡谷。风景优美、地形多变，终点令人回味无穷。深受摄影爱好者和家庭喜爱。</p>
+      <p><strong>Ashley Gorge</strong> — 一条气势磅礴的峡谷走廊，两侧是高耸的砂岩峭壁和河谷风光。地形较为狭窄，却以最美妙的方式带来身临其境、被环抱的感觉。</p>
+      <p><strong>Outlaw Trail</strong> — Butch Cassidy 和 Wild Bunch 曾使用过的历史悠久荒野路线。地形崎岖，充满亡命之徒的历史和偏远的峡谷风光。是最富冒险精神的选择。</p>
+      <p><strong>Asphalt Ridge</strong> — 山脊之巅的越野路线，可全景饱览恐龙之乡和 Uinta Mountains。高处的视角让你看清整个盆地的全貌。</p>
+
+      <h2>导览游与自驾骑行的比较</h2>
+      <p>如果你自带 ATV 或 UTV，环绕 Vernal 的 BLM 土地上有开放的骑行区域和指定路线。不过，最好的越野路线——那些通往岩画、拱门和峡谷的路线——最好由熟悉线路、历史和地形状况的当地向导带你走。</p>
+      <p>Adventure Tours Vernal 一应俱全：配备 FOX 2.5 PODIUM LSC 悬挂的 2 座 Kawasaki KRX 1000 并排越野车、头盔、安全讲解，以及资深向导。Dave and Trudy Wilson 各自驾驶一台车，在整整三小时的行程中始终与你的队伍并肩同行。</p>
+
+      <h2>骑行前须知</h2>
+      <p>行程全年运营，视天气而定。春季（4 月–5 月）和秋季（9 月–10 月）是黄金季节——气温宜人、路线干燥、光线金黄。夏季的骑行会趁早出发以避开高温。晴朗的冬日也可骑行，景色则截然不同。</p>
+      <p>无需任何越野经验。KRX 1000 配有动力转向、自动变速箱和整体式防滚架。Dave 和 Trudy 会根据你队伍的舒适程度来调整节奏，从悠闲的观光巡游到更激进的荒野骑行皆可。</p>
+
+      <div class="article-tip">
+        <strong>选路线小贴士：</strong> 如果是第一次，就从 Doc's Beach 或 Moonshine Arch 开始。若想要最偏远、最崎岖的体验，就指定 Outlaw Trail。预订时 Dave 会根据你的队伍帮你选择。
+      </div>
+
+      <div class="article-faq">
+        <h2>常见问题</h2>
+        <div class="faq-item"><h3>犹他州 Vernal 附近有 ATV 越野路线吗？</h3><p>有——五套各具特色的越野路线系统，涵盖峡谷、沙漠涸河和山脊路线，全部可通过 UTV 导览游前往。</p></div>
+        <div class="faq-item"><h3>可以在 Dinosaur National Monument 附近骑 ATV 吗？</h3><p>纪念地内部不行，但周边荒野有穿越类似地形的广阔 UTV 越野路线系统，可由向导带领前往。</p></div>
+        <div class="faq-item"><h3>在 Vernal 附近骑越野路线需要自备 ATV 吗？</h3><p>不需要。Adventure Tours Vernal 提供 Kawasaki KRX 1000 车辆、头盔、装备和向导。每台车 3 小时 $349。</p></div>
+      </div>
+
+      <div class="article-cta">
+        <h3>出发上路吧</h3>
+        <p>Kawasaki KRX 1000 导览游 · 每台车 $349 · 5 套越野路线系统 · 各种技术水平</p>
+        <a href="/booking/" class="cta-btn">预订行程</a>
+        <a href="tel:435-219-9447" class="cta-phone">📞 (435) 219-9447</a>
+      </div>
+    </div>
+
+    <div class="related-articles">
+      <h3>更多越野路线攻略</h3>
+      <div class="related-grid">
+        <a href="/utv/best-utv-trails-vernal/" class="related-card"><h4>Vernal 附近最佳 UTV 越野路线</h4><p>全部 5 套越野路线系统的详细解析。</p></a>
+        <a href="/jeep-trails-vernal-utah/" class="related-card"><h4>Vernal 附近的 Jeep 越野路线</h4><p>适合 Jeep 和 4x4 爱好者的越野选择。</p></a>
+        <a href="/utv/side-by-side-rentals-vernal-utah/" class="related-card"><h4>并排越野车：导览游与租赁的比较</h4><p>为何导览游胜过自驾租赁。</p></a>
+        <a href="/guides/what-to-wear-utv-tour/" class="related-card"><h4>穿什么</h4><p>沙漠 UTV 骑行的装备攻略。</p></a>
+      </div>
+    </div>
+  </main>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3D). Every
  * locale without a committed variant falls back to English. Callers that
@@ -511,6 +582,7 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
   if (locale === 'de') return DE;
+  if (locale === 'zh') return ZH;
   if (locale === 'ja') return JA;
   return bodyHtml;
 }

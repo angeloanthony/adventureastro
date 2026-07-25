@@ -1,0 +1,173 @@
+---
+// zh/faq.astro — Simplified Chinese FAQ page (Z4-inline batch, mirrors ja/faq.astro).
+// Mirrors src/pages/faq.astro. FAQPage schema mirrors the visible Chinese
+// FAQ below (translated name/text for all 15 questions), matching the
+// existing "schema mirrors visible FAQ verbatim" convention.
+import { getBodyHtml } from '../../page-content/faq';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../config/site';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "我可以带上自己的 ATV 越野车参加行程吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "可以！带上自己的越野车，能够玩到更个性化、甚至更极限的路线。Adventure Tours Vernal 会提供对讲机，并在硬核路段提供更容易的替代方案。请打电话或发邮件说明你想体验的骑行类型。安全是第一优先，紧随其后的就是尽情享受。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "我可以带一个团队参加 Vernal 的 ATV 行程吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "当然可以！Adventure Tours Vernal 欢迎各种规模的团队行程。请联系我们商量你们团队的需求，包括 Uintah Basin 的额外景点、餐厅、酒店住宿、酒吧、夜生活和适合孩子的活动。请致电 (435) 219-9447。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "ATV 行程遇到天气问题怎么办？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "无论晴天还是下雨，Adventure Tours Vernal 都照常出行。不过，如遇极端天气或不可预见的情况，你可以选择改期或获得全额退款。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "参加 Vernal 的 ATV 行程我应该带些什么？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "请带上太阳镜、帽子、相机、外套和包脚的鞋子。采用洋葱式穿搭，因为气温可能会有起伏。Adventure Tours Vernal 免费提供饮用水和小食，并提供头盔和安全装备。建议携带防晒霜、驱蚊喷雾和润唇膏。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "我应该什么时候到达我的 ATV 行程？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "所有行程都请在出发时间前 30 分钟到达。在完成全部安全培训之前，我们不会出发。如果在行前说明开始时你没有到场，你可能会失去这次行程的名额，且不予退款。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "参加 ATV 行程我需要年满多少岁？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "要驾驶 Adventure Tours Vernal 的越野车，你需要至少年满 18 岁。要作为乘客乘坐，你需要至少年满 2 岁。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "ATV 行程的取消政策是怎样的？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal 有一份详细的取消政策。关于取消和押金的完整细则，请访问 adventuretoursvernal.com 上的取消政策页面，或致电 (435) 219-9447。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "在犹他州 Vernal 参加 ATV 行程要多少钱？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal 提供一种由 Kawasaki KRX 1000 并排越野车带你体验的导览式 3 小时行程：每台车 $349，最多可坐 2 名乘员。你可以以 $125 加坐第三名同乘乘客，或以每台车每小时 $99 延长你的行程。需 3 人成行，最多可接待 12 位客人（6 台车）。请致电 (435) 219-9447 查询空位。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "在 Vernal 骑 ATV 需要有经验吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "在 Vernal 参加行程无需任何 ATV 经验。Adventure Tours Vernal 欢迎完全的新手，并在每趟行程前提供完整的安全培训。经验丰富的向导会一步步教你操作 Kawasaki KRX 1000 并排越野车。欢迎各种水平的人参加。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "可以在 ATV 行程中顺道去 Dinosaur National Monument 吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "可以。Adventure Tours Vernal 的导览式 3 小时 UTV 行程会探索 Dinosaur National Monument 附近的荒野越野路线，包括古老的岩层和岩画。纪念区里那面著名的恐龙骨墙是由 National Park Service 管理的另一处独立景点——许多客人会上午在纪念区游览，下午再参加一趟穿越周边恐龙之乡荒野的 UTV 行程。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "犹他州 Vernal 最好的 ATV 行程公司是哪家？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal 是犹他州 Vernal 唯一一家提供 Kawasaki KRX 1000 导览游的公司。我们提供独家进入隐秘越野路线、岩画、Butch Cassidy 藏身之处和风景优美拱门的机会。专业的本地向导、专业的安全装备，欢迎各种水平的人参加。每天 7am 至 7pm 营业。请致电 (435) 219-9447。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Vernal 的 ATV 行程有多长？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal 提供一种大约 3 小时的标准导览游。想在越野路线上多玩一会儿？你可以以每台车每小时 $99 延长你的行程。请致电 (435) 219-9447 安排更长的骑行。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Vernal 的 ATV 行程适合家庭参加吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "适合。这趟导览游适合家庭参加，每次骑行前都会进行完整的安全说明，乘客从 2 岁起即可参加。每台 Kawasaki KRX 1000 最多可坐 2 名乘员，所以家庭会预订多台车一起出行——每趟行程最多 6 台车、12 位客人。无需经验，我们提供完整的安全培训。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Adventure Tours Vernal 的营业时间是什么时候？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal 每天从早上 7:00 到晚上 7:00 营业，采用 Mountain Time，每周 7 天。请致电 (435) 219-9447 预订你的 ATV 行程，或访问 adventuretoursvernal.com。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Adventure Tours Vernal 提供哪些行程？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adventure Tours Vernal 在犹他州 Vernal 提供一种由 Kawasaki KRX 1000 并排越野车带你体验的导览式 3 小时行程，可从五套越野路线中选择——Doc's Beach、Moonshine Arch、Ashley Gorge、Outlaw Trail 和 Asphalt Ridge——在预订时选定。每趟行程都包含专业的本地向导、完整的安全说明和安全装备。"
+        }
+      }
+    ]
+  }
+`;
+---
+<BaseLayout bodyClass="faq-page-body">
+  <Fragment slot="head">
+    <Seo
+      title="常见问题 | 犹他州 Vernal 的 UTV 行程 | Adventure Tours Vernal"
+      description="关于犹他州 Vernal 导览式 UTV 行程常见问题的解答。年龄要求、价格、需携带物品、天气政策等。请致电 (435) 219-9447。"
+      path="/zh/faq/"
+      type="website"
+      ogTitle="常见问题 — Adventure Tours Vernal | 犹他州导览式 UTV 行程"
+      ogDescription="在你参加犹他州 Vernal 的 Kawasaki KRX 1000 导览式 UTV 行程之前，需要知道的一切。年龄限制、价格、需携带物品等。"
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="faq" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.faq', lang) }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: t('footer.quickLinks', lang),
+      links: [
+        { href: '/#tours', label: t('footer.link.ourTours', lang) },
+        { href: '/#vehicles', label: t('footer.link.ourFleet', lang) },
+        { href: '/#gallery', label: t('footer.link.photoGallery', lang) },
+        { href: '/booking/', label: t('cta.bookNow', lang) },
+      ],
+    }}
+  />
+</BaseLayout>

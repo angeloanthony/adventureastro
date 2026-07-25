@@ -1,0 +1,50 @@
+---
+// zh/privacy-policy.astro — Simplified Chinese privacy policy (Z4 inline batch).
+// Mirrors src/pages/de/privacy-policy.astro.
+import { getBodyHtml } from '../../page-content/privacy';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+---
+<BaseLayout bodyClass="policy-page-body">
+  <Fragment slot="head">
+    <Seo
+      title="隐私政策 | Adventure Tours Vernal"
+      description="犹他州 Vernal 的 Adventure Tours Vernal 隐私政策。当你预订导览 UTV 行程时，我们如何收集、使用和保护你的信息。来电请拨 (435) 219-9447。"
+      path="/zh/privacy-policy/"
+      type="website"
+      ogDescription="当你在犹他州 Vernal 预订导览 UTV 行程时，Adventure Tours Vernal 如何收集、使用和保护你的信息。"
+    />
+  </Fragment>
+  <Header slot="body" active="privacy-policy" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.privacyPolicy', lang) }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: t('footer.quickLinks', lang),
+      links: [
+        { href: '/#tours', label: t('footer.link.ourTours', lang) },
+        { href: '/#vehicles', label: t('footer.link.ourFleet', lang) },
+        { href: '/#gallery', label: t('footer.link.photoGallery', lang) },
+        { href: '/booking/', label: t('cta.bookNow', lang) },
+      ],
+    }}
+    contact={{ showStreet: false }}
+    info={{
+      heading: t('footer.information', lang),
+      links: [
+        { href: '/cancellation-policy/', label: t('nav.cancellationPolicy', lang) },
+        { href: '/privacy-policy/', label: t('nav.privacyPolicy', lang) },
+        { href: '/faq/', label: t('nav.faq', lang) },
+        { href: '/safety-guidelines/', label: t('nav.safetyGuidelines', lang) },
+      ],
+    }}
+  />
+</BaseLayout>

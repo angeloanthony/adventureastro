@@ -1,0 +1,335 @@
+---
+// /zh/fishing/ — 釣りハブPILLARの簡体字中国語版（Z4バッチ。日本語P10K /
+// ドイツ語P9-P9C / フランス語P8-P6 / ポルトガル語P7-P6のロールアウトパターンを踏襲）。
+// src/pages/fishing/index.astro を構造・クラス・idまで正確にミラーしています。
+// authorは他のpillarの既存エンティティに合わせてOrganizationのまま。
+// 規則・料金・捕獲制限は創作せず、変わりうる事実には
+// 请向官方渠道核实 と明記しています。本文の内部リンクは英語ルート相対のまま
+// （中央リンクローカライズパスで後日一括処理）。
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import TrustBadge from '../../../components/content/TrustBadge.astro';
+import Header from '../../../components/layout/Header.astro';
+import Footer from '../../../components/layout/Footer.astro';
+import Seo from '../../../components/seo/Seo.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import HubIndex from '../../../components/content/HubIndex.astro';
+import { getLangFromUrl } from '../../../lib/i18n';
+import { t } from '../../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+
+const schema = `{
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "恐龙之乡钓鱼完全攻略",
+        "description": "一位当地向导为你规划在犹他州 Vernal 近郊及整个恐龙之乡钓鱼的方案——Flaming Gorge、Green River、Uinta 山间湖泊、Red Fleet 和 Steinaker——教你如何按目标、经验和季节选对水域。",
+        "author": {"@type": "Organization", "name": "Adventure Tours Vernal"},
+        "publisher": {"@type": "Organization", "name": "Adventure Tours Vernal", "logo": {"@type": "ImageObject", "url": "https://adventuretoursvernal.com/images/logo.webp"}},
+        "datePublished": "2026-07-11",
+        "dateModified": "2026-07-11",
+        "mainEntityOfPage": "https://adventuretoursvernal.com/zh/fishing/"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type": "Question", "name": "犹他州 Vernal 近郊哪里钓鱼最好？", "acceptedAnswer": {"@type": "Answer", "text": "这取决于你的目标。往北约一小时车程的 Flaming Gorge 是本地区最招牌的水域，能钓到冠军级的湖红点鲑和大型褐鳟。大坝下游的 Green River 是世界级的飞蝇钓尾水河段。若想要轻松、就近、适合全家的钓鱼，Red Fleet 和 Steinaker 水库离镇上只有几分钟，而 Ashley National Forest 里的 Uinta 山间湖泊则提供风景优美的高地鳟鱼钓。"}},
+          {"@type": "Question", "name": "在 Vernal 近郊钓鱼需要钓鱼证吗？", "acceptedAnswer": {"@type": "Answer", "text": "需要。在犹他州钓鱼的任何人都需要一张有效的犹他州钓鱼证，有效期长短不一。Flaming Gorge 跨入怀俄明州，其水库水域有互认钓鱼证的安排，而规则与大坝下游的 Green River 不同。钓鱼证、限额和规则会变动，因此下水前请向 Utah Division of Wildlife Resources（Flaming Gorge 还需向 Wyoming Game and Fish）核实当前要求。"}},
+          {"@type": "Question", "name": "在恐龙之乡能全年钓鱼吗？", "acceptedAnswer": {"@type": "Answer", "text": "能，只是形式不同。水库和 Green River 的开放水面钓鱼从春季持续到秋季，Uinta 高山湖泊在雪化后的夏季状态最好，冬季在条件允许时可到 Flaming Gorge 和较低的水库进行冰钓。冬季出行前请务必核实当前的冰情和季节性通行状况。"}},
+          {"@type": "Question", "name": "在 Vernal 近郊能钓到什么鱼？", "acceptedAnswer": {"@type": "Answer", "text": "在 Flaming Gorge 有湖红点鲑（mackinaw）、褐鳟、虹鳟、红鲑（kokanee）和小口黑鲈；在 Green River 有野生虹鳟和褐鳟；在 Uinta 湖泊有溪红点鲑、割喉鳟、虎纹鳟、虹鳟和北极茴鱼；在 Red Fleet 和 Steinaker 则有虹鳟以及黑鲈和蓝鳃太阳鱼。鱼种和放流会变动，请向 Utah Division of Wildlife Resources 核实当前详情。"}},
+          {"@type": "Question", "name": "钓鱼选 Flaming Gorge 还是 Green River 更好？", "acceptedAnswer": {"@type": "Answer", "text": "这是两种不同的体验。Flaming Gorge 是大水面水库钓，通常从船上进行，以创纪录级的湖红点鲑和奖杯级褐鳟闻名。大坝下游的 Green River 是一条冰冷清澈的飞蝇钓尾水河，钓野生鳟鱼，靠漂流之旅或涉水进行。许多钓者会在同一次行程里两处都钓。"}},
+          {"@type": "Question", "name": "新手和家庭在 Vernal 近郊哪里能钓鱼？", "acceptedAnswer": {"@type": "Answer", "text": "Red Fleet 和 Steinaker 水库是最轻松、最适合全家的选择——离镇上近，夏季水温暖，不用船就能从岸边钓。它们非常适合带孩子入门钓鱼，而且两处都天然适合搭配游泳和划桨，凑成完整的家庭一日。"}},
+          {"@type": "Question", "name": "能从岸边钓吗，还是需要船？", "acceptedAnswer": {"@type": "Answer", "text": "两者都行。Red Fleet、Steinaker 以及 Flaming Gorge 和 Green River 的部分水域都提供高产的岸钓和涉水钓，非常适合新手和家庭。船能让你进入更深的水库水域——在 Flaming Gorge 追大型湖红点鲑时必不可少——而漂流之旅是钓 Green River 的经典方式。"}},
+          {"@type": "Question", "name": "我该如何规划一次恐龙之乡钓鱼之旅？", "acceptedAnswer": {"@type": "Answer", "text": "以 Vernal 为大本营，这里有住宿、燃料和补给，然后按目标当天往返前往对应水域——北面的 Flaming Gorge 和 Green River，离镇上几分钟的 Red Fleet 和 Steinaker，以及山中的 Uinta 湖泊。提前买好犹他州钓鱼证，核实每处水域的当前规则，并查看天气，因为高地沙漠和山区的状况变化很快。"}}
+        ]
+      }
+    ]
+  }`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="恐龙之乡钓鱼 | Vernal 与 Flaming Gorge 攻略"
+      description="在犹他州 Vernal 近郊去哪儿钓鱼——Flaming Gorge、Green River、Uinta 湖泊、Red Fleet 和 Steinaker。当地人教你如何按季节和目标选对水域。"
+      path="/zh/fishing/"
+      type="article"
+      ogTitle="恐龙之乡钓鱼完全攻略"
+      ogDescription="Flaming Gorge、Green River、Uinta 山间湖泊、Red Fleet 和 Steinaker——在犹他州 Vernal 近郊，如何按你的目标、经验和季节选择钓鱼地点。"
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('hub.fishing', lang) }]} />
+
+  <p slot="body" class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">《恐龙之乡钓鱼完全攻略》是一份实用的行程规划攻略，面向犹他州东北部 Vernal 近郊的休闲钓鱼。它讲解如何根据你的目标、经验、季节和时间来选择钓点：钓冠军级湖红点鲑和褐鳟的 Flaming Gorge 水库，大坝下游世界级飞蝇钓的 Green River，Ashley National Forest 和 High Uintas 的高山湖泊，以及 Red Fleet 和 Steinaker State Park 里适合全家的水库。它比较了岸钓、船钓与飞蝇钓、季节时机、鱼种、家庭钓鱼、无障碍通行，以及一日和周末的行程。犹他州的钓鱼证和规则由 Utah Division of Wildlife Resources 制定，会随时间变动。Adventure Tours Vernal 提供每台 $349 的导览 UTV 行程，最多 2 名乘客，3 小时。请致电 (435) 219-9447。</p>
+
+  <main class="article-page" slot="body">
+    <header class="article-header">
+      <h1 class="article-title">恐龙之乡钓鱼完全攻略</h1>
+      <p class="article-meta">2026 年 7 月更新 · Adventure Tours Vernal</p>
+      <TrustBadge align="left" />
+    </header>
+
+    <div class="article-body">
+
+      <div class="article-summary-box"><strong>快速答案：</strong>恐龙之乡——Vernal 周边这片犹他州东北角——是美国西部最被低估的钓鱼地区之一，而诀窍在于把水域和你的目标对上号。想钓奖杯级大鱼？Flaming Gorge 藏着创纪录级的湖红点鲑和巨型褐鳟。想过一个人生清单般的飞蝇钓之日？大坝下游的 Green River 世界闻名。想教孩子钓鱼，或在别的冒险之间挤出几个小时？Red Fleet 和 Steinaker 水库离镇上只有几分钟。想要凉爽的山间风景和积极咬钩的鳟鱼？Uinta 湖泊能满足你。这份攻略帮你选择——按季节、经验和时间——再把你引向每处水域的专门深度指南。以 Vernal 为大本营，买好你的犹他州钓鱼证，抛竿前先核实当前规则。</div>
+
+      <div class="key-takeaways">
+        <h2>要点速览</h2>
+        <ul>
+          <li><strong>五处各具特色的渔场，一个大本营。</strong>Flaming Gorge、Green River、Uinta 湖泊、Red Fleet 和 Steinaker 全都在 Vernal 的当天往返范围内，而每一处都提供真正不同的钓鱼体验。</li>
+          <li><strong>把水域和你的目标对上号。</strong>追奖杯、飞蝇钓、家庭出游、风景优美的高地钓鱼——每一种在这里都有它最好的归宿——这份攻略就是为帮你挑选而做的。</li>
+          <li><strong>四季皆可钓。</strong>春到秋的水库和河流钓鱼、夏季的高山湖泊、冬季的冰钓，意味着这里没有真正的淡季。</li>
+          <li><strong>对新手友好，对高手够深。</strong>你可以在 Red Fleet 的岸边用一根竿和一条蚯蚓钓鱼，也可以在 Gorge 上驾船追 40 磅的湖红点鲑——这种跨度正是重点所在。</li>
+          <li><strong>始终核实规则。</strong>钓鱼证、限额和规则由州野生动物管理机构制定，逐年变动——每次出行前都要核实当前详情。</li>
+        </ul>
+      </div>
+
+      <h2>为什么要在恐龙之乡钓鱼</h2>
+      <p>大多数人认识这片地区是因为恐龙和红岩，而不是钓鱼——而这恰恰是它钓鱼如此出色的原因。当钓者们涌向西部那些更有名的水域时，恐龙之乡静静地拥有着一处放在任何地方都会是头条目的地的渔场：一座产出过创纪录级湖红点鲑的水库、一条跻身全美最佳之列的飞蝇钓河流，以及一批从冰化到封冻都能让鱼竿保持弯曲的山间湖泊和温暖水库。</p>
+      <p>这里真正的优势在于<em>小半径之内的多样性</em>。从 Vernal 这一个大本营出发，你可以在某个清晨于深水追一条五十岁的湖红点鲑，第二天又在清澈见底的河中潜近野生虹鳟，再在下午带孩子们到温暖的岸边钓起他们的第一条蓝鳃太阳鱼。很少有地方能把大水面奖杯钓、一流的飞蝇钓水域、高山湖泊和轻松的家庭水库塞进彼此一小时车程之内。</p>
+      <p>而且它做到这一切还不用忍受人潮。这里是一片仍在劳作、并不拥挤的乡野，你依然能找到一段属于自己的岸线或一座只属于你的山湖。想了解这片地区的全貌以及如何围绕它规划行程，请先从我们的<a href="/guides/ultimate-guide-to-vernal-utah/">Vernal 完全攻略</a>看起；至于钓鱼之余还有什么可玩的，请看<a href="/things-to-do/">Vernal 有什么可玩</a>。</p>
+
+      <h2>钓鱼区域总览</h2>
+      <p>把恐龙之乡的钓鱼想成五处各具个性的水域。你不必只选一处——很多行程会组合其中两三处——但知道每一处提供什么，是做好计划的关键。</p>
+      <p>这些水域可归入四大类钓鱼环境，全都能从 Vernal 这一个大本营当天往返——它们的关系如下：</p>
+      <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+        <img src="/images/maps/vernal-fishing-waters-overview.svg" alt="将犹他州 Vernal 近郊的钓鱼示意为共享 Vernal 作为大本营的四种环境的概览图：大水库（Flaming Gorge——奖杯级湖红点鲑和大型褐鳟，船钓水域）、尾水河流（大坝下游的 Green River——钓野生鳟鱼的一流飞蝇钓）、近镇水库（Red Fleet 和 Steinaker——钓鳟鱼、黑鲈和蓝鳃太阳鱼的家庭岸钓），以及高山湖泊（Ashley National Forest 里的 Uinta 湖泊——高地鳟鱼和茴鱼）。非按比例；蓝色形状是示意用的水域符号，并非实测的湖泊或河流。" width="1600" height="1200" loading="lazy" decoding="async" />
+        <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">四种钓鱼环境，一个大本营——从奖杯水库到高山湖泊。概览示意图，非按比例；未标示边界、下水坡道或路线。</figcaption>
+      </figure>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>水域</th><th>类型</th><th>以何闻名</th><th>距 Vernal</th><th>适合</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Flaming Gorge</td><td>大型水库</td><td>奖杯级湖红点鲑、大型褐鳟、红鲑、黑鲈</td><td>往北约 1 小时</td><td>追奖杯者、船钓者</td></tr>
+            <tr><td>Green River（大坝下游）</td><td>尾水河流</td><td>野生虹鳟和褐鳟、飞蝇钓</td><td>往北约 1 小时</td><td>飞蝇钓者、漂流之旅</td></tr>
+            <tr><td>Uinta 湖泊（Ashley NF）</td><td>高山湖泊</td><td>溪红点鲑、割喉鳟、虎纹鳟、虹鳟；茴鱼</td><td>往北约 30–90 分钟</td><td>风景、荒野、夏季</td></tr>
+            <tr><td>Red Fleet Reservoir</td><td>小型水库</td><td>虹鳟、黑鲈、蓝鳃太阳鱼</td><td>往北约 15 分钟</td><td>家庭、岸钓</td></tr>
+            <tr><td>Steinaker Reservoir</td><td>小型水库</td><td>虹鳟、黑鲈、蓝鳃太阳鱼</td><td>往北约 5–10 分钟</td><td>家庭、便捷抵达</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><em>距离为大致数值；鱼种和放流会随时间变动。各处水域的当前鱼种和规则请<strong>请向官方渠道核实</strong>（Utah Division of Wildlife Resources）。</em></p>
+
+      <figure style="margin:2.5rem auto;max-width:900px;text-align:center;">
+        <img src="/images/graphics/vernal-fishing-waters-comparison.svg" alt="Vernal 近郊四大主要钓鱼水域的对比表——Flaming Gorge（奖杯级湖红点鲑和大型褐鳟，一座横跨犹他州与怀俄明州的大水库，船钓水域，适合追奖杯者）、Green River（野生一流鳟鱼，大坝下游的尾水，漂流或涉水，适合飞蝇钓者）、Red Fleet（鳟鱼、黑鲈和蓝鳃太阳鱼，一座带有恐龙足迹化石的近镇水库，轻松的家庭岸钓，适合家庭）以及 Steinaker（鳟鱼、黑鲈和蓝鳃太阳鱼，最近的水库，轻松的家庭岸钓，适合快速的本地出行）。" width="1600" height="1200" loading="lazy" decoding="async" />
+        <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">四处水域一览——各以何闻名、适合谁。与上方地图配套使用；抛竿前请核实当前规则。</figcaption>
+      </figure>
+
+      <h2>Flaming Gorge</h2>
+      <p>如果说恐龙之乡的钓鱼有一位头牌，那就是它。<a href="/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge</a> 是一座横跨犹他—怀俄明州界、全长 91 英里的水库，它以在这里长到巨大体型、产出过创纪录级鱼的<strong>湖红点鲑（mackinaw）</strong>，以及长久以来以巨物著称的奖杯级<strong>褐鳟</strong>而闻名全美。钓者也会瞄准<strong>虹鳟</strong>、<strong>红鲑</strong>和<strong>小口黑鲈</strong>，这使 Gorge 成为一处贯穿四季的名副其实的多鱼种渔场。</p>
+      <p>这里主要是<strong>船钓</strong>：最大的湖红点鲑栖息在深处，覆盖水域本身就是这场游戏的一部分，不过岸钓和近岸钓也有收获。由于水库跨越州界，发证方式很特别——犹他州和怀俄明州就水库水域维持着一套互认安排——而规则与大坝下游的 Green River 不同。</p>
+      <div class="article-tip"><strong>把 Gorge 规划妥当：</strong>我们专门的<a href="/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge 完全攻略</a>详尽介绍了码头、下水坡道、休闲区和通行方式。关于钓鱼证、限额和互认证规则，出行前请<strong>请向官方渠道核实</strong>（Utah Division of Wildlife Resources 和 Wyoming Game and Fish）。</div>
+
+      <h2>Green River</h2>
+      <p>就在 Flaming Gorge Dam 下方，水库让位给了截然不同的东西：<strong>Green River 尾水</strong>——一段冰冷、清澈、一流的飞蝇钓河段，屡屡跻身全美最佳鳟鱼河之列。从大坝底部放出的水常年保持冰冷洁净，为数量惊人的野生<strong>虹鳟</strong>和<strong>褐鳟</strong>创造了理想条件，而且在著名的清澈水中你常常可以看鱼下竿。</p>
+      <p>经典体验是从大坝下方不远处顺流而下、经过 <strong>Little Hole</strong> 及更远处的<strong>漂流之旅</strong>，向清澈见底的深潭中的鳟鱼抛竿，不过涉水钓也很出色，沿河的步道可供步行抵达。它本身就是一处目的地渔场——钓者从全国各地赶来——而且它与上游水库上的一天完美搭配。</p>
+      <p>由于这条河的钓法与水库不同，还带有自己的规则，请把它当作单独的一次出行。关于 Green River 的当前规则（可能与紧邻上游的 Flaming Gorge 水库不同），<strong>请向官方渠道核实</strong>，第一次漂流不妨考虑请一位持证的当地向导。</p>
+
+      <h2>Ashley National Forest 的湖泊</h2>
+      <p>在 Vernal 以北，地势攀升进入 Uinta Mountains 和<a href="/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest</a>，这里坐拥<strong>数百座高山湖泊</strong>。这是与下方水库截然不同的世界：冰冷清澈的高地之水、美到难以形容的风景，以及积极咬钩的鳟鱼。视流域而定，这些湖里有<strong>溪红点鲑</strong>、<strong>割喉鳟</strong>、<strong>虹鳟</strong>、<strong>虎纹鳟</strong>和<strong>北极茴鱼</strong>，许多较为偏远的水域会进行放流以保持其产量。</p>
+      <p>体验的跨度很大，从像 Moon Lake 那样可以开车抵达、能带全家从岸边或小船上钓鱼的山间水库，到只能徒步抵达、可能整片都归你独享的 <strong>High Uintas Wilderness</strong> 荒野深处湖泊。若论静谧、风景，以及那些愿意咬钩（往往个头偏小）的鳟鱼的高咬钩率，这里是本地区最好的钓鱼之处。</p>
+      <div class="article-tip"><strong>高地的现实：</strong>这些湖泊海拔很高，季节短——最佳窗口通常是雪化之后的夏季。午后的雷暴、寒冷的夜晚，以及离服务设施的漫长距离，都是这场钓鱼的一部分。关于通行与规划请看 <a href="/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest 攻略</a>，当前的道路状况和湖泊情况请<strong>请向官方渠道核实</strong>。</div>
+
+      <h2>Red Fleet Reservoir</h2>
+      <p>更靠近镇上的<a href="/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet State Park</a> 提供一处友好、易上手的渔场，坐落在壮观的红色砂岩之间。这座水库通常以<strong>虹鳟</strong>以及<strong>黑鲈</strong>和<strong>蓝鳃太阳鱼</strong>等温水鱼种闻名，其易于掌控的规模使它特别适合从岸边或小船上钓鱼，而无需大水库那样的繁琐张罗。这是一次轻松、风景优美的出行——你还可以划桨去看看公园著名的恐龙足迹化石，把它组合进来。</p>
+      <p>对于一个悠闲的半天、对于新手，以及对于想在不用长途跋涉的情况下真正钓到鱼的家庭，Red Fleet 都是一个有力的选择。关于完整计划——通行、露营、划桨和足迹化石——请看<a href="/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet State Park 完全攻略</a>，当前的鱼种、钓鱼证和限额请<strong>请向官方渠道核实</strong>。</p>
+
+      <h2>Steinaker Reservoir</h2>
+      <p>离 Vernal 最近的钓点<a href="/guides/ultimate-guide-to-steinaker-state-park/">Steinaker State Park</a> 就在镇北仅五到十分钟处，这使它成为本地区最便捷、最能说走就走的选择。和 Red Fleet 一样，它通常以<strong>虹鳟</strong>加上<strong>黑鲈</strong>和<strong>蓝鳃太阳鱼</strong>等温水鱼种闻名，从岸边或船上都钓得不错。在较凉的过渡季节，鳟鱼钓往往更出彩；夏季温水鱼种更活跃，而这座水库还兼作全家其余成员游泳和划桨的去处。</p>
+      <p>Steinaker 是傍晚随手抛竿、带孩子第一次钓鱼，或不必长途驾车就在水边消磨几个小时的首选。完整计划请看<a href="/guides/ultimate-guide-to-steinaker-state-park/">Steinaker State Park 完全攻略</a>，当前的钓鱼详情请<strong>请向官方渠道核实</strong>。</p>
+
+      <h2>如何选对目的地</h2>
+      <p>有五个好选择，真正的问题就变成了哪一个适合<em>你的</em>行程。用下面这份快速决策指南把自己指向对的水域。</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>如果你想要……</th><th>那就去……</th><th>原因</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>一生一次的奖杯大鱼</td><td>Flaming Gorge</td><td>创纪录级的湖红点鲑和巨型褐鳟</td></tr>
+            <tr><td>世界级的飞蝇钓之日</td><td>Green River</td><td>一流的尾水、野生鳟鱼、漂流之旅</td></tr>
+            <tr><td>风景、静谧、高咬钩率</td><td>Uinta 湖泊</td><td>数百座高山湖泊、积极咬钩的鳟鱼</td></tr>
+            <tr><td>轻松的家庭出游，离镇上近</td><td>Steinaker 或 Red Fleet</td><td>温暖的水库、岸钓、几分钟即达</td></tr>
+            <tr><td>教孩子钓鱼</td><td>Red Fleet 或 Steinaker</td><td>易上手、宽容、鱼情不断</td></tr>
+            <tr><td>把钓鱼和别的冒险组合起来</td><td>Red Fleet（足迹化石）或 Flaming Gorge（划船）</td><td>钓鱼加上恐龙、划桨或风景</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>时间紧张？钓 Steinaker 或 Red Fleet。有整整一天还有船？去 Flaming Gorge。追求某种特定体验——飞蝇钓之旅、奖杯大鱼，还是山间湖泊？在上表里对上号，然后出发前先读那处水域的专门攻略。</p>
+
+      <h2>鱼种概览</h2>
+      <p>恐龙之乡孕育着真正广泛的游钓鱼类，这也是它之所以特别的原因之一。以下是一份大致的介绍，而非规则清单——任何特定水域实际存在的鱼种以及适用的规则，请<strong>请向官方渠道核实</strong>。</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>鱼种</th><th>在哪里</th><th>备注</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>湖红点鲑（mackinaw）</td><td>Flaming Gorge</td><td>深水；长得非常大；这里钓到过创纪录级的鱼</td></tr>
+            <tr><td>褐鳟</td><td>Flaming Gorge、Green River</td><td>奖杯口碑；有望钓到大鱼</td></tr>
+            <tr><td>虹鳟</td><td>Green River、水库、Uinta 湖泊</td><td>尾水和水库渔场的中坚</td></tr>
+            <tr><td>红鲑（kokanee）</td><td>Flaming Gorge</td><td>有季节性；常有特别规则适用</td></tr>
+            <tr><td>小口黑鲈</td><td>Flaming Gorge</td><td>沿岩石岸线的暖季趣味鱼情</td></tr>
+            <tr><td>溪红点鲑／割喉鳟／虎纹鳟</td><td>Uinta 湖泊</td><td>高地鱼种；常常积极咬钩，有时个头偏小</td></tr>
+            <tr><td>北极茴鱼</td><td>部分 Uinta 湖泊</td><td>一种独特而美丽的高山湖收获</td></tr>
+            <tr><td>黑鲈和蓝鳃太阳鱼</td><td>Red Fleet、Steinaker</td><td>温水鱼种；很适合孩子和岸钓</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>岸钓</h2>
+      <p>在恐龙之乡钓得好，你并不需要船。<strong>岸钓和堤岸钓</strong>高产又易上手，对许多游客来说这本身就是全部意义所在——不用下水、不用拖车、不用折腾。Red Fleet 和 Steinaker 是其中的佼佼者：温暖、就近的水库有可钓的岸线，新手带一根竿和一个浮标扎下来，就真能钓到鱼。Green River 沿着河边步道提供出色的涉水和步行入水通道，就连 Flaming Gorge 也有不用船就能出鱼的近岸钓点。</p>
+      <p>岸钓是进入这项运动最友好的入口，最容易与全家的水边一日组合，也是花一个小时垂下钓线最不需要下决心的方式。带上一把椅子、一点耐心和防晒，你就准备妥当了。</p>
+
+      <h2>船钓</h2>
+      <p>不过，要解锁本地区最大的鱼和最多的水域，一艘<strong>船</strong>会改变局面。在 Flaming Gorge，要够到奖杯级湖红点鲑潜伏的深处、要高效覆盖 91 英里的水库，船实际上是必需品。船也拓展了你在 Red Fleet 和 Steinaker 的选择，并打开了 Uintas 那些可以开车抵达的山间水库。</p>
+      <p>下水坡道在 Flaming Gorge（各码头）、Red Fleet 和 Steinaker 均有。现场是否提供租船因地点和季节而异，所以在指望租船之前请<strong>请向官方渠道核实</strong>（各公园或码头）。两条普遍适用的提醒：犹他州要求船只使用者清洗、排水并晾干其船只，并可能进行<strong>外来物种检查</strong>；此外，冰冷的水加上午后的风，使得在这些水域上穿救生衣和早出航都是明智之举。</p>
+
+      <h2>飞蝇钓</h2>
+      <p>对飞蝇钓者而言，恐龙之乡是一处目的地，而皇冠上的明珠就是 Flaming Gorge Dam 下游的 <strong>Green River</strong>——一段冰冷清澈的尾水，野生虹鳟和褐鳟游弋在著名的清澈之水中，靠漂流船或徒步来钓。这是那种人们会围绕它规划整趟行程的河流，而第一次来访时，一位持证的当地向导非常值得，好帮你了解水情和羽化。</p>
+      <p>但飞蝇钓并不止步于此。夏季的 <strong>Uinta 山间湖泊</strong>是绝佳而不拥挤的飞蝇钓水域，积极的溪红点鲑和割喉鳟会痛快地起水，一小背包的装备就能玩上一整天。就连水库也在岸沿和浅滩提供飞蝇钓的机会。无论你想要在一流河流上的一次导览漂流，还是在山湖边独自向起水的鳟鱼抛竿的一个傍晚，这片地区都能满足你。</p>
+
+      <h2>你需要钓鱼向导吗？</h2>
+      <p>在这些水域中，有些地方向导可有可无；在另一些地方，它却是沮丧的一天和美好的一天之间的分界。下面是实话实说。</p>
+      <p><strong>值得请向导的情况。</strong><a href="/guides/ultimate-guide-to-flaming-gorge/">Green River</a> 的漂流，尤其是第一次来访——一位持证的户外经营者会提供漂流船、读懂水情和羽化，并把你送到那些你自己划船很可能会径直错过的野生鳟鱼跟前。大水面的 <strong>Flaming Gorge</strong> 湖红点鲑同样有赖于当地知识和声呐，因此一次包船能帮你省去多年摸索水库水深和地形的弯路。</p>
+      <p><strong>自己就能轻松搞定的情况。</strong><a href="/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a>、<a href="/guides/ultimate-guide-to-steinaker-state-park/">Steinaker</a> 以及大多数 <a href="/guides/ultimate-guide-to-ashley-national-forest/">Uinta 湖泊</a>，带上基本装备就能从岸边或小船上手——非常适合独立的钓者和家庭。户外经营者、包船、空位和价格都会变动，所以请<strong>请向官方渠道核实</strong>并提前预订，尤其是在旺季。</p>
+
+      <h2>家庭钓鱼</h2>
+      <p>这里也许是犹他州最好却无人提起的家庭钓鱼地区。原因很简单：<strong>Red Fleet</strong> 和 <strong>Steinaker</strong> 让孩子真的能钓到鱼。温暖平静的水面、可钓的岸线、像蓝鳃太阳鱼这样宽容的温水鱼种，加上离镇上很短的车程，共同凑成了那道让小钓者上瘾的「低挫败、高回报」公式。而且因为这两座水库同时也是游泳和划桨的去处，在钓鱼进行时，全家其余成员也不会闲得无聊。</p>
+      <p>在这里度过一个美好家庭钓鱼日的公式是这样的：选 Red Fleet 或 Steinaker，趁凉爽的清晨或傍晚去，装备保持简单，每钓到一条都热烈庆祝，让这一天在钓鱼、游泳和零食之间灵活切换。再把它和 Red Fleet 的恐龙足迹化石组合起来，你就把钓鱼和一场真正的冒险合二为一了。想要更多以孩子为中心的点子，请看<a href="/things-to-do/fun-things-to-do-vernal-utah-kids/">带孩子在 Vernal 有什么好玩</a>。</p>
+
+      <h2>季节性钓鱼</h2>
+      <p>这片地区一个不动声色的强项是：<em>总有什么东西正钓得不错</em>。下面是一年的展开方式。</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>季节</th><th>最佳水域</th><th>可预期的状况</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>春</td><td>水库、Green River</td><td>水冷、鱼饿、人少；高地仍被积雪封锁</td></tr>
+            <tr><td>夏</td><td>Uinta 湖泊、Green River、所有水库</td><td>高地的黄金季节；下方早出发可避开暑热与风</td></tr>
+            <tr><td>秋</td><td>Flaming Gorge、水库、Green River</td><td>水温转凉、鱼情活跃、色彩绚丽、人更少</td></tr>
+            <tr><td>冬</td><td>Flaming Gorge、较低的水库（冰上）</td><td>条件允许时冰钓；深沉的静谧与孤独</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><em>季节时机为大致情况，会随各年的天气和海拔前后变动。出行前，当前的状况、冰面安全和通行请<strong>请向官方渠道核实</strong>——并且在未确认冰面安全之前，绝不要贸然上冰。</em>关于这片地区逐月的天气，请看我们的<a href="/guides/vernal-weather-guide/">Vernal 天气攻略</a>。</p>
+
+      <h2>冬季冰钓</h2>
+      <p>当开放水面的季节收官，恐龙之乡仍透过冰层继续垂钓。<a href="/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge</a> 是本地区的招牌冰钓渔场，吸引钓者们透过硬水追钓湖红点鲑、红鲑和其他鱼种，条件允许时较低的水库也能提供冰钓。这是一种安静、冷峻而有回报的钓鱼方式——孤独、白雪，以及与夏日水边截然不同的节奏。</p>
+      <p>冰钓也要求真正的谨慎。冰层厚度在一座水库的不同位置、在整个季节的推进中都不一样，寒冷是实实在在的危险，而且状况变化很快。在未确认当前冰面安全之前，绝不要贸然上冰；按严寒着装，并与熟悉该水域的人同行。任何冬季出行前，当前的冰情、通行和规则请<strong>请向官方渠道核实</strong>。</p>
+
+      <h2>摄影贴士</h2>
+      <p>在这里的一次钓鱼之旅也是一次摄影之旅，稍加规划就能把随手拍变成佳作。</p>
+      <ul>
+        <li><strong>拍黄金时段。</strong>黎明和黄昏——最好的钓鱼光线——也是最好的摄影光线，温暖而低斜地铺过水面。</li>
+        <li><strong>捕捉倒影。</strong>清晨平静的水面在水库和山湖上会像镜子一样映出红岩和山峰；趁风起之前出门。</li>
+        <li><strong>持鱼合影要快。</strong>如果你在拍一条准备放生的鱼，让它保持湿润、轻柔托住、快速拍摄，然后把它放回水里。</li>
+        <li><strong>在水上保护你的器材。</strong>一个防水袋或防水箱在船上或桨板上是便宜的保险。</li>
+        <li><strong>留意暴风雨。</strong>戏剧性的天空拍出好照片，却也意味着危险的水面——雷电逼近时，要撤离开阔水面和无遮蔽的岸边。</li>
+      </ul>
+
+      <h2>家庭出行注意事项</h2>
+      <p>除了钓鱼本身，还有几件事能让这里的家庭钓鱼之行更顺利。<strong>水上安全放在第一位</strong>：这些水域都没有救生员，水面之下比感觉上更冷，孩子在近水或水上时应穿救生衣。其次要留意的是<strong>日晒和暑热</strong>——高地沙漠的阳光很强烈，水库边几乎没有遮荫，你会需要帽子、防晒霜，以及远比你预计要喝的更多的水。</p>
+      <p>尤其是带小孩子时，要对期望保持灵活，把一天安排得短而多变：一个小时钓鱼、一场游泳、一顿零食再加一觉，胜过一场沉闷的全天马拉松。Red Fleet 和 Steinaker 正是为这种灵活的家庭一日而生的地方。关于针对本地区状况的具体打包清单，请看我们的<a href="/guides/what-to-bring/">该带什么攻略</a>。</p>
+
+      <h2>无障碍通行</h2>
+      <p>本地区最便于抵达的钓鱼在设施完善的 State Park。<strong>Red Fleet</strong> 和 <strong>Steinaker</strong> 通常提供无障碍停车场和设施，岸线和日间使用区靠近停车场，这使它们成为对有出行需求的访客较为友好的钓鱼之处。<strong>Flaming Gorge</strong> 和 <strong>Green River</strong> 廊道的部分区域也提供相对便于抵达的入水点和靠近停车的岸线，不过因地点而异。</p>
+      <p>相比之下，荒野深处的山间湖泊、未铺装的林道，以及在崎岖地面上的涉水钓则崎岖难行，并非一律便于抵达。由于具体的无障碍设施和钓鱼通行安排因地点和季节而变动，如果你有特殊需求，来访前请就当前的安排<strong>请向官方渠道核实</strong>（Utah State Parks、Ashley National Forest 或相关管理机构）。</p>
+
+      <h2>推荐的一日钓鱼行程</h2>
+      <p>时间紧张？下面任何一个都能从 Vernal 大本营凑成完整的一天。</p>
+      <ul>
+        <li><strong>奖杯之日（Flaming Gorge）。</strong>清早出航，在水库钓湖红点鲑和褐鳟，鱼口之间尽享红色峡谷的风光。有船才成就这一天；请看 <a href="/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge 攻略</a>。</li>
+        <li><strong>飞蝇钓之日（Green River）。</strong>一次导览漂流，或一整天在大坝下游经 Little Hole 的涉水加步行，向清澈水中的野生鳟鱼抛竿。</li>
+        <li><strong>山湖之日（Uinta 湖泊）。</strong>驱车上到 <a href="/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest</a>，在风景优美的湖里钓鱼，并在凉爽的高地野餐。</li>
+        <li><strong>家庭之日（Red Fleet 或 Steinaker）。</strong>上午从岸边钓鱼，正午游泳划桨，再轻松驾车回家。想加点冒险，就去 <a href="/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a> 看恐龙足迹化石。</li>
+      </ul>
+
+      <h2>推荐的周末钓鱼行程</h2>
+      <p>有两三天，你就能钓不止一处水域，把这片地区好好领略一番。</p>
+      <p><strong>钓者的周末。</strong>第一天在 <a href="/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge</a> 从船上追奖杯；第二天漂流大坝下游的 <a href="/guides/ultimate-guide-to-flaming-gorge/">Green River</a> 钓野生鳟鱼；有时间的话，第三天到 <a href="/guides/ultimate-guide-to-ashley-national-forest/">Uinta 湖泊</a>享受风景和积极咬钩的鱼。以 Vernal 为大本营，或在水边露营。</p>
+      <p><strong>家庭的周末。</strong>第一天在 <a href="/guides/ultimate-guide-to-steinaker-state-park/">Steinaker</a> 轻松岸钓和戏水；第二天在 <a href="/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet</a> 把钓鱼和恐龙足迹化石组合起来；有时间的话，第三天去 <a href="/dinosaur-national-monument/visiting-dinosaur-national-monument/">Dinosaur National Monument</a> 或 <a href="/things-to-do/">Vernal 周边的其他可玩之处</a>。从西边开车过来？请看我们的 <a href="/from/salt-lake-city/">Salt Lake City 到 Vernal 攻略</a>。</p>
+
+      <h2>钓鱼证、限额与规则：基础知识</h2>
+      <p>这份攻略刻意不做成规则清单——规则会变，而弄错代价不菲。但每位钓者出行前都应当理解这套框架。</p>
+      <ul>
+        <li><strong>必须持证。</strong>在犹他州钓鱼的任何人都需要一张有效的犹他州钓鱼证，按从单日到全年的多种有效期出售。</li>
+        <li><strong>Flaming Gorge 很特殊。</strong>由于水库跨入怀俄明州，犹他州和怀俄明州就水库水域维持着一套互认钓鱼证的安排——但大坝下游的 Green River 和两州的规则可能不同。</li>
+        <li><strong>限额和规则因水域而异。</strong>持有限额、体长和区间限额、渔具限制，以及针对红鲑等鱼种的特别规则，在水库、河流和山间湖泊之间各不相同。</li>
+        <li><strong>一切都可能逐年变化。</strong>放流、限额和季节性规则会定期更新。</li>
+      </ul>
+      <p>底线是：出发前买好你的钓鱼证，抛竿前，当前的、逐水域的规则请<strong>请向官方渠道核实</strong>——Utah Division of Wildlife Resources，Flaming Gorge 还需向 Wyoming Game and Fish。</p>
+
+      <h2>装备与该带什么</h2>
+      <p>你的装备取决于水域，但有几样必需品贯穿每次出行。对于<strong>水库</strong>——Flaming Gorge、Red Fleet 和 Steinaker——配基本拟饵、活饵和浮标的旋转钓组能应付大多数场面，也是对新手和孩子最宽容的配置。对于 <strong>Green River</strong> 和 <strong>Uinta 湖泊</strong>，飞蝇钓组最出彩，不过旋转钓者也玩得很好。在 Gorge 大水面追湖红点鲑则需要更重的钓组，往往还要一艘配声呐的船。</p>
+      <p>钓组之外，请为环境而非只为鱼来打包：高地沙漠的水库要防晒和比你以为还多的水；山里以及水上寒冷的清晨要保暖的多层衣物和雨具；偏光太阳镜可减弱眩光、帮你发现鱼；还要有办法在水上让电子设备保持干燥。我们的<a href="/guides/what-to-bring/">该带什么攻略</a>详细讲解了这片地区的状况，而<a href="/guides/vernal-weather-guide/">Vernal 天气攻略</a>能帮你安排出行时机。</p>
+
+      <h2>把钓鱼之旅的大本营设在哪里</h2>
+      <p>对大多数游客来说，<a href="/guides/ultimate-guide-to-vernal-utah/">Vernal</a> 是合乎逻辑的大本营。它有住宿、餐馆、燃料、渔具和补给，而这份攻略里的每一处水域都能从镇上当天往返——Flaming Gorge 和 Green River 往北约一小时，Red Fleet 和 Steinaker 几分钟即达，Uinta 湖泊在山上。你可以每天追逐不同的渔场，却睡在同一张床上。</p>
+      <p>如果你更想留在水边，那么 Flaming Gorge、Red Fleet、Steinaker 以及整个 <a href="/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest</a> 都有露营——在离你晨间钓点几步之遥处醒来，本身就是一种回报。每份目的地攻略都涵盖其露营选择，而空位和预订会变动，所以请<strong>请向官方渠道核实</strong>并为夏季提前预订。从州外过来？我们的 <a href="/from/salt-lake-city/">Salt Lake City 到 Vernal 攻略</a>讲解了这段车程。</p>
+
+      <h2>保育与礼仪</h2>
+      <p>这些水域之所以能一直出色，是因为钓者们爱护它们。在适当场合，请实践用心的<strong>捕捞放流</strong>：让鱼保持湿润，用湿手轻柔处理，尽量减少露出空气的时间，放走前先让它恢复——这对 Green River 的野生鳟鱼和 Gorge 的奖杯大鱼尤为重要。通过在不同水域之间清洗、排水并晾干你的船和装备，遵守<strong>外来物种规则</strong>。并践行<strong>Leave No Trace</strong>：把所有钓线、渔具和垃圾都带走，尊重其他钓者的空间，在脆弱的岸线和山湖流域轻踏慢行。</p>
+      <p>在合法限额之内留几条鱼当一顿饭，也是钓鱼的一部分——只是要了解并遵守你所在水域当前的持有和体长规则，只取你会用到的量。</p>
+
+      <h2>规划贴士</h2>
+      <ul>
+        <li><strong>先买好你的犹他州钓鱼证。</strong>钓鱼的每个人都需要；出发前拿到，并留意 Flaming Gorge 与怀俄明州有一套特别的互认安排。<strong>请向官方渠道核实</strong>（Utah Division of Wildlife Resources）。</li>
+        <li><strong>逐水域核实规则。</strong>限额和规则在水库、Green River 和山间湖泊之间各不相同，而且逐年变化。</li>
+        <li><strong>以 Vernal 为大本营。</strong>它有住宿、燃料、渔具和补给，而每一处水域都能从镇上当天往返。</li>
+        <li><strong>按你的目标和季节匹配水域</strong>，用上面的表格——别只是默认去最近的水库，如果你是为奖杯大鱼或飞蝇钓之日而来。</li>
+        <li><strong>为环境做好准备。</strong>高地沙漠的日晒、冰冷的水、午后的风，以及时断时续的手机信号，都是实实在在的——带上水、防晒和多层衣物，并把你的计划告诉别人。</li>
+        <li><strong>清洗、排水并晾干</strong>任何船只或装备，以符合外来物种规则。</li>
+        <li><strong>考虑请一位向导</strong>，如果你是第一次去 Green River 或大水面的 Flaming Gorge——当地知识能大幅缩短学习曲线。</li>
+      </ul>
+
+      <p>恐龙之乡会回报那些围绕钓鱼来规划、而非误打误撞闯进来的钓者。选一处契合你目标、家庭和季节的水域，读那处水域的专门攻略，买好钓鱼证，核实当前规则，并给自己留出时间去享受西部这处真正被低估的渔场之一。当你想在钓鱼日之间把鱼竿换成一场导览的荒野冒险时，<a href="/booking/">向 Adventure Tours Vernal 预订一次 UTV 行程</a>，让 Dave 和 Trudy 带你去看看水域之外的这片土地。</p>
+
+      <div class="article-faq">
+        <h2>常见问题</h2>
+        <div class="faq-item">
+          <h3>犹他州 Vernal 近郊哪里钓鱼最好？</h3>
+          <p>这取决于你的目标。往北约一小时车程的 Flaming Gorge 是本地区最招牌的水域，能钓到冠军级的湖红点鲑和大型褐鳟。大坝下游的 Green River 是世界级的飞蝇钓尾水河段。若想要轻松、就近、适合全家的钓鱼，Red Fleet 和 Steinaker 水库离镇上只有几分钟，而 Ashley National Forest 里的 Uinta 山间湖泊则提供风景优美的高地鳟鱼钓。</p>
+        </div>
+        <div class="faq-item">
+          <h3>在 Vernal 近郊钓鱼需要钓鱼证吗？</h3>
+          <p>需要。在犹他州钓鱼的任何人都需要一张有效的犹他州钓鱼证。Flaming Gorge 跨入怀俄明州，其水库水域有互认钓鱼证的安排，而规则与大坝下游的 Green River 不同。钓鱼证、限额和规则会变动，因此下水前请向 Utah Division of Wildlife Resources（Flaming Gorge 还需向 Wyoming Game and Fish）核实当前要求。</p>
+        </div>
+        <div class="faq-item">
+          <h3>在恐龙之乡能全年钓鱼吗？</h3>
+          <p>能，只是形式不同。水库和 Green River 的开放水面钓鱼从春季持续到秋季，Uinta 高山湖泊在雪化后的夏季状态最好，冬季在条件允许时可到 Flaming Gorge 和较低的水库进行冰钓。冬季出行前请务必核实当前的冰情和季节性通行状况。</p>
+        </div>
+        <div class="faq-item">
+          <h3>在 Vernal 近郊能钓到什么鱼？</h3>
+          <p>在 Flaming Gorge 有湖红点鲑（mackinaw）、褐鳟、虹鳟、红鲑（kokanee）和小口黑鲈；在 Green River 有野生虹鳟和褐鳟；在 Uinta 湖泊有溪红点鲑、割喉鳟、虎纹鳟、虹鳟和北极茴鱼；在 Red Fleet 和 Steinaker 则有虹鳟以及黑鲈和蓝鳃太阳鱼。鱼种和放流会变动，请向 Utah Division of Wildlife Resources 核实当前详情。</p>
+        </div>
+        <div class="faq-item">
+          <h3>钓鱼选 Flaming Gorge 还是 Green River 更好？</h3>
+          <p>这是两种不同的体验。Flaming Gorge 是大水面水库钓，通常从船上进行，以创纪录级的湖红点鲑和奖杯级褐鳟闻名。大坝下游的 Green River 是一条冰冷清澈的飞蝇钓尾水河，钓野生鳟鱼，靠漂流之旅或涉水进行。许多钓者会在同一次行程里两处都钓。</p>
+        </div>
+        <div class="faq-item">
+          <h3>新手和家庭在 Vernal 近郊哪里能钓鱼？</h3>
+          <p>Red Fleet 和 Steinaker 水库是最轻松、最适合全家的选择——离镇上近，夏季水温暖，不用船就能从岸边钓。它们非常适合带孩子入门钓鱼，而且两处都天然适合搭配游泳和划桨，凑成完整的家庭一日。</p>
+        </div>
+        <div class="faq-item">
+          <h3>能从岸边钓吗，还是需要船？</h3>
+          <p>两者都行。Red Fleet、Steinaker 以及 Flaming Gorge 和 Green River 的部分水域都提供高产的岸钓和涉水钓，非常适合新手和家庭。船能让你进入更深的水库水域——在 Flaming Gorge 追大型湖红点鲑时必不可少——而漂流之旅是钓 Green River 的经典方式。</p>
+        </div>
+        <div class="faq-item">
+          <h3>我该如何规划一次恐龙之乡钓鱼之旅？</h3>
+          <p>以 Vernal 为大本营，这里有住宿、燃料和补给，然后按目标当天往返前往对应水域——北面的 Flaming Gorge 和 Green River，离镇上几分钟的 Red Fleet 和 Steinaker，以及山中的 Uinta 湖泊。提前买好犹他州钓鱼证，核实每处水域的当前规则，并查看天气，因为高地沙漠和山区的状况变化很快。</p>
+        </div>
+      </div>
+
+      <div class="article-tip"><strong>抛竿之前：</strong>这份攻略里每一处水域的钓鱼证、持有限额和规则，都由 Utah Division of Wildlife Resources（Flaming Gorge 还有 Wyoming Game and Fish）制定，并逐年变化。这里关于在哪儿、怎么钓的一切都逐季有效；会变的是规则。每次出行前请<strong>请向官方渠道核实</strong>。</div>
+
+    </div>
+  </main>
+
+  <HubIndex slot="body" collection="fishing" heading="全部钓鱼攻略" />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

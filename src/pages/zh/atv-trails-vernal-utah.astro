@@ -1,0 +1,32 @@
+---
+// zh/atv-trails-vernal-utah.astro — Simplified Chinese ATV trails landing page.
+// Mirrors src/pages/de/atv-trails-vernal-utah.astro.
+import { getBodyHtml } from '../../page-content/atv-trails';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"犹他州 Vernal 附近的 ATV 越野路线","description":"犹他州 Vernal 附近的 ATV 和 UTV 越野路线攻略，包括穿越五套越野路线系统的 Kawasaki KRX 1000 导览游。","author":{"@type":"Organization","name":"Adventure Tours Vernal"},"publisher":{"@type":"Organization","name":"Adventure Tours Vernal","logo":{"@type":"ImageObject","url":"https://adventuretoursvernal.com/images/logo.webp"}},"datePublished":"2026-04-08","dateModified":"2026-04-08","mainEntityOfPage":"https://adventuretoursvernal.com/zh/atv-trails-vernal-utah/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"犹他州 Vernal 附近有 ATV 越野路线吗？","acceptedAnswer":{"@type":"Answer","text":"有。环绕 Vernal 的 Uintah Basin 拥有广阔的荒野越野路线系统，包括 Doc's Beach、Moonshine Arch、Ashley Gorge、Outlaw Trail 和 Asphalt Ridge——全部可通过 Adventure Tours Vernal 的 UTV 导览游前往。"}},{"@type":"Question","name":"可以在 Dinosaur National Monument 附近骑 ATV 吗？","acceptedAnswer":{"@type":"Answer","text":"Dinosaur National Monument 内部不允许机动车辆进入，但环绕 Vernal 和纪念地一带的荒野越野路线，可通过导览游穿越类似的峡谷和沙漠地形进行广阔的 UTV 骑行。"}},{"@type":"Question","name":"在 Vernal 附近骑越野路线需要自备 ATV 吗？","acceptedAnswer":{"@type":"Answer","text":"不需要。Adventure Tours Vernal 提供 Kawasaki KRX 1000 并排越野车、头盔、安全装备和资深向导。行程为每台车 3 小时 $349，每台车最多可乘 2 人。"}}]}]}`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="犹他州 Vernal 的 ATV 越野路线 | 导览式 UTV 与并排越野车行程"
+      description="探索犹他州 Vernal 附近最棒的 ATV 和 UTV 越野路线。Kawasaki KRX 1000 并排越野车导览游，穿越峡谷、沙漠涸河和荒野地形。立即预订。"
+      path="/zh/atv-trails-vernal-utah/"
+      type="article"
+      ogTitle="犹他州 Vernal 的 ATV 越野路线 | 导览式 UTV 行程"
+      ogDescription="Vernal 附近最棒的 ATV 和 UTV 越野路线——穿越峡谷、岩画遗址和荒野地形的 Kawasaki KRX 1000 导览游。"
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.trails', lang), href: '/zh/utv/' }, { label: 'Vernal ATV 越野路线' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

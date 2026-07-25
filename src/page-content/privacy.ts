@@ -1804,6 +1804,263 @@ const JA = `
 
 `;
 
+const ZH = `
+<section class="policy-section">
+    <div class="container">
+        <div class="section-header">
+            <h1 class="section-title">隐私政策</h1>
+            <p class="section-subtitle">你的隐私对我们很重要。了解我们如何收集、使用和保护你的信息。</p>
+            <p class="policy-effective-date">生效日期：2026 年 2 月</p>
+        </div>
+
+        <div class="policy-container">
+
+            <!-- INTRODUCTION -->
+            <div class="policy-card">
+                <div class="policy-icon">🔒</div>
+                <h2 class="policy-heading">我们对隐私的承诺</h2>
+                <p>在 Adventure Tours Vernal（可通过 <strong>adventuretoursvernal.com</strong> 访问），保护访客的隐私是我们的首要任务之一。本隐私政策文件说明了 Adventure Tours Vernal 收集和记录的信息类型，以及我们如何使用这些信息。</p>
+                <p>如果你对我们的隐私政策还有其他疑问，或需要了解更多信息，请随时与我们联系。</p>
+                <div class="policy-note">
+                    <strong>适用范围：</strong>本隐私政策仅适用于线上活动，就分享和／或收集的信息而言，对我们网站的访客有效。本政策不适用于任何以线下方式或通过本网站以外渠道收集的信息。
+                </div>
+            </div>
+
+            <!-- CONSENT -->
+            <div class="policy-card">
+                <div class="policy-icon">✅</div>
+                <h2 class="policy-heading">同意</h2>
+                <p>使用我们的网站，即表示你同意我们的隐私政策并接受其条款。</p>
+            </div>
+
+            <!-- INFORMATION WE COLLECT -->
+            <div class="policy-card">
+                <div class="policy-icon">📋</div>
+                <h2 class="policy-heading">我们收集的信息</h2>
+
+                <p>我们请你提供的个人信息，以及请你提供这些信息的原因，都会在我们请你提供个人信息时向你明确说明。</p>
+
+                <div class="policy-list">
+                    <h3>当你直接联系我们时：</h3>
+                    <p>如果你直接联系我们，我们可能会收到有关你的其他信息，例如：</p>
+                    <ul>
+                        <li>你的姓名</li>
+                        <li>电子邮箱地址</li>
+                        <li>电话号码</li>
+                        <li>你可能向我们发送的消息内容和／或附件</li>
+                        <li>你选择提供的任何其他信息</li>
+                    </ul>
+
+                    <h3>当你进行购买或预订时：</h3>
+                    <p>我们可能会向你索取联系信息，包括：</p>
+                    <ul>
+                        <li>姓名</li>
+                        <li>公司名称（如适用）</li>
+                        <li>地址</li>
+                        <li>电子邮箱地址</li>
+                        <li>电话号码</li>
+                        <li>信用卡信息（用于完成你的购买）</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- HOW WE USE YOUR INFORMATION -->
+            <div class="policy-card">
+                <div class="policy-icon">🔧</div>
+                <h2 class="policy-heading">我们如何使用你的信息</h2>
+
+                <p>我们以多种方式使用所收集的信息，包括用于：</p>
+
+                <div class="usage-grid">
+                    <div class="usage-item">
+                        <div class="usage-icon">🌐</div>
+                        <div class="usage-text">
+                            <strong>提供并运营我们的网站</strong>
+                            <p>维护并向你提供我们的服务</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">📈</div>
+                        <div class="usage-text">
+                            <strong>改进与个性化</strong>
+                            <p>提升你的体验并拓展我们的服务</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">📊</div>
+                        <div class="usage-text">
+                            <strong>分析使用情况</strong>
+                            <p>了解你如何使用我们的网站</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">💡</div>
+                        <div class="usage-text">
+                            <strong>开发新功能</strong>
+                            <p>创造新的产品、服务和功能</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">💬</div>
+                        <div class="usage-text">
+                            <strong>与你沟通</strong>
+                            <p>客户服务、更新和营销</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">📧</div>
+                        <div class="usage-text">
+                            <strong>发送电子邮件更新</strong>
+                            <p>促销和信息类消息</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">🛡️</div>
+                        <div class="usage-text">
+                            <strong>防止欺诈</strong>
+                            <p>发现并防止欺诈活动</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LOG FILES -->
+            <div class="policy-card">
+                <div class="policy-icon">📁</div>
+                <h2 class="policy-heading">日志文件</h2>
+
+                <p>Adventure Tours Vernal 遵循使用日志文件的标准做法。这些文件会在访客访问网站时对其进行记录。所有托管公司都会这样做，作为托管服务分析的一部分。</p>
+
+                <div class="info-box">
+                    <h3>日志文件收集的信息：</h3>
+                    <div class="info-items">
+                        <span class="info-tag">IP 地址</span>
+                        <span class="info-tag">浏览器类型</span>
+                        <span class="info-tag">互联网服务提供商（ISP）</span>
+                        <span class="info-tag">日期和时间戳</span>
+                        <span class="info-tag">来源／退出页面</span>
+                        <span class="info-tag">点击次数</span>
+                    </div>
+                </div>
+
+                <p class="policy-disclaimer">这些信息不会与任何可识别个人身份的信息相关联。收集这些信息的目的是分析趋势、管理网站、追踪用户在网站上的活动，以及收集人口统计信息。</p>
+            </div>
+
+            <!-- COOKIES -->
+            <div class="policy-card">
+                <div class="policy-icon">🍪</div>
+                <h2 class="policy-heading">Cookie 和网络信标</h2>
+
+                <p>与任何其他网站一样，Adventure Tours Vernal 也使用「Cookie」。这些 Cookie 用于存储信息，包括访客的偏好设置以及访客在网站上访问过的页面。这些信息用于根据访客的浏览器类型和／或其他信息定制我们的网页内容，从而优化用户体验。</p>
+
+                <div class="policy-warning">
+                    <strong>你的选择：</strong>你可以通过各自的浏览器选项选择停用 Cookie。要了解有关特定网络浏览器中 Cookie 管理的更详细信息，可在各浏览器相应的网站上查询。
+                </div>
+            </div>
+
+            <!-- CCPA RIGHTS -->
+            <div class="policy-card">
+                <div class="policy-icon">⚖️</div>
+                <h2 class="policy-heading">CCPA 隐私权（请勿出售我的个人信息）</h2>
+
+                <p>根据《加州消费者隐私法》（CCPA），加州消费者除享有其他权利外，还有权：</p>
+
+                <div class="rights-list">
+                    <div class="right-item">
+                        <div class="right-number">1</div>
+                        <div class="right-content">
+                            <strong>请求披露数据</strong>
+                            <p>要求收集消费者个人数据的企业披露其就消费者所收集的个人数据的类别及具体项目。</p>
+                        </div>
+                    </div>
+                    <div class="right-item">
+                        <div class="right-number">2</div>
+                        <div class="right-content">
+                            <strong>请求删除数据</strong>
+                            <p>要求企业删除其所收集的有关该消费者的任何个人数据。</p>
+                        </div>
+                    </div>
+                    <div class="right-item">
+                        <div class="right-number">3</div>
+                        <div class="right-content">
+                            <strong>拒绝数据出售</strong>
+                            <p>要求出售消费者个人数据的企业不再出售该消费者的个人数据。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="policy-note">
+                    <strong>回应时间：</strong>如果你提出请求，我们有一个月的时间予以回应。如果你希望行使上述任何权利，请与我们联系。
+                </div>
+            </div>
+
+            <!-- GDPR RIGHTS -->
+            <div class="policy-card">
+                <div class="policy-icon">🇪🇺</div>
+                <h2 class="policy-heading">GDPR 数据保护权</h2>
+
+                <p>我们希望确保你充分了解自己所有的数据保护权利。每位用户都有权享有以下权利：</p>
+
+                <div class="gdpr-rights">
+                    <div class="gdpr-right">
+                        <h3>访问权</h3>
+                        <p>你有权请求获取你个人数据的副本。我们可能会就此项服务向你收取少量费用。</p>
+                    </div>
+                    <div class="gdpr-right">
+                        <h3>更正权</h3>
+                        <p>你有权请求我们更正你认为不准确的任何信息。你也有权请求我们补全你认为不完整的信息。</p>
+                    </div>
+                    <div class="gdpr-right">
+                        <h3>删除权</h3>
+                        <p>你有权在特定条件下请求我们删除你的个人数据。</p>
+                    </div>
+                    <div class="gdpr-right">
+                        <h3>限制处理权</h3>
+                        <p>你有权在特定条件下请求我们限制对你个人数据的处理。</p>
+                    </div>
+                    <div class="gdpr-right">
+                        <h3>反对处理权</h3>
+                        <p>你有权在特定条件下反对我们对你个人数据的处理。</p>
+                    </div>
+                    <div class="gdpr-right">
+                        <h3>数据可携权</h3>
+                        <p>你有权在特定条件下请求我们将所收集的数据转移给另一个组织，或直接转移给你。</p>
+                    </div>
+                </div>
+
+                <div class="policy-note">
+                    <strong>回应时间：</strong>如果你提出请求，我们有一个月的时间予以回应。如果你希望行使上述任何权利，请与我们联系。
+                </div>
+            </div>
+
+            <!-- CHILDREN'S INFORMATION -->
+            <div class="policy-card">
+                <div class="policy-icon">👶</div>
+                <h2 class="policy-heading">儿童信息</h2>
+
+                <p>Adventure Tours Vernal 不会故意收集 13 岁以下儿童的任何可识别个人身份的信息。</p>
+
+                <div class="policy-warning">
+                    <strong>⚠️ 重要提示：</strong>如果你认为你的孩子在我们的网站上提供了此类信息，我们强烈建议你立即与我们联系，我们将尽最大努力从记录中及时删除此类信息。
+                </div>
+            </div>
+
+            <!-- CONTACT CTA -->
+            <div class="policy-cta">
+                <h3>对我们的隐私政策有疑问？</h3>
+                <p>如果你对我们如何处理你的数据有任何疑问或顾虑，请随时与我们联系。</p>
+                <div class="cta-buttons">
+                    <a href="tel:435-219-9447" class="cta-button primary">📞 致电 (435) 219-9447</a>
+                    <a href="mailto:adventuretoursvernal@gmail.com" class="cta-button secondary">✉️ 给我们发邮件</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3A, Italian P6,
  * French P8-P6, German P9-P6, Japanese P10K).
@@ -1816,6 +2073,7 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
   if (locale === 'de') return DE;
+  if (locale === 'zh') return ZH;
   if (locale === 'ja') return JA;
   return bodyHtml;
 }

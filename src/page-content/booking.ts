@@ -1475,6 +1475,216 @@ const JA = `
 </script>
 `;
 
+const ZH = `
+
+  <!-- 页面 -->
+  <div class="booking-page">
+
+    <!-- 页眉 -->
+    <div class="page-header">
+      <h1 class="page-title">预订你的探险之旅</h1>
+      <p class="page-subtitle">所有行程均使用 Kawasaki KRX 1000 并排越野车，由熟悉当地的资深向导带队 — 预订时挑选你的越野路线！</p>
+      <div style="text-align:center;margin-top:12px;"><span style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border:1px solid rgba(212,118,78,0.35);border-radius:999px;background:rgba(212,118,78,0.08);font-size:0.95rem;color:#4a4139;"><span aria-hidden="true" style="color:#e6a817;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count} 条 Google 评论</span></span></div>
+      <div class="calendar-badge">
+        📅 实时日历 &bull; 即时预订 &bull; 查看可预约时间
+      </div>
+
+      <!-- CAL.COM INLINE EMBED -->
+<div id="cal-booking-inline" style="width:100%; min-height:700px; margin-top:30px; border-radius:12px; overflow:hidden;"></div>
+    </div>
+
+    <!-- 越野路线部分 -->
+    <section class="tours-section">
+      <div class="section-intro">
+        <h2>5 条可探索的越野路线</h2>
+        <p>在下方浏览我们的越野路线，然后点击 <strong>“预订你的探险之旅”</strong>，在同一处选好日期、时间和路线。</p>
+      </div>
+
+      <p style="max-width:820px;margin:1rem auto 0;padding:0 1rem;text-align:center;line-height:1.7;">无论你在下方选择哪条路线，每次导览游都从 Vernal 同一个集合点出发。这张示意图展示了你在预订时可以选择的五套越野路线系统。</p>
+
+      <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+        <img src="/images/maps/vernal-utv-trail-systems.svg" alt="预订用示意图，展示宾客在 Vernal, Utah 附近可选的五套 UTV 越野路线系统 — Doc's Beach、Moonshine Arch、Ashley Gorge、Asphalt Ridge 和 Outlaw Trail — 每条都以带标签的辐射线呈现，从每次行程出发的 Vernal 唯一集合点向外延伸。图非按比例绘制；不显示路线、距离、方向或登山口。" width="1600" height="1200" loading="lazy" decoding="async" />
+        <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">预订时任选五套越野路线系统之一 — 所有行程都从 Vernal 的一个集合点出发。仅为示意图，非按比例绘制。</figcaption>
+      </figure>
+
+      <div class="tours-grid">
+
+        <!-- Doc's Beach -->
+        <div class="tour-card">
+          <div class="tour-image" style="background-image: url('/images/Docs Beach.webp');">
+            <span class="difficulty-badge trail-badge">Doc's Beach</span>
+          </div>
+          <div class="tour-content">
+            <h3 class="tour-title">Doc's Beach</h3>
+            <p class="tour-description">一路驶向 Vernal 最受喜爱的河畔目的地之一。沙质的沙漠冲沟、开阔的地形，以及 Green River 河道沿线的壮丽景色，让这里成为各种水平骑手的心头好。</p>
+            <div class="tour-details">
+              <div class="tour-detail">
+                <span class="tour-detail-icon">📍</span>
+                <span>Green River 一带</span>
+              </div>
+              <div class="tour-detail">
+                <span class="tour-detail-icon">⭐</span>
+                <span>适合各种水平</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Moonshine Arch -->
+        <div class="tour-card">
+          <div class="tour-image" style="background-image: url('/images/Moonshine Arch.webp');">
+            <span class="difficulty-badge trail-badge">Moonshine Arch</span>
+          </div>
+          <div class="tour-content">
+            <h3 class="tour-title">Moonshine Arch</h3>
+            <p class="tour-description">在崎岖的红岩峡谷间穿行，抵达一座藏在荒野深处的壮丽天然砂岩拱门。这处景色迷人、令人难忘的目的地足以媲美犹他州最著名的公园 — 却没有人潮。</p>
+            <div class="tour-details">
+              <div class="tour-detail">
+                <span class="tour-detail-icon">📍</span>
+                <span>红岩峡谷</span>
+              </div>
+              <div class="tour-detail">
+                <span class="tour-detail-icon">⭐</span>
+                <span>景色 &amp; 历史</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ashley Gorge -->
+        <div class="tour-card">
+          <div class="tour-image" style="background-image: url('/images/50a.webp');">
+            <span class="difficulty-badge trail-badge">Ashley Gorge</span>
+          </div>
+          <div class="tour-content">
+            <h3 class="tour-title">Ashley Gorge</h3>
+            <p class="tour-description">深入壮观的 Ashley Gorge 峡谷地带，高耸的砂岩崖壁环抱着一条蜿蜒的河谷。这是整个 Uintah Basin 里视觉冲击力数一数二的一段越野。</p>
+            <div class="tour-details">
+              <div class="tour-detail">
+                <span class="tour-detail-icon">📍</span>
+                <span>Ashley National Forest</span>
+              </div>
+              <div class="tour-detail">
+                <span class="tour-detail-icon">⭐</span>
+                <span>峡谷探险</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Outlaw Trail -->
+        <div class="tour-card">
+          <div class="tour-image" style="background-image: url('/images/51a.webp');">
+            <span class="difficulty-badge trail-badge">Outlaw Trail</span>
+          </div>
+          <div class="tour-content">
+            <h3 class="tour-title">Outlaw Trail</h3>
+            <p class="tour-description">骑行在当年 Butch Cassidy 与 Wild Bunch 使用过的路线上。这条历史悠久的荒野越野路线穿越峡谷地带和开阔的高地沙漠台地，昔日不法之徒曾在此遁入荒野。</p>
+            <div class="tour-details">
+              <div class="tour-detail">
+                <span class="tour-detail-icon">📍</span>
+                <span>峡谷之乡</span>
+              </div>
+              <div class="tour-detail">
+                <span class="tour-detail-icon">⭐</span>
+                <span>历史路线</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Asphalt Ridge -->
+        <div class="tour-card">
+          <div class="tour-image" style="background-image: url('/images/52a.webp');">
+            <span class="difficulty-badge trail-badge">Asphalt Ridge</span>
+          </div>
+          <div class="tour-content">
+            <h3 class="tour-title">Asphalt Ridge</h3>
+            <p class="tour-description">登上 Asphalt Ridge 之巅，360 度饱览恐龙之乡、Uintah Mountains 以及脚下辽阔的高地沙漠。这是 Vernal 周边极致的山脊 UTV 体验。</p>
+            <div class="tour-details">
+              <div class="tour-detail">
+                <span class="tour-detail-icon">📍</span>
+                <span>Uintah Basin 山脊</span>
+              </div>
+              <div class="tour-detail">
+                <span class="tour-detail-icon">⭐</span>
+                <span>全景视野</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    <div style="text-align:center; margin-top:50px; padding:20px 0;">
+      <p style="font-size:1.05rem; color:#666; font-family:var(--font-body);">用上方的日历挑选你的日期和越野路线。</p>
+    </div>
+
+    </section>
+
+    <!-- 帮助部分 -->
+    <section class="help-section">
+      <h3>预订需要帮助吗？</h3>
+      <p>给我们打个电话，我们会亲自帮你挑选最合适的越野路线，并找到适合你的时间。</p>
+      <a href="tel:435-219-9447" class="phone-cta">(435) 219-9447</a>
+      <p class="hours">每日营业 &bull; 7am – 7pm 山区时间</p>
+    </section>
+
+  </div>
+
+  <!-- Mobile Sticky CTA -->
+  <div class="mobile-sticky-cta">
+    <button onclick="window.open('https://cal.com/adventuretoursvernal/trails', '_blank')">立即预订你的越野之旅</button>
+  </div>
+
+  <!-- Cal.com Inline Embed Script -->
+<script is:inline type="text/javascript">
+  (function (C, A, L) {
+    let p = function (a, ar) { a.q.push(ar); };
+    let d = C.document;
+    C.Cal = C.Cal || function () {
+      let cal = C.Cal; let ar = arguments;
+      if (!cal.loaded) {
+        cal.ns = {}; cal.q = cal.q || [];
+        d.head.appendChild(d.createElement("script")).src = A;
+        cal.loaded = true;
+      }
+      if (ar[0] === L) {
+        const api = function () { p(api, arguments); };
+        const namespace = ar[1];
+        api.q = api.q || [];
+        if (typeof namespace === "string") {
+          cal.ns[namespace] = cal.ns[namespace] || api;
+          p(cal.ns[namespace], ar);
+          p(cal, [L, namespace, ar[2]]);
+        } else p(cal, ar);
+        return;
+      }
+      p(cal, ar);
+    };
+  })(window, "https://app.cal.com/embed/embed.js", "init");
+
+  Cal("init", { origin: "https://cal.com" });
+
+  Cal("inline", {
+  elementOrSelector: "#cal-booking-inline",
+  calLink: "adventuretoursvernal/trails",
+  layout: "month_view",
+  config: {
+    duration: 180,
+    overlayCalendar: true
+  }
+});
+
+  Cal("ui", {
+    theme: "light",
+    styles: { branding: { brandColor: "#d4764e" } },
+    hideEventTypeDetails: false,
+    layout: "month_view"
+  });
+</script>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3A). Every
  * locale without a committed variant falls back to English. Callers that
@@ -1486,6 +1696,7 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
   if (locale === 'de') return DE;
+  if (locale === 'zh') return ZH;
   if (locale === 'ja') return JA;
   return bodyHtml;
 }

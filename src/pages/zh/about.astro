@@ -1,0 +1,100 @@
+---
+// zh/about.astro — Simplified Chinese about page (Z4 inline-page translation
+// batch, mirrors Japanese P10K structurally).
+// Person + TouristInformationCenter schema: translated jobTitle/description/
+// knowsAbout (visible structured content); business-identity fields
+// (name/address/rating) stay byte-identical.
+import { getBodyHtml } from '../../page-content/about';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Dave Wilson",
+      "jobTitle": "老板兼首席向导",
+      "description": "Dave Wilson 是 Adventure Tours Vernal 的老板兼首席向导，这是 Uintah Basin 首屈一指的 UTV 越野游公司。Dave 在 Wasatch 和 Oquirrh 山间探索中长大，培养出一生对户外冒险的热爱。他与妻子 Trudy 搬到犹他州 Vernal 后，创办了 Adventure Tours Vernal，把 Uintah Basin 的自然奇观 — 从 Dinosaur National Monument 到 Flaming Gorge — 分享给来访者和当地人。",
+      "url": "https://adventuretoursvernal.com/zh/about/",
+      "image": "https://adventuretoursvernal.com/images/wilson-family.webp",
+      "worksFor": {
+        "@type": "TouristInformationCenter",
+        "name": "Adventure Tours Vernal",
+        "url": "https://adventuretoursvernal.com"
+      },
+      "knowsAbout": [
+        "犹他州 Vernal 的 UTV 越野游",
+        "Dinosaur National Monument",
+        "Flaming Gorge",
+        "Uintah Basin 荒野越野路线",
+        "Kawasaki KRX 1000 并排越野车行程",
+        "犹他州户外冒险"
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristInformationCenter",
+      "name": "Adventure Tours Vernal",
+      "image": "https://adventuretoursvernal.com/images/logo.webp",
+      "telephone": "+1-435-219-9447",
+      "email": "adventuretoursvernal@gmail.com",
+      "url": "https://adventuretoursvernal.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1935 S 1500 E",
+        "addressLocality": "Vernal",
+        "addressRegion": "UT",
+        "postalCode": "84078",
+        "addressCountry": "US"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "82",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Dave Wilson"
+      }
+    }
+  ]
+`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="关于我们｜Adventure Tours Vernal — Dave & Trudy Wilson"
+      description="认识 Adventure Tours Vernal 的老板 Dave 和 Trudy Wilson。犹他州 Vernal 的本地经营 UTV 越野游公司。5.0 星，82 条评价。致电 (435) 219-9447。"
+      path="/zh/about/"
+      type="website"
+      image="https://adventuretoursvernal.com/images/wilson-family.webp"
+      ogTitle="关于 Adventure Tours Vernal｜认识 Wilson 一家"
+      ogDescription="Dave 和 Trudy Wilson 通过犹他州 Vernal 的 Kawasaki KRX 1000 UTV 导览游，分享他们对 Uintah Basin 的热爱。5 星好评。致电 (435) 219-9447。"
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="about" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.about', lang) }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: t('footer.quickLinks', lang),
+      links: [
+        { href: '/zh/#tours', label: t('footer.link.ourTours', lang) },
+        { href: '/zh/#vehicles', label: t('footer.link.ourFleet', lang) },
+        { href: '/zh/#gallery', label: t('footer.link.photoGallery', lang) },
+        { href: '/zh/booking/', label: t('cta.bookNow', lang) },
+      ],
+    }}
+  />
+</BaseLayout>

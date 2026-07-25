@@ -1,0 +1,225 @@
+---
+// zh/things-to-do/best-restaurants-vernal-utah.astro — Simplified Chinese
+// restaurant guide (Z4, informal 你 register). Mirrors
+// src/pages/ja/things-to-do/best-restaurants-vernal-utah.astro, which in
+// turn mirrors src/pages/things-to-do/best-restaurants-vernal-utah.astro.
+// Restaurant names/addresses/phones/coupon codes are business data — kept
+// identical to the English source verbatim (see restaurants array below).
+import { getBodyHtml } from '../../../page-content/best-restaurants';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/layout/Header.astro';
+import Footer from '../../../components/layout/Footer.astro';
+import Seo from '../../../components/seo/Seo.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../../lib/i18n';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const restaurantStyles = `
+  <style>
+    .restaurant-page{max-width:1200px;margin:180px auto 60px;padding:0 20px}
+    .dining-hero{position:relative;border-radius:28px;overflow:hidden;margin-bottom:50px;min-height:340px;display:flex;align-items:flex-end;background:linear-gradient(135deg,#D2691E,#8B4513)}
+    .dining-hero-bg{position:absolute;inset:0;background:url('/images/95a.webp') center/cover no-repeat}
+    .dining-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(58,58,58,0.92) 0%,rgba(58,58,58,0.6) 40%,rgba(0,0,0,0.15) 100%)}
+    .dining-hero-content{position:relative;z-index:2;padding:50px 45px 40px;width:100%}
+    .dining-hero-content nav{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-size:0.88rem;font-weight:600;color:rgba(255,255,255,0.65)}
+    .dining-hero-content nav a{color:rgba(255,255,255,0.65);transition:color 0.3s}
+    .dining-hero-content nav a:hover{color:var(--burnt-orange)}
+    .dining-hero-content h1{font-family:var(--font-heading);font-size:clamp(2.2rem,5vw,3.4rem);font-weight:800;color:#fff;line-height:1.1;letter-spacing:-1.5px;margin-bottom:14px}
+    .dining-hero-content p{font-size:1.1rem;color:rgba(255,255,255,0.88);max-width:640px;line-height:1.7}
+    .dining-hero-content p strong{color:var(--desert-gold)}
+    .discount-banner{background:linear-gradient(135deg,#1a3c5e 0%,#0d2b45 100%);border-radius:20px;padding:32px 36px;margin-bottom:45px;display:flex;align-items:center;gap:28px;border:2px solid rgba(218,165,32,0.35);position:relative;overflow:hidden}
+    .discount-banner::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--desert-gold),var(--burnt-orange),var(--desert-gold))}
+    .discount-banner-icon{font-size:3.5rem;flex-shrink:0}
+    .discount-banner-text h2{font-family:var(--font-heading);font-size:1.4rem;font-weight:800;color:var(--desert-gold);margin-bottom:6px}
+    .discount-banner-text p{color:rgba(255,255,255,0.82);font-size:0.98rem;line-height:1.6;margin:0}
+    .discount-banner-text p strong{color:#fff}
+    .category-filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:35px;position:sticky;top:68px;z-index:50;background:var(--off-white);padding:14px 0;border-bottom:1px solid rgba(212,118,78,0.1)}
+    .filter-btn{font-family:var(--font-heading);font-size:0.85rem;font-weight:700;padding:10px 22px;border-radius:30px;border:2px solid rgba(212,118,78,0.2);background:white;color:var(--charcoal);cursor:pointer;transition:all 0.3s ease;white-space:nowrap}
+    .filter-btn:hover{border-color:var(--burnt-orange);color:var(--burnt-orange);transform:translateY(-2px)}
+    .filter-btn.active{background:linear-gradient(135deg,var(--burnt-orange),var(--rust-red));color:white;border-color:transparent;box-shadow:0 6px 18px rgba(212,118,78,0.3)}
+    .restaurant-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:30px;margin-bottom:60px}
+    .restaurant-card{background:white;border-radius:22px;overflow:hidden;box-shadow:0 12px 35px rgba(0,0,0,0.08);border:2px solid transparent;transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column}
+    .restaurant-card:hover{transform:translateY(-10px);box-shadow:0 22px 55px rgba(212,118,78,0.18);border-color:rgba(212,118,78,0.2)}
+    .restaurant-card.hidden{display:none}
+    .card-image{
+      height:240px;
+      background-color:#F5EDE3;
+      background-size:contain;
+      background-repeat:no-repeat;
+      background-position:center;
+      position:relative;
+      overflow:hidden
+    }
+    .card-image::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top,rgba(0,0,0,0.18),transparent)}
+    .cuisine-badge{position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.96);backdrop-filter:blur(8px);padding:6px 16px;border-radius:22px;font-family:var(--font-heading);font-size:0.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--burnt-orange);box-shadow:0 4px 12px rgba(0,0,0,0.15);z-index:2}
+    .discount-tag{position:absolute;top:14px;left:14px;background:linear-gradient(135deg,#27AE60,#229954);color:white;padding:6px 14px;border-radius:22px;font-family:var(--font-heading);font-size:0.72rem;font-weight:700;letter-spacing:0.5px;box-shadow:0 4px 12px rgba(39,174,96,0.3);z-index:2;display:flex;align-items:center;gap:4px}
+    .card-body{padding:26px 28px 20px;flex:1;display:flex;flex-direction:column}
+    .card-body h3{font-family:var(--font-heading);font-size:1.35rem;font-weight:700;color:var(--charcoal);margin-bottom:8px;letter-spacing:-0.3px}
+    .card-address{font-size:0.9rem;color:var(--charcoal);opacity:0.65;margin-bottom:14px;line-height:1.4}
+    .card-description{font-size:0.95rem;color:var(--charcoal);opacity:0.82;line-height:1.7;margin-bottom:20px;flex:1}
+    .card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+    .card-action-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:10px;font-family:var(--font-heading);font-size:0.8rem;font-weight:700;text-decoration:none;transition:all 0.3s ease;border:none;cursor:pointer}
+    .action-call{background:linear-gradient(135deg,rgba(212,118,78,0.1),rgba(184,92,62,0.1));color:var(--burnt-orange);border:1.5px solid rgba(212,118,78,0.2)}
+    .action-call:hover{background:var(--burnt-orange);color:white;border-color:var(--burnt-orange);transform:translateY(-2px)}
+    .action-website{background:linear-gradient(135deg,rgba(168,205,236,0.15),rgba(168,205,236,0.08));color:#2980B9;border:1.5px solid rgba(41,128,185,0.2)}
+    .action-website:hover{background:#2980B9;color:white;border-color:#2980B9;transform:translateY(-2px)}
+    .action-map{background:linear-gradient(135deg,rgba(184,197,168,0.2),rgba(184,197,168,0.1));color:#27AE60;border:1.5px solid rgba(39,174,96,0.2)}
+    .action-map:hover{background:#27AE60;color:white;border-color:#27AE60;transform:translateY(-2px)}
+    .coupon-section{background:linear-gradient(135deg,rgba(245,237,227,0.6),rgba(248,244,240,0.8));border-radius:14px;padding:16px 18px;border:1.5px dashed rgba(212,118,78,0.3);position:relative}
+    .coupon-label{font-family:var(--font-heading);font-size:0.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--burnt-orange);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+    .coupon-row{display:flex;align-items:center;gap:10px}
+    .coupon-code{flex:1;background:white;border:2px solid rgba(212,118,78,0.25);border-radius:10px;padding:10px 14px;font-family:'Courier New',monospace;font-size:1.1rem;font-weight:700;color:var(--burnt-orange);letter-spacing:2px;text-align:center}
+    .coupon-copy-btn{background:linear-gradient(135deg,var(--burnt-orange),var(--rust-red));color:white;border:none;border-radius:10px;padding:10px 16px;font-family:var(--font-heading);font-size:0.78rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;white-space:nowrap}
+    .coupon-copy-btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(212,118,78,0.35)}
+    .coupon-copy-btn.copied{background:linear-gradient(135deg,#27AE60,#229954)}
+    .coupon-show-btn{width:100%;margin-top:10px;padding:12px;border-radius:12px;font-size:0.88rem}
+    .coupon-note{font-size:0.76rem;color:var(--charcoal);opacity:0.55;margin-top:8px;line-height:1.4}
+    .coupon-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:10000;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(5px)}
+    .coupon-modal-overlay.visible{display:flex;animation:fadeInModal 0.3s ease}
+    .coupon-modal{background:white;border-radius:28px;width:100%;max-width:400px;padding:45px 35px;text-align:center;position:relative;box-shadow:0 30px 80px rgba(0,0,0,0.35)}
+    .coupon-modal-close{position:absolute;top:14px;right:16px;background:rgba(0,0,0,0.06);border:none;width:36px;height:36px;border-radius:50%;font-size:1.4rem;cursor:pointer;transition:all 0.3s ease;display:flex;align-items:center;justify-content:center;color:var(--charcoal)}
+    .coupon-modal-close:hover{background:rgba(0,0,0,0.1);transform:rotate(90deg)}
+    .coupon-modal-icon{font-size:4rem;margin-bottom:12px}
+    .coupon-modal h2{font-family:var(--font-heading);font-size:1.5rem;font-weight:800;color:var(--charcoal);margin-bottom:6px}
+    .modal-restaurant{font-size:1rem;color:var(--burnt-orange);font-weight:700;margin-bottom:20px}
+    .modal-code-box{background:linear-gradient(135deg,rgba(245,237,227,0.8),rgba(248,244,240,1));border:3px dashed var(--burnt-orange);border-radius:16px;padding:22px 20px;margin-bottom:20px}
+    .modal-code{font-family:'Courier New',monospace;font-size:2rem;font-weight:800;color:var(--burnt-orange);letter-spacing:4px}
+    .modal-discount{font-family:var(--font-heading);font-size:1.3rem;font-weight:800;color:#27AE60;margin-top:10px}
+    .modal-instructions{font-size:0.92rem;color:var(--charcoal);opacity:0.7;line-height:1.6;margin-bottom:20px}
+    .modal-branding{display:flex;align-items:center;justify-content:center;gap:10px;padding-top:18px;border-top:1px solid rgba(0,0,0,0.08)}
+    .modal-branding img{height:40px;width:auto}
+    .modal-branding span{font-family:var(--font-heading);font-size:0.78rem;font-weight:700;color:var(--charcoal);opacity:0.5}
+    @keyframes fadeInModal{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
+    .rest-tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;margin:40px 0 60px}
+    .rest-tip-card{background:white;border-radius:18px;padding:28px 24px;box-shadow:0 8px 25px rgba(0,0,0,0.06);border:1.5px solid rgba(212,118,78,0.1);transition:all 0.3s ease}
+    .rest-tip-card:hover{transform:translateY(-5px);box-shadow:0 14px 35px rgba(212,118,78,0.12);border-color:rgba(212,118,78,0.25)}
+    .rest-tip-icon{font-size:2.2rem;margin-bottom:14px}
+    .rest-tip-card h3{font-family:var(--font-heading);font-size:1.1rem;font-weight:700;color:var(--charcoal);margin-bottom:8px}
+    .rest-tip-card p{font-size:0.92rem;color:var(--charcoal);opacity:0.78;line-height:1.65;margin:0}
+    @media(max-width:768px){
+      .restaurant-page{margin-top:130px}
+      .dining-hero{min-height:280px;border-radius:20px}
+      .dining-hero-content{padding:35px 25px 30px}
+      .dining-hero-content h1{font-size:1.9rem}
+      .discount-banner{flex-direction:column;text-align:center;padding:28px 24px;gap:16px}
+      .category-filters{top:60px;gap:8px;padding:10px 0}
+      .filter-btn{font-size:0.78rem;padding:8px 16px}
+      .restaurant-grid{grid-template-columns:1fr;gap:22px}
+      .rest-tips-grid{grid-template-columns:1fr}
+      .coupon-modal{padding:35px 25px}
+      .card-image{height:200px;background-size:contain;background-repeat:no-repeat}
+    }
+    @media(max-width:480px){
+      .restaurant-page{margin-top:110px}
+      .dining-hero{min-height:220px}
+      .dining-hero-content h1{font-size:1.65rem;letter-spacing:-0.5px}
+      .card-actions{flex-direction:column}
+      .card-action-btn{justify-content:center}
+      .card-image{height:180px;background-size:contain;background-repeat:no-repeat}
+    }
+  </style>`;
+const schema = `
+  {"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"犹他州 Vernal 最佳餐厅（含行程客人专属折扣）","description":"以本地视角为你介绍犹他州 Vernal 最佳餐厅的攻略，按料理类别整理，并附有 Adventure Tours Vernal 客人专属的餐饮折扣码。","author":{"@type":"Organization","name":"Adventure Tours Vernal","url":"https://adventuretoursvernal.com"},"publisher":{"@type":"Organization","name":"Adventure Tours Vernal","url":"https://adventuretoursvernal.com"},"datePublished":"2026-04-01","dateModified":"2026-04-01","mainEntityOfPage":"https://adventuretoursvernal.com/zh/things-to-do/best-restaurants-vernal-utah/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"犹他州 Vernal 最好的餐厅有哪些?","acceptedAnswer":{"@type":"Answer","text":"Vernal 的热门餐厅包括休闲用餐的 4 Brothers Pizza、早餐的 Betty's Café、坐下来好好吃晚餐的 Swain's Steakhouse，以及地道墨西哥菜的 Plaza Mexicana。Adventure Tours Vernal 的客人可在其中许多店享受专属折扣码。"}},{"@type":"Question","name":"Dinosaur National Monument 附近有餐厅吗?","acceptedAnswer":{"@type":"Answer","text":"有。Vernal 是通往 Dinosaur National Monument 的门户小镇，本页所列餐厅距离纪念地入口都只有很短的车程。Main Street 上的 La Cabaña 和 Plaza Mexicana 这类市中心店，是往东前往 Quarry Visitor Center 途中顺路的落脚点。"}},{"@type":"Question","name":"如何使用 Adventure Tours 的餐饮折扣码?","acceptedAnswer":{"@type":"Answer","text":"每家参与的餐厅都有一个列在本页的专属折扣码。在手机上点按「出示给服务员」即可显示全屏优惠券，或在点餐时报出优惠码。折扣码适用于已确认预订的 Adventure Tours Vernal 客人。"}},{"@type":"Question","name":"在 Vernal 参加 UTV 行程后该去哪儿吃?","acceptedAnswer":{"@type":"Answer","text":"结束 3 小时的 UTV 行程后，大多数客人都想吃点实在的舒心美食。4 Brothers Pizza、Country Grub 和 7-11 Ranch Restaurant 都是分量十足、上菜快捷、深受欢迎的骑行后之选。"}},{"@type":"Question","name":"犹他州 Vernal 有高档餐厅吗?","acceptedAnswer":{"@type":"Answer","text":"Vernal 的餐饮以休闲为主，而非高档餐厅，但 Swain's Steakhouse 和 Red Canyon Lodge 提供坐下来慢慢享用的高品质用餐体验。Flaming Gorge 附近的 Red Canyon Lodge 风景尤其优美，为了一顿特别的餐点值得专程前往。"}}]},{"@type":"TouristAttraction","name":"Adventure Tours Vernal","description":"乘坐 Kawasaki KRX 1000 并排越野车，探访犹他州 Vernal 的沙漠峡谷、岩画与岩石艺术遗址的导览式 UTV 行程。","url":"https://adventuretoursvernal.com","address":{"@type":"PostalAddress","addressLocality":"Vernal","addressRegion":"UT","addressCountry":"US"},"telephone":"+14352199447"}]}
+`;
+// Restaurant + ItemList schema — business data (name/address/phone/url)
+// transcribed identically from the English source; only servesCuisine
+// mirrors the translated cuisine badges shown on the page.
+const restaurants = [
+  { name: '4 Brothers Pizza', street: '1060 Market Dr. #5', city: 'Vernal', state: 'UT', zip: '84078', phone: '+14357892222', cuisine: '比萨' },
+  { name: 'Country Grub Hamburger Restaurant', street: '2416 W 1500 E', city: 'Vernal', state: 'UT', zip: '84078', phone: '+14357891414', cuisine: '汉堡' },
+  { name: 'Get Grilled Sandwiches', street: '1096 W Hwy 40', city: 'Vernal', state: 'UT', zip: '84078', phone: '+14357893900', cuisine: '三明治' },
+  { name: "Abby's Café", street: '73 W Main St.', city: 'Vernal', state: 'UT', zip: '84078', phone: '+14357891366', cuisine: '早餐' },
+  { name: "Betty's Café", street: '416 W Main St.', city: 'Vernal', state: 'UT', zip: '84078', phone: '+14357810827', cuisine: '小馆' },
+  { name: "Swain's Steakhouse", street: '29 S Vernal Ave.', city: 'Vernal', state: 'UT', zip: '84078', phone: '+14357892671', cuisine: '牛排馆' },
+  { name: '7-11 Ranch Restaurant', street: '77 E Main St.', city: 'Vernal', state: 'UT', zip: '84078', phone: '+14357891170', cuisine: '西部风味' },
+  { name: 'Red Canyon Lodge', street: '2450 Red Canyon Rd', city: 'Dutch John', state: 'UT', zip: '84023', phone: '+14358892090', cuisine: '山间旅舍餐饮', url: 'https://www.redcanyonlodge.com' },
+  { name: 'Plaza Mexicana', street: '55 E Main St.', city: 'Vernal', state: 'UT', zip: '84078', phone: '+14357893340', cuisine: '墨西哥菜' },
+  { name: 'Mi Hacienda', street: '2075 US-40, Suite A', city: 'Vernal', state: 'UT', zip: '84078', phone: '+14357810099', cuisine: '墨西哥菜' },
+  { name: 'Canton Canyon City Chinese Restaurant', street: '1175 W Hwy 40', city: 'Vernal', state: 'UT', zip: '84078', phone: '+14357891388', cuisine: '中餐' },
+  { name: 'La Cabaña', street: '120 E Main St', city: 'Vernal', state: 'UT', zip: '84078', phone: '+14357893151', cuisine: '墨西哥菜' },
+];
+const restaurantListJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Adventure Tours Vernal 推荐的犹他州 Vernal 餐厅',
+  itemListElement: restaurants.map((r, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Restaurant',
+      name: r.name,
+      servesCuisine: r.cuisine,
+      telephone: r.phone,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: r.street,
+        addressLocality: r.city,
+        addressRegion: r.state,
+        postalCode: r.zip,
+        addressCountry: 'US',
+      },
+      ...(r.url ? { url: r.url } : {}),
+    },
+  })),
+};
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="犹他州 Vernal 最佳餐厅 | Adventure Tours Vernal"
+      description="发现犹他州 Vernal 最佳餐厅——从本地小馆、牛排馆到人气墨西哥菜，按类别为你精选。Adventure Tours 的行程客人可凭各店的优惠码享受专属餐饮折扣。"
+      path="/zh/things-to-do/best-restaurants-vernal-utah/"
+      type="article"
+      image="https://adventuretoursvernal.com/images/95a.webp"
+      ogDescription="发现犹他州 Vernal 最佳餐厅。Adventure Tours 的行程客人可凭优惠码享受专属餐饮折扣。"
+    />
+    <meta name="keywords" content="犹他州 Vernal 最佳餐厅, Vernal 去哪儿吃, Vernal 餐厅, Dinosaur National Monument 周边餐厅, Flaming Gorge 周边餐厅, Vernal 美食攻略">
+    <meta name="ai-content-summary" content="介绍犹他州 Vernal 最佳餐厅的互动式攻略，含类别筛选、Adventure Tours 客人专属优惠码、电话号码、网站链接以及 Google Maps 链接。类别包括休闲/比萨、小馆与早餐、牛排馆与西部风味、墨西哥与各国料理。每张餐厅卡片都含专属折扣码，以及出示给服务员的手机优惠券功能。">
+    <Fragment set:html={restaurantStyles} />
+    <script type="application/ld+json" set:html={schema} />
+    <script type="application/ld+json" set:html={JSON.stringify(restaurantListJsonLd)} />
+  </Fragment>
+  <Header slot="body" active="food" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: '最佳餐厅' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    tagline="乘坐 UTV 的导览式行程，穿越犹他州 Vernal 最壮美的沙漠景观、古老岩画与红岩峡谷。"
+    logoHeight={80}
+    brandPhone
+    showSocial={false}
+    contact={false}
+    columns={[
+      {
+        heading: '探索',
+        links: [
+          { href: '/zh/', label: '首页' },
+          { href: '/zh/utv/', label: 'UTV 越野路线与行程' },
+          { href: '/zh/booking/', label: '预订行程' },
+          { href: '/zh/about/', label: '关于我们' },
+          { href: '/zh/faq/', label: '常见问题' },
+        ],
+      },
+      {
+        heading: '游客资源',
+        links: [
+          { href: '/zh/things-to-do/best-restaurants-vernal-utah/', label: 'Vernal 最佳餐厅' },
+          { href: '/zh/utv/best-utv-trails-vernal/', label: '最佳 UTV 越野路线' },
+          { href: '/zh/dinosaur-national-monument/petroglyphs-rock-art-vernal/', label: '岩画与岩石艺术' },
+          { href: '/zh/guides/vernal-weather-guide/', label: 'Vernal 天气攻略' },
+          { href: '/zh/guides/what-to-wear-utv-tour/', label: '穿什么' },
+          { href: '/zh/guides/what-to-bring/', label: '带什么' },
+        ],
+      },
+      {
+        heading: '政策',
+        links: [
+          { href: '/zh/safety-guidelines/', label: '安全须知' },
+          { href: '/zh/cancellation-policy/', label: '取消政策' },
+          { href: '/zh/privacy-policy/', label: '隐私政策' },
+        ],
+      },
+    ]}
+    copyright={{ prefix: '2026 Adventure Tours Vernal. 版权所有。犹他州 Vernal。', linkText: undefined, linkHref: undefined, suffix: '' }}
+  />
+</BaseLayout>

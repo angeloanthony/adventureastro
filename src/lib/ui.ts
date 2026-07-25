@@ -902,9 +902,156 @@ const JA: Dict = {
   'hub.guides': 'ガイド',
 };
 
+// Simplified Chinese chrome dictionary (Z2), written for readers in mainland
+// China. Keys mirror EN 1:1 (structural reference = DE; non-Latin-script
+// implementation reference = JA). The glossary decisions locked here bind the
+// Z3 MDX batches and the Z4 inline pages — reuse them, do not re-derive:
+//
+//   • PROPER NAMES — two tiers, and the split is deliberate. A place with an
+//     ESTABLISHED mainland Chinese exonym uses it (Utah → 犹他州, Salt Lake
+//     City → 盐湖城, Rocky Mountains → 落基山脉, Colorado → 科罗拉多州). A place
+//     with NO established Chinese name stays English rather than being given an
+//     invented transliteration — Vernal, Uintas, Flaming Gorge, Ashley National
+//     Forest, Red Fleet, Green River, Dinosaur National Monument / Dinosaur
+//     Monument. This follows handoff §3 ("keep English") for the unnamed tier
+//     while honouring "prefer established terminology" for the named tier. It
+//     deliberately diverges from ja, which transliterated Vernal → バーナル:
+//     Japanese orthography expects katakana for foreign toponyms, whereas
+//     Chinese prose mixes Latin proper nouns freely, and 弗纳尔 would be an
+//     invention. `Vernal` is also inside the frozen brand `Adventure Tours
+//     Vernal` and is what a reader types into a search box.
+//   • CJK/Latin SPACING — one space between Chinese characters and any Latin
+//     run or Arabic numeral ('探索 Vernal', '3 小时', 'UTV 越野路线'). Applied
+//     uniformly; this is the zh-CN typographic convention.
+//   • LOCKED TERMS — Dinosaur Country → 恐龙之乡 (an established Chinese
+//     collocation for fossil country, not a coinage) · Key Takeaways → 要点速览
+//     · guides (the travel sense) → 攻略, the standard mainland travel word,
+//     never the flatter 指南 · petroglyphs → 岩画 · backcountry → 荒野深处 ·
+//     tour (the product) → 行程 / 之旅 · hub (the content grouping) → 专题.
+//   • TRAIL SPLIT — mirrors the locked DE Pisten/Wanderweg split: off-road
+//     (UTV/ATV/Jeep) → 越野路线; hiking → 徒步 / 步道. Never one blanket word.
+//   • Brand, NAP, prices, and fleet (Kawasaki KRX 1000) never appear here in
+//     translated form, per the handoff's proper-noun policy.
+const ZH: Dict = {
+  'nav.home': '首页',
+  'nav.about': '关于我们',
+  'nav.trails': '越野路线',
+  'nav.thingsToDo': '玩什么',
+  'nav.dinosaurMonument': 'Dinosaur Monument',
+  'nav.guides': '攻略',
+  'nav.food': '美食',
+  'nav.info': '实用信息',
+  'nav.cancellationPolicy': '取消政策',
+  'nav.privacyPolicy': '隐私政策',
+  'nav.faq': '常见问题',
+  'nav.safetyGuidelines': '安全须知',
+  'nav.whatToBring': '携带物品',
+  'nav.itineraries': '行程',
+
+  'cta.bookNow': '立即预订',
+  'cta.bookYourAdventure': '预订你的冒险之旅',
+
+  'a11y.toggleMenu': '切换菜单',
+  'a11y.breadcrumb': '面包屑导航',
+  'a11y.relatedArticles': '相关文章',
+  'a11y.allArticlesInHub': '本专题的全部文章',
+  'a11y.keyTakeaways': '要点速览',
+  'a11y.relatedGuides': '相关攻略',
+
+  'section.faq': '常见问题',
+  'section.exploreThisHub': '探索本专题',
+  'section.youMightAlsoLike': '你可能还喜欢',
+  'section.keyTakeaways': '要点速览',
+  'section.exploreVernal': '探索 Vernal',
+  'section.moreVernalGuides': '更多 Vernal 攻略',
+
+  'footer.tagline': '在犹他州的恐龙之乡，开启一生难忘的冒险。',
+  'footer.ourTrails': '我们的越野路线',
+  'footer.information': '实用信息',
+  'footer.contactInfo': '联系方式',
+  'footer.copyrightSuffix': ' - 版权所有。',
+  'footer.link.utvTrailsTours': 'UTV 越野路线与导览游',
+  'footer.link.thingsToDo': '玩什么',
+  'footer.link.dinosaurNationalMonument': 'Dinosaur National Monument',
+  'footer.link.guides': '攻略',
+  'footer.link.visitingFromSLC': '从盐湖城出发',
+  'footer.quickLinks': '快速链接',
+  'footer.link.ourTours': '我们的行程',
+  'footer.link.ourFleet': '我们的车队',
+  'footer.link.photoGallery': '照片集',
+
+  'tour.value.family': '大多数家庭都用它为 Vernal 之行画上句号。',
+  'tour.value.adventure': '由向导带队，驾驶 Kawasaki KRX 1000 穿越恐龙之乡。',
+  'tour.value.sunset': '黄金时刻的越野路线、岩画，以及荒野深处的观景点。',
+  'tour.value.generic': '由向导带队的 UTV 之旅，穿越恐龙之乡。',
+  'tour.callForPricing': '致电咨询价格',
+  'tour.threeHours': '3 小时',
+  'tour.upToRiders': '最多 {n} 人',
+
+  'reviews.googleReviews': 'Google 评价',
+  'reviews.ratedAria': '根据 {count} 条 Google 评价，评分为 5 分中的 {value} 分',
+
+  'author.writtenBy': '作者',
+  'author.updated': '更新于',
+  'author.areasOfExpertise': '专长领域',
+  'author.credentials': '资历与经验',
+  'author.aboutBusiness': '关于 Adventure Tours Vernal',
+  'author.articlesBy': '{name} 的文章',
+
+  'time.morning': '上午',
+  'time.lunch': '午餐',
+  'time.afternoon': '下午',
+  'time.dinner': '晚餐',
+  'time.evening': '傍晚',
+  'itinerary.weatherBackup': '恶劣天气备选方案',
+
+  'gateway.heading': '从外地前来？先看看你的出发路线。',
+  'gateway.note.saltLakeCity': '翻越 Uintas 的经典路线，约 3 小时车程。',
+  'gateway.note.denver': '向西穿越落基山脉的半日自驾之旅。',
+  'gateway.note.grandJunction': '科罗拉多州最近的出发地。',
+  'gateway.seeAllItineraries': '查看 Vernal 的全部行程',
+
+  'decision.heading': '不确定选哪个行程？从这里开始。',
+  'decision.intro': '告诉我们你最看重什么，我们为你推荐合适的攻略。',
+  'decision.q.firstTime': '第一次驾驶越野车？',
+  'decision.a.firstTime': '从新手攻略开始',
+  'decision.q.children': '带着孩子？',
+  'decision.a.children': '查看家庭 UTV 攻略',
+  'decision.q.couple': '两人同行？',
+  'decision.a.couple': '预订双人私人行程',
+  'decision.q.scenery': '想看风景？',
+  'decision.a.scenery': '比较最美的越野路线',
+  'decision.q.history': '想了解历史？',
+  'decision.a.history': '探访岩画与岩刻艺术',
+  'decision.q.adventure': '想要极致冒险？',
+  'decision.a.adventure': '深入荒野，来一趟秘境之旅',
+  'decision.q.shortTime': '时间紧张？',
+  'decision.a.shortTime': '预订下一场 3 小时行程',
+  'decision.q.group': '多人团体？',
+  'decision.a.group': '规划团体行程',
+
+  'city.driveTime': '车程',
+  'city.distance': '距离',
+  'city.route': '路线',
+  'city.nearestAirport': '最近的机场',
+  'city.driveTimeValue': '{n} 小时',
+  'city.distanceValue': '{n} 英里',
+
+  'hub.utv': 'UTV 越野路线与导览游',
+  'hub.atv': 'ATV 越野路线',
+  'hub.jeep': 'Jeep 越野路线',
+  'hub.dinosaur-national-monument': 'Dinosaur National Monument',
+  'hub.things-to-do': 'Vernal 玩什么',
+  'hub.hiking': '徒步',
+  'hub.camping': '露营',
+  'hub.fishing': '钓鱼',
+  'hub.scenic-drives': '景观自驾',
+  'hub.guides': '攻略',
+};
+
 // One entry per locale. es (P3A), it (P6), pt (P7A), fr (P8-P6), de
-// (P9-inline), and ja (P10K) are all real dictionaries now — every registered
-// locale has a translated UI chrome.
+// (P9-inline), ja (P10K), and zh (Z2) are all real dictionaries now — every
+// registered locale has a translated UI chrome.
 const UI_STRINGS: Partial<Record<Locale, Dict>> = {
   en: EN,
   es: ES,
@@ -913,6 +1060,7 @@ const UI_STRINGS: Partial<Record<Locale, Dict>> = {
   fr: FR,
   de: DE,
   ja: JA,
+  zh: ZH,
 };
 
 /**

@@ -36,6 +36,7 @@ export const LOCALES = [
   { code: 'fr', name: 'Français',   dir: 'ltr', ogLocale: 'fr_FR', hreflang: 'fr-FR' },
   { code: 'de', name: 'Deutsch',    dir: 'ltr', ogLocale: 'de_DE', hreflang: 'de-DE' },
   { code: 'ja', name: '日本語',      dir: 'ltr', ogLocale: 'ja_JP', hreflang: 'ja-JP' },
+  { code: 'zh', name: '简体中文',    dir: 'ltr', ogLocale: 'zh_CN', hreflang: 'zh-CN' },
 ] as const satisfies readonly LocaleMeta[];
 
 export const DEFAULT_LOCALE = 'en';
@@ -371,6 +372,74 @@ const JA_SLUGS = new Set<string>([
   'things-to-do/best-restaurants-vernal-utah',
 ]);
 
+// Simplified Chinese translations, added batch by batch exactly as the prior
+// six locales were. Locale code is the short `zh` (URL prefix `/zh/`, file
+// suffix `.zh.mdx`, dictionary key `zh`), matching how `pt`/`es` carry a short
+// code with a region-qualified hreflang; the mainland-China targeting lives in
+// the LOCALES entry above (hreflang `zh-CN`, og:locale `zh_CN`).
+//
+// Z1 registration ships an EMPTY set: `zh` is registered and type-visible, but
+// no /zh/ route, hreflang alternate, or switcher option is emitted until a slug
+// lands here — proving the registry pattern needs zero other code changes for a
+// new locale (byte-identical build vs. the 542-page baseline).
+const ZH_SLUGS = new Set<string>([
+  // Z3A — Simplified Chinese UTV hub batch. Compound slug = `utv/<base-id>`
+  // (the translated file is `utv/<base-id>.zh.mdx`). A spoke MUST be registered
+  // as its file lands: the localized route emits a page for any non-English
+  // entry, but nothing links to it until the registry lights up hreflang + the
+  // language switcher — an unregistered translation is a validator orphan.
+  'utv/backcountry-tours-vernal-utah', 'utv/beginners-guide-to-utv-tours-vernal',
+  'utv/best-utv-trails-vernal', 'utv/family-utv-guide-vernal', 'utv/group-utv-tours-vernal',
+  'utv/private-utv-tours-vernal', 'utv/side-by-side-rentals-vernal-utah',
+  // Z3B — Simplified Chinese hiking hub batch, wave 1 (8 of 16 spokes).
+  'hiking/alpine-lakes-hiking-high-uintas', 'hiking/beginner-hiking-guide-near-vernal',
+  'hiking/best-hikes-in-dinosaur-national-monument', 'hiking/bird-watching-near-vernal',
+  'hiking/dog-friendly-hiking-near-vernal', 'hiking/fall-hiking-near-vernal',
+  'hiking/family-hiking-near-vernal', 'hiking/high-uintas-backpacking-guide',
+  // Z3B wave 2 — remaining 8 hiking spokes. Hiking hub complete (16/16).
+  'hiking/high-uintas-day-hikes', 'hiking/kings-peak-hiking-guide',
+  'hiking/photography-hikes-near-vernal', 'hiking/spring-hiking-near-vernal',
+  'hiking/summer-hiking-near-vernal', 'hiking/wildflower-hiking-near-vernal',
+  'hiking/wildlife-hiking-guide-near-vernal', 'hiking/winter-hiking-near-vernal',
+  // Z3C — fishing (4), camping (4), scenic-drives (4).
+  'fishing/fishing-flaming-gorge', 'fishing/fishing-red-fleet-reservoir',
+  'fishing/fishing-steinaker-reservoir', 'fishing/green-river-fly-fishing',
+  'camping/camping-at-flaming-gorge', 'camping/camping-at-red-fleet-state-park',
+  'camping/camping-at-steinaker-state-park', 'camping/camping-in-ashley-national-forest',
+  'scenic-drives/cub-creek-road-tour-of-the-tilted-rocks', 'scenic-drives/flaming-gorge-uintas-scenic-byway',
+  'scenic-drives/red-cloud-loop-scenic-drive', 'scenic-drives/sheep-creek-geological-loop',
+  // Z3D — guides hub (9 spokes).
+  'guides/moab-utv-tours', 'guides/ultimate-guide-to-ashley-national-forest',
+  'guides/ultimate-guide-to-flaming-gorge', 'guides/ultimate-guide-to-red-fleet-state-park',
+  'guides/ultimate-guide-to-steinaker-state-park', 'guides/ultimate-guide-to-vernal-utah',
+  'guides/vernal-weather-guide', 'guides/what-to-bring', 'guides/what-to-wear-utv-tour',
+  // Z3E — itineraries (9), things-to-do (2), dinosaur-national-monument (2).
+  // FINAL zh MDX batch — all 57 spokes complete.
+  'itineraries/2-day-family-itinerary', 'itineraries/3-day-adventure-itinerary',
+  'itineraries/one-day-adventure-vernal', 'itineraries/photography-weekend-vernal',
+  'itineraries/romantic-weekend-dinosaur-country', 'itineraries/weekend-fishing-trip-vernal',
+  'itineraries/weekend-road-trip-from-denver', 'itineraries/weekend-road-trip-from-grand-junction',
+  'itineraries/weekend-road-trip-from-salt-lake-city',
+  'things-to-do/fun-things-to-do-vernal-utah-kids', 'things-to-do/vernal-utah-attractions',
+  'dinosaur-national-monument/petroglyphs-rock-art-vernal',
+  'dinosaur-national-monument/visiting-dinosaur-national-monument',
+  // Z4 Batch A — Simplified Chinese inline commercial/core pages (mirrors ja
+  // P10K Batch A). Registered as a batch once all 7 route files exist, per the
+  // dependency-root rule (handoff §7 Gate 4b). Body links stay English until the
+  // central zh link pass; these slugs only light up hreflang + the switcher so
+  // the pages are reachable from the English chrome (no validator orphans).
+  '', 'booking', 'about', 'faq', 'privacy-policy', 'cancellation-policy', 'safety-guidelines',
+  // Z4 Batch B — UTV + Dinosaur National Monument pillar roots + the two
+  // legacy trail landing pages (mirrors ja P10K Batch B+D pillars). Registered
+  // after Batch A; spoke breadcrumbs resolve through utv/ and dnm/.
+  'utv', 'dinosaur-national-monument', 'atv-trails-vernal-utah', 'jeep-trails-vernal-utah',
+  // Z4 Batch C — the 7 activity-hub pillars (mirrors ja P10K Batch C).
+  'hiking', 'fishing', 'camping', 'scenic-drives', 'things-to-do', 'guides', 'itineraries',
+  // Z4 Batch D — gateway + legacy restaurant landing pages. FINAL zh inline
+  // batch; with these the zh route set reaches inline-page parity with de/ja.
+  'from/salt-lake-city', 'things-to-do/best-restaurants-vernal-utah',
+]);
+
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {
   es: ES_SLUGS,
   it: IT_SLUGS,
@@ -378,6 +447,7 @@ const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {
   fr: FR_SLUGS,
   de: DE_SLUGS,
   ja: JA_SLUGS,
+  zh: ZH_SLUGS,
 };
 
 /**

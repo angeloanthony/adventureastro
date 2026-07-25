@@ -2275,6 +2275,329 @@ document.addEventListener('DOMContentLoaded', function() {
 
 `;
 
+const ZH = `
+
+<!-- ================================================
+     PAGE SUMMARY BLOCK — feeds Google AI Overviews
+     ================================================ -->
+<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+  Adventure Tours Vernal 为你解答关于 Vernal（犹他州）导览式 UTV 行程的常见问题。内容涵盖价格、年龄要求、需携带物品、天气政策、团队行程以及行程选择。每天 7am–7pm 营业。请致电 (435) 219-9447。
+</p>
+
+<section id="faq" class="faq-section">
+  <div class="faq-watermark">INTEL</div>
+
+  <div class="container">
+    <div class="section-header">
+      <span class="status-badge">MISSION PREP</span>
+      <h1 class="section-title" style="font-size:clamp(1.8rem,3.5vw,2.8rem);">UTV 行程常见问题 — Adventure Tours Vernal</h1>
+      <p class="section-subtitle">在你出发前往犹他州荒野之前，先把这些事实装进行囊。</p>
+      <p style="display:inline-flex;align-items:center;gap:8px;margin:14px auto 0;padding:7px 15px;border:1px solid rgba(212,118,78,0.5);border-radius:999px;background:#ffffff;box-shadow:0 1px 4px rgba(0,0,0,0.08);font-size:0.95rem;color:#4a4139;"><span aria-hidden="true" style="color:#e6a817;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count} 条 Google 评价</span></p>
+    </div>
+
+    <div class="faq-container">
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq1" class="faq-toggle">
+        <label for="faq1" class="faq-question">
+          <span class="faq-index">01</span> 我可以带上自己的越野车吗？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p><strong>当然可以！</strong>带上自己的越野车，能够玩到更个性化、甚至更极限的路线。你可以在线预订，但如果是自带越野车或定制行程，最好先打电话或发邮件给我们，说明你想体验的骑行类型。</p>
+            <p>我们会提供对讲机，并尽全力让每个人都玩得尽兴（同时又不失舒适）。在越野路线中更「硬核」的路段，我们很乐意提供更容易的替代方案。我们非常自豪于对这些区域了如指掌，也知道有无数种享受它们的方式！</p>
+            <p>请与你的向导充分沟通。如果你对越野路线的某一段感到不放心，尽管说出来！安全是第一优先，紧随其后的就是尽情享受。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq2" class="faq-toggle">
+        <label for="faq2" class="faq-question">
+          <span class="faq-index">02</span> 我可以带一个团队来吗？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>当然可以！团队行程请联系我们。告诉我们你的团队有多大、想看些什么。我们有很多选择，可以一起商量你们团队的需求，比如额外的停靠观光点、餐厅和酒店住宿、酒吧、夜生活、适合孩子的活动等等。在你们畅游美丽的 Uintah Basin 期间，我们很乐意成为你们团队活动的一部分。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq3" class="faq-toggle">
+        <label for="faq3" class="faq-question">
+          <span class="faq-index">03</span> 天气不好怎么办？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>无论晴天还是下雨，我们都照常出行。不过，如遇极端天气，或因其他不可预见的情况我们不得不取消行程，你可以选择改期或获得全额退款。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq4" class="faq-toggle">
+        <label for="faq4" class="faq-question">
+          <span class="faq-index">04</span> 我应该带些什么？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>我们会在户外待上好几个小时，请自行妥善判断。我们会尽量为每一趟行程备好应急厕纸和其他必需品。不过，如果你觉得自己可能会用到，最好还是随身带上！防晒霜、驱蚊喷雾和润唇膏永远不会多余。</p>
+            <p>我们建议你带上<strong>太阳镜、帽子、相机、外套和包脚的鞋子。</strong>这些并非必需（但有备无患，对吧？）。你也可以采用洋葱式穿搭，因为气温可能会有起伏。我们免费提供饮用水和小食。如果你有任何过敏情况，建议自备符合你饮食限制的食物。并排越野车后座的空间有限，所以如果你不确定该带什么，尽管问我们！</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq5" class="faq-toggle">
+        <label for="faq5" class="faq-question">
+          <span class="faq-index">05</span> 我应该什么时候到集合点？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>所有行程都请在出发时间<strong>前 30 分钟</strong>到达。行程预订时间就是实际出发时间。在完成全部安全培训、你熟悉自己的车辆之前，我们不会出发。出发前，我们会逐项讲解所有的行前说明和安全事项，比如免责声明、装备选择等。</p>
+            <p>完成预订后，你会收到一封确认邮件，里面包含关于你所选行程的重要信息。请仔细阅读并遵照执行。如果在行前说明开始时，你没有到场、手续没办完、装备没选好，你可能会失去这次行程的名额，且不予退款。这就像赶校车一样……到点不在，就会被落下！</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq6" class="faq-toggle">
+        <label for="faq6" class="faq-question">
+          <span class="faq-index">06</span> 我需要年满多少岁？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>要驾驶我们的越野车，你需要至少<strong>年满 18 岁。</strong>要作为乘客乘坐我们的越野车，你需要至少<strong>年满 2 岁。</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq7" class="faq-toggle">
+        <label for="faq7" class="faq-question">
+          <span class="faq-index">07</span> 取消和押金？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>点击<a href="/cancellation-policy/" class="faq-link">这里</a>查看完整的取消政策。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq8" class="faq-toggle">
+        <label for="faq8" class="faq-question">
+          <span class="faq-index">08</span> ATV 行程要多少钱？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>我们提供一种由 Kawasaki KRX 1000 并排越野车带你体验的导览式 3 小时行程：</p>
+            <ul>
+              <li><strong>每台车 $349</strong> — 最多可坐 2 名乘员</li>
+              <li><strong>$125 同乘</strong> — 在有向导的车上加坐第三名乘客</li>
+              <li><strong>每小时 $99</strong> — 每台车，用于延长你的行程</li>
+            </ul>
+            <p>需 3 人成行，最多可接待 12 位客人（6 台车）。<strong>请致电 <a href="tel:435-219-9447" class="faq-link">(435) 219-9447</a> 查询空位。</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq9" class="faq-toggle">
+        <label for="faq9" class="faq-question">
+          <span class="faq-index">09</span> 我需要有 ATV 经验吗？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p><strong>不需要任何 ATV 经验！</strong>Adventure Tours Vernal 欢迎完全的新手，并在每趟行程前提供完整的安全培训。</p>
+            <p>我们经验丰富的向导会手把手、一步步教你操作 Kawasaki KRX 1000 并排越野车。我们欢迎各种水平的人——从第一次上手的新手到老练的骑手。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq10" class="faq-toggle">
+        <label for="faq10" class="faq-question">
+          <span class="faq-index">10</span> 我们可以顺道去 Dinosaur National Monument 吗？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p><strong>可以！</strong>我们的导览式 <strong>3 小时 UTV 行程</strong>会探索 Dinosaur National Monument 附近的荒野越野路线，包括古老的岩层和岩画。</p>
+            <p>纪念区里那面著名的恐龙骨墙是由 National Park Service 管理的另一处独立景点——许多客人会上午在纪念区游览，下午再参加一趟穿越周边恐龙之乡荒野的 UTV 行程。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq11" class="faq-toggle">
+        <label for="faq11" class="faq-question">
+          <span class="faq-index">11</span> 为什么选择 ADVENTURE TOURS VERNAL？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Adventure Tours Vernal 是 <strong>Vernal（犹他州）唯一一家提供 Kawasaki KRX 1000 导览游的公司。</strong>我们提供独家进入以下地方的机会：</p>
+            <ul>
+              <li>只有当地人才知道的隐秘越野路线</li>
+              <li>古老的岩画</li>
+              <li>Butch Cassidy 的藏身之处</li>
+              <li>风景优美的拱门和岩石地貌</li>
+            </ul>
+            <p>专业的本地向导、专业的安全装备，欢迎各种水平的人参加。<strong>每天 7am–7pm 营业。</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq12" class="faq-toggle">
+        <label for="faq12" class="faq-question">
+          <span class="faq-index">12</span> 你们的行程有多长？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>我们的标准导览游大约 <strong>3 小时</strong>，提供五套越野路线供你选择，以匹配你的团队和经验水平：</p>
+            <ul>
+              <li><strong>Doc's Beach</strong>、<strong>Moonshine Arch</strong>、<strong>Ashley Gorge</strong>、<strong>Outlaw Trail</strong> 和 <strong>Asphalt Ridge</strong></li>
+              <li>预订时由你选择越野路线</li>
+              <li>想多玩一会儿？每台车每小时 $99 即可延长</li>
+            </ul>
+            <p>每趟行程都包含安全装备、培训、饮用水和小食。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq13" class="faq-toggle">
+        <label for="faq13" class="faq-question">
+          <span class="faq-index">13</span> 你们的行程适合家庭参加吗？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p><strong>当然！</strong>我们的导览游非常适合带孩子的家庭。它包含：</p>
+            <ul>
+              <li>地形平缓、轻松好走的越野路线</li>
+              <li>令人惊叹的沙漠远景</li>
+              <li>拍照的好机会</li>
+              <li>2 座并排越野车；家庭会预订多台车一起出行</li>
+            </ul>
+            <p>无需任何经验——我们提供完整的安全培训。孩子须至少年满 2 岁才能作为乘客乘坐。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq14" class="faq-toggle">
+        <label for="faq14" class="faq-question">
+          <span class="faq-index">14</span> 你们的营业时间是什么时候？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Adventure Tours Vernal <strong>每天从早上 7:00 到晚上 7:00 营业</strong>，采用 Mountain Time，每周 7 天。</p>
+            <p><strong>请致电 <a href="tel:435-219-9447" class="faq-link">(435) 219-9447</a></strong> 预订你的 ATV 行程，或访问 <a href="https://adventuretoursvernal.com" class="faq-link">adventuretoursvernal.com</a>。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq15" class="faq-toggle">
+        <label for="faq15" class="faq-question">
+          <span class="faq-index">15</span> 你们提供哪些行程选择？
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Adventure Tours Vernal 提供一种由 Kawasaki KRX 1000 并排越野车带你体验的导览式 3 小时行程，预订时可从五套越野路线中选择：</p>
+            <ul>
+              <li>Doc's Beach</li>
+              <li>Moonshine Arch</li>
+              <li>Ashley Gorge</li>
+              <li>Outlaw Trail</li>
+              <li>Asphalt Ridge</li>
+            </ul>
+            <p>每趟行程都包含 Kawasaki KRX 1000 并排越野车、专业的本地向导、安全装备、培训、饮用水和小食。</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end .faq-container -->
+  </div>
+</section>
+
+<!-- Mobile Sticky CTA -->
+<div class="mobile-sticky-cta">
+  <button onclick="location.href='/booking/'">立即预订你的行程</button>
+</div>
+
+<script is:inline>
+document.addEventListener('DOMContentLoaded', function() {
+
+  // Auto-close other FAQs when one opens
+  const faqToggles = document.querySelectorAll('.faq-toggle');
+  faqToggles.forEach(toggle => {
+    toggle.addEventListener('change', function() {
+      if (this.checked) {
+        faqToggles.forEach(otherToggle => {
+          if (otherToggle !== this && otherToggle.checked) {
+            otherToggle.checked = false;
+          }
+        });
+        setTimeout(() => {
+          this.parentElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 300);
+      }
+    });
+  });
+
+  // Keyboard navigation
+  const faqQuestions = document.querySelectorAll('.faq-question');
+  faqQuestions.forEach((question, index) => {
+    question.setAttribute('tabindex', '0');
+    question.setAttribute('role', 'button');
+    question.setAttribute('aria-expanded', 'false');
+    question.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const checkbox = this.previousElementSibling;
+        checkbox.checked = !checkbox.checked;
+        this.setAttribute('aria-expanded', checkbox.checked);
+        checkbox.dispatchEvent(new Event('change'));
+      }
+      if (e.key === 'ArrowDown') { e.preventDefault(); if (faqQuestions[index + 1]) faqQuestions[index + 1].focus(); }
+      if (e.key === 'ArrowUp') { e.preventDefault(); if (faqQuestions[index - 1]) faqQuestions[index - 1].focus(); }
+    });
+    question.addEventListener('click', function() {
+      const checkbox = this.previousElementSibling;
+      setTimeout(() => { this.setAttribute('aria-expanded', checkbox.checked); }, 10);
+    });
+  });
+
+  // URL hash linking
+  if (window.location.hash) {
+    const targetId = window.location.hash.substring(1);
+    const targetCheckbox = document.getElementById(targetId);
+    if (targetCheckbox && targetCheckbox.classList.contains('faq-toggle')) {
+      targetCheckbox.checked = true;
+      setTimeout(() => {
+        targetCheckbox.parentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 500);
+    }
+  }
+
+  // Smooth load animation
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach((item, index) => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+      item.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+      item.style.opacity = '1';
+      item.style.transform = 'translateY(0)';
+    }, 100 * index);
+  });
+});
+</script>
+
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3A). Every
  * locale without a committed variant falls back to English. Callers that
@@ -2286,6 +2609,7 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'pt') return PT;
   if (locale === 'fr') return FR;
   if (locale === 'de') return DE;
+  if (locale === 'zh') return ZH;
   if (locale === 'ja') return JA;
   return bodyHtml;
 }

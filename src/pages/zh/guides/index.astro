@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import TrustBadge from '../../../components/content/TrustBadge.astro';
+import Header from '../../../components/layout/Header.astro';
+import Footer from '../../../components/layout/Footer.astro';
+import Seo from '../../../components/seo/Seo.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import HubIndex from '../../../components/content/HubIndex.astro';
+import { getLangFromUrl } from '../../../lib/i18n';
+import { t } from '../../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+// zh/guides/index.astro — Simplified Chinese Guides hub pillar, mirrors
+// src/pages/ja/guides/index.astro and the German/French/Portuguese equivalents.
+// Mirrors src/pages/guides/index.astro exactly (structure, classes, ids).
+//
+// Body internal links stay English root-relative (central link-localization
+// pass re-prefixes them once all /zh/ routes exist).
+const schema = `{
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "犹他州 Vernal 旅行攻略——规划你的 UTV 之旅",
+        "description": "为犹他州 Vernal 之旅准备的攻略合集：目的地全貌、穿什么、带什么、各季节天气、Vernal 与 Moab 的对比，以及 Flaming Gorge、Red Fleet State Park、Steinaker State Park、Ashley National Forest 的深度攻略。",
+        "author": {"@type": "Organization", "name": "Adventure Tours Vernal"},
+        "publisher": {"@type": "Organization", "name": "Adventure Tours Vernal", "logo": {"@type": "ImageObject", "url": "https://adventuretoursvernal.com/images/logo.webp"}},
+        "datePublished": "2026-07-10",
+        "dateModified": "2026-07-11",
+        "mainEntityOfPage": "https://adventuretoursvernal.com/zh/guides/"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type": "Question", "name": "Adventure Tours Vernal 为行程规划提供哪些攻略？", "acceptedAnswer": {"@type": "Answer", "text": "Adventure Tours Vernal 发布了九篇行程规划攻略：一份完整的 Vernal 目的地全貌、一份各季节天气攻略、一份穿衣攻略、一份行李打包清单、一份面向从 Moab 前来的游客的对比攻略，以及附近四个目的地——Flaming Gorge、Red Fleet State Park、Steinaker State Park、Ashley National Forest——的深度攻略。每一篇都涵盖了在 Vernal 附近参加 Kawasaki KRX 1000 UTV 导览游之前需要了解的内容。"}},
+          {"@type": "Question", "name": "预订 UTV 行程之前需要先读这些攻略吗？", "acceptedAnswer": {"@type": "Answer", "text": "不需要，但它们能帮你做好准备。大多数客人只需要一双包脚趾的鞋和一张有效的驾照——头盔和安全装备由 Adventure Tours Vernal 提供。这些攻略涵盖穿衣、打包、各季节天气、目的地概况，以及 Vernal 的行程与 Moab 相比如何。"}}
+        ]
+      }
+    ]
+  }`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="犹他州 Vernal 旅行攻略 | Adventure Tours Vernal"
+      description="为犹他州 Vernal 之旅准备的九篇攻略合集：穿什么、带什么、各季节天气、Flaming Gorge 等周边目的地，以及 Vernal 附近的 UTV 导览游与 Moab 相比如何。出发前需要了解的一切，尽在于此。"
+      path="/zh/guides/"
+      type="article"
+      ogTitle="犹他州 Vernal 旅行攻略 | Adventure Tours Vernal"
+      ogDescription="规划一次 Vernal 附近 UTV 导览游所需的一切——穿衣、打包、各季节天气，以及与 Moab 的对比。"
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="guides" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.guides', lang) }]} />
+  <main class="article-page" slot="body">
+    <header class="article-header">
+      <h1 class="article-title">犹他州 Vernal 旅行攻略</h1>
+      <p class="article-meta">Adventure Tours Vernal</p>
+      <TrustBadge align="left" />
+    </header>
+    <div class="article-body">
+      <div class="article-summary-box">
+        参加一次 Kawasaki KRX 1000 UTV 导览游很好准备——大多数客人只需要一张有效的驾照和一双包脚趾的鞋。这里汇集的攻略涵盖其余的一切：穿什么、带什么、Vernal 的高地沙漠天气如何随季节变化，以及如果你在拿它和 Moab 做比较，Vernal 的行程又该如何定位。
+      </div>
+
+      <div class="article-tip"><strong>正在规划第一次到访？</strong>请阅读 <a href="/dinosaur-national-monument/visiting-dinosaur-national-monument/">Dinosaur National Monument 终极攻略</a>——一份涵盖化石、岩画、景观自驾、徒步以及最佳到访季节的完整方案。</div>
+
+      <h2>先从目的地本身说起</h2>
+      <p>完全没听说过 Vernal？<a href="/guides/ultimate-guide-to-vernal-utah/">犹他州 Vernal 终极攻略</a>为每位初次到访者梳理了必备基础——Vernal 在哪里、它如何成为恐龙之乡、怎么抵达以及如何在当地出行、住哪儿吃什么，以及如何围绕这一地区的亮点安排行程。先从这里开始，再用下面的攻略为上路做好准备。</p>
+
+      <h2>为你的行程做好准备</h2>
+      <p>预订之前，先了解 Vernal 周边的地形和气候实际是什么感觉会很有帮助。<a href="/guides/what-to-wear-utv-tour/">沙漠 UTV 之旅穿衣攻略</a>讲解了在敞篷并排越野车中三小时行程所需的鞋子、叠穿和防晒。<a href="/guides/what-to-bring/">带什么</a>清单为打包收尾——哪些是必备的、哪些由我们提供，以及哪些留在家里就好。</p>
+
+      <h2>选择到访时机</h2>
+      <p>Vernal 位于犹他州高地沙漠、海拔 5,331 英尺，早晨和午后的气温可相差 30–40°F。<a href="/guides/vernal-weather-guide/">Vernal 天气攻略</a>按季节逐一拆解天气状况，让你挑选最合适的出行窗口——也让你知道在盛夏或冬季边缘出行时会遇到什么。</p>
+
+      <h2>Vernal 与 Moab 的对比</h2>
+      <p>如果你在 Vernal 和 Moab 的 UTV 之旅之间权衡，<a href="/guides/moab-utv-tours/">Moab UTV 之旅的替代之选</a>攻略会给你一份坦诚的对比——路线的拥挤程度、夏季气温、价格，以及 Vernal 有而 Moab 没有的路线和景点（比如 Moonshine Arch 和 Dinosaur National Monument）。</p>
+
+      <h2>深入探索这一地区的目的地</h2>
+      <p>想在哪里度过你的日子这件事上再深入一点？四篇深度目的地攻略涵盖了从 Vernal 向四周辐射的这片土地——<a href="/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge 终极攻略</a>、<a href="/guides/ultimate-guide-to-red-fleet-state-park/">Red Fleet State Park 终极攻略</a>、<a href="/guides/ultimate-guide-to-steinaker-state-park/">Steinaker State Park 终极攻略</a>，以及 <a href="/guides/ultimate-guide-to-ashley-national-forest/">Ashley National Forest 终极攻略</a>——每一处都有各自的景色、水域和路线，且都在离镇上很近、轻松可达的范围内。</p>
+
+      <div class="article-tip">
+        <strong>不确定从哪里开始？</strong>拨打 <a href="tel:435-219-9447">(435) 219-9447</a> 联系 Dave 或 Trudy——他们能根据你的出行日期和团队人数，为你讲清会遇到什么。或者，当你准备好了，就<a href="/booking/">查看档期并在线预订</a>。
+      </div>
+    </div>
+  </main>
+  <HubIndex slot="body" collection="guides" heading="全部攻略" />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

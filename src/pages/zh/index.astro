@@ -1,0 +1,173 @@
+---
+// zh/index.astro — Simplified Chinese homepage (Z4 inline batch, mirrors ja/index.astro).
+// Mirrors src/pages/index.astro exactly; only Seo/schema copy and the
+// page-content locale differ. lang is URL-derived ('zh'), same as every
+// other page — no new routing/lang-prop mechanism introduced.
+import { getBodyHtml } from "../../page-content/home";
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import { SITE } from '../../config/site';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+// TouristInformationCenter + OfferCatalog structured data — translated
+// name/description fields; business identity fields (name, url root,
+// address, geo, rating) stay byte-identical to the English page (same
+// business entity, not page-specific copy).
+const schema = `
+  {
+    "@context": "https://schema.org",
+    "@type": "TouristInformationCenter",
+    "name": "Adventure Tours Vernal",
+    "image": "https://adventuretoursvernal.com/images/logo.webp",
+    "telephone": "+1-435-219-9447",
+    "email": "adventuretoursvernal@gmail.com",
+    "url": "https://adventuretoursvernal.com",
+    "priceRange": "$$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1935 S 1500 E",
+      "addressLocality": "Vernal",
+      "addressRegion": "UT",
+      "postalCode": "84078",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 40.4555,
+      "longitude": -109.5287
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"
+      ],
+      "opens": "07:00",
+      "closes": "19:00"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "82",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "employee": {
+      "@type": "Person",
+      "name": "Dave Wilson",
+      "jobTitle": "首席向导兼老板",
+      "description": "Dave Wilson 是 Adventure Tours Vernal 的老板兼首席向导，这是一家本地经营、服务 Uintah Basin 的 UTV 导览游公司。Dave 对 Vernal 的荒野越野路线、Dinosaur National Monument 以及犹他州的高地沙漠地形了如指掌。",
+      "url": "https://adventuretoursvernal.com/zh/about/"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "并排越野车 UTV 导览游 — 犹他州 Vernal",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Doc's Beach UTV 导览游",
+            "description": "前往 Doc's Beach 的并排越野车向导之旅，穿越越野路线、沙质沙漠地形，饱览犹他州 Vernal 附近 Uintah Basin 的辽阔景色。",
+            "provider": { "@type": "LocalBusiness", "name": "Adventure Tours Vernal" },
+            "areaServed": "Vernal, Utah"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Moonshine Arch UTV 导览游",
+            "description": "前往 Moonshine Arch 的 Kawasaki KRX 1000 导览游，蜿蜒穿行于犹他州 Vernal 附近的红岩峡谷与高地沙漠台地。",
+            "provider": { "@type": "LocalBusiness", "name": "Adventure Tours Vernal" },
+            "areaServed": "Vernal, Utah"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Ashley Gorge UTV 导览游",
+            "description": "穿越壮观的 Ashley Gorge 峡谷走廊的并排越野车导览游，饱览犹他州 Vernal 附近高耸的砂岩峭壁与河谷风光。",
+            "provider": { "@type": "LocalBusiness", "name": "Adventure Tours Vernal" },
+            "areaServed": "Vernal, Utah"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Outlaw Trail UTV 导览游",
+            "description": "沿犹他州历史悠久的 Outlaw Trail 前行的荒野 UTV 导览游，穿越犹他州 Vernal 附近曾被 Butch Cassidy 的 Wild Bunch 使用的崎岖峡谷地形。",
+            "provider": { "@type": "LocalBusiness", "name": "Adventure Tours Vernal" },
+            "areaServed": "Vernal, Utah"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Asphalt Ridge UTV 导览游",
+            "description": "沿 Asphalt Ridge 山脊行进的 Kawasaki KRX 1000 导览游，将犹他州 Vernal 附近的恐龙之乡与 Uintah Mountains 全景尽收眼底。",
+            "provider": { "@type": "LocalBusiness", "name": "Adventure Tours Vernal" },
+            "areaServed": "Vernal, Utah"
+          }
+        }
+      ]
+    }
+  }
+`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="犹他州 Vernal 的 UTV 导览游 | Adventure Tours Vernal"
+      description="Adventure Tours Vernal 在犹他州 Vernal 提供 Kawasaki KRX 1000 并排越野车导览游，穿越犹他州的恐龙之乡。5 星好评。每日 7am–7pm 营业。预订请拨打 (435) 219-9447。"
+      path="/zh/"
+      type="website"
+      ogTitle="Adventure Tours Vernal | 犹他州恐龙之乡的 UTV 导览游"
+      ogDescription="穿越 Vernal 荒野的 Kawasaki KRX 1000 并排越野车导览游。5.0 星，82 条评价。预订请拨打 (435) 219-9447。"
+      twitterTitle="Adventure Tours Vernal | 犹他州的 UTV 导览游"
+      twitterDescription="穿越 Vernal 荒野的 Kawasaki KRX 1000 并排越野车导览游。5.0 星，82 条评价。"
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="home" />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: t('footer.ourTrails', lang),
+      links: [
+        { href: '#tours', label: "Doc's Beach" },
+        { href: '#tours', label: 'Moonshine Arch' },
+        { href: '#tours', label: 'Ashley Gorge' },
+        { href: '#tours', label: 'Outlaw Trail' },
+        { href: '#tours', label: 'Asphalt Ridge' },
+        { href: '/booking/', label: t('cta.bookNow', lang), class: 'nav-book-btn' },
+      ],
+    }}
+    contact={{ emailAsLink: true }}
+    info={{
+      heading: t('footer.information', lang),
+      links: [
+        { href: '/cancellation-policy/', label: t('nav.cancellationPolicy', lang) },
+        { href: '/privacy-policy/', label: t('nav.privacyPolicy', lang) },
+        { href: '/faq/', label: t('nav.faq', lang) },
+        { href: '/safety-guidelines/', label: t('nav.safetyGuidelines', lang) },
+        { href: '/guides/what-to-bring/', label: t('nav.whatToBring', lang) },
+      ],
+      secondHeading: t('section.exploreVernal', lang),
+      secondLinks: [
+        { href: '/utv/', label: t('footer.link.utvTrailsTours', lang) },
+        { href: '/things-to-do/', label: t('footer.link.thingsToDo', lang) },
+        { href: '/dinosaur-national-monument/', label: t('footer.link.dinosaurNationalMonument', lang) },
+        { href: '/guides/', label: t('footer.link.guides', lang) },
+        { href: '/from/salt-lake-city/', label: t('footer.link.visitingFromSLC', lang) },
+      ],
+    }}
+  />
+</BaseLayout>

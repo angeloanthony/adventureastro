@@ -1,0 +1,37 @@
+---
+// zh/dinosaur-national-monument/index.astro — Simplified Chinese DNM hub pillar
+// (Z4 Simplified Chinese inline batch, mirrors Japanese P10K / src/pages/ja/dinosaur-national-monument/index.astro).
+// Chinese spoke articles for this hub already exist (visiting-dinosaur-national-monument,
+// petroglyphs-rock-art-vernal — see ZH_SLUGS in src/lib/i18n.ts), so HubIndex renders
+// Chinese titles/links directly, matching the German/French/Portuguese/Italian/Spanish/Japanese rollout pattern.
+import { getBodyHtml } from '../../../page-content/dnm';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE } from '../../../config/site';
+import Header from '../../../components/layout/Header.astro';
+import Footer from '../../../components/layout/Footer.astro';
+import Seo from '../../../components/seo/Seo.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import HubIndex from '../../../components/content/HubIndex.astro';
+import { getLangFromUrl } from '../../../lib/i18n';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Dinosaur National Monument 近郊的 UTV 行程","description":"在犹他州 Vernal，探索环绕 Dinosaur National Monument 荒野的有向导带队 UTV 行程。","author":{"@type":"Organization","name":"Adventure Tours Vernal"},"publisher":{"@type":"Organization","name":"Adventure Tours Vernal","logo":{"@type":"ImageObject","url":"https://adventuretoursvernal.com/images/logo.webp"}},"datePublished":"2026-04-08","dateModified":"2026-04-08","mainEntityOfPage":"https://adventuretoursvernal.com/zh/dinosaur-national-monument/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"能在 Dinosaur National Monument 附近参加 UTV 行程吗？","acceptedAnswer":{"@type":"Answer","text":"可以。Adventure Tours Vernal 提供有向导带队的 Kawasaki KRX 1000 行程，带你穿越环绕纪念地的荒野。纪念地内部不允许动力车辆通行，但紧邻外侧的越野路线拥有同样的峡谷地形、岩画和地质构造。"}},{"@type":"Question","name":"Adventure Tours Vernal 距 Dinosaur National Monument 有多远？","acceptedAnswer":{"@type":"Answer","text":"Adventure Tours Vernal 的总部位于犹他州 Vernal，在纪念地 Quarry Exhibit Hall 以西大约 20 分钟车程处。许多游客都会在同一趟旅程中把 UTV 行程与纪念地游览结合起来。"}},{"@type":"Question","name":"把 UTV 行程与 Dinosaur National Monument 结合起来的最佳方式是什么？","acceptedAnswer":{"@type":"Answer","text":"把 UTV 行程订在上午、下午游览纪念地，或者反过来。一趟 3 小时的有向导带队 UTV 行程，再加上在纪念地的半天，就构成了探索峡谷之乡的完整一天冒险。"}}]}]}`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Dinosaur National Monument 近郊的 UTV 行程｜Adventure Tours"
+      description="在犹他州 Vernal 的 Dinosaur National Monument 近郊，畅享有向导带队的 UTV 行程。距纪念地仅几分钟车程的荒野里，探索峡谷、古老岩画和沙漠地形。Kawasaki KRX 1000，3 小时，每台车 $349。今天就来预订。"
+      path="/zh/dinosaur-national-monument/"
+      type="article"
+      ogTitle="Dinosaur National Monument 近郊的 UTV 行程"
+      ogDescription="有向导带队的 Kawasaki KRX 1000 行程，带你穿越环绕 Dinosaur National Monument 的荒野——峡谷、岩画，以及沙漠冒险。"
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="dinosaur-national-monument" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'Dinosaur Monument 行程' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <HubIndex slot="body" collection="dinosaur-national-monument" heading="全部 Dinosaur Monument 攻略" />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>
