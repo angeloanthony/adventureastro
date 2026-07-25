@@ -9,14 +9,23 @@ number below is a count from the shipped corpus.
 
 All three locales are feature-complete (57 MDX spokes + 20 inline pages each,
 77/77 registered routes, validator green). What remains is judgement a corpus
-scan cannot make. This document exists so a reviewer decides **nine questions**,
-not so they read 171 files.
+scan cannot make. This document exists so a reviewer decides a short list of
+questions, not so they read 171 files.
 
-| Locale | Decisions | Highest-impact item |
+**Decided so far — 2 of 10:**
+
+| Item | Decision | State |
 |---|---|---|
-| `de` | A1–A4 | A1 register: `du` vs `Sie` — **blocks DE review assignment** |
+| **A1** German register | **informal `du` confirmed**; `Sie` flip cancelled | ✅ decided 2026-07-25 — **DE review unblocked**. Consistency residual (~18 formal leaks, `Du`/`du` caps) still open |
+| **C1** `官方渠道` vs `官方来源` | **`官方渠道`** is the standard | ✅ decided **and applied** 2026-07-25 — 962/0 |
+
+**Open — 8:**
+
+| Locale | Open items | Highest-impact |
+|---|---|---|
+| `de` | A1-residual, A2, A3, A4 | A2 — 135 title-cased headings across 28 files |
 | `ja` | B1 | B1 `モアブ` vs `Moab` |
-| `zh` | C1–C4 | C1 官方渠道 vs 官方来源 (961 vs 1 — a live inconsistency) |
+| `zh` | C2, C3, C4, **C6** | **C6** — 13 duplicated-`请` defects, 3 of which would bend the 962-instance locked caveat |
 
 ---
 
@@ -40,9 +49,26 @@ times and bare `Vernal` 0 times.
 
 ---
 
-## A. German (`de`) — four decisions
+## A. German (`de`) — A1 decided; A1-residual/A2/A3/A4 open
 
-### A1. Register: the corpus is informal `du`. Confirm or flip. — HIGHEST IMPACT
+### A1. Register: the corpus is informal `du`. — ✅ DECIDED 2026-07-25: keep `du`
+
+> **✅ OWNER DECISION (2026-07-25): informal `du` is confirmed as the German house
+> register.** Rationale: leisure/adventure tourism — parks, road trips, hiking,
+> family activities — reads better in a friendly, conversational voice than an
+> institutional one, and the brand aims to feel welcoming rather than governmental.
+> **The corpus-wide flip to `Sie` is cancelled and will not happen.**
+>
+> **This unblocks German native review** (see `MULTILINGUAL_HANDOFF.md` §10.1) and
+> deliberately diverges from Spanish (*usted*) and Italian (*Lei*) — that divergence
+> is now a recorded decision, not undocumented drift.
+>
+> **Residual work this authorises** (not the flip — the *consistency* half of A1):
+> normalise the ~18 unambiguous formal forms (`Ihnen`/`Ihre`/`Ihr`) and the mixed
+> `Du`/`du` capitalisation, both of which are wrong under *either* register. Apply
+> as one corpus-wide sweep per Gate 4c, then re-run the register scan below.
+
+The evidence the decision was made against is preserved:
 
 German shipped **informal address**, which diverges from the other two locales
 where a register decision was explicitly recorded (Spanish = formal *usted*,
@@ -58,22 +84,16 @@ caught.
 | `Sie` (includes sentence-initial *sie* = "they") | 120 |
 | `Ihnen` / `Ihre` / `Ihr` (unambiguous formal) | ~18 |
 
-Two sub-questions:
+The shipped register (informal) is now the confirmed register, so the 4,085
+informal forms stand as-is. The reviewer's remaining task here is narrow:
 
-- **The main call:** is informal `du` right for this brand in German? It is
-  common and often preferred in German outdoor/adventure tourism, so this is
-  plausibly correct — but it is a brand-voice decision, not a language one, and
-  it currently contradicts the Spanish and Italian house style.
-- **Regardless of the above:** the ~18 unambiguous formal forms and the mixed
-  `Du`/`du` capitalisation are inconsistent with *either* choice and should be
-  normalised once the main call is made.
+> **A1 residual (open):** confirm the ~18 `Ihnen`/`Ihre`/`Ihr` formal leaks and
+> the `Du`/`du` capitalisation split should normalise to lowercase `du`. Both are
+> inconsistent under *either* register, so this is a consistency fix, not a
+> register question. **Do not touch the 2,999 `du` / 1,086 `dein*` forms.**
 
-> **Question A1:** Keep informal `du` (and normalise the ~18 formal leaks and the
-> `Du`/`du` capitalisation), or convert the corpus to formal *Sie* to match
-> Spanish and Italian?
-
-*Impact if flipped: corpus-wide, all 57 `de` spokes + 20 inline pages. This is by
-far the largest possible change in this document — please answer it first.*
+*Note on the `Sie` row: 120 is an upper bound, not 120 formal leaks — it includes
+sentence-initial* sie *= "they". The ~18 unambiguous row is the real target.*
 
 ---
 
@@ -193,42 +213,59 @@ This item is closed; the earlier note was stale.
 
 ---
 
-## C. Simplified Chinese (`zh`) — four decisions; register and typography verified clean
+## C. Simplified Chinese (`zh`) — C1 decided & applied; C2/C3/C4/C6 open; register clean
 
 Counted across all 57 `.zh.mdx` spokes **and** the 20 `src/pages/zh/**` inline
 pages. Register needs no decision: **你 3,668 / 您 0 / 咱们 0** — informal `你`
 is applied without a single leak, exactly as the Z1 brief locked it.
 
-### C1. `官方渠道` vs `官方来源` — one instance diverges from 961. — HIGHEST IMPACT
+### C1. `官方渠道` vs `官方来源` — ✅ DECIDED & APPLIED 2026-07-25: `官方渠道`
+
+> **✅ OWNER DECISION (2026-07-25): `请向官方渠道核实` is the project standard.**
+> Rationale: the corpus already demonstrates it as the established editorial
+> convention at 961 instances. Rewriting 961 to match a single outlier would be a
+> large sweep for no demonstrated benefit — the outlier is what diverged.
+>
+> **Applied the same day (3 changes, smallest-possible scope):**
+>
+> | Change | Location | Count |
+> |---|---|---|
+> | `请向官方来源核实` → `请向官方渠道核实` | [`zh/itineraries/index.astro:65`](src/pages/zh/itineraries/index.astro#L65) | 1 |
+> | Duplicated `请` removed (independent grammar fix) | [`wildflower-hiking-near-vernal.zh.mdx:278`](src/content/hiking/wildflower-hiking-near-vernal.zh.mdx#L278) | 1 |
+> | **Result** | `请向官方渠道核实` = **962**, `请向官方来源核实` = **0** | |
+>
+> The grammar fix reads `…就你要前往的海拔的当前预报，请向官方渠道核实（…）` —
+> the first `请` is dropped and a comma inserted, so the locked phrase stays
+> byte-identical and the agency list stays adjacent to it.
+>
+> **Deliberately NOT changed:** the 3 remaining `官方来源` in ordinary prose
+> (`由官方来源掌握`, `请查当年的天文历或官方来源确认`, `出发前请先向官方来源确认`).
+> These are not the caveat phrase — 来源 as a common noun is a separate usage from
+> the fixed 渠道 formula, and collapsing them was not part of the decision. One of
+> them (`且都由官方来源掌握`) is mildly awkward Chinese on its own merits and is
+> worth the native reviewer's eye — flagged, not fixed.
+
+The evidence the decision was made against is preserved:
 
 Every article carries the same standing caveat that hours, fees, road conditions
 and closures change and must be checked. The Chinese corpus renders it two ways:
 
-| Form | Literal sense | Count |
+| Form | Literal sense | Count *before* the fix |
 |---|---|---|
 | `请向官方渠道核实` | "verify via official **channels**" | **961** |
 | `请向官方来源核实` | "verify with official **sources**" | **1** |
 
-The lone `来源` instance is [`src/pages/zh/itineraries/index.astro:65`](src/pages/zh/itineraries/index.astro#L65)
-— changed deliberately during Z5 on the judgement that 渠道 ("channels") reads as
-booking/contact channels rather than authoritative sources. That judgement may
-well be right, but it was applied to one page out of 77, so the corpus is now
-inconsistent either way. Separately, `官方来源` appears 4 times in ordinary prose,
-and two of those sit in the *same sentence* as the 渠道 caveat.
+The lone `来源` instance was introduced deliberately during Z5, on the judgement
+that 渠道 ("channels") reads as booking/contact channels rather than authoritative
+sources. That judgement was defensible in isolation, but it was applied to one
+page out of 77, so it left the corpus inconsistent either way — which is what made
+this a decision rather than a cleanup.
 
-One of those two is also a straightforward grammar defect, independent of the
-terminology call — [`wildflower-hiking-near-vernal.zh.mdx:278`](src/content/hiking/wildflower-hiking-near-vernal.zh.mdx#L278)
-reads `…由官方来源掌握，请就你要前往的海拔的当前预报请向官方渠道核实（…）`, with
-`请` twice in one clause. That should be fixed regardless of C1's outcome.
-
-> **Question C1:** Which form is correct for "official sources" in this caveat —
-> `官方渠道` or `官方来源`? Whichever wins is swept to 100%. If `来源` wins the
-> sweep is 961 replacements; if `渠道` wins it is 1, and the Z5 change is reverted.
-
-*Note for the reviewer: `VERIFY WITH OFFICIAL SOURCE` appears **0** times in the
-`zh` corpus. Earlier notes describing a locked all-caps English variant alongside
-a natural Chinese one do not describe what actually shipped — Chinese has one
-phrase, used 962 times, in two spellings.*
+**Correcting the record:** earlier phase notes described `zh` as keeping "9 locked
+all-caps `VERIFY WITH OFFICIAL SOURCE` instances alongside 1 natural Chinese
+phrase." That is not what shipped. The English string appears **0** times in the
+`zh` corpus. Chinese had one phrase in two spellings, 961 to 1 — not a
+locked/natural split. The 961-vs-1 framing above is the measured state.
 
 ---
 
@@ -341,8 +378,14 @@ range or compound, where a single dash is the correct form: `犹他州—怀俄�
 woodland). This is the Chinese counterpart of the German nominalised-infinitive
 trap in A2 — the reason these passes need a human and not a script.
 
-Two items are engineering polish rather than language, and are not questions for
+Three items are engineering polish rather than language, and are not questions for
 the reviewer:
+
+- [`zh/things-to-do/best-restaurants-vernal-utah.astro:176`](src/pages/zh/things-to-do/best-restaurants-vernal-utah.astro#L176)
+  is the *only* source of ASCII commas after Han characters in the whole `zh`
+  corpus (5 of them) — and it is a `<meta name="keywords">` list, where
+  comma-separation is the correct convention. Not a defect. Recorded so a future
+  scan doesn't "fix" it.
 
 - [`zh/things-to-do/best-restaurants-vernal-utah.astro:122`](src/pages/zh/things-to-do/best-restaurants-vernal-utah.astro#L122)
   — 5 JSON-LD `FAQPage` question strings end in ASCII `?` where the visible page
@@ -351,6 +394,50 @@ the reviewer:
   [`zh/fishing/index.astro`](src/pages/zh/fishing/index.astro) still carry
   Japanese-language `//` code comments left over from mirroring the `ja`
   rollout, plus 11 `/ja/` provenance comments across the locale. None render.
+
+---
+
+### C6. Duplicated `请` before the locked caveat — 13 instances, 5 files. OPEN.
+
+Surfaced while applying the C1 grammar fix. The wildflower instance was **not**
+isolated: the locked caveat `请向官方渠道核实` was mechanically appended to
+sentences that already opened with `请`, producing `请…请向官方渠道核实` — *please …
+please verify with official channels* — in **14** places. One is fixed (C1); **13
+remain.**
+
+| File | Lines | Shipped text |
+|---|---|---|
+| `utv/beginners-guide-to-utv-tours-vernal.zh.mdx` | 23 | `请在来电时请向官方渠道核实` |
+| ″ | 31, 112 | `请在预订前致电请向官方渠道核实` |
+| ″ | 33, 174 | `请在预订时请向官方渠道核实` |
+| `hiking/wildflower-hiking-near-vernal.zh.mdx` | 18 | `请就当前状况与通行情况请向官方渠道核实` |
+| ″ | 22, 30 | `请就当前状况请向官方渠道核实` |
+| ″ | 28 | `请就你要去徒步的地方请向官方渠道核实` |
+| `itineraries/weekend-road-trip-from-grand-junction.zh.mdx` | 41 | `请针对你的具体日期请向官方渠道核实` |
+| `itineraries/romantic-weekend-dinosaur-country.zh.mdx` | 25 | `请尽早预订并请向官方渠道核实` |
+| `utv/family-utv-guide-vernal.zh.mdx` | 136 | `请致电请向官方渠道核实` |
+| ″ | 178 | `请直接向我们请向官方渠道核实` |
+
+**They do not all take the same fix, which is why this is a decision and not a
+sweep.** Ten follow the rule already applied at C1 — drop the *leading* `请`, add a
+comma, leave the locked phrase byte-identical (`请在预订时…` → `在预订时，请向官方渠道核实`).
+Three cannot:
+
+- `请致电请向官方渠道核实` — *please call please verify*. The two clauses collapse
+  into one verb phrase; dropping either `请` still leaves `致电请向…` or `请致电向…`,
+  so the **locked phrase itself has to bend** (e.g. `请致电或向官方渠道核实`).
+- `请直接向我们请向官方渠道核实` — same problem, two competing `向` targets (*us*
+  vs *official channels*); it needs a real rewrite, not a deletion.
+- `请尽早预订并请向官方渠道核实` — here the *second* `请` is the one to drop
+  (`请尽早预订，并向官方渠道核实`), which again breaks the locked string.
+
+> **Question C6:** Approve the 10 mechanical fixes (leading `请` → comma, locked
+> phrase untouched)? And for the 3 that require bending
+> `请向官方渠道核实` — permit a local variant at those sites, or rewrite the
+> surrounding sentence so the locked phrase survives intact?
+
+*Nothing beyond the single C1 instance has been changed. This is reported, not
+fixed, because 3 of the 13 would silently break the 962-instance lock.*
 
 ---
 
