@@ -16,7 +16,7 @@ All three locales are feature-complete (57 MDX spokes + 20 inline pages each,
 scan cannot make. This document exists so a reviewer decides a short list of
 questions, not so they read 171 files.
 
-**Decided — 7 of 12:**
+**Decided — 8 of 13:**
 
 | Item | Decision | State |
 |---|---|---|
@@ -25,6 +25,7 @@ questions, not so they read 171 files.
 | **A5** German missing heading localization | **translate the 16**; `Leave No Trace` stays English | ✅ decided **and applied** 2026-07-25 (P14) — 16 headings localized, 1 retained, line numbers and heading levels unchanged |
 | **A6** `Leave No Trace` lock alignment | **English programme name**; lowercase prose stays German | ✅ decided **and applied** 2026-07-25 (P15) — 8 sites aligned across 6 files, 9 descriptive uses deliberately kept German |
 | **A3** `Piste` for UTV trails | **`Piste` is CORRECT — retained**; only the `-system` compound normalised | ✅ decided 2026-07-25 (P16) — 251 occurrences reviewed, **239 unchanged**, 12 compound-drift replacements |
+| **A4** generic English `Trail` | **localize by sense** — `Piste` for motorised, `Wanderweg` for hiking; proper names stay English | ✅ decided **and applied** 2026-07-25 (P17) — 167 occurrences reviewed, **32 replaced**, 88 proper names + 2 footwear terms + 4 code identifiers kept |
 | **C1** `官方渠道` vs `官方来源` | **`官方渠道`** is the standard | ✅ decided **and applied** 2026-07-25 |
 | **C6** locked-phrase policy | caveat is locked by **intent, not byte sequence** | ✅ decided **and fully applied** 2026-07-25 — 27 seam defects across 13 files fixed, disclaimer count conserved at 994 |
 
@@ -32,14 +33,19 @@ questions, not so they read 171 files.
 
 | Locale | Open items | Highest-impact |
 |---|---|---|
-| `de` | **A4 only** | A4 — ~6 generic `Trail` uses; proper names stay English |
+| `de` | **all 6 original items closed**; **A7 newly raised** | A7 — `Trailhead` (41); the recorded lock is contradicted by the corpus |
 | `ja` | B1 | B1 `モアブ` vs `Moab` |
 | `zh` | C2, C3, C4 | C2 — `登山口` (228) for trailheads with no mountain |
 
 **Priority order** (owner-set 2026-07-25, revised at P16 once A3 was decided):
-~~C6~~ → ~~A1-residual~~ → ~~A2~~ → ~~A5~~ → ~~A6~~ → ~~A3~~ → **A4** → B1, C2, C3, C4.
+~~C6~~ → ~~A1-residual~~ → ~~A2~~ → ~~A5~~ → ~~A6~~ → ~~A3~~ → ~~A4~~ → B1, C2, C3, C4
+(**A7** to be slotted by the owner).
 
-*German is one item from complete. A4 is the last German item, and it is small.*
+***The German review as originally scoped is COMPLETE — A1, A2, A3, A4, A5 and A6
+are all decided and applied.*** P17 raised one new item, **A7 (`Trailhead`)**, which
+the A4 census surfaced as evidence against a lock this document had recorded as
+frozen. It is a decision, not a defect, and it did not exist when the "one item from
+complete" plan was written.
 
 ---
 
@@ -63,7 +69,17 @@ times and bare `Vernal` 0 times.
 
 ---
 
-## A. German (`de`) — A1 fully closed; A2/A3/A4 open
+## A. German (`de`) — A1–A6 all closed; A7 newly raised
+
+| Item | Subject | State |
+|---|---|---|
+| **A1** | register (`du` vs `Sie`) | ✅ closed — P12, zero edits (both targets were false positives) |
+| **A2** | heading capitalisation | ✅ closed — P13, 297 replacements / 55 files |
+| **A3** | `Piste` for UTV trails | ✅ closed — P16, `Piste` retained; 12 compound fixes |
+| **A4** | generic English `Trail` | ✅ closed — P17, 32 replacements / 5 files |
+| **A5** | untranslated English headings | ✅ closed — P14, 16 headings localized |
+| **A6** | `Leave No Trace` lock | ✅ closed — P15, 8 sites aligned |
+| **A7** | `Trailhead` (41) | ⬜ **open** — raised by the A4 census; owner decision |
 
 ### A1. Register: the corpus is informal `du`. — ✅ DECIDED 2026-07-25: keep `du`
 
@@ -371,7 +387,117 @@ trail**, or whether it reads as a ski slope or rally stage to a German ear
 
 ---
 
-### A4. Generic English `Trail` — a small residue
+### A4. Generic English `Trail` — ✅ DECIDED & APPLIED 2026-07-25 (P17)
+
+> **✅ Applied: 32 generic occurrences localized in one sweep; 88 proper names,
+> 2 footwear terms and 4 code identifiers deliberately untouched.** Verified:
+> `astro check` 0 errors / 0 warnings · build **619 pages** · validator ✔ ·
+> 5 files changed, all `de`.
+>
+> **No new policy was invented — A4 is A3's rule applied to the residue A3
+> deferred.** A3 closed with the note *"Generic English `Trail` residue — out of
+> scope, belongs to A4."* The German corpus already encodes a clean
+> motorised/non-motorised split, so each generic `Trail` was decided by which side
+> of that split its sentence sits on:
+>
+> | Sense | German term | Evidence it was already the corpus's own word |
+> |---|---|---|
+> | motorised / UTV / off-road | `Piste`, `Pisten` | A3 decision, 251 occurrences |
+> | non-motorised / hiking | `Wanderweg`, `Wanderwege` | 888 occurrences before this sweep |
+>
+> **The true census was 167 occurrences, not 127** — the earlier figure omitted the
+> 20 inline `src/pages/de/**` pages and every hyphenated compound. The generic
+> residue was **32, not "roughly 6"**, because the original note counted only bare
+> `Trail`/`Trails` and missed the compounds (`Backcountry-Trails`, `Offroad-Trails`,
+> `Trail-Systeme`, `UTV-Trail-Touren`, `Trail-Tipp`, `Trail-Seite`, `Trail-Pflege`,
+> `Trail-Beschreibungen`, `Off-Trail-Strecken`).
+>
+> | Context | Before | Proper name | Generic (swept) | Kept for other reasons |
+> |---|---|---|---|---|
+> | body prose | 96 | 62 | 24 | 10 (`Trailhead`) |
+> | headings | 8 | 7 | 1 | 0 |
+> | frontmatter / FAQ | 21 | 13 | 2 | 6 (`Trailhead`) |
+> | image alt / figcaption | 15 | 0 | 0 | 15 (`Trailhead`) |
+> | tables | 13 | 6 | 1 | 6 (`Trailhead`) |
+> | page-summary | 5 | 0 | 0 | 5 (`Trailhead`) |
+> | inline `.astro` (incl. JSON-LD, nav labels) | 9 | 0 | 4 | 5 |
+> | **Total** | **167** | **88** | **32** | **47** |
+>
+> **Every peer locale translates generic `trail` and keeps the proper names — German
+> was the sole Latin-script outlier**, exactly the A6 shape. At the identical lines:
+>
+> | Locale | Generic *trail* | Proper names |
+> |---|---|---|
+> | `fr` | `pistes` — **the cognate, independently chosen again** | English |
+> | `es` | `senderos` | English |
+> | `it` | `sentieri` | English |
+> | `pt` | `trilhos` | English |
+> | `de` (before) | **untranslated `Trails`** | English |
+>
+> French converging on `piste` for the *same UTV lines* is the second time this
+> review has seen `fr` independently pick the piste family — it was line 3 of A3's
+> evidence, and it recurs here.
+>
+> **What changed** (32 replacements across 5 files):
+>
+> | From | To | Count | Why this target |
+> |---|---|---|---|
+> | `Backcountry-Trails` | `Backcountry-Pisten` | 5 | `Backcountry-Piste*` already 11× in `de` |
+> | `Trails` (UTV prose) | `Pisten` | 6 | A3 |
+> | `Trail` (UTV singular) | `Piste` | 3 | A3 |
+> | `UTV-Trail-Touren` | `UTV-Pistentouren` | 4 | `UTV-Pistentouren` is the shipped name in [`de/utv/index.astro`](src/pages/de/utv/index.astro) |
+> | `Trail-System*` | `Pistensystem*` | 2 | A3's canonical compound (38→40) |
+> | `Offroad-Trails` | `Offroad-Pisten` | 1 | `Offroad-Piste` already 3× |
+> | `Trail-Tipp` | `Pisten-Tipp` | 1 | tip labels are localized corpus-wide |
+> | `Trails` (hiking prose) | `Wanderwege(n)` | 6 | the hiking counterpart, 888× |
+> | `Trail` (hiking singular) | `Wanderweg` | 1 | ″ |
+> | `Trail-Seite` / `Trail-Beschreibungen` | `Seite des Wanderwegs` / `Beschreibungen der Wanderwege` | 2 | all four peers translate these |
+> | `Trail-Pflege` | `Wegpflege` | 1 | `Wegpflege` already 2× in `de` |
+> | `Off-Trail-Strecken` | `Strecken abseits der Wege` | 1 | `abseits` already 34×; peers all translate |
+>
+> **One cross-batch drift caught by the census.** The identical English sentence
+> *"Backcountry trails and unpaved roads are not accessible and vary widely in
+> surface and grade"* ships in two files. German rendered it `Backcountry-Pisten` in
+> [`ultimate-guide-to-vernal-utah:163`](src/content/guides/ultimate-guide-to-vernal-utah.de.mdx#L163)
+> and `Backcountry-Trails` in
+> [`visiting-dinosaur-national-monument:268`](src/content/dinosaur-national-monument/visiting-dinosaur-national-monument.de.mdx#L268).
+> Same source, same meaning, two renderings — resolved to the established form.
+>
+> **Intentional exceptions — documented, not swept:**
+> - **88 proper names stay English**: Outlaw Trail, Uinta Highline Trail, Fossil
+>   Discovery Trail, Harpers Corner Trail, Desert Voices Trail, Sound of Silence
+>   Trail, Canyon Rim Trail, Little Hole National Recreation Trail, Doc's Beach-Trail.
+> - **`Trailschuhe` and `Trail-Running-Schuhe`** ([`what-to-wear-utv-tour:17`](src/content/guides/what-to-wear-utv-tour.de.mdx#L17),
+>   [`:42`](src/content/guides/what-to-wear-utv-tour.de.mdx#L42)) — footwear product
+>   categories, **kept on unanimous peer evidence**: `fr` *chaussures de trail* /
+>   *trail running*, `es` *zapatos de trail running*, `it` *scarpe da trail* /
+>   *trail running*, `pt` *sapatilhas de trail running*. All four retain English
+>   `trail` here. German also mirrors the English master's own distinction
+>   (*trail shoes* at L17 vs *trail running shoes* at L42) and is faithful as shipped.
+> - **4 code identifiers** — `t('footer.ourTrails')`, `t('footer.link.utvTrailsTours')`,
+>   `class="other-trail-info"`. Not content; renaming them would be an engineering
+>   change and is out of scope for an editorial pass.
+> - **41 `Trailhead`** — a *different lexeme* and outside this item's stated scope
+>   (`Trail`, `Trails`, `Trail-`). The census nevertheless turned up strong evidence
+>   that the recorded lock is wrong. **Raised as A7 for the owner** rather than swept.
+>
+> **Anchor note.** One heading changed
+> ([`petroglyphs-rock-art-vernal:49`](src/content/dinosaur-national-monument/petroglyphs-rock-art-vernal.de.mdx#L49),
+> `## Was du auf den Trails zu sehen bekommst` → `## Was du auf den Pisten zu sehen
+> bekommst`), so its ID regenerated. Verified safe: **0** references to the old
+> anchor in source or in built `dist/` HTML.
+>
+> **Post-change scans all match their recorded baselines** (per the Appendix rule
+> that any `de` change re-runs A1/A2): `Du` 202 · `Sie` 137 · `Ihr` 13 · `Ihnen` 1 ·
+> `Ihre` 4 — identical to the P12 closure table; mid-sentence capitalised
+> `Du`/`Dich`/`Dir`/`Dein*` still **0** (P13); A3's protected exceptions intact
+> (`Wüstenpiste` 2, `Waschbrettpiste` 2, `Pistenpräparierung` 1, `Streckensystem` 0,
+> `Pistennetz` 0); A6's split intact (`Leave No Trace` 20 + `Leave-No-Trace` 8,
+> lowercase German prose 6).
+
+The original finding is preserved:
+
+### A4 (original finding). Generic English `Trail` — a small residue
 
 `Trail` appears 127 times in German files. **~90 are proper nouns and correctly
 stay English** per the frozen never-translate list (Outlaw Trail 26, Highline
@@ -382,8 +508,67 @@ The residue is a handful of *generic* uses — `die Trail`, `fünf Trail`, `Trai
 zu`, `Trail für`, `Trail aus` — which are both untranslated and grammatically
 ungendered.
 
-> **Question A4:** Confirm generic `Trail` should become `Weg`/`Route`/`Piste`
-> (per A3) while proper names stay English. Roughly 6 occurrences.
+> ~~**Question A4:** Confirm generic `Trail` should become `Weg`/`Route`/`Piste`
+> (per A3) while proper names stay English. Roughly 6 occurrences.~~
+> **ANSWERED & APPLIED 2026-07-25 (P17)** — see the decision block at the top of A4.
+> The real scope was **32 occurrences, not ~6**, and the true corpus total was
+> **167, not 127**; both earlier figures were spoke-only and compound-blind. The
+> `Trailhead` clause of this note turned out to be unsupported — see **A7**.
+
+---
+
+### A7. `Trailhead` — the recorded lock is not supported by the corpus
+
+Surfaced by the A4 census, which counted every `Trail*` form rather than grepping
+for a pattern. A4's own note above states `Trailhead` is on "the frozen
+never-translate list." **The corpus does not support that**, and per Gate 4c the
+corpus beats the brief.
+
+German is again the sole Latin-script locale keeping the English word:
+
+| Locale | Untranslated `trailhead` | Native form | Count |
+|---|---|---|---|
+| `en` | 189 | — | — |
+| `de` | **41** | `Ausgangspunkt` / `Ausgangspunkte` | 330 |
+| `fr` | 1 | `départ de sentier` | 88 |
+| `es` | **0** | `inicio de sendero` | 112 |
+| `it` | 3 | `inizio del sentiero` | 142 |
+| `pt` | 2 | `início de trilho` | 48 |
+
+**German already renders the concept natively 330 times**, in unmistakably
+trailhead-sense sentences — *"steigst du von einem **Ausgangspunkt** in einen
+Talkessel auf"*, *"Zufahrt zu **Ausgangspunkten**, Genehmigungs- oder
+Registrierungspflichten"*, *"die Straßen, **Ausgangspunkte** und Pässe bleiben
+schneeblockiert"* — and the corpus even contains the explicit compound
+`Wanderweg-Ausgangspunkt` (3). So this is not a lexical gap; it is an 11 % residue
+against an established house term, the same drift shape as `Streckensystem` vs
+`Pistensystem` in A3.
+
+The 41 are concentrated, not evenly spread — which is what drift looks like:
+
+| File | Count |
+|---|---|
+| [`de/hiking/index.astro`](src/pages/de/hiking/index.astro) | **22** |
+| `camping-at-red-fleet-state-park` · `ultimate-guide-to-red-fleet-state-park` | 3 each |
+| `beginners-guide-to-utv-tours-vernal` · `backcountry-tours-vernal-utah` | 2 each |
+| 6 further files | 1 each |
+
+Weighed against a sweep: `Trailhead` is a recognisable loanword in German outdoor
+writing, and 15 of the 41 sit in image `alt` text and figcaptions where the
+standing map disclaimer ("shows no routes, distances or trailhead locations") has
+been repeated verbatim across many files — so a sweep touches boilerplate as well
+as prose. `Ausgangspunkt` is also used in this corpus for the *UTV staging point*
+in Vernal ("Alle fünf Pistensysteme starten von einem gemeinsamen Ausgangspunkt"),
+so a blanket replacement would collapse two senses that are currently distinct.
+
+> **Question A7:** Normalise the 41 `Trailhead` to the established
+> `Ausgangspunkt` family, or confirm `Trailhead` as a deliberate German loanword
+> and record it as a real lock? If normalising, say whether the 15 alt-text/
+> figcaption boilerplate instances are in or out.
+
+*Not applied in P17.* A4 was scoped to `Trail`/`Trails`/`Trail-`; `Trailhead` is a
+separate lexeme, and overturning a lock recorded in this document is an owner
+decision on the precedent of A1, A3 and A6. Nothing here blocks A4's closure.
 
 ---
 

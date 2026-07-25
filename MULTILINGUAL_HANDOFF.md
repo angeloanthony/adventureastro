@@ -43,7 +43,7 @@ are kept because their lessons are reusable, not because anything in them is out
 
 | Item | Where it lives | Blocking? |
 |---|---|---|
-| **Native-speaker editorial review** (`de`, `ja`, `zh`) | `NATIVE_REVIEW.md` — 12 items with corpus counts; **7 decided** (A1, A2, A3, A5, A6, C1, C6), **5 open** (**A4**, B1, C2, C3, C4) | Not for engineering. German is **one item from complete**: A1 register, A1-residual (P12), A2 sentence case (P13), A5 heading localization (P14), A6 `Leave No Trace` lock (P15), A3 `Piste` retained (P16). Only A4 remains for `de` |
+| **Native-speaker editorial review** (`de`, `ja`, `zh`) | `NATIVE_REVIEW.md` — 13 items with corpus counts; **8 decided** (A1, A2, A3, A4, A5, A6, C1, C6), **5 open** (**A7**, B1, C2, C3, C4) | Not for engineering. **German as originally scoped is COMPLETE**: A1 register, A1-residual (P12), A2 sentence case (P13), A5 heading localization (P14), A6 `Leave No Trace` lock (P15), A3 `Piste` retained (P16), A4 generic `Trail` localized (P17). P17's census raised one **new** `de` item, **A7 `Trailhead`** (41 uses; the "never-translate" lock is contradicted by the corpus — `de` has `Ausgangspunkt` 330×, and es/fr/it/pt all translate). A7 is an owner decision, not a defect |
 | **`es` / `it` never reviewed** | `NATIVE_REVIEW.md` §D — their tags are retroactive markers, not review sign-off | No |
 | **RTL infrastructure (Arabic Stage 0)** | §10 — a **new engineering initiative**, not an extension of this rollout | No |
 | **Additional LTR locales** | §10 — the pipeline is ready; each is execution, not design | No |
