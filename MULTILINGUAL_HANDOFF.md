@@ -27,10 +27,23 @@ an architecture change, stop and flag it — do not improvise one.
   internal link is emitted **only** if that translation exists; otherwise it falls back to
   English. Nothing 404s.
 - **Language order:** 🇪🇸 Spanish complete first → 🇮🇹 Italian → 🇵🇹 Portuguese → 🇫🇷 French →
-  🇩🇪 German. Finish one language fully before starting the next; the workflow improvements
-  compound. Status: ES/IT/PT/FR/DE all feature-complete and tagged (`i18n-<locale>-complete`)
-  as of 2026-07-20; DE additionally needs a native-speaker consistency pass before it's
-  considered fully closed out (see §6 below).
+  🇩🇪 German → 🇯🇵 Japanese → 🇨🇳 Simplified Chinese. Finish one language fully before starting
+  the next; the workflow improvements compound. Status: ES/IT/PT/FR/DE/JA/ZH all
+  feature-complete as of 2026-07-25.
+- **Release-tag policy — when it started.** The formal `i18n-<locale>-complete` tag
+  convention began with **Portuguese**; `i18n-pt-complete` and `i18n-fr-complete` were both
+  created on the same commit (`9f360f3`, 2026-07-18) when the policy was adopted. **Spanish
+  and Italian were completed before the policy existed and were never tagged
+  contemporaneously.** Their tags, if present, are retroactive markers reconstructed from
+  structural evidence (see below) — not contemporaneous release gates, and not build-verified
+  at those commits. Definition of complete used throughout: **77 registered routes**
+  (57 MDX spokes + 20 inline pages) present in the tree *and* registered in the locale's
+  `*_SLUGS` set in `src/lib/i18n.ts`. Registration is load-bearing — Italian reached 57 MDX +
+  20 inline pages at `7bff110` with only 58/77 slugs registered, leaving a third of its routes
+  dark (no hreflang, no switcher entry, validator orphans). Historical completion points:
+  **es → `aab144b`**, **it → `0ab5581`** (both 2026-07-16).
+- DE additionally needs a native-speaker consistency pass before it's considered fully closed
+  out (see §6 below); JA and ZH carry the same open native-review item.
 
 ---
 
