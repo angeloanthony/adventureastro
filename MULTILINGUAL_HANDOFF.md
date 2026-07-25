@@ -43,7 +43,7 @@ are kept because their lessons are reusable, not because anything in them is out
 
 | Item | Where it lives | Blocking? |
 |---|---|---|
-| **Native-speaker editorial review** (`de`, `ja`, `zh`) | `NATIVE_REVIEW.md` — 11 items with corpus counts; **4 decided** (A1, A2, C1, C6), **7 open** (A3, A4, **A5**, B1, C2, C3, C4) | Not for engineering. **No longer blocked** — A1 (`du`) decided 2026-07-25, A1-residual closed at P12, **A2 sentence-case sweep applied at P13** (297 replacements, 55 files). A5 is new: 17 untranslated English headings in one `de` file |
+| **Native-speaker editorial review** (`de`, `ja`, `zh`) | `NATIVE_REVIEW.md` — 12 items with corpus counts; **5 decided** (A1, A2, A5, C1, C6), **7 open** (A3, A4, **A6**, B1, C2, C3, C4) | Not for engineering. **No longer blocked** — A1 (`du`) decided, A1-residual closed at P12, **A2 sentence case applied at P13** (297 replacements, 55 files), **A5 heading localization applied at P14** (16 headings, `Leave No Trace` retained). A6 is new: the same locked name is translated in 3 other `de` spokes |
 | **`es` / `it` never reviewed** | `NATIVE_REVIEW.md` §D — their tags are retroactive markers, not review sign-off | No |
 | **RTL infrastructure (Arabic Stage 0)** | §10 — a **new engineering initiative**, not an extension of this rollout | No |
 | **Additional LTR locales** | §10 — the pipeline is ready; each is execution, not design | No |
@@ -441,7 +441,7 @@ from now can tell the finished system from the roadmap without reading the git l
 
 ### 10.1 Editorial / native-speaker review — `de`, `ja`, `zh`
 
-Owned by `NATIVE_REVIEW.md`, not by this document. Eleven items, each backed by corpus
+Owned by `NATIVE_REVIEW.md`, not by this document. Twelve items, each backed by corpus
 counts rather than "please proofread" — the review is evidence-based by construction, and
 must stay that way.
 
@@ -460,7 +460,22 @@ Sequence, in order:
    headers, hero/CTA strings, `<strong>` micro-headings, bold day-labels, one quoted
    heading in prose, and four frontmatter SEO titles. Mid-sentence pronoun capitals went
    **44 → 0** while sentence-initial forms were untouched, so A1-residual closed with it.
-   11 false positives were verified and rejected. German now continues at **A5**.
+   11 false positives were verified and rejected.
+   **A5 DONE 2026-07-25 (P14)** — the 16 untranslated English headings in
+   `high-uintas-backpacking-guide.de.mdx` localized; `## Leave No Trace` retained as a
+   locked programme name. German now continues at **A6**.
+
+**Localization lesson from P14 (recover the translator's vocabulary before inventing your
+own).** When a localized file is missing a *surface* rather than a whole translation, the
+words you need are usually already in the file. Here the German `page-summary` and
+frontmatter `description` enumerated every heading in German — written by the original
+translator when the body was localized — so the 16 headings could be restored in the
+vocabulary the page already used (`Mehrtagestour`, `Mehrtageswanderer`, `Backcountry`)
+instead of a fresh translation that would have drifted from its own prose. Check
+`description`, `page-summary`, FAQ answers and key-takeaways for the missing terms before
+translating anything. The same prose also settles locked-term questions: `Leave No Trace`
+appeared 7× untranslated in the German body, which decided A5's one open question without
+needing a native speaker.
 3. Apply each accepted change as **one corpus-wide sweep**, per Gate 4c — never
    file-by-file. Piecemeal edits are how cross-batch drift was created originally.
 4. Re-verify per the `NATIVE_REVIEW.md` appendix, then **freeze the LTR framework**.

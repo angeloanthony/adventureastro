@@ -16,12 +16,13 @@ All three locales are feature-complete (57 MDX spokes + 20 inline pages each,
 scan cannot make. This document exists so a reviewer decides a short list of
 questions, not so they read 171 files.
 
-**Decided — 4 of 11:**
+**Decided — 5 of 12:**
 
 | Item | Decision | State |
 |---|---|---|
 | **A1** German register | **informal `du` confirmed**; `Sie` flip cancelled | ✅ decided **and closed** 2026-07-25 — **DE review unblocked**. Residual re-measured at P12: **0 formal leaks, 0 standalone capitalisation leaks**; the capitalisation split is A2, not A1 |
 | **A2** German heading capitalisation | **German sentence case** confirmed; nominalised forms preserved | ✅ decided **and fully applied** 2026-07-25 (P13) — 297 replacements across 55 files; mid-sentence pronoun capitals **44 → 0** |
+| **A5** German missing heading localization | **translate the 16**; `Leave No Trace` stays English | ✅ decided **and applied** 2026-07-25 (P14) — 16 headings localized, 1 retained, line numbers and heading levels unchanged |
 | **C1** `官方渠道` vs `官方来源` | **`官方渠道`** is the standard | ✅ decided **and applied** 2026-07-25 |
 | **C6** locked-phrase policy | caveat is locked by **intent, not byte sequence** | ✅ decided **and fully applied** 2026-07-25 — 27 seam defects across 13 files fixed, disclaimer count conserved at 994 |
 
@@ -29,16 +30,15 @@ questions, not so they read 171 files.
 
 | Locale | Open items | Highest-impact |
 |---|---|---|
-| `de` | A3, A4, **A5 (new)** | **A5** — 17 untranslated English headings in one file, found during the P13 sweep |
+| `de` | A3, A4, **A6 (new)** | **A3** — `Piste` for UTV trails, 196 occurrences |
 | `ja` | B1 | B1 `モアブ` vs `Moab` |
 | `zh` | C2, C3, C4 | C2 — `登山口` (228) for trailheads with no mountain |
 
-**Priority order** (owner-set 2026-07-25, revised at P13 once A2 was applied):
-~~C6~~ → ~~A1-residual~~ → ~~A2~~ → **A5** → A3, A4, B1, C2, C3, C4.
+**Priority order** (owner-set 2026-07-25, revised at P14 once A5 was applied):
+~~C6~~ → ~~A1-residual~~ → ~~A2~~ → ~~A5~~ → **A6** → A3, A4, B1, C2, C3, C4.
 
-*A5 is placed first among the remainder because it is a **visible untranslated
-surface**, not a stylistic judgement — a German reader currently sees 17 English
-headings on a shipped page.*
+*A6 is a direct consequence of A5 and is small and self-contained (3 headings), so
+it is cheapest to settle while the evidence is fresh.*
 
 ---
 
@@ -316,7 +316,61 @@ ungendered.
 
 ---
 
-### A5. Untranslated English headings in one shipped German file — NEW, found at P13
+### A5. Untranslated English headings — ✅ DECIDED & APPLIED 2026-07-25 (P14)
+
+> **✅ Applied: 16 of 17 headings localized; `## Leave No Trace` retained as a locked
+> programme name.** Verified: `astro check` 0 errors / 0 warnings · build **619 pages** ·
+> validator ✔ · exactly one file changed.
+>
+> **The translations were not invented — they were recovered from the file itself.**
+> The German `page-summary` and frontmatter `description` already enumerate the whole
+> heading list in German, written by the original translator when the body was
+> localized. Those strings supplied the vocabulary, so the headings now match the prose
+> that was always shipped beneath them (`Mehrtagestour` 46 uses, `Mehrtageswanderer`
+> 14, `Backcountry` 14 — the file's own established terms).
+>
+> | Line | Was | Now |
+> |---|---|---|
+> | 54 | `## Why Backpack the High Uintas` | `## Warum eine Mehrtagestour in den High Uintas` |
+> | 71 | `## Who Should Consider Backpacking` | `## Wer eine Mehrtagestour in Betracht ziehen sollte` |
+> | 81 | `## Planning Your First Backpacking Trip` | `## Deine erste Mehrtagestour planen` |
+> | 95 | `## Backpacking vs Day Hiking` | `## Mehrtagestour vs. Tageswanderung` |
+> | 115 | `## Popular Backpacking Experiences` | `## Beliebte Mehrtageserlebnisse` |
+> | 119 | `### Alpine Lakes` | `### Bergseen` |
+> | 125 | `### Backcountry Camping` | `### Backcountry-Camping` |
+> | 131 | `### Wildlife` | `### Wildtiere` |
+> | 137 | `## Weather` | `## Wetter` |
+> | **145** | `## Leave No Trace` | **unchanged — locked** |
+> | 157 | `## Photography` | `## Fotografie` |
+> | 165 | `## Safety` | `## Sicherheit` |
+> | 179 | `## Seasonal Considerations` | `## Saisonale Überlegungen` |
+> | 199 | `## Experience Level: Beginner vs Experienced Backpackers` | `## Erfahrungsstufe: Anfänger vs. erfahrene Mehrtageswanderer` |
+> | 219 | `## Kings Peak vs General High Uintas Backpacking` | `## Kings Peak vs. allgemeine Mehrtagestouren in den High Uintas` |
+> | 241 | `## Accessibility` | `## Barrierefreiheit` |
+> | 249 | `## Planning Tips` | `## Planungstipps` |
+>
+> **Preserved:** all 17 line numbers and heading levels (`##`/`###`) are unchanged, so
+> the structural mirror against the English master still holds. Glossary terms
+> `High Uintas`, `Kings Peak` and `Backcountry` stay English, matching every other
+> locale. A2 sentence case is applied throughout — note `Erfahrungsstufe: Anfänger`
+> keeps its capital because a **noun** follows the colon, and `vs. erfahrene` is
+> lowercase because `vs.` does not begin a new sentence.
+>
+> **Anchor note.** Heading-derived anchor IDs necessarily changed with the text. This
+> was safe and verified: the file has **no explicit `id=` attributes**, and **no link
+> anywhere in source or in built `dist/` targets this page's anchors**. `#leave-no-trace`
+> is unchanged because that heading was retained.
+>
+> **`Leave No Trace` lock — three independent lines of evidence:** it appears **7×
+> untranslated in this file's own German prose** (6 plain + 1 as
+> `Leave-No-Trace-Praktiken`), including the frontmatter description and a
+> key-takeaways bullet; `es`/`it`/`pt`/`fr`/`ja` all keep it English at the identical
+> line 145; and only `zh` translated it (`无痕山林`). See **A6** for the one
+> inconsistency this exposed.
+
+The original finding is preserved:
+
+### A5 (original finding). Untranslated English headings in one shipped German file
 
 Surfaced by the A2 census, which reads every heading rather than grepping for a
 pattern. [`hiking/high-uintas-backpacking-guide.de.mdx`](src/content/hiking/high-uintas-backpacking-guide.de.mdx)
@@ -370,12 +424,45 @@ a heading in three other hiking spokes —
 — so keeping `Leave No Trace` English here would be inconsistent *within German* even
 though it is consistent *across locales*.
 
-> **Question A5:** Translate the 16 non-locked headings into German sentence case
-> (recommended — no precedent supports leaving them English). For `Leave No Trace`,
-> choose which consistency wins: **cross-locale** (keep English, matching es/it/fr/ja)
-> or **de-internal** (use `Hinterlasse keine Spuren`, matching the other three German
-> hiking spokes). Recommendation: de-internal, since a German reader sees the German
-> corpus, not the other locales.
+> ~~**Question A5:** Translate the 16 non-locked headings…~~
+> **ANSWERED & APPLIED 2026-07-25 (P14)** — see the decision block at the top of A5.
+> The `Leave No Trace` question resolved in favour of the **lock**, on evidence that
+> was not available when this question was written: the file's own German prose uses
+> the English name 7 times. The de-internal tension it named is now tracked as **A6**.
+
+---
+
+### A6. `Leave No Trace` vs `Hinterlasse keine Spuren` — NEW, exposed by A5
+
+A5 confirmed `Leave No Trace` is a locked programme name and retained it. That makes
+German internally inconsistent: **one German heading now uses the locked English name
+and three use a German translation of it.**
+
+| File | German heading | `en` | `es` | `fr` | `ja` |
+|---|---|---|---|---|---|
+| `high-uintas-backpacking-guide` | `## Leave No Trace` ✅ | `Leave No Trace` | `Leave No Trace` | `Leave No Trace` | `Leave No Trace` |
+| [`wildflower-hiking-near-vernal:254`](src/content/hiking/wildflower-hiking-near-vernal.de.mdx#L254) | `## Hinterlasse keine Spuren` | `Leave No Trace` | `Leave No Trace` | `Leave No Trace` | `Leave No Trace` |
+| [`dog-friendly-hiking-near-vernal:163`](src/content/hiking/dog-friendly-hiking-near-vernal.de.mdx#L163) | `## Hinterlasse keine Spuren mit Haustieren` | `Leave No Trace with Pets` | `Leave No Trace con Mascotas` | `Leave No Trace avec Animaux` | — |
+| [`alpine-lakes-hiking-high-uintas:283`](src/content/hiking/alpine-lakes-hiking-high-uintas.de.mdx#L283) | `## Hinterlasse keine Spuren an empfindlichen Ufern` | `Leave No Trace at Fragile Shores` | — | `Leave No Trace Sur Les Rives Fragiles` | — |
+
+The pattern is unambiguous: **every other locale keeps the programme name in English
+and translates only the surrounding words** (`con Mascotas`, `avec Animaux`,
+`Sur Les Rives Fragiles`). German is the only locale that translated the name itself,
+and it did so in exactly these three places.
+
+Weighed against that: `Hinterlasse keine Spuren` is genuinely idiomatic German and a
+reader unfamiliar with the programme will understand it, whereas `Leave No Trace` is
+an untranslated English string in a German heading.
+
+> **Question A6:** Bring the three headings in line with the lock —
+> `## Leave No Trace`, `## Leave No Trace mit Haustieren`,
+> `## Leave No Trace an empfindlichen Ufern` — matching en/es/fr/ja and the German
+> body prose, which already writes `Leave No Trace` and `Leave-No-Trace-Praktiken`
+> untranslated? Recommendation: **yes**, on the same locked-proper-noun logic that
+> keeps `Kings Peak` and `High Uintas` English. Three headings, one sweep.
+>
+> *Not actioned at P14: the phase was scoped to a single file, and changing three
+> other German spokes was explicitly out of scope.*
 
 ---
 
