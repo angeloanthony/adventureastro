@@ -43,7 +43,7 @@ are kept because their lessons are reusable, not because anything in them is out
 
 | Item | Where it lives | Blocking? |
 |---|---|---|
-| **Native-speaker editorial review** (`de`, `ja`, `zh`) | `NATIVE_REVIEW.md` — 12 items with corpus counts; **5 decided** (A1, A2, A5, C1, C6), **7 open** (A3, A4, **A6**, B1, C2, C3, C4) | Not for engineering. **No longer blocked** — A1 (`du`) decided, A1-residual closed at P12, **A2 sentence case applied at P13** (297 replacements, 55 files), **A5 heading localization applied at P14** (16 headings, `Leave No Trace` retained). A6 is new: the same locked name is translated in 3 other `de` spokes |
+| **Native-speaker editorial review** (`de`, `ja`, `zh`) | `NATIVE_REVIEW.md` — 12 items with corpus counts; **6 decided** (A1, A2, A5, A6, C1, C6), **6 open** (A3, A4, B1, C2, C3, C4) | Not for engineering. **All structural German work is closed** — A1 register, A1-residual (P12), A2 sentence case (P13), A5 heading localization (P14), A6 `Leave No Trace` lock (P15). What remains for `de` is terminology only (A3, A4) |
 | **`es` / `it` never reviewed** | `NATIVE_REVIEW.md` §D — their tags are retroactive markers, not review sign-off | No |
 | **RTL infrastructure (Arabic Stage 0)** | §10 — a **new engineering initiative**, not an extension of this rollout | No |
 | **Additional LTR locales** | §10 — the pipeline is ready; each is execution, not design | No |
@@ -463,7 +463,28 @@ Sequence, in order:
    11 false positives were verified and rejected.
    **A5 DONE 2026-07-25 (P14)** — the 16 untranslated English headings in
    `high-uintas-backpacking-guide.de.mdx` localized; `## Leave No Trace` retained as a
-   locked programme name. German now continues at **A6**.
+   locked programme name.
+   **A6 DONE 2026-07-25 (P15)** — the `Leave No Trace` lock aligned across the German
+   corpus: 8 sites in 6 files, 9 descriptive-prose uses deliberately left in German.
+   **All structural German review work is now closed**; `de` continues at A3/A4, which
+   are terminology decisions rather than consistency defects.
+
+**Glossary lesson from P15 (a locked name and an ordinary phrase can be the same words).**
+`Leave No Trace` is both a programme name and a plain-English instruction, and the
+English master already distinguishes them **by capitalisation**: Title-Case
+`Leave No Trace` is the programme, lowercase `leave no trace` is prose. Any locked-term
+audit must check the *master's* casing at each site before deciding, or it will either
+under-fix (leaving the programme name translated) or over-fix (turning idiomatic
+imperative prose into an English string). Applying that rule to German turned a
+"3 headings" estimate into 8 real sites and simultaneously *protected* 9 correct
+translations that a naive find-and-replace would have destroyed.
+
+**Locale-consistency is not always corpus-wide — check the script family.** The same
+audit showed the lock holds for Latin-script locales (`it`/`pt`/`fr` 8/8, `es` 6/8) while
+`ja` transliterates to `リーブ・ノー・トレイス` and `zh` uses `无痕山林`. Both are correct:
+an English programme name is readable in a Latin-script locale and opaque in CJK. Before
+declaring a term "locked in every locale", verify across locales *and* sites — a
+single-file spot check produced exactly the wrong generalisation at P14.
 
 **Localization lesson from P14 (recover the translator's vocabulary before inventing your
 own).** When a localized file is missing a *surface* rather than a whole translation, the

@@ -16,29 +16,32 @@ All three locales are feature-complete (57 MDX spokes + 20 inline pages each,
 scan cannot make. This document exists so a reviewer decides a short list of
 questions, not so they read 171 files.
 
-**Decided — 5 of 12:**
+**Decided — 6 of 12:**
 
 | Item | Decision | State |
 |---|---|---|
 | **A1** German register | **informal `du` confirmed**; `Sie` flip cancelled | ✅ decided **and closed** 2026-07-25 — **DE review unblocked**. Residual re-measured at P12: **0 formal leaks, 0 standalone capitalisation leaks**; the capitalisation split is A2, not A1 |
 | **A2** German heading capitalisation | **German sentence case** confirmed; nominalised forms preserved | ✅ decided **and fully applied** 2026-07-25 (P13) — 297 replacements across 55 files; mid-sentence pronoun capitals **44 → 0** |
 | **A5** German missing heading localization | **translate the 16**; `Leave No Trace` stays English | ✅ decided **and applied** 2026-07-25 (P14) — 16 headings localized, 1 retained, line numbers and heading levels unchanged |
+| **A6** `Leave No Trace` lock alignment | **English programme name**; lowercase prose stays German | ✅ decided **and applied** 2026-07-25 (P15) — 8 sites aligned across 6 files, 9 descriptive uses deliberately kept German |
 | **C1** `官方渠道` vs `官方来源` | **`官方渠道`** is the standard | ✅ decided **and applied** 2026-07-25 |
 | **C6** locked-phrase policy | caveat is locked by **intent, not byte sequence** | ✅ decided **and fully applied** 2026-07-25 — 27 seam defects across 13 files fixed, disclaimer count conserved at 994 |
 
-**Open — 7:**
+**Open — 6:**
 
 | Locale | Open items | Highest-impact |
 |---|---|---|
-| `de` | A3, A4, **A6 (new)** | **A3** — `Piste` for UTV trails, 196 occurrences |
+| `de` | A3, A4 | **A3** — `Piste` for UTV trails, 196 occurrences |
 | `ja` | B1 | B1 `モアブ` vs `Moab` |
 | `zh` | C2, C3, C4 | C2 — `登山口` (228) for trailheads with no mountain |
 
-**Priority order** (owner-set 2026-07-25, revised at P14 once A5 was applied):
-~~C6~~ → ~~A1-residual~~ → ~~A2~~ → ~~A5~~ → **A6** → A3, A4, B1, C2, C3, C4.
+**Priority order** (owner-set 2026-07-25, revised at P15 once A6 was applied):
+~~C6~~ → ~~A1-residual~~ → ~~A2~~ → ~~A5~~ → ~~A6~~ → **A3, A4** → B1, C2, C3, C4.
 
-*A6 is a direct consequence of A5 and is small and self-contained (3 headings), so
-it is cheapest to settle while the evidence is fresh.*
+*All **structural** German review work is now closed (register, capitalisation,
+missing localization, glossary lock). A3 and A4 are the first purely
+**terminological** German items — judgement calls about word choice, not
+consistency defects a corpus scan can settle on its own.*
 
 ---
 
@@ -432,7 +435,78 @@ though it is consistent *across locales*.
 
 ---
 
-### A6. `Leave No Trace` vs `Hinterlasse keine Spuren` — NEW, exposed by A5
+### A6. `Leave No Trace` lock — ✅ DECIDED & APPLIED 2026-07-25 (P15)
+
+> **✅ Applied: 8 sites aligned to the English programme name across 6 files;
+> 9 descriptive-prose uses deliberately left in German.** Verified: `astro check`
+> 0 errors / 0 warnings · build **619 pages** · validator ✔ · 6 files changed.
+>
+> **The census found a discriminator the original A6 question did not anticipate:
+> the English master already distinguishes the two senses by capitalisation.**
+>
+> | English form | Sense | German should be |
+> |---|---|---|
+> | `Leave No Trace` (Title Case) | the **programme name** | `Leave No Trace` — locked |
+> | `leave no trace` / `Leave no trace` | ordinary **imperative prose** | `hinterlasse keine Spuren` — translated |
+>
+> That rule decides every occurrence mechanically and made the scope smaller and
+> better-founded than the "3 headings" first estimated. Of 11 German-form
+> occurrences, **8 rendered a Title-Case programme name and were misaligned**;
+> **3 rendered lowercase prose and were already correct**.
+>
+> | Site | Context | English master | Action |
+> |---|---|---|---|
+> | [`camping-in-ashley-national-forest:104`](src/content/camping/camping-in-ashley-national-forest.de.mdx#L104) | list-item | `<strong>Leave No Trace.</strong>` | aligned |
+> | [`alpine-lakes-hiking-high-uintas:33`](src/content/hiking/alpine-lakes-hiking-high-uintas.de.mdx#L33) | page-summary | `Leave No Trace at fragile shores` | aligned |
+> | [`alpine-lakes-hiking-high-uintas:283`](src/content/hiking/alpine-lakes-hiking-high-uintas.de.mdx#L283) | heading | `## Leave No Trace at Fragile Shores` | aligned |
+> | [`dog-friendly-hiking-near-vernal:163`](src/content/hiking/dog-friendly-hiking-near-vernal.de.mdx#L163) | heading | `## Leave No Trace with Pets` | aligned |
+> | [`dog-friendly-hiking-near-vernal:165`](src/content/hiking/dog-friendly-hiking-near-vernal.de.mdx#L165) | prose | `The Leave No Trace ethic` | → `Die Leave-No-Trace-Ethik` |
+> | [`high-uintas-day-hikes:28`](src/content/hiking/high-uintas-day-hikes.de.mdx#L28) | FAQ | `Leave No Trace practices` | → `Leave-No-Trace-Praktiken` |
+> | [`spring-hiking-near-vernal:245`](src/content/hiking/spring-hiking-near-vernal.de.mdx#L245) | prose | `The Leave No Trace answer` | → `Die Leave-No-Trace-Antwort` |
+> | [`wildflower-hiking-near-vernal:254`](src/content/hiking/wildflower-hiking-near-vernal.de.mdx#L254) | heading | `## Leave No Trace` | aligned |
+>
+> The three attributive uses take the German compound form `Leave-No-Trace-X`, which
+> the corpus already used before this sweep
+> ([`kings-peak-hiking-guide:24`](src/content/hiking/kings-peak-hiking-guide.de.mdx#L24),
+> [`high-uintas-backpacking-guide:20`](src/content/hiking/high-uintas-backpacking-guide.de.mdx#L20)) —
+> so this is the file's own convention, not a new coinage.
+>
+> **9 occurrences intentionally left unchanged** (each renders lowercase English prose,
+> where a German imperative is the correct translation and the programme name is *not*
+> being invoked):
+> `bird-watching-near-vernal:28` (FAQ), `:203`, `:256` · `wildlife-hiking-guide-near-vernal:26`
+> (FAQ), `:205`, `:223` · `photography-hikes-near-vernal:228` ·
+> `high-uintas-backpacking-guide:259` · and
+> [`de/camping/index.astro:167`](src/pages/de/camping/index.astro#L167), which reads
+> `<strong>Leave No Trace (hinterlasse keine Spuren).</strong>` — already led by the
+> locked name, with a first-use German gloss. That gloss is **good practice and was kept**.
+>
+> **Anchors.** Three headings changed, so their IDs regenerated to
+> `#leave-no-trace`, `#leave-no-trace-mit-haustieren`,
+> `#leave-no-trace-an-empfindlichen-ufern`. Verified safe: no link in source or built
+> `dist/` targeted the old IDs, and `dist/` contains no `hinterlasse-keine-spuren`
+> anchor references at all.
+>
+> **⚠ Correction to the P14 record.** P14 stated "es/it/pt/fr/ja all keep it English",
+> generalising from a single file. A full 8-site × 7-locale check shows the real
+> pattern is **script-family, not universal**:
+>
+> | Locale | Keeps `Leave No Trace` | Note |
+> |---|---|---|
+> | `it` `pt` `fr` | 8 / 8 | consistent lock |
+> | `es` | 6 / 8 | translates twice in one file (`No Dejar Rastro`) |
+> | `ja` | 2 / 8 | usually transliterates — `リーブ・ノー・トレイス` (still the programme name, script-adapted) |
+> | `zh` | 0 / 8 | uses the established Chinese name `无痕山林` |
+> | `de` (before) | 0 / 8 | **the only Latin-script locale translating at every site** |
+>
+> The lock therefore holds for **Latin-script locales**, where an English programme
+> name is readable; `ja` and `zh` legitimately render it in their own script. German is
+> Latin-script, so aligning it to the English name is the correct and evidence-backed
+> call — and it was the sole outlier among its peers.
+
+The original finding is preserved:
+
+### A6 (original finding). `Leave No Trace` vs `Hinterlasse keine Spuren`
 
 A5 confirmed `Leave No Trace` is a locked programme name and retained it. That makes
 German internally inconsistent: **one German heading now uses the locked English name
@@ -454,15 +528,10 @@ Weighed against that: `Hinterlasse keine Spuren` is genuinely idiomatic German a
 reader unfamiliar with the programme will understand it, whereas `Leave No Trace` is
 an untranslated English string in a German heading.
 
-> **Question A6:** Bring the three headings in line with the lock —
-> `## Leave No Trace`, `## Leave No Trace mit Haustieren`,
-> `## Leave No Trace an empfindlichen Ufern` — matching en/es/fr/ja and the German
-> body prose, which already writes `Leave No Trace` and `Leave-No-Trace-Praktiken`
-> untranslated? Recommendation: **yes**, on the same locked-proper-noun logic that
-> keeps `Kings Peak` and `High Uintas` English. Three headings, one sweep.
->
-> *Not actioned at P14: the phase was scoped to a single file, and changing three
-> other German spokes was explicitly out of scope.*
+> ~~**Question A6:** Bring the three headings in line with the lock…~~
+> **ANSWERED & APPLIED 2026-07-25 (P15)** — see the decision block at the top of A6.
+> The final scope was **8 sites, not 3**: the census found the same defect in a
+> page-summary, a FAQ, a list-item and two prose sentences, not only in headings.
 
 ---
 
