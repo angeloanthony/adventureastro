@@ -3,6 +3,10 @@
 **Status:** open.
 **Prepared:** `de`/`ja` on 2026-07-22 against `i18n-ja-complete` (`65041fd`);
 `zh` added 2026-07-25 against `i18n-zh-complete` (`41b3482`).
+**Counts re-verified:** 2026-07-25 at `0e1c682` (P12). Note the C1 and C6 corpus
+fixes were committed *after* `i18n-zh-complete`, so the shipped `zh` corpus is
+two commits ahead of that tag — the tag marks route completeness, not the
+current editorial state. Every `zh` count below is measured at `0e1c682`.
 **Scope:** `de`, `ja`, `zh`. `es` and `it` have never had a native review — see
 §D. No code or translation has been changed to produce this document — every
 number below is a count from the shipped corpus.
@@ -12,11 +16,12 @@ All three locales are feature-complete (57 MDX spokes + 20 inline pages each,
 scan cannot make. This document exists so a reviewer decides a short list of
 questions, not so they read 171 files.
 
-**Decided — 3 of 10:**
+**Decided — 4 of 11:**
 
 | Item | Decision | State |
 |---|---|---|
-| **A1** German register | **informal `du` confirmed**; `Sie` flip cancelled | ✅ decided 2026-07-25 — **DE review unblocked**. Consistency residual (~18 formal leaks, `Du`/`du` caps) still open |
+| **A1** German register | **informal `du` confirmed**; `Sie` flip cancelled | ✅ decided **and closed** 2026-07-25 — **DE review unblocked**. Residual re-measured at P12: **0 formal leaks, 0 standalone capitalisation leaks**; the capitalisation split is A2, not A1 |
+| **A2** German heading capitalisation | **German sentence case** confirmed; nominalised forms preserved | ✅ decided **and fully applied** 2026-07-25 (P13) — 297 replacements across 55 files; mid-sentence pronoun capitals **44 → 0** |
 | **C1** `官方渠道` vs `官方来源` | **`官方渠道`** is the standard | ✅ decided **and applied** 2026-07-25 |
 | **C6** locked-phrase policy | caveat is locked by **intent, not byte sequence** | ✅ decided **and fully applied** 2026-07-25 — 27 seam defects across 13 files fixed, disclaimer count conserved at 994 |
 
@@ -24,12 +29,16 @@ questions, not so they read 171 files.
 
 | Locale | Open items | Highest-impact |
 |---|---|---|
-| `de` | **A1-residual**, A2, A3, A4 | A1-residual, then A2 — 135 title-cased headings across 28 files |
+| `de` | A3, A4, **A5 (new)** | **A5** — 17 untranslated English headings in one file, found during the P13 sweep |
 | `ja` | B1 | B1 `モアブ` vs `Moab` |
 | `zh` | C2, C3, C4 | C2 — `登山口` (228) for trailheads with no mountain |
 
-**Priority order** (owner-set 2026-07-25): ~~C6~~ → **A1-residual** → A2, A3, A4,
-B1, C2, C3.
+**Priority order** (owner-set 2026-07-25, revised at P13 once A2 was applied):
+~~C6~~ → ~~A1-residual~~ → ~~A2~~ → **A5** → A3, A4, B1, C2, C3, C4.
+
+*A5 is placed first among the remainder because it is a **visible untranslated
+surface**, not a stylistic judgement — a German reader currently sees 17 English
+headings on a shipped page.*
 
 ---
 
@@ -53,7 +62,7 @@ times and bare `Vernal` 0 times.
 
 ---
 
-## A. German (`de`) — A1 decided; A1-residual/A2/A3/A4 open
+## A. German (`de`) — A1 fully closed; A2/A3/A4 open
 
 ### A1. Register: the corpus is informal `du`. — ✅ DECIDED 2026-07-25: keep `du`
 
@@ -71,6 +80,9 @@ times and bare `Vernal` 0 times.
 > normalise the ~18 unambiguous formal forms (`Ihnen`/`Ihre`/`Ihr`) and the mixed
 > `Du`/`du` capitalisation, both of which are wrong under *either* register. Apply
 > as one corpus-wide sweep per Gate 4c, then re-run the register scan below.
+>
+> **➡ A1-residual was executed at P12 (2026-07-25) and closed with zero corpus
+> edits — both targets were false positives.** See "A1 residual — CLOSED" below.
 
 The evidence the decision was made against is preserved:
 
@@ -88,20 +100,145 @@ caught.
 | `Sie` (includes sentence-initial *sie* = "they") | 120 |
 | `Ihnen` / `Ihre` / `Ihr` (unambiguous formal) | ~18 |
 
-The shipped register (informal) is now the confirmed register, so the 4,085
-informal forms stand as-is. The reviewer's remaining task here is narrow:
-
-> **A1 residual (open):** confirm the ~18 `Ihnen`/`Ihre`/`Ihr` formal leaks and
-> the `Du`/`du` capitalisation split should normalise to lowercase `du`. Both are
-> inconsistent under *either* register, so this is a consistency fix, not a
-> register question. **Do not touch the 2,999 `du` / 1,086 `dein*` forms.**
-
-*Note on the `Sie` row: 120 is an upper bound, not 120 formal leaks — it includes
-sentence-initial* sie *= "they". The ~18 unambiguous row is the real target.*
+*These original figures were **spoke-only and partial-paradigm** (they omit the 20
+inline `src/pages/de/**` pages, and the `deiner`/`deines`/`dich`/`dir` forms). They
+are preserved as the evidence the register decision was made against; the P12
+census below supersedes them for any counting purpose.*
 
 ---
 
-### A2. Heading capitalisation: English title case is leaking into German headings
+### A1 residual — ✅ CLOSED 2026-07-25 (P12), zero corpus edits
+
+The residual was executed as a census before any editing, per the standing rule that
+previous counts are not to be trusted. **Both targets turned out not to exist.**
+Scope: all 57 `.de.mdx` spokes **and** all 20 `src/pages/de/**` inline pages,
+classified by sentence position — the discriminator that the earlier counts lacked,
+since German `sie`/`ihr` are lowercase mid-sentence and capitalised sentence-initially.
+
+| Form | Count | True leak | Correct usage |
+|---|---|---|---|
+| `Sie` | 138 | **0** | 138 — 137 sentence-initial 3rd-person *sie* ("they/it"), 1 inside a title-cased heading |
+| `Ihnen` | 1 | **0** | 1 — dative *"give **them** a task"*, referring to children |
+| `Ihre` | 4 | **0** | 4 — 3rd-person possessive (*"**their** art"*, *"**her** cabin"*, *"**its** fixed time"*, *"**its** lower sections"*) |
+| `Ihr` | 13 | **0** | 13 — informal **plural** *ihr* (the plural of `du`), sentence-initial: `Ihr habt`, `Ihr fahrt`, `Ihr könnt` |
+| `Du` | 227 | **0** | 202 sentence-initial (correct); 25 mid-sentence — **all inside title-cased display strings → A2** |
+| `Dich` | 9 | **0** | 9 mid-sentence — all in headings/table headers/CTAs → A2 |
+| `Deine` / `Dein` / `Deinen` / `Deiner` | 52 | **0** | 43 sentence-initial; 9 mid-sentence — all in headings/micro-headings → A2 |
+| `Dir` | 2 | **0** | 1 sentence-initial; 1 in a heading (`## Der Tag Gehört Dir`) → A2 |
+| `du` / `dich` / `dir` / `dein*` (lowercase) | 7,171 total informal tokens | — | untouched, as decided |
+
+**Finding 1 — there are no formal-address leaks at all.** All 156 capitalised
+`Sie`/`Ihnen`/`Ihre`/`Ihr` are legitimate third-person or informal-plural usage. The
+"~18 unambiguous formal" row was a false positive produced by counting capitalised
+forms without checking sentence position. The strongest evidence is co-occurrence:
+formal `Sie` and informal `du` cannot share a sentence, yet the corpus is full of
+lines like `Sie können **dir** empfehlen…`, `Sie sind alle leicht zu vermeiden,
+sobald **du** sie kennst`, `Sie passen das Tempo an **deine** Gruppe an`. Every one is
+third-person. Verb agreement confirms it independently: 39 of them are `Sie ist`,
+which formal address cannot take (formal is always `Sie sind`).
+
+**Finding 2 — the `Du`/`du` capitalisation split is not a letter-style artifact; it
+is A2 wearing a different hat.** Of 44 mid-sentence capitalised informal forms:
+
+| Context | Count | Example |
+|---|---|---|
+| markdown heading | 30 | `## Was Du Anziehen Solltest` |
+| HTML `<th>` table header | 6 | `<th>Was Dich Erwartet</th>` |
+| display CTA / hero | 3 | `<span class="accent">Machen Dich Fertig?</span>` |
+| `<strong>` micro-heading | 3 | `<strong>Sichere Deine Sachen</strong>` |
+| markdown table header cell | 1 | `\| Monat \| Was Dich Erwartet \|` |
+| **running prose** | **1** | `Sieh dir "Wo Du Übernachtest" weiter unten` |
+
+and the single running-prose instance
+([`weekend-road-trip-from-salt-lake-city.de.mdx:78`](src/content/itineraries/weekend-road-trip-from-salt-lake-city.de.mdx#L78))
+is a **verbatim quotation of the heading at line 269** of the same file, so it must
+change if and only if that heading changes.
+
+**Why nothing was edited.** Lowercasing these in isolation produces
+`## Was du Anziehen Solltest` — a half-corrected heading, which is precisely the
+piecemeal drift Gate 4c exists to prevent. The pronouns are not a separable defect
+class; they are 44 of the tokens inside the 135 title-cased headings A2 is about, and
+they cannot be resolved before A2's nominalised-infinitive judgement is made.
+**A1-residual is therefore closed and its work is absorbed into A2.**
+
+*One trap recorded for A2:* `Machen Dich Fertig?` in
+[`moab-utv-tours.de.mdx:44`](src/content/guides/moab-utv-tours.de.mdx#L44) is **not**
+ungrammatical and must not be "fixed" into an imperative. It is the tail of the H1
+sentence `Moab-UTV-Touren` `<br/>` `machen dich fertig?` — correct German idiom
+(*jemanden fertigmachen* = to wear someone out) that is merely title-cased.
+
+**Two capitalisation rules confirmed correct and explicitly out of scope:**
+
+- **`Du` after a colon is correct**, not a leak. 44 instances follow `: ` and each
+  introduces a complete independent sentence (`Der Reiz ist unkompliziert: Du
+  bekommst die Landschaft…`), where Duden permits capitalisation.
+- **After an em-dash or semicolon, German requires lowercase** — scanned, and the
+  corpus has **0** violations.
+
+> **A1 residual: nothing for the reviewer to answer.** Closed on measurement.
+> **Do not touch the 7,171 informal forms.**
+
+---
+
+### A2. Heading capitalisation — ✅ DECIDED & FULLY APPLIED 2026-07-25 (P13)
+
+> **✅ Applied as one corpus-wide sweep per Gate 4c: German sentence case.**
+> **297 replacements from 252 distinct strings across 55 files.** Verified:
+> `astro check` 0 errors / 0 warnings · build **619 pages** · validator ✔ · diff
+> confined to `.de.mdx` + `src/pages/de/**` (no config, schema, routing or component).
+>
+> **Rules applied.** First word capitalised; nouns capitalised; nominalised
+> infinitives and adjectives capitalised (`Wandern`, `Angeln`, `Fahren`, `Wechseln`,
+> `Ankommen`, `Aufbauen`, `Essen`, `Übernachten`, `das Richtige`, `das Wichtigste`,
+> `etwas Besonderes`, `jedes Können`); proper nouns and locked English terms
+> untouched; after a colon a capital only where a **complete clause or a noun**
+> follows (Duden); `vs.` does not begin a new sentence.
+>
+> **Coverage was larger than the original estimate of 135 headings**, because a
+> closed-class detector alone under-counts. Two passes were needed: one for
+> function-word title case (`Für`, `Mit`, `Den`, `Ist`), and a second aggregating
+> *every* mid-heading capital, which surfaced verb/adjective-only headings carrying
+> no closed-class word at all — `Deine Fahrt Planen`, `Die Richtige Piste Wählen`,
+> `Warum den Kings Peak Besteigen`, `Wildtiere Verantwortungsvoll Beobachten`.
+>
+> | Surface | Candidates | Corrected |
+> |---|---|---|
+> | markdown headings | 127 + ~60 second-pass | all |
+> | table headers (HTML `<th>` + markdown) | 38 | all |
+> | HTML headings / hero titles | 6 | all |
+> | `<strong>` micro-headings | 6 | all |
+> | bold day-labels | 4 | all |
+> | CTA / hero display strings | 2 | all |
+> | quoted heading in running prose | 1 | all |
+> | frontmatter SEO titles | 4 | all |
+>
+> **A1-residual closed out with it, as predicted:** mid-sentence capitalised
+> `Du`/`Dich`/`Dir`/`Dein*` went **44 → 0**, while sentence-initial forms were left
+> untouched (`Du` 202, `Sie` 137, `Ihr` 13 — all unchanged), confirming the sweep
+> corrected title case without touching the register.
+>
+> **11 false positives rejected** (verified correct, must not be "fixed" later):
+> six `Tag N — …` day-labels where the capital follows a **label dash** and a full
+> sentence begins (`Tag 3 — Ein letzter Morgen, dann heim oder weiter.`); three
+> nominalised modals (`Es gibt eine Version für jedes Können.`, `Leave No Trace ist
+> hier kein Kann.`); and two sentence-initial words inside long bold prose spans.
+> Also rejected wholesale: the locked all-caps disclaimer `PRÜFE BEI DER OFFIZIELLEN
+> QUELLE` (679 raw hits — every one a false positive of a naive capital-letter scan).
+>
+> **One documented deviation from this document's own A2 note.** The note below
+> protected `### Fotografie vs. Lockeres Wandern` in full. Only the **noun** needed
+> protecting: `Wandern` is the nominalised infinitive and stays capitalised, but
+> `Lockeres` is an ordinary attributive adjective and takes lowercase. Applied as
+> `Fotografie vs. lockeres Wandern`, consistent with the ten parallel
+> `X vs. <adjective> <noun>` headings in the same corpus (`vs. erfahrene
+> Wildblumen-Wanderer`, `vs. ambitionierte Angler`, `vs. fortgeschrittene
+> Herbstwanderungen`). The original note conflated the nominalised head with its
+> modifier; `## Saisonales Angeln` remains correct because `Saisonales` is
+> heading-initial, not because adjectives before nominalisations stay capitalised.
+
+The evidence the decision was made against is preserved:
+
+### A2 (original finding). English title case is leaking into German headings
 
 German capitalises nouns, not every significant word. **135 of 877 German
 headings (15.4%), across 28 of 57 spoke files**, capitalise mid-heading articles,
@@ -124,9 +261,16 @@ and `### Fotografie vs. Lockeres Wandern` are **correct** and must not be
 "fixed". That distinction is exactly why this needs a human pass rather than a
 regex.
 
-> **Question A2:** Confirm these should be German sentence case. If yes, the 135
-> headings will be listed individually for you to approve in one table, so the
-> nominalised cases can be excluded.
+**A2 now also carries all German pronoun capitalisation** (absorbed from A1-residual
+at P12). 44 mid-sentence `Du`/`Dich`/`Dir`/`Dein*` forms sit inside these title-cased
+strings and must be lowercased *as part of* the sentence-case pass, never separately —
+see the A1-residual closure above for the per-context breakdown and the
+`Machen Dich Fertig?` trap. Scope beyond the 135 `##`/`###` headings: 6 HTML `<th>`
+headers, 1 markdown table header cell, 3 hero/CTA display strings, 3 `<strong>`
+micro-headings, and 1 in-prose quotation that mirrors a heading.
+
+> ~~**Question A2:** Confirm these should be German sentence case.~~
+> **ANSWERED & APPLIED 2026-07-25 (P13)** — see the decision block at the top of A2.
 
 *No URL or anchor risk: these are display headings. The four `ja`/`de` anchor-ID
 headings use explicit `id=` attributes and are untouched by any heading edit.*
@@ -169,6 +313,69 @@ ungendered.
 
 > **Question A4:** Confirm generic `Trail` should become `Weg`/`Route`/`Piste`
 > (per A3) while proper names stay English. Roughly 6 occurrences.
+
+---
+
+### A5. Untranslated English headings in one shipped German file — NEW, found at P13
+
+Surfaced by the A2 census, which reads every heading rather than grepping for a
+pattern. [`hiking/high-uintas-backpacking-guide.de.mdx`](src/content/hiking/high-uintas-backpacking-guide.de.mdx)
+ships **17 of its headings in English** while its body prose is fully and fluently
+German. This is not a capitalisation defect, so A2 deliberately left it untouched.
+
+| Line | Shipped heading |
+|---|---|
+| 54 | `## Why Backpack the High Uintas` |
+| 71 | `## Who Should Consider Backpacking` |
+| 81 | `## Planning Your First Backpacking Trip` |
+| 95 | `## Backpacking vs Day Hiking` |
+| 115 | `## Popular Backpacking Experiences` |
+| 119 | `### Alpine Lakes` |
+| 125 | `### Backcountry Camping` |
+| 131 | `### Wildlife` |
+| 137 | `## Weather` |
+| 145 | `## Leave No Trace` |
+| 157 | `## Photography` |
+| 165 | `## Safety` |
+| 179 | `## Seasonal Considerations` |
+| 199 | `## Experience Level: Beginner vs Experienced Backpackers` |
+| 219 | `## Kings Peak vs General High Uintas Backpacking` |
+| 241 | `## Accessibility` |
+| 249 | `## Planning Tips` |
+
+The file's frontmatter title *is* German (`High Uintas Mehrtagestour-Guide: Plane
+deinen Wilderness-Trip`), and the prose under each English heading is German — so
+this reads as a batch that translated bodies and skipped the heading layer, not a
+deliberate choice.
+
+**Cross-locale check (run at P13) confirms `de` is the sole outlier.** The same file
+in every other locale has all 17 headings translated:
+
+| Locale | English headings remaining (of 17) |
+|---|---|
+| `de` | **17** |
+| `es` / `pt` | 1 — `## Leave No Trace` (plus `Backcountry` inside a translated heading) |
+| `it` / `fr` / `ja` | 1 — `## Leave No Trace` |
+| `zh` | 0 — rendered as `## 无痕山林` |
+
+So `Leave No Trace` **is** a locked programme name in practice: four locales keep it
+English at the identical line 145, and only `zh` translated it. The other 16
+headings have no such precedent and are simply missing.
+
+The one genuine tension is `de`-internal: German already uses the translated form as
+a heading in three other hiking spokes —
+[`wildflower-hiking-near-vernal.de.mdx:254`](src/content/hiking/wildflower-hiking-near-vernal.de.mdx#L254),
+[`dog-friendly-hiking-near-vernal.de.mdx:163`](src/content/hiking/dog-friendly-hiking-near-vernal.de.mdx#L163),
+[`alpine-lakes-hiking-high-uintas.de.mdx:283`](src/content/hiking/alpine-lakes-hiking-high-uintas.de.mdx#L283)
+— so keeping `Leave No Trace` English here would be inconsistent *within German* even
+though it is consistent *across locales*.
+
+> **Question A5:** Translate the 16 non-locked headings into German sentence case
+> (recommended — no precedent supports leaving them English). For `Leave No Trace`,
+> choose which consistency wins: **cross-locale** (keep English, matching es/it/fr/ja)
+> or **de-internal** (use `Hinterlasse keine Spuren`, matching the other three German
+> hiking spokes). Recommendation: de-internal, since a German reader sees the German
+> corpus, not the other locales.
 
 ---
 

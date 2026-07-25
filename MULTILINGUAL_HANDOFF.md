@@ -43,7 +43,7 @@ are kept because their lessons are reusable, not because anything in them is out
 
 | Item | Where it lives | Blocking? |
 |---|---|---|
-| **Native-speaker editorial review** (`de`, `ja`, `zh`) | `NATIVE_REVIEW.md` — 9 decisions with corpus counts | Not for engineering. **`de` review cannot start until the `du`/`Sie` call is made** (A1) |
+| **Native-speaker editorial review** (`de`, `ja`, `zh`) | `NATIVE_REVIEW.md` — 11 items with corpus counts; **4 decided** (A1, A2, C1, C6), **7 open** (A3, A4, **A5**, B1, C2, C3, C4) | Not for engineering. **No longer blocked** — A1 (`du`) decided 2026-07-25, A1-residual closed at P12, **A2 sentence-case sweep applied at P13** (297 replacements, 55 files). A5 is new: 17 untranslated English headings in one `de` file |
 | **`es` / `it` never reviewed** | `NATIVE_REVIEW.md` §D — their tags are retroactive markers, not review sign-off | No |
 | **RTL infrastructure (Arabic Stage 0)** | §10 — a **new engineering initiative**, not an extension of this rollout | No |
 | **Additional LTR locales** | §10 — the pipeline is ready; each is execution, not design | No |
@@ -441,20 +441,52 @@ from now can tell the finished system from the roadmap without reading the git l
 
 ### 10.1 Editorial / native-speaker review — `de`, `ja`, `zh`
 
-Owned by `NATIVE_REVIEW.md`, not by this document. Nine decisions, each backed by corpus
+Owned by `NATIVE_REVIEW.md`, not by this document. Eleven items, each backed by corpus
 counts rather than "please proofread" — the review is evidence-based by construction, and
 must stay that way.
 
 Sequence, in order:
 
-1. **Make the German `du`/`Sie` call** (`NATIVE_REVIEW.md` A1). It is a brand-voice
-   decision, not a language one, and it is the largest possible change in the corpus —
-   4,085 informal forms across 77 routes. **Do not assign the German review before it is
-   answered**, or the reviewer works against a register that may be about to flip.
-2. Run `de` / `ja` / `zh` review, collect answers.
+1. ~~**Make the German `du`/`Sie` call** (`NATIVE_REVIEW.md` A1).~~ **DONE 2026-07-25 —
+   informal `du` confirmed, the `Sie` flip is cancelled**, and the ~7,171 informal forms
+   across 77 routes stand. A1-residual was then executed at P12 and **closed with zero
+   corpus edits**: the corpus contains **0 formal-address leaks** (all 156 capitalised
+   `Sie`/`Ihr*` are third-person or informal-plural `ihr`) and no separable capitalisation
+   defect — all 44 mid-sentence capitals live inside title-cased display strings and are
+   now part of A2. **German review is unblocked.**
+2. ~~Run `de` / `ja` / `zh` review, collect answers. German starts at **A2**.~~
+   **A2 DONE 2026-07-25 (P13)** — German sentence case applied corpus-wide as one sweep:
+   297 replacements from 252 distinct strings across 55 files, covering headings, table
+   headers, hero/CTA strings, `<strong>` micro-headings, bold day-labels, one quoted
+   heading in prose, and four frontmatter SEO titles. Mid-sentence pronoun capitals went
+   **44 → 0** while sentence-initial forms were untouched, so A1-residual closed with it.
+   11 false positives were verified and rejected. German now continues at **A5**.
 3. Apply each accepted change as **one corpus-wide sweep**, per Gate 4c — never
    file-by-file. Piecemeal edits are how cross-batch drift was created originally.
 4. Re-verify per the `NATIVE_REVIEW.md` appendix, then **freeze the LTR framework**.
+
+**Counting lesson from P12 (applies to any register or capitalisation audit).** A raw
+grep for capitalised `Sie`/`Ihr`/`Du` measures nothing on its own — German capitalises
+sentence-initially, so the same token is a formal-address leak mid-sentence and correct
+third-person or informal-plural at a sentence start. Classify by **position** before
+reporting a count, and treat `: ` as a sentence boundary (Duden permits a capital after a
+colon introducing a full sentence) while `—` and `;` are not. The pre-P12 figures of
+"~18 formal leaks" and "214 letter-style capitals" were both artefacts of skipping this
+step; the true counts are 0 and 0.
+
+**Detection lesson from P13 (title-case audits need two passes, not one).** A detector
+built on a closed-class word list (articles, prepositions, pronouns, modals) has high
+precision but **silently under-counts**, because a heading whose only error is a
+capitalised verb or adjective contains no closed-class word at all — `Deine Fahrt Planen`,
+`Die Richtige Piste Wählen`, `Wildtiere Verantwortungsvoll Beobachten` all scored clean on
+pass one. Always follow it with a second pass that aggregates **every** mid-position
+capital in the corpus and reviews the frequency list by hand; that is what raised P13's
+coverage from 135 estimated headings to 252 distinct strings. Two filters are mandatory
+before counting anything, or the signal drowns: skip **all-caps locked strings** (the
+German disclaimer `PRÜFE BEI DER OFFIZIELLEN QUELLE` alone produced 679 false hits) and
+skip **sentence-initial positions inside long prose spans**. Reviewing whole display
+strings rather than grepping for a pattern is also what surfaced A5 — 17 untranslated
+English headings that no capitalisation regex would ever have flagged.
 
 `es` and `it` have never had a native review. Their `i18n-*-complete` tags are retroactive
 structural markers (§1) and must not be read as editorial sign-off.
