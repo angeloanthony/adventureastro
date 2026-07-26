@@ -37,14 +37,14 @@ questions, not so they read 171 files.
 |---|---|---|
 | `de` | **all 6 original items closed** | — (A7 is post-review, see §E) |
 | `ja` | **all closed** — B1 applied at P18, B2 dissolved | — |
-| `zh` | **C3, C4** | C3 — five synonym residues; the `越野车` (81) call is the real question |
+| `zh` | **C4** | C4 — confirm the `恐龙之乡` / `Dinosaur National Monument` split holds |
 
 **Priority order** (owner-set 2026-07-25, revised at P16 once A3 was decided):
-~~C6~~ → ~~A1-residual~~ → ~~A2~~ → ~~A5~~ → ~~A6~~ → ~~A3~~ → ~~A4~~ → ~~B1~~ → ~~C2~~ → C3, C4
+~~C6~~ → ~~A1-residual~~ → ~~A2~~ → ~~A5~~ → ~~A6~~ → ~~A3~~ → ~~A4~~ → ~~B1~~ → ~~C2~~ → ~~C3~~ → C4
 
 ***The German and Japanese reviews as originally scoped are both COMPLETE.*** German
 A1–A6 are all decided and applied; Japanese B1 is applied and B2 dissolved on
-measurement. **Only C3 and C4 remain from the original plan.**
+measurement. **Only C4 remains from the original plan.**
 
 **Post-review opportunities — 4, all deliberately sequenced last.** A7, B3, B4 and C7
 were each surfaced by a census run while applying an accepted decision, not by the
@@ -1173,7 +1173,38 @@ against 0 `步道` in motorised content may be the weakest fit of all.
 
 ---
 
-### C3. Five small synonym residues — confirm and sweep
+### C3. Five small synonym residues — ✅ DECIDED & APPLIED 2026-07-25 (P20)
+
+**Outcome: only 2 of the 5 rows were genuine drift. 6 replacements in 2 files**
+(`a6e8f1e`). Measurement overturned the other three rows *and* the `越野车`
+question, which turned out not to be a synonym question at all.
+
+| Row | Doc's hypothesis | What the corpus showed | Decision |
+|---|---|---|---|
+| trail `小径` 15 | batch drift | EN says **"path"** at all 15 sites and "trail" at none. `summer-hiking` L229 renders EN *"high-country trails and hot desert paths"* as *"高山**步道**和炎热的沙漠**小径**"* — the EN contrast reproduced inside one sentence | **RETAIN** — 步道 = trail, 小径 = path |
+| camping `野营` 4 | batch drift | **0 genuine occurrences.** 3 were substrings of `荒野营位`/`荒野营地`; the 4th was `背包野营` (a *backpacking* rendering, not a camping synonym) | **1 replacement** → `背包穿越` |
+| fishing `垂钓` 22 | batch drift | Register/technique word. EN uses *angler/angling/jigging* at these sites; `垂直垂钓` (4) matches EN "vertical jigging" (4) exactly | **RETAIN** |
+| byway `风景公路` 5 | batch drift | All 5 in **one file** that also uses `景观公路` 3×, twice in the same paragraph. Proper name is `Flaming Gorge–Uintas 景观公路` ~35× vs `风景公路` 1× | **SWEEP** → `景观公路` |
+| byway `景观道路` 1 | batch drift | Renders EN *"paved scenic **road**"* at that site, not "byway" | **RETAIN** |
+| vehicle `越野车` 81 | "may be deliberate" | **Not a UTV synonym.** 69 of 81 are the compound `并排越野车` = *"side-by-side"* — the same slot `de` fills 53× and `ja` 53×. The 12 bare uses are the generic category (*"我可以带上自己的越野车吗？"*) or render EN *"machine"* | **RETAIN** |
+
+`背包野营` → `背包穿越` because the zh heading for the same EN pair
+("Hiking and Backpacking") is already `## 徒步与背包穿越`; house terms are
+`背包穿越` (26) and `背包徒步` (117).
+
+**Lesson (reinforces C2/P19): never sweep a bare stem.** `野营`'s headline count
+of 4 was 100% inflated — 3 substrings plus 1 unrelated sense. **New lesson:
+check whether the "synonym" is a bound morpheme in a compound.** `越野车` looked
+like an 81-occurrence competitor to `UTV`; 85% of it was the second half of
+`并排越野车`, and cross-locale comparison (de 53 / ja 53) proved it fills the
+"side-by-side" slot, not the "UTV" slot. **The EN master is the arbiter for
+apparent synonym pairs** — three of the five rows were faithful renderings of a
+distinction English itself draws.
+
+Residual, out of C3's scope: EN *"machine"* renders as `车辆` / `车` / `越野车`
+in the zh corpus. That is a separate 3-way slot, not a UTV question.
+
+<details><summary>Original finding (kept for the record)</summary>
 
 Each of these is a dominant term with a handful of stragglers. None is wrong in
 isolation; the issue is that one corpus uses both.
@@ -1201,6 +1232,8 @@ Three words that are **not** residues and must not be swept:
 
 > **Question C3:** Confirm the four drift rows normalise to the dominant term,
 > and rule on whether `越野车` is a deliberate generic or should become `UTV`.
+
+</details>
 
 ---
 
