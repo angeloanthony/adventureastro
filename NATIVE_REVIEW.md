@@ -16,7 +16,7 @@ All three locales are feature-complete (57 MDX spokes + 20 inline pages each,
 scan cannot make. This document exists so a reviewer decides a short list of
 questions, not so they read 171 files.
 
-**Decided — 8 of 13:**
+**Decided — 9 of 13:**
 
 | Item | Decision | State |
 |---|---|---|
@@ -26,26 +26,31 @@ questions, not so they read 171 files.
 | **A6** `Leave No Trace` lock alignment | **English programme name**; lowercase prose stays German | ✅ decided **and applied** 2026-07-25 (P15) — 8 sites aligned across 6 files, 9 descriptive uses deliberately kept German |
 | **A3** `Piste` for UTV trails | **`Piste` is CORRECT — retained**; only the `-system` compound normalised | ✅ decided 2026-07-25 (P16) — 251 occurrences reviewed, **239 unchanged**, 12 compound-drift replacements |
 | **A4** generic English `Trail` | **localize by sense** — `Piste` for motorised, `Wanderweg` for hiking; proper names stay English | ✅ decided **and applied** 2026-07-25 (P17) — 167 occurrences reviewed, **32 replaced**, 88 proper names + 2 footwear terms + 4 code identifiers kept |
+| **B1** `モアブ` vs `Moab` | **Latin `Moab`** — the corpus transliterates only `バーナル` and state names | ✅ decided **and applied** 2026-07-25 (P18) — 85 occurrences reviewed, **37 replaced** in 1 file, 48 already canonical |
 | **C1** `官方渠道` vs `官方来源` | **`官方渠道`** is the standard | ✅ decided **and applied** 2026-07-25 |
 | **C6** locked-phrase policy | caveat is locked by **intent, not byte sequence** | ✅ decided **and fully applied** 2026-07-25 — 27 seam defects across 13 files fixed, disclaimer count conserved at 994 |
 
-**Open — 5:**
+**Open — 4:**
 
 | Locale | Open items | Highest-impact |
 |---|---|---|
 | `de` | **all 6 original items closed**; **A7 newly raised** | A7 — `Trailhead` (41); the recorded lock is contradicted by the corpus |
-| `ja` | B1 | B1 `モアブ` vs `Moab` |
+| `ja` | **all closed** — B1 applied at P18, B2 dissolved | — |
 | `zh` | C2, C3, C4 | C2 — `登山口` (228) for trailheads with no mountain |
 
 **Priority order** (owner-set 2026-07-25, revised at P16 once A3 was decided):
-~~C6~~ → ~~A1-residual~~ → ~~A2~~ → ~~A5~~ → ~~A6~~ → ~~A3~~ → ~~A4~~ → B1, C2, C3, C4
-(**A7** to be slotted by the owner).
+~~C6~~ → ~~A1-residual~~ → ~~A2~~ → ~~A5~~ → ~~A6~~ → ~~A3~~ → ~~A4~~ → ~~B1~~ → C2, C3, C4
+(**A7** deferred by the owner to *after* the planned queue — see below).
 
-***The German review as originally scoped is COMPLETE — A1, A2, A3, A4, A5 and A6
-are all decided and applied.*** P17 raised one new item, **A7 (`Trailhead`)**, which
-the A4 census surfaced as evidence against a lock this document had recorded as
-frozen. It is a decision, not a defect, and it did not exist when the "one item from
-complete" plan was written.
+***The German and Japanese reviews as originally scoped are both COMPLETE.*** German
+A1–A6 are all decided and applied; Japanese B1 is applied and B2 dissolved on
+measurement. Only the three Chinese items remain from the original plan.
+
+**A7 is deliberately sequenced last.** P17 raised it as a *new* item — the A4 census
+surfaced evidence against a lock this document had recorded as frozen. It is an
+editorial opportunity, not a defect in the original review scope, so it does not
+displace the planned items (C2, C3, C4) that were committed before it existed. It is
+an owner decision to be taken once the planned queue is finished.
 
 ---
 
@@ -788,9 +793,117 @@ an untranslated English string in a German heading.
 
 ---
 
-## B. Japanese (`ja`) — one decision, plus one item that dissolved
+## B. Japanese (`ja`) — B1 decided & applied; B2 dissolved. **Section closed.**
 
-### B1. `モアブ` vs `Moab`
+### B1. `モアブ` vs `Moab` — ✅ DECIDED & APPLIED 2026-07-25 (P18): **Latin `Moab`**
+
+> **✅ Applied: the 37 katakana occurrences in the single outlier file were
+> normalised to Latin `Moab`; the 48 already-canonical occurrences across the other
+> 11 Japanese surfaces were left untouched.** Verified: `astro check` 0 errors /
+> 0 warnings · build **619 pages** · validator ✔ · route parity `ja` = `de` = `zh`
+> = 77 · **1 file changed**.
+>
+> **The decision was not made on the file split — it was made on the corpus's own
+> place-name rule, which the earlier B1 note never measured.** The `ja` corpus does
+> not transliterate US place names as a class. It transliterates exactly two things:
+> the **subject town** and **state names**. Every other settlement ships in Latin:
+>
+> | Place | Katakana | Latin |
+> |---|---|---|
+> | Vernal — *the subject town* | **バーナル 2,084** | 381 (321 of them the brand `Adventure Tours Vernal` / `Best Western Vernal`) |
+> | Utah / Colorado / Wyoming — *states* | **ユタ州 763 · コロラド 146 · ワイオミング 64** | compound names only |
+> | Denver | 0 | **88** |
+> | Grand Junction | 0 | **64** |
+> | Heber City | 0 | **11** |
+> | Roosevelt | 0 | **10** |
+> | Duchesne | 0 | **10** |
+> | Rock Springs | 0 | **1** |
+> | **Moab** *(before)* | **37** | **48** |
+>
+> Landmarks are locked Latin even more strongly — Flaming Gorge 860 / 0, Dinosaur
+> National Monument 507 / 0, Ashley National Forest 578 / 0, Steinaker 449 / 0,
+> Kings Peak 174 / 1. So `Moab` in Latin is not an untranslated residue; it is the
+> form the corpus already uses for every place that is not Vernal or a state.
+>
+> **Four independent lines of evidence, all pointing the same way:**
+>
+> 1. **Latin was already the majority and the wider spread** — 48 occurrences across
+>    11 files, against 37 in **one** file. The katakana is a single-batch artifact.
+> 2. **The `ja` guides hub already titles this very article in Latin.**
+>    [`ja/guides/index.astro:80`](src/pages/ja/guides/index.astro#L80) links to it as
+>    `Moab UTVツアーの代替案`, while the article's own frontmatter title read
+>    `モアブUTVツアーの代替案`. The same string in two scripts — the hub, which lists all
+>    nine guides consistently, used Latin. That is the `Streckensystem`/`Pistensystem`
+>    shape from A3, and it also resolves the anchor-text objection the original B1
+>    note raised.
+> 3. **One shipped sentence contained both conventions.**
+>    [`ultimate-guide-to-vernal-utah.ja.mdx:72`](src/content/guides/ultimate-guide-to-vernal-utah.ja.mdx#L72)
+>    reads `ソルトレイクシティは西へ約3時間、MoabはUS-191経由で南へ約2.5時間` — a
+>    transliterated city and a Latin city in one clause — and lines 110–111 of the same
+>    file put `ソルトレイクシティ` and `Moab` in **adjacent rows of one distance table**.
+> 4. **The other CJK locale agrees.** `zh` — which readily uses native names elsewhere
+>    (`恐龙之乡`, `无痕山林`) — ships `Moab` **72** times and the standard Chinese
+>    transliteration `摩押` **0** times.
+>
+> **Why not the other direction.** Standardising on `モアブ` would have been the larger
+> and less defensible sweep: it touches 48 occurrences across 11 files including three
+> `page-content/*.ts` locale blocks, it contradicts the hub's own article title, and —
+> decisively — it would leave `Moab` transliterated while `Denver` (88), `Grand
+> Junction` (64), `Heber City`, `Duchesne` and `Roosevelt` stayed Latin. Being
+> consistent would then have required transliterating those too, turning a one-item
+> review into a corpus-wide transliteration programme that nobody has asked for.
+>
+> **Occurrences by context** (all 85): body prose 31 · FAQ 15 · HTML heading 10 ·
+> structured data (JSON-LD) 7 · frontmatter metadata 5 · CTA / hero display 5 ·
+> table 4 · page-summary 3 · image alt / figcaption 2 · Astro props 2 ·
+> **markdown heading 1**.
+>
+> That single markdown heading is `## バーナル対Moab：正直な比較`
+> ([`ultimate-guide-to-vernal-utah.ja.mdx:173`](src/content/guides/ultimate-guide-to-vernal-utah.ja.mdx#L173)) —
+> already Latin, in a file this sweep did not touch. It is the reason the
+> anchor-safety claim below holds without further checking.
+>
+> **Spacing.** The corpus sets Latin tokens directly against kana with no space
+> (`Moabは`, `Moabから`, `Denverから`, `Grand Junctionから`), so the substitution is
+> direct. The **one** place where the katakana abutted a Latin token — the frontmatter
+> title `モアブUTVツアー` — took a space, giving `Moab UTVツアーの代替案`, which is
+> byte-identical to the hub's existing link text. Verified: **0** `Moab`+Latin run-ons
+> in the rendered page.
+>
+> **Intentional exceptions — documented, not swept:**
+> - **20 lowercase `moab`** in the same file are the route slug
+>   `/ja/guides/moab-utv-tours/` and the CSS class `moab-hero-badge`. Not content;
+>   renaming them would be a routing/engineering change, out of scope for an editorial
+>   pass — the same call A4 made for its 4 code identifiers.
+> - **The 48 existing Latin occurrences** — already canonical, untouched.
+> - **`バーナル` (2,084) and the state names** — the two things the corpus *does*
+>   transliterate. Untouched.
+>
+> **No anchor risk.** The changed strings are frontmatter, FAQ, HTML headings and
+> prose; **no markdown `##`/`###` heading was touched**, so no heading-derived ID
+> regenerated. Confirmed against the diff.
+>
+> **⚠ Two pre-existing `ja` defects surfaced by this census — recorded, not fixed,
+> because they are outside B1's scope:**
+> 1. **`Salt Lake City` is split the same way `Moab` was** — Latin **129** vs
+>    ソルトレイクシティ **34**, and the two forms appear in *identical* sentence
+>    patterns (`<a href="/ja/from/salt-lake-city/">Salt Lake Cityからバーナルへの旅行
+>    ガイド</a>` in `visiting-dinosaur-national-monument.ja.mdx:244` against
+>    `…ソルトレイクシティからバーナルへのガイド</a>` in `camping-at-flaming-gorge.ja.mdx:236`).
+>    The rule established here decides it — the gateway page
+>    [`ja/from/salt-lake-city.astro`](src/pages/ja/from/salt-lake-city.astro), whose
+>    entire subject is the city, names it **`Salt Lake City`** in its `title`,
+>    `description` and `<h1>` — but applying it is a separate sweep of 34 occurrences
+>    and was not authorised by B1. **Recommended as B3.**
+> 2. **~14 untranslated English anchor texts** in `ja` body links —
+>    `things to do in Vernal`, `Vernal weather guide`, `wildlife hiking guide near
+>    Vernal`, `Ultimate Guide to Vernal` — where the link target is a `/ja/` route but
+>    the visible text is English. Distinct from the Gate 4d route-downgrade class
+>    (which is clean); this is display text, not hrefs. **Recommended as B4.**
+
+The original finding is preserved:
+
+### B1 (original finding). A single-file split
 
 A single-file split, and cleanly so:
 
@@ -816,8 +929,15 @@ clean one-pass change. Context that matters for the decision:
 - Moab is a comparison/competitor destination here, not a place this business
   operates — it may warrant different treatment from バーナル.
 
-> **Question B1:** Standardise on `モアブ` (change 5 files + the anchor text) or
-> on `Moab` (change 1 file, 37 occurrences)? Either is a single sweep.
+> ~~**Question B1:** Standardise on `モアブ` (change 5 files + the anchor text) or
+> on `Moab` (change 1 file, 37 occurrences)? Either is a single sweep.~~
+> **ANSWERED & APPLIED 2026-07-25 (P18): `Moab`.** See the decision block at the top
+> of B1. The table above was **spoke-only and undercounted**: the true census is
+> **85** occurrences, not 37+5 files — it omitted the 20 inline `src/pages/ja/**`
+> pages (15) and the `page-content/*.ts` JA locale blocks (13). The framing was also
+> wrong in kind: this was never a file split to be resolved either way, but a residue
+> measured against the corpus's own place-name rule, which no earlier count had
+> established.
 
 ---
 
