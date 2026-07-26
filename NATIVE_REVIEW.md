@@ -16,7 +16,7 @@ All three locales are feature-complete (57 MDX spokes + 20 inline pages each,
 scan cannot make. This document exists so a reviewer decides a short list of
 questions, not so they read 171 files.
 
-**Decided — 9 of 13:**
+**Decided — 10 of 13:**
 
 | Item | Decision | State |
 |---|---|---|
@@ -27,30 +27,32 @@ questions, not so they read 171 files.
 | **A3** `Piste` for UTV trails | **`Piste` is CORRECT — retained**; only the `-system` compound normalised | ✅ decided 2026-07-25 (P16) — 251 occurrences reviewed, **239 unchanged**, 12 compound-drift replacements |
 | **A4** generic English `Trail` | **localize by sense** — `Piste` for motorised, `Wanderweg` for hiking; proper names stay English | ✅ decided **and applied** 2026-07-25 (P17) — 167 occurrences reviewed, **32 replaced**, 88 proper names + 2 footwear terms + 4 code identifiers kept |
 | **B1** `モアブ` vs `Moab` | **Latin `Moab`** — the corpus transliterates only `バーナル` and state names | ✅ decided **and applied** 2026-07-25 (P18) — 85 occurrences reviewed, **37 replaced** in 1 file, 48 already canonical |
+| **C2** `登山口` for trailheads | **`登山口` is CORRECT — retained**; no terrain split exists to apply | ✅ decided **and applied** 2026-07-25 (P19) — 232 occurrences reviewed, **230 unchanged**, 2 single-file drift fixes |
 | **C1** `官方渠道` vs `官方来源` | **`官方渠道`** is the standard | ✅ decided **and applied** 2026-07-25 |
 | **C6** locked-phrase policy | caveat is locked by **intent, not byte sequence** | ✅ decided **and fully applied** 2026-07-25 — 27 seam defects across 13 files fixed, disclaimer count conserved at 994 |
 
-**Open — 4:**
+**Open — 2 from the original plan:**
 
 | Locale | Open items | Highest-impact |
 |---|---|---|
-| `de` | **all 6 original items closed**; **A7 newly raised** | A7 — `Trailhead` (41); the recorded lock is contradicted by the corpus |
+| `de` | **all 6 original items closed** | — (A7 is post-review, see §E) |
 | `ja` | **all closed** — B1 applied at P18, B2 dissolved | — |
-| `zh` | C2, C3, C4 | C2 — `登山口` (228) for trailheads with no mountain |
+| `zh` | **C3, C4** | C3 — five synonym residues; the `越野车` (81) call is the real question |
 
 **Priority order** (owner-set 2026-07-25, revised at P16 once A3 was decided):
-~~C6~~ → ~~A1-residual~~ → ~~A2~~ → ~~A5~~ → ~~A6~~ → ~~A3~~ → ~~A4~~ → ~~B1~~ → C2, C3, C4
-(**A7** deferred by the owner to *after* the planned queue — see below).
+~~C6~~ → ~~A1-residual~~ → ~~A2~~ → ~~A5~~ → ~~A6~~ → ~~A3~~ → ~~A4~~ → ~~B1~~ → ~~C2~~ → C3, C4
 
 ***The German and Japanese reviews as originally scoped are both COMPLETE.*** German
 A1–A6 are all decided and applied; Japanese B1 is applied and B2 dissolved on
-measurement. Only the three Chinese items remain from the original plan.
+measurement. **Only C3 and C4 remain from the original plan.**
 
-**A7 is deliberately sequenced last.** P17 raised it as a *new* item — the A4 census
-surfaced evidence against a lock this document had recorded as frozen. It is an
-editorial opportunity, not a defect in the original review scope, so it does not
-displace the planned items (C2, C3, C4) that were committed before it existed. It is
-an owner decision to be taken once the planned queue is finished.
+**Post-review opportunities — 4, all deliberately sequenced last.** A7, B3, B4 and C7
+were each surfaced by a census run while applying an accepted decision, not by the
+original scoping. They are registered in **§E** so the original queue stays intact and
+they do not displace planned items that were committed before they existed. Each is an
+owner decision to be taken once the planned queue is finished. **C7 is the highest-impact
+of the four** — it shows closed item C6's seam fix is clean in plain text but leaves
+**249 seams** once inline markup is stripped.
 
 ---
 
@@ -84,7 +86,7 @@ times and bare `Vernal` 0 times.
 | **A4** | generic English `Trail` | ✅ closed — P17, 32 replacements / 5 files |
 | **A5** | untranslated English headings | ✅ closed — P14, 16 headings localized |
 | **A6** | `Leave No Trace` lock | ✅ closed — P15, 8 sites aligned |
-| **A7** | `Trailhead` (41) | ⬜ **open** — raised by the A4 census; owner decision |
+| **A7** | `Trailhead` (42) | ⬜ **open** — post-review item, registered in [§E](#e-post-review-opportunities--newly-discovered-editorial-items) |
 
 ### A1. Register: the corpus is informal `du`. — ✅ DECIDED 2026-07-25: keep `du`
 
@@ -953,7 +955,7 @@ This item is closed; the earlier note was stale.
 
 ---
 
-## C. Simplified Chinese (`zh`) — C1 + C6 decided & applied; C2/C3/C4 open; register clean
+## C. Simplified Chinese (`zh`) — C1 + C2 + C6 decided & applied; C3/C4 open; register clean
 
 Counted across all 57 `.zh.mdx` spokes **and** the 20 `src/pages/zh/**` inline
 pages. Register needs no decision: **你 3,668 / 您 0 / 咱们 0** — informal `你`
@@ -1009,7 +1011,135 @@ locked/natural split. The 961-vs-1 framing above is the measured state.
 
 ---
 
-### C2. `登山口` for trailheads — is it right where there is no mountain?
+### C2. `登山口` for trailheads — ✅ DECIDED & APPLIED 2026-07-25 (P19): **KEEP `登山口`**
+
+> **✅ Decision: `登山口` is the correct and canonical Chinese term for a trailhead in
+> every context, and is retained. 230 of 232 occurrences are unchanged.** The only
+> change is a drift fix inside the same terminology family: **2 replacements** in one
+> file that rendered `trailhead` as bare `入口`. Verified: `astro check` 0 errors /
+> 0 warnings · build **619 pages** · validator ✔ · 1 file changed.
+>
+> **This is a "leave it alone" decision, and five independent lines of evidence
+> produced it.**
+>
+> 1. **The English master makes no terrain distinction, so a split would invent one
+>    the source does not have.** `trailhead` appears **204** times in the English
+>    corpus and is used identically for desert-bench and alpine access points — often
+>    in the *same sentence*.
+>    [`winter-hiking-near-vernal.mdx:26`](src/content/hiking/winter-hiking-near-vernal.mdx#L26)
+>    is decisive: *"the **lower-elevation** roads and **trailheads** around Vernal,
+>    Dinosaur National Monument, Red Fleet, and the lower gorge … The **higher
+>    mountain** roads, byways, and **trailheads** that reach the upper Ashley National
+>    Forest and the High Uintas…"* One word, both terrains, one FAQ answer.
+> 2. **No mechanical rule exists to apply a split.** C2 asked for a rule that decides
+>    which is which. There is none: **29 of the 37 files** containing `登山口` cover
+>    both terrains, and the split falls *inside* sentences and table rows, not between
+>    files. [`winter-hiking-near-vernal.zh.mdx:102`](src/content/hiking/winter-hiking-near-vernal.zh.mdx#L102)
+>    puts `低海拔道路更有可能开放` and `高海拔道路和登山口通常冬季封闭` in **adjacent
+>    cells of one comparison table**; a terrain rule would render the identical concept
+>    with two different words inside a single row. That is the cross-batch drift Gate 4c
+>    exists to prevent, manufactured deliberately.
+> 3. **No peer locale splits by terrain — every one uses a single house term.**
+>
+>    | Locale | Trailhead term | Count | Split by terrain? |
+>    |---|---|---|---|
+>    | `en` | `trailhead` | 204 | no |
+>    | `de` | `Ausgangspunkt` (+ 42 `Trailhead` → **A7**) | 235 | no |
+>    | `fr` | `tête de sentier` 48 / `départ de sentier` 37 | 85 | no — batch drift, not terrain |
+>    | `es` | `inicio de sendero` | 39 | no |
+>    | `it` | `inizio del sentiero` | 99 | no |
+>    | `pt` | `início de trilho` | 16 | no |
+>    | `ja` | `トレイルヘッド` | 230 | no |
+>    | `zh` | `登山口` | 232 | no |
+>
+> 4. **`登山口` is not a `ja` artifact — the two CJK locales chose independently.**
+>    Worth checking because `zh` was mirrored from the `ja` rollout (C5 records the
+>    leftover Japanese code comments). `ja` uses `トレイルヘッド` **230** times and
+>    `登山口` **0** times, so the Chinese term was an independent editorial choice,
+>    not carried over.
+> 5. **The corpus already anchors `登山-` as a lexicalised outdoor morpheme in a
+>    desert context.** This is the A3 `Piste` shape. The literal reading of `登山口`
+>    ("mountain-climbing entrance") is in tension with the corpus's *own* use of bare
+>    `登山` for technical mountaineering — `冬季登山` (10), `技术登山`, `登山远征`,
+>    `登山者` (2), and explicitly `那是冬季登山地形，不是徒步`. But the compounds
+>    behave differently: `登山靴` renders *hiking boots* at
+>    [`visiting-dinosaur-national-monument.zh.mdx:279`](src/content/dinosaur-national-monument/visiting-dinosaur-national-monument.zh.mdx)
+>    — for **slickrock at Dinosaur National Monument**, where there is no mountain at
+>    all — and reads correctly. `登山杖` (4) behaves the same way. Exactly as
+>    `Wüstenpiste`/`Waschbrettpiste` proved the German translator was working in the
+>    off-road register, these prove `登山X` is lexicalised here and not compositional.
+>
+> **The senses are already kept separate — `zh` does not have the collapse risk `de`
+> has.** A7 warns that German `Ausgangspunkt` serves *both* trailhead and UTV staging
+> point, so a blanket sweep there would merge two senses. Chinese keeps them apart:
+>
+> | Sense | Chinese term | Count |
+> |---|---|---|
+> | trailhead | `登山口` | 232 |
+> | UTV staging / meeting point | `集合点` | 44 |
+> | parking area | `停车场` | 22 |
+> | campground | `营地` | 708 |
+>
+> **The `utv` row that C2 flagged as "the weakest fit of all" dissolves on
+> measurement.** Of the 9 `utv` occurrences, **8 are the shared map-disclaimer
+> boilerplate** — the English master's *"shows no routes, distances, directions, or
+> trailhead locations"* — which is the identical string used in the hiking hub. It is
+> not UTV-specific terminology. The 9th
+> ([`side-by-side-rentals-vernal-utah.zh.mdx:45`](src/content/utv/side-by-side-rentals-vernal-utah.zh.mdx#L45))
+> renders *"there are no marked trailheads, no posted signs"* and is a genuine
+> trailhead use.
+>
+> **What *was* fixed — single-file drift, the `Streckensystem` shape.** A per-file
+> `en`↔`zh` count found **exactly one divergence** across the whole corpus:
+> [`beginners-guide-to-utv-tours-vernal`](src/content/utv/beginners-guide-to-utv-tours-vernal.zh.mdx)
+> rendered `trailhead` as bare `入口` twice, where every sibling file uses `登山口` —
+> including for the *same English sentence*.
+>
+> | Line | English master | Was | Now |
+> |---|---|---|---|
+> | 85 | `no marked trailheads` | `没有标记出来的入口` | `没有标记出来的登山口` |
+> | 164 | `or trailhead locations shown` | `或入口位置` | `或登山口位置` |
+>
+> Line 85 is the same sentence as `side-by-side-rentals-vernal-utah:45`, which already
+> shipped `没有标注好的登山口`. Result: `登山口` **232 → 234**, and every English
+> `trailhead` in the corpus now has a `登山口` counterpart.
+>
+> **Intentional exceptions — documented, not swept:**
+> - **Bare `入口` (35) is untouched, and sweeping it would have been a serious error.**
+>   Every other occurrence is a genuine *entrance*: park entrances (`犹他州入口`,
+>   `科罗拉多州入口`, `纪念地入口`), forest gateways (`## 最佳区域与入口`), a canyon
+>   mouth (`深红色峡谷的入口`), boat-ramp access (`岸钓入口`) and figurative gateways
+>   (`徒步中心页的新手入口`). This is the Chinese counterpart of A3's bare `Strecke`
+>   (110), left alone for the same reason — **never sweep a bare stem.**
+> - **`步道` (1,156)** — the house word for *trail*, not in question and untouched.
+> - **The 26 map-disclaimer instances** stay `登山口`. Their surrounding wording varies
+>   (`不显示` / `未标示` / `未标注` / `不含` / `不标注`), which looks like drift but is
+>   **faithful to the source**: the English master itself ships **11 distinct
+>   phrasings** of this disclaimer. Recorded so a later sweep does not "fix" it.
+> - **`登山杖` (4), `登山靴` (1), `登山者` (2), `冬季登山` (10)** — correct
+>   mountaineering and gear senses, untouched.
+>
+> **No anchor risk whatsoever.** `登山口` appears in **0** markdown or HTML headings
+> anywhere in the corpus, so no heading-derived ID could regenerate. Both edits are
+> body prose and image `alt` text.
+>
+> **Occurrences by surface** (all 232): body prose 149 · FAQ 35 · table 22 ·
+> image alt 22 · figcaption 4 · **heading 0**.
+> **By sense:** hiking trailhead 232 · UTV staging area **0** · parking area **0** ·
+> campground access **0** — no concept is conflated.
+>
+> **Post-change guard scans all match their recorded baselines** (per the Appendix rule
+> that any `zh` change re-runs the C5 and Gate 4e scans): `您` **0** · `——` **5,222** ·
+> 14 `连接号` single dashes intact · `官方渠道核实` conserved at **994** · plain-text
+> seams `请…请向` / `并请向` / `先请向` all **0**.
+>
+> **⚠ One pre-existing defect surfaced by this census — recorded, not fixed, because it
+> is outside C2's scope. See `C7` in the Post-Review Opportunities section: C6's seam
+> fix is clean in plain text but leaves 249 seams once inline markup is stripped.**
+
+The original finding is preserved:
+
+### C2 (original finding). Is `登山口` right where there is no mountain?
 
 `登山口` (152 in hiking, 228 corpus-wide) literally means *mountain-climbing
 entrance*. Much of this region's hiking is desert bench, canyon rim and
@@ -1030,9 +1160,16 @@ Note `步道` itself (1,156) is consistent and not in question — this is only 
 the *trailhead* compound. The `utv` row is worth a second look: 9 `登山口`
 against 0 `步道` in motorised content may be the weakest fit of all.
 
-> **Question C2:** Keep `登山口` throughout, or use `步道起点`/`步道入口` for
+> ~~**Question C2:** Keep `登山口` throughout, or use `步道起点`/`步道入口` for
 > non-mountain trailheads? If split, state the rule that decides which is which
-> so it can be applied mechanically.
+> so it can be applied mechanically.~~
+> **ANSWERED & APPLIED 2026-07-25 (P19): keep `登山口`.** See the decision block at
+> the top of C2. The question's own condition decided it — **no mechanical rule
+> exists**, because 29 of 37 files span both terrains and the split falls inside
+> single sentences and table rows. The true corpus figure is **232**, not 228; the
+> earlier count omitted the 4 occurrences in the `page-content/*.ts` ZH blocks. The
+> `utv` row flagged as "the weakest fit of all" is **8 parts shared map-disclaimer
+> boilerplate and 1 genuine trailhead use** — not UTV-specific terminology.
 
 ---
 
@@ -1273,6 +1410,96 @@ Recorded so the reviewer knows what this document deliberately does *not* cover:
 - **RTL is not in scope anywhere in this document.** Arabic and any other
   right-to-left locale is a separate engineering initiative
   (`MULTILINGUAL_HANDOFF.md` §10), not an extension of this review.
+
+---
+
+## E. Post-Review Opportunities — newly discovered editorial items
+
+**These were not overlooked in the original review plan. Every one was surfaced by a
+census run while applying an accepted decision**, because this review counts every
+form of a term rather than grepping for the pattern it expects. They are recorded
+here so the original queue (A1–A6, B1–B2, C1–C6) stays intact as scoped, and these
+improvements get a proper home instead of reading as gaps in the initial planning.
+
+**None of them is authorised.** Each is an owner decision, sequenced *after* the
+planned queue.
+
+| Item | Locale | Subject | Raised by | Size | State |
+|---|---|---|---|---|---|
+| **C7** | `zh` | caveat seams survive behind inline markup | P19 (C2 census) | **249 sites / 28+ files** | ⬜ open — **highest impact** |
+| **A7** | `de` | `Trailhead` (42) vs the established `Ausgangspunkt` (235) | P17 (A4 census) | 42 sites | ⬜ open |
+| **B3** | `ja` | `Salt Lake City` split — Latin 129 vs `ソルトレイクシティ` 34 | P18 (B1 census) | 34 sites | ⬜ open |
+| **B4** | `ja` | ~14 untranslated English anchor texts on `/ja/` links | P18 (B1 census) | ~14 sites | ⬜ open |
+
+### C7. The caveat seam fix is clean in plain text but not as rendered
+
+**This is a genuine gap in closed item C6, not a new preference.** C6 fixed 27 seam
+defects and verified `请…请向` / `并请向` / `先请向` at **0**. That verification is
+correct — but only against *plain text*. The corpus wraps the caveat in inline markup,
+and the scan could not see through it.
+
+Strip `<strong>`, `</strong>` and `**` — i.e. read the corpus **as it renders** — and
+the seam count is not 0:
+
+| Rendered form | Count | Source shape |
+|---|---|---|
+| `请请向官方渠道核实` | **179** | `请<strong>请向官方渠道核实</strong>` |
+| `请务必请向官方渠道核实` | **16** | `请务必<strong>请向官方渠道核实</strong>` |
+| `请就当前状况请向官方渠道核实` | 5 | plain-text residue |
+| ~20 further one- and two-off variants | ~49 | mixed |
+| **Total rendered seams** | **249** | across 28+ files |
+| *Same scan, plain text only (what C6 ran)* | **0** | — |
+
+A real example —
+[`camping-in-ashley-national-forest.zh.mdx`](src/content/camping/camping-in-ashley-national-forest.zh.mdx):
+
+```
+source:   …可饮用水情况和预订状态 —— 请<strong>请向官方渠道核实</strong>（美国林务局…）
+renders:  …可饮用水情况和预订状态 —— 请请向官方渠道核实（美国林务局…）
+```
+
+That is precisely C6's defect class: **two `请` inside one clause with no boundary
+between them.** The five grammatical `请A，请B` coordinate clauses C6 protected are
+*not* in this count — the scan excludes any match containing a clause boundary, so
+they remain correctly out of scope.
+
+**This is exactly what Gate 4e was written for, one level deeper.** Gate 4e says to
+grep the *join seam* of a locked phrase, not just the phrase. C7 adds the corollary:
+**the seam must be measured on the rendered text, not the source text** — inline
+markup sits inside the seam and hides it from every plain-text scan.
+
+> **Question C7:** Authorise a corpus-wide sweep dropping the redundant leading `请`
+> where it is immediately followed by the locked caveat across markup? Per the C6
+> policy the caveat is locked by **intent, not bytes**, so `…—— <strong>请向官方渠道
+> 核实</strong>` and `请务必<strong>向官方渠道核实</strong>` both satisfy the lock —
+> but which of the two shapes is preferred is an editorial call, and the 16
+> `请务必` instances may want the opposite fix from the 179 bare ones.
+
+*Not applied in P19.* C2 was scoped to `登山口`; this is the caveat phrase, it belongs
+to a closed item, and at 249 sites it needs its own phase and its own verification
+pass. Nothing here blocks C2's closure — the C2 change does not touch the caveat, and
+the Gate 4e conservation check (`官方渠道核实` = 994) passed unchanged.
+
+### A7 · B3 · B4
+
+Full evidence for these three is written up where the census that found them lives:
+
+- **A7** — see [§A7](#a7-trailhead--the-recorded-lock-is-not-supported-by-the-corpus)
+  above. German is the sole Latin-script locale keeping English `Trailhead`, against
+  its own established `Ausgangspunkt` family (235). Complicated by two things the
+  question must settle: 15 of the 42 sit in repeated `alt`/figcaption boilerplate,
+  and `Ausgangspunkt` already carries the UTV **staging-point** sense in German, so a
+  blanket sweep would merge two senses. *(P19 note: Chinese does **not** have that
+  collapse risk — `zh` uses `集合点` for staging, kept distinct from `登山口`.)*
+- **B3** — `Salt Lake City` ships Latin **129** times and `ソルトレイクシティ` **34**
+  times in identical sentence patterns. The B1 place-name rule decides it: the gateway
+  page [`ja/from/salt-lake-city.astro`](src/pages/ja/from/salt-lake-city.astro), whose
+  whole subject is the city, uses **`Salt Lake City`** in its `title`, `description`
+  and `<h1>`. Applying it is a 34-site sweep that B1 did not authorise.
+- **B4** — ~14 `ja` body links whose target is a `/ja/` route but whose visible anchor
+  text is English (`things to do in Vernal`, `Vernal weather guide`, `Ultimate Guide
+  to Vernal`). Distinct from the Gate 4d route-downgrade class, which is clean in
+  every locale — this is display text, not `href`s.
 
 ---
 
