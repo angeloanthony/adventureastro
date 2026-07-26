@@ -41,7 +41,7 @@ questions, not so they read 171 files.
 | Locale | Open items | Post-review items (§E) |
 |---|---|---|
 | `de` | **all 6 original items closed** | ~~A7~~ ✅ P22, ~~A8~~ ✅ P23 — **German backlog closed** |
-| `ja` | **all closed** — B1 applied at P18, B2 dissolved | ~~B3~~ ✅ P24 — only **B4** remains |
+| `ja` | **all closed** — B1 applied at P18, B2 dissolved | ~~B3~~ ✅ P24, ~~B4~~ ✅ P25 — **Japanese backlog closed** |
 | `zh` | **all closed** — C4 decided at P21 | C7 (**highest impact**), C8 |
 
 **Priority order** (owner-set 2026-07-25, revised at P16 once A3 was decided) — fully consumed:
@@ -60,11 +60,12 @@ the translators had been right and the suspicion wrong. The genuine defects it d
 were consistency drift, not mistranslation — and the six items in §E were all surfaced
 by censuses run for other purposes.
 
-**Post-review opportunities — 6 raised, 3 closed (A7 P22, A8 P23, B3 P24), 1 newly added (D1).**
-**The German language review is now closed end-to-end (A1–A8).** Owner-set sequencing
-for what remains (2026-07-25, at P23) keeps the editorial terminology work together
-and defers the one cross-cutting engineering item until the language backlog is done:
-~~B3~~ → **B4 → C7 → C8 → `zh` machine terminology (`车辆`/`车`/`越野车`) → D1 → Gate 4f.**
+**Post-review opportunities — 6 raised, 4 closed (A7 P22, A8 P23, B3 P24, B4 P25), 1 newly added (D1).**
+**The German and Japanese language reviews are now closed end-to-end (A1–A8, B1–B4).**
+Owner-set sequencing for what remains (2026-07-25, at P23) keeps the editorial
+terminology work together and defers the one cross-cutting engineering item until the
+language backlog is done:
+~~B3~~ → ~~B4~~ → **C7 → C8 → `zh` machine terminology (`车辆`/`车`/`越野车`) → D1 → Gate 4f.**
 D1 is deliberately last of the content items: it is a repository-wide content-
 architecture question (does the fix belong in shared source data or in localisation
 assets?), not an editorial one, and it must be answered before Gate 4f is implemented.
@@ -998,7 +999,7 @@ an untranslated English string in a German heading.
 
 ---
 
-## B. Japanese (`ja`) — B1 decided & applied; B2 dissolved. **Section closed.**
+## B. Japanese (`ja`) — B1 decided & applied; B2 dissolved; B3 P24, B4 P25. **Section closed end-to-end.**
 
 ### B1. `モアブ` vs `Moab` — ✅ DECIDED & APPLIED 2026-07-25 (P18): **Latin `Moab`**
 
@@ -1973,12 +1974,127 @@ and by `de`/`es`/`fr`/`it` at the *same two lines* of the same file — not the 
 `Salt Lake City国際空港` that a blind substitution would have produced. Verified by
 reverse-transform: undoing both rules restores `HEAD` byte-for-byte in all 23 files.
 
-### B4
+### B4 — English anchor text ✅ decided and applied (P25)
 
-- **B4** — ~14 `ja` body links whose target is a `/ja/` route but whose visible anchor
+> **✅ Applied: descriptive English anchor text is localized; locked proper nouns stay
+> Latin. 57 replacements across 8 files; 597 English anchors deliberately retained.**
+> Verified: `astro check` 0 errors / 0 warnings · build **619 pages** · validator ✔ ·
+> rendered `dist/ja` contains **0** of the 57 strings as anchor text · reverse-transform
+> restores `HEAD` byte-for-byte in all 8 files · no other locale touched.
+
+**The census was 4× the estimate, and it split cleanly in two.** The note below guessed
+"~14". The real figure is **652** `/ja/` links whose visible anchor text contains no
+CJK — but **597 of them are correct**, because the `ja` place-name policy keeps every
+proper noun Latin. Only **55** were descriptive English phrases, plus **2 hybrids**
+that a CJK filter cannot see (below). The canonical policy is therefore *not*
+"localize English anchors" but:
+
+> **Anchor text follows the same rule as body prose: proper nouns stay Latin, everything
+> else is Japanese.** An article title is not a proper noun — every `ja` target page
+> carries a Japanese `title`, so an English title in anchor text cites nothing.
+
+| Class | Occurrences | Action |
+|---|---|---|
+| Locked proper nouns (`Dinosaur National Monument` 108, `Flaming Gorge` 92, `Red Fleet` 80, `Ashley National Forest` 70, `High Uintas` 45, `Steinaker` 42, + 25 more) | **597** | **retained** |
+| Descriptive phrases / article titles | **55** | localized |
+| Hybrid — English title with a Japanese suffix | **2** | localized |
+
+**Three independent authorities agreed, as in B3.**
+
+1. **`ja`'s own corpus already answers every case.** Each destination carrying an
+   English anchor also carries a dominant Japanese one — the English is the minority
+   residue, which is what drift looks like:
+
+   | Destination | English anchors | Japanese anchors already shipped |
+   |---|---|---|
+   | `/guides/what-to-bring/` | 4 | **93** (`持ち物ガイド` 89) |
+   | `/guides/vernal-weather-guide/` | 5 | **90** (`バーナル天候ガイド` 35) |
+   | `/scenic-drives/` | 3 | **85** (`絶景ドライブ` 53) |
+   | `/things-to-do/` | 3 | **70** (`バーナルで楽しめること` 17) |
+   | `/hiking/family-hiking-near-vernal/` | 1 | **27** |
+   | `/from/salt-lake-city/` | 2 | **51** (`Salt Lake Cityからバーナルへのガイド` 31) |
+
+2. **Every peer locale localizes these same anchors** at the identical lines, while
+   keeping the proper nouns — `fr` *guide météo de Vernal*, `es` *guía de qué llevar*,
+   `it` *cose da fare a Vernal*, `pt` *estradas panorâmicas*, `zh` `携带物品攻略`.
+3. **The target pages have Japanese titles.** `Flaming Gorge完全ガイド`,
+   `バーナル天候ガイド`… so `Ultimate Guide to Flaming Gorge` was citing a title that
+   does not exist in `ja`.
+
+**The drift was often intra-file, the A8 signature.**
+[`kings-peak-hiking-guide.ja.mdx:41`](src/content/hiking/kings-peak-hiking-guide.ja.mdx#L41)
+keeps the proper noun `High Uintas Wilderness` and the English article title
+`Ultimate Guide to Ashley National Forest` **in the same sentence** of otherwise fully
+Japanese prose. Likewise `green-river-fly-fishing.ja.mdx` carried
+`Fishing Flaming Gorgeガイド` at L49 and bare `Fishing Flaming Gorge` at L69/L89.
+
+**Every target form was recovered from the corpus, never invented** — the A5/A7 method.
+`Ultimate Guide to X` → `X完全ガイド` (attested 14/12/9), the plain `X guide` →
+`Xガイド` (18), `destination guide` → `X目的地ガイド` — so English's own
+ultimate/destination/plain distinction survives rather than being flattened.
+
+**Classification of the 57 sites:**
+
+| Class | Count |
+|---|---|
+| Inline content link (body prose) | 42 |
+| Related-content / "related guides" run | 9 |
+| Summary box (`article-summary-box`) | 3 |
+| Page summary / pillar cross-reference | 3 |
+| Navigation link · CTA · FAQ | **0** |
+
+Nothing reached a heading, so **no anchor ID regenerated**; nothing reached frontmatter,
+JSON-LD, `alt` text or a CTA. 23 of the 57 are in one file,
+[`photography-hikes-near-vernal.ja.mdx`](src/content/hiking/photography-hikes-near-vernal.ja.mdx) —
+concentration, not spread, exactly as in A7.
+
+**Two hybrids swept, on the Gate 4e principle that a locked phrase is intent, not bytes.**
+`Fishing Flaming Gorgeガイド` and `Scenic Drivesのまとめページ` contain CJK, so a
+naive scan reads them as localized; their English *core* is an untranslated title and
+hub name. Leaving them would have left `green-river-fly-fishing.ja.mdx` inconsistent
+with its own L69/L89 — the drift this item exists to remove.
+
+**Intentional exceptions — documented, not swept:**
+- **All 597 proper-noun anchors**, per the `ja` place-name rule ([B3](#b3--salt-lake-city--decided-and-applied-p24)).
+  After the sweep `ja` has 33 distinct English anchor strings against frozen `zh`'s 37,
+  at matching counts (`Dinosaur National Monument` 176, `Dinosaur Monument` 77,
+  `Ashley Gorge` / `Outlaw Trail` / `Asphalt Ridge` / `Doc's Beach` 60 each).
+- **`Cub Creek's tour of the Tilted Rocks`** was *not* fully translated. `Tour of the
+  Tilted Rocks` is a locked route name; only the English possessive was localized, to
+  the corpus's own attested `Cub CreekのTour of the Tilted Rocks`.
+- **`Flaming Gorge釣行ガイド`** — the fishing page's own `title`/`<h1>`. Left untouched:
+  B4 is scoped to anchor text. Cross-file anchors use the sibling-consistent
+  `Flaming Gorge釣りガイド` (cf. `Red Fleet貯水湖釣りガイド`, `恐竜の国の釣りガイド概要`).
+- **`src/pages/ja/**` (117 English anchors) and the `page-content` `JA` blocks (5)** —
+  censused and found to contain **only** proper nouns. Zero edits; all 57 sites are
+  `.ja.mdx` spokes.
+
+**Two `de`/`it` observations, deliberately not acted on** (P25 stop conditions forbid
+touching German, and the German backlog is closed): `de` retains English
+`Ultimate Guide to Flaming Gorge` / `to Vernal` at the same lines, and `it` retains
+`Ultimate Guide to Ashley National Forest` at `kings-peak-hiking-guide.it.mdx:243`/`:60`.
+Recorded here as observations only — **not** raised as new items.
+
+**Gate 4d re-verified as structural, not regressed.** `dist/ja` shows 136 internal links
+to non-locale routes — **identical in count and shape to frozen `de` and `zh`**
+(77 = the language switcher's English option, one per page; 59 = the documented
+author-bio exception from P11.1; `other` = 0). No `href` was modified by this sweep.
+
+***This closes the Japanese post-review backlog. B1–B4 are all decided; the only
+Japanese item still outstanding is the human native-speaker read, tracked separately.***
+
+The original finding is preserved:
+
+- **B4 (original)** — ~14 `ja` body links whose target is a `/ja/` route but whose visible anchor
   text is English (`things to do in Vernal`, `Vernal weather guide`, `Ultimate Guide
   to Vernal`). Distinct from the Gate 4d route-downgrade class, which is clean in
   every locale — this is display text, not `href`s.
+
+> ~~**Question B4:** Localize the English anchor text, or confirm it as intentional?~~
+> **ANSWERED & APPLIED 2026-07-25 (P25).** Localized. The real scope was **57
+> occurrences, not ~14**, and the far larger finding is the **597 English anchors that
+> are correct** — the earlier figure counted neither the proper-noun class nor the
+> hybrids.
 
 ---
 
