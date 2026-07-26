@@ -41,7 +41,7 @@ questions, not so they read 171 files.
 | Locale | Open items | Post-review items (§E) |
 |---|---|---|
 | `de` | **all 6 original items closed** | ~~A7~~ ✅ P22, ~~A8~~ ✅ P23 — **German backlog closed** |
-| `ja` | **all closed** — B1 applied at P18, B2 dissolved | B3, B4 |
+| `ja` | **all closed** — B1 applied at P18, B2 dissolved | ~~B3~~ ✅ P24 — only **B4** remains |
 | `zh` | **all closed** — C4 decided at P21 | C7 (**highest impact**), C8 |
 
 **Priority order** (owner-set 2026-07-25, revised at P16 once A3 was decided) — fully consumed:
@@ -60,11 +60,11 @@ the translators had been right and the suspicion wrong. The genuine defects it d
 were consistency drift, not mistranslation — and the six items in §E were all surfaced
 by censuses run for other purposes.
 
-**Post-review opportunities — 6 raised, 2 closed (A7 P22, A8 P23), 1 newly added (D1).**
+**Post-review opportunities — 6 raised, 3 closed (A7 P22, A8 P23, B3 P24), 1 newly added (D1).**
 **The German language review is now closed end-to-end (A1–A8).** Owner-set sequencing
 for what remains (2026-07-25, at P23) keeps the editorial terminology work together
 and defers the one cross-cutting engineering item until the language backlog is done:
-**B3 → B4 → C7 → C8 → `zh` machine terminology (`车辆`/`车`/`越野车`) → D1 → Gate 4f.**
+~~B3~~ → **B4 → C7 → C8 → `zh` machine terminology (`车辆`/`车`/`越野车`) → D1 → Gate 4f.**
 D1 is deliberately last of the content items: it is a repository-wide content-
 architecture question (does the fix belong in shared source data or in localisation
 assets?), not an editorial one, and it must be answered before Gate 4f is implemented.
@@ -1099,7 +1099,8 @@ an untranslated English string in a German heading.
 >    [`ja/from/salt-lake-city.astro`](src/pages/ja/from/salt-lake-city.astro), whose
 >    entire subject is the city, names it **`Salt Lake City`** in its `title`,
 >    `description` and `<h1>` — but applying it is a separate sweep of 34 occurrences
->    and was not authorised by B1. **Recommended as B3.**
+>    and was not authorised by B1. **Recommended as B3** — ✅ **applied at P24**, all
+>    34 replaced, 0 exceptions; see §E.
 > 2. **~14 untranslated English anchor texts** in `ja` body links —
 >    `things to do in Vernal`, `Vernal weather guide`, `wildlife hiking guide near
 >    Vernal`, `Ultimate Guide to Vernal` — where the link target is a `/ja/` route but
@@ -1801,7 +1802,7 @@ planned queue.
 | **C7** | `zh` | caveat seams survive behind inline markup | P19 (C2 census) | **249 sites / 28+ files** | ⬜ open — **highest impact** |
 | **D1** | *all 7* | home-page carousel ships English `alt` + captions in every locale | P22 (A7 census) | 106 slides × 7 locales | ⬜ open — **newly raised** |
 | ~~**A7**~~ | `de` | `Trailhead` (42) vs the established `Ausgangspunkt` (235) | P17 (A4 census) | 42 sites | ✅ **applied P22** — 41 replaced, 1 exception |
-| **B3** | `ja` | `Salt Lake City` split — Latin 129 vs `ソルトレイクシティ` 34 | P18 (B1 census) | 34 sites | ⬜ open |
+| ~~**B3**~~ | `ja` | `Salt Lake City` split — Latin 129 vs `ソルトレイクシティ` 34 | P18 (B1 census) | 34 sites | ✅ **applied P24** — 34 replaced, 0 exceptions |
 | **B4** | `ja` | ~14 untranslated English anchor texts on `/ja/` links | P18 (B1 census) | ~14 sites | ⬜ open |
 | **C8** | `zh` | generic *"a national monument"* rendered 3 ways | P21 (C4 census) | 7 sites / 4 files | ⬜ open |
 | ~~**A8**~~ | `de` | 18 untranslated English `Dinosaur Country` in `de` MDX | P21 (C4 census) | 18 sites | ✅ **applied P23** — 18 replaced, 0 exceptions |
@@ -1920,14 +1921,60 @@ untranslated-block defect, and the stop conditions for P22 forbid touching `ja`/
 Nothing here blocks A7's closure — the German `Trailhead` in this file is recorded as
 A7's second documented exception.
 
-### B3 · B4
+### B3 — `Salt Lake City` ✅ decided and applied (P24)
 
-Full evidence for these two is written up where the census that found them lives:
-- **B3** — `Salt Lake City` ships Latin **129** times and `ソルトレイクシティ` **34**
-  times in identical sentence patterns. The B1 place-name rule decides it: the gateway
-  page [`ja/from/salt-lake-city.astro`](src/pages/ja/from/salt-lake-city.astro), whose
-  whole subject is the city, uses **`Salt Lake City`** in its `title`, `description`
-  and `<h1>`. Applying it is a 34-site sweep that B1 did not authorise.
+**Decision: Latin `Salt Lake City`.** 34 katakana occurrences across 23 files replaced;
+**0 intentional exceptions retained.** Corpus after the sweep: Latin **163** source
+occurrences, katakana **0**; rendered `dist/ja` **287 Latin / 0 katakana** across 77 pages.
+
+**Why the evidence was decisive.** The `ja` corpus localises exactly *one* city name.
+Every other city is Latin with a **uniform** count — and `Salt Lake City` was the sole split:
+
+| Place | Latin in `ja` | Transliterated in `ja` |
+|---|---|---|
+| Vernal | (proper compounds only) | `バーナル` **2084** — the one localised city |
+| Denver | **89** | `デンバー` 0 |
+| Moab | **72** | `モアブ` 0 *(after B1)* |
+| Grand Junction | **66** | `グランドジャンクション` 0 |
+| Heber City | **11** | `ヒーバーシティ` 0 |
+| **Salt Lake City** | **129** | **`ソルトレイクシティ` 34** ← the only split |
+
+Three independent authorities all pointed the same way: the gateway page
+[`ja/from/salt-lake-city.astro`](src/pages/ja/from/salt-lake-city.astro) — whose entire
+subject is the city — uses Latin in its `title`, `description`, `<h1>` and breadcrumb;
+the `ja` UI-chrome dictionary uses `'Salt Lake Cityからお越しの方'`
+([`src/lib/ui.ts:830`](src/lib/ui.ts#L830)); and the two forms occurred in **byte-identical
+sentence frames** in sibling files (`ソルトレイクシティからバーナルへのガイド` in
+`camping-at-flaming-gorge.ja.mdx:236` against `Salt Lake Cityからバーナルへのガイド` in
+`alpine-lakes-hiking-high-uintas.ja.mdx:348`). That last point is what makes this drift
+rather than register: no editorial distinction separated the two sets.
+
+Cross-locale check confirms the *policy*, not merely the form: `de`/`fr`/`es`/`it`/`pt`
+all keep Latin (161–164 each), and `zh` is **uniformly** localised (`盐湖城`) at *exactly*
+the union of the two `ja` sets — i.e. every locale is internally consistent except `ja`.
+
+**Classification of the 34 sites** — no JSON-LD, `alt` text, component props or page
+metadata was affected (those were already Latin):
+
+| Class | Count |
+|---|---|
+| Link anchor text inside `<a href="/ja/from/salt-lake-city/">` | 24 |
+| FAQ `q`/`a` in frontmatter | 3 |
+| Body prose | 3 |
+| Quoted guide title (non-link) | 1 |
+| Hidden `page-summary` paragraph | 1 |
+| `article-summary-box` | 1 |
+| HTML table cell (`<td>`) | 1 |
+
+**One form-change, not a straight swap.** Two of the 34 were the hybrid compound
+`ソルトレイクシティ国際空港`. These became **`Salt Lake City International Airport`**, the
+proper name used by the gateway page, by `cities/salt-lake-city.json` (`nearestAirport`)
+and by `de`/`es`/`fr`/`it` at the *same two lines* of the same file — not the mechanical
+`Salt Lake City国際空港` that a blind substitution would have produced. Verified by
+reverse-transform: undoing both rules restores `HEAD` byte-for-byte in all 23 files.
+
+### B4
+
 - **B4** — ~14 `ja` body links whose target is a `/ja/` route but whose visible anchor
   text is English (`things to do in Vernal`, `Vernal weather guide`, `Ultimate Guide
   to Vernal`). Distinct from the Gate 4d route-downgrade class, which is clean in
