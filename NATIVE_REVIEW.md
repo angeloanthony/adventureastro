@@ -40,7 +40,7 @@ questions, not so they read 171 files.
 
 | Locale | Open items | Post-review items (§E) |
 |---|---|---|
-| `de` | **all 6 original items closed** | ~~A7~~ ✅ P22, A8 |
+| `de` | **all 6 original items closed** | ~~A7~~ ✅ P22, ~~A8~~ ✅ P23 — **German backlog closed** |
 | `ja` | **all closed** — B1 applied at P18, B2 dissolved | B3, B4 |
 | `zh` | **all closed** — C4 decided at P21 | C7 (**highest impact**), C8 |
 
@@ -60,7 +60,15 @@ the translators had been right and the suspicion wrong. The genuine defects it d
 were consistency drift, not mistranslation — and the six items in §E were all surfaced
 by censuses run for other purposes.
 
-**Post-review opportunities — 6 raised, 1 closed (A7, P22), 1 newly added (D1).**
+**Post-review opportunities — 6 raised, 2 closed (A7 P22, A8 P23), 1 newly added (D1).**
+**The German language review is now closed end-to-end (A1–A8).** Owner-set sequencing
+for what remains (2026-07-25, at P23) keeps the editorial terminology work together
+and defers the one cross-cutting engineering item until the language backlog is done:
+**B3 → B4 → C7 → C8 → `zh` machine terminology (`车辆`/`车`/`越野车`) → D1 → Gate 4f.**
+D1 is deliberately last of the content items: it is a repository-wide content-
+architecture question (does the fix belong in shared source data or in localisation
+assets?), not an editorial one, and it must be answered before Gate 4f is implemented.
+
 A7, A8, B3, B4, C7 and C8 were each surfaced by a census run while applying an accepted
 decision, not by the original scoping — and A7's own census then surfaced **D1**, the
 first cross-locale item in this document. They are registered in **§E** so the original queue stays intact and
@@ -91,7 +99,7 @@ times and bare `Vernal` 0 times.
 
 ---
 
-## A. German (`de`) — A1–A7 all closed; A8 open
+## A. German (`de`) — A1–A8 all closed
 
 | Item | Subject | State |
 |---|---|---|
@@ -679,6 +687,98 @@ so a blanket replacement would collapse two senses that are currently distinct.
 separate lexeme, and overturning a lock recorded in this document is an owner
 decision on the precedent of A1, A3 and A6. Nothing here blocks A4's closure.
 **Applied in P22.**
+
+---
+
+### A8. `Dinosaur Country` — ✅ DECIDED & APPLIED 2026-07-25 (P23)
+
+> **✅ Applied: `Land der Dinosaurier` confirmed as the canonical German rendering of
+> the destination identity `Dinosaur Country`; all 18 untranslated English
+> occurrences normalised. 0 intentional exceptions — every one of the 18 was drift.**
+> Verified: `astro check` 0 errors / 0 warnings · build **619 pages** · validator ✔ ·
+> **5 files changed**, 18 insertions / 18 deletions · rendered `dist/de/` contains
+> **0** `Dinosaur Country` · route parity 77/77 in all seven locales · no other
+> locale touched.
+
+**The decision needed no new argument — the repository already carries the rule in
+writing.** The German chrome dictionary's own preamble in
+[`src/lib/ui.ts`](src/lib/ui.ts#L661) states it explicitly:
+
+> `"Dinosaur Country" → "Land der Dinosaurier" and "Key Takeaways" → "Das Wichtigste`
+> `in Kürze" reuse the exact locked phrases from the P9 MDX batches, not new`
+> `translations.`
+
+P21's cross-locale census (§C4) had already established that localising the identity
+is **unanimous across all seven locales** — `de` was not being asked to break a
+pattern, it was 96 % conformant to one already. The 18 English occurrences sat
+against 449 German ones, and the drift was often *intra-file*: the page summary of
+[`weekend-fishing-trip-vernal.de.mdx`](src/content/itineraries/weekend-fishing-trip-vernal.de.mdx#L40)
+opened with the untranslated English article title and then said
+`Land der Dinosaurier` **in the same sentence**.
+
+**Occurrences by surface** (all 18, all in 5 files):
+
+| Surface | Count | Files |
+|---|---|---|
+| Prose | 9 | `fishing-red-fleet-reservoir` 4 · `visiting-dinosaur-national-monument` 3 · `camping-*` 2 |
+| Link anchor text | 5 | `camping-at-red-fleet-state-park` 2 · `camping-in-ashley-national-forest` 1 · `fishing-red-fleet-reservoir` 1 · `visiting-dinosaur-national-monument` 1 |
+| Image `alt` text | 2 | `visiting-dinosaur-national-monument` (both regional maps) |
+| Hidden `page-summary` | 1 | `weekend-fishing-trip-vernal` |
+| Article summary box | 1 | `camping-in-ashley-national-forest` |
+| Headings · metadata · FAQ · CTA · structured data | **0** | — |
+
+Nothing reached a heading, a frontmatter field, an FAQ block, a CTA or a JSON-LD
+value; the residue was entirely body-level. `src/pages/de/**` was already clean (0),
+as were the `DE` blocks of every `page-content/*.ts` file and the `DE` dictionary in
+`ui.ts`.
+
+**Two occurrences looked like candidate exceptions and both failed the test.**
+
+1. **The two map `alt` texts.** Alt text is machine-facing, so retention was
+   arguable. But the *sibling files in the same page family* settle it — the same two
+   SVGs are described in four other German files, and every one of them already uses
+   the German identity: `Schematisches Hub-and-Spoke-Diagramm des Landes der
+   Dinosaurier …` in
+   [`ultimate-guide-to-ashley-national-forest.de.mdx`](src/content/guides/ultimate-guide-to-ashley-national-forest.de.mdx#L67)
+   and `ultimate-guide-to-steinaker-state-park`, plus `Nabe-Speiche-` and
+   `Speichenrad-` variants in the Red Fleet and Flaming Gorge guides. All six peer
+   locales localise the identity inside these same `alt` strings too. The German
+   compound `Hub-and-Spoke-Diagramm` was **left alone** — it is established in two
+   other German files and is a separate lexeme, out of A8's scope.
+2. **The English article title in the hidden page summary.** All seven peer locales
+   translate this title in the identical position (`es` «Fin de semana de pesca en
+   Vernal y Tierra de los Dinosaurios», `fr` *Le Week-end de Pêche à Vernal et en
+   Terre des Dinosaures*, `zh` 《Vernal 与恐龙之乡钓鱼周末行程》…), and it was the
+   only one of the 57 German page summaries carrying an untranslated English title.
+   The replacement reuses the file's **own** locked frontmatter title —
+   `Angelwochenende in Vernal und im Land der Dinosaurier` — rather than a new
+   translation.
+
+**One competing German rendering was found and deliberately retained.**
+[`things-to-do.ts`](src/page-content/things-to-do.ts#L1624) renders the identity as
+`Dinosaurierland` in the scenic-drives paragraph. This is **not** drift: the English
+master at that line reads lowercase `past petroglyphs and dinosaur country` — the
+generic common noun, not the branded identity — and every Latin-script locale
+independently reached for a lowercase generic form there rather than its own brand
+(`es` *tierra de dinosaurios* · `it` *terra dei dinosauri* · `pt` *território de
+dinossauros* · `fr` *un pays de dinosaures*; `ja`/`zh` drop the clause). Same shape
+as C3's `越野车`: the apparent competing rendering is **English's own distinction
+being faithfully preserved**, so normalising it would have destroyed a sense
+contrast, not fixed one. There are 4 lowercase generic instances in the English
+corpus in total, and they are held separate from the 361 branded ones.
+
+**Case forms all reuse collocations the corpus already had**, per the same
+`ui.ts` instruction not to invent: `im Land der Dinosaurier` (197 existing) for
+locative, `durchs Land der Dinosaurier` (9) for `durch`, `für das Land der
+Dinosaurier` (25), `das Land der Dinosaurier` (130) for subject position, and the
+genitive `des Landes der Dinosaurier` (24 — including `Diagramm des Landes der
+Dinosaurier` 4×) after `Diagramm`, `Charakter`, `Geschmack` and `Repertoire`. The
+genitive choice follows the corpus's dominant `Charakter des …` pattern rather than
+`von`. German totals after the sweep: `Land der Dinosaurier` 461, `Landes der
+Dinosaurier` 30.
+
+**This closes the German post-review backlog.** A1–A8 are all decided; the only
+German item still outstanding is the human native-speaker read, tracked separately.
 
 ---
 
@@ -1413,7 +1513,8 @@ Three words that are **not** residues and must not be swept:
 > German additionally ships **18 untranslated English `Dinosaur Country`** in its MDX
 > (`es` 3 + 2, `ja` 1 + 4, all other locales 0). That is a German residue of the A4/A6
 > shape and is **out of P21's scope** — recorded here only because the cross-locale
-> census surfaced it.
+> census surfaced it. *(Raised as A8 and **closed in P23**: all 18 normalised to
+> `Land der Dinosaurier`, bringing `de`'s total to 461. See §A8.)*
 >
 > **On the ambiguity question — `恐龙之乡` cannot be read as the monument, and the
 > corpus proves it grammatically.** The question asked whether a Chinese reader might
@@ -1703,7 +1804,7 @@ planned queue.
 | **B3** | `ja` | `Salt Lake City` split — Latin 129 vs `ソルトレイクシティ` 34 | P18 (B1 census) | 34 sites | ⬜ open |
 | **B4** | `ja` | ~14 untranslated English anchor texts on `/ja/` links | P18 (B1 census) | ~14 sites | ⬜ open |
 | **C8** | `zh` | generic *"a national monument"* rendered 3 ways | P21 (C4 census) | 7 sites / 4 files | ⬜ open |
-| **A8** | `de` | 18 untranslated English `Dinosaur Country` in `de` MDX | P21 (C4 census) | 18 sites | ⬜ open |
+| ~~**A8**~~ | `de` | 18 untranslated English `Dinosaur Country` in `de` MDX | P21 (C4 census) | 18 sites | ✅ **applied P23** — 18 replaced, 0 exceptions |
 
 ### C8. The generic common noun *"a national monument"* has three `zh` renderings
 
