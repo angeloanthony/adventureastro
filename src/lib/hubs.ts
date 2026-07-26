@@ -71,16 +71,8 @@ export const spokeHref = (hub: LinkCollection, id: string): string => {
 /** Root-relative href of a hub's pillar page. */
 export const pillarHref = (hub: HubSlug): string => `/${hub}/`;
 
-/** Sitemap <loc> path (relative to SITE.url, no leading slash). Locale-aware,
- *  mirroring spokeHref: a translated id emits its `/{locale}/…` loc. */
-export const spokeSitemapLoc = (hub: LinkCollection, id: string): string =>
-  spokeHref(hub, id).slice(1);
-
 /** Root-relative href of a city landing page (guide §4.3 "from" pages). */
 export const cityHref = (id: string): string => `/from/${id}/`;
-
-/** Sitemap <loc> path of a city landing page. */
-export const citySitemapLoc = (id: string): string => `from/${id}/`;
 
 // tourHref() joins these when the first hand-built /tours/ page exists —
 // tour pages have no collection (§9.2), so there is nothing to emit yet.

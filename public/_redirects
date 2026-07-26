@@ -40,3 +40,37 @@
 # Root-level until their hubs launch (update these lines then — no chains)
 /atv-trails-vernal-utah.html /atv-trails-vernal-utah/ 301
 /jeep-trails-vernal-utah.html /jeep-trails-vernal-utah/ 301
+
+# ---------------------------------------------------------------------
+# WordPress-era URLs (site ran on WP/Divi ~2021–2024). Recovered from the
+# Wayback CDX index 2026-07-25 after an audit found all of these serving
+# hard 404s — they predate the .html set above and were never mapped.
+# These carry whatever backlink history the business accumulated, so they
+# redirect to the closest surviving page rather than the homepage.
+# Same rule as above: point at the FINAL url, never chain.
+
+# Tours + rentals (the commercial set)
+/guided-atv-rental-tours/ /utv/ 301
+/vernal-utah-byom-atv-tours/ /utv/ 301
+/byom /utv/ 301
+/adventure-rentals/ /utv/side-by-side-rentals-vernal-utah/ 301
+/rent-4x4-atv-in-vernal-now/ /utv/side-by-side-rentals-vernal-utah/ 301
+
+# Named-trail pages — no 1:1 successor exists, so they land on the ATV
+# trails pillar that covers all of them.
+/moonshine-arch-atv-rentals-and-tours/ /atv-trails-vernal-utah/ 301
+/outlaw-trail-atv-rental-and-tours/ /atv-trails-vernal-utah/ 301
+/ashley-gorge-atv-guided-tours/ /atv-trails-vernal-utah/ 301
+/asphalt-ridge-atv-rentals-and-tours/ /atv-trails-vernal-utah/ 301
+/docs-beach-atv-tour-vernal-4x4-rental/ /atv-trails-vernal-utah/ 301
+/flinstone-atv-trail/ /atv-trails-vernal-utah/ 301
+/petroglyph-atv-trails-vernal-utah/ /dinosaur-national-monument/petroglyphs-rock-art-vernal/ 301
+
+# WP slug artifacts
+/frequently-asked-questions/ /faq/ 301
+/privacy-policy-2/ /privacy-policy/ 301
+/home-page/ / 301
+
+# Explicit 301 so the legacy slashless /about doesn't rely on the
+# platform's automatic 308 trailing-slash redirect.
+/about /about/ 301
