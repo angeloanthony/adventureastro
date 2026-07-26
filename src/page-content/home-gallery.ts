@@ -15,8 +15,8 @@
 // P31 SCOPE: structure only. Not one character of display text changed; the
 // English strings below were extracted verbatim from home.ts and the rendered
 // output of all eight homepages is byte-identical. Locale dictionaries arrive
-// in P32 and are populated in P33 — this module is the place they plug into.
-import { DEFAULT_LOCALE } from "../lib/i18n";
+// in P32 (registered, empty, English-fallback) and are populated in P33.
+import { DEFAULT_LOCALE, type Locale } from "../lib/i18n";
 
 /** Immutable slide identity. Text lives in GALLERY_TEXT, never here. */
 export interface GallerySlide {
@@ -260,14 +260,37 @@ export const GALLERY_TEXT_EN: GalleryDictionary = {
 };
 
 /**
- * Locale dictionaries. P32 adds one entry per locale (English fallback only);
- * P33 populates them with translations. A locale absent from this map, or a
- * slide id absent from a locale's dictionary, falls back to English — the same
- * fail-soft contract as `t()` in ui.ts, and the reason Gate 4j exists to make
- * that fallback visible rather than silent.
+ * Locale dictionaries — one per registered locale (P32).
+ *
+ * A slide id absent from a locale's dictionary falls back to English, the same
+ * fail-soft contract as `t()` in ui.ts. The seven non-English dictionaries are
+ * deliberately EMPTY rather than pre-filled with copies of the English text:
+ *
+ *   - Copying English in would re-create, in data, exactly the duplication the
+ *     P31 refactor removed from markup (735 entries).
+ *   - It would also destroy the signal P33 and Gate 4j depend on. With an empty
+ *     dictionary, "not yet translated" is a MISSING KEY — decidable by set
+ *     difference against GALLERY_SLIDES. With a pre-filled one it becomes "a
+ *     key whose value happens to equal English", which is indistinguishable
+ *     from a deliberate English proper noun ("Doc's Beach", "Moonshine Arch",
+ *     "Kawasaki KRX 1000") and can only be guessed at.
+ *
+ * So today every locale renders the English gallery text — byte-identical to
+ * what shipped before P31 — and each key P33 adds silently stops falling back.
+ *
+ * Typed as Record<Locale, …> on purpose: registering a new locale in i18n.ts
+ * fails the build here until its gallery dictionary is added, so a new language
+ * can never reach the gallery by silently inheriting English (fail-closed).
  */
-const GALLERY_TEXT: Readonly<Record<string, GalleryDictionary>> = {
+const GALLERY_TEXT: Readonly<Record<Locale, GalleryDictionary>> = {
   en: GALLERY_TEXT_EN,
+  es: {},
+  it: {},
+  pt: {},
+  fr: {},
+  de: {},
+  ja: {},
+  zh: {},
 };
 
 /** Indentation of a slide element inside `<div class="carousel-track">`. */
@@ -288,8 +311,12 @@ function escapeHtml(value: string): string {
     .replace(/"/g, "&quot;");
 }
 
+/**
+ * Resolve one slide's display text, falling back to English when the locale is
+ * unregistered or the slide has no entry in that locale's dictionary yet.
+ */
 function textFor(locale: string, id: string): GallerySlideText {
-  const entry = GALLERY_TEXT[locale]?.[id];
+  const entry = GALLERY_TEXT[locale as Locale]?.[id];
   if (entry) return entry;
   return GALLERY_TEXT_EN[id];
 }
