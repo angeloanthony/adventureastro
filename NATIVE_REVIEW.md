@@ -1,6 +1,8 @@
 # Native-Speaker Review — German (`de`), Japanese (`ja`), Simplified Chinese (`zh`)
 
-**Status:** open.
+**Status:** ✅ **the original review programme is COMPLETE** (closed at P21,
+2026-07-25). Six post-review opportunities remain open in **§E** — they were
+discovered *by* this review, not missed by it.
 **Prepared:** `de`/`ja` on 2026-07-22 against `i18n-ja-complete` (`65041fd`);
 `zh` added 2026-07-25 against `i18n-zh-complete` (`41b3482`).
 **Counts re-verified:** 2026-07-25 at `0e1c682` (P12). Note the C1 and C6 corpus
@@ -58,13 +60,13 @@ the translators had been right and the suspicion wrong. The genuine defects it d
 were consistency drift, not mistranslation — and the six items in §E were all surfaced
 by censuses run for other purposes.
 
-**Post-review opportunities — 4, all deliberately sequenced last.** A7, B3, B4 and C7
-were each surfaced by a census run while applying an accepted decision, not by the
+**Post-review opportunities — 6, all deliberately sequenced last.** A7, A8, B3, B4, C7
+and C8 were each surfaced by a census run while applying an accepted decision, not by the
 original scoping. They are registered in **§E** so the original queue stays intact and
 they do not displace planned items that were committed before they existed. Each is an
-owner decision to be taken once the planned queue is finished. **C7 is the highest-impact
-of the four** — it shows closed item C6's seam fix is clean in plain text but leaves
-**249 seams** once inline markup is stripped.
+owner decision to be taken now that the planned queue is finished. **C7 is the
+highest-impact of the six** — it shows closed item C6's seam fix is clean in plain text
+but leaves **249 seams** once inline markup is stripped.
 
 ---
 
