@@ -2424,7 +2424,7 @@ const ZH = `
         <div class="faq-answer">
           <div class="answer-content">
             <p><strong>可以！</strong>我们的导览式 <strong>3 小时 UTV 行程</strong>会探索 Dinosaur National Monument 附近的荒野越野路线，包括古老的岩层和岩画。</p>
-            <p>纪念区里那面著名的恐龙骨墙是由 National Park Service 管理的另一处独立景点——许多客人会上午在纪念区游览，下午再参加一趟穿越周边恐龙之乡荒野的 UTV 行程。</p>
+            <p>纪念地里那面著名的恐龙骨墙是由 National Park Service 管理的另一处独立景点——许多客人会上午在纪念地游览，下午再参加一趟穿越周边恐龙之乡荒野的 UTV 行程。</p>
           </div>
         </div>
       </div>

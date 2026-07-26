@@ -42,7 +42,11 @@ questions, not so they read 171 files.
 |---|---|---|
 | `de` | **all 6 original items closed** | ~~A7~~ ✅ P22, ~~A8~~ ✅ P23 — **German backlog closed** |
 | `ja` | **all closed** — B1 applied at P18, B2 dissolved | ~~B3~~ ✅ P24, ~~B4~~ ✅ P25 — **Japanese backlog closed** |
-| `zh` | **all closed** — C4 decided at P21 | ~~C7~~ ✅ P26, C8, C9 (**new, from P26**) |
+| `zh` | **all closed** — C4 decided at P21 | ~~C7~~ ✅ P26, ~~C8~~ ✅ P27, ~~C9~~ ✅ P27 — **Chinese backlog closed** |
+
+***All three language reviews are now closed end-to-end (A1–A8, B1–B4, C1–C9).***
+Nothing editorial remains. What is left is one architecture question (**D1**) and the
+**Localization Regression Framework** — both engineering, neither language review.
 
 **Priority order** (owner-set 2026-07-25, revised at P16 once A3 was decided) — fully consumed:
 ~~C6~~ → ~~A1-residual~~ → ~~A2~~ → ~~A5~~ → ~~A6~~ → ~~A3~~ → ~~A4~~ → ~~B1~~ → ~~C2~~ → ~~C3~~ → ~~C4~~ ✅
@@ -60,20 +64,22 @@ the translators had been right and the suspicion wrong. The genuine defects it d
 were consistency drift, not mistranslation — and the six items in §E were all surfaced
 by censuses run for other purposes.
 
-**Post-review opportunities — 7 raised, 5 closed (A7 P22, A8 P23, B3 P24, B4 P25, C7 P26), C9 newly added at P26.**
-**The German and Japanese language reviews are now closed end-to-end (A1–A8, B1–B4).**
+**Post-review opportunities — 8 raised, 7 closed (A7 P22, A8 P23, B3 P24, B4 P25, C7 P26, C8 P27, C9 P27). Only D1 remains, and it is not a language item.**
+**All three language reviews are closed end-to-end (A1–A8, B1–B4, C1–C9).**
 Owner-set sequencing for what remains (2026-07-25, at P23) keeps the editorial
 terminology work together and defers the one cross-cutting engineering item until the
 language backlog is done:
-~~B3~~ → ~~B4~~ → ~~C7~~ → **C8 (+ C9) → `zh` machine terminology (`车辆`/`车`/`越野车`) → D1 → Localization Regression Framework.**
+~~B3~~ → ~~B4~~ → ~~C7~~ → ~~C8 (+ C9)~~ → ~~`zh` machine terminology (`车辆`/`车`/`越野车`)~~ → **D1 → Localization Regression Framework.**
 D1 is deliberately last of the content items: it is a repository-wide content-
 architecture question (does the fix belong in shared source data or in localisation
 assets?), not an editorial one, and it must be answered before the framework is built.
 
 **Revised at P26 (owner-agreed).** Two changes to the tail of that sequence:
-- **The machine-terminology item folds into C8 if ≤20 corpus decisions remain** once
-  the P20 census is re-read (`并排越野车` = *side-by-side* already accounts for 69 of
-  81 `越野车`, so the live residue is ~12). Otherwise it keeps its own phase.
+- ~~**The machine-terminology item folds into C8 if ≤20 corpus decisions remain**~~ —
+  **resolved at P27: it folds, and the count is 0, not ≤20.** See §E "Machine
+  terminology" below. The fold rule was the right test; the answer was that the slot
+  has no enumerable target value at all, so there is nothing to gate and nothing to
+  sweep. **No P28.**
 - **Gate 4f is superseded by a Localization Regression Framework** — 4f untranslated
   headings (A5), 4g anchor-text audit (B4), 4h rendered-seam detector (C6/C7), 4i
   glossary-lock drift (A6/C4), 4j shared-content localization (D1). Governing rule:
@@ -94,7 +100,16 @@ highest-impact of the six** — it showed closed item C6's seam fix was clean in
 text but left seams once inline markup is stripped. Applied at P26: the true scope was
 **326 sites / 44 files**, not the 249 first recorded, because the original figure used
 a fixed ≤10-character window rather than the full clause. Its own sweep then raised
-**C9** (28 seam shapes with no C6 precedent, recommended keep).
+**C9** (28 seam shapes with no C6 precedent, recommended keep) — **closed by review at
+P27 with zero edits**, the fifth item in this programme to close that way.
+
+**C8 repeated C7's measurement lesson at 16× the scale.** Recorded as 7 sites / 4 files;
+the true scope was **113 sites / 9 files**, because the recorded census counted only the
+`国家`-prefixed attributive form and missed the bare anaphoric one — the same
+*window-too-narrow* failure as C7's ≤10-character clause window, in a different
+dimension. Measuring first (Principle 1) is what turned a 7-site patch into a complete
+normalisation; sweeping the recorded 7 would have left 106 drifted sites behind and
+*looked* finished.
 
 ---
 
@@ -1885,15 +1900,80 @@ planned queue.
 | Item | Locale | Subject | Raised by | Size | State |
 |---|---|---|---|---|---|
 | ~~**C7**~~ | `zh` | caveat seams survive behind inline markup | P19 (C2 census) | **326 sites / 44 files** | ✅ **applied P26** — 326 swept, 28 held as C9 |
-| **C9** | `zh` | `都`/`务必`/`始终`/`也` + `请向` — seam shapes with no C6 precedent | P26 (C7 sweep) | 28 sites | ⬜ open — **recommend keep** |
+| ~~**C9**~~ | `zh` | `都`/`务必`/`始终`/`也` + `请向` — seam shapes with no C6 precedent | P26 (C7 sweep) | 28 sites | ✅ **closed P27 — kept, 0 edits** |
 | **D1** | *all 7* | home-page carousel ships English `alt` + captions in every locale | P22 (A7 census) | 106 slides × 7 locales | ⬜ open — **newly raised** |
 | ~~**A7**~~ | `de` | `Trailhead` (42) vs the established `Ausgangspunkt` (235) | P17 (A4 census) | 42 sites | ✅ **applied P22** — 41 replaced, 1 exception |
 | ~~**B3**~~ | `ja` | `Salt Lake City` split — Latin 129 vs `ソルトレイクシティ` 34 | P18 (B1 census) | 34 sites | ✅ **applied P24** — 34 replaced, 0 exceptions |
 | **B4** | `ja` | ~14 untranslated English anchor texts on `/ja/` links | P18 (B1 census) | ~14 sites | ⬜ open |
-| **C8** | `zh` | generic *"a national monument"* rendered 3 ways | P21 (C4 census) | 7 sites / 4 files | ⬜ open |
+| ~~**C8**~~ | `zh` | generic *"a national monument"* rendered 3 ways | P21 (C4 census) | **113 sites / 9 files** (recorded 7/4) | ✅ **applied P27** — normalised to `纪念地` |
 | ~~**A8**~~ | `de` | 18 untranslated English `Dinosaur Country` in `de` MDX | P21 (C4 census) | 18 sites | ✅ **applied P23** — 18 replaced, 0 exceptions |
 
-### C8. The generic common noun *"a national monument"* has three `zh` renderings
+### C8. The generic common noun *"a national monument"* has three `zh` renderings — ✅ DECIDED & APPLIED 2026-07-25 (P27)
+
+**Applied: 113 sites across 9 files, normalised to the house standard `纪念地`.**
+
+**The recorded size of 7 sites / 4 files was low by 16×.** The census had counted only
+the `国家`-prefixed **attributive** form (`国家保护区` 3, `国家纪念区` 4) and never
+looked at the bare **anaphoric** form the same files use for *"the monument"*. Both
+forms are the same lexeme in the same sense; only the syntactic slot differs. Scoped
+properly:
+
+| Rendering | Attributive `国家X` | Anaphoric bare `X` | Total | Files |
+|---|---|---|---|---|
+| `纪念地` — **house standard** | 82 | 301 | **383** | 29 |
+| `保护区` — drift | 8 (recorded as 3) | 57 (not counted) | **65** | 6 |
+| `纪念区` — drift | 4 | 44 (not counted) | **48** | 3 |
+
+**Four independent lines of evidence say normalise, not retain.**
+
+1. **The partition is by file, not by sense.** No file mixes two renderings. Every file
+   is exclusively a `纪念地` file, a `保护区` file, or a `纪念区` file — the signature
+   of translation-batch inheritance, not of a semantic distinction an author drew.
+2. **Per-file `en`↔`zh` count alignment holds in every file, for every rendering.**
+   `best-hikes-in-dinosaur-national-monument` EN 23 / `保护区` 24 · `fall-hiking` EN 5 /
+   `保护区` 7 · control `visiting-dinosaur-national-monument` EN 46 / `纪念地` 49 ·
+   `family-hiking` EN 7 / `纪念地` 7. Same slot, same density, different word.
+3. **No comparison locale preserves a distinction.** `de` *Monument* · `fr` *monument* ·
+   `es`/`it`/`pt` *monumento* — each locale uses exactly **one** anaphoric noun. There is
+   no distinction here for `zh` to be preserving.
+4. **`保护区` is not merely inconsistent, it is wrong.** It means *protected area /
+   reserve* — a different NPS designation (National Preserve, National Conservation
+   Area). `纪念区` is not a designation at all. `国家纪念地` is the standard Chinese for
+   a US National Monument and is already 77% of the corpus.
+
+**Answering the two questions as posed.** The 3 `国家保护区` sites *do* render EN
+*"national parks and monuments"* — but the pair is already built in `zh` as
+`国家公园和X`, so the correct fix is the one-word swap, not a re-rendering:
+`国家公园和国家纪念地`. Two further sites in the same file wrote the second element
+without `国家` (`国家公园与保护区`); those were raised to `国家公园与国家纪念地` to match
+their three siblings. **These 2 are the only sites where anything but the noun changed,
+and they are the sweep's only documented exception.**
+
+**C4 is untouched.** All 96 resulting `国家纪念地` are the generic common noun; zero are
+proper names. `Dinosaur National Monument` remains locked English at 514, `恐龙之乡`
+locked Chinese at 503.
+
+**Verification.**
+
+| Check | Result |
+|---|---|
+| `纪念地` total | 383 → **496** (= 383 + 113, exact) |
+| `国家纪念地` | 82 → **96** (= 82 + 8 + 4 + 2 pair-form upgrades, exact) |
+| `纪念区` | 48 → **0** |
+| `保护区` | 70 → **5** — the 5 survivors are all `荒野保护区` = *wilderness area*, a genuine and different referent, in 4 files outside the sweep |
+| C7 core `官方渠道核实` conserved | **994 → 994** |
+| Reverse-transform: collapse all four renderings to one token on both sides of the diff | **identical in 8 of 9 files**; the 9th differs at exactly the 2 documented pair-form sites and nowhere else |
+| Multi-locale `.ts` files stayed in the `ZH` block | `things-to-do.ts` edits 2111–2346 (block opens 2093) · `faq.ts` edit 2427 (block opens 2278) |
+| English master and 6 other locales | **unchanged** — `dist/de`, `dist/ja`, `dist/fr` contain 0 `纪念地` |
+| Rendered `dist/zh` monument-sense `保护区` / `纪念区` | **0 / 0** across 77 pages (10 `保护区` remain, all `荒野保护区`) |
+| `zh` routes · schema · components | 77 · unchanged · 0 files touched |
+| `astro check` · build · validator | 0/0 · 619 pages · ✔ |
+
+---
+
+*Original finding, retained for the record:*
+
+### C8 (original finding). The generic common noun *"a national monument"* has three `zh` renderings
 
 Not to be confused with C4, which is closed. C4 governs the **proper name**
 `Dinosaur National Monument` (locked English, 514 occurrences, 0 translations) and
@@ -1977,6 +2057,63 @@ markup is what surfaces the remaining ~127), but the plain-text figure was never
 > remove redundancy, which is not the C6 defect. **Recommendation: keep all 28.**
 > Two of the 20 `都请向` were created *by* this sweep: they were `都请请向` (a genuine
 > double), correctly reduced to the single form.
+
+### C9. The 28 held imperative shapes — ✅ DECIDED 2026-07-25 (P27), RETAINED, 0 edits
+
+**Owner decision: keep all 28. C9 is resolved by review; no edit was required.**
+
+The 28 are **not** another instance of C6/C7, and the distinction is structural rather
+than stylistic:
+
+| | Shape | What the second `请` does | Effect of deleting it |
+|---|---|---|---|
+| **C6 / C7** | `请…请向` — a *duplicated* imperative | nothing — the first `请` already carries it | removes redundancy; **meaning preserved** |
+| **C9** | `都请向` / `务必请向` / `始终请向` / `也请向` — a *single* imperative with an adverb | it is the **only** imperative in the sentence; the adverb modifies it but cannot replace it | removes politeness and imperative force; **register changes** |
+
+Deleting a `请` is only ever licensed when a second one survives to carry the imperative.
+In all 28 of these, none does. The defect C6 and C7 fixed is therefore absent here, and
+applying their fix would introduce a new one.
+
+This closes the fifth item in the programme to be **resolved by review rather than by
+edit** — joining **A3** (`Piste` retained, 239 of 251), **C2** (`登山口` retained, 230 of
+232), **C3** (4 of 5 "residues" were real distinctions) and **C4** (503 of 503 kept). In
+each, measurement showed the translator had been right and the suspicion wrong. That
+outcome is a result, not a null result: the programme's main product is reduced
+uncertainty, and a documented *keep* is as durable as a sweep.
+
+### Machine terminology (`车辆` / `车` / `越野车`) — ✅ ASSESSED 2026-07-25 (P27), FOLDED AND CLOSED, 0 edits
+
+The P26 fold rule was *"folds into C8 if ≤20 corpus decisions remain."* **It folds — and
+the count is 0.** Not "small enough to do here": there is nothing to decide.
+
+Re-reading the P20 census with the C8 window correction first (P20 measured `.zh.mdx`
+only; the corpus-wide figures are `越野车` 108 / `并排越野车` 90, not 81 / 69):
+
+- **The `越野车` row is already closed and stays closed.** 90 of 108 are the compound
+  `并排越野车` = *side-by-side*, and all 18 bare uses are the generic category read —
+  *"自己的越野车"* (bring your own), *"从没开过越野车"* (never driven one), *"只有越野车
+  才能抵达"* (only reachable by one). Zero displace the locked product term.
+- **The locked term is conserved 1:1.** Per-file EN `UTV` ↔ `zh` `UTV`: 17↔17, 23↔23,
+  13↔11. There is no term-lock violation anywhere in the slot.
+- **The live residual — EN *"machine"* — has no enumerable Chinese target.** English uses
+  *machine* as an informal register variant of *UTV* (219 times across the `.mdx`
+  masters). Chinese has no informal one-word equivalent, so `zh` fills the slot with
+  `车辆` where a noun is needed and lets `UTV` absorb the rest.
+- **Two shipped locales already do exactly this.** In `best-utv-trails-vernal`, the 9 EN
+  *machine* slots are filled by a cognate in `de` (9), `fr` (8), `es` (9) and `pt` (9) —
+  and by **nothing at all** in `it` (0) and `ja` (0), both of which collapse the word into
+  `UTV`, exactly as `zh` does. Both are finished, tagged, released locales.
+
+So the corpus contains **two legitimate strategies for this slot, not a correct one and a
+drifted one**, and `zh` follows the same strategy as Italian and Japanese. Normalising
+would mean picking a winner between two shipped conventions on 219 per-sentence register
+judgements with no repository evidence favouring either.
+
+This is the P26.5 governing rule applied to a candidate phase rather than to a gate:
+**decide only where the correct value is enumerable.** It is not enumerable here, so the
+item closes by review. **No P28.** With C8 and C9 closed alongside it, the editorial
+programme is finished; everything remaining is architectural (D1) or automation (the
+Localization Regression Framework).
 
 ---
 
