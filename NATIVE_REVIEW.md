@@ -1901,10 +1901,10 @@ planned queue.
 |---|---|---|---|---|---|
 | ~~**C7**~~ | `zh` | caveat seams survive behind inline markup | P19 (C2 census) | **326 sites / 44 files** | ✅ **applied P26** — 326 swept, 28 held as C9 |
 | ~~**C9**~~ | `zh` | `都`/`务必`/`始终`/`也` + `请向` — seam shapes with no C6 precedent | P26 (C7 sweep) | 28 sites | ✅ **closed P27 — kept, 0 edits** |
-| **D1** | *all 7* | home-page carousel ships English `alt` + captions in every locale | P22 (A7 census) | 106 slides × 7 locales | ⬜ open — **newly raised** |
+| **D1** | *all 7* | home-page carousel ships English `alt` + captions in every locale | P22 (A7 census) | 106 slides × 7 locales | ⬜ **open — the only remaining item** |
 | ~~**A7**~~ | `de` | `Trailhead` (42) vs the established `Ausgangspunkt` (235) | P17 (A4 census) | 42 sites | ✅ **applied P22** — 41 replaced, 1 exception |
 | ~~**B3**~~ | `ja` | `Salt Lake City` split — Latin 129 vs `ソルトレイクシティ` 34 | P18 (B1 census) | 34 sites | ✅ **applied P24** — 34 replaced, 0 exceptions |
-| **B4** | `ja` | ~14 untranslated English anchor texts on `/ja/` links | P18 (B1 census) | ~14 sites | ⬜ open |
+| ~~**B4**~~ | `ja` | ~14 untranslated English anchor texts on `/ja/` links | P18 (B1 census) | **57 sites / 8 files** (recorded ~14; 652 candidates, 597 correct) | ✅ **applied P25** — 57 localized, 597 proper nouns retained |
 | ~~**C8**~~ | `zh` | generic *"a national monument"* rendered 3 ways | P21 (C4 census) | **113 sites / 9 files** (recorded 7/4) | ✅ **applied P27** — normalised to `纪念地` |
 | ~~**A8**~~ | `de` | 18 untranslated English `Dinosaur Country` in `de` MDX | P21 (C4 census) | 18 sites | ✅ **applied P23** — 18 replaced, 0 exceptions |
 
