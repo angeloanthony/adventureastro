@@ -16,7 +16,8 @@ All three locales are feature-complete (57 MDX spokes + 20 inline pages each,
 scan cannot make. This document exists so a reviewer decides a short list of
 questions, not so they read 171 files.
 
-**Decided — 10 of 13:**
+**Decided — 12 of 13, with C5 needing no decision. ✅ The original review programme
+(A1–A6, B1–B2, C1–C6) is COMPLETE as of P21, 2026-07-25.**
 
 | Item | Decision | State |
 |---|---|---|
@@ -29,22 +30,33 @@ questions, not so they read 171 files.
 | **B1** `モアブ` vs `Moab` | **Latin `Moab`** — the corpus transliterates only `バーナル` and state names | ✅ decided **and applied** 2026-07-25 (P18) — 85 occurrences reviewed, **37 replaced** in 1 file, 48 already canonical |
 | **C2** `登山口` for trailheads | **`登山口` is CORRECT — retained**; no terrain split exists to apply | ✅ decided **and applied** 2026-07-25 (P19) — 232 occurrences reviewed, **230 unchanged**, 2 single-file drift fixes |
 | **C1** `官方渠道` vs `官方来源` | **`官方渠道`** is the standard | ✅ decided **and applied** 2026-07-25 |
+| **C3** | five suspected synonym residues | **4 of 5 were real distinctions — retained**; only the localized `风景公路`/`景观公路` split was drift | ✅ decided **and applied** 2026-07-25 (P20) |
 | **C6** locked-phrase policy | caveat is locked by **intent, not byte sequence** | ✅ decided **and fully applied** 2026-07-25 — 27 seam defects across 13 files fixed, disclaimer count conserved at 994 |
+| **C5** typography | no decision needed — verified clean; one do-not-fix trap recorded | ✅ resolved on measurement |
 
-**Open — 2 from the original plan:**
+**Open — 0 from the original plan.**
 
-| Locale | Open items | Highest-impact |
+| Locale | Open items | Post-review items (§E) |
 |---|---|---|
-| `de` | **all 6 original items closed** | — (A7 is post-review, see §E) |
-| `ja` | **all closed** — B1 applied at P18, B2 dissolved | — |
-| `zh` | **C4** | C4 — confirm the `恐龙之乡` / `Dinosaur National Monument` split holds |
+| `de` | **all 6 original items closed** | A7, A8 |
+| `ja` | **all closed** — B1 applied at P18, B2 dissolved | B3, B4 |
+| `zh` | **all closed** — C4 decided at P21 | C7 (**highest impact**), C8 |
 
-**Priority order** (owner-set 2026-07-25, revised at P16 once A3 was decided):
-~~C6~~ → ~~A1-residual~~ → ~~A2~~ → ~~A5~~ → ~~A6~~ → ~~A3~~ → ~~A4~~ → ~~B1~~ → ~~C2~~ → ~~C3~~ → C4
+**Priority order** (owner-set 2026-07-25, revised at P16 once A3 was decided) — fully consumed:
+~~C6~~ → ~~A1-residual~~ → ~~A2~~ → ~~A5~~ → ~~A6~~ → ~~A3~~ → ~~A4~~ → ~~B1~~ → ~~C2~~ → ~~C3~~ → ~~C4~~ ✅
 
-***The German and Japanese reviews as originally scoped are both COMPLETE.*** German
-A1–A6 are all decided and applied; Japanese B1 is applied and B2 dissolved on
-measurement. **Only C4 remains from the original plan.**
+***The German, Japanese and Chinese reviews as originally scoped are all COMPLETE.***
+German A1–A6 are decided and applied; Japanese B1 is applied and B2 dissolved on
+measurement; Chinese C1–C4 and C6 are decided and C5 needed no decision. **Nothing
+remains from the original plan.**
+
+**What the programme actually found.** Of the 13 decidable items, **5 closed with zero
+or near-zero corpus edits** — A1 (0), A3 (239 of 251 kept), C2 (230 of 232 kept),
+C3 (4 of 5 residues were real distinctions), C4 (503 of 503 kept). The review's main
+product was *reduced uncertainty*, not a large edit set: measurement repeatedly showed
+the translators had been right and the suspicion wrong. The genuine defects it did fix
+were consistency drift, not mistranslation — and the six items in §E were all surfaced
+by censuses run for other purposes.
 
 **Post-review opportunities — 4, all deliberately sequenced last.** A7, B3, B4 and C7
 were each surfaced by a census run while applying an accepted decision, not by the
@@ -955,7 +967,7 @@ This item is closed; the earlier note was stale.
 
 ---
 
-## C. Simplified Chinese (`zh`) — C1 + C2 + C6 decided & applied; C3/C4 open; register clean
+## C. Simplified Chinese (`zh`) — C1–C4 + C6 all decided; register clean. **Section closed.**
 
 Counted across all 57 `.zh.mdx` spokes **and** the 20 `src/pages/zh/**` inline
 pages. Register needs no decision: **你 3,668 / 您 0 / 咱们 0** — informal `你`
@@ -1237,7 +1249,142 @@ Three words that are **not** residues and must not be swept:
 
 ---
 
-### C4. `恐龙之乡` vs `Dinosaur National Monument` — confirm the split holds
+### C4. `恐龙之乡` vs `Dinosaur National Monument` — ✅ DECIDED 2026-07-25 (P21): **the split holds — RETAINED, zero edits**
+
+> **✅ Decision: `恐龙之乡` is confirmed as the canonical Chinese destination
+> identity and `Dinosaur National Monument` as the locked English place name. All
+> 503 occurrences reviewed, **503 unchanged**, 0 replacements.** Verified:
+> `astro check` 0 errors / 0 warnings · build **619 pages** · validator ✔ ·
+> **0 content files changed**.
+>
+> **This is the third "leave it alone" decision of the review (after A3 and C2), and
+> the first where the repository had already written the answer down.** The `zh`
+> translation brief in [`src/lib/ui.ts:926`](src/lib/ui.ts#L926) locks *both sides
+> of the split explicitly*:
+>
+> > `• LOCKED TERMS — Dinosaur Country → 恐龙之乡 (an established Chinese`
+> > `  collocation for fossil country, not a coinage) …`
+>
+> and, twelve lines above it, locks the place name in the opposite direction — *"A
+> place with NO established Chinese name stays English … Dinosaur National Monument
+> / Dinosaur Monument."* C4 is therefore not an open question about intent; it is a
+> check that the shipped corpus honours a lock it already recorded. **It does.**
+>
+> **Five independent lines of evidence:**
+>
+> 1. **No competing rendering of the identity exists.** 15 plausible alternatives
+>    were counted (`恐龙之地`, `恐龙乐园`, `恐龙王国`, `恐龙之都`, `恐龙国度`,
+>    `恐龙地区`, `恐龙圣地`, …). Every one is **0**. `恐龙之乡` is the sole form at
+>    503 — unlike C3's `风景公路`/`景观公路`, there is nothing here to normalise.
+> 2. **No unauthorised translation of the place name exists.** `恐龙国家纪念地`,
+>    `恐龙国家公园`, `恐龙国家保护区`, `恐龙国家遗址`, `恐龙化石国家纪念地` — all
+>    **0**. `zh` ships `Dinosaur National Monument` in Latin **514** times
+>    (400 MDX + 114 inline).
+> 3. **Line-aligned check against the English master: 0 true referent merges.** Every
+>    `zh` line containing `恐龙之乡` was compared to the same line of its English
+>    source. Only **2** lines carried the monument name without Title-Case
+>    `Dinosaur Country` — and both are **false positives**: the English carries the
+>    hyphenated attributive `dinosaur-country` (*"the full **dinosaur-country** trail
+>    picture"*, *"**dinosaur-country** history"*), which a Title-Case-only scan
+>    misses. The earlier C4 note's own paradigm was incomplete: the English master
+>    uses `Dinosaur Country` 361 · `dinosaur-country` 11 prose (+12 in the
+>    `romantic-weekend-dinosaur-country` slug) · `dinosaur country` 2.
+> 4. **The split is maintained *inside single sentences*, 58 times.** 58 MDX lines
+>    carry both terms at once, e.g.
+>    [`family-hiking-near-vernal.zh.mdx:145`](src/content/hiking/family-hiking-near-vernal.zh.mdx#L145):
+>    *"想看**恐龙之乡**完整的步道图景，见我们的 **Dinosaur National Monument** 最佳徒步路线攻略"*.
+>    A corpus that merged the referents could not produce that line.
+> 5. **The English master itself states the containment relation, and `zh` renders
+>    it faithfully.** [`one-day-adventure-vernal.mdx`](src/content/itineraries/one-day-adventure-vernal.mdx)
+>    reads *"**Dinosaur Country** packs **a national monument**, a guided
+>    backcountry, two red-rock reservoirs … into one area"* → `zh`:
+>    *"**恐龙之乡**在一块土地上塞进了**一座国家纪念区**、一片需要向导带队才能进入的荒野、两座红岩水库…"*.
+>    The region contains the monument in both languages.
+>
+> **Every locale translates the identity and keeps the place name English — `zh` is
+> not an outlier, it is unanimous.** This is the inverse of the A6/A4 shape, where
+> German stood alone:
+>
+> | Locale | Destination identity | MDX | inline + `.ts` | **Total** | `Dinosaur National Monument` |
+> |---|---|---|---|---|---|
+> | `en` | `Dinosaur Country` | 361 | — | — | English |
+> | `de` | `Land der Dinosaurier` | 321 | 129 | 450 | English |
+> | `fr` | `Terre des Dinosaures` | 360 | 136 | 496 | English |
+> | `es` | `Tierra de los Dinosaurios` | 356 | 131 | 487 | English |
+> | `it` | `Terra dei Dinosauri` | 359 | 138 | 497 | English |
+> | `pt` | `Terra dos Dinossauros` | 362 | 137 | 499 | English |
+> | `ja` | `恐竜の国` | 364 | 133 | 497 | English |
+> | `zh` | **`恐龙之乡`** | **365** | **138** | **503** | English |
+>
+> The MDX column is the tight one — 356–365 across all seven locales against the
+> English master's 361 — which is what a faithful 1:1 rendering of the same source
+> sentences looks like. **`de`'s low total (450) is not a `de` translation choice**:
+> German additionally ships **18 untranslated English `Dinosaur Country`** in its MDX
+> (`es` 3 + 2, `ja` 1 + 4, all other locales 0). That is a German residue of the A4/A6
+> shape and is **out of P21's scope** — recorded here only because the cross-locale
+> census surfaced it.
+>
+> **On the ambiguity question — `恐龙之乡` cannot be read as the monument, and the
+> corpus proves it grammatically.** The question asked whether a Chinese reader might
+> take the identity for the place. Three measurements say no:
+>
+> | Test | Result |
+> |---|---|
+> | **Regional collocations** | `在恐龙之乡` (*in* DC) **51** · `整个恐龙之乡` (*the whole of* DC) **5** · `来恐龙之乡` (*come to* DC) **4** · `恐龙之乡的` (attributive) **78** |
+> | **Site-specific collocations** — the ones a *monument* would take | `恐龙之乡门票` · `恐龙之乡游客中心` · `恐龙之乡入口` · `恐龙之乡开放` · `恐龙之乡内` — **all 0** |
+> | **Script separation** | `恐龙之乡` is Hanzi; `Dinosaur National Monument` is Latin. The two referents are never confusable **on sight** — a disambiguation no Latin-script locale enjoys, since `Terra dei Dinosauri` and `Dinosaur National Monument` share an alphabet |
+>
+> `整个恐龙之乡` is the decisive one: *整个* ("the entirety of") is an areal quantifier
+> that presupposes a region, and it is used 5 times. Meanwhile not one of the eight
+> site-nouns a national monument attracts — tickets, visitor centre, entrance,
+> opening hours — ever attaches to it.
+>
+> **The remedy C4 proposed already exists, and `zh` is the only locale that has it.**
+> The question offered *"a qualifier on first use per page"* as the fix if the term
+> were ambiguous. [`one-day-adventure-vernal.zh.mdx`](src/content/itineraries/one-day-adventure-vernal.zh.mdx)
+> already glosses it geographically on first use — `恐龙之乡（犹他州东北部）`,
+> *"Dinosaur Country (northeastern Utah)"* — where `de`/`fr`/`es`/`it`/`pt`/`ja` all
+> render the identity bare at the identical line. The translator anticipated the
+> concern. **Extending that gloss corpus-wide was considered and rejected**: it would
+> add 500 parenthetical insertions to fix an ambiguity the collocation evidence shows
+> does not exist, and would diverge from all six peer locales.
+>
+> **Occurrences by surface** (all 503):
+>
+> | Surface | Count |
+> |---|---|
+> | body prose (MDX) | 223 |
+> | frontmatter metadata (incl. FAQ `q:`/`a:` pairs) | 83 |
+> | inline `.astro` prose | 81 |
+> | page summary | 37 |
+> | heading | 36 |
+> | image text (`alt` / figcaption) | 15 |
+> | `page-content/*.ts` locale block | 13 |
+> | structured data (JSON-LD) | 11 |
+> | UI chrome (`ui.ts` `ZH` dict — 3 strings + 1 brief comment) | 4 |
+>
+> **Intentional exceptions — documented, not swept:** none required. There is no
+> minority variant to retain or normalise; the term is uniform at 503/503. The one
+> deliberate *addition* left in place is the single geographic gloss above.
+>
+> **`Dinosaur Monument` short-form: the earlier count of 4 does not survive
+> re-measurement.** The form appears **0** times in *any* locale's MDX content. Its
+> real home is UI chrome and page-content — `'nav.dinosaurMonument': 'Dinosaur Monument'`
+> in [`ui.ts:940`](src/lib/ui.ts#L940) and the equivalent nav labels — where it is a
+> deliberate short nav label, English in every locale including `zh`, and explicitly
+> covered by the same `ui.ts` lock. Nothing to do.
+>
+> **One adjacent finding, deliberately NOT folded into C4 — registered as C8.** The
+> *generic common noun* "a national monument" (lowercase, indefinite — not the place
+> name) is rendered three ways in `zh`: `国家纪念地` **82** (21 files, the house
+> standard), `国家保护区` **3** in this sense (3 files), `国家纪念区` **4** (1 file).
+> That is single-file drift of the C2/C3 shape, but its referent is neither of C4's
+> two terms, so sweeping it here would be exactly the scope creep the `越野车`
+> "machine" item was kept out of C3 to avoid. See [§E](#e-post-review-opportunities--newly-discovered-editorial-items).
+
+The original finding is preserved:
+
+### C4 (original finding). Two referents that must not be merged
 
 Two different referents that must not be merged: `恐龙之乡` (486) is the
 regional/brand identity — *Dinosaurland*, the marketing name for the Vernal
@@ -1463,6 +1610,38 @@ planned queue.
 | **A7** | `de` | `Trailhead` (42) vs the established `Ausgangspunkt` (235) | P17 (A4 census) | 42 sites | ⬜ open |
 | **B3** | `ja` | `Salt Lake City` split — Latin 129 vs `ソルトレイクシティ` 34 | P18 (B1 census) | 34 sites | ⬜ open |
 | **B4** | `ja` | ~14 untranslated English anchor texts on `/ja/` links | P18 (B1 census) | ~14 sites | ⬜ open |
+| **C8** | `zh` | generic *"a national monument"* rendered 3 ways | P21 (C4 census) | 7 sites / 4 files | ⬜ open |
+| **A8** | `de` | 18 untranslated English `Dinosaur Country` in `de` MDX | P21 (C4 census) | 18 sites | ⬜ open |
+
+### C8. The generic common noun *"a national monument"* has three `zh` renderings
+
+Not to be confused with C4, which is closed. C4 governs the **proper name**
+`Dinosaur National Monument` (locked English, 514 occurrences, 0 translations) and
+the **destination identity** `恐龙之乡` (locked Chinese, 503, uniform). C8 is the
+third thing: the lowercase, indefinite **common noun** the English master uses in
+sentences like *"Dinosaur Country packs **a national monument** … into one area"*
+and *"**national parks and monuments** — including Dinosaur National Monument"*.
+
+| Rendering | Count (generic sense) | Files | Note |
+|---|---|---|---|
+| `国家纪念地` | 82 | 21 | **the house standard** |
+| `国家保护区` | 3 | 3 | renders *"national parks and monuments"*; 保护区 = *preserve/reserve*, a different NPS designation |
+| `国家纪念区` | 4 | 1 — [`one-day-adventure-vernal.zh.mdx`](src/content/itineraries/one-day-adventure-vernal.zh.mdx) | single-file drift, the C2/C3 shape |
+
+Weighed against a sweep: all three are comprehensible and none is *wrong* in
+isolation, so this is a consistency question rather than a defect. `国家保护区`
+additionally needs a per-site judgement — if the English at that line really is
+*"parks and monuments"* as a pair, the right fix may be `国家公园和国家纪念地`
+rather than a one-word swap.
+
+> **Question C8:** Normalise the 7 minority renderings to the house standard
+> `国家纪念地`, or leave the generic noun free to vary? If normalising, confirm the
+> 3 `国家保护区` sites should become `国家纪念地` rather than being re-rendered as
+> the *"parks and monuments"* pair.
+
+*Not applied in P21.* C4 was scoped to the identity/place-name split; this is a
+separate lexeme, and folding it in would repeat the scope creep the `越野车`
+"machine" item was deliberately kept out of C3 to avoid.
 
 ### C7. The caveat seam fix is clean in plain text but not as rendered
 
