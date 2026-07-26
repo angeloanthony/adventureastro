@@ -42,7 +42,7 @@ questions, not so they read 171 files.
 |---|---|---|
 | `de` | **all 6 original items closed** | ~~A7~~ ✅ P22, ~~A8~~ ✅ P23 — **German backlog closed** |
 | `ja` | **all closed** — B1 applied at P18, B2 dissolved | ~~B3~~ ✅ P24, ~~B4~~ ✅ P25 — **Japanese backlog closed** |
-| `zh` | **all closed** — C4 decided at P21 | C7 (**highest impact**), C8 |
+| `zh` | **all closed** — C4 decided at P21 | ~~C7~~ ✅ P26, C8, C9 (**new, from P26**) |
 
 **Priority order** (owner-set 2026-07-25, revised at P16 once A3 was decided) — fully consumed:
 ~~C6~~ → ~~A1-residual~~ → ~~A2~~ → ~~A5~~ → ~~A6~~ → ~~A3~~ → ~~A4~~ → ~~B1~~ → ~~C2~~ → ~~C3~~ → ~~C4~~ ✅
@@ -60,23 +60,107 @@ the translators had been right and the suspicion wrong. The genuine defects it d
 were consistency drift, not mistranslation — and the six items in §E were all surfaced
 by censuses run for other purposes.
 
-**Post-review opportunities — 6 raised, 4 closed (A7 P22, A8 P23, B3 P24, B4 P25), 1 newly added (D1).**
+**Post-review opportunities — 7 raised, 5 closed (A7 P22, A8 P23, B3 P24, B4 P25, C7 P26), C9 newly added at P26.**
 **The German and Japanese language reviews are now closed end-to-end (A1–A8, B1–B4).**
 Owner-set sequencing for what remains (2026-07-25, at P23) keeps the editorial
 terminology work together and defers the one cross-cutting engineering item until the
 language backlog is done:
-~~B3~~ → ~~B4~~ → **C7 → C8 → `zh` machine terminology (`车辆`/`车`/`越野车`) → D1 → Gate 4f.**
+~~B3~~ → ~~B4~~ → ~~C7~~ → **C8 (+ C9) → `zh` machine terminology (`车辆`/`车`/`越野车`) → D1 → Localization Regression Framework.**
 D1 is deliberately last of the content items: it is a repository-wide content-
 architecture question (does the fix belong in shared source data or in localisation
-assets?), not an editorial one, and it must be answered before Gate 4f is implemented.
+assets?), not an editorial one, and it must be answered before the framework is built.
+
+**Revised at P26 (owner-agreed).** Two changes to the tail of that sequence:
+- **The machine-terminology item folds into C8 if ≤20 corpus decisions remain** once
+  the P20 census is re-read (`并排越野车` = *side-by-side* already accounts for 69 of
+  81 `越野车`, so the live residue is ~12). Otherwise it keeps its own phase.
+- **Gate 4f is superseded by a Localization Regression Framework** — 4f untranslated
+  headings (A5), 4g anchor-text audit (B4), 4h rendered-seam detector (C6/C7), 4i
+  glossary-lock drift (A6/C4), 4j shared-content localization (D1). Governing rule:
+  **block only where a correct value is enumerable; everything else reports counts.**
+  4f/4h/4i block, **4g is advisory** (B4's 597:55 correct-to-drift ratio would make a
+  blocking anchor check fail on proper nouns indefinitely), 4j is a one-time audit that
+  becomes a structural invariant once D1 lands. D1's outcome determines how 4j inspects
+  shared content, which is why the framework waits for it.
+- **A methodology section is written first**, immediately after C7 — it records *why*
+  each gate exists, which is what makes 4f–4j maintainable rather than arbitrary.
 
 A7, A8, B3, B4, C7 and C8 were each surfaced by a census run while applying an accepted
 decision, not by the original scoping — and A7's own census then surfaced **D1**, the
 first cross-locale item in this document. They are registered in **§E** so the original queue stays intact and
 they do not displace planned items that were committed before they existed. Each is an
-owner decision to be taken now that the planned queue is finished. **C7 is the
-highest-impact of the six** — it shows closed item C6's seam fix is clean in plain text
-but leaves **249 seams** once inline markup is stripped.
+owner decision to be taken now that the planned queue is finished. **C7 was the
+highest-impact of the six** — it showed closed item C6's seam fix was clean in plain
+text but left seams once inline markup is stripped. Applied at P26: the true scope was
+**326 sites / 44 files**, not the 249 first recorded, because the original figure used
+a fixed ≤10-character window rather than the full clause. Its own sweep then raised
+**C9** (28 seam shapes with no C6 precedent, recommended keep).
+
+---
+
+## Review methodology — what actually produced correct decisions
+
+*Written at P26, once every major class of editorial review had been run across
+German, Japanese and Chinese. This section exists so the Localization Regression
+Framework records **why** each gate exists, not only what it checks.*
+
+**The headline result: most flagged items were not defects.** Across the programme,
+the estimate was wrong in the same direction almost every time — the corpus was
+larger than expected and *more* internally consistent than expected. A3 kept 239 of
+251. C2 kept 230 of 232. C4 kept 503 of 503. C3 found 2 of 5 suspected residues real.
+B4 split 597 correct to 55 drift. The review's product was **reduced uncertainty**,
+not a large edit set. Any permanent gate must be designed for that ratio or it will
+report mostly false positives and be switched off.
+
+**The principles that held, in the order they tend to matter:**
+
+1. **Measure before editing; never sweep from an estimate.** Every recorded size that
+   was carried forward without re-measuring turned out wrong — C7's "249" was really
+   326, B4's "≈14" was 652. Re-census at the start of the applying phase, always.
+2. **Distinguish repository policy from translation preference.** The question is not
+   "is this the best word?" but "does the corpus already have a rule?" C2 was decided
+   by the fact that *no* mechanical split rule exists, not by which term is nicer.
+3. **The English master arbitrates apparent synonym pairs.** Three of C3's five
+   "residues" were faithful renderings of a distinction English itself draws
+   (`path` vs `trail`, `angling` vs `fishing`). Per-file `en`↔locale count diffing is
+   the cheapest high-yield drift detector there is.
+4. **Compare line-aligned peers across locales.** `de` 53 / `ja` 53 / `zh` 69 in the
+   same slot proved `并排越野车` was the compound *side-by-side*, not a UTV synonym.
+   Cross-locale sense tables also show whether a loanword is deliberate (A3 keep) or
+   drift (A7 sweep).
+5. **Treat rendered output as authoritative when markup can obscure the source.** This
+   is C6→C7 in one line: a fix verified at 0 in plain text left 326 defects on the
+   page, because `<strong>` sits *inside* the join seam. Gates that scan source text
+   for anything a reader sees are measuring the wrong artifact.
+6. **A locked phrase is locked by intent, not by bytes.** C6 established it and C7
+   depended on it: `请向官方渠道核实` and `向官方渠道核实` both satisfy the lock, so
+   the invariant to assert is the **conserved core count** (`官方渠道核实` = 994),
+   not exact-string uniformity. Census prefixes before assuming a phrase is uniform —
+   the "962-instance lock" never was.
+7. **Check whether the target is a bound morpheme before sweeping it.** `野营`'s count
+   of 4 was 100% inflated by `荒野营地`. `请` is bound in `申请`/`请求` and is a plain
+   verb in `请向导`. Mask compounds first; a bare-stem sweep will silently corrupt.
+8. **Encode grammatical licensing, not surface repetition.** The C6 defect was never
+   "two `请` in a sentence" — it was two imperatives in **one clause with no
+   boundary**. `请A，请B` is correct Chinese and must survive. Getting this wrong in
+   either direction is how a scan either misses defects or creates them.
+9. **Separate engineering defects from editorial ones.** D1 (English carousel in all
+   seven locales) is a content-architecture problem wearing a localization costume.
+   Routing it to a translator would have produced seven copies of the same fix.
+10. **Verify by reverse-transform, not by re-running the finder.** The finder agreeing
+    with itself proves nothing. Strip the changed token from both sides of the diff
+    and require the strings to be identical — that is what proved P26 touched exactly
+    326 `请` characters and nothing else.
+11. **Automated analysis cannot replace native judgement.** It is excellent at
+    inconsistency, drift, untranslated content, glossary violations and structural
+    defects. It is not competent at punctuation, idiom, rhythm or nuance — the 14
+    Chinese `连接号` dashes and the 5 grammatical `请A，请B` clauses are correct and a
+    regex would "fix" both. Native review stays a distinct milestone.
+
+**Consequence for the framework.** Principles 1, 5, 6 and 7 are why 4h scans rendered
+text and asserts a conserved count. Principle 8 is why it encodes clause boundaries.
+The headline ratio is why **4g is advisory** while 4f/4h/4i block: an anchor-text
+check has no enumerable correct set, so it must report rather than fail the build.
 
 ---
 
@@ -1800,7 +1884,8 @@ planned queue.
 
 | Item | Locale | Subject | Raised by | Size | State |
 |---|---|---|---|---|---|
-| **C7** | `zh` | caveat seams survive behind inline markup | P19 (C2 census) | **249 sites / 28+ files** | ⬜ open — **highest impact** |
+| ~~**C7**~~ | `zh` | caveat seams survive behind inline markup | P19 (C2 census) | **326 sites / 44 files** | ✅ **applied P26** — 326 swept, 28 held as C9 |
+| **C9** | `zh` | `都`/`务必`/`始终`/`也` + `请向` — seam shapes with no C6 precedent | P26 (C7 sweep) | 28 sites | ⬜ open — **recommend keep** |
 | **D1** | *all 7* | home-page carousel ships English `alt` + captions in every locale | P22 (A7 census) | 106 slides × 7 locales | ⬜ open — **newly raised** |
 | ~~**A7**~~ | `de` | `Trailhead` (42) vs the established `Ausgangspunkt` (235) | P17 (A4 census) | 42 sites | ✅ **applied P22** — 41 replaced, 1 exception |
 | ~~**B3**~~ | `ja` | `Salt Lake City` split — Latin 129 vs `ソルトレイクシティ` 34 | P18 (B1 census) | 34 sites | ✅ **applied P24** — 34 replaced, 0 exceptions |
@@ -1838,7 +1923,66 @@ rather than a one-word swap.
 separate lexeme, and folding it in would repeat the scope creep the `越野车`
 "machine" item was deliberately kept out of C3 to avoid.
 
-### C7. The caveat seam fix is clean in plain text but not as rendered
+### C7. The caveat seam fix is clean in plain text but not as rendered — ✅ DECIDED & APPLIED 2026-07-25 (P26)
+
+**Applied: 326 sites across 44 files. One `请` deleted per site, nothing else.**
+Content landed in `6b1dc49`.
+
+**The recorded size of 249 was low.** That figure came from a fixed ≤10-character
+window before the locked phrase. Scoped properly — *any* redundant `请` in the same
+clause, with the clause boundary set to `，` alone — the real count is **326**:
+
+| Shape | Count | C6 precedent | Fix |
+|---|---|---|---|
+| `请…请向` in one clause, the two adjacent | **179** | shape-1 | delete the **outer prose** `请` — lock stays byte-intact |
+| `请…请向` in one clause, separated by prose | **137** | shape-1 | delete the **lock's** `请` (C6-endorsed `请向`→`向`) |
+| `并请向` | **9** | shape-2 | delete the lock's `请` |
+| `先请向` | **1** | shape-3 | delete the lock's `请` |
+
+Two measurement traps were found and corrected while scoping this, both of which
+would have produced wrong edits:
+
+1. **`、` is an enumeration comma, not a clause boundary**, and **inline phone numbers
+   contain ASCII parens**. Treating either as a boundary hid real shape-1 seams in the
+   "grammatically licensed" bucket — e.g. `预订前请拨打(435)219-9447请向官方渠道核实`
+   is a genuine double imperative, not a `请A，请B` coordinate pair.
+2. **`请` is a bound morpheme in `申请`/`邀请`/`请求`** and a plain verb meaning *to
+   hire* in `请向导`. Both were censused before any edit — the corpus has **zero** of
+   either near the caveat, so all 326 prior `请` are true polite imperatives. Had
+   `申请许可证` appeared in one of these clauses, a naive sweep would have deleted the
+   wrong character.
+
+**Correction to the C7 finding as first recorded.** The line *"same scan, plain text
+only = 0"* was an artifact of the narrower character class. With the ≤10-char class,
+plain text already showed **199** — `<strong>` is only 8 characters, so it fits inside
+the window. The conclusion is unchanged and the corollary still holds (stripping
+markup is what surfaces the remaining ~127), but the plain-text figure was never 0.
+
+**Verification.**
+
+| Check | Result |
+|---|---|
+| Core `官方渠道核实` conserved | **994 → 994** |
+| Reverse-transform: strip all `请` from both sides of the diff | **identical** — no character other than `请` changed at any of the 326 sites |
+| Rendered `dist/zh` shape-1/2/3 seams | **0** across 77 pages |
+| …including JSON-LD blocks and `<meta>` attributes | **0** |
+| Licensed `请A，请B` clause-boundary cases | preserved (25 → 30, five more created by the adjacent-form fix) |
+| `astro check` · build · validator | 0/0 · 619 pages · ✔ |
+
+**28 sites were deliberately NOT swept — they are new item C9.**
+
+> **Question C9:** `都请向官方渠道核实` (20), `务必请向…` (6), `始终请向…` (1),
+> `也请向…` (1). None has C6 precedent, and in all 28 the locked `请` is the **only**
+> imperative in its sentence — so deleting it would remove politeness rather than
+> remove redundancy, which is not the C6 defect. **Recommendation: keep all 28.**
+> Two of the 20 `都请向` were created *by* this sweep: they were `都请请向` (a genuine
+> double), correctly reduced to the single form.
+
+---
+
+*Original finding, retained for the record:*
+
+### C7 (original finding). The caveat seam fix is clean in plain text but not as rendered
 
 **This is a genuine gap in closed item C6, not a new preference.** C6 fixed 27 seam
 defects and verified `请…请向` / `并请向` / `先请向` at **0**. That verification is
