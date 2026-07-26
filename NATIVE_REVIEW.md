@@ -40,7 +40,7 @@ questions, not so they read 171 files.
 
 | Locale | Open items | Post-review items (§E) |
 |---|---|---|
-| `de` | **all 6 original items closed** | A7, A8 |
+| `de` | **all 6 original items closed** | ~~A7~~ ✅ P22, A8 |
 | `ja` | **all closed** — B1 applied at P18, B2 dissolved | B3, B4 |
 | `zh` | **all closed** — C4 decided at P21 | C7 (**highest impact**), C8 |
 
@@ -60,9 +60,10 @@ the translators had been right and the suspicion wrong. The genuine defects it d
 were consistency drift, not mistranslation — and the six items in §E were all surfaced
 by censuses run for other purposes.
 
-**Post-review opportunities — 6, all deliberately sequenced last.** A7, A8, B3, B4, C7
-and C8 were each surfaced by a census run while applying an accepted decision, not by the
-original scoping. They are registered in **§E** so the original queue stays intact and
+**Post-review opportunities — 6 raised, 1 closed (A7, P22), 1 newly added (D1).**
+A7, A8, B3, B4, C7 and C8 were each surfaced by a census run while applying an accepted
+decision, not by the original scoping — and A7's own census then surfaced **D1**, the
+first cross-locale item in this document. They are registered in **§E** so the original queue stays intact and
 they do not displace planned items that were committed before they existed. Each is an
 owner decision to be taken now that the planned queue is finished. **C7 is the
 highest-impact of the six** — it shows closed item C6's seam fix is clean in plain text
@@ -90,7 +91,7 @@ times and bare `Vernal` 0 times.
 
 ---
 
-## A. German (`de`) — A1–A6 all closed; A7 newly raised
+## A. German (`de`) — A1–A7 all closed; A8 open
 
 | Item | Subject | State |
 |---|---|---|
@@ -100,7 +101,7 @@ times and bare `Vernal` 0 times.
 | **A4** | generic English `Trail` | ✅ closed — P17, 32 replacements / 5 files |
 | **A5** | untranslated English headings | ✅ closed — P14, 16 headings localized |
 | **A6** | `Leave No Trace` lock | ✅ closed — P15, 8 sites aligned |
-| **A7** | `Trailhead` (42) | ⬜ **open** — post-review item, registered in [§E](#e-post-review-opportunities--newly-discovered-editorial-items) |
+| **A7** | `Trailhead` (42) | ✅ closed — P22, 41 replacements / 12 files; 1 documented exception |
 
 ### A1. Register: the corpus is informal `du`. — ✅ DECIDED 2026-07-25: keep `du`
 
@@ -538,7 +539,91 @@ ungendered.
 
 ---
 
-### A7. `Trailhead` — the recorded lock is not supported by the corpus
+### A7. `Trailhead` — ✅ DECIDED & APPLIED 2026-07-25 (P22)
+
+> **✅ Applied: `Ausgangspunkt` confirmed as the canonical German rendering of
+> `trailhead`; all 41 content occurrences of English `Trailhead` normalised.**
+> Verified: `astro check` 0 errors / 0 warnings · build **619 pages** · validator ✔ ·
+> **12 files changed**, 38 insertions / 38 deletions · rendered `dist/de/` contains
+> **0** `Trailhead` · no other locale touched.
+>
+> **The decision was settled by per-file `en`↔`de` alignment, not by the totals.**
+> Counting `trailhead` in each English master against `Ausgangspunkt` in its German
+> counterpart produces an exact match, file after file, across the whole hiking
+> corpus — `high-uintas-day-hikes` 25→25, `spring-hiking-near-vernal` 16→16,
+> `summer-hiking-near-vernal` 15→15, `camping-in-ashley-national-forest` 14→14,
+> `alpine-lakes-hiking-high-uintas` 13→13, `winter-hiking-near-vernal` 10→10. Roughly
+> **200 aligned pairs with zero English residue.** `Ausgangspunkt` is not a plausible
+> synonym here; it is the house term, already applied consistently everywhere the
+> concept appears outside the 12 files below. The 41 are the drift.
+>
+> **Every peer locale renders the concept natively — and every one keeps it distinct
+> from the UTV staging sense.** Measured on the one string where both senses occur
+> together, the shared UTV map `alt`/figcaption:
+>
+> | Locale | *staging point* | *trailhead* |
+> |---|---|---|
+> | `en` | staging point | trailhead |
+> | `fr` | point de départ | départ de piste |
+> | `es` | punto de partida | punto de inicio de sendero |
+> | `it` | punto di ritrovo | inizio di sentiero |
+> | `pt` | ponto de encontro | ponto de partida |
+> | `ja` | 集合場所 | トレイルヘッド |
+> | `zh` | 集合点 | 登山口 |
+> | `de` *(was)* | Ausgangspunkt | **`Trailhead`** |
+>
+> German was the only locale resolving the collision by falling back to English.
+>
+> **The disambiguator was recovered from the corpus, not invented — the A5 method.**
+> The German UTV pillar had already solved this exact problem on the same image.
+> [`page-content/utv.ts`](src/page-content/utv.ts) DE block renders the English
+> *"trailhead locations"* as **`Ausgangspunkte der einzelnen Pisten`** and separates
+> the staging sense as `Treffpunkt` — *"Fünf unterschiedliche Pistensysteme, ein
+> Treffpunkt in Vernal … ohne Routen, Entfernungen oder Ausgangspunkte der einzelnen
+> Pisten."* That attested phrase was applied verbatim to the 9 sites where both senses
+> share a string, so no sweep site collapses two concepts and the staging sense was
+> never touched.
+>
+> | Group | Sites | Rendering |
+> |---|---|---|
+> | Hiking-sense prose, headings-free, no staging sense in the string | **32** | `Ausgangspunkt` / `Ausgangspunkte` / `Ausgangspunkten` (case-inflected) |
+> | `alt` + figcaption strings that *also* carry the UTV staging `Ausgangspunkt` | **9** | `Ausgangspunkte der einzelnen Pisten` (attested in `utv.ts`) |
+>
+> By surface: 24 in [`de/hiking/index.astro`](src/pages/de/hiking/index.astro) (prose,
+> table cells, `<li>`, JSON-LD FAQ answers, one `alt`, one figcaption), 17 across 11
+> MDX spokes (7 map-disclaimer `alt`, 2 figcaption, 8 body prose incl. 2 FAQ answers).
+> **0 headings changed**, so no anchor regenerated — the A4 anchor hazard does not
+> arise here.
+>
+> **Intentional exceptions — documented, not swept:**
+> - **`src/pages/de/hiking/index.astro:7`** — lowercase `trailhead` inside the file's
+>   English developer comment block (*"No invented trail mileage, elevation gain,
+>   permits, trailhead facilities…"*), copied verbatim from the English master's own
+>   header comment. Not content, never rendered. Same precedent as A4's 4 code
+>   identifiers: renaming it is an engineering change, not an editorial one.
+> - **`src/page-content/home.ts:3345`** — the DE block's carousel `alt` *"Doc's Beach
+>   trailhead sign on an Adventure Tours Vernal UTV tour near Vernal Utah"*. **Not
+>   German terminology drift.** The entire 106-slide carousel — every `alt` and every
+>   caption — is byte-identical to the English block in **all seven** locales
+>   (verified `es`/`it`/`pt`/`fr`/`de`/`ja`/`zh`). Fixing German alone would create the
+>   cross-locale inconsistency this review exists to remove. **Raised as [D1](#d1-the-home-page-carousel-ships-english-alt-text-and-captions-in-all-seven-locales)**
+>   rather than swept.
+>
+> **The "15 boilerplate sites" figure in the original question was wrong** — the real
+> count is 9, and they were not a reason to hold back: they are precisely the sites the
+> `utv.ts` precedent already covers.
+>
+> **Post-change scans all match their recorded baselines** (Appendix rule — any `de`
+> change re-runs A1/A2): `Du` 202 · `Sie` 137 · `Ihr` 13 · `Ihnen` 1 · `Ihre` 4;
+> mid-sentence capitalised `Du`/`Dich`/`Dir`/`Dein*` **0**; A3's protected exceptions
+> intact (`Wüstenpiste` 2, `Waschbrettpiste` 2, `Pistenpräparierung` 1,
+> `Streckensystem` 0, `Pistennetz` 0); A6's split intact (`Leave No Trace` 20 +
+> `Leave-No-Trace` 8). Conservation check: `Ausgangspunkt` family **234 → 275**, exactly
+> +41, one per replaced occurrence, verified per file.
+
+The original finding is preserved:
+
+### A7 (original finding). `Trailhead` — the recorded lock is not supported by the corpus
 
 Surfaced by the A4 census, which counted every `Trail*` form rather than grepping
 for a pattern. A4's own note above states `Trailhead` is on "the frozen
@@ -582,14 +667,18 @@ as prose. `Ausgangspunkt` is also used in this corpus for the *UTV staging point
 in Vernal ("Alle fünf Pistensysteme starten von einem gemeinsamen Ausgangspunkt"),
 so a blanket replacement would collapse two senses that are currently distinct.
 
-> **Question A7:** Normalise the 41 `Trailhead` to the established
+> ~~**Question A7:** Normalise the 41 `Trailhead` to the established
 > `Ausgangspunkt` family, or confirm `Trailhead` as a deliberate German loanword
 > and record it as a real lock? If normalising, say whether the 15 alt-text/
-> figcaption boilerplate instances are in or out.
+> figcaption boilerplate instances are in or out.~~
+> **ANSWERED & APPLIED 2026-07-25 (P22)** — see the decision block at the top of A7.
+> Normalised. The boilerplate sites were **9, not 15**, and they were included using
+> the corpus's own disambiguating phrase rather than being held back.
 
 *Not applied in P17.* A4 was scoped to `Trail`/`Trails`/`Trail-`; `Trailhead` is a
 separate lexeme, and overturning a lock recorded in this document is an owner
 decision on the precedent of A1, A3 and A6. Nothing here blocks A4's closure.
+**Applied in P22.**
 
 ---
 
@@ -1609,7 +1698,8 @@ planned queue.
 | Item | Locale | Subject | Raised by | Size | State |
 |---|---|---|---|---|---|
 | **C7** | `zh` | caveat seams survive behind inline markup | P19 (C2 census) | **249 sites / 28+ files** | ⬜ open — **highest impact** |
-| **A7** | `de` | `Trailhead` (42) vs the established `Ausgangspunkt` (235) | P17 (A4 census) | 42 sites | ⬜ open |
+| **D1** | *all 7* | home-page carousel ships English `alt` + captions in every locale | P22 (A7 census) | 106 slides × 7 locales | ⬜ open — **newly raised** |
+| ~~**A7**~~ | `de` | `Trailhead` (42) vs the established `Ausgangspunkt` (235) | P17 (A4 census) | 42 sites | ✅ **applied P22** — 41 replaced, 1 exception |
 | **B3** | `ja` | `Salt Lake City` split — Latin 129 vs `ソルトレイクシティ` 34 | P18 (B1 census) | 34 sites | ⬜ open |
 | **B4** | `ja` | ~14 untranslated English anchor texts on `/ja/` links | P18 (B1 census) | ~14 sites | ⬜ open |
 | **C8** | `zh` | generic *"a national monument"* rendered 3 ways | P21 (C4 census) | 7 sites / 4 files | ⬜ open |
@@ -1694,17 +1784,44 @@ to a closed item, and at 249 sites it needs its own phase and its own verificati
 pass. Nothing here blocks C2's closure — the C2 change does not touch the caveat, and
 the Gate 4e conservation check (`官方渠道核实` = 994) passed unchanged.
 
-### A7 · B3 · B4
+### D1. The home-page carousel ships English `alt` text and captions in all seven locales
 
-Full evidence for these three is written up where the census that found them lives:
+Surfaced by the A7 census, which swept every German surface rather than only the MDX
+spokes. [`src/page-content/home.ts`](src/page-content/home.ts) holds one locale block
+per language (`bodyHtml` = `en`, then `ES` `IT` `PT` `FR` `DE` `JA` `ZH`). Each block
+carries a **106-slide** image carousel, and in every block the carousel is
+**byte-identical to the English one** — verified by diffing the `carousel-slide` lines
+of each locale block against the English block: all seven match exactly.
 
-- **A7** — see [§A7](#a7-trailhead--the-recorded-lock-is-not-supported-by-the-corpus)
-  above. German is the sole Latin-script locale keeping English `Trailhead`, against
-  its own established `Ausgangspunkt` family (235). Complicated by two things the
-  question must settle: 15 of the 42 sit in repeated `alt`/figcaption boilerplate,
-  and `Ausgangspunkt` already carries the UTV **staging-point** sense in German, so a
-  blanket sweep would merge two senses. *(P19 note: Chinese does **not** have that
-  collapse risk — `zh` uses `集合点` for staging, kept distinct from `登山口`.)*
+So every non-English home page ships English `alt` text (*"Doc's Beach trailhead sign
+on an Adventure Tours Vernal UTV tour near Vernal Utah"*, *"Side-by-side UTV on a
+steep slickrock descent near Vernal Utah"*) and English visible captions (*"Steep
+Slickrock Descent"*, *"Tackling the Rut"*, *"Fleet at the Hilltop"*).
+
+This is **not** a terminology question and it is not German-specific — it is the same
+class as the Gate 4a rendered-output English scan, one level below the surfaces that
+gate checks. It touches `ja` and `zh`, so it is out of scope for any German item.
+
+Weighed: the captions are **visible page text**, which makes this higher-impact than
+its "alt text" description suggests; against that, 106 slides × 7 locales = **742
+strings**, so it needs its own phase and its own conservation check, and the slide
+markup is duplicated wholesale rather than authored per locale, which may mean the
+carousel is generated and should be fixed at its source instead of in the blocks.
+
+> **Question D1:** Localise the carousel `alt` text and captions across all seven
+> locale blocks, or accept English media descriptions on non-English home pages? If
+> localising, confirm whether the blocks are the right place to fix it or whether the
+> carousel should be factored out of `home.ts` first — the latter is an engineering
+> change, not an editorial one.
+
+*Not applied in P22.* A7 was scoped to German `Trailhead`; this is a seven-locale
+untranslated-block defect, and the stop conditions for P22 forbid touching `ja`/`zh`.
+Nothing here blocks A7's closure — the German `Trailhead` in this file is recorded as
+A7's second documented exception.
+
+### B3 · B4
+
+Full evidence for these two is written up where the census that found them lives:
 - **B3** — `Salt Lake City` ships Latin **129** times and `ソルトレイクシティ` **34**
   times in identical sentence patterns. The B1 place-name rule decides it: the gateway
   page [`ja/from/salt-lake-city.astro`](src/pages/ja/from/salt-lake-city.astro), whose
