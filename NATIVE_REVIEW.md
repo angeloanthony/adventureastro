@@ -64,7 +64,7 @@ the translators had been right and the suspicion wrong. The genuine defects it d
 were consistency drift, not mistranslation — and the six items in §E were all surfaced
 by censuses run for other purposes.
 
-**Post-review opportunities — 8 raised, 7 closed (A7 P22, A8 P23, B3 P24, B4 P25, C7 P26, C8 P27, C9 P27). Only D1 remains, and it is not a language item.**
+**Post-review opportunities — 9 raised, 8 closed (A7 P22, A8 P23, B3 P24, B4 P25, C7 P26, C8 P27, C9 P27, D1 P33). Only C10 remains — raised by gate 4h at P36, 1 site, and the first item in this programme found by automation rather than by census.**
 **All three language reviews are closed end-to-end (A1–A8, B1–B4, C1–C9).**
 Owner-set sequencing for what remains (2026-07-25, at P23) keeps the editorial
 terminology work together and defers the one cross-cutting engineering item until the
@@ -116,6 +116,27 @@ assets?), not an editorial one, and it must be answered before the framework is 
   it necessarily reports 0 on the current corpus** (A5 was fixed in P14) — this is a
   regression gate, and it cannot catch an English heading built only from words already used
   in that locale. 4g, 4h, 4i remain unimplemented.
+  **4h IMPLEMENTED at P36** — `scripts/gate-4h-seams.mjs` + `i18n-gates/4h-seams.json`. It
+  reads `dist/` and never source, because C7 proved a fix can verify clean in plain source
+  text and still leave 326 defects on the page: inline markup sits *inside* the join seam.
+  Extraction is the gate's substance — **block-level tags are replaced by a space and inline
+  tags by nothing**, and both halves are load-bearing: joining inline markup is what exposes
+  a hidden seam, while separating blocks is what stops the end of one paragraph abutting the
+  next from fabricating one. Four rules: `duplicated-imperative` (two imperatives inside one
+  clause), `coordinated-imperative` (C6 shapes 2/3), `glossary-join` (a lock lead-in particle
+  repeated at the join) and `duplicated-connective`. **C9's 28 held shapes are encoded as
+  grammar, not as an allow-list** — the rule is *deleting an imperative is licensed only when
+  a surviving imperative preserves the sentence*, so `都请向`/`务必请向`/`始终请向`/`也请向`
+  (one imperative) and `请A，请B` (two, but across a boundary) pass without being listed.
+  Conserved counts are **advisory, never blocking**: a count moves legitimately whenever a
+  page is added. Two measurement corrections were forced during construction, both the P26.5
+  window lesson on new axes: the rendered zh core count is **982, not the source figure of
+  994**, and `——` must be treated as a clause boundary (excluding it produced 8 false
+  positives on sentences carrying two genuinely separate requests). Validated on an isolated
+  scratch corpus of 11 injected cases — 5 expected failures, 6 expected passes — and the
+  output is byte-identical across runs. **Unlike 4f it does not report zero by construction:
+  it found one real live defect (new item C10) that C6 and C7 both missed.** 4g and 4i remain
+  unimplemented.
 - **A methodology section is written first**, immediately after C7 — it records *why*
   each gate exists, which is what makes 4f–4j maintainable rather than arbitrary.
 
@@ -1929,12 +1950,48 @@ planned queue.
 |---|---|---|---|---|---|
 | ~~**C7**~~ | `zh` | caveat seams survive behind inline markup | P19 (C2 census) | **326 sites / 44 files** | ✅ **applied P26** — 326 swept, 28 held as C9 |
 | ~~**C9**~~ | `zh` | `都`/`务必`/`始终`/`也` + `请向` — seam shapes with no C6 precedent | P26 (C7 sweep) | 28 sites | ✅ **closed P27 — kept, 0 edits** |
-| **D1** | *all 7* | home-page carousel ships English `alt` + captions in every locale | P22 (A7 census) | 106 slides × 7 locales | ⬜ **open — the only remaining item** |
+| ~~**D1**~~ | *all 7* | home-page carousel ships English `alt` + captions in every locale | P22 (A7 census) | 106 slides × 7 locales | ✅ **closed P33** — 735/735 entries localized, zero fallback; invariant now held by gate 4j |
 | ~~**A7**~~ | `de` | `Trailhead` (42) vs the established `Ausgangspunkt` (235) | P17 (A4 census) | 42 sites | ✅ **applied P22** — 41 replaced, 1 exception |
 | ~~**B3**~~ | `ja` | `Salt Lake City` split — Latin 129 vs `ソルトレイクシティ` 34 | P18 (B1 census) | 34 sites | ✅ **applied P24** — 34 replaced, 0 exceptions |
 | ~~**B4**~~ | `ja` | ~14 untranslated English anchor texts on `/ja/` links | P18 (B1 census) | **57 sites / 8 files** (recorded ~14; 652 candidates, 597 correct) | ✅ **applied P25** — 57 localized, 597 proper nouns retained |
 | ~~**C8**~~ | `zh` | generic *"a national monument"* rendered 3 ways | P21 (C4 census) | **113 sites / 9 files** (recorded 7/4) | ✅ **applied P27** — normalised to `纪念地` |
 | ~~**A8**~~ | `de` | 18 untranslated English `Dinosaur Country` in `de` MDX | P21 (C4 census) | 18 sites | ✅ **applied P23** — 18 replaced, 0 exceptions |
+| **C10** | `zh` | duplicated `向` at a caveat join seam, hidden by inline markup | P36 (gate 4h) | **1 site / 1 file** | ⬜ **open — owner decision; blocks wiring 4h into `build`** |
+
+### C10. A duplicated `向` at the caveat seam — ⬜ OPEN, raised by gate 4h at P36
+
+**Found by the new gate on the current corpus, not by a census.** One site:
+
+`src/content/camping/camping-in-ashley-national-forest.zh.mdx:77`
+
+```
+…请就各区域当前的营地和路况向<strong>向官方渠道核实</strong>（美国林务局 / Ashley National Forest）。
+```
+
+The caveat was appended to a clause that already ended in `向`, so the rendered page
+reads `…营地和路况向向官方渠道核实…`. **It is invisible to every scan run so far**: the
+duplicate does not exist in the `.mdx` source, and it does not exist in the raw HTML
+either — the two `向` are separated by `<strong>`. Only tag-stripped rendered text
+shows it. This is precisely the C7 class, and it survived C7's sweep because **C6 and
+C7 both censused `请`** — the seam that mattered here duplicates a different particle.
+
+That is the item's real lesson, and it is the P26.5 window lesson once more: C7 varied
+the *distance* axis (≤10 chars → full clause) but never varied the **particle** axis.
+Gate 4h generalises the rule to any lock lead-in particle, which is why it caught this.
+
+**Recommended fix — delete the prose `向` outside the `<strong>`,** leaving the lock
+byte-intact, exactly the C7-endorsed treatment of the adjacent form:
+
+```
+…请就各区域当前的营地和路况<strong>向官方渠道核实</strong>（…）。
+```
+
+Conserved-count effect: none — `官方渠道核实` stays at 982 rendered, and the fix
+touches one character outside the lock. **Not applied: P36's brief forbids modifying
+localization content.** Until it is decided, `gate:4h` reports 1 blocking finding, so
+the gate ships as `npm run gate:4h` and is deliberately **not** wired into `npm run
+build`/`validate` — wiring it now would leave the build red. Wiring is a one-line
+change once this is resolved.
 
 ### C8. The generic common noun *"a national monument"* has three `zh` renderings — ✅ DECIDED & APPLIED 2026-07-25 (P27)
 

@@ -1,0 +1,333 @@
+// scripts/gate-4h-seams.mjs — Gate 4h: rendered seam detection (P36).
+// Origin: review items C6, C7 and C9.
+//
+// INVARIANT. A locked phrase joined into surrounding prose must not leave a
+// structural seam — no duplicated imperative inside one clause, no coordinator
+// binding a redundant second imperative, no repeated lead-in particle at the
+// join, no repeated connective.
+//
+// WHY IT READS dist/. C6's fix verified clean in plain source text and still left
+// 326 defects on the page: inline markup sits *inside* the join seam, so
+// `路况向<strong>向官方渠道核实</strong>` holds no duplicated character until the
+// tags come off. This gate therefore never parses source templates — it extracts
+// visible text from rendered HTML and asserts against that (principle 5).
+//
+// WHAT IT IS NOT. It is not a translation-quality check and not a glossary-lock
+// check. Lock presence and drift are gate 4i (P37); 4h checks only the *seam* at
+// a lock boundary. Conserved counts are reported as drift telemetry and never
+// block, because those counts move legitimately whenever a page is added.
+//
+// LICENSING IS GRAMMATICAL, NOT ENUMERATED. C9's 28 held shapes appear nowhere in
+// this file or its config. The C9 finding is encoded as a rule instead: deleting
+// an imperative is licensed only when a *surviving* imperative preserves the
+// sentence. `都请向`/`务必请向`/`始终请向`/`也请向` carry exactly one imperative and
+// so are licensed automatically; `请A，请B` carries two but a clause boundary
+// separates them. New shapes obeying that grammar pass without being listed.
+//
+// HONEST RESULT. Unlike 4f, this gate does not report zero by construction. On the
+// corpus it was built against it finds one real defect that C6/C7 missed, because
+// those passes censused `请` and this seam duplicates `向`.
+import { readdirSync, readFileSync, existsSync, statSync } from 'node:fs';
+import { join, dirname, relative, resolve, sep } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const CONFIG = join(root, 'i18n-gates', '4h-seams.json');
+// An explicit dist path lets the gate be exercised against a scratch corpus
+// without touching the repository (P36 phase 6). Defaults to ./dist.
+const dist = process.argv[2] ? resolve(process.argv[2]) : join(root, 'dist');
+
+// Missing inputs are exit 2, never a silent pass — the ja UI-chrome fail-open
+// lesson (handoff §7, Gate 4a): that locale shipped 57 pages of English chrome
+// precisely because an absent dictionary degraded quietly instead of failing.
+if (!existsSync(CONFIG)) {
+  console.error(`gate-4h: config not found at ${relative(root, CONFIG)} — refusing to pass silently.`);
+  process.exit(2);
+}
+if (!existsSync(dist)) {
+  console.error('gate-4h: dist/ not found — this gate reads rendered output; run astro build first.');
+  process.exit(2);
+}
+
+let config;
+try {
+  config = JSON.parse(readFileSync(CONFIG, 'utf8'));
+} catch (e) {
+  console.error(`gate-4h: config is not valid JSON — ${e.message}`);
+  process.exit(2);
+}
+
+// --- Registered locales come from i18n.ts, so a new language cannot reach
+//     production without either a rule set or a deliberate exit 2. ---
+const i18nSrc = readFileSync(join(root, 'src', 'lib', 'i18n.ts'), 'utf8');
+const localesBlock = i18nSrc.match(/LOCALES\s*=\s*\[([\s\S]*?)\]\s*as const/);
+if (!localesBlock) {
+  console.error('gate-4h: could not parse LOCALES from src/lib/i18n.ts');
+  process.exit(2);
+}
+const LOCALE_CODES = [...localesBlock[1].matchAll(/code:\s*'([^']+)'/g)].map((m) => m[1]);
+const DEFAULT_LOCALE = i18nSrc.match(/DEFAULT_LOCALE\s*=\s*'([^']+)'/)?.[1] ?? 'en';
+const TARGETS = LOCALE_CODES.filter((c) => c !== DEFAULT_LOCALE);
+
+for (const loc of TARGETS) {
+  if (!config.locales?.[loc]) {
+    console.error(`gate-4h: locale "${loc}" is registered in i18n.ts but has no entry in ${relative(root, CONFIG)} — refusing to pass silently.`);
+    process.exit(2);
+  }
+}
+
+const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+// ---------------------------------------------------------------------------
+// Phase 1 — rendered extraction. Visible text only.
+// ---------------------------------------------------------------------------
+const ENTITIES = {
+  nbsp: ' ', amp: '&', quot: '"', apos: "'", lt: '<', gt: '>',
+  '#39': "'", '#039': "'", '#160': ' ', mdash: '—', ndash: '–', hellip: '…',
+};
+
+// Block-level elements interrupt the text flow; inline ones do not. The
+// distinction is load-bearing in both directions: inline tags must be removed
+// with NO separator, because that is what re-joins the seam C7 proved markup can
+// hide (`向<strong>向官方渠道核实`), while block tags must leave one, or the end of
+// one paragraph abutting the start of the next would fabricate a seam no reader
+// ever sees.
+const BLOCK =
+  'p|div|section|article|aside|header|footer|nav|main|figure|figcaption|blockquote|pre|hr|br|' +
+  'ul|ol|li|dl|dt|dd|table|thead|tbody|tfoot|tr|td|th|h[1-6]|form|fieldset|legend|address|' +
+  'details|summary|option|title';
+
+function visibleText(html) {
+  return html
+    // Non-rendered regions first, so their contents can never reach the corpus.
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<template[\s\S]*?<\/template>/gi, ' ')
+    .replace(/<noscript[\s\S]*?<\/noscript>/gi, ' ')
+    .replace(/<!--[\s\S]*?-->/g, ' ')
+    .replace(new RegExp(`</?(?:${BLOCK})\\b[^>]*>`, 'gi'), ' ')
+    // Whatever remains is inline, and is dropped with no separator on purpose:
+    // that is what re-joins a seam inline markup had split (C7).
+    .replace(/<[^>]+>/g, '')
+    .replace(/&([a-z#0-9]+);/gi, (m, e) => ENTITIES[e.toLowerCase()] ?? m)
+    .normalize('NFC')
+    .replace(/[   ]/g, ' ')
+    .replace(/[ \t\r\n]+/g, ' ');
+}
+
+const htmlFiles = [];
+(function walk(dir) {
+  for (const name of readdirSync(dir)) {
+    const full = join(dir, name);
+    if (statSync(full).isDirectory()) walk(full);
+    else if (name.endsWith('.html')) htmlFiles.push(full);
+  }
+})(dist);
+
+// ---------------------------------------------------------------------------
+// Phase 2/3 — seam rules, with grammatical licensing built in.
+// ---------------------------------------------------------------------------
+const boundaryRe = (chars) => new RegExp(chars.map(escapeRe).join('|'), 'g');
+
+/** Split on boundaries, keeping each segment's offset for context reporting. */
+function segments(text, re) {
+  const out = [];
+  let last = 0;
+  for (const m of text.matchAll(re)) {
+    out.push({ text: text.slice(last, m.index), start: last });
+    last = m.index + m[0].length;
+  }
+  out.push({ text: text.slice(last), start: last });
+  return out.filter((s) => s.text.trim());
+}
+
+/** Mask bound morphemes so a compound cannot be counted as an imperative. */
+function maskBound(text, morphemes) {
+  let s = text;
+  for (const m of morphemes) s = s.replace(new RegExp(escapeRe(m), 'g'), '�'.repeat(m.length));
+  return s;
+}
+
+/**
+ * Walk left from a lock occurrence over the lock's own optional lead-in
+ * particles, recording what was consumed. A particle consumed twice in a row is
+ * the join seam itself — detecting it during the walk rather than after is what
+ * catches `向向官方渠道核实`, where a greedy walk would swallow the duplicate.
+ */
+function walkLeadIns(text, index, leadIns) {
+  const consumed = [];
+  let s = index;
+  for (;;) {
+    let hit = null;
+    for (const p of leadIns) {
+      if (s - p.length >= 0 && text.slice(s - p.length, s) === p) { hit = p; break; }
+    }
+    if (!hit) break;
+    consumed.push(hit);
+    s -= hit.length;
+  }
+  return { start: s, consumed };
+}
+
+const snippet = (text, from, to, pad = 34) =>
+  (from - pad > 0 ? '…' : '') +
+  text.slice(Math.max(0, from - pad), Math.min(text.length, to + pad)).trim() +
+  (to + pad < text.length ? '…' : '');
+
+const findings = [];
+let pagesScanned = 0;
+const conserved = {};
+
+for (const file of htmlFiles) {
+  const pageKey = relative(dist, file).split(sep).join('/');
+  const loc = pageKey.split('/')[0];
+  if (!TARGETS.includes(loc)) continue; // English pages are out of scope by definition
+  const entry = config.locales[loc];
+  const url = `/${pageKey.replace(/index\.html$/, '')}`;
+  const raw = visibleText(readFileSync(file, 'utf8'));
+  pagesScanned++;
+
+  const imp = entry.imperative;
+  const text = imp ? maskBound(raw, imp.boundMorphemes ?? []) : raw;
+  const clauseRe = boundaryRe(config.clauseBoundaries);
+  const sentenceRe = boundaryRe(config.sentenceBoundaries);
+
+  const add = (type, index, end, rule, ctxText = text) =>
+    findings.push({ loc, url, type, rule, context: snippet(ctxText, index, end) });
+
+  // --- Rule A: duplicated imperative inside one clause. -------------------
+  // The C6 defect was never "two imperatives in a sentence" — it was two inside
+  // ONE clause with no boundary between them. Two across a boundary is the
+  // licensed `请A，请B` coordinate pair and must survive (C6, C9).
+  if (imp?.particle) {
+    const pRe = new RegExp(escapeRe(imp.particle), 'g');
+    for (const cl of segments(text, clauseRe)) {
+      const hits = [...cl.text.matchAll(pRe)];
+      if (hits.length < 2) continue; // a lone imperative is the only one carrying the sentence
+      add(
+        'duplicated-imperative',
+        cl.start + hits[0].index,
+        cl.start + hits[hits.length - 1].index + imp.particle.length,
+        `Two "${imp.particle}" imperatives inside one clause with no boundary between them; ` +
+          `the first already carries the imperative, so the second is redundant.`
+      );
+    }
+  }
+
+  // --- Rule B: a coordinator binding a redundant second imperative. -------
+  // C6 shapes 2/3 (`并请向`, `先请向`). A coordinator glued directly to the lock's
+  // imperative binds it into the preceding request, so the imperative is carried
+  // across the boundary. Licensed unless an imperative earlier in the same
+  // sentence survives to preserve it — which is the C9 rule, stated generally.
+  // Adverbs (`都`/`务必`/`始终`/`也`) are not coordinators and never match.
+  if (imp?.particle && imp.coordinators?.length) {
+    for (const lock of entry.locks ?? []) {
+      const re = new RegExp(
+        `(${imp.coordinators.map(escapeRe).join('|')})${escapeRe(imp.particle)}[^]{0,4}?${escapeRe(lock.core)}`,
+        'g'
+      );
+      for (const s of segments(text, sentenceRe)) {
+        for (const m of s.text.matchAll(re)) {
+          const before = s.text.slice(0, m.index);
+          if (!before.includes(imp.particle)) continue; // no surviving imperative — C9 licensed
+          add(
+            'coordinated-imperative',
+            s.start + m.index,
+            s.start + m.index + m[0].length,
+            `Coordinator "${m[1]}" binds a second "${imp.particle}" into a request that already ` +
+              `carries one; the surviving imperative preserves the sentence, so this one is redundant.`
+          );
+        }
+      }
+    }
+  }
+
+  // --- Rule C: repeated lead-in particle at a lock join (glossary join). --
+  // Generalises beyond the imperative: C6/C7 censused `请` only, which is why a
+  // duplicated `向` at the same seam survived both passes.
+  for (const lock of entry.locks ?? []) {
+    const coreRe = new RegExp(escapeRe(lock.core), 'g');
+    for (const m of raw.matchAll(coreRe)) {
+      conserved[loc] = (conserved[loc] ?? 0) + 1;
+      const { start, consumed } = walkLeadIns(raw, m.index, lock.leadIns ?? []);
+      for (let k = 1; k < consumed.length; k++) {
+        if (consumed[k] !== consumed[k - 1]) continue;
+        findings.push({
+          loc, url, type: 'glossary-join',
+          rule: `The locked phrase's lead-in particle "${consumed[k]}" is repeated at the join seam; ` +
+            `the caveat was appended to a clause already ending in it.`,
+          context: snippet(raw, start, m.index + lock.core.length),
+        });
+        break;
+      }
+    }
+  }
+
+  // --- Rule D: an immediately repeated connective. ------------------------
+  // A coordinating connective is never licensed twice in succession, in any of
+  // these languages — so this needs no per-locale exception.
+  for (const c of entry.connectives ?? []) {
+    // `\b` is ASCII-only in JS, so it sees a boundary inside `frío` and reads
+    // `frío o una` as `o o`. Unicode letter classes are required, not optional.
+    const re = entry.script === 'latin'
+      ? new RegExp(`(?<![\\p{L}\\p{N}_])(${escapeRe(c)})\\s+\\1(?![\\p{L}\\p{N}_])`, 'giu')
+      : new RegExp(`(${escapeRe(c)})\\1`, 'g');
+    for (const m of raw.matchAll(re)) {
+      findings.push({
+        loc, url, type: 'duplicated-connective',
+        rule: `Connective "${c}" is repeated immediately, which no join licenses.`,
+        context: snippet(raw, m.index, m.index + m[0].length),
+      });
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Phase 4 — conserved counts. Reported, never blocking: a count moves whenever a
+// page is added or removed, so blocking on it would fail on legitimate content.
+// ---------------------------------------------------------------------------
+const drift = [];
+for (const loc of TARGETS) {
+  for (const lock of config.locales[loc].locks ?? []) {
+    if (typeof lock.expected !== 'number') continue;
+    const actual = conserved[loc] ?? 0;
+    if (actual !== lock.expected) drift.push({ loc, core: lock.core, expected: lock.expected, actual });
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Phase 5 — reporting.
+// ---------------------------------------------------------------------------
+const render = (f) =>
+  `Locale: ${f.loc}\nPage: ${f.url}\nType: ${f.type}\n\nRendered:\n  "${f.context}"\n\nRule:\n  ${f.rule}\n`;
+
+if (drift.length) {
+  console.warn(`\ngate-4h: conserved-count drift (advisory)\n`);
+  for (const d of drift) {
+    console.warn(`  ${d.loc}  "${d.core}"  expected ${d.expected}, found ${d.actual}  (${d.actual > d.expected ? '+' : ''}${d.actual - d.expected})`);
+  }
+  console.warn(
+    `\n  A count moves legitimately when pages are added or removed. If this change was\n` +
+      `  intended, update "expected" in ${relative(root, CONFIG).split(sep).join('/')}.\n`
+  );
+}
+
+if (findings.length) {
+  const byType = findings.reduce((a, f) => ((a[f.type] = (a[f.type] ?? 0) + 1), a), {});
+  console.error(`\ngate-4h: ${findings.length} rendered seam violation(s) — ` +
+    Object.entries(byType).map(([t, n]) => `${t} ${n}`).join(', ') + '\n');
+  for (const f of findings) console.error(render(f));
+  console.error(
+    'Each seam is a join defect in rendered output, not a translation-quality issue.\n' +
+      'Fix the join in the source file; do not add an exception — the rules encode grammar,\n' +
+      'so a licensed construction never reaches this report.\n'
+  );
+  process.exit(1);
+}
+
+const lockTotal = Object.values(conserved).reduce((a, b) => a + b, 0);
+console.log(
+  `gate-4h: ✔ ${pagesScanned} rendered pages across ${TARGETS.length} locales, ` +
+    `${lockTotal} locked phrases — no seam violations` +
+    (drift.length ? ` (${drift.length} advisory count drift)` : '')
+);

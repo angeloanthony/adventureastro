@@ -8,6 +8,7 @@
     "validate": "node scripts/gate-4j-gallery-parity.mjs && node scripts/validate-site.mjs && node scripts/gate-4f-headings.mjs",
     "gate:4j": "node scripts/gate-4j-gallery-parity.mjs",
     "gate:4f": "node scripts/gate-4f-headings.mjs",
+    "gate:4h": "node scripts/gate-4h-seams.mjs",
     "preview": "astro preview"
   },
   "dependencies": {

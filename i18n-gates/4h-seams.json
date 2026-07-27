@@ -1,0 +1,135 @@
+{
+  "$doc": {
+    "gate": "4h — rendered seam detection",
+    "phase": "P36",
+    "origin": "Review items C6, C7 and C9.",
+    "invariant": "A locked phrase joined into surrounding prose must not leave a structural seam: no duplicated imperative inside one clause, no coordinator binding a redundant second imperative, no repeated lead-in particle at the join, no repeated connective.",
+
+    "why_rendered": [
+      "C7 is the reason this gate reads dist/ and never src/. The C6 fix verified clean in",
+      "plain source text and still left 326 defects on the page, because inline markup sits",
+      "INSIDE the join seam: `路况向<strong>向官方渠道核实</strong>` contains no duplicated",
+      "character until the tags are stripped. Any scan of source text for something a reader",
+      "sees is measuring the wrong artifact (methodology principle 5).",
+      "P36 confirmed this is not historical: the one live finding on the current corpus is",
+      "invisible in both the .mdx source and the raw HTML, and appears only after extraction."
+    ],
+
+    "why_rules_not_lists": [
+      "Phase 3 of the P36 brief forbids encoding C9's 28 held shapes as an allow-list, and",
+      "the rules below do not contain them. C9 is expressed as a grammatical test instead:",
+      "a duplicated imperative is a defect only when a SURVIVING imperative preserves the",
+      "sentence. `都请向`/`务必请向`/`始终请向`/`也请向` carry exactly one imperative, so no",
+      "rule fires on them — the adverb modifies the imperative and cannot replace it.",
+      "`请A，请B` carries two, but a clause boundary separates them, so rule A does not fire.",
+      "New shapes obeying the same grammar are licensed automatically; new shapes breaking",
+      "it are caught without being enumerated first."
+    ],
+
+    "measured_baselines": {
+      "note": "Measured on the rendered corpus at P36, not carried over from source figures. The source count of the zh core is 994; the RENDERED count is 982. Methodology principle 1 — a recorded size is a hypothesis about the measurement window.",
+      "zh_core": 982,
+      "ja_core": 940,
+      "rendered_pages_per_locale": 77
+    },
+
+    "clause_boundary_derivation": [
+      "`、` is an enumeration comma and is NOT a clause boundary (C7 trap 1); treating it as",
+      "one hides real seams. ASCII parentheses hold inline phone numbers and are likewise",
+      "not boundaries — `预订前请拨打(435)219-9447请向官方渠道核实` is a genuine double",
+      "imperative, not a licensed coordinate pair.",
+      "`——` IS a boundary. Measured at P36: excluding it produces 8 false positives on",
+      "sentences carrying two genuinely separate requests (`都请向官方渠道核实——夏季请尽早预订`)."
+    ],
+
+    "bound_morphemes": [
+      "Methodology principle 7. `请` is a bound morpheme in 申请/邀请/聘请/请求 and a plain",
+      "verb meaning `to hire` in `请向导`. These are masked before any imperative is counted,",
+      "so a compound cannot inflate a clause's imperative count. This is lexical data about",
+      "the language, not a list of historical defects. The rendered corpus contains 邀请 (3)",
+      "and 申请 (2)."
+    ],
+
+    "scope_boundary": [
+      "This gate checks the SEAM at a lock boundary. It deliberately does not verify that the",
+      "lock itself is present, complete or undrifted — that is gate 4i (P37). It reports",
+      "conserved counts as advisory drift telemetry and never blocks on them, because a count",
+      "changes legitimately whenever a page is added or removed.",
+      "Only zh and ja carry a uniform locked disclaimer form. de/es/it/pt/fr phrase the same",
+      "editorial intent variably, so they have no lock entry and are checked for repeated",
+      "connectives only."
+    ]
+  },
+
+  "clauseBoundaries": ["，", "。", "；", "：", "！", "？", "!", "?", ";", "——"],
+  "nonBoundaries": ["、", "(", ")", "（", "）"],
+  "sentenceBoundaries": ["。", "！", "？", "!", "?"],
+
+  "locales": {
+    "zh": {
+      "state": "complete",
+      "script": "cjk",
+      "locks": [
+        {
+          "core": "官方渠道核实",
+          "leadIns": ["请", "向"],
+          "expected": 982
+        }
+      ],
+      "imperative": {
+        "particle": "请",
+        "boundMorphemes": ["申请", "邀请", "聘请", "请求", "请假", "请柬", "请帖", "请示", "请向导"],
+        "coordinators": ["并", "先"]
+      },
+      "connectives": ["并", "而", "或", "但", "和", "与", "及"]
+    },
+    "ja": {
+      "state": "complete",
+      "script": "cjk",
+      "locks": [
+        {
+          "core": "公式情報をご確認ください",
+          "leadIns": ["で", "に", "を"],
+          "expected": 940
+        }
+      ],
+      "imperative": null,
+      "connectives": ["および", "また", "かつ", "そして", "ただし"]
+    },
+    "de": {
+      "state": "complete",
+      "script": "latin",
+      "locks": [],
+      "imperative": null,
+      "connectives": ["und", "oder", "aber", "sowie", "denn"]
+    },
+    "fr": {
+      "state": "complete",
+      "script": "latin",
+      "locks": [],
+      "imperative": null,
+      "connectives": ["et", "ou", "mais", "donc", "ainsi"]
+    },
+    "es": {
+      "state": "complete",
+      "script": "latin",
+      "locks": [],
+      "imperative": null,
+      "connectives": ["y", "o", "pero", "aunque"]
+    },
+    "it": {
+      "state": "complete",
+      "script": "latin",
+      "locks": [],
+      "imperative": null,
+      "connectives": ["e", "o", "ma", "oppure"]
+    },
+    "pt": {
+      "state": "complete",
+      "script": "latin",
+      "locks": [],
+      "imperative": null,
+      "connectives": ["e", "ou", "mas", "porém"]
+    }
+  }
+}
