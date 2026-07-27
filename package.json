@@ -9,6 +9,7 @@
     "gate:4j": "node scripts/gate-4j-gallery-parity.mjs",
     "gate:4f": "node scripts/gate-4f-headings.mjs",
     "gate:4h": "node scripts/gate-4h-seams.mjs",
+    "gate:4i": "node scripts/gate-4i-glossary.mjs",
     "preview": "astro preview"
   },
   "dependencies": {

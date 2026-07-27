@@ -40,13 +40,15 @@ questions, not so they read 171 files.
 
 | Locale | Open items | Post-review items (§E) |
 |---|---|---|
-| `de` | **all 6 original items closed** | ~~A7~~ ✅ P22, ~~A8~~ ✅ P23 — **German backlog closed** |
+| `de` | **all 6 original items closed** | ~~A7~~ ✅ P22, ~~A8~~ ✅ P23 — original backlog closed; **A9 + A10 ⬜ open**, raised by gate 4i at P37, 1 site each |
 | `ja` | **all closed** — B1 applied at P18, B2 dissolved | ~~B3~~ ✅ P24, ~~B4~~ ✅ P25 — **Japanese backlog closed** |
-| `zh` | **all closed** — C4 decided at P21 | ~~C7~~ ✅ P26, ~~C8~~ ✅ P27, ~~C9~~ ✅ P27 — **Chinese backlog closed** |
+| `zh` | **all closed** — C4 decided at P21 | ~~C7~~ ✅ P26, ~~C8~~ ✅ P27, ~~C9~~ ✅ P27 — original backlog closed; **C10 ⬜ open**, raised by gate 4h at P36 |
 
 ***All three language reviews are now closed end-to-end (A1–A8, B1–B4, C1–C9).***
 Nothing editorial remains. What is left is one architecture question (**D1**) and the
 **Localization Regression Framework** — both engineering, neither language review.
+*(Three single-site items — C10, A9, A10 — have since been raised by the framework's own
+gates rather than by review. They are owner decisions listed in §E, not reopened reviews.)*
 
 **Priority order** (owner-set 2026-07-25, revised at P16 once A3 was decided) — fully consumed:
 ~~C6~~ → ~~A1-residual~~ → ~~A2~~ → ~~A5~~ → ~~A6~~ → ~~A3~~ → ~~A4~~ → ~~B1~~ → ~~C2~~ → ~~C3~~ → ~~C4~~ ✅
@@ -64,7 +66,7 @@ the translators had been right and the suspicion wrong. The genuine defects it d
 were consistency drift, not mistranslation — and the six items in §E were all surfaced
 by censuses run for other purposes.
 
-**Post-review opportunities — 9 raised, 8 closed (A7 P22, A8 P23, B3 P24, B4 P25, C7 P26, C8 P27, C9 P27, D1 P33). Only C10 remains — raised by gate 4h at P36, 1 site, and the first item in this programme found by automation rather than by census.**
+**Post-review opportunities — 11 raised, 8 closed (A7 P22, A8 P23, B3 P24, B4 P25, C7 P26, C8 P27, C9 P27, D1 P33). Three remain — C10 (gate 4h, P36) and A9 + A10 (gate 4i, P37), 1 site each. All three were found by automation rather than by census, which is what the framework was built to do.**
 **All three language reviews are closed end-to-end (A1–A8, B1–B4, C1–C9).**
 Owner-set sequencing for what remains (2026-07-25, at P23) keeps the editorial
 terminology work together and defers the one cross-cutting engineering item until the
@@ -137,6 +139,42 @@ assets?), not an editorial one, and it must be answered before the framework is 
   output is byte-identical across runs. **Unlike 4f it does not report zero by construction:
   it found one real live defect (new item C10) that C6 and C7 both missed.** 4g and 4i remain
   unimplemented.
+  **4i IMPLEMENTED at P37** — `scripts/gate-4i-glossary.mjs` + `i18n-gates/4i-glossary.json`,
+  **50 locks across 7 locales**, every one carrying the item that decided it. It reads `dist/`
+  with an extractor byte-identical to 4h's (two gates that disagreed about visible text could
+  not share a baseline — and they do share one: `官方渠道核实` = 982 in both) and it reads
+  `src/lib/ui.ts` for the **18 dictionary anchors**, which are what stop a frozen JSON file
+  from becoming a second source of truth: each anchor asserts that a locked phrase is still
+  the value shipped under a named key in a named locale dictionary, so editing `ui.ts` breaks
+  the anchor and `ui.ts` stays authoritative. Four propositions per locale — the locked phrase
+  is present, no competing rendering appears, conserved counts hold, and the mapping is
+  one-to-one — with **no locale ever compared to another**. One-to-one is enforced in both
+  directions: in the corpus (all competing renderings at zero) and statically in the registry,
+  where two concepts claiming one phrase, a phrase both locked and forbidden, or a phrase filed
+  under a locale whose script it does not belong to are **exit 2, config errors**, distinct from
+  exit 1 corpus violations. Counts come in two frozen forms: `min` floors, which may rise as
+  pages are added but never fall, and three exact `count` conservation checks the review itself
+  established (A6's `Leave No Trace` 23 / `Leave-No-Trace` 8 split, C7's core 982, C8's 5
+  `荒野保护区` survivors). **`licensedIn` is the gate's load-bearing idea** (principle 7): a
+  forbidden term is masked inside its licensed compounds *before* counting, so `保护区` is drift
+  as a monument noun and correct inside `荒野保护区`, and `Dinosaur Country` in `ja` counts 3
+  raw but 2 as residue because `恐竜の国（Dinosaur Country）` is a first-use gloss. **The
+  census killed more candidate rules than it kept, exactly as the headline ratio predicts** —
+  `de Startpunkt` 10, `zh 指南` 81, `zh 入口` 32, `zh 岩刻` 8 and `de Trail` 134 were all
+  measured and *rejected* as forbidden terms, and they are recorded in the config's
+  `measured_not_forbidden` so the next phase does not re-propose them. Notably the P37 brief's
+  own illustration used `Startpunkt` as the example substitution for `Ausgangspunkt`; all 10
+  uses are the generic *starting point* sense (Gate 4c — corpus beats brief). Validated on an
+  isolated scratch corpus and registry: **26 injected cases, 20 expected failures across all
+  five defect classes and 6 expected passes, 26/26**; output byte-identical across runs.
+  **Like 4h and unlike 4f, it does not report zero: it found two real live defects in `de`
+  (new items A9 and A10) that no census had reached** — and A9 is a heading gate 4f
+  structurally *cannot* catch, because the defect was already in the corpus when 4f's marker
+  lexicon was frozen, so `key`/`takeaways` self-excluded from the `de` marker set. It also
+  prints 11 advisory occurrences (`es` and `ja` English identity residue, `es No Dejar Rastro`)
+  which C4 and A6 had already measured and placed out of scope; those never block. Because the
+  two `de` findings are real, `gate:4i` ships as `npm run gate:4i` and is **not** wired into
+  `build`/`validate`, on the C10 precedent. **4g is the only gate left unimplemented.**
 - **A methodology section is written first**, immediately after C7 — it records *why*
   each gate exists, which is what makes 4f–4j maintainable rather than arbitrary.
 
@@ -1957,6 +1995,82 @@ planned queue.
 | ~~**C8**~~ | `zh` | generic *"a national monument"* rendered 3 ways | P21 (C4 census) | **113 sites / 9 files** (recorded 7/4) | ✅ **applied P27** — normalised to `纪念地` |
 | ~~**A8**~~ | `de` | 18 untranslated English `Dinosaur Country` in `de` MDX | P21 (C4 census) | 18 sites | ✅ **applied P23** — 18 replaced, 0 exceptions |
 | **C10** | `zh` | duplicated `向` at a caveat join seam, hidden by inline markup | P36 (gate 4h) | **1 site / 1 file** | ⬜ **open — owner decision; blocks wiring 4h into `build`** |
+| **A9** | `de` | untranslated `Key Takeaways` heading where the locked term is `Das Wichtigste in Kürze` | P37 (gate 4i) | **1 site / 1 file** | ⬜ **open — owner decision; blocks wiring 4i into `build`** |
+| **A10** | `de` | `Dinosaurierland` — a second German rendering of the identity locked to `Land der Dinosaurier` | P37 (gate 4i) | **1 site / 1 file** | ⬜ **open — owner decision; blocks wiring 4i into `build`** |
+
+### A9. An untranslated `Key Takeaways` heading — ⬜ OPEN, raised by gate 4i at P37
+
+**Found by the new gate on the current corpus.** One site:
+
+[`src/content/guides/ultimate-guide-to-flaming-gorge.de.mdx:59`](src/content/guides/ultimate-guide-to-flaming-gorge.de.mdx#L59)
+
+```
+<h2>Key Takeaways</h2>
+```
+
+The German locked term is **`Das Wichtigste in Kürze`**, recorded in the `de` preamble of
+[`src/lib/ui.ts:661`](src/lib/ui.ts#L661) and shipped under `section.keyTakeaways`. It is
+used **51 times** in rendered `de`; this is the one page that kept the English heading.
+Every other locale is clean: `es`/`it`/`pt`/`fr`/`ja`/`zh` all render `Key Takeaways` **0**
+times.
+
+**The interesting part is why gate 4f could not have caught this.** 4f tests one enumerable
+proposition per locale — *these specific English words must never appear in a heading of this
+locale* — from a marker lexicon frozen at P35 by taking English heading tokens that appear in
+**zero** headings of the target locale. This heading was already in the corpus at that moment,
+so `key` and `takeaways` appeared in a `de` heading and **self-excluded from the `de` marker
+set** (verified: neither token is among 4f's 250 `de` markers). The freeze inherited a live
+defect. That is the same shape as 4f's own documented limit, one level earlier: a frozen
+lexicon cannot mark a word the defect itself taught it to accept. 4i catches it because a
+glossary lock names the correct value outright instead of inferring it from the corpus —
+which is the argument for having both gates rather than either.
+
+**Recommended fix — one heading, matching the 51 sibling occurrences:**
+
+```
+<h2>Das Wichtigste in Kürze</h2>
+```
+
+**Anchor effect: the heading id regenerates** from `#key-takeaways` to
+`#das-wichtigste-in-kürze`. Per the A6 precedent this must be checked before applying —
+no link in source or `dist/` may target the old id. **Not applied: P37's brief forbids
+modifying translations.**
+
+### A10. `Dinosaurierland` — a second German rendering of the identity — ⬜ OPEN, raised by gate 4i at P37
+
+**Found by the new gate on the current corpus.** One site:
+
+[`src/page-content/things-to-do.ts:1624`](src/page-content/things-to-do.ts#L1624), in the `DE` block:
+
+```
+…die Cub Creek Road des Dinosaur National Monument, vorbei an Petroglyphen und
+Dinosaurierland — ideal, wenn du viel sehen willst…
+```
+
+The English master at the same line reads *"…past petroglyphs and **dinosaur country** —
+ideal when you want to see a lot…"*, so this is the identity, not a different lexeme. A8
+(P23) closed the German identity at **`Land der Dinosaurier`**, now 598 rendered
+occurrences, and drove the untranslated English `Dinosaur Country` to 0. `Dinosaurierland`
+is the one surviving competing rendering.
+
+**A8 censused the wrong axis, and this is the third time that lesson has recurred.** A8
+counted *untranslated English* residue — the axis C4's cross-locale table had surfaced — and
+found 18. It never counted **competing German** renderings, so a synonym in a `.ts` page-content
+block was outside its window. Neither `Dinoland` nor `Land der Saurier` exists; the residue is
+exactly one site. Same lesson as C7 (distance axis), C8 (syntactic slot) and C10 (particle): a
+recorded item size is a hypothesis about the measurement window.
+
+**Recommended fix — align to the locked identity:**
+
+```
+…vorbei an Petroglyphen und dem Land der Dinosaurier — ideal, …
+```
+
+Conserved-count effect: `Land der Dinosaurier` 598 → 599. **Not applied: P37's brief forbids
+modifying translations.** Until A9 and A10 are decided, `gate:4i` reports 2 blocking findings,
+so the gate ships as `npm run gate:4i` and is deliberately **not** wired into `npm run
+build`/`validate` — the same call the owner made for 4h at P36. Wiring is a one-line change
+once both are resolved.
 
 ### C10. A duplicated `向` at the caveat seam — ⬜ OPEN, raised by gate 4h at P36
 
