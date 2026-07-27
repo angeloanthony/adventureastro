@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
+    "check": "astro check",
     "build": "npm run gates:src && astro build && npm run gates:dist",
     "validate": "npm run gates:src && npm run gates:dist",
     "gates:src": "node scripts/gate-4j-gallery-parity.mjs",
