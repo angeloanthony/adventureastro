@@ -1,0 +1,122 @@
+# CI — build and localization gates (P41).
+#
+# This runs the same pipeline `npm run build` runs locally, but split into named
+# steps so a red run names the failure instead of burying it in one log. The
+# ordering is load-bearing and mirrors package.json:
+#
+#   gate 4j  — source-level, no dist/ dependency, so it fails in seconds
+#   check    — types
+#   build    — astro build (~4 min)
+#   dist gates — validate-site, 4f, 4h, 4i, 4g, all against rendered output
+#
+# EXIT CODES ARE NOT INTERCHANGEABLE. The gates distinguish two failures that CI
+# must not flatten into one red X:
+#
+#   1 = the corpus violates the invariant — a content defect, fix the content
+#   2 = the gate could not run as specified (missing input, unparseable config)
+#       — an infrastructure defect, and never a silent pass. This is the ja
+#       UI-chrome fail-open lesson: a gate that cannot run must be louder than
+#       one that fails, not quieter.
+#
+# The dist gates therefore run in one step that captures each exit code and
+# reports it verbatim in the job summary, rather than as separate steps where
+# GitHub would show both as an indistinguishable failure.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# A superseded push has nothing to prove; cancel it rather than pay for a
+# four-minute build twice.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Build and gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+
+      # `ci`, not `install` — the lockfile is the input, and a gate suite that
+      # validated against a different dependency tree than the one committed
+      # has validated nothing.
+      - name: Install
+        run: npm ci
+
+      # Source gate first: a broken dictionary should fail before the build, not
+      # after it. See the header of gate-4j-gallery-parity.mjs.
+      - name: Gate 4j — gallery locale parity (source)
+        run: npm run gate:4j
+
+      - name: Type check
+        run: npm run check
+
+      - name: Build
+        run: npx astro build
+
+      - name: Localization gates (rendered output)
+        run: |
+          set -uo pipefail
+
+          NAMES=()
+          CODES=()
+
+          run_gate () {
+            local label="$1"; shift
+            echo "::group::${label}"
+            "$@"
+            local code=$?
+            echo "::endgroup::"
+            NAMES+=("${label}")
+            CODES+=("${code}")
+          }
+
+          run_gate "validate-site"                 node scripts/validate-site.mjs
+          run_gate "4f — untranslated headings"    node scripts/gate-4f-headings.mjs
+          run_gate "4h — rendered seams"           node scripts/gate-4h-seams.mjs
+          run_gate "4i — glossary locks"           node scripts/gate-4i-glossary.mjs
+          run_gate "4g — anchor audit (advisory)"  node scripts/gate-4g-anchors.mjs
+
+          {
+            echo "### Localization gates"
+            echo
+            echo "| Gate | Exit | Result |"
+            echo "| --- | ---: | --- |"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          failed=0
+          for i in "${!NAMES[@]}"; do
+            code="${CODES[$i]}"
+            case "${code}" in
+              0) verdict='pass' ;;
+              1) verdict='**corpus violates the invariant** — fix the content'; failed=1 ;;
+              2) verdict='**gate could not run** — missing or invalid input, not a pass'; failed=1 ;;
+              *) verdict="**unexpected exit ${code}**"; failed=1 ;;
+            esac
+            echo "| ${NAMES[$i]} | ${code} | ${verdict} |" >> "$GITHUB_STEP_SUMMARY"
+          done
+
+          {
+            echo
+            echo 'Gate 4g is advisory by construction: exit 0 is its only content'
+            echo 'outcome, so it reports candidates and never fails this job.'
+            echo 'Its findings are read, not enforced.'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          exit "${failed}"
