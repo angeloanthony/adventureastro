@@ -88,6 +88,17 @@ assets?), not an editorial one, and it must be answered before the framework is 
   blocking anchor check fail on proper nouns indefinitely), 4j is a one-time audit that
   becomes a structural invariant once D1 lands. D1's outcome determines how 4j inspects
   shared content, which is why the framework waits for it.
+  **4j IMPLEMENTED at P34** — `scripts/gate-4j-gallery-parity.mjs`, wired into `npm run
+  build` and `npm run validate` (it runs *before* `astro build`: it is a source-level
+  check with no `dist/` dependency, so a broken dictionary fails in seconds). It parses
+  `home-gallery.ts` with the TypeScript AST rather than importing it — the module's
+  extensionless `../lib/i18n` specifier defeats Node's type-stripping loader, and the AST
+  is the only place two runtime-invisible defects are visible: a **duplicate key** (the
+  later literal silently wins) and **two locales aliased to one dictionary** (fallback
+  shipped as a translation). It validates structure only — presence, uniqueness,
+  non-emptiness — and never compares one locale's text to another's, because proper nouns
+  (`Doc's Beach`, `Kawasaki KRX 1000`) are legitimately identical across locales. 4f, 4g,
+  4h, 4i remain unimplemented.
 - **A methodology section is written first**, immediately after C7 — it records *why*
   each gate exists, which is what makes 4f–4j maintainable rather than arbitrary.
 

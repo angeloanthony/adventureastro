@@ -4,8 +4,9 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node scripts/validate-site.mjs",
-    "validate": "node scripts/validate-site.mjs",
+    "build": "node scripts/gate-4j-gallery-parity.mjs && astro build && node scripts/validate-site.mjs",
+    "validate": "node scripts/gate-4j-gallery-parity.mjs && node scripts/validate-site.mjs",
+    "gate:4j": "node scripts/gate-4j-gallery-parity.mjs",
     "preview": "astro preview"
   },
   "dependencies": {
