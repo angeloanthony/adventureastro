@@ -99,6 +99,23 @@ assets?), not an editorial one, and it must be answered before the framework is 
   non-emptiness — and never compares one locale's text to another's, because proper nouns
   (`Doc's Beach`, `Kawasaki KRX 1000`) are legitimately identical across locales. 4f, 4g,
   4h, 4i remain unimplemented.
+  **4f IMPLEMENTED at P35** — `scripts/gate-4f-headings.mjs` + `i18n-gates/4f-headings.json`,
+  run after `astro build` (it reads rendered output). It does **no** language detection and
+  **no** comparison against the English page: both were ruled out because neither yields an
+  enumerable correct value, and a heading legitimately identical to English (`Leave No Trace`,
+  `Doc's Beach`) is indistinguishable from one nobody translated. Instead it tests one
+  enumerable proposition per locale — *these specific English words must never appear in a
+  heading of this locale* — from a frozen marker lexicon derived from the 2,055-heading
+  rendered corpus (EN heading tokens occurring ≥3× that appear in **zero** headings of the
+  target locale; 244–276 per locale). Tokens genuinely shared with the target language
+  self-exclude, which is why `camping`/`guide` are absent for de/fr. **Freezing is
+  load-bearing**: re-derived at run time, an introduced English heading would add its own
+  tokens to the locale vocabulary and delete the markers that should have caught it.
+  **Validated against the real A5 defect: 13 of its 15 headings fire, and the 2 that pass are
+  exactly the 2 A5/A6 licensed** (`Leave No Trace`, `Backcountry Camping`). **Honest limit:
+  it necessarily reports 0 on the current corpus** (A5 was fixed in P14) — this is a
+  regression gate, and it cannot catch an English heading built only from words already used
+  in that locale. 4g, 4h, 4i remain unimplemented.
 - **A methodology section is written first**, immediately after C7 — it records *why*
   each gate exists, which is what makes 4f–4j maintainable rather than arbitrary.
 

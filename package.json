@@ -4,9 +4,10 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/gate-4j-gallery-parity.mjs && astro build && node scripts/validate-site.mjs",
-    "validate": "node scripts/gate-4j-gallery-parity.mjs && node scripts/validate-site.mjs",
+    "build": "node scripts/gate-4j-gallery-parity.mjs && astro build && node scripts/validate-site.mjs && node scripts/gate-4f-headings.mjs",
+    "validate": "node scripts/gate-4j-gallery-parity.mjs && node scripts/validate-site.mjs && node scripts/gate-4f-headings.mjs",
     "gate:4j": "node scripts/gate-4j-gallery-parity.mjs",
+    "gate:4f": "node scripts/gate-4f-headings.mjs",
     "preview": "astro preview"
   },
   "dependencies": {
