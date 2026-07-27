@@ -4,10 +4,11 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/gate-4j-gallery-parity.mjs && astro build && node scripts/validate-site.mjs && node scripts/gate-4f-headings.mjs",
-    "validate": "node scripts/gate-4j-gallery-parity.mjs && node scripts/validate-site.mjs && node scripts/gate-4f-headings.mjs",
+    "build": "node scripts/gate-4j-gallery-parity.mjs && astro build && node scripts/validate-site.mjs && node scripts/gate-4f-headings.mjs && node scripts/gate-4g-anchors.mjs",
+    "validate": "node scripts/gate-4j-gallery-parity.mjs && node scripts/validate-site.mjs && node scripts/gate-4f-headings.mjs && node scripts/gate-4g-anchors.mjs",
     "gate:4j": "node scripts/gate-4j-gallery-parity.mjs",
     "gate:4f": "node scripts/gate-4f-headings.mjs",
+    "gate:4g": "node scripts/gate-4g-anchors.mjs",
     "gate:4h": "node scripts/gate-4h-seams.mjs",
     "gate:4i": "node scripts/gate-4i-glossary.mjs",
     "preview": "astro preview"

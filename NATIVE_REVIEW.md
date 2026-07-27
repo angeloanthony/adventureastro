@@ -42,12 +42,12 @@ questions, not so they read 171 files.
 |---|---|---|
 | `de` | **all 6 original items closed** | ~~A7~~ ✅ P22, ~~A8~~ ✅ P23 — original backlog closed; **A9 + A10 ⬜ open**, raised by gate 4i at P37, 1 site each |
 | `ja` | **all closed** — B1 applied at P18, B2 dissolved | ~~B3~~ ✅ P24, ~~B4~~ ✅ P25 — **Japanese backlog closed** |
-| `zh` | **all closed** — C4 decided at P21 | ~~C7~~ ✅ P26, ~~C8~~ ✅ P27, ~~C9~~ ✅ P27 — original backlog closed; **C10 ⬜ open**, raised by gate 4h at P36 |
+| `zh` | **all closed** — C4 decided at P21 | ~~C7~~ ✅ P26, ~~C8~~ ✅ P27, ~~C9~~ ✅ P27 — original backlog closed; **C10 ⬜ open**, raised by gate 4h at P36; **C11 ⬜ open**, raised by gate 4g at P38, 2 sites |
 
 ***All three language reviews are now closed end-to-end (A1–A8, B1–B4, C1–C9).***
 Nothing editorial remains. What is left is one architecture question (**D1**) and the
 **Localization Regression Framework** — both engineering, neither language review.
-*(Three single-site items — C10, A9, A10 — have since been raised by the framework's own
+*(Four small items — C10, A9, A10, C11 — have since been raised by the framework's own
 gates rather than by review. They are owner decisions listed in §E, not reopened reviews.)*
 
 **Priority order** (owner-set 2026-07-25, revised at P16 once A3 was decided) — fully consumed:
@@ -66,7 +66,7 @@ the translators had been right and the suspicion wrong. The genuine defects it d
 were consistency drift, not mistranslation — and the six items in §E were all surfaced
 by censuses run for other purposes.
 
-**Post-review opportunities — 11 raised, 8 closed (A7 P22, A8 P23, B3 P24, B4 P25, C7 P26, C8 P27, C9 P27, D1 P33). Three remain — C10 (gate 4h, P36) and A9 + A10 (gate 4i, P37), 1 site each. All three were found by automation rather than by census, which is what the framework was built to do.**
+**Post-review opportunities — 12 raised, 8 closed (A7 P22, A8 P23, B3 P24, B4 P25, C7 P26, C8 P27, C9 P27, D1 P33). Four remain — C10 (gate 4h, P36), A9 + A10 (gate 4i, P37) at 1 site each, and C11 (gate 4g, P38) at 2 sites. All four were found by automation rather than by census, which is what the framework was built to do.**
 **All three language reviews are closed end-to-end (A1–A8, B1–B4, C1–C9).**
 Owner-set sequencing for what remains (2026-07-25, at P23) keeps the editorial
 terminology work together and defers the one cross-cutting engineering item until the
@@ -174,7 +174,52 @@ assets?), not an editorial one, and it must be answered before the framework is 
   prints 11 advisory occurrences (`es` and `ja` English identity residue, `es No Dejar Rastro`)
   which C4 and A6 had already measured and placed out of scope; those never block. Because the
   two `de` findings are real, `gate:4i` ships as `npm run gate:4i` and is **not** wired into
-  `build`/`validate`, on the C10 precedent. **4g is the only gate left unimplemented.**
+  `build`/`validate`, on the C10 precedent. 4g remains unimplemented.
+  **4g IMPLEMENTED at P38 — the framework is complete.** `scripts/gate-4g-anchors.mjs` +
+  `i18n-gates/4g-anchors.json`. **It is advisory by construction, not by configuration:**
+  exit 0 is its only content outcome, and the single non-zero exit it can produce is 2,
+  meaning the gate could not run. That is B4's ratio made structural — 597 correct English
+  anchors against 55 corrections means a blocking anchor check fails on proper nouns
+  indefinitely and gets switched off, which the methodology section names as the failure
+  mode any permanent gate must be designed against. Because it cannot fail a build it *is*
+  wired into `build` and `validate`, unlike 4h and 4i.
+  **Two independent signals, failing in opposite directions.** `marker` — an English token
+  frozen as absent from this locale, derived from the 6,100-anchor-per-locale rendered corpus
+  exactly as 4f's heading markers were, and frozen for the same reason. `identity` — the
+  anchor is byte-identical to the anchor English uses for the *same destination*. The marker
+  signal is blind to a defect already present at freeze time, because that defect's own tokens
+  self-excluded from the marker set; that is not a hypothesis, it is precisely how 4f missed A9.
+  The identity signal sees exactly those, because a defect present at freeze time is still
+  identical to its English source — and is blind to the opposite case, a legitimately identical
+  proper noun. Neither is sufficient; both together are why the report is worth reading.
+  **The identity registry is subtracted before either signal fires**, and its authority is
+  `4f-headings.json` `licensed.global`, read at run time and unioned with 4g's anchor-surface
+  additions — one frozen proper-noun registry for the repository rather than two that can
+  drift apart. Registry entries are **per-locale where a policy is per-locale**: `Vernal` and
+  `Utah` are identities in six locales and deliberately *not* in `ja`, so B3's place-name rule
+  is encoded rather than flattened — a bare Latin `Vernal` anchor is an identity in `de` and a
+  review candidate in `ja`, and the scratch suite asserts both.
+  **Four exclusive groups** — approved identity, mixed-language, probable untranslated,
+  probable proper noun — plus **repeated English phrases as a cross-cutting view** at ≥5
+  distinct pages, the measured line between systemic surfaces (breadcrumb/nav/related runs,
+  60–77 pages) and content drift (never above 3 pages per distinct string in B4).
+  `measured_not_identities` records what the census refused to register and why: `Home`
+  (the shipped `it` `nav.home` value, but hardcoded English on two `zh` pages — registering it
+  would excuse the first while masking the second), `Guides` (French and English spell it
+  identically), `Dinosaur Country` (a 4i `ja` lock *and* the live `de` A10 defect), and bare
+  heads like `State Park`. **Two extraction facts are load-bearing and are not shared with
+  4h/4i**: numeric character references are decoded generically, because anchor text — unlike
+  prose — carries `&#128222;`, and left encoded it arrives as the letter-bearing string
+  `#128222;`; and a **letterless** anchor (phone number, icon, price) carries no language and
+  is counted but classified in no group. Validated on an isolated scratch corpus against the
+  *shipped* config: **20/20 cases**, covering every group, both signals, the per-locale registry
+  A/B, `aria-hidden`/`<svg>` stripping, the advisory contract (findings present, exit 0) and
+  fail-closed on a missing corpus. Output is byte-identical across runs.
+  **Like 4h and 4i and unlike 4f it does not report zero — it found one real live defect
+  (new item C11) in `zh`.** Its headline number, though, is the one B4 predicted: **268 approved
+  identities against 63 review candidates**, and `ja` — the one locale whose anchors have had a
+  full pass — reports **0 candidates against 46 approved identities**, an independent
+  confirmation that B4's sweep was complete.
 - **A methodology section is written first**, immediately after C7 — it records *why*
   each gate exists, which is what makes 4f–4j maintainable rather than arbitrary.
 
@@ -1997,6 +2042,47 @@ planned queue.
 | **C10** | `zh` | duplicated `向` at a caveat join seam, hidden by inline markup | P36 (gate 4h) | **1 site / 1 file** | ⬜ **open — owner decision; blocks wiring 4h into `build`** |
 | **A9** | `de` | untranslated `Key Takeaways` heading where the locked term is `Das Wichtigste in Kürze` | P37 (gate 4i) | **1 site / 1 file** | ⬜ **open — owner decision; blocks wiring 4i into `build`** |
 | **A10** | `de` | `Dinosaurierland` — a second German rendering of the identity locked to `Land der Dinosaurier` | P37 (gate 4i) | **1 site / 1 file** | ⬜ **open — owner decision; blocks wiring 4i into `build`** |
+| **C11** | `zh` | untranslated `Home` breadcrumb crumb where `zh` `nav.home` is `首页` | P38 (gate 4g) | **2 sites / 2 files** | ⬜ **open — owner decision; 4g is advisory and is wired into `build` regardless** |
+
+### C11. An untranslated `Home` breadcrumb — ⬜ OPEN, raised by gate 4g at P38
+
+**Found by the new gate on the current corpus.** Two sites, both the first crumb of a
+hardcoded breadcrumb in a `page-content` `ZH` block:
+
+- [`src/page-content/atv-trails.ts:513`](src/page-content/atv-trails.ts#L513)
+- [`src/page-content/jeep-trails.ts:462`](src/page-content/jeep-trails.ts#L462)
+
+```
+<a href="/zh/">Home</a><span class="sep">›</span><a href="/zh/utv/">越野路线</a>…
+```
+
+**Why this is drift and not policy — the corpus decides it, not the gate.** The same crumb
+in the same two files is localized in every other locale, and `zh` has a shipped value for
+it:
+
+| Locale | First crumb | Source |
+|---|---|---|
+| `es` | `Inicio` | `jeep-trails.ts:79` |
+| `it` | `Home` | `jeep-trails.ts:143` — **and `it` `nav.home` is itself `'Home'`** ([`ui.ts:285`](src/lib/ui.ts#L285)) |
+| `pt` | `Início` | `jeep-trails.ts:207` |
+| `fr` | `Accueil` | `jeep-trails.ts:271` |
+| `de` | `Start` | `jeep-trails.ts:334` |
+| `ja` | `ホーム` | `jeep-trails.ts:398` |
+| `zh` | **`Home`** | `jeep-trails.ts:462` — but `zh` `nav.home` is `首页` ([`ui.ts:936`](src/lib/ui.ts#L936)) |
+
+`it` is the trap and the reason `Home` is **not** in 4g's identity registry: registering the
+string would license `it`'s deliberate dictionary value and mask `zh`'s hardcoded English in
+the same stroke. The gate reports the shape; the `it`/`zh` dictionary split is what decides
+which one is a defect.
+
+**Same shape as A9 and A10 — the defect is in a surface no census had reason to visit.** The
+Z5 link pass swept `href`s and body prose in the `page-content` `ZH` blocks; this is *anchor
+text* in a hardcoded breadcrumb, a third surface in the same files.
+
+> **Question C11:** localize the two `zh` crumbs to `首页`, matching the shipped `zh`
+> `nav.home` value and the other six locales? **Not applied at P38** — the phase's stop
+> conditions forbid modifying localization content. Unlike C10/A9/A10 this one blocks
+> nothing: 4g is advisory and ships wired into `build` either way.
 
 ### A9. An untranslated `Key Takeaways` heading — ⬜ OPEN, raised by gate 4i at P37
 
