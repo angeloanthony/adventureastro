@@ -140,8 +140,9 @@ These are frozen. Machine translation must leave them byte-identical (add them t
 
 ## 4. Validation the translation MUST satisfy
 
-The build is the gate. `npm run build` runs `scripts/validate-site.mjs` and the content
-schema. A translated page that violates these fails the build:
+The build is the gate. `npm run build` runs the content schema, `scripts/validate-site.mjs`,
+and every localization gate — see §7.1 for the full pipeline and its ordering rationale.
+A translated page that violates these fails the build:
 
 - **`title` ≤ 65 chars.** Spanish/Italian/Portuguese run ~20–30% longer — **re-fit the
   title to the cap, do not translate literally.**
@@ -342,6 +343,79 @@ first; see §10.2.
    reference implementation (`git tag -a i18n-<locale>-complete`) and treat it as
    the template — future locales' briefs should quote its locked glossary/rules
    directly rather than re-deriving them.
+
+---
+
+## 7.1 The validation pipeline (P40 — wiring, 2026-07-27)
+
+`npm run build` is the single command that performs complete localization validation.
+`npm run validate` re-runs every check against an **existing** `dist/` without rebuilding.
+Neither introduces validation logic; both only sequence the gates P34–P38 already defined.
+
+```
+npm run build   →  gates:src  →  astro build  →  gates:dist
+npm run validate →  gates:src  →                  gates:dist
+```
+
+| Step | Script | Reads | Semantics |
+|------|--------|-------|-----------|
+| 1 | `gate-4j-gallery-parity` | **source** | blocking |
+| 2 | `astro build` | source → `dist/` | blocking |
+| 3 | `validate-site` | `dist/` | blocking |
+| 4 | `gate-4f-headings` | `dist/` | blocking |
+| 5 | `gate-4h-seams` | `dist/` | blocking |
+| 6 | `gate-4i-glossary` | `dist/` + `src/lib/ui.ts` | blocking |
+| 7 | `gate-4g-anchors` | `dist/` | **advisory** |
+
+**Why this order.**
+
+1. **4j runs before the build because it is the only gate that reads source alone.**
+   It parses `src/lib/i18n.ts` and `src/page-content/home-gallery.ts` and needs no
+   rendered output, so it is the one check that can fail in ~1s instead of after a
+   2m15s build. Everything it could catch is a defect the build would faithfully
+   render anyway.
+
+2. **The build sits in the middle because it manufactures the substrate.** Gates
+   4f/4g/4h/4i and `validate-site` all read `dist/`. This is not an optimization —
+   *it is a correctness constraint.* Any ordering that puts a `dist/`-consuming gate
+   before `astro build` either exits 2 on a clean checkout ("dist/ not found") or,
+   far worse, silently validates a **stale** `dist/` on a dirty tree and reports
+   green for content that was never built. The gates read rendered output by
+   deliberate design — 4h exists precisely because C6's seams measured 0 in plain
+   source and 249 as rendered — so the dependency cannot be relaxed.
+
+3. **`validate-site` leads the `dist/` consumers because structure precedes content.**
+   It checks routes, link resolution, and schema. If the site is structurally broken,
+   the content gates' findings are noise — a missing page yields phantom heading and
+   glossary failures that vanish once the route is restored. Failing on structure
+   first keeps the first error the diagnostic one.
+
+4. **4f → 4h → 4i is coarse-to-fine.** 4f catches a *whole heading left in English*;
+   4h catches ungrammatical *joins* inside phrases that are otherwise correct; 4i
+   verifies *individual glossary terms*. A 4f failure implies large untranslated
+   regions that would make 4h and 4i emit noisy downstream findings, so the coarsest
+   signal is allowed to fail first.
+
+5. **4g is last because it is advisory.** Placing it at the tail means its report is
+   the final output of a successful run (where a reviewer will actually read it), and
+   it can never delay or mask a blocking failure.
+
+**Failure semantics.** The chain is `&&` throughout, so the first non-zero exit
+terminates validation — blocking gates fast-fail and nothing downstream runs.
+Exit `1` = content violation; exit `2` = the gate could not run (missing `dist/`,
+unparseable config) and is never silently degraded into a pass.
+
+**"4g always runs" means unconditional on findings, not unconditional on failure.**
+4g exits 0 for *every* content outcome — review candidates are questions, not defects
+(P38) — so it is the one gate whose result can never fail a build. It is still subject
+to fast-fail: if a blocking gate fails, the run stops and 4g does not execute, which is
+correct, because an advisory report about a corpus that failed a blocking check is not
+actionable. The only way 4g exits non-zero is exit 2, an execution error in the tool
+itself.
+
+**No duplicate work.** `gates:src` and `gates:dist` are single composite scripts shared
+by `build` and `validate`; no gate executes twice in one invocation. Individual gates
+remain runnable in isolation via `npm run gate:4f` etc. for iteration.
 
 ---
 
