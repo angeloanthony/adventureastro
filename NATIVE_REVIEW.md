@@ -40,15 +40,15 @@ questions, not so they read 171 files.
 
 | Locale | Open items | Post-review items (§E) |
 |---|---|---|
-| `de` | **all 6 original items closed** | ~~A7~~ ✅ P22, ~~A8~~ ✅ P23 — original backlog closed; **A9 + A10 ⬜ open**, raised by gate 4i at P37, 1 site each |
+| `de` | **all 6 original items closed** | ~~A7~~ ✅ P22, ~~A8~~ ✅ P23, ~~A9~~ ✅ P39, ~~A10~~ ✅ P39 — original backlog closed; A9 + A10 were raised by gate 4i at P37 (1 site each) and applied at P39 |
 | `ja` | **all closed** — B1 applied at P18, B2 dissolved | ~~B3~~ ✅ P24, ~~B4~~ ✅ P25 — **Japanese backlog closed** |
-| `zh` | **all closed** — C4 decided at P21 | ~~C7~~ ✅ P26, ~~C8~~ ✅ P27, ~~C9~~ ✅ P27 — original backlog closed; **C10 ⬜ open**, raised by gate 4h at P36; **C11 ⬜ open**, raised by gate 4g at P38, 2 sites |
+| `zh` | **all closed** — C4 decided at P21 | ~~C7~~ ✅ P26, ~~C8~~ ✅ P27, ~~C9~~ ✅ P27, ~~C10~~ ✅ P39, ~~C11~~ ✅ P39 — original backlog closed; C10 was raised by gate 4h at P36 and C11 by gate 4g at P38 (2 sites), both applied at P39 |
 
 ***All three language reviews are now closed end-to-end (A1–A8, B1–B4, C1–C9).***
 Nothing editorial remains. What is left is one architecture question (**D1**) and the
 **Localization Regression Framework** — both engineering, neither language review.
-*(Four small items — C10, A9, A10, C11 — have since been raised by the framework's own
-gates rather than by review. They are owner decisions listed in §E, not reopened reviews.)*
+*(Four small items — C10, A9, A10, C11 — were raised by the framework's own gates rather
+than by review, and all four were decided and applied at P39. They are listed in §E.)*
 
 **Priority order** (owner-set 2026-07-25, revised at P16 once A3 was decided) — fully consumed:
 ~~C6~~ → ~~A1-residual~~ → ~~A2~~ → ~~A5~~ → ~~A6~~ → ~~A3~~ → ~~A4~~ → ~~B1~~ → ~~C2~~ → ~~C3~~ → ~~C4~~ ✅
@@ -66,7 +66,7 @@ the translators had been right and the suspicion wrong. The genuine defects it d
 were consistency drift, not mistranslation — and the six items in §E were all surfaced
 by censuses run for other purposes.
 
-**Post-review opportunities — 12 raised, 8 closed (A7 P22, A8 P23, B3 P24, B4 P25, C7 P26, C8 P27, C9 P27, D1 P33). Four remain — C10 (gate 4h, P36), A9 + A10 (gate 4i, P37) at 1 site each, and C11 (gate 4g, P38) at 2 sites. All four were found by automation rather than by census, which is what the framework was built to do.**
+**Post-review opportunities — 12 raised, 12 closed (A7 P22, A8 P23, B3 P24, B4 P25, C7 P26, C8 P27, C9 P27, D1 P33, and C10 + A9 + A10 + C11 all at P39). The last four were found by automation rather than by census — which is what the framework was built to do — and P39 resolved them as one content-only cleanup phase. Nothing remains open.**
 **All three language reviews are closed end-to-end (A1–A8, B1–B4, C1–C9).**
 Owner-set sequencing for what remains (2026-07-25, at P23) keeps the editorial
 terminology work together and defers the one cross-cutting engineering item until the
@@ -175,6 +175,9 @@ assets?), not an editorial one, and it must be answered before the framework is 
   which C4 and A6 had already measured and placed out of scope; those never block. Because the
   two `de` findings are real, `gate:4i` ships as `npm run gate:4i` and is **not** wired into
   `build`/`validate`, on the C10 precedent. 4g remains unimplemented.
+  *(P39 note: A9, A10 and C10 were all applied at P39, so `gate:4h` and `gate:4i` both exit 0
+  on the current corpus. They are still unwired — wiring them is P40, deliberately a separate
+  phase so that the wiring change is reviewed on its own and not folded into a content fix.)*
   **4g IMPLEMENTED at P38 — the framework is complete.** `scripts/gate-4g-anchors.mjs` +
   `i18n-gates/4g-anchors.json`. **It is advisory by construction, not by configuration:**
   exit 0 is its only content outcome, and the single non-zero exit it can produce is 2,
@@ -2039,12 +2042,12 @@ planned queue.
 | ~~**B4**~~ | `ja` | ~14 untranslated English anchor texts on `/ja/` links | P18 (B1 census) | **57 sites / 8 files** (recorded ~14; 652 candidates, 597 correct) | ✅ **applied P25** — 57 localized, 597 proper nouns retained |
 | ~~**C8**~~ | `zh` | generic *"a national monument"* rendered 3 ways | P21 (C4 census) | **113 sites / 9 files** (recorded 7/4) | ✅ **applied P27** — normalised to `纪念地` |
 | ~~**A8**~~ | `de` | 18 untranslated English `Dinosaur Country` in `de` MDX | P21 (C4 census) | 18 sites | ✅ **applied P23** — 18 replaced, 0 exceptions |
-| **C10** | `zh` | duplicated `向` at a caveat join seam, hidden by inline markup | P36 (gate 4h) | **1 site / 1 file** | ⬜ **open — owner decision; blocks wiring 4h into `build`** |
-| **A9** | `de` | untranslated `Key Takeaways` heading where the locked term is `Das Wichtigste in Kürze` | P37 (gate 4i) | **1 site / 1 file** | ⬜ **open — owner decision; blocks wiring 4i into `build`** |
-| **A10** | `de` | `Dinosaurierland` — a second German rendering of the identity locked to `Land der Dinosaurier` | P37 (gate 4i) | **1 site / 1 file** | ⬜ **open — owner decision; blocks wiring 4i into `build`** |
-| **C11** | `zh` | untranslated `Home` breadcrumb crumb where `zh` `nav.home` is `首页` | P38 (gate 4g) | **2 sites / 2 files** | ⬜ **open — owner decision; 4g is advisory and is wired into `build` regardless** |
+| ~~**C10**~~ | `zh` | duplicated `向` at a caveat join seam, hidden by inline markup | P36 (gate 4h) | **1 site / 1 file** | ✅ **applied P39** — prose `向` deleted; `gate:4h` now exits 0 |
+| ~~**A9**~~ | `de` | untranslated `Key Takeaways` heading where the locked term is `Das Wichtigste in Kürze` | P37 (gate 4i) | **1 site / 1 file** | ✅ **applied P39** — heading localized; lock floor 51 → 52 |
+| ~~**A10**~~ | `de` | `Dinosaurierland` — a second German rendering of the identity locked to `Land der Dinosaurier` | P37 (gate 4i) | **1 site / 1 file** | ✅ **applied P39** — aligned to the locked identity; floor 598 → 599 |
+| ~~**C11**~~ | `zh` | untranslated `Home` breadcrumb crumb where `zh` `nav.home` is `首页` | P38 (gate 4g) | **2 sites / 2 files** | ✅ **applied P39** — both crumbs → `首页`; 4g candidates 63 → 62 |
 
-### C11. An untranslated `Home` breadcrumb — ⬜ OPEN, raised by gate 4g at P38
+### C11. An untranslated `Home` breadcrumb — ✅ DECIDED & APPLIED 2026-07-27 (P39), raised by gate 4g at P38
 
 **Found by the new gate on the current corpus.** Two sites, both the first crumb of a
 hardcoded breadcrumb in a `page-content` `ZH` block:
@@ -2080,11 +2083,13 @@ Z5 link pass swept `href`s and body prose in the `page-content` `ZH` blocks; thi
 text* in a hardcoded breadcrumb, a third surface in the same files.
 
 > **Question C11:** localize the two `zh` crumbs to `首页`, matching the shipped `zh`
-> `nav.home` value and the other six locales? **Not applied at P38** — the phase's stop
-> conditions forbid modifying localization content. Unlike C10/A9/A10 this one blocks
-> nothing: 4g is advisory and ships wired into `build` either way.
+> `nav.home` value and the other six locales? **Answered yes and applied at P39.** Both
+> crumbs now read `首页`; the `it` crumb was deliberately left as `Home` because it *is*
+> the shipped `it` `nav.home` value, which is the whole reason `Home` stays out of 4g's
+> identity registry. 4g's review-candidate count moves 63 → 62 and the gate stays
+> advisory, exit 0 throughout.
 
-### A9. An untranslated `Key Takeaways` heading — ⬜ OPEN, raised by gate 4i at P37
+### A9. An untranslated `Key Takeaways` heading — ✅ DECIDED & APPLIED 2026-07-27 (P39), raised by gate 4i at P37
 
 **Found by the new gate on the current corpus.** One site:
 
@@ -2117,12 +2122,18 @@ which is the argument for having both gates rather than either.
 <h2>Das Wichtigste in Kürze</h2>
 ```
 
-**Anchor effect: the heading id regenerates** from `#key-takeaways` to
-`#das-wichtigste-in-kürze`. Per the A6 precedent this must be checked before applying —
-no link in source or `dist/` may target the old id. **Not applied: P37's brief forbids
-modifying translations.**
+**Applied at P39 — and the anticipated anchor effect turned out not to exist.** The A6
+precedent required checking that no link targets the old id before applying, and the check
+returned something better than a clean result: **the heading carries no id at all.** It is
+raw HTML inside the MDX (`<h2>Key Takeaways</h2>` within the `key-takeaways` div), and
+Astro's auto-id generation applies only to markdown headings — every *markdown* `h2` on
+the same page does carry one (`#warum-flaming-gorge-besuchen`, `#geschichte-und-geologie`,
+…). So there was never a `#key-takeaways` id to break, and `grep` confirmed zero inbound
+references in both `src/` and `dist/`. The lock's floor moves 51 → 52; because the `de`
+`key-takeaways` lock is declared `min` and not an exact `count`, no re-baseline of
+`4i-glossary.json` was needed.
 
-### A10. `Dinosaurierland` — a second German rendering of the identity — ⬜ OPEN, raised by gate 4i at P37
+### A10. `Dinosaurierland` — a second German rendering of the identity — ✅ DECIDED & APPLIED 2026-07-27 (P39), raised by gate 4i at P37
 
 **Found by the new gate on the current corpus.** One site:
 
@@ -2152,13 +2163,16 @@ recorded item size is a hypothesis about the measurement window.
 …vorbei an Petroglyphen und dem Land der Dinosaurier — ideal, …
 ```
 
-Conserved-count effect: `Land der Dinosaurier` 598 → 599. **Not applied: P37's brief forbids
-modifying translations.** Until A9 and A10 are decided, `gate:4i` reports 2 blocking findings,
-so the gate ships as `npm run gate:4i` and is deliberately **not** wired into `npm run
-build`/`validate` — the same call the owner made for 4h at P36. Wiring is a one-line change
-once both are resolved.
+**Applied at P39** as `…vorbei an Petroglyphen und dem Land der Dinosaurier — ideal, …`;
+the dative article is required because `vorbei an` governs the dative and the locked form is
+a full noun phrase, not the bare compound it replaces. Floor effect: `Land der Dinosaurier`
+598 → 599, and `Dinosaurierland` now measures **0 in `src/` and 0 in `dist/`**. With A9 and
+A10 both resolved, `gate:4i` exits 0 — it still prints its 11 pre-existing advisory
+occurrences (`es`/`ja` English identity residue and `es No Dejar Rastro`, all placed out of
+scope by C4 and A6 and untouched here), which never block. **Wiring 4i and 4h into
+`build`/`validate` is deliberately left to P40**, outside this phase's scope.
 
-### C10. A duplicated `向` at the caveat seam — ⬜ OPEN, raised by gate 4h at P36
+### C10. A duplicated `向` at the caveat seam — ✅ DECIDED & APPLIED 2026-07-27 (P39), raised by gate 4h at P36
 
 **Found by the new gate on the current corpus, not by a census.** One site:
 
@@ -2186,12 +2200,15 @@ byte-intact, exactly the C7-endorsed treatment of the adjacent form:
 …请就各区域当前的营地和路况<strong>向官方渠道核实</strong>（…）。
 ```
 
-Conserved-count effect: none — `官方渠道核实` stays at 982 rendered, and the fix
-touches one character outside the lock. **Not applied: P36's brief forbids modifying
-localization content.** Until it is decided, `gate:4h` reports 1 blocking finding, so
-the gate ships as `npm run gate:4h` and is deliberately **not** wired into `npm run
-build`/`validate` — wiring it now would leave the build red. Wiring is a one-line
-change once this is resolved.
+**Applied at P39** exactly as the C7-endorsed adjacent-form treatment prescribes: the one
+prose `向` outside the `<strong>` was deleted and the lock left byte-intact. **Conserved-count
+effect: none, as predicted** — `官方渠道核实` remains at **982** rendered, verified not by
+raw grep over `dist/` (which counts nav, footer and head duplicates and reports a much larger
+figure) but by gate 4i's exact `count: 982` conservation check, which is measured on
+visible rendered text with the same extractor 4h uses and which fails on any deviation. It
+passes. `gate:4h` now reports **0 seam violations across 539 rendered pages and 1,922 locked
+phrases** and exits 0. **Wiring it into `build`/`validate` is left to P40**, outside this
+phase's scope.
 
 ### C8. The generic common noun *"a national monument"* has three `zh` renderings — ✅ DECIDED & APPLIED 2026-07-25 (P27)
 

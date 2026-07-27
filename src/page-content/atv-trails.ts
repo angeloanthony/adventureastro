@@ -510,7 +510,7 @@ const ZH = `
   <main class="article-page">
     <header class="article-header">
       <div class="article-breadcrumb">
-        <a href="/zh/">Home</a><span class="sep">›</span><a href="/zh/utv/">越野路线</a><span class="sep">›</span><span>Vernal ATV 越野路线</span>
+        <a href="/zh/">首页</a><span class="sep">›</span><a href="/zh/utv/">越野路线</a><span class="sep">›</span><span>Vernal ATV 越野路线</span>
       </div>
       <h1 class="article-title">犹他州 Vernal 附近的 ATV 越野路线</h1>
       <p class="article-meta">2026 年 4 月更新 · Adventure Tours Vernal</p>
