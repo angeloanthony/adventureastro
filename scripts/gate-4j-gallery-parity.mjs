@@ -128,14 +128,92 @@ for (const prop of registryNode.properties) {
   registry.set(locale, ident);
 }
 
+// ---------------------------------------------------------------------------
+// 3a. The exemption map — GALLERY_EXEMPT names registered locales that render no
+//     gallery at all, each with a reason (AR-2 B-0).
+//
+//     WHY THIS EXISTS. Until AR-2 this gate required every REGISTERED locale to
+//     carry a dictionary, which silently assumed registration implies rendering.
+//     AR-1 separated those facts for the first time: `ar` is registered with one
+//     policy page and no homepage, so `renderGallery('ar')` is never called and
+//     there is no fallback for it to ship. Under the old rule, registering any
+//     locale first required 105 slide translations — which broke handoff §7 stage
+//     1 ("register with an empty slug set before any content lands") for every
+//     future locale, Arabic or not.
+//
+//     WHY IT IS NOT A SUPPRESSION LIST. Absence stays illegal; only DECLARED
+//     absence is legal, and the declaration is checked in both directions. A
+//     locale in neither map fails, a locale in both fails, and an exemption with
+//     no reason fails. The runtime carries the other half: renderGallery() throws
+//     if an exempt locale ever reaches it, so the claim cannot rot into the P34
+//     defect it replaced. The exempt set is printed on success — an exemption
+//     nobody reads is how a suppression list starts.
+// ---------------------------------------------------------------------------
+const exemptNode = declOf(gallerySf, 'GALLERY_EXEMPT');
+if (!exemptNode || !ts.isObjectLiteralExpression(exemptNode)) {
+  console.error('gate-4j: could not parse the GALLERY_EXEMPT map from src/page-content/home-gallery.ts');
+  process.exit(1);
+}
+
+const exempt = new Map(); // locale -> reason
+for (const prop of exemptNode.properties) {
+  const locale = keyOf(prop);
+  if (!locale) {
+    fail(`GALLERY_EXEMPT has a computed/unreadable key at ${at(gallerySf, prop)}`);
+    continue;
+  }
+  if (!ts.isPropertyAssignment(prop)) {
+    fail(`GALLERY_EXEMPT["${locale}"] at ${at(gallerySf, prop)} is not a plain string reason`);
+    continue;
+  }
+  // The reason may be a concatenation of string literals; the gate cares only
+  // that it resolves to non-empty prose, not how it was typed.
+  const reason = flattenStringConcat(unwrap(prop.initializer));
+  if (reason === null) {
+    fail(`GALLERY_EXEMPT["${locale}"] at ${at(gallerySf, prop)} is not a string literal — an exemption must state its reason in the source`);
+    continue;
+  }
+  if (reason.trim() === '') {
+    fail(`GALLERY_EXEMPT["${locale}"] at ${at(gallerySf, prop)} has an empty reason — an exemption with no stated reason is a suppression`);
+    continue;
+  }
+  if (exempt.has(locale)) fail(`GALLERY_EXEMPT declares locale "${locale}" twice at ${at(gallerySf, prop)}`);
+  exempt.set(locale, reason);
+}
+
+/** `'a' + 'b'` and `'a'` both flatten to a string; anything else is null. */
+function flattenStringConcat(node) {
+  const lit = stringOf(node);
+  if (lit !== null) return lit;
+  if (ts.isBinaryExpression(node) && node.operatorToken.kind === ts.SyntaxKind.PlusToken) {
+    const l = flattenStringConcat(unwrap(node.left));
+    const r = flattenStringConcat(unwrap(node.right));
+    if (l !== null && r !== null) return l + r;
+  }
+  return null;
+}
+
+// Every registered locale sits in EXACTLY ONE of the two maps.
 for (const code of LOCALE_CODES) {
-  if (!registry.has(code)) {
-    fail(`locale "${code}" is registered by the host but has no GALLERY_TEXT dictionary — it would resolve through the English fallback`);
+  const hasDict = registry.has(code);
+  const isExempt = exempt.has(code);
+  if (hasDict && isExempt) {
+    fail(`locale "${code}" is in BOTH GALLERY_TEXT and GALLERY_EXEMPT — it cannot both render the gallery and not render it`);
+  } else if (!hasDict && !isExempt) {
+    fail(
+      `locale "${code}" is registered by the host but appears in neither GALLERY_TEXT nor GALLERY_EXEMPT — ` +
+      `add GALLERY_TEXT_${code.toUpperCase()} if it renders the gallery, or declare it in GALLERY_EXEMPT with the reason it does not`
+    );
   }
 }
 for (const code of registry.keys()) {
   if (!LOCALE_CODES.includes(code)) {
     fail(`GALLERY_TEXT registers "${code}", which is not a locale the host registers`);
+  }
+}
+for (const code of exempt.keys()) {
+  if (!LOCALE_CODES.includes(code)) {
+    fail(`GALLERY_EXEMPT declares "${code}", which is not a locale the host registers — a stale exemption hides nothing and misleads the next reader`);
   }
 }
 // Aliasing check: a non-default locale pointing at another locale's dictionary
@@ -160,7 +238,9 @@ const summary = [];
 
 for (const locale of LOCALE_CODES) {
   const ident = registry.get(locale);
-  if (!ident) continue; // already reported above
+  // No dictionary: either declared exempt (nothing to check — it renders no
+  // gallery) or already failed above as an undeclared absence.
+  if (!ident) continue;
 
   const dictNode = declOf(gallerySf, ident);
   if (!dictNode || !ts.isObjectLiteralExpression(dictNode)) {
@@ -242,14 +322,20 @@ if (errors.length || report.length) {
   if (errors.length) console.error('');
   for (const block of report) console.error(`${block}\n`);
   console.error(
-    'Every registered locale must explicitly define every slide id in GALLERY_SLIDES.\n' +
+    'Every registered locale must EITHER define every slide id in GALLERY_SLIDES,\n' +
+      'OR be declared in GALLERY_EXEMPT with the reason it renders no gallery.\n' +
       'The English fallback in textFor() is an emergency runtime guard, not a shipped state.\n'
   );
   process.exit(1);
 }
 
-const localeCount = LOCALE_CODES.length;
-const entries = SLIDE_IDS.length * localeCount;
+const rendering = [...registry.keys()];
+const entries = SLIDE_IDS.length * rendering.length;
+// The exempt set is printed on every success, not just on failure. An exemption
+// that nobody sees is how a declared absence decays into a suppression list.
+const exemptNote = exempt.size
+  ? `; ${exempt.size} locale(s) render no gallery: ${[...exempt.keys()].map((c) => `"${c}"`).join(', ')}`
+  : '';
 console.log(
-  `gate-4j: ✔ ${SLIDE_IDS.length} slides x ${localeCount} locales — ${entries} entries, complete (${summary.join(' · ')})`
+  `gate-4j: ✔ ${SLIDE_IDS.length} slides x ${rendering.length} gallery locales — ${entries} entries, complete (${summary.join(' · ')})${exemptNote}`
 );

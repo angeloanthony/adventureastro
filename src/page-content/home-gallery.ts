@@ -1119,20 +1119,34 @@ const GALLERY_TEXT_ZH: GalleryDictionary = {
 };
 
 /**
- * Locale dictionaries — one per registered locale (P32 registered them empty,
- * P33 populated them).
+ * Locale dictionaries — one per registered locale that RENDERS the gallery
+ * (P32 registered them empty, P33 populated them, AR-2 B-0 made the map partial).
  *
- * All eight are now COMPLETE: every dictionary carries an entry for all 105
- * slide ids, so the English fallback in `textFor()` is unreachable for any
- * registered locale. It is kept as a fail-soft guard for an unregistered
- * locale string and for the window between adding a slide to GALLERY_SLIDES
- * and translating it.
+ * All eight are COMPLETE: every dictionary carries an entry for all 105 slide
+ * ids, so the English fallback in `textFor()` is unreachable for any locale that
+ * reaches it. It is kept as a fail-soft guard for an unregistered locale string
+ * and for the window between adding a slide to GALLERY_SLIDES and translating it.
  *
- * Typed as Record<Locale, …> on purpose: registering a new locale in i18n.ts
- * fails the build here until its gallery dictionary is added, so a new language
- * can never reach the gallery by silently inheriting English (fail-closed).
+ * ── Why this is `Partial<…>` and not `Record<Locale, …>` (AR-2 B-0) ──────────
+ * It was total, which encoded a true invariant with one false premise: that every
+ * REGISTERED locale RENDERS the gallery. Registration and rendering are different
+ * facts, and AR-1 was the first phase to separate them — `ar` is registered with a
+ * single policy page and no `/ar/` homepage, so `renderGallery('ar')` is never
+ * called and there is nothing for it to fall back from.
+ *
+ * The total map made registering a locale impossible without first authoring 105
+ * slide translations, which silently broke `MULTILINGUAL_HANDOFF.md` §7 stage 1
+ * ("register with an empty slug set, confirm the build is unchanged, before any
+ * content lands") for EVERY future locale, not just Arabic. It had simply not
+ * been noticed because no locale had been registered since P34.
+ *
+ * Making it partial on its own would trade a false failure for a silent one — the
+ * P34 defect back again — so absence is no longer allowed to be silent. A
+ * registered locale must appear in EXACTLY ONE of `GALLERY_TEXT` (it renders the
+ * gallery and here is its dictionary) or `GALLERY_EXEMPT` (it does not, and here
+ * is why). Gate 4j enforces the partition; `renderGallery()` enforces the claim.
  */
-const GALLERY_TEXT: Readonly<Record<Locale, GalleryDictionary>> = {
+const GALLERY_TEXT: Partial<Readonly<Record<Locale, GalleryDictionary>>> = {
   en: GALLERY_TEXT_EN,
   es: GALLERY_TEXT_ES,
   it: GALLERY_TEXT_IT,
@@ -1141,6 +1155,27 @@ const GALLERY_TEXT: Readonly<Record<Locale, GalleryDictionary>> = {
   de: GALLERY_TEXT_DE,
   ja: GALLERY_TEXT_JA,
   zh: GALLERY_TEXT_ZH,
+};
+
+/**
+ * Registered locales that do NOT render the gallery, each with the reason.
+ *
+ * This is a CLAIM, not a suppression. "This locale ships no page that calls
+ * renderGallery()" is falsifiable, and both halves of the framework falsify it:
+ *
+ *   • Gate 4j (source, pre-build) rejects a locale that is in neither map, in
+ *     both, or exempt with an empty reason — and prints the exempt set in its
+ *     summary, so an exemption can never sit unread.
+ *   • `renderGallery()` (below, at build time) THROWS if it is ever called for an
+ *     exempt locale. So the moment someone adds `/ar/index.astro` the build stops
+ *     with a message naming this map, instead of quietly shipping 105 English
+ *     captions on an Arabic page — which is exactly the P34 defect.
+ *
+ * An entry here is therefore load-bearing in both directions. Delete it when the
+ * locale gains a homepage; the build will tell you the moment you forget.
+ */
+export const GALLERY_EXEMPT: Readonly<Record<string, string>> = {
+  // Empty today: every registered locale ships a homepage and therefore a gallery.
 };
 
 /** Indentation of a slide element inside `<div class="carousel-track">`. */
@@ -1182,6 +1217,18 @@ function textFor(locale: string, id: string): GallerySlideText {
  * value is escaped here.
  */
 export function renderGallery(locale: string = DEFAULT_LOCALE): string {
+  // The exemption in GALLERY_EXEMPT asserts that this is unreachable for that
+  // locale. Verifying the assertion here is what keeps the partial GALLERY_TEXT
+  // honest: without it, adding a homepage for an exempt locale would ship 105
+  // English captions under a translated page and pass every gate.
+  if (locale in GALLERY_EXEMPT) {
+    throw new Error(
+      `renderGallery("${locale}") — "${locale}" is declared in GALLERY_EXEMPT ` +
+      `(src/page-content/home-gallery.ts) as a locale that renders no gallery, but a page ` +
+      `just asked for one. Add GALLERY_TEXT_${locale.toUpperCase()} and remove the exemption ` +
+      `in the same change; do not delete this check. Reason on record: ${GALLERY_EXEMPT[locale]}`
+    );
+  }
   return GALLERY_SLIDES.map((slide) => {
     const { alt, caption } = textFor(locale, slide.id);
     const className = slide.active ? "carousel-slide active" : "carousel-slide";
