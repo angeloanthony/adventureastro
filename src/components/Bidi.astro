@@ -1,0 +1,25 @@
+---
+// src/components/Bidi.astro — the `.astro` delivery surface of the shared bidi formatter
+// (AR-2 B-2, Phase A). The policy and the mechanism live in `src/lib/bidi.ts`; this file
+// carries neither.
+//
+// WHY A SECOND SURFACE EXISTS. The two authoring surfaces that measured bare mixed-direction
+// runs are different in kind and neither can use the other's form:
+//
+//   src/components/**.astro     JSX-like templates    ->  <Bidi>{SITE.phoneDisplay}</Bidi>
+//   src/page-content/*.ts       HTML template literals -> ${phoneDisplay(SITE.phoneDisplay)}
+//
+// A string helper in an `.astro` template would need `<Fragment set:html={…} />` around a
+// phone number, which is an injection-shaped pattern adopted for formatting reasons — and
+// an `.astro` component cannot be called from a `.ts` template literal at all. So the
+// formatter has one authority and two surfaces, rather than one surface and a workaround.
+//
+// THE TAG NAME IS NOT WRITTEN HERE. It resolves from ISOLATION_ELEMENT, so this component
+// cannot drift from the string helpers, and changing the isolation mechanism stays one edit
+// in one file. That indirection is the whole reason this file is allowed to exist: a
+// component that hardcoded `<bdi>` would be a second definition of the mechanism wearing a
+// component's name.
+import { ISOLATION_ELEMENT } from '../lib/bidi';
+const Isolate = ISOLATION_ELEMENT;
+---
+<Isolate><slot /></Isolate>
