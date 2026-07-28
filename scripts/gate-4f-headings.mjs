@@ -33,6 +33,7 @@ import { join, dirname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { stripNonRendered, flattenElementText, foldPunctuation } from './lib/rendered-text.mjs';
 import { createRenderIndex } from './lib/render-index.mjs';
+import { resolveHost } from './lib/host-adapter.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
@@ -58,21 +59,27 @@ try {
   process.exit(2);
 }
 
-// --- Registered locales come from i18n.ts, so a new language cannot reach
-//     production without either a marker list or a deliberate exit 2. ---
-const i18nSrc = readFileSync(join(root, 'src', 'lib', 'i18n.ts'), 'utf8');
-const localesBlock = i18nSrc.match(/LOCALES\s*=\s*\[([\s\S]*?)\]\s*as const/);
-if (!localesBlock) {
-  console.error('gate-4f: could not parse LOCALES from src/lib/i18n.ts');
+// --- Registered locales come from the host adapter, so a new language cannot reach
+//     production without either a marker list or a deliberate exit 2.
+//
+//     F4 Phase 1: the regex that used to live here — /LOCALES\s*=\s*\[…\]\s*as const/
+//     over src/lib/i18n.ts — was one of three byte-identical copies. Where the registry
+//     lives and how it is written is host shape, and this gate is no longer permitted
+//     to know either. ---
+let host;
+try {
+  host = resolveHost();
+} catch (e) {
+  console.error(`gate-4f: ${e.message}`);
   process.exit(2);
 }
-const LOCALE_CODES = [...localesBlock[1].matchAll(/code:\s*'([^']+)'/g)].map((m) => m[1]);
-const DEFAULT_LOCALE = i18nSrc.match(/DEFAULT_LOCALE\s*=\s*'([^']+)'/)?.[1] ?? 'en';
-const TARGETS = LOCALE_CODES.filter((c) => c !== DEFAULT_LOCALE);
+const LOCALE_CODES = host.localeCodes;
+const DEFAULT_LOCALE = host.defaultLocale;
+const TARGETS = host.targets;
 
 for (const loc of TARGETS) {
   if (!config.locales?.[loc]) {
-    console.error(`gate-4f: locale "${loc}" is registered in i18n.ts but has no entry in ${relative(root, CONFIG)} — refusing to pass silently.`);
+    console.error(`gate-4f: locale "${loc}" is registered by the host but has no entry in ${relative(root, CONFIG)} — refusing to pass silently.`);
     process.exit(2);
   }
 }

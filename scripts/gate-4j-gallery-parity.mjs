@@ -22,86 +22,46 @@
 // This is a source-level check with no dist/ dependency, so it runs BEFORE
 // `astro build` — a broken dictionary fails in seconds rather than after a
 // full site build.
-import { readFileSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
+import { parseSourceFile, declOf, keyOf, stringOf, unwrap, at as atIn } from './lib/ts-ast.mjs';
+import { resolveHost } from './lib/host-adapter.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const I18N = join(root, 'src', 'lib', 'i18n.ts');
 const GALLERY = join(root, 'src', 'page-content', 'home-gallery.ts');
 
 const errors = [];
 const fail = (msg) => errors.push(msg);
 
 /** Parse a file into an AST. Syntax errors surface as garbage nodes, not throws. */
-function parse(file) {
-  return ts.createSourceFile(file, readFileSync(file, 'utf8'), ts.ScriptTarget.Latest, true);
-}
+const parse = parseSourceFile;
 
 /** `file:line` for a node, so a failure points at the exact source line. */
-function at(sf, node) {
-  const { line } = sf.getLineAndCharacterOfPosition(node.getStart(sf));
-  return `${sf.fileName.slice(root.length + 1).replace(/\\/g, '/')}:${line + 1}`;
-}
-
-/** Unwrap `x as const satisfies T` / parenthesized initializers to the real value. */
-function unwrap(node) {
-  while (node && (ts.isAsExpression(node) || ts.isSatisfiesExpression(node) || ts.isParenthesizedExpression(node))) {
-    node = node.expression;
-  }
-  return node;
-}
-
-/** The initializer of a top-level `const NAME = …`, unwrapped, or undefined. */
-function declOf(sf, name) {
-  for (const stmt of sf.statements) {
-    if (!ts.isVariableStatement(stmt)) continue;
-    for (const d of stmt.declarationList.declarations) {
-      if (ts.isIdentifier(d.name) && d.name.text === name) return unwrap(d.initializer);
-    }
-  }
-  return undefined;
-}
-
-/** A property key as text, whether written `en:` or `"slide-001":`. */
-function keyOf(prop) {
-  const n = prop.name;
-  if (!n) return null;
-  if (ts.isIdentifier(n) || ts.isStringLiteral(n) || ts.isNumericLiteral(n)) return n.text;
-  return null; // computed key — rejected by the caller
-}
-
-/** A string-literal value as text, or null if it is not a literal string. */
-function stringOf(node) {
-  const v = unwrap(node);
-  if (!v) return null;
-  return ts.isStringLiteral(v) || ts.isNoSubstitutionTemplateLiteral(v) ? v.text : null;
-}
+const at = (sf, node) => atIn(sf, node, root);
 
 // ---------------------------------------------------------------------------
-// 1. Registered locales — the roadmap in i18n.ts is the authority on which
+// 1. Registered locales — the host's own registry is the authority on which
 //    locales must have a dictionary at all.
+//
+//    F4 Phase 1: this gate no longer knows where that roadmap lives or how it is
+//    written. It asks the host adapter and receives the answer. The exit code
+//    stays 1 here, where the dist/ gates use 2 — that difference is gate policy
+//    and is decided here, never in the adapter.
 // ---------------------------------------------------------------------------
-const i18nSf = parse(I18N);
-const localesNode = declOf(i18nSf, 'LOCALES');
-if (!localesNode || !ts.isArrayLiteralExpression(localesNode)) {
-  console.error('gate-4j: could not parse LOCALES from src/lib/i18n.ts');
+let host;
+try {
+  host = resolveHost();
+} catch (e) {
+  console.error(`gate-4j: ${e.message}`);
   process.exit(1);
 }
-const LOCALE_CODES = [];
-for (const el of localesNode.elements) {
-  const obj = unwrap(el);
-  if (!ts.isObjectLiteralExpression(obj)) continue;
-  const codeProp = obj.properties.find((p) => ts.isPropertyAssignment(p) && keyOf(p) === 'code');
-  const code = codeProp && stringOf(codeProp.initializer);
-  if (code) LOCALE_CODES.push(code);
-}
+const LOCALE_CODES = host.localeCodes;
 if (LOCALE_CODES.length === 0) {
-  console.error('gate-4j: parsed LOCALES but found no locale codes');
+  console.error(`gate-4j: ${host.diagnostics.noCodes}`);
   process.exit(1);
 }
-const DEFAULT_LOCALE = stringOf(declOf(i18nSf, 'DEFAULT_LOCALE')) ?? 'en';
+const DEFAULT_LOCALE = host.defaultLocale;
 
 // ---------------------------------------------------------------------------
 // 2. The canonical key set — GALLERY_SLIDES. The slide table is the authority;
@@ -170,12 +130,12 @@ for (const prop of registryNode.properties) {
 
 for (const code of LOCALE_CODES) {
   if (!registry.has(code)) {
-    fail(`locale "${code}" is registered in i18n.ts but has no GALLERY_TEXT dictionary — it would resolve through the English fallback`);
+    fail(`locale "${code}" is registered by the host but has no GALLERY_TEXT dictionary — it would resolve through the English fallback`);
   }
 }
 for (const code of registry.keys()) {
   if (!LOCALE_CODES.includes(code)) {
-    fail(`GALLERY_TEXT registers "${code}", which is not a locale in i18n.ts LOCALES`);
+    fail(`GALLERY_TEXT registers "${code}", which is not a locale the host registers`);
   }
 }
 // Aliasing check: a non-default locale pointing at another locale's dictionary

@@ -1,0 +1,223 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://adventuretoursvernal.local/schemas/host-manifest.schema.json",
+  "title": "Localization framework host manifest, schema v1",
+
+  "$doc": [
+    "This schema is FRAMEWORK-OWNED. The instance it validates is HOST-AUTHORED.",
+    "",
+    "The manifest declares WHAT EXISTS AND HOW IT IS ORGANIZED. It never declares HOW TO",
+    "RECOVER THAT FROM BYTES. F2 ADR-2's discriminator governs every field: if changing the",
+    "engine from regex to AST — or from a dist/ walk to a build hook — would require editing",
+    "the manifest, the manifest has absorbed procedure. A field that survives that change is",
+    "structure. `entryStyle`, `collection` and `parser` were all rejected under that test.",
+    "",
+    "Unknown keys are REJECTED, not ignored. A typo'd key that silently does nothing is the",
+    "`4h.nonBoundaries` failure (F2 measurement M-4) reproduced in the contract layer. `$doc`",
+    "is therefore allowed explicitly wherever prose is useful.",
+    "",
+    "SECTIONS 3-6 ARE OPTIONAL IN v1 BY DESIGN. They are the ratified shape of couplings C-2",
+    "and C-4 through C-6, recorded here so the contract is complete and additive changes stay",
+    "additive. The host instance declares a section only when a consumer reads it: shipping",
+    "config that nothing reads is the same defect as M-4, stated in the other direction."
+  ],
+
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["manifestVersion", "project", "locales"],
+
+  "properties": {
+    "$schema": { "type": "string" },
+    "$doc": { "$ref": "#/definitions/doc" },
+
+    "manifestVersion": {
+      "const": 1,
+      "$doc": "The engine refuses a version it does not know, forward AND backward. A field that changes meaning bumps this; additive optional fields do not."
+    },
+
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "root"],
+      "properties": {
+        "$doc": { "$ref": "#/definitions/doc" },
+        "name": { "type": "string", "minLength": 1 },
+        "root": { "type": "string", "minLength": 1 }
+      }
+    },
+
+    "locales": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["registry", "defaultBinding", "entries"],
+      "$doc": [
+        "The host's own registry is the source of truth for codes; `entries` adds the framework",
+        "facts it does not carry. The adapter asserts keys(entries) === codes(registry) and fails",
+        "closed on drift. A CHECKED second list is not a second source of truth — the stale 4-of-8",
+        "locale list in astro.config.mjs is what an UNCHECKED one looks like."
+      ],
+      "properties": {
+        "$doc": { "$ref": "#/definitions/doc" },
+        "registry": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["module", "binding", "codeField"],
+          "properties": {
+            "$doc": { "$ref": "#/definitions/doc" },
+            "module": { "type": "string", "minLength": 1 },
+            "binding": {
+              "type": "string",
+              "minLength": 1,
+              "$doc": "Names WHAT THE HOST CALLS its locale registry, not how to find it. Regex to AST does not change the name."
+            },
+            "codeField": { "type": "string", "minLength": 1 }
+          }
+        },
+        "defaultBinding": { "type": "string", "minLength": 1 },
+        "entries": {
+          "type": "object",
+          "minProperties": 1,
+          "properties": { "$doc": { "$ref": "#/definitions/doc" } },
+          "additionalProperties": { "$ref": "#/definitions/localeEntry" },
+          "propertyNames": { "pattern": "^(\\$doc|[a-z]{2}(-[A-Za-z0-9]+)*)$" }
+        }
+      }
+    },
+
+    "routes": {
+      "$ref": "#/definitions/routes",
+      "$doc": "OPTIONAL in the instance until the phase that migrates coupling C-2 (the dist/ walk) lands."
+    },
+    "dictionaries": {
+      "$ref": "#/definitions/dictionaries",
+      "$doc": "OPTIONAL in the instance until the phase that migrates couplings C-4/C-5 lands."
+    },
+    "policy": {
+      "$ref": "#/definitions/policy",
+      "$doc": "OPTIONAL in the instance until the phase that migrates coupling C-3 lands."
+    },
+    "structures": {
+      "$ref": "#/definitions/structures",
+      "$doc": "OPTIONAL in the instance until the phase that migrates coupling C-6 (HUB_SLUGS) lands."
+    }
+  },
+
+  "definitions": {
+    "doc": {
+      "$doc": "Prose carried in the manifest. Allowed everywhere precisely because unknown keys are rejected.",
+      "oneOf": [{ "type": "string" }, { "type": "array", "items": { "type": "string" } }]
+    },
+
+    "localeEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$doc": { "$ref": "#/definitions/doc" },
+        "role": {
+          "enum": ["reference", "target"],
+          "$doc": [
+            "F3-B1 is DELIBERATELY NOT RESOLVED BY THIS FIELD. Gate 4g's identity signal needs the",
+            "default locale's corpus as its reference set; that is a framework-level truth ('default",
+            "locale corpus = reference corpus'), enforced as an engine invariant, not a host fact.",
+            "`role` records the host's own view and must not be read as the source of that semantics.",
+            "Widening the schema here is the precedent that kills the declarative boundary."
+          ]
+        },
+        "script": {
+          "enum": ["latin", "han", "japanese"],
+          "$doc": "The fine vocabulary subsumes 4h's coarse `cjk`, which is retired. Declared once here; F2 M-1 measured it declared 4x and already drifted."
+        },
+        "state": {
+          "enum": ["planned", "in-progress", "complete"],
+          "$doc": "F2 M-2 measured this declared 3x."
+        }
+      }
+    },
+
+    "routes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["output", "pageGlob", "localePrefix", "defaultLocalePrefixed"],
+      "properties": {
+        "$doc": { "$ref": "#/definitions/doc" },
+        "output": { "type": "string", "minLength": 1 },
+        "pageGlob": { "type": "string", "minLength": 1 },
+        "localePrefix": {
+          "enum": ["path-segment"],
+          "$doc": "The host's URL policy, not a routing algorithm. A build-hook engine would still need it and would not change it."
+        },
+        "defaultLocalePrefixed": { "type": "boolean" },
+        "entryPoint": { "type": "string", "minLength": 1 },
+        "exempt": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "dictionaries": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["module", "registry", "canonicalKeys", "requiredFields", "completeness"],
+        "properties": {
+          "$doc": { "$ref": "#/definitions/doc" },
+          "module": { "type": "string", "minLength": 1 },
+          "registry": { "type": "string", "minLength": 1 },
+          "canonicalKeys": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["binding"],
+            "properties": {
+              "binding": { "type": "string", "minLength": 1 },
+              "keyField": {
+                "type": "string",
+                "minLength": 1,
+                "$doc": "Kept under the discriminator: which field carries permanent identity is a host modelling decision. An array of objects has no canonical key the engine could infer."
+              }
+            }
+          },
+          "requiredFields": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "minLength": 1 },
+            "$doc": "`[\"*\"]` means every canonical key must be present."
+          },
+          "completeness": { "enum": ["total", "partial"] }
+        }
+      }
+    },
+
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dir", "gates"],
+      "$doc": "Paths only. Contents stay host-owned — a gate config answers 'how should the framework behave', which is not what this manifest is for.",
+      "properties": {
+        "$doc": { "$ref": "#/definitions/doc" },
+        "dir": { "type": "string", "minLength": 1 },
+        "gates": {
+          "type": "object",
+          "additionalProperties": {
+            "type": ["string", "null"],
+            "$doc": "null means the gate has no config file by design (4j)."
+          }
+        }
+      }
+    },
+
+    "structures": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["module", "binding"],
+        "properties": {
+          "$doc": { "$ref": "#/definitions/doc" },
+          "module": { "type": "string", "minLength": 1 },
+          "binding": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

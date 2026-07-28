@@ -1,0 +1,71 @@
+{
+  "$schema": "./scripts/lib/host-manifest.schema.json",
+  "manifestVersion": 1,
+
+  "$doc": [
+    "HOST MANIFEST — what kind of host is this repository?",
+    "",
+    "This file is HOST-AUTHORED and lives at the repository root, deliberately outside",
+    "i18n-gates/. The two are orthogonal and must not drift into each other:",
+    "",
+    "  i18n-gates/*.json  answers  'how should the framework behave?'   (policy)",
+    "  host-manifest.json answers  'what kind of host is this?'         (structure)",
+    "",
+    "Colocating them invites policy leaking into the manifest and host shape leaking into",
+    "gate configs purely through proximity. Keeping them apart is the invariant, not a",
+    "filing preference.",
+    "",
+    "The manifest declares WHAT EXISTS AND HOW IT IS ORGANIZED. It never declares HOW TO",
+    "RECOVER THAT FROM BYTES — no regex, no AST node, no parser selection, no traversal",
+    "rule. If switching the adapter from regex to AST would require editing this file,",
+    "procedure has leaked in; that is an F4 finding, not a schema change.",
+    "",
+    "Sections routes/dictionaries/policy/structures are defined in schema v1 but are NOT",
+    "declared here yet. Each lands with the phase that reads it. Config that nothing reads",
+    "is the 4h.nonBoundaries defect (F2 M-4) in the other direction."
+  ],
+
+  "project": {
+    "name": "adventuretoursvernal",
+    "root": "."
+  },
+
+  "locales": {
+    "$doc": [
+      "The host's own registry is the source of truth for locale codes; this section points",
+      "at it rather than copying it. `entries` adds only the framework facts the host registry",
+      "does not carry, and the adapter asserts keys(entries) === codes(registry), failing",
+      "closed on any drift.",
+      "",
+      "A CHECKED second list is not a second source of truth. The stale 4-of-8 locale list in",
+      "astro.config.mjs, which nothing verifies, is what an UNCHECKED one looks like."
+    ],
+    "registry": {
+      "module": "src/lib/i18n.ts",
+      "binding": "LOCALES",
+      "codeField": "code"
+    },
+    "defaultBinding": "DEFAULT_LOCALE",
+
+    "entries": {
+      "$doc": [
+        "`script` and `state` are RATIFIED for this section (F2 ADR-2, on the strength of M-1 and",
+        "M-2) but are NOT declared yet. Gates 4f, 4g and 4h still declare `script` in their own",
+        "configs; adding it here before those reads migrate would put one fact in four places and",
+        "make the measured drift worse, not better. It lands with the phase that strips the configs.",
+        "",
+        "`role` is declared because it duplicates nothing. Note that it is NOT the source of 4g's",
+        "reference-corpus semantics — F3-B1 keeps that an engine invariant ('default locale corpus",
+        "= reference corpus'). `role` records the host's own view and must not be read as meaning."
+      ],
+      "en": { "role": "reference" },
+      "es": { "role": "target" },
+      "it": { "role": "target" },
+      "pt": { "role": "target" },
+      "fr": { "role": "target" },
+      "de": { "role": "target" },
+      "ja": { "role": "target" },
+      "zh": { "role": "target" }
+    }
+  }
+}

@@ -43,6 +43,7 @@ import { join, dirname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { stripNonRendered, flattenElementText, foldPunctuation } from './lib/rendered-text.mjs';
 import { createRenderIndex } from './lib/render-index.mjs';
+import { resolveHost } from './lib/host-adapter.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -57,7 +58,16 @@ const positional = argv.filter((a, i) => !a.startsWith('--') && !argv[i - 1]?.st
 const dist = positional[0] ? resolve(positional[0]) : join(root, 'dist');
 const CONFIG = resolve(flag('--config') ?? join(root, 'i18n-gates', '4g-anchors.json'));
 const LICENSED = resolve(flag('--licensed') ?? join(root, 'i18n-gates', '4f-headings.json'));
-const I18N = resolve(flag('--i18n') ?? join(root, 'src', 'lib', 'i18n.ts'));
+// `--i18n` is no longer resolved here: where the locale registry lives is host shape, and
+// this gate is not permitted to know it. The flag is passed through to the adapter, which
+// is the only component that may turn it into a path.
+//
+// `--manifest` is its necessary companion. The adapter checks the manifest's locale set
+// against the registry's on every run, so a scratch registry with a different locale set
+// is DRIFT unless a scratch manifest describes it. Without this flag, `--i18n` alone
+// could only ever point at a registry identical to the real one, which is not a test.
+const I18N_OVERRIDE = flag('--i18n');
+const MANIFEST_OVERRIDE = flag('--manifest');
 
 const rel = (p) => relative(root, p).split(sep).join('/');
 
@@ -66,7 +76,7 @@ const rel = (p) => relative(root, p).split(sep).join('/');
 // because an absent dictionary degraded quietly instead of failing. An advisory gate
 // that cannot run must say so; silently reporting "0 candidates" would be worse than
 // blocking, because it reads as a clean corpus.
-for (const [label, path] of [['config', CONFIG], ['4f licensed registry', LICENSED], ['i18n', I18N]]) {
+for (const [label, path] of [['config', CONFIG], ['4f licensed registry', LICENSED]]) {
   if (!existsSync(path)) {
     console.error(`gate-4g: ${label} not found at ${rel(path)} — refusing to report silently.`);
     process.exit(2);
@@ -91,25 +101,26 @@ try {
   process.exit(2);
 }
 
-// --- Registered locales come from i18n.ts, so a new language cannot reach
+// --- Registered locales come from the host adapter, so a new language cannot reach
 //     production without either an entry here or a deliberate exit 2. ---
-const i18nSrc = readFileSync(I18N, 'utf8');
-const localesBlock = i18nSrc.match(/LOCALES\s*=\s*\[([\s\S]*?)\]\s*as const/);
-if (!localesBlock) {
-  console.error(`gate-4g: could not parse LOCALES from ${rel(I18N)}`);
+let host;
+try {
+  host = resolveHost({ registryModule: I18N_OVERRIDE, manifestPath: MANIFEST_OVERRIDE });
+} catch (e) {
+  console.error(`gate-4g: ${e.message}`);
   process.exit(2);
 }
-const LOCALE_CODES = [...localesBlock[1].matchAll(/code:\s*'([^']+)'/g)].map((m) => m[1]);
-const DEFAULT_LOCALE = i18nSrc.match(/DEFAULT_LOCALE\s*=\s*'([^']+)'/)?.[1] ?? 'en';
-const TARGETS = LOCALE_CODES.filter((c) => c !== DEFAULT_LOCALE);
+const LOCALE_CODES = host.localeCodes;
+const DEFAULT_LOCALE = host.defaultLocale;
+const TARGETS = host.targets;
 if (!TARGETS.length) {
-  console.error(`gate-4g: parsed LOCALES from ${rel(I18N)} but found no target locales`);
+  console.error(`gate-4g: ${host.diagnostics.noTargets}`);
   process.exit(2);
 }
 for (const loc of TARGETS) {
   if (!config.locales?.[loc]) {
     console.error(
-      `gate-4g: locale "${loc}" is registered in ${rel(I18N)} but has no entry in ${rel(CONFIG)} — refusing to report silently.`
+      `gate-4g: locale "${loc}" is registered by the host but has no entry in ${rel(CONFIG)} — refusing to report silently.`
     );
     process.exit(2);
   }

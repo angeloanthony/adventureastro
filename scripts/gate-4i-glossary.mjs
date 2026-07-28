@@ -31,6 +31,8 @@ import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
 import { extractVisibleText } from './lib/rendered-text.mjs';
 import { createRenderIndex } from './lib/render-index.mjs';
+import { parseSourceFile, declOf, keyOf, stringOf, unwrap } from './lib/ts-ast.mjs';
+import { resolveHost } from './lib/host-adapter.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -45,14 +47,23 @@ const positional = argv.filter((a, i) => !a.startsWith('--') && !argv[i - 1]?.st
 const dist = positional[0] ? resolve(positional[0]) : join(root, 'dist');
 const CONFIG = resolve(flag('--config') ?? join(root, 'i18n-gates', '4i-glossary.json'));
 const UI = resolve(flag('--ui') ?? join(root, 'src', 'lib', 'ui.ts'));
-const I18N = resolve(flag('--i18n') ?? join(root, 'src', 'lib', 'i18n.ts'));
+// `--i18n` is no longer resolved here: where the locale registry lives is host shape, and
+// this gate is not permitted to know it. The flag is passed through to the adapter, which
+// is the only component that may turn it into a path.
+//
+// `--manifest` is its necessary companion. The adapter checks the manifest's locale set
+// against the registry's on every run, so a scratch registry with a different locale set
+// is DRIFT unless a scratch manifest describes it. Without this flag, `--i18n` alone
+// could only ever point at a registry identical to the real one, which is not a test.
+const I18N_OVERRIDE = flag('--i18n');
+const MANIFEST_OVERRIDE = flag('--manifest');
 
 const rel = (p) => relative(root, p).split(sep).join('/');
 
 // Missing inputs are exit 2, never a silent pass — the ja UI-chrome fail-open lesson
 // (handoff §7, Gate 4a): that locale shipped 57 pages of English chrome precisely
 // because an absent dictionary degraded quietly instead of failing.
-for (const [label, path] of [['config', CONFIG], ['ui dictionary', UI], ['i18n', I18N]]) {
+for (const [label, path] of [['config', CONFIG], ['ui dictionary', UI]]) {
   if (!existsSync(path)) {
     console.error(`gate-4i: ${label} not found at ${rel(path)} — refusing to pass silently.`);
     process.exit(2);
@@ -77,57 +88,26 @@ try {
 // type-stripping loader) and a regex over a 1,000-line dictionary would match
 // keys inside comments and prose.
 // ---------------------------------------------------------------------------
-const parse = (file) => ts.createSourceFile(file, readFileSync(file, 'utf8'), ts.ScriptTarget.Latest, true);
+const parse = parseSourceFile;
 
-const unwrap = (node) => {
-  while (node && (ts.isAsExpression(node) || ts.isSatisfiesExpression(node) || ts.isParenthesizedExpression(node))) {
-    node = node.expression;
-  }
-  return node;
-};
-
-function declOf(sf, name) {
-  for (const stmt of sf.statements) {
-    if (!ts.isVariableStatement(stmt)) continue;
-    for (const d of stmt.declarationList.declarations) {
-      if (ts.isIdentifier(d.name) && d.name.text === name) return unwrap(d.initializer);
-    }
-  }
-  return undefined;
-}
-
-function keyOf(prop) {
-  const n = prop.name;
-  if (!n) return null;
-  return ts.isIdentifier(n) || ts.isStringLiteral(n) || ts.isNumericLiteral(n) ? n.text : null;
-}
-
-function stringOf(node) {
-  const v = unwrap(node);
-  if (!v) return null;
-  return ts.isStringLiteral(v) || ts.isNoSubstitutionTemplateLiteral(v) ? v.text : null;
-}
-
-// --- Registered locales come from i18n.ts, so a new language cannot reach
-//     production without either a lock set or a deliberate exit 2. ---
-const i18nSf = parse(I18N);
-const localesNode = declOf(i18nSf, 'LOCALES');
-if (!localesNode || !ts.isArrayLiteralExpression(localesNode)) {
-  console.error(`gate-4i: could not parse LOCALES from ${rel(I18N)}`);
+// --- Registered locales come from the host adapter, so a new language cannot reach
+//     production without either a lock set or a deliberate exit 2.
+//
+//     F4 Phase 1: this gate no longer knows which module holds the registry, what the
+//     registry is called, or how it is written. It receives resolved facts. The
+//     fail-closed exit 2 below is gate policy and stays here. ---
+let host;
+try {
+  host = resolveHost({ registryModule: I18N_OVERRIDE, manifestPath: MANIFEST_OVERRIDE });
+} catch (e) {
+  console.error(`gate-4i: ${e.message}`);
   process.exit(2);
 }
-const LOCALE_CODES = [];
-for (const el of localesNode.elements) {
-  const obj = unwrap(el);
-  if (!ts.isObjectLiteralExpression(obj)) continue;
-  const codeProp = obj.properties.find((p) => ts.isPropertyAssignment(p) && keyOf(p) === 'code');
-  const code = codeProp && stringOf(codeProp.initializer);
-  if (code) LOCALE_CODES.push(code);
-}
-const DEFAULT_LOCALE = stringOf(declOf(i18nSf, 'DEFAULT_LOCALE')) ?? 'en';
-const TARGETS = LOCALE_CODES.filter((c) => c !== DEFAULT_LOCALE);
+const LOCALE_CODES = host.localeCodes;
+const DEFAULT_LOCALE = host.defaultLocale;
+const TARGETS = host.targets;
 if (!TARGETS.length) {
-  console.error(`gate-4i: parsed LOCALES from ${rel(I18N)} but found no target locales`);
+  console.error(`gate-4i: ${host.diagnostics.noTargets}`);
   process.exit(2);
 }
 for (const loc of TARGETS) {
