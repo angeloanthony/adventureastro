@@ -1,0 +1,739 @@
+{
+  "$schema": "astro-localization-gates/schemas/census-output.schema.json",
+  "censusVersion": 1,
+  "provenance": {
+    "measuredAt": "2026-07-28",
+    "manifest": "sha256:c0803653c5697ed98324a463b5a3e432dbeb3ea8f12c747fa0a50ccbe25b7539",
+    "corpus": {
+      "pages": {
+        "de": 77,
+        "en": 80,
+        "es": 77,
+        "fr": 77,
+        "it": 77,
+        "ja": 77,
+        "pt": 77,
+        "zh": 77
+      },
+      "fingerprint": "sha256:74429ecc2a71a26b32f81d6a66fb7bb944aeda1d5824fbc0d2f747286a29e165"
+    },
+    "engine": "astro-localization-gates@0.0.0+inrepo",
+    "invocation": "census phrase-count --phrases census/phrase-set.json --measured-at 2026-07-28"
+  },
+  "facts": [
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "de",
+        "phrase": "Ausgangspunkt",
+        "surface": "prose"
+      },
+      "value": 247,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 46
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "de",
+        "phrase": "Das Wichtigste in Kürze",
+        "surface": "prose"
+      },
+      "value": 52,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 52
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "de",
+        "phrase": "Dinosaur National Monument",
+        "surface": "prose"
+      },
+      "value": 542,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 76
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "de",
+        "phrase": "Kawasaki KRX 1000",
+        "surface": "prose"
+      },
+      "value": 103,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 28
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "de",
+        "phrase": "Land der Dinosaurier",
+        "surface": "prose"
+      },
+      "value": 599,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 75
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "de",
+        "phrase": "Leave No Trace",
+        "surface": "prose"
+      },
+      "value": 23,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 11
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "de",
+        "phrase": "Leave-No-Trace",
+        "surface": "prose"
+      },
+      "value": 8,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 7
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "de",
+        "phrase": "Piste",
+        "surface": "prose"
+      },
+      "value": 564,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 77
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "de",
+        "phrase": "Wanderweg",
+        "surface": "prose"
+      },
+      "value": 542,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 34
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "es",
+        "phrase": "Dinosaur National Monument",
+        "surface": "prose"
+      },
+      "value": 475,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 61
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "es",
+        "phrase": "Kawasaki KRX 1000",
+        "surface": "prose"
+      },
+      "value": 124,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 34
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "es",
+        "phrase": "Leave No Trace",
+        "surface": "prose"
+      },
+      "value": 31,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 11
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "es",
+        "phrase": "Puntos Clave",
+        "surface": "prose"
+      },
+      "value": 43,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 43
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "es",
+        "phrase": "Tierra de los Dinosaurios",
+        "surface": "prose"
+      },
+      "value": 553,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 67
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "fr",
+        "phrase": "Dinosaur National Monument",
+        "surface": "prose"
+      },
+      "value": 543,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 76
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "fr",
+        "phrase": "Kawasaki KRX 1000",
+        "surface": "prose"
+      },
+      "value": 124,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 34
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "fr",
+        "phrase": "Leave No Trace",
+        "surface": "prose"
+      },
+      "value": 34,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 12
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "fr",
+        "phrase": "Points Clés",
+        "surface": "prose"
+      },
+      "value": 52,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 52
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "fr",
+        "phrase": "Terre des Dinosaures",
+        "surface": "prose"
+      },
+      "value": 565,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 70
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "it",
+        "phrase": "Dinosaur National Monument",
+        "surface": "prose"
+      },
+      "value": 543,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 76
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "it",
+        "phrase": "Kawasaki KRX 1000",
+        "surface": "prose"
+      },
+      "value": 124,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 34
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "it",
+        "phrase": "Leave No Trace",
+        "surface": "prose"
+      },
+      "value": 33,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 11
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "it",
+        "phrase": "Punti Chiave",
+        "surface": "prose"
+      },
+      "value": 52,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 52
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "it",
+        "phrase": "Terra dei Dinosauri",
+        "surface": "prose"
+      },
+      "value": 559,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 70
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "ja",
+        "phrase": "Dinosaur National Monument",
+        "surface": "prose"
+      },
+      "value": 545,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 76
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "ja",
+        "phrase": "Kawasaki KRX 1000",
+        "surface": "prose"
+      },
+      "value": 123,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 34
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "ja",
+        "phrase": "トレイルヘッド",
+        "surface": "prose"
+      },
+      "value": 209,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 35
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "ja",
+        "phrase": "バーナル",
+        "surface": "prose"
+      },
+      "value": 2371,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 76
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "ja",
+        "phrase": "公式情報をご確認ください",
+        "surface": "prose"
+      },
+      "value": 940,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 50
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "ja",
+        "phrase": "岩絵",
+        "surface": "prose"
+      },
+      "value": 510,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 56
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "ja",
+        "phrase": "恐竜の国",
+        "surface": "prose"
+      },
+      "value": 644,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 75
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "ja",
+        "phrase": "要点まとめ",
+        "surface": "prose"
+      },
+      "value": 51,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 51
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "pt",
+        "phrase": "Dinosaur National Monument",
+        "surface": "prose"
+      },
+      "value": 543,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 76
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "pt",
+        "phrase": "Kawasaki KRX 1000",
+        "surface": "prose"
+      },
+      "value": 124,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 34
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "pt",
+        "phrase": "Leave No Trace",
+        "surface": "prose"
+      },
+      "value": 35,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 13
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "pt",
+        "phrase": "Pontos-Chave",
+        "surface": "prose"
+      },
+      "value": 52,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 52
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "pt",
+        "phrase": "Terra dos Dinossauros",
+        "surface": "prose"
+      },
+      "value": 534,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 70
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "zh",
+        "phrase": "Dinosaur National Monument",
+        "surface": "prose"
+      },
+      "value": 597,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 76
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "zh",
+        "phrase": "Kawasaki KRX 1000",
+        "surface": "prose"
+      },
+      "value": 141,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 34
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "zh",
+        "phrase": "官方渠道核实",
+        "surface": "prose"
+      },
+      "value": 982,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 50
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "zh",
+        "phrase": "岩画",
+        "surface": "prose"
+      },
+      "value": 587,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 61
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "zh",
+        "phrase": "恐龙之乡",
+        "surface": "prose"
+      },
+      "value": 658,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 75
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "zh",
+        "phrase": "攻略",
+        "surface": "prose"
+      },
+      "value": 1645,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 77
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "zh",
+        "phrase": "无痕山林",
+        "surface": "prose"
+      },
+      "value": 42,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 15
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "zh",
+        "phrase": "步道",
+        "surface": "prose"
+      },
+      "value": 1178,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 46
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "zh",
+        "phrase": "登山口",
+        "surface": "prose"
+      },
+      "value": 209,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 35
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "zh",
+        "phrase": "纪念地",
+        "surface": "prose"
+      },
+      "value": 477,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 46
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "zh",
+        "phrase": "荒野保护区",
+        "surface": "prose"
+      },
+      "value": 5,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 4
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "zh",
+        "phrase": "荒野深处",
+        "surface": "prose"
+      },
+      "value": 23,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 19
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "zh",
+        "phrase": "要点速览",
+        "surface": "prose"
+      },
+      "value": 52,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 52
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "zh",
+        "phrase": "越野路线",
+        "surface": "prose"
+      },
+      "value": 443,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 77,
+        "pagesWithPhrase": 77
+      }
+    }
+  ]
+}

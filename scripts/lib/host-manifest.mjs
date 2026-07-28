@@ -82,6 +82,12 @@ const ROLES = ['reference', 'target'];
 const SCRIPTS = ['latin', 'han', 'japanese'];
 const STATES = ['planned', 'in-progress', 'complete'];
 
+// The census kinds schema v1 declares. Duplicated from census-output.schema.json in the
+// same sense `SCRIPTS` is duplicated from the gate configs: this module validates the
+// manifest and must not import a producer. The two lists are checked against each other
+// by the phase bootstrap rather than trusted.
+const CENSUS_KINDS = ['phrase-count', 'marker-lexicon'];
+
 function validateLocaleEntry(entry, code) {
   const where = `locales.entries["${code}"]`;
   requireObject(entry, where);
@@ -137,6 +143,18 @@ function validateOptionalSections(manifest) {
   if ('routes' in manifest) {
     const routes = requireObject(manifest.routes, 'routes');
     closeObject(routes, ['output', 'pageGlob', 'localePrefix', 'defaultLocalePrefixed', 'entryPoint', 'exempt'], 'routes');
+    // Required as of F5 Phase 5, which is the first phase to read this section. The four
+    // are required together because a routes section that says where output lives but not
+    // how locales appear in a route describes half a routing policy, and the half it omits
+    // is the half three consumers currently hardcode.
+    requireString(routes.output, 'routes.output');
+    requireString(routes.pageGlob, 'routes.pageGlob');
+    if (routes.localePrefix !== 'path-segment') {
+      throw new HostManifestError(`routes.localePrefix must be "path-segment" — got ${JSON.stringify(routes.localePrefix)}`);
+    }
+    if (typeof routes.defaultLocalePrefixed !== 'boolean') {
+      throw new HostManifestError('routes.defaultLocalePrefixed must be a boolean');
+    }
   }
   if ('dictionaries' in manifest) {
     const dicts = requireObject(manifest.dictionaries, 'dictionaries');
@@ -160,6 +178,18 @@ function validateOptionalSections(manifest) {
       closeObject(s, ['module', 'binding'], where);
     }
   }
+  if ('census' in manifest) {
+    const census = requireObject(manifest.census, 'census');
+    closeObject(census, ['dir', 'facts'], 'census');
+    requireString(census.dir, 'census.dir');
+    const facts = requireObject(census.facts, 'census.facts');
+    // Closed against the kinds census v1 declares. A filename filed under an unknown kind
+    // announces a readable artifact that nothing can read — M-4 with a filename attached.
+    closeObject(facts, CENSUS_KINDS, 'census.facts');
+    const kinds = Object.keys(facts).filter((k) => k !== '$doc' && k !== '$schema');
+    if (kinds.length === 0) throw new HostManifestError('census.facts must declare at least one kind');
+    for (const kind of kinds) requireString(facts[kind], `census.facts["${kind}"]`);
+  }
 }
 
 /**
@@ -168,7 +198,7 @@ function validateOptionalSections(manifest) {
  */
 export function validateManifest(manifest, label = MANIFEST_FILENAME) {
   requireObject(manifest, label);
-  closeObject(manifest, ['manifestVersion', 'project', 'locales', 'routes', 'dictionaries', 'policy', 'structures'], label);
+  closeObject(manifest, ['manifestVersion', 'project', 'locales', 'routes', 'dictionaries', 'policy', 'structures', 'census'], label);
 
   // Refused forward AND backward: an engine that guesses at an unknown version is an
   // engine that silently applies the wrong contract.
@@ -219,4 +249,4 @@ export function loadManifest({ manifestPath } = {}) {
   return { manifest: validateManifest(raw, label), manifestDir: dirname(file), label };
 }
 
-export const __testing = { root };
+export const __testing = { root, CENSUS_KINDS };

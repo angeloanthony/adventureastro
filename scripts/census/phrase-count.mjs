@@ -24,15 +24,16 @@
 // making it the producer's business would be the one thing that stops this tool being
 // portable. The contract is NARROWED, not widened: census reads no policy.
 //
-// WHY `--dist` IS REQUIRED. The census is the first framework artifact that needs to know
-// where rendered output lives, which is manifest section 3 (`routes.output`, coupling
-// C-2) — a section adventureastro's manifest does not declare yet. Rather than teach this
-// producer to compute a host path (the C-1 defect, reintroduced), or widen the manifest
-// in a phase whose brief forbids manifest changes, the location is an operator argument.
-// That is a recorded finding, not a design preference: see the F5 Phase 4 report.
+// WHERE THE CORPUS COMES FROM (changed at F5 Phase 5). Phase 4 required `--dist`, because
+// the census was the first framework artifact needing to know where rendered output lives
+// and manifest §3 did not exist yet. An operator-supplied path is the C-1 coupling wearing
+// a command-line flag: the host fact was still being supplied by hand, only from outside
+// the repository instead of inside it. §3 now exists, so the ordinary path is
+// `routes.output` resolved through the adapter, and `--dist` survives ONLY as an explicit
+// override for scratch corpora — the same affordance, and the same reason, as `--manifest`.
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { extractVisibleText } from '../lib/rendered-text.mjs';
+import { extractVisibleText, VISIBLE_TEXT_EXTRACTOR } from '../lib/rendered-text.mjs';
 import { createRenderIndex } from '../lib/render-index.mjs';
 import { resolveHost } from '../lib/host-adapter.mjs';
 import { loadManifest } from '../lib/host-manifest.mjs';
@@ -41,12 +42,12 @@ import { buildEnvelope, validateCensusOutput, serialize, canonicalJson, sha256 }
 // The extractor identity. It is the SAME view gates 4h and 4i read, called the same way,
 // which is what makes a count here comparable with a baseline frozen there.
 //
-// ⚠ RECORDED HOLE: this string is maintained by hand here, while the view it names lives
-// in ../lib/rendered-text.mjs. A change to the view that forgets to bump this string
-// leaves stale counts undetectable — which is exactly the staleness the `extractor` field
-// exists to catch. The version belongs beside the view; it stays here only until a second
-// view version exists to move it for.
-const EXTRACTOR = 'visibleText@1';
+// ✔ HOLE CLOSED AT F5 PHASE 5. Phase 4 recorded this as a hand-maintained literal one
+// directory away from the function it named. Phase 5 gave the field its first two readers,
+// which made the literal load-bearing — and a name that two consumers must agree with the
+// producer about is exactly the duplicated knowledge this phase exists to remove. It now
+// lives beside the view it names, and everyone imports it from there.
+const EXTRACTOR = VISIBLE_TEXT_EXTRACTOR;
 const SURFACE = 'prose';
 const visibleText = (html) => extractVisibleText(html, { inlineSeparator: '' });
 
@@ -66,18 +67,16 @@ for (let i = 0; i < argv.length; i++) {
   if (v === undefined || v.startsWith('--')) die(`${a} needs a value`);
   args[a] = v;
 }
-for (const required of ['--dist', '--phrases', '--measured-at']) {
+for (const required of ['--phrases', '--measured-at']) {
   if (!(required in args)) die(`${required} is required`);
 }
 if (!/^\d{4}-\d{2}-\d{2}$/.test(args['--measured-at'])) {
   die('--measured-at must be YYYY-MM-DD — the census takes its date as an argument so that repeated runs are byte-identical');
 }
 
-const dist = resolve(args['--dist']);
-if (!existsSync(dist)) die(`rendered output not found at ${args['--dist']}`);
-
 // --- Host facts. The adapter is the only component permitted to understand host shape;
-//     this producer receives answers (locale codes, default locale) and no paths. ---
+//     this producer receives answers (locale codes, default locale, where output lives)
+//     and computes no host path of its own. ---
 let host, manifest;
 try {
   host = resolveHost({ manifestPath: args['--manifest'] });
@@ -86,7 +85,19 @@ try {
   die(e.message);
 }
 const LOCALE_CODES = host.localeCodes;
-const DEFAULT_LOCALE = host.defaultLocale;
+
+// The corpus. `--dist` overrides, and the override is deliberately not the default: a
+// producer that took its corpus location from whoever invoked it would record a fact
+// about whatever directory was passed, under the manifest digest of a host that may not
+// have produced it.
+let dist, distLabel;
+try {
+  dist = args['--dist'] ? resolve(args['--dist']) : host.routes.output;
+  distLabel = args['--dist'] ?? host.routes.describe();
+} catch (e) {
+  die(`rendered output ${e.message}`);
+}
+if (!existsSync(dist)) die(`rendered output not found at ${distLabel}`);
 
 // --- The phrase set. Validated strictly: a phrase for an unregistered locale, a blank
 //     phrase or a duplicated request is a specification error, and a producer that
@@ -128,12 +139,10 @@ function countOf(text, phrase) {
 // --- Measure. ---
 const index = createRenderIndex(dist);
 
-/** Route identity is the index's; the locale rule is the consumer's — the same split every
- *  gate makes, and the reason render-index refuses to name a locale itself. */
-const localeOf = (key) => {
-  const seg = key.split('/')[0];
-  return LOCALE_CODES.includes(seg) ? seg : DEFAULT_LOCALE;
-};
+/** Route identity is the index's; the locale rule is the HOST's, and F5 Phase 5 moved it
+ *  to the one component allowed to hold host policy. Phase 4 open-coded it here, which
+ *  meant this producer had quietly decided what an unprefixed route means. */
+const localeOf = (key) => host.routes.localeOf(key);
 
 const byLocale = new Map();          // locale -> phrase -> {count, pagesWithPhrase}
 const pagesPerLocale = {};
@@ -141,7 +150,12 @@ const digest = [];
 
 for (const page of [...index.pages].sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0))) {
   const loc = localeOf(page.key);
-  pagesPerLocale[loc] = (pagesPerLocale[loc] ?? 0) + 1;
+  // `null` means the host prefixes every locale, so this route is outside the localized
+  // corpus entirely. It is not the default locale's by default — that inference is the
+  // host's to make, and the manifest is where it made it. The fingerprint below still
+  // covers the page: a census must notice a corpus change even where it counted nothing,
+  // or a reviewer diffing two censuses would read "same fingerprint" as "same corpus".
+  if (loc !== null) pagesPerLocale[loc] = (pagesPerLocale[loc] ?? 0) + 1;
 
   const html = page.html;
   digest.push(`${page.key}\u0000${sha256(html)}`);

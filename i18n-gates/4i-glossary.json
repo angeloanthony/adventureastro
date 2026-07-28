@@ -34,18 +34,27 @@
     ],
 
     "counts_are_frozen_measurements": [
-      "Two count forms, both measured on the P37 rendered corpus (619 pages, 77 per",
-      "locale) and frozen — never estimated, never carried over from a source-text",
-      "figure (methodology principle 1).",
-      "  min   — a floor. A lock's count may rise when pages are added; it must never",
-      "          fall, because the only ways down are deletion and substitution. This",
-      "          is what makes `missing lock` and `silent substitution` detectable",
-      "          without pinning the corpus to a fixed size.",
-      "  count — exact. Reserved for the three conservation checks the review itself",
-      "          established (A6's split, C7's core, C8's survivors), where the number",
-      "          is the invariant rather than a by-product of corpus size.",
-      "A legitimate content change re-baselines these figures deliberately. That is the",
-      "point of a freeze, and it is the Gate 4e rule stated as code."
+      "THE FIGURES ARE NO LONGER IN THIS FILE (F5 Phase 5). They were, from P37 until",
+      "then: fifty numbers measured on the rendered corpus and typed in beside the lock",
+      "they bound. One of them — zh `官方渠道核实` — was also typed into 4h-seams.json,",
+      "under a different aggregation semantics, which is defect D-1: one measurement, two",
+      "transcriptions, and nothing that could ever notice them diverge.",
+      "",
+      "What is left here is the part that was always a decision rather than a measurement:",
+      "  bound: floor  — the count may rise when pages are added; it must never fall,",
+      "                  because the only ways down are deletion and substitution. This",
+      "                  is what makes `missing lock` and `silent substitution` detectable",
+      "                  without pinning the corpus to a fixed size.",
+      "  bound: exact  — reserved for the conservation checks the review itself established",
+      "                  (A6's split, C7's core, C8's survivors), where the number is the",
+      "                  invariant rather than a by-product of corpus size.",
+      "",
+      "The number each bound applies to is read from the phrase census, which measured it",
+      "once, records which extractor produced it, and is regenerated wholesale rather than",
+      "edited. A legitimate content change still re-baselines deliberately — by re-running",
+      "the producer and reviewing the diff, which is the same freeze semantics with the",
+      "transcription step removed. `min` and `count` are now REFUSED here, not ignored: a",
+      "leftover figure would look like configuration and silently do nothing."
     ],
 
     "licensed_compounds": [
@@ -103,7 +112,7 @@
           "concept": "Dinosaur Country — the destination identity",
           "phrase": "Land der Dinosaurier",
           "provenance": "A8 (P23) — 18 English residues normalised; ui.ts DE preamble line 660",
-          "min": 598,
+          "bound": "floor",
           "forbidden": [
             { "text": "Dinosaur Country", "enforce": "block", "why": "untranslated English identity — A8 swept all 18 to zero" },
             { "text": "Dinosaurierland", "enforce": "block", "why": "a competing German rendering; A8 established the identity has exactly one" },
@@ -116,7 +125,7 @@
           "concept": "trailhead — the hiking sense",
           "phrase": "Ausgangspunkt",
           "provenance": "A7 (P22) — 41 English occurrences normalised; the staging sense stays Treffpunkt",
-          "min": 247,
+          "bound": "floor",
           "forbidden": [
             { "text": "Trailhead", "enforce": "block", "why": "the English loanword A7 removed; German was the only Latin-script locale keeping it" }
           ]
@@ -126,7 +135,7 @@
           "concept": "Key Takeaways — the summary block heading",
           "phrase": "Das Wichtigste in Kürze",
           "provenance": "ui.ts DE preamble lines 661–662 — reuses the locked P9 MDX phrase, not a new translation",
-          "min": 51,
+          "bound": "floor",
           "forbidden": [
             { "text": "Key Takeaways", "enforce": "block", "why": "the untranslated English heading the lock exists to replace" },
             { "text": "Wichtigste Erkenntnisse", "enforce": "block", "why": "competing German rendering" }
@@ -137,7 +146,7 @@
           "concept": "Leave No Trace — the programme name (Title Case in the English master)",
           "phrase": "Leave No Trace",
           "provenance": "A6 (P15) — 8 sites aligned; lowercase German imperative prose is licensed and deliberately not locked",
-          "count": 23,
+          "bound": "exact",
           "forbidden": []
         },
         {
@@ -145,7 +154,7 @@
           "concept": "Leave No Trace — the German attributive compound form",
           "phrase": "Leave-No-Trace",
           "provenance": "A6 (P15) — the corpus's own convention (kings-peak, high-uintas-backpacking), not a coinage",
-          "count": 8,
+          "bound": "exact",
           "forbidden": []
         },
         {
@@ -153,7 +162,7 @@
           "concept": "trail — the off-road (UTV/ATV/Jeep) sense",
           "phrase": "Piste",
           "provenance": "A3 (P16) RETAINED, 239 of 251 kept; A4 (P17) localised the generic noun. The split must not collapse.",
-          "min": 564,
+          "bound": "floor",
           "forbidden": []
         },
         {
@@ -161,7 +170,7 @@
           "concept": "trail — the hiking sense",
           "phrase": "Wanderweg",
           "provenance": "A3/A4 — the other half of the locked DE split; never one blanket term",
-          "min": 542,
+          "bound": "floor",
           "forbidden": []
         },
         {
@@ -170,7 +179,7 @@
           "phrase": "Dinosaur National Monument",
           "latinLock": true,
           "provenance": "handoff proper-noun policy; ui.ts DE preamble lines 657–658",
-          "min": 542,
+          "bound": "floor",
           "forbidden": []
         },
         {
@@ -179,7 +188,7 @@
           "phrase": "Kawasaki KRX 1000",
           "latinLock": true,
           "provenance": "handoff proper-noun policy — brand/fleet never translated",
-          "min": 103,
+          "bound": "floor",
           "forbidden": []
         }
       ]
@@ -197,7 +206,7 @@
           "concept": "Dinosaur Country — the destination identity",
           "phrase": "Tierra de los Dinosaurios",
           "provenance": "C4 (P21) cross-locale table — every locale translates the identity",
-          "min": 553,
+          "bound": "floor",
           "forbidden": [
             { "text": "Dinosaur Country", "enforce": "report", "why": "English residue C4 measured and placed out of scope for es; an owner decision, not a regression" }
           ]
@@ -207,7 +216,7 @@
           "concept": "Leave No Trace — the programme name",
           "phrase": "Leave No Trace",
           "provenance": "A6 (P15) — the lock holds for Latin-script locales; es was measured at 6/8 and left undecided",
-          "min": 31,
+          "bound": "floor",
           "forbidden": [
             { "text": "No Dejar Rastro", "enforce": "report", "why": "A6 recorded es translating the programme name twice in one file; never swept" }
           ]
@@ -217,7 +226,7 @@
           "concept": "Key Takeaways — the summary block heading",
           "phrase": "Puntos Clave",
           "provenance": "ui.ts ES dictionary section.keyTakeaways",
-          "min": 43,
+          "bound": "floor",
           "forbidden": [
             { "text": "Key Takeaways", "enforce": "block", "why": "untranslated English heading" }
           ]
@@ -228,7 +237,7 @@
           "phrase": "Dinosaur National Monument",
           "latinLock": true,
           "provenance": "handoff proper-noun policy",
-          "min": 475,
+          "bound": "floor",
           "forbidden": []
         },
         {
@@ -237,7 +246,7 @@
           "phrase": "Kawasaki KRX 1000",
           "latinLock": true,
           "provenance": "handoff proper-noun policy",
-          "min": 124,
+          "bound": "floor",
           "forbidden": []
         }
       ]
@@ -255,7 +264,7 @@
           "concept": "Dinosaur Country — the destination identity",
           "phrase": "Terra dei Dinosauri",
           "provenance": "C4 (P21) cross-locale table",
-          "min": 559,
+          "bound": "floor",
           "forbidden": [
             { "text": "Dinosaur Country", "enforce": "block", "why": "C4 measured 0 English residue in it — a hit is a regression" }
           ]
@@ -265,7 +274,7 @@
           "concept": "Leave No Trace — the programme name",
           "phrase": "Leave No Trace",
           "provenance": "A6 (P15) — it keeps the English programme name 8/8, a consistent lock",
-          "min": 33,
+          "bound": "floor",
           "forbidden": []
         },
         {
@@ -273,7 +282,7 @@
           "concept": "Key Takeaways — the summary block heading",
           "phrase": "Punti Chiave",
           "provenance": "ui.ts IT dictionary section.keyTakeaways",
-          "min": 52,
+          "bound": "floor",
           "forbidden": [
             { "text": "Key Takeaways", "enforce": "block", "why": "untranslated English heading" }
           ]
@@ -284,7 +293,7 @@
           "phrase": "Dinosaur National Monument",
           "latinLock": true,
           "provenance": "handoff proper-noun policy",
-          "min": 543,
+          "bound": "floor",
           "forbidden": []
         },
         {
@@ -293,7 +302,7 @@
           "phrase": "Kawasaki KRX 1000",
           "latinLock": true,
           "provenance": "handoff proper-noun policy",
-          "min": 124,
+          "bound": "floor",
           "forbidden": []
         }
       ]
@@ -311,7 +320,7 @@
           "concept": "Dinosaur Country — the destination identity",
           "phrase": "Terra dos Dinossauros",
           "provenance": "C4 (P21) cross-locale table",
-          "min": 534,
+          "bound": "floor",
           "forbidden": [
             { "text": "Dinosaur Country", "enforce": "block", "why": "C4 measured 0 English residue in pt — a hit is a regression" }
           ]
@@ -321,7 +330,7 @@
           "concept": "Leave No Trace — the programme name",
           "phrase": "Leave No Trace",
           "provenance": "A6 (P15) — pt keeps the English programme name 8/8",
-          "min": 35,
+          "bound": "floor",
           "forbidden": []
         },
         {
@@ -329,7 +338,7 @@
           "concept": "Key Takeaways — the summary block heading",
           "phrase": "Pontos-Chave",
           "provenance": "ui.ts PT dictionary section.keyTakeaways",
-          "min": 52,
+          "bound": "floor",
           "forbidden": [
             { "text": "Key Takeaways", "enforce": "block", "why": "untranslated English heading" }
           ]
@@ -340,7 +349,7 @@
           "phrase": "Dinosaur National Monument",
           "latinLock": true,
           "provenance": "handoff proper-noun policy",
-          "min": 543,
+          "bound": "floor",
           "forbidden": []
         },
         {
@@ -349,7 +358,7 @@
           "phrase": "Kawasaki KRX 1000",
           "latinLock": true,
           "provenance": "handoff proper-noun policy",
-          "min": 124,
+          "bound": "floor",
           "forbidden": []
         }
       ]
@@ -367,7 +376,7 @@
           "concept": "Dinosaur Country — the destination identity",
           "phrase": "Terre des Dinosaures",
           "provenance": "C4 (P21) cross-locale table",
-          "min": 565,
+          "bound": "floor",
           "forbidden": [
             { "text": "Dinosaur Country", "enforce": "block", "why": "C4 measured 0 English residue in fr — a hit is a regression" }
           ]
@@ -377,7 +386,7 @@
           "concept": "Leave No Trace — the programme name",
           "phrase": "Leave No Trace",
           "provenance": "A6 (P15) — fr keeps the English programme name 8/8",
-          "min": 34,
+          "bound": "floor",
           "forbidden": []
         },
         {
@@ -385,7 +394,7 @@
           "concept": "Key Takeaways — the summary block heading",
           "phrase": "Points Clés",
           "provenance": "ui.ts FR dictionary section.keyTakeaways",
-          "min": 52,
+          "bound": "floor",
           "forbidden": [
             { "text": "Key Takeaways", "enforce": "block", "why": "untranslated English heading" }
           ]
@@ -396,7 +405,7 @@
           "phrase": "Dinosaur National Monument",
           "latinLock": true,
           "provenance": "handoff proper-noun policy",
-          "min": 543,
+          "bound": "floor",
           "forbidden": []
         },
         {
@@ -405,7 +414,7 @@
           "phrase": "Kawasaki KRX 1000",
           "latinLock": true,
           "provenance": "handoff proper-noun policy",
-          "min": 124,
+          "bound": "floor",
           "forbidden": []
         }
       ]
@@ -424,7 +433,7 @@
           "concept": "Dinosaur Country — the destination identity",
           "phrase": "恐竜の国",
           "provenance": "C4 (P21) cross-locale table; ui.ts JA preamble line 785",
-          "min": 644,
+          "bound": "floor",
           "forbidden": [
             {
               "text": "Dinosaur Country",
@@ -440,7 +449,7 @@
           "concept": "Key Takeaways — the summary block heading",
           "phrase": "要点まとめ",
           "provenance": "ui.ts JA preamble line 785 — reuses the phrase locked during the P10 MDX batches",
-          "min": 51,
+          "bound": "floor",
           "forbidden": [
             { "text": "Key Takeaways", "enforce": "block", "why": "untranslated English heading" }
           ]
@@ -450,7 +459,7 @@
           "concept": "trailhead — the hiking sense",
           "phrase": "トレイルヘッド",
           "provenance": "A7's cross-locale sense table; B3/B4 (P24/P25) confirmed the ja rendering",
-          "min": 209,
+          "bound": "floor",
           "forbidden": [
             { "text": "Trailhead", "enforce": "block", "why": "untranslated English loanword — ja renders it in katakana" }
           ]
@@ -460,7 +469,7 @@
           "concept": "petroglyphs",
           "phrase": "岩絵",
           "provenance": "ui.ts JA preamble line 787",
-          "min": 510,
+          "bound": "floor",
           "forbidden": []
         },
         {
@@ -468,7 +477,7 @@
           "concept": "Vernal — the one city name ja localises",
           "phrase": "バーナル",
           "provenance": "B3 (P24) — only Vernal and the state names are localised; every other city stays Latin",
-          "min": 2371,
+          "bound": "floor",
           "forbidden": []
         },
         {
@@ -477,7 +486,7 @@
           "phrase": "Dinosaur National Monument",
           "latinLock": true,
           "provenance": "ui.ts JA preamble lines 781–783 — official park names stay English",
-          "min": 545,
+          "bound": "floor",
           "forbidden": []
         },
         {
@@ -486,7 +495,7 @@
           "phrase": "Kawasaki KRX 1000",
           "latinLock": true,
           "provenance": "handoff proper-noun policy",
-          "min": 123,
+          "bound": "floor",
           "forbidden": []
         }
       ]
@@ -506,7 +515,7 @@
           "concept": "Dinosaur Country — the destination identity",
           "phrase": "恐龙之乡",
           "provenance": "C4 (P21) — 503 occurrences reviewed, 503 retained, 15 alternatives all measured at 0; ui.ts ZH preamble line 926",
-          "min": 658,
+          "bound": "floor",
           "forbidden": [
             { "text": "恐龙之地", "enforce": "block", "why": "C4 counted 15 competing renderings; every one measured 0" },
             { "text": "恐龙乐园", "enforce": "block", "why": "C4 competing rendering, measured 0" },
@@ -523,7 +532,7 @@
           "phrase": "Dinosaur National Monument",
           "latinLock": true,
           "provenance": "C4 (P21) — the other half of the split; ui.ts ZH preamble lines 913–916 keep places with no established Chinese name in Latin",
-          "min": 597,
+          "bound": "floor",
           "forbidden": [
             { "text": "恐龙国家纪念地", "enforce": "block", "why": "C4 — an unauthorised translation of the place name; measured 0" },
             { "text": "恐龙国家公园", "enforce": "block", "why": "C4 unauthorised translation, measured 0" },
@@ -537,7 +546,7 @@
           "concept": "a national monument — the generic common noun, distinct from the proper name above",
           "phrase": "纪念地",
           "provenance": "C8 (P27) — 113 sites across 9 files normalised to the house standard; 纪念区 driven to 0",
-          "min": 477,
+          "bound": "floor",
           "forbidden": [
             { "text": "纪念区", "enforce": "block", "why": "C8 drift — not an NPS designation at all; swept to 0" },
             {
@@ -554,7 +563,7 @@
           "concept": "wilderness area — the C8 survivors, held at their exact count",
           "phrase": "荒野保护区",
           "provenance": "C8 (P27) verification table — 保护区 70 → 5, and the 5 are all this compound",
-          "count": 5,
+          "bound": "exact",
           "forbidden": []
         },
         {
@@ -562,7 +571,7 @@
           "concept": "the verify-with-official-sources caveat core",
           "phrase": "官方渠道核实",
           "provenance": "C6/C7 and Gate 4e — a locked phrase is intent, not bytes, so the invariant is the conserved core count. Identical baseline to gate 4h.",
-          "count": 982,
+          "bound": "exact",
           "forbidden": []
         },
         {
@@ -570,7 +579,7 @@
           "concept": "Key Takeaways — the summary block heading",
           "phrase": "要点速览",
           "provenance": "ui.ts ZH preamble line 927",
-          "min": 52,
+          "bound": "floor",
           "forbidden": [
             { "text": "Key Takeaways", "enforce": "block", "why": "untranslated English heading" }
           ]
@@ -580,7 +589,7 @@
           "concept": "guides — the travel sense",
           "phrase": "攻略",
           "provenance": "ui.ts ZH preamble line 928 — the standard mainland travel word. Locked positively; bare 指南 is NOT forbidden, see $doc.measured_not_forbidden.",
-          "min": 1645,
+          "bound": "floor",
           "forbidden": []
         },
         {
@@ -588,7 +597,7 @@
           "concept": "petroglyphs",
           "phrase": "岩画",
           "provenance": "ui.ts ZH preamble line 929",
-          "min": 587,
+          "bound": "floor",
           "forbidden": []
         },
         {
@@ -596,7 +605,7 @@
           "concept": "backcountry",
           "phrase": "荒野深处",
           "provenance": "ui.ts ZH preamble line 929",
-          "min": 23,
+          "bound": "floor",
           "forbidden": []
         },
         {
@@ -604,7 +613,7 @@
           "concept": "trail — the off-road (UTV/ATV/Jeep) sense",
           "phrase": "越野路线",
           "provenance": "ui.ts ZH preamble lines 931–932 — mirrors the locked DE split; never one blanket word",
-          "min": 443,
+          "bound": "floor",
           "forbidden": []
         },
         {
@@ -612,7 +621,7 @@
           "concept": "trail — the hiking sense",
           "phrase": "步道",
           "provenance": "ui.ts ZH preamble lines 931–932 — the other half of the split",
-          "min": 1178,
+          "bound": "floor",
           "forbidden": []
         },
         {
@@ -620,7 +629,7 @@
           "concept": "trailhead — the hiking sense",
           "phrase": "登山口",
           "provenance": "C2 (P19) RETAINED — 230 of 232 kept; no terrain rule exists, so the term is locked as it stands",
-          "min": 209,
+          "bound": "floor",
           "forbidden": []
         },
         {
@@ -628,7 +637,7 @@
           "concept": "Leave No Trace — the programme name in its established Chinese form",
           "phrase": "无痕山林",
           "provenance": "A6 (P15) cross-locale table — zh renders it in its own script 8/8, which A6 confirmed as legitimate",
-          "min": 42,
+          "bound": "floor",
           "forbidden": []
         },
         {
@@ -637,7 +646,7 @@
           "phrase": "Kawasaki KRX 1000",
           "latinLock": true,
           "provenance": "ui.ts ZH preamble line 933 — brand, NAP, prices and fleet never appear in translated form",
-          "min": 141,
+          "bound": "floor",
           "forbidden": []
         }
       ]

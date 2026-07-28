@@ -30,14 +30,27 @@
 import { existsSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { extractVisibleText } from './lib/rendered-text.mjs';
+import { extractVisibleText, VISIBLE_TEXT_EXTRACTOR } from './lib/rendered-text.mjs';
 import { createRenderIndex } from './lib/render-index.mjs';
 import { resolveHost } from './lib/host-adapter.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-// An explicit dist path lets the gate be exercised against a scratch corpus
-// without touching the repository (P36 phase 6). Defaults to ./dist.
-const dist = process.argv[2] ? resolve(process.argv[2]) : join(root, 'dist');
+
+// `--manifest` is ADDED at F5 Phase 5, for the reason F4 Phase 1 added it to 4g and 4i:
+// every host artifact this gate reads is now addressed through the manifest, so a scratch
+// manifest is the only way to exercise the fail-closed paths — a missing census, a census
+// from another extractor, a stale version. Without it those paths could only be tested by
+// damaging the repository's own files, which is not a test, it is a rehearsal.
+//
+// The dist positional survives and must be read AROUND the flag: `4h --manifest x` used to
+// resolve `--manifest` as a corpus directory.
+const argv = process.argv.slice(2);
+const flag = (name) => {
+  const i = argv.indexOf(name);
+  return i >= 0 ? argv[i + 1] : undefined;
+};
+const positional = argv.filter((a, i) => !a.startsWith('--') && !argv[i - 1]?.startsWith('--'));
+const MANIFEST_OVERRIDE = flag('--manifest');
 
 // --- F5 Phase 2: policy comes from the host manifest, not from a path this gate
 //     computes. Before this, CONFIG was join(root, 'i18n-gates', …) with root = the
@@ -47,7 +60,7 @@ const dist = process.argv[2] ? resolve(process.argv[2]) : join(root, 'dist');
 //     declares, and there is no default to fall back to. ---
 let host;
 try {
-  host = resolveHost();
+  host = resolveHost({ manifestPath: MANIFEST_OVERRIDE });
 } catch (e) {
   console.error(`gate-4h: ${e.message}`);
   process.exit(2);
@@ -56,6 +69,19 @@ try {
 // Missing inputs are exit 2, never a silent pass — the ja UI-chrome fail-open
 // lesson (handoff §7, Gate 4a): that locale shipped 57 pages of English chrome
 // precisely because an absent dictionary degraded quietly instead of failing.
+// An explicit dist path lets the gate be exercised against a scratch corpus without
+// touching the repository (P36 phase 6). The DEFAULT is now the host's declared output
+// (manifest §3) rather than `join(root, 'dist')` — F5 Phase 5, coupling C-2: the old
+// default was correct only for the repository the framework happens to live in, which is
+// the same silent wrong-answer shape the policy migration removed one phase earlier.
+let dist;
+try {
+  dist = positional[0] ? resolve(positional[0]) : host.routes.output;
+} catch (e) {
+  console.error(`gate-4h: rendered output ${e.message} — refusing to pass silently.`);
+  process.exit(2);
+}
+
 let config;
 try {
   config = host.policy.load('seams');
@@ -71,6 +97,28 @@ try {
 
 if (!existsSync(dist)) {
   console.error('gate-4h: dist/ not found — this gate reads rendered output; run astro build first.');
+  process.exit(2);
+}
+
+// --- The census. F5 Phase 5: the conserved figures leave this gate's config. -----------
+//
+// `zh` 982 was authored HERE as `expected` and again in 4i-glossary.json as `count` — the
+// same measurement of the same phrase by the same extractor, transcribed twice under two
+// aggregation semantics, with nothing able to notice if the two ever disagreed. That is
+// defect D-1, and it is structurally gone the moment both gates read the one fact.
+//
+// What this gate keeps is what was always its own: the aggregation (occurrences summed
+// per LOCALE, not per lock — 4i sums per lock, and the two coincide here only because
+// each locale declares one) and the verdict (advisory, never blocking).
+let census;
+try {
+  census = host.census.open('phrase-count', { extractor: VISIBLE_TEXT_EXTRACTOR });
+} catch (e) {
+  console.error(
+    e.kind === 'invalid' || e.kind === 'incompatible'
+      ? `gate-4h: census ${e.message}`
+      : `gate-4h: census ${e.message} — refusing to pass silently.`
+  );
   process.exit(2);
 }
 
@@ -270,9 +318,24 @@ for (const page of index.pages) {
 const drift = [];
 for (const loc of TARGETS) {
   for (const lock of config.locales[loc].locks ?? []) {
-    if (typeof lock.expected !== 'number') continue;
+    // A leftover `expected` is refused rather than ignored: it would look like the number
+    // being enforced while the census supplied a different one — M-4 with a second opinion.
+    if ('expected' in lock) {
+      console.error(
+        `gate-4h: lock "${lock.core}" (${loc}) still declares "expected" in ${host.policy.describe('seams')} — ` +
+          'F5 Phase 5 replaced authored figures with the phrase census. Delete the number; the count is measured, not written.'
+      );
+      process.exit(2);
+    }
+    let expected;
+    try {
+      expected = census.value({ locale: loc, phrase: lock.core, surface: 'prose' });
+    } catch (e) {
+      console.error(`gate-4h: lock "${lock.core}" (${loc}) — census ${e.message}`);
+      process.exit(2);
+    }
     const actual = conserved[loc] ?? 0;
-    if (actual !== lock.expected) drift.push({ loc, core: lock.core, expected: lock.expected, actual });
+    if (actual !== expected) drift.push({ loc, core: lock.core, expected, actual });
   }
 }
 
@@ -289,7 +352,7 @@ if (drift.length) {
   }
   console.warn(
     `\n  A count moves legitimately when pages are added or removed. If this change was\n` +
-      `  intended, update "expected" in ${host.policy.describe('seams')}.\n`
+      `  intended, re-run the census producer and commit the diff to ${host.census.describe('phrase-count')}.\n`
   );
 }
 

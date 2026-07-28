@@ -27,10 +27,17 @@
     ],
 
     "measured_baselines": {
-      "note": "Measured on the rendered corpus at P36, not carried over from source figures. The source count of the zh core is 994; the RENDERED count is 982. Methodology principle 1 — a recorded size is a hypothesis about the measurement window.",
-      "zh_core": 982,
-      "ja_core": 940,
-      "rendered_pages_per_locale": 77
+      "note": [
+        "THE FIGURES ARE NO LONGER HERE (F5 Phase 5). They live in the phrase census, which",
+        "measured each once and records which extractor produced it. The zh core figure used",
+        "to be written twice — as `expected` here and as `count` in 4i-glossary.json — for one",
+        "measurement of one phrase by one extractor: defect D-1. Both gates now read the fact.",
+        "",
+        "Carried forward because it is a lesson and not a number: the baselines were measured",
+        "on the RENDERED corpus at P36, never carried over from source figures. Source and",
+        "rendered counts of the zh core differ, and the rendered one is the one a reader sees.",
+        "Methodology principle 1 — a recorded size is a hypothesis about the measurement window."
+      ]
     },
 
     "clause_boundary_derivation": [
@@ -72,8 +79,7 @@
       "locks": [
         {
           "core": "官方渠道核实",
-          "leadIns": ["请", "向"],
-          "expected": 982
+          "leadIns": ["请", "向"]
         }
       ],
       "imperative": {
@@ -89,8 +95,7 @@
       "locks": [
         {
           "core": "公式情報をご確認ください",
-          "leadIns": ["で", "に", "を"],
-          "expected": 940
+          "leadIns": ["で", "に", "を"]
         }
       ],
       "imperative": null,

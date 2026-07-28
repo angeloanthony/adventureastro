@@ -20,9 +20,9 @@
     "rule. If switching the adapter from regex to AST would require editing this file,",
     "procedure has leaked in; that is an F4 finding, not a schema change.",
     "",
-    "Sections routes/dictionaries/policy/structures are defined in schema v1 but are NOT",
-    "declared here yet. Each lands with the phase that reads it. Config that nothing reads",
-    "is the 4h.nonBoundaries defect (F2 M-4) in the other direction."
+    "Sections dictionaries/structures are defined in schema v1 but are NOT declared here",
+    "yet. Each lands with the phase that reads it. Config that nothing reads is the",
+    "4h.nonBoundaries defect (F2 M-4) in the other direction."
   ],
 
   "project": {
@@ -66,6 +66,54 @@
       "de": { "role": "target" },
       "ja": { "role": "target" },
       "zh": { "role": "target" }
+    }
+  },
+
+  "routes": {
+    "$doc": [
+      "WHERE rendered output lives and how a route carries its locale. Never how to walk it.",
+      "",
+      "Declared at F5 Phase 5 because the census producer forced the question: producing a",
+      "census needs the rendered corpus, and F5 Phase 4 had to take it as an operator",
+      "argument (`--dist`) because this section did not exist. An operator-supplied path is",
+      "the C-1 coupling wearing a command-line flag — the host fact was still being supplied",
+      "by hand, just from outside the repository instead of inside it.",
+      "",
+      "`localePrefix` and `defaultLocalePrefixed` together state the rule five consumers",
+      "hardcoded as `key.split('/')[0]`: a locale appears as the first path segment, and the",
+      "default locale does not carry one, so an unprefixed route is English. That is host",
+      "policy, not a routing algorithm — a build-hook engine that never walked a directory",
+      "would still need both facts and would not change either.",
+      "",
+      "`pageGlob` is declared and NOT YET READ: the render index hardcodes `**/*.html`, and",
+      "changing its signature would touch all six of its consumers for no behavioural gain",
+      "in this phase. It is required by schema v1 rather than optional because a routes",
+      "section that omits it describes half a routing policy. Recorded here so the omission",
+      "is a known debt with a named reader, not the silent kind (M-4)."
+    ],
+    "output": "dist",
+    "pageGlob": "**/*.html",
+    "localePrefix": "path-segment",
+    "defaultLocalePrefixed": false
+  },
+
+  "census": {
+    "$doc": [
+      "WHERE census output lives. Never a fact, never a threshold, never a phrase.",
+      "",
+      "The mirror of `policy` one section down: `policy` addresses what a human authored,",
+      "`census` addresses what a producer measured. Both are paths only, both resolve",
+      "against THIS FILE's directory. The file below is machine-written wholesale and must",
+      "never be hand-edited — a corrected count is a re-run and a reviewed diff, because",
+      "an edited census is an authored number wearing a producer's provenance.",
+      "",
+      "Only `phrase-count` is declared: it is the only kind a producer exists for. When the",
+      "marker-lexicon producer ships, its entry lands with it. A kind declared here with no",
+      "producer would be a promise the framework cannot keep."
+    ],
+    "dir": "census",
+    "facts": {
+      "phrase-count": "phrase-count.json"
     }
   },
 

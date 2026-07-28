@@ -55,7 +55,6 @@ const flag = (name) => {
   return i >= 0 ? argv[i + 1] : undefined;
 };
 const positional = argv.filter((a, i) => !a.startsWith('--') && !argv[i - 1]?.startsWith('--'));
-const dist = positional[0] ? resolve(positional[0]) : join(root, 'dist');
 // `--config` and `--licensed` are GONE as of F5 Phase 2. They resolved policy paths in
 // this gate — `join(root, 'i18n-gates', …)` against the FRAMEWORK root — which is the
 // coupling the phase removes. Their scratch-testing purpose is fully served by
@@ -85,6 +84,16 @@ try {
   host = resolveHost({ registryModule: I18N_OVERRIDE, manifestPath: MANIFEST_OVERRIDE });
 } catch (e) {
   console.error(`gate-4g: ${e.message}`);
+  process.exit(2);
+}
+
+// The positional override survives for scratch corpora; the DEFAULT is now the host's
+// declared output (manifest §3) rather than `join(root, 'dist')` — F5 Phase 5, C-2.
+let dist;
+try {
+  dist = positional[0] ? resolve(positional[0]) : host.routes.output;
+} catch (e) {
+  console.error(`gate-4g: rendered output ${e.message} — refusing to pass silently.`);
   process.exit(2);
 }
 

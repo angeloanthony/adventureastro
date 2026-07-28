@@ -268,6 +268,67 @@ single measured fact `{zh, 官方渠道核实, prose} = 982` reproduces both `4h
 `{ja, 公式情報をご確認ください, prose} = 940` supplies the row 4i never had. All 52 frozen baselines
 (4 exact counts, 46 floors, 2 seam cores) are reproduced by the producer with no re-baselining.
 
+### 4.6 AS ADOPTED — F5 Phase 5, the first producer → consumer cycle
+
+Phase 4 shipped a producer with no consumer. Phase 5 gives it two, which is what turns the census from
+a plausible artifact into an authoritative one. **Three of Phase 4's four amendments are resolved by
+adoption itself** — they were not separate work, they were what adoption required.
+
+| Phase 4 amendment | Status after Phase 5 |
+|---|---|
+| (1) the policy → census edge is withdrawn | **Unchanged and reinforced.** The producer still reads no policy. The phrase set is derived by a separate *operator* program (`census/phrase-set.mjs`) which reads gate policy through the adapter and prints a request list. The edge is `policy → operator → (file) → producer`, and host 2 — which has no gate policy — simply does not run it. |
+| (2) `--dist` is an operator argument | **RESOLVED.** Manifest §3 `routes.output` declared and read. `--dist` survives as an explicit override for scratch corpora; it is no longer how the census is ordinarily produced. All four dist gates migrated with it, so no consumer computes `join(root, 'dist')` any more. |
+| (3) `provenance.invocation` is verbatim | **RESOLVED BY REMOVAL OF THE CAUSE.** With `routes.output` declared, the canonical invocation names no corpus path at all: `census phrase-count --phrases census/phrase-set.json --measured-at YYYY-MM-DD`. The usage rule is now the default rather than a discipline. |
+| (4) the extractor identity is a hand-maintained literal | **RESOLVED.** `VISIBLE_TEXT_EXTRACTOR` is exported from `scripts/lib/rendered-text.mjs`, beside the view it names. The producer and both consumers import it; no file repeats the string. Adoption is what forced this — a name two consumers must agree with the producer about is D-1 one layer down. |
+
+**Four contract amendments of its own, all narrowing:**
+
+1. **§8.1 ships without `provenance`.** The sketch had `"provenance": "provenance.json"` alongside
+   `facts`. Phase 4's envelope carries provenance *inside* each census document, so a separate file
+   would be a path to something nothing writes. The section is `dir` + `facts` only, and `facts` is
+   **closed against the kinds census v1 declares** — a filename filed under an unknown kind is M-4 with
+   a filename attached.
+2. **The census owns the number; policy owns the comparison.** 4i's `min` / `count` were doing two jobs
+   at once — recording a measurement and declaring whether it is a floor or a conservation. They are
+   split: `bound: "floor" | "exact"` stays in the config (a decision, and it survives a corpus change),
+   the figure comes from the census (a measurement, and it is re-derivable). `min`, `count` and 4h's
+   `expected` are now **refused, not ignored**, because a leftover figure would read as configuration,
+   do nothing, and disagree with the census the day the corpus moved.
+3. **`extractor` is verified per fact, not per document.** §9 makes it a per-fact field precisely so a
+   document may carry facts from more than one view. A document-level check would either reject such a
+   document or bless facts the consumer cannot read. What must never happen is a consumer *interpreting*
+   a number produced by a view it does not implement — which is exactly a per-fact question.
+4. **A `routes` section is all-or-nothing.** Declaring only `output` would describe half a routing
+   policy, and the omitted half — how a locale appears in a route — was hardcoded five times as
+   `key.split('/')[0]`. `localePrefix` + `defaultLocalePrefixed` are now read through
+   `host.routes.localeOf()`. `pageGlob` is declared and **not yet read** (the render index hardcodes
+   `**/*.html`); recorded here so it is a known debt with a named reader rather than the silent kind.
+
+**The measured result.** 52 authored figures across two configs → **51 census facts**, one owner. The
+collapse from 52 to 51 *is* D-1: `zh 官方渠道核实` was two transcriptions of one measurement.
+
+**Two floors rose, and it is disclosed rather than absorbed.** `de` `Land der Dinosaurier` 598 → 599 and
+`de` `Das Wichtigste in Kürze` 51 → 52. Both are the P39 fixes for gate-found defects A10 and A9, which
+each added one occurrence after the P37 freeze. The census measures today's corpus, so adopting it
+re-freezes both floors one higher. No lock changed verdict; the gate is marginally stricter and now
+agrees with the corpus it guards.
+
+**What re-baselining now costs, and the honest trade.** Before: edit one number in one config. After:
+re-run the producer and commit the diff — which re-baselines **every** figure at once. That is a real
+loss of granularity, and it is accepted because the diff is reviewable per fact (51 rows, deterministic,
+sorted) whereas a hand edit is reviewable only as a claim. An edited census is an authored number
+wearing a producer's provenance; the file says so, and the gates' remediation text now points at the
+producer rather than at the config.
+
+**Verified by 96 bootstrap checks** (scratchpad, by design — several compare against derivations that no
+longer exist). Two orthogonal proofs: behavioural equivalence (six gates, stdout *and* stderr,
+byte-identical to a pre-migration capture) and fail-closed behaviour (30 refusal cases across both
+consumers: undeclared, missing, malformed, unknown key, duplicate key, out of canonical order, version
+too new, version too old, extractor mismatch, absent fact, wrong kind, plus every leftover-figure and
+malformed-manifest case). The second proof exists because the first cannot see it — the F4 `I18N` and
+F5-P2 `CONFIG` ReferenceErrors each survived a byte-identical migration, and **this phase's own
+first-cut key mismatch would have caused every floor to pass silently** (`actual < undefined` is false).
+
 ---
 
 ## 5. Minimal canonical examples
@@ -604,6 +665,21 @@ phase and was not investigated here.
 | …**at least one consumer** | §4.4 — `marker-lexicon` → 4f, 4g; `phrase-count` → 4h, 4i; `provenance` → `census diff` and human review. Three candidate kinds were **rejected** for failing this (§11). |
 | No artifact exists solely because one gate needs it | §2 — the five census artifacts are keyed by (locale, surface, polarity) and (locale, phrase, surface). No key names a gate. The two artifacts with a single gate consumer are authored decisions, not census output. |
 | Ambiguity eliminated before implementation | §4.1's naming test, §9's three version axes, §4.4's absence rule and §4.3's mask rule each answer a question the extractor would otherwise have had to invent an answer to mid-implementation. |
+
+---
+
+## 15. Open items after F5 Phase 5
+
+Phase 5 closed the census's own open items. What remains is either the next producer or the rest of C-2.
+
+| Item | Blocking? | Note |
+|---|---|---|
+| `routes.pageGlob` is declared and unread | No | The render index hardcodes `**/*.html`. Reading it means changing `createRenderIndex`'s signature, which touches all six of its consumers — the C-2 completion phase's work, not a census concern. |
+| `validate-site.mjs` still computes `join(root, 'dist')` | No | It is the only dist consumer that does. It resolves no host at all today (F5 P2 found it reads no `i18n-gates` config), so migrating it would give the project's core validator a manifest dependency and a new fail-closed mode. Deliberately left to the C-2 phase, which is where that trade gets decided. |
+| `state` migration | **Yes, for markers** | Unchanged from Phase 4. F-1 makes `state` a precondition of `marker-lexicon` emission. `phrase-count` never needed it, which is why it went first. |
+| `marker-lexicon` producer | — | Now unblocked *architecturally*: one full producer → adapter → consumer cycle exists and every part of it is exercised. Still blocked on `state`. |
+| Re-baselining granularity | No | Recorded in §4.6: a census regeneration re-baselines every figure at once. If per-fact re-baselining is ever wanted, the mechanism is a reviewed partial diff, not an authored override — the moment a consumer can override a fact, D-1 is back. |
+| ADR-6's one-file-per-ADR split | No | Still outstanding, four phases on. |
 
 ---
 

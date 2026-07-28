@@ -29,7 +29,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import { join, dirname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
-import { extractVisibleText } from './lib/rendered-text.mjs';
+import { extractVisibleText, VISIBLE_TEXT_EXTRACTOR } from './lib/rendered-text.mjs';
 import { createRenderIndex } from './lib/render-index.mjs';
 import { parseSourceFile, declOf, keyOf, stringOf, unwrap } from './lib/ts-ast.mjs';
 import { resolveHost } from './lib/host-adapter.mjs';
@@ -44,7 +44,6 @@ const flag = (name) => {
   return i >= 0 ? argv[i + 1] : undefined;
 };
 const positional = argv.filter((a, i) => !a.startsWith('--') && !argv[i - 1]?.startsWith('--'));
-const dist = positional[0] ? resolve(positional[0]) : join(root, 'dist');
 // `--config` is GONE as of F5 Phase 2: it resolved a policy path in this gate, against
 // the FRAMEWORK root, which is the coupling the phase removes. `--manifest` serves the
 // same scratch-testing purpose at the boundary instead of per artifact.
@@ -74,6 +73,18 @@ try {
   process.exit(2);
 }
 
+// Where rendered output lives is a host fact (manifest §3), resolved by the adapter as of
+// F5 Phase 5. The positional override survives for scratch corpora; what is gone is this
+// gate's ability to compute `join(root, 'dist')` — a path that is correct only for the one
+// repository the framework happens to live in, which is coupling C-2's whole shape.
+let dist;
+try {
+  dist = positional[0] ? resolve(positional[0]) : host.routes.output;
+} catch (e) {
+  console.error(`gate-4i: rendered output ${e.message} — refusing to pass silently.`);
+  process.exit(2);
+}
+
 let config;
 try {
   config = host.policy.load('glossary');
@@ -82,6 +93,33 @@ try {
     e.kind === 'invalid'
       ? `gate-4i: config ${e.message}`
       : `gate-4i: config ${e.message} — refusing to pass silently.`
+  );
+  process.exit(2);
+}
+
+// --- The census. F5 Phase 5: this gate no longer authors a single number. -------------
+//
+// Every frozen figure it enforces — four exact counts and forty-six floors — used to be
+// typed into the config beside the lock it bounds. `zh` `官方渠道核实` was typed there AND
+// into gate 4h's config, under two different aggregation semantics, which is defect D-1:
+// one measurement, two transcriptions, no mechanism that could ever notice them diverge.
+//
+// The number now comes from the committed census, which measured it once. What stays here
+// is the only part that was ever this gate's: whether a lock's figure is an exact
+// conservation or a floor. The census owns the number; policy owns the comparison.
+//
+// The extractor identity is passed because a count is only comparable with the view that
+// produced it. This gate implements `extractVisibleText(html, {inlineSeparator:''})`, and
+// the reader refuses any fact recorded under a different view rather than returning a
+// number that is approximately right.
+let census;
+try {
+  census = host.census.open('phrase-count', { extractor: VISIBLE_TEXT_EXTRACTOR });
+} catch (e) {
+  console.error(
+    e.kind === 'invalid' || e.kind === 'incompatible'
+      ? `gate-4i: census ${e.message}`
+      : `gate-4i: census ${e.message} — refusing to pass silently.`
   );
   process.exit(2);
 }
@@ -145,6 +183,13 @@ const CJK = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hang
 const configErrors = [];
 const cfgFail = (loc, msg) => configErrors.push(`  [${loc}] ${msg}`);
 
+/** locale + lock id -> the measured figure the census recorded for that lock's phrase. */
+const baselines = new Map();
+/** Both ends of the map build their key here. Two call sites that each format their own
+ *  key is one typo away from a lookup that silently misses, and a missed baseline reads
+ *  as `actual < undefined` — false, so the lock would PASS. Found exactly that way. */
+const baselineKey = (loc, id) => `${loc}/${id}`;
+
 for (const loc of TARGETS) {
   const entry = config.locales[loc];
   const locks = entry.locks ?? [];
@@ -169,10 +214,33 @@ for (const loc of TARGETS) {
     }
     byPhrase.set(lock.phrase, id);
 
-    const hasMin = typeof lock.min === 'number';
-    const hasCount = typeof lock.count === 'number';
-    if (hasMin && hasCount) cfgFail(loc, `lock "${id}" declares both "min" and "count"; a lock is either a floor or a conserved exact count, never both.`);
-    if (!hasMin && !hasCount) cfgFail(loc, `lock "${id}" declares neither "min" nor "count" — an unmeasured lock cannot be verified.`);
+    // --- The bound, and the number it bounds. -----------------------------------
+    //
+    // F5 Phase 5 split these. `bound` is a decision — did the review conserve this
+    // count exactly, or only forbid it regressing? — and decisions are policy, so it
+    // stays here. The FIGURE is a measurement and comes from the census.
+    //
+    // `min` and `count` are refused rather than ignored. A leftover number would read
+    // as configuration, do nothing, and disagree with the census the day the corpus
+    // moved: `nonBoundaries` (F2 M-4) with a stale baseline inside it.
+    for (const dead of ['min', 'count']) {
+      if (dead in lock) {
+        cfgFail(loc, `lock "${id}" still declares "${dead}" — F5 Phase 5 replaced authored figures with the phrase census. Declare "bound": "${dead === 'min' ? 'floor' : 'exact'}" and delete the number; the count is measured, not written.`);
+      }
+    }
+    if (lock.bound !== 'exact' && lock.bound !== 'floor') {
+      cfgFail(loc, `lock "${id}" declares bound ${JSON.stringify(lock.bound)} — must be "exact" (a conserved count) or "floor" (a minimum). An unbounded lock cannot be verified.`);
+    } else if (lock.phrase) {
+      // Resolved during registry integrity rather than at comparison time, so a lock the
+      // census never measured is reported alongside every other registry defect and in
+      // the same run — and never quietly skipped, which is the one outcome a gate whose
+      // baselines live in another file must make impossible.
+      try {
+        baselines.set(baselineKey(loc, id), census.value({ locale: loc, phrase: lock.phrase, surface: 'prose' }));
+      } catch (e) {
+        cfgFail(loc, `lock "${id}" ${e.message}`);
+      }
+    }
 
     // Script sanity. This is what makes a phrase filed under the wrong locale a
     // loud failure rather than a lock that can never match anything.
@@ -374,16 +442,29 @@ for (const loc of TARGETS) {
     const actual = observed[loc]?.[lock.id] ?? 0;
 
     // --- required locked phrases exist / conserved counts remain valid ---
-    if (typeof lock.count === 'number' && actual !== lock.count) {
+    //
+    // The figure is the census's; the comparison is this gate's. `bound` decides which
+    // comparison, and phase 1 has already refused any lock that declares neither a
+    // usable bound nor a census fact, so `baseline` is a number here or the gate exited.
+    const baseline = baselines.get(baselineKey(loc, lock.id));
+    if (typeof baseline !== 'number') {
+      // Unreachable: phase 1 fails the run for any lock without a resolvable figure. It
+      // is checked anyway because the failure mode is a SILENT PASS — `actual < undefined`
+      // is false — and a gate whose baselines live in another file must not have a way to
+      // succeed by not finding them.
+      console.error(`gate-4i: internal — lock "${lock.id}" (${loc}) reached verification with no census figure; refusing to report a verdict.`);
+      process.exit(2);
+    }
+    if (lock.bound === 'exact' && actual !== baseline) {
       findings.push({
         loc, kind: 'count', lock: lock.id, term: lock.phrase,
-        detail: lock.concept, expectedCount: lock.count, observedCount: actual,
+        detail: lock.concept, expectedCount: baseline, observedCount: actual,
         provenance: lock.provenance,
       });
-    } else if (typeof lock.min === 'number' && actual < lock.min) {
+    } else if (lock.bound === 'floor' && actual < baseline) {
       findings.push({
         loc, kind: actual === 0 ? 'missing' : 'floor', lock: lock.id, term: lock.phrase,
-        detail: lock.concept, expectedCount: lock.min, observedCount: actual,
+        detail: lock.concept, expectedCount: baseline, observedCount: actual,
         provenance: lock.provenance,
       });
     }
@@ -468,8 +549,9 @@ if (findings.length) {
   console.error(
     'Each violation is a locked rendering the corpus no longer honours. Fix it as one\n' +
       'corpus-wide pass (Gate 4c), never file by file. If a count moved because pages were\n' +
-      `added or removed, re-measure and update the frozen figure in ${host.policy.describe('glossary')} —\n` +
-      'deliberately, as a re-baseline, which is what a conserved count is for.\n'
+      `added or removed, re-run the census producer and commit the diff to ${host.census.describe('phrase-count')} —\n` +
+      'deliberately, as a re-baseline, which is what a conserved count is for. Do not edit\n' +
+      'the figure: it is a measurement, and a hand-edited measurement is an assertion.\n'
   );
   process.exit(1);
 }

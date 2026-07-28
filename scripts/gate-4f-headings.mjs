@@ -36,7 +36,6 @@ import { createRenderIndex } from './lib/render-index.mjs';
 import { resolveHost } from './lib/host-adapter.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const dist = join(root, 'dist');
 
 // --- Registered locales AND policy both come from the host adapter.
 //
@@ -52,6 +51,17 @@ try {
   host = resolveHost();
 } catch (e) {
   console.error(`gate-4f: ${e.message}`);
+  process.exit(2);
+}
+
+// Where rendered output lives is a host fact (manifest §3), not a path this gate computes
+// — F5 Phase 5, coupling C-2. `join(root, 'dist')` was correct only for the repository the
+// framework happens to live in, which is the same defect shape the policy migration closed.
+let dist;
+try {
+  dist = host.routes.output;
+} catch (e) {
+  console.error(`gate-4f: rendered output ${e.message} — refusing to pass silently.`);
   process.exit(2);
 }
 

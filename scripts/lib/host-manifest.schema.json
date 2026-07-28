@@ -99,6 +99,15 @@
     "structures": {
       "$ref": "#/definitions/structures",
       "$doc": "OPTIONAL in the instance until the phase that migrates coupling C-6 (HUB_SLUGS) lands."
+    },
+    "census": {
+      "$ref": "#/definitions/census",
+      "$doc": [
+        "F5 Phase 5 (contract §8.1). ADDITIVE AND OPTIONAL, so manifestVersion stays 1 —",
+        "the schema's own drift rule: a field that changes meaning bumps the version, a",
+        "field that only adds capability does not. A host with no census section resolves",
+        "exactly as it did before this section existed."
+      ]
     }
   },
 
@@ -216,6 +225,47 @@
           "$doc": { "$ref": "#/definitions/doc" },
           "module": { "type": "string", "minLength": 1 },
           "binding": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+
+    "census": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dir", "facts"],
+      "$doc": [
+        "WHERE census output lives. Never what a census fact means, and never a fact.",
+        "",
+        "The same rule as `policy`, applied to the other direction of the data flow:",
+        "`policy` addresses files a human authors, `census` addresses files a producer",
+        "writes. If a locale, a phrase, a count or a threshold ever appears in this",
+        "section, the manifest has absorbed census content — revert rather than extend.",
+        "F2 ADR-2's discriminator, verbatim: a field that would have to be edited if the",
+        "census switched extractors is procedure, not structure.",
+        "",
+        "`facts` is keyed by census KIND, so a host that has produced one kind declares",
+        "one entry. A kind declared with no file is not the same as a kind absent: the",
+        "first is a broken declaration and fails closed, the second means the host has",
+        "never produced that kind, which the consumer is entitled to have an opinion",
+        "about ('absence is not a fact', contract §4)."
+      ],
+      "properties": {
+        "$doc": { "$ref": "#/definitions/doc" },
+        "dir": { "type": "string", "minLength": 1 },
+        "facts": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": false,
+          "properties": {
+            "$doc": { "$ref": "#/definitions/doc" },
+            "phrase-count": { "type": "string", "minLength": 1 },
+            "marker-lexicon": { "type": "string", "minLength": 1 }
+          },
+          "$doc": [
+            "Closed against the kinds census v1 declares. An unknown kind here would be a",
+            "file nothing can read, announced as if it were readable — the M-4 defect with",
+            "a filename attached."
+          ]
         }
       }
     }

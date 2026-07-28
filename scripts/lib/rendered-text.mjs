@@ -112,6 +112,24 @@ export const BLOCK_ELEMENTS =
 const BLOCK_RE = new RegExp(`</?(?:${BLOCK_ELEMENTS})\\b[^>]*>`, 'gi');
 
 /**
+ * THE IDENTITY OF THE VIEW BELOW, AND THE REASON IT LIVES HERE.
+ *
+ * A census fact records which view produced it, so a consumer can refuse a number it
+ * cannot interpret. That only works if producer and consumer agree on the name — and
+ * F5 Phase 4 shipped the name as a hand-maintained literal inside the producer, one
+ * directory away from the function it names. Phase 5 made the hole load-bearing: with
+ * two consumers about to assert on it, a copied literal would be exactly the duplicated
+ * knowledge this phase exists to remove (D-1, one layer down).
+ *
+ * So the identity sits beside the view. A change to `extractVisibleText` that alters
+ * what a reader sees must bump this string in the same edit — the two are one line
+ * apart, which is the only enforcement a constant can honestly have. Bumping it makes
+ * every committed count that names the old version unreadable rather than silently
+ * stale, which is the entire purpose of the field.
+ */
+export const VISIBLE_TEXT_EXTRACTOR = 'visibleText@1';
+
+/**
  * Whole-page visible text, for gates whose unit of extraction is the page.
  *
  * `inlineSeparator` is the caller's decision and is load-bearing in both directions.

@@ -32,6 +32,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import ts from 'typescript';
 import { parseSourceFile, declOf, keyOf, stringOf, unwrap } from './ts-ast.mjs';
 import { loadManifest, HostManifestError } from './host-manifest.mjs';
+import { createCensusReader, CensusReadError } from '../census/read.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
 
@@ -155,7 +156,84 @@ export function resolveHost({ manifestPath, registryModule } = {}) {
     targets: Object.freeze(targets),
     roles: Object.freeze(roles),
     diagnostics,
+    routes: createRoutesResolver(manifest, hostRoot, codes, defaultLocale),
     policy: createPolicyResolver(manifest, hostRoot),
+    census: createCensusResolver(manifest, hostRoot),
+  });
+}
+
+/**
+ * The host's routing facts could not be resolved.
+ *
+ * `.kind` is `undeclared` when the manifest has no `routes` section — distinct from a
+ * declared section pointing at output that is not there, which is a build that has not
+ * been run, not a manifest defect.
+ */
+export class HostRoutesError extends Error {
+  constructor(message, kind) {
+    super(message);
+    this.name = 'HostRoutesError';
+    this.kind = kind;
+  }
+}
+
+/**
+ * Resolve manifest §3 — where rendered output lives, and how a route carries its locale.
+ *
+ * WHY `output` IS A PATH AND `policy.load` IS NOT. The policy resolver returns parsed
+ * data and no path on purpose: a consumer holding a policy path can compute a second one.
+ * Rendered output is different in kind — it is a directory a consumer must traverse, and
+ * there is no "parsed form" of a corpus to hand over instead. The path is therefore
+ * returned, and the coupling it would otherwise create is closed at the other end: the
+ * value is resolved HERE from the manifest, so no consumer computes `join(root, 'dist')`
+ * and no consumer can be pointed at another host's output by accident. F5 Phase 4 took
+ * this as an operator argument (`--dist`) because this section did not exist; that is the
+ * hole this closes.
+ *
+ * `localeOf` is the second half and the more interesting one. Five consumers implemented
+ * `key.split('/')[0]` by hand, each re-deciding what an unprefixed route means. It means
+ * whatever `defaultLocalePrefixed` says it means, which is a host fact, so it is answered
+ * once here.
+ */
+function createRoutesResolver(manifest, hostRoot, codes, defaultLocale) {
+  const section = manifest.routes;
+
+  const relFromHost = (p) => {
+    const r = relative(hostRoot, p).replace(/\\/g, '/');
+    return r && !r.startsWith('..') ? r : p.replace(/\\/g, '/');
+  };
+
+  const output = () => {
+    if (!section) {
+      throw new HostRoutesError('is not declared — the host manifest has no "routes" section', 'undeclared');
+    }
+    return resolve(hostRoot, section.output);
+  };
+
+  /**
+   * The locale a route key belongs to.
+   *
+   * The render index states route identity and refuses to name a locale, which is right:
+   * naming one requires the host's URL policy, and the index has no access to it. This is
+   * where that policy is applied, and it is the only place that should apply it.
+   */
+  const localeOf = (key) => {
+    if (!section) {
+      throw new HostRoutesError('is not declared — the host manifest has no "routes" section', 'undeclared');
+    }
+    const seg = String(key).split('/')[0];
+    if (codes.includes(seg)) return seg;
+    // An unprefixed route is the default locale's only when the host says the default
+    // locale is unprefixed. A host that prefixes every locale has no unprefixed routes,
+    // so anything that reaches here is outside the localized corpus entirely.
+    return section.defaultLocalePrefixed ? null : defaultLocale;
+  };
+
+  return Object.freeze({
+    get output() { return output(); },
+    localeOf,
+    declared: Boolean(section),
+    describe: () => (section ? relFromHost(resolve(hostRoot, section.output)) : null),
   });
 }
 
@@ -242,4 +320,77 @@ function createPolicyResolver(manifest, hostRoot) {
   return Object.freeze({ load, describe, declared: Object.freeze(section ? Object.keys(section.gates) : []) });
 }
 
-export { HostManifestError };
+/**
+ * A census artifact could not be resolved, read, or interpreted.
+ *
+ * @param {'undeclared'|'missing'|'invalid'|'incompatible'} kind
+ *   `undeclared` — the host has never produced this kind. That is a fact about the host,
+ *      not a defect, and a consumer may legitimately treat it as one ("absence is not a
+ *      fact", contract §4). It still fails closed here; deciding otherwise is the
+ *      consumer's business, and it must decide explicitly.
+ *   `missing` / `invalid` — declared but absent, unparseable, or rejected by the census
+ *      contract. Always a defect.
+ *   `incompatible` — well-formed and unreadable BY THIS ENGINE: a census version it does
+ *      not know. Distinct from `invalid` because the remedy is different (upgrade or
+ *      regenerate, not repair).
+ */
+export class HostCensusError extends Error {
+  constructor(message, kind) {
+    super(message);
+    this.name = 'HostCensusError';
+    this.kind = kind;
+  }
+}
+
+/**
+ * Resolve manifest §8.1 — where census output lives.
+ *
+ * The division of labour matches `policy`: this function answers WHERE, and the census
+ * reader answers WHAT IT MEANS. The adapter never learns what a phrase count is, and the
+ * reader never learns where a host keeps its files. Collapsing the two would make the
+ * reader host-aware, which is the coupling this whole series exists to remove.
+ *
+ * `open(kind, {extractor})` returns a reader, not data. A consumer names the extractor
+ * identity it was built to interpret, and the reader refuses any fact produced by a
+ * different one — a count is only comparable with the view that produced it.
+ */
+function createCensusResolver(manifest, hostRoot) {
+  const section = manifest.census;
+  const relFromHost = (p) => {
+    const r = relative(hostRoot, p).replace(/\\/g, '/');
+    return r && !r.startsWith('..') ? r : p.replace(/\\/g, '/');
+  };
+
+  const open = (kind, { extractor } = {}) => {
+    if (!section) {
+      throw new HostCensusError('is not declared — the host manifest has no "census" section', 'undeclared');
+    }
+    if (!(kind in section.facts)) {
+      throw new HostCensusError(`is not declared — the host manifest's census.facts has no "${kind}" entry`, 'undeclared');
+    }
+
+    const file = resolve(hostRoot, section.dir, section.facts[kind]);
+    const label = relFromHost(file);
+    if (!existsSync(file)) throw new HostCensusError(`not found at ${label}`, 'missing');
+
+    let doc;
+    try {
+      doc = JSON.parse(readFileSync(file, 'utf8'));
+    } catch (e) {
+      throw new HostCensusError(`at ${label} is not valid JSON — ${e.message}`, 'invalid');
+    }
+    return createCensusReader({ doc, kind, label, extractor });
+  };
+
+  const describe = (kind) => (section && section.facts?.[kind]
+    ? relFromHost(resolve(hostRoot, section.dir, section.facts[kind]))
+    : null);
+
+  return Object.freeze({ open, describe, declared: Object.freeze(section ? Object.keys(section.facts) : []) });
+}
+
+// Re-exported so a consumer imports its whole census vocabulary from the adapter and
+// never reaches into the census package for an error class. Both carry `.kind` and a
+// fully rendered `.message`, so a consumer that does not care which layer refused can
+// catch either and print one sentence.
+export { HostManifestError, CensusReadError };
