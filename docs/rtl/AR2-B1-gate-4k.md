@@ -372,10 +372,15 @@ B-10). Unchanged by this phase.
 
 ## 10. Follow-on
 
-- **Possible ADR.** §3 records a manifest-shape decision — direction is a *registry pointer*,
-  never a manifest copy, and absence of the field is a refusal rather than a default. It is
-  the same class of argument as ADR-7 (declared absence) and would file naturally as ADR-9.
-  Not written here; the brief scoped this phase to the gate. Owner's call.
+- **ADR-9 — written, as a separate docs-only commit after this phase.**
+  [`0009-registry-indirection-over-manifest-duplication.md`](../framework/adr/0009-registry-indirection-over-manifest-duplication.md).
+  §3's decision — direction is a *registry pointer*, never a manifest copy, and a dangling
+  pointer refuses rather than defaults — turned out to be the fourth application of a rule
+  four shipped manifest sections already follow. The ADR states the discriminator (*does an
+  artifact inside the host already own this fact?*), which is sharper than "never
+  duplicate" and is what permits `entries[code].role` and `routes.output` while forbidding
+  `entries[code].dir`. It also records a live violation of itself: `script` is declared in
+  three gate configs in two incompatible vocabularies.
 - **B-8 / B-9 are unaffected.** 4h's missing Arabic connective branch and 4i's missing
   Arabic script case are still open and still unreachable.
 - **B-2 (bidi isolation) is now the highest-value item**: it is the one remaining defect
