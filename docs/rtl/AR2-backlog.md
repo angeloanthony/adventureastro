@@ -86,23 +86,82 @@ review; (c) discards work that is already done and green.
 
 ---
 
-## Direction — the largest gap
+## Direction — ~~the largest gap~~ CLOSED
 
-### B-1 — No gate perceives page direction *(S3, S4)*
+### ~~B-1~~ — Gate 4k, direction integrity — **RESOLVED 2026-07-28**
 
-An Arabic page rendering `dir="ltr"`, or with no `dir` at all, passes every gate,
-the validator and the build. The single attribute that makes an RTL locale an RTL
-locale is checked by nothing.
+> Full write-up: [`AR2-B1-gate-4k.md`](AR2-B1-gate-4k.md). `scripts/gate-4k-direction.mjs`,
+> `dist/`-reading, **blocking, wired into `npm run build`** — it found no live defect, so
+> unlike 4h and 4i it ships wired. Suite green: 620 pages, `astro check` 0/0, all five
+> existing gates **byte-identical**, `dist/` unchanged. **S3 and S4: BLIND → BLOCK.**
 
-Proposed **Gate 4k — direction integrity** (`dist/`-reading, blocking):
-1. every page under `/<loc>/` where `LOCALES[loc].dir === 'rtl'` carries
-   `<html … dir="rtl">`;
-2. no page carries a `dir` that contradicts its locale's registry value;
-3. no `dir` attribute anywhere traces to a locale-code branch rather than
-   `LOCALES[].dir` (the direction invariant, enforced rather than trusted).
+**The problem.** An Arabic page rendering `dir="ltr"`, or with no `dir` at all, passed every
+gate, the validator and the build. The single attribute that makes an RTL locale an RTL
+locale was checked by nothing.
 
-Cheap: the render index already walks every page, and (1)+(2) are one attribute
-read. This is the highest value-per-line item in the backlog.
+**The fix, and the one measurement that shaped it.** The proposal above asked for
+`<html … dir="rtl">` to be *present* on RTL pages. That test is not portable, and the census
+taken before writing the gate says why:
+
+```
+adventureastro    619 LTR pages with NO dir attribute   +   1 × dir="rtl"
+parkingwayastro   133 pages with an EXPLICIT dir="ltr"  +  12 × dir="rtl"
+```
+
+`dir` is an enumerated attribute whose missing-value default on the root element is `ltr`,
+so a page has a direction whether or not it says so, and the two hosts emit opposite shapes
+for the same intent. A gate requiring an explicit `dir` fails all 619 pages here; one
+forbidding `dir="ltr"` fails all 133 there. So the gate tests **effective direction** —
+the root element's `dir` if present, otherwise `ltr` — against `LOCALES[].dir`. S3 and S4
+then fall out as the same check rather than two, and the attribute's *form* is measured and
+printed but never blocks.
+
+**Declared direction is a registry pointer, not a manifest copy.** New optional
+`locales.registry.directionField: "dir"`, parallel to `codeField`. It is *not* in
+`locales.entries`, because that section adds only facts the host registry does not carry —
+a `dir` there would be a second source checked against nothing, and the gate would verify
+the framework's transcription of the fact instead of the fact. A host that declares no
+`directionField` is refused (exit 2), never answered `ltr`: an invented default would make
+the gate approve exactly the page it exists to catch. `auto` is rejected from the vocabulary
+— direction inferred per document is not a direction a locale declares.
+
+**Proven failing in nine directions** (against copies, in the scratchpad — the repository
+was never modified), each naming route · locale · declared · rendered:
+
+| Perturbation | Result |
+|---|---|
+| missing `dir` on the RTL page **(S3)** | ✖ declared `rtl` · rendered `ltr` *(no dir attribute, which reads as ltr)* |
+| RTL page rendered `dir="ltr"` **(S4)** | ✖ declared `rtl` · rendered `ltr` |
+| LTR locale rendered `dir="rtl"` | ✖ `/zh/` · declared `ltr` · rendered `rtl` |
+| duplicate `dir` on `<html>` | ✖ *"a parser keeps the first and drops the rest"* |
+| `dir="auto"` | ✖ *"not a declared direction"* |
+| `<body dir="ltr">` over a correct root | ✖ *"the rendered document reads ltr"* |
+| host declares no `directionField` | ✖ exit 2, refusing to pass silently |
+| registry declares `dir: 'auto'` | ✖ exit 2, naming the locale and the value |
+| registry says `de` is RTL, output still LTR | ✖ 77 pages, grouped as one locale-wide defect |
+
+**And in the two that needed a rebuild**, which are the ones that matter:
+
+- **The registry is the source.** Flipping `de` to `dir: 'rtl'` — one line, no other edit —
+  rebuilt to 77 × `<html lang="de" dir="rtl">` and 4k tracked it automatically. The
+  framework invariant demonstrated, not asserted.
+- **A locale-code branch is caught.** `const dir = lang === 'ar' ? undefined : …` in
+  `BaseLayout` reproduces S3 through the exact mechanism the invariant forbids. On that
+  build `validate-site` and gates 4f/4g/4h/4i **all exit 0**, and **4k alone exits 1**.
+
+**Cross-host, read-only.** Ran unmodified against ParkingWay via a scratch manifest in the
+scratchpad: ✔ 134 pages / 11 locales / default `it` / SSR `dist/client` — including an
+independent 12-page Arabic corpus this framework did not produce. Its mixed-form advisory
+found a real structural fact: `dist/client/admin/index.html` is the one page there that
+bypasses `BaseLayout` and ships no `dir`. Correct today (`it` is LTR), latent if an RTL
+locale ever reaches that path — surfaced without a false block.
+
+**Honest limit, stated because a green 4k must not read as "RTL works".** It verifies
+*structure*: a page it passes may still be visually broken. It also proves a second
+direction source that *lies*, and can never prove one does not exist — a branch returning
+the registry's own answer is invisible in rendered output, correctly. That half is closed by
+the substitution test instead. **The gate proves the declaration is well-formed; the
+substitution proves it is what renders.** B-2 and B-5–B-7 remain open and unaffected.
 
 ### B-2 — Bidi isolation is per-page, not shared *(R-4)*
 

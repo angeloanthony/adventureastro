@@ -70,7 +70,24 @@
               "minLength": 1,
               "$doc": "Names WHAT THE HOST CALLS its locale registry, not how to find it. Regex to AST does not change the name."
             },
-            "codeField": { "type": "string", "minLength": 1 }
+            "codeField": { "type": "string", "minLength": 1 },
+            "directionField": {
+              "type": "string",
+              "minLength": 1,
+              "$doc": [
+                "Names the registry field carrying each locale's text direction. Same class as",
+                "`codeField`: WHAT THE HOST CALLS the field, never how to recover it from bytes.",
+                "",
+                "It belongs here and NOT in `entries` because the host registry already carries",
+                "direction — `entries` adds only facts it does not carry, and copying this one",
+                "would create the second, unchecked source of truth this section exists to avoid.",
+                "",
+                "OPTIONAL, and its absence is a declared fact rather than a default. A host that",
+                "does not declare it cannot be asked for direction: the adapter refuses instead of",
+                "answering 'ltr', because an invented direction would silently approve an RTL",
+                "locale rendering left-to-right — the exact defect gate 4k exists to catch."
+              ]
+            }
           }
         },
         "defaultBinding": { "type": "string", "minLength": 1 },

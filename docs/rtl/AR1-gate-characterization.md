@@ -40,10 +40,20 @@ or ad-hoc script); `4f`–`4j` are executable scripts wired into `npm run build`
 | **4h** seams | script, blocking | Direction-blind; **has a latent Arabic bug** | Yes | §2.7 |
 | **4i** glossary | script, blocking | Direction-blind; **script validation has no Arabic case** | Yes | §2.8 |
 | **4j** gallery parity | script, blocking | Direction-blind | Yes | §2.9 |
+| **4k** direction | script, blocking | **Yes — the only direction-aware gate** | **Yes** — it reads structure, not appearance | §2.10 |
 
-**Summary: 10 of 10 gates would pass a visually broken RTL page.** Not one reads
-`dir`, and none has a concept of mirroring, logical properties, bidi isolation or
-numeral systems. That is the single largest gap AR-2 inherits.
+**Summary as measured at AR-1: 10 of 10 gates would pass a visually broken RTL
+page.** Not one read `dir`, and none had a concept of mirroring, logical
+properties, bidi isolation or numeral systems. That was the single largest gap
+AR-2 inherited.
+
+> **AR-2 B-1 update (2026-07-28).** Gate 4k landed and the count is now **10 of
+> 11** — but read the qualifier carefully. 4k is the first gate that perceives
+> direction at all, and it *would still pass a visually broken RTL page*, because
+> it validates structure rather than appearance. It closes the **structural**
+> gap (§3, S3 and S4); mirroring, logical properties, bidi isolation and numeral
+> systems remain uncovered by every gate. Recording only the first half is how a
+> green suite starts reading as "RTL works".
 
 ### 2.1 Gate 4a — UI-chrome parity
 
@@ -203,6 +213,27 @@ of failure the check exists to prevent, and Arabic is outside its coverage.
 See §4. Direction-blind like the rest; its significance to this phase is
 structural, not RTL.
 
+### 2.10 Gate 4k — direction (blocking) — *added by AR-2 B-1, 2026-07-28*
+
+Did not exist at AR-1. Recorded here so this table stays the complete
+characterization rather than a snapshot with a gap in it.
+
+Validates that every page's **effective** direction — the root element's `dir` if
+it carries one, otherwise `ltr`, which is the missing-value default — equals the
+direction its locale declares in `LOCALES[].dir`. The effective formulation is
+what makes it portable: this host emits **no** `dir` on its 619 LTR pages, while
+ParkingWay emits an explicit `dir="ltr"` on all 133 of its LTR pages, and both are
+correct.
+
+`✔ 620 pages across 9 locales — every page renders its declared direction; 1 rtl
+locale(s): "ar"`. No live defect, so it ships wired into `build`.
+
+**Still passes a visually broken RTL page**, and says so: it reads no CSS, no
+logical properties, no mirroring, no bidi isolation and no numbering system. It
+closes S3 and S4, and nothing else in §3.
+
+Full write-up: [`AR2-B1-gate-4k.md`](AR2-B1-gate-4k.md).
+
 ---
 
 ## 3. Fail-closed matrix
@@ -226,8 +257,8 @@ scenarios by perturbing `dist/ar/cancellation-policy/index.html` and restoring i
 | — | Registered but no gate policy | **BLOCK** — 4f, 4g, 4h, 4i each independently | *"locale "ar" is registered by the host but has no entry in i18n-gates/4X-….json — refusing to pass silently"* |
 | **S8** | *(control)* locked glossary phrase changed in rendered output | **BLOCK** — 4i | lock `dinosaur-country`, phrase `أرض الديناصورات`, floor 1 |
 | **S2** | Arabic page with incomplete chrome (English fallback rendered) | **REPORT** — 4f (advisory) | markers `policy`, `quick`, `links` at `/ar/cancellation-policy/` |
-| **S3** | Missing `dir` | **BLIND** | — |
-| **S4** | Suppressed `dir` (`ltr` on an RTL locale) | **BLIND** | — |
+| **S3** | Missing `dir` | ~~**BLIND**~~ → **BLOCK** — 4k *(AR-2 B-1)* | `LOCALES[].dir` in `src/lib/i18n.ts`, reached via `locales.registry.directionField`: *"Declared: rtl · Rendered: ltr (no dir attribute on `<html>`, which reads as ltr)"* |
+| **S4** | Suppressed `dir` (`ltr` on an RTL locale) | ~~**BLIND**~~ → **BLOCK** — 4k *(AR-2 B-1)* | same field: *"Declared: rtl · Rendered: ltr (`<html dir="ltr">`)"* |
 | **S5** | Mixed Latin/Arabic proper nouns (`Vernal` transliterated in half the page) | **BLIND** | — |
 | **S6** | Numeral-policy violation (Arabic-Indic digits in rendered text) | **BLIND** | — |
 
@@ -243,6 +274,12 @@ locales landed, and it held.
 phase: an Arabic page rendering left-to-right, or with no direction at all, passes
 every gate, the validator, and the build. The one attribute that makes an RTL
 locale an RTL locale is checked by nothing.
+
+> **Closed by AR-2 B-1.** Gate 4k now blocks both. The AR-1 finding was reproduced
+> under controlled conditions before it was closed: a `lang === 'ar' ? …` branch in
+> `BaseLayout` that suppresses `dir` for Arabic still passes `validate-site` and
+> gates 4f, 4g, 4h and 4i — all exit 0 — and **4k alone exits 1**. The paragraph
+> above remains an accurate description of the repository up to `c4a6f2f`.
 
 **S5 and S6 are blind for different reasons, and the difference matters.**
 Numerals (S6) are blind because *no gate has the concept* — a numbering-system

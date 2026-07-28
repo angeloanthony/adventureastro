@@ -38,12 +38,19 @@
       "closed on any drift.",
       "",
       "A CHECKED second list is not a second source of truth. The stale 4-of-8 locale list in",
-      "astro.config.mjs, which nothing verifies, is what an UNCHECKED one looks like."
+      "astro.config.mjs, which nothing verifies, is what an UNCHECKED one looks like.",
+      "",
+      "`directionField` is DECLARED as of AR-2 B-1, and it points at the registry rather than",
+      "copying it for a reason this section states twice already: `LOCALES[].dir` is where the",
+      "layout reads direction, so it is where the gate must read it. A `dir` in `entries` would",
+      "render correctly and be checked against nothing — the framework would then be verifying",
+      "its own copy of the fact instead of the fact."
     ],
     "registry": {
       "module": "src/lib/i18n.ts",
       "binding": "LOCALES",
-      "codeField": "code"
+      "codeField": "code",
+      "directionField": "dir"
     },
     "defaultBinding": "DEFAULT_LOCALE",
 

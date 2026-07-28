@@ -109,13 +109,17 @@ function validateLocales(locales) {
   closeObject(locales, ['registry', 'defaultBinding', 'entries'], 'locales');
 
   const registry = requireObject(locales.registry, 'locales.registry');
-  closeObject(registry, ['module', 'binding', 'codeField'], 'locales.registry');
+  closeObject(registry, ['module', 'binding', 'codeField', 'directionField'], 'locales.registry');
   requireString(registry.module, 'locales.registry.module');
   // `binding` names WHAT THE HOST CALLS its registry, not how to find it. Switching the
   // adapter from regex to AST does not change the name — that is why it passes the
   // declarative discriminator while a `parser` field does not.
   requireString(registry.binding, 'locales.registry.binding');
   requireString(registry.codeField, 'locales.registry.codeField');
+  // OPTIONAL, and unset is a fact rather than a default: a host that declares no direction
+  // field is refused when asked for one, never answered `ltr`. Validated when present so a
+  // typo fails here rather than surfacing as "this locale has no direction" much later.
+  if ('directionField' in registry) requireString(registry.directionField, 'locales.registry.directionField');
 
   requireString(locales.defaultBinding, 'locales.defaultBinding');
 

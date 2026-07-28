@@ -64,9 +64,14 @@ const relFromRoot = (p) => {
  * host calls it and which field carries the code; it never says how to recover either
  * from bytes. Switching this function to a regex would not change one character of the
  * manifest — that is the discriminator, applied.
+ *
+ * `directionField`, when the manifest declares one, is read in the SAME PASS and returned
+ * raw. Raw is deliberate: this function reports what the registry says, and whether what
+ * it says is a legal direction is a judgement the direction resolver makes, once, where
+ * the vocabulary lives. Validating here would put a framework rule in a byte reader.
  */
 function readRegistryCodes(manifest, moduleFile, label) {
-  const { binding, codeField } = manifest.locales.registry;
+  const { binding, codeField, directionField } = manifest.locales.registry;
 
   if (!existsSync(moduleFile)) {
     throw new HostShapeError(`could not parse ${binding} from ${label}`);
@@ -79,14 +84,23 @@ function readRegistryCodes(manifest, moduleFile, label) {
   }
 
   const codes = [];
+  const directions = new Map();
   for (const el of node.elements) {
     const obj = unwrap(el);
     if (!ts.isObjectLiteralExpression(obj)) continue;
-    const prop = obj.properties.find((p) => ts.isPropertyAssignment(p) && keyOf(p) === codeField);
-    const code = prop && stringOf(prop.initializer);
-    if (code) codes.push(code);
+    const fieldOf = (name) => {
+      const prop = obj.properties.find((p) => ts.isPropertyAssignment(p) && keyOf(p) === name);
+      return prop ? stringOf(prop.initializer) : undefined;
+    };
+    const code = fieldOf(codeField);
+    if (!code) continue;
+    codes.push(code);
+    // `undefined` here means one of two different things — the field is absent, or its
+    // value is not a string literal this reader can recover. Both are recorded the same
+    // way and both fail closed downstream, because neither yields a direction.
+    if (directionField) directions.set(code, fieldOf(directionField));
   }
-  return { sf, codes };
+  return { sf, codes, directions };
 }
 
 /**
@@ -100,7 +114,8 @@ function readRegistryCodes(manifest, moduleFile, label) {
  *
  * @returns {Readonly<{localeCodes: readonly string[], defaultLocale: string,
  *                     targets: readonly string[], roles: Readonly<Record<string,string|undefined>>,
- *                     diagnostics: Readonly<Record<string,string>>}>}
+ *                     diagnostics: Readonly<Record<string,string>>, direction: object,
+ *                     routes: object, policy: object, census: object}>}
  */
 export function resolveHost({ manifestPath, registryModule } = {}) {
   const { manifest, manifestDir } = loadManifest({ manifestPath });
@@ -115,7 +130,7 @@ export function resolveHost({ manifestPath, registryModule } = {}) {
   const moduleFile = registryModule ? resolve(registryModule) : resolve(hostRoot, declaredModule);
   const label = relFromRoot(moduleFile);
 
-  const { sf, codes } = readRegistryCodes(manifest, moduleFile, label);
+  const { sf, codes, directions } = readRegistryCodes(manifest, moduleFile, label);
 
   // The manifest's key set is checked against the host's real registry on every run.
   // A CHECKED second list is not a second source of truth; the stale 4-of-8 locale list
@@ -157,8 +172,101 @@ export function resolveHost({ manifestPath, registryModule } = {}) {
     roles: Object.freeze(roles),
     diagnostics,
     routes: createRoutesResolver(manifest, hostRoot, codes, defaultLocale),
+    direction: createDirectionResolver(manifest, codes, directions, label),
     policy: createPolicyResolver(manifest, hostRoot),
     census: createCensusResolver(manifest, hostRoot),
+  });
+}
+
+/**
+ * The declared text directions, one of which every locale must have.
+ *
+ * `auto` is HTML-legal and deliberately absent. It means "let the bidi algorithm infer
+ * direction from the first strong character", which is the opposite of a declared
+ * direction: a locale whose direction is inferred per page has no direction the framework
+ * can check a page against. A host that wants `auto` is describing a document, not a
+ * locale, and gate 4k would have nothing to verify.
+ */
+export const DIRECTIONS = Object.freeze(['ltr', 'rtl']);
+
+/**
+ * The host's declared direction could not be resolved.
+ *
+ * `.kind` is `undeclared` when the manifest names no `directionField` — a fact about the
+ * host, distinct from `invalid`, which means the field was named and the registry does not
+ * carry a legal value for some locale. The remedies differ: declare the field, versus fix
+ * the registry.
+ */
+export class HostDirectionError extends Error {
+  constructor(message, kind) {
+    super(message);
+    this.name = 'HostDirectionError';
+    this.kind = kind;
+  }
+}
+
+/**
+ * Resolve each locale's declared text direction from the host's own registry.
+ *
+ * ONE AUTHORITATIVE SOURCE, READ TWICE. `LOCALES[].dir` is where the layout reads
+ * direction and it is where this reads it. That is the whole point: a gate that consulted
+ * a manifest copy would verify the framework's transcription of the fact rather than the
+ * fact, and would pass a page whose layout disagreed with both.
+ *
+ * RESOLUTION IS LAZY, VALIDATION IS EAGER-ONCE. Gates 4f–4j resolve the same host and have
+ * no business with direction; making an undeclared `directionField` fatal at
+ * `resolveHost()` would break five gates on a host that never claimed to have one. So the
+ * refusal happens on ASK. Once asked, every locale is validated together — a partial
+ * answer ("here are the seven I could read") is how a locale silently loses its direction.
+ *
+ * THERE IS NO DEFAULT, AND THAT IS THE LOAD-BEARING DECISION. Returning `ltr` for a locale
+ * the registry does not describe would make gate 4k approve exactly the page it exists to
+ * catch: an RTL locale rendering left-to-right, agreeing with an invented declaration.
+ */
+function createDirectionResolver(manifest, codes, directions, label) {
+  const { binding, directionField } = manifest.locales.registry;
+  let resolved = null;
+
+  const map = () => {
+    if (resolved) return resolved;
+    if (!directionField) {
+      throw new HostDirectionError(
+        `is not declared — the host manifest's locales.registry names no "directionField", so ${label} cannot be asked which way a locale reads`,
+        'undeclared'
+      );
+    }
+    const bad = [];
+    const out = {};
+    for (const code of codes) {
+      const value = directions.get(code);
+      if (typeof value === 'string' && DIRECTIONS.includes(value)) out[code] = value;
+      else bad.push(`"${code}" (${value === undefined ? `no readable ${directionField}` : JSON.stringify(value)})`);
+    }
+    if (bad.length) {
+      throw new HostDirectionError(
+        `is declared as ${binding}[].${directionField} in ${label}, but ${bad.length} locale(s) carry no legal direction: ${bad.join(', ')} — expected one of ${DIRECTIONS.join(', ')}`,
+        'invalid'
+      );
+    }
+    resolved = Object.freeze(out);
+    return resolved;
+  };
+
+  return Object.freeze({
+    /** Every registered locale's declared direction. Throws rather than answering partially. */
+    get map() { return map(); },
+    /** One locale's declared direction. An unregistered code is a caller defect, not a default. */
+    of(code) {
+      const m = map();
+      if (!(code in m)) {
+        throw new HostDirectionError(`has no entry for "${code}" — it is not a registered locale`, 'invalid');
+      }
+      return m[code];
+    },
+    declared: Boolean(directionField),
+    vocabulary: DIRECTIONS,
+    /** Display label for report text only, on the `describe()` precedent. */
+    describe: () => (directionField ? `${binding}[].${directionField}` : null),
   });
 }
 
