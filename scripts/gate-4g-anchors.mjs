@@ -38,9 +38,10 @@
 // Its authority is i18n-gates/4f-headings.json `licensed.global`, unioned with this
 // gate's anchor-surface additions — one frozen proper-noun registry for the
 // repository, not two that can drift apart.
-import { readdirSync, readFileSync, existsSync, statSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { join, dirname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { distWalk, stripNonRendered, flattenElementText, foldPunctuation } from './lib/rendered-text.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -128,39 +129,20 @@ const REPEAT = config.repeatThreshold ?? 5;
 // result is whitespace-normalised, which is what makes an anchor split across
 // `<strong>` compare equal to the same anchor written flat.
 // ---------------------------------------------------------------------------
-const ENTITIES = {
-  nbsp: ' ', amp: '&', quot: '"', apos: "'", lt: '<', gt: '>',
-  mdash: '—', ndash: '–', hellip: '…',
-};
-
-/**
- * Numeric references are decoded generically, which gates 4h and 4i do not need to
- * do: they scan prose, and prose does not carry `&#128222;`. Anchor text does — the
- * phone and gallery links render their icons as numeric entities, and left encoded
- * they arrive as the letter-bearing string `#128222;` and classify as English text.
- */
-const decode = (s) =>
-  s.replace(/&#x([0-9a-f]+);/gi, (m, h) => safeCodePoint(parseInt(h, 16), m))
-   .replace(/&#(\d+);/g, (m, d) => safeCodePoint(parseInt(d, 10), m))
-   .replace(/&([a-z]+);/gi, (m, e) => ENTITIES[e.toLowerCase()] ?? m);
-
-const safeCodePoint = (cp, fallback) => {
-  try { return String.fromCodePoint(cp); } catch { return fallback; }
-};
+// Gate 4g decodes numeric references, which the prose gates do not need to do: they
+// scan prose, and prose does not carry `&#128222;`. Anchor text does — the phone and
+// gallery links render their icons as numeric entities, and left encoded they arrive
+// as the letter-bearing string `#128222;` and classify as English text. The narrower
+// named pattern is 4g's own too: it matches `[a-z]+` only, so the union table's
+// numeric keys are unreachable from here rather than merely unused.
+const ANCHOR_TEXT = { numeric: true, namedPattern: /&([a-z]+);/gi, nfc: true };
 
 // Curly punctuation is folded to ASCII so a registered identity matches whether the
-// page renders `Doc's Beach` or `Doc’s Beach` (the 4f normalisation, unchanged).
-const normalize = (s) =>
-  s.replace(/[‘’]/g, "'").replace(/[“”]/g, '"')
-   .replace(/[   ]/g, ' ').replace(/\s+/g, ' ').trim();
+// page renders `Doc's Beach` or `Doc’s Beach` (the 4f normalisation, shared).
+const normalize = foldPunctuation;
 
 function anchorsOf(html) {
-  const body = html
-    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
-    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
-    .replace(/<template[\s\S]*?<\/template>/gi, ' ')
-    .replace(/<noscript[\s\S]*?<\/noscript>/gi, ' ')
-    .replace(/<!--[\s\S]*?-->/g, ' ')
+  const body = stripNonRendered(html)
     .replace(/<svg\b[\s\S]*?<\/svg>/gi, ' ')
     .replace(/<span\b[^>]*aria-hidden\s*=\s*"true"[^>]*>[\s\S]*?<\/span>/gi, ' ');
   const out = [];
@@ -169,20 +151,13 @@ function anchorsOf(html) {
     const attrs = m[1];
     if (/\bhidden\b|aria-hidden\s*=\s*"true"|sr-only|visually-hidden/i.test(attrs)) continue;
     const href = attrs.match(/href\s*=\s*"([^"]*)"/i)?.[1] ?? '';
-    const text = normalize(decode(m[2].replace(/<[^>]+>/g, ' '))).normalize('NFC');
+    const text = flattenElementText(m[2], ANCHOR_TEXT);
     if (text) out.push({ href, text });
   }
   return out;
 }
 
-const htmlFiles = [];
-(function walk(dir) {
-  for (const name of readdirSync(dir).sort()) {
-    const full = join(dir, name);
-    if (statSync(full).isDirectory()) walk(full);
-    else if (name.endsWith('.html')) htmlFiles.push(full);
-  }
-})(dist);
+const htmlFiles = distWalk(dist);
 
 /** English anchor text, indexed by destination — the identity signal's reference set. */
 const enByHref = new Map();

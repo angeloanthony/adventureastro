@@ -27,9 +27,10 @@
 // HONEST RESULT. Unlike 4f, this gate does not report zero by construction. On the
 // corpus it was built against it finds one real defect that C6/C7 missed, because
 // those passes censused `请` and this seam duplicates `向`.
-import { readdirSync, readFileSync, existsSync, statSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { join, dirname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { distWalk, extractVisibleText } from './lib/rendered-text.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const CONFIG = join(root, 'i18n-gates', '4h-seams.json');
@@ -80,49 +81,16 @@ const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 // ---------------------------------------------------------------------------
 // Phase 1 — rendered extraction. Visible text only.
+//
+// The extractor is the shared primitive; what belongs to gate 4h is the argument.
+// `inlineSeparator: ''` states the C7 fix at the call site: inline tags are removed
+// with NO separator, because that is what re-joins the seam markup can hide
+// (`向<strong>向官方渠道核实`). Block tags always leave a space, or the end of one
+// paragraph abutting the start of the next would fabricate a seam no reader sees.
 // ---------------------------------------------------------------------------
-const ENTITIES = {
-  nbsp: ' ', amp: '&', quot: '"', apos: "'", lt: '<', gt: '>',
-  '#39': "'", '#039': "'", '#160': ' ', mdash: '—', ndash: '–', hellip: '…',
-};
+const visibleText = (html) => extractVisibleText(html, { inlineSeparator: '' });
 
-// Block-level elements interrupt the text flow; inline ones do not. The
-// distinction is load-bearing in both directions: inline tags must be removed
-// with NO separator, because that is what re-joins the seam C7 proved markup can
-// hide (`向<strong>向官方渠道核实`), while block tags must leave one, or the end of
-// one paragraph abutting the start of the next would fabricate a seam no reader
-// ever sees.
-const BLOCK =
-  'p|div|section|article|aside|header|footer|nav|main|figure|figcaption|blockquote|pre|hr|br|' +
-  'ul|ol|li|dl|dt|dd|table|thead|tbody|tfoot|tr|td|th|h[1-6]|form|fieldset|legend|address|' +
-  'details|summary|option|title';
-
-function visibleText(html) {
-  return html
-    // Non-rendered regions first, so their contents can never reach the corpus.
-    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
-    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
-    .replace(/<template[\s\S]*?<\/template>/gi, ' ')
-    .replace(/<noscript[\s\S]*?<\/noscript>/gi, ' ')
-    .replace(/<!--[\s\S]*?-->/g, ' ')
-    .replace(new RegExp(`</?(?:${BLOCK})\\b[^>]*>`, 'gi'), ' ')
-    // Whatever remains is inline, and is dropped with no separator on purpose:
-    // that is what re-joins a seam inline markup had split (C7).
-    .replace(/<[^>]+>/g, '')
-    .replace(/&([a-z#0-9]+);/gi, (m, e) => ENTITIES[e.toLowerCase()] ?? m)
-    .normalize('NFC')
-    .replace(/[   ]/g, ' ')
-    .replace(/[ \t\r\n]+/g, ' ');
-}
-
-const htmlFiles = [];
-(function walk(dir) {
-  for (const name of readdirSync(dir)) {
-    const full = join(dir, name);
-    if (statSync(full).isDirectory()) walk(full);
-    else if (name.endsWith('.html')) htmlFiles.push(full);
-  }
-})(dist);
+const htmlFiles = distWalk(dist);
 
 // ---------------------------------------------------------------------------
 // Phase 2/3 — seam rules, with grammatical licensing built in.

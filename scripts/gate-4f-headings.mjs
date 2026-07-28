@@ -28,9 +28,10 @@
 // where it fires on 13 of 15 — the two it passes being exactly the two A5/A6
 // licensed (`Leave No Trace`, `Backcountry Camping`). It will not catch an
 // untranslated heading built only from words already used in that locale.
-import { readdirSync, readFileSync, existsSync, statSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { join, dirname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { distWalk, stripNonRendered, flattenElementText, foldPunctuation } from './lib/rendered-text.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
@@ -77,41 +78,27 @@ for (const loc of TARGETS) {
 
 // --- Normalization. Curly punctuation is folded to ASCII so a licensed phrase
 //     matches whether the page renders `Doc's Beach` or `Doc’s Beach`. ---
-const normalize = (s) =>
-  s.replace(/[‘’]/g, "'").replace(/[“”]/g, '"')
-   .replace(/[   ]/g, ' ').replace(/\s+/g, ' ').trim();
+const normalize = foldPunctuation;
+
+// Gate 4f reads headings, which are prose: no numeric references to decode, and no
+// NFC pass — headings are compared against a Latin-script marker lexicon, not a CJK
+// corpus. Both are stated here rather than assumed by the primitive.
+const HEADING_TEXT = { numeric: false, nfc: false };
 
 const TOKEN = /[a-z][a-z'-]{2,}/g;
 
 // --- Phase 1: heading discovery from rendered HTML. ---
-const htmlFiles = [];
-(function walk(dir) {
-  for (const name of readdirSync(dir)) {
-    const full = join(dir, name);
-    if (statSync(full).isDirectory()) walk(full);
-    else if (name.endsWith('.html')) htmlFiles.push(full);
-  }
-})(dist);
+const htmlFiles = distWalk(dist);
 
 /** Strip regions whose text is not rendered prose, then pull h1–h6. */
 function headingsOf(html) {
-  const body = html
-    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
-    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
-    .replace(/<template[\s\S]*?<\/template>/gi, ' ')
-    .replace(/<noscript[\s\S]*?<\/noscript>/gi, ' ')
-    .replace(/<!--[\s\S]*?-->/g, ' ');
+  const body = stripNonRendered(html);
   const out = [];
   for (const m of body.matchAll(/<h([1-6])\b([^>]*)>([\s\S]*?)<\/h\1>/gi)) {
     const attrs = m[2];
     // Visually-hidden headings are navigation scaffolding, not display copy.
     if (/\bhidden\b|aria-hidden\s*=\s*"true"|sr-only|visually-hidden/i.test(attrs)) continue;
-    const text = normalize(
-      m[3].replace(/<[^>]+>/g, ' ')
-          .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
-          .replace(/&quot;/g, '"').replace(/&#0?39;|&apos;/g, "'")
-          .replace(/&lt;/g, '<').replace(/&gt;/g, '>')
-    );
+    const text = flattenElementText(m[3], HEADING_TEXT);
     if (text) out.push({ level: +m[1], text });
   }
   return out;

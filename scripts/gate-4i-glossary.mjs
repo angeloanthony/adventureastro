@@ -25,10 +25,11 @@
 // registry that is internally inconsistent — a duplicated lock, a phrase filed under
 // the wrong script, an anchor pointing at nothing). 1 = the corpus violates a lock.
 // 0 = every blocking lock holds; advisory counts may still have been printed.
-import { readdirSync, readFileSync, existsSync, statSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { join, dirname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
+import { distWalk, extractVisibleText } from './lib/rendered-text.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -303,46 +304,14 @@ for (const loc of TARGETS) {
 }
 
 // ---------------------------------------------------------------------------
-// Phase 2b — rendered extraction. Byte-identical to gate 4h's extractor.
-//
-// Block-level tags are replaced by a space and inline tags by nothing, and both
-// halves are load-bearing: joining inline markup is what exposes text a reader
-// sees as continuous, while separating blocks is what stops the end of one
-// paragraph abutting the start of the next.
+// Phase 2b — rendered extraction. The same contract as gate 4h, now the same code:
+// both gates scan whole-page prose, so both pass `inlineSeparator: ''`. Joining
+// inline markup is what exposes text a reader sees as continuous, while separating
+// blocks is what stops the end of one paragraph abutting the start of the next.
 // ---------------------------------------------------------------------------
-const ENTITIES = {
-  nbsp: ' ', amp: '&', quot: '"', apos: "'", lt: '<', gt: '>',
-  '#39': "'", '#039': "'", '#160': ' ', mdash: '—', ndash: '–', hellip: '…',
-};
+const visibleText = (html) => extractVisibleText(html, { inlineSeparator: '' });
 
-const BLOCK =
-  'p|div|section|article|aside|header|footer|nav|main|figure|figcaption|blockquote|pre|hr|br|' +
-  'ul|ol|li|dl|dt|dd|table|thead|tbody|tfoot|tr|td|th|h[1-6]|form|fieldset|legend|address|' +
-  'details|summary|option|title';
-
-function visibleText(html) {
-  return html
-    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
-    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
-    .replace(/<template[\s\S]*?<\/template>/gi, ' ')
-    .replace(/<noscript[\s\S]*?<\/noscript>/gi, ' ')
-    .replace(/<!--[\s\S]*?-->/g, ' ')
-    .replace(new RegExp(`</?(?:${BLOCK})\\b[^>]*>`, 'gi'), ' ')
-    .replace(/<[^>]+>/g, '')
-    .replace(/&([a-z#0-9]+);/gi, (m, e) => ENTITIES[e.toLowerCase()] ?? m)
-    .normalize('NFC')
-    .replace(/[   ]/g, ' ')
-    .replace(/[ \t\r\n]+/g, ' ');
-}
-
-const htmlFiles = [];
-(function walk(dir) {
-  for (const name of readdirSync(dir).sort()) {
-    const full = join(dir, name);
-    if (statSync(full).isDirectory()) walk(full);
-    else if (name.endsWith('.html')) htmlFiles.push(full);
-  }
-})(dist);
+const htmlFiles = distWalk(dist);
 
 /**
  * Occurrence offsets of `term`, with every licensed compound masked out first.
