@@ -597,7 +597,7 @@ any time).
 
 | Artifact | Home | Disposition |
 |---|---|---|
-| These ADRs | `docs/framework/adr/NNNN-*.md` in **adventureastro**, moving to the framework repo's `docs/adr/` at the repo split | One file per ADR, numbered, status header. F3 places them. |
+| These ADRs | `docs/framework/adr/NNNN-*.md` in **adventureastro**, moving to the framework repo's `docs/adr/` at the repo split | One file per ADR, numbered, status header. **`docs/framework/adr/` now exists** and holds ADR-7 (2026-07-28) onward; **ADR-1–6 have still not been split out of this file** — see that directory's README for the pointer between the two homes. |
 | F1 architecture doc | `docs/framework/F1-architecture.md`, same move | **DONE** — committed alongside these ADRs. |
 | Methodology (`NATIVE_REVIEW.md` "Review methodology", 11 principles) | Framework `docs/methodology.md` | **Portable verbatim** (F1 §1.4). Copied at extraction, then the original section points at it. |
 | Lifecycle + pipeline rationale (`MULTILINGUAL_HANDOFF.md` §7, §7.1) | Framework `docs/lifecycle.md` and `docs/pipeline-order.md` | **Superseded in part.** The gate-stage model and the load-bearing ordering argument are framework knowledge; the project's gate *history* stays. |

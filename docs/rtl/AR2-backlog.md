@@ -51,6 +51,13 @@ gate-4j: ✔ 105 slides x 8 gallery locales — 840 entries, complete (…);
          1 locale(s) render no gallery: "ar"
 ```
 
+**Rationale recorded as an ADR:**
+[`docs/framework/adr/0007-declared-absence-over-optional-presence.md`](../framework/adr/0007-declared-absence-over-optional-presence.md)
+— why registration and rendering diverged, why exemption is explicit, why a
+partition beats optionality, and why the invariant lives in the module rather
+than in a gate rule. It also names the other registries in this repository with
+the same shape (`getBodyHtml` dispatchers, `UI_STRINGS`) that still fail silently.
+
 **Still open for a later phase:** the exemption is checked for internal
 consistency, not against the route table. Gate 4j is a source gate and cannot see
 which locales have a homepage; the `renderGallery()` throw is what closes that
@@ -117,13 +124,17 @@ backwards inside Arabic prose.
 isolation and `+39 327 1864779` bare in Arabic prose. This defect ships and nobody
 notices.
 
-### B-3 — ⚑ HIGHEST-PRIORITY ARCHITECTURAL ITEM: `LocaleMeta.hreflang` serves two consumers with different requirements
+### B-3 — `LocaleMeta.hreflang` serves two consumers with different requirements
 
-*Owner's assessment, 2026-07-28: this is a hidden coupling of the same family
-F3–F5 spent five phases eliminating — one field silently governing cross-cutting
-behaviour in a second, unrelated subsystem. It warrants an ADR in
-`docs/framework/` alongside the F2 decision records, written as its own change
-rather than folded into a layout phase.*
+> **ADR WRITTEN 2026-07-28 — decision recorded, not yet implemented:**
+> [`docs/framework/adr/0008-hreflang-is-two-fields.md`](../framework/adr/0008-hreflang-is-two-fields.md).
+> Split the field (`hreflang` for SEO, `intl` for `Intl`) and add a registry
+> check asserting every locale's `intl` tag resolves to `latn`. Implementation is
+> ~9 lines plus the check; it does not block B-1 or B-2.
+>
+> The ADR adds one measurement this entry did not have: **`ar-SA` — the most
+> plausible regionalization for this audience — is one of the tags that violates
+> the numeral policy** (`ar-EG` and `ar-SA` → `arab`; `ar` and `ar-MA` → `latn`).
 
 `getIntlLocale()` reuses the hreflang value as the `Intl` tag, so it silently
 decides the numbering system of every machine-formatted date and number:

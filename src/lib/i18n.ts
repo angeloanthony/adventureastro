@@ -36,7 +36,13 @@ export interface LocaleMeta {
    * dictionary, the corpus, or any gate enforces that for machine-formatted
    * output — this field does, alone. Changing `ar` to a region whose CLDR
    * default is `arab` would violate the policy site-wide without touching a
-   * single translated string. See docs/rtl/AR1-arabic-policy.md §3.
+   * single translated string. `ar-EG` and `ar-SA` both do; `ar` and `ar-MA` do
+   * not. See docs/rtl/AR1-arabic-policy.md §3.
+   *
+   * THE FIX IS DECIDED, NOT YET APPLIED: split this into `hreflang` (SEO) and
+   * `intl` (formatting), and assert every locale's `intl` tag resolves to
+   * `latn`. See docs/framework/adr/0008-hreflang-is-two-fields.md. Until then
+   * this comment is the only guard, which is exactly the ADR's complaint.
    */
   hreflang: string;
 }
