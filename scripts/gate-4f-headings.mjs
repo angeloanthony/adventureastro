@@ -57,9 +57,13 @@ try {
 // Where rendered output lives is a host fact (manifest §3), not a path this gate computes
 // — F5 Phase 5, coupling C-2. `join(root, 'dist')` was correct only for the repository the
 // framework happens to live in, which is the same defect shape the policy migration closed.
-let dist;
+// WHAT COUNTS AS A PAGE is the second half of that fact, migrated at F5 Phase 6: the
+// render index used to test `.html` itself. Both come from the manifest, so a host that
+// renders something else is described, not assumed.
+let dist, pages;
 try {
   dist = host.routes.output;
+  pages = host.routes.pages;
 } catch (e) {
   console.error(`gate-4f: rendered output ${e.message} — refusing to pass silently.`);
   process.exit(2);
@@ -108,7 +112,7 @@ const HEADING_TEXT = { numeric: false, nfc: false };
 const TOKEN = /[a-z][a-z'-]{2,}/g;
 
 // --- Phase 1: heading discovery from rendered HTML. ---
-const index = createRenderIndex(dist);
+const index = createRenderIndex(dist, { pages });
 
 /** Strip regions whose text is not rendered prose, then pull h1–h6. */
 function headingsOf(html) {

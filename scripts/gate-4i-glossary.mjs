@@ -77,9 +77,12 @@ try {
 // F5 Phase 5. The positional override survives for scratch corpora; what is gone is this
 // gate's ability to compute `join(root, 'dist')` — a path that is correct only for the one
 // repository the framework happens to live in, which is coupling C-2's whole shape.
-let dist;
+// What counts as a page comes from `routes.pageGlob` as of F5 Phase 6 — including for a
+// scratch corpus, which is rendered by the same host and therefore has the same shape.
+let dist, pageShape;
 try {
   dist = positional[0] ? resolve(positional[0]) : host.routes.output;
+  pageShape = host.routes.pages;
 } catch (e) {
   console.error(`gate-4i: rendered output ${e.message} — refusing to pass silently.`);
   process.exit(2);
@@ -369,7 +372,7 @@ for (const loc of TARGETS) {
 // ---------------------------------------------------------------------------
 const visibleText = (html) => extractVisibleText(html, { inlineSeparator: '' });
 
-const index = createRenderIndex(dist);
+const index = createRenderIndex(dist, { pages: pageShape });
 
 /**
  * Occurrence offsets of `term`, with every licensed compound masked out first.

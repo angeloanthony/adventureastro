@@ -155,6 +155,17 @@ function validateOptionalSections(manifest) {
     if (typeof routes.defaultLocalePrefixed !== 'boolean') {
       throw new HostManifestError('routes.defaultLocalePrefixed must be a boolean');
     }
+    // Optional in the schema and validated only when present. Both address ROUTE IDENTITY
+    // within the declared output — which route is the corpus root, and which routes stand
+    // outside the linked corpus — so they belong beside `output`, not in a validator's
+    // source. A host that declares neither gets the fail-closed error from the resolver,
+    // not a framework default; see createRoutesResolver.
+    if ('entryPoint' in routes) requireString(routes.entryPoint, 'routes.entryPoint');
+    if ('exempt' in routes) {
+      if (!Array.isArray(routes.exempt) || !routes.exempt.every(isNonEmptyString)) {
+        throw new HostManifestError('routes.exempt must be an array of non-empty strings');
+      }
+    }
   }
   if ('dictionaries' in manifest) {
     const dicts = requireObject(manifest.dictionaries, 'dictionaries');

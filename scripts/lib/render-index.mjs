@@ -92,8 +92,20 @@ class Page {
   }
 }
 
-export function createRenderIndex(dist, { cache = false } = {}) {
-  const pages = distWalk(dist).map((f) => new Page(dist, f, cache));
+/**
+ * @param {string} dist  The host's declared render output (`host.routes.output`).
+ * @param {{pages: {match: (name: string) => boolean}, cache?: boolean}} options
+ *   `pages` is the adapter's interpretation of `routes.pageGlob` (`host.routes.pages`).
+ *   It is required for the same reason `distWalk`'s predicate is: which files are pages
+ *   is a host fact, and the index is not entitled to assume one. Passing the adapter's
+ *   object rather than a bare function keeps the call site readable as what it is —
+ *   "index the host's pages" — rather than as an anonymous filter.
+ */
+export function createRenderIndex(dist, { pages: pageShape, cache = false } = {}) {
+  if (!pageShape || typeof pageShape.match !== 'function') {
+    throw new TypeError('createRenderIndex requires `pages` — resolve it from the host adapter (host.routes.pages), never from a literal extension');
+  }
+  const pages = distWalk(dist, pageShape.match).map((f) => new Page(dist, f, cache));
   const byKey = new Map(pages.map((p) => [p.key, p]));
   return {
     dist,

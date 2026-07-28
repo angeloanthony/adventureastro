@@ -90,10 +90,14 @@ const LOCALE_CODES = host.localeCodes;
 // producer that took its corpus location from whoever invoked it would record a fact
 // about whatever directory was passed, under the manifest digest of a host that may not
 // have produced it.
-let dist, distLabel;
+let dist, distLabel, pages;
 try {
   dist = args['--dist'] ? resolve(args['--dist']) : host.routes.output;
   distLabel = args['--dist'] ?? host.routes.describe();
+  // What counts as a page is `routes.pageGlob`, read as of F5 Phase 6. A census that
+  // measured a different file set than the gates consume would produce facts nobody can
+  // check against the corpus they describe.
+  pages = host.routes.pages;
 } catch (e) {
   die(`rendered output ${e.message}`);
 }
@@ -137,7 +141,7 @@ function countOf(text, phrase) {
 }
 
 // --- Measure. ---
-const index = createRenderIndex(dist);
+const index = createRenderIndex(dist, { pages });
 
 /** Route identity is the index's; the locale rule is the HOST's, and F5 Phase 5 moved it
  *  to the one component allowed to hold host policy. Phase 4 open-coded it here, which

@@ -89,9 +89,12 @@ try {
 
 // The positional override survives for scratch corpora; the DEFAULT is now the host's
 // declared output (manifest §3) rather than `join(root, 'dist')` — F5 Phase 5, C-2.
-let dist;
+// What counts as a page comes from `routes.pageGlob` as of F5 Phase 6 — including for a
+// scratch corpus, which is rendered by the same host and therefore has the same shape.
+let dist, pages;
 try {
   dist = positional[0] ? resolve(positional[0]) : host.routes.output;
+  pages = host.routes.pages;
 } catch (e) {
   console.error(`gate-4g: rendered output ${e.message} — refusing to pass silently.`);
   process.exit(2);
@@ -189,7 +192,7 @@ function anchorsOf(html) {
   return out;
 }
 
-const index = createRenderIndex(dist);
+const index = createRenderIndex(dist, { pages });
 
 /** English anchor text, indexed by destination — the identity signal's reference set. */
 const enByHref = new Map();

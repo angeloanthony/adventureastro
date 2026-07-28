@@ -23,13 +23,63 @@
 // Frontmatter-level checks (missing author, missing tags, wrong hub,
 // nonexistent/oversized heroImage, tag format, date order) are enforced
 // earlier, by zod in content.config.ts.
+//
+// THE MANIFEST IS A REQUIRED DEPENDENCY OF THIS VALIDATOR; THE LOCALE REGISTRY IS NOT.
+// (F5 Phase 6, Deliverable 0 — decided explicitly rather than as a side effect.)
+//
+// This script used to compute `join(root, 'dist')`, with `root` the FRAMEWORK repository.
+// That is coupling C-2's exact shape and its exact failure: point the framework at another
+// host and the validator reports a clean site having validated adventureastro's output —
+// a wrong answer, not a crash. A fallback ("use the manifest if there is one, else
+// join(root,'dist')") would have preserved that failure while looking migrated, so there
+// is no fallback. Render addressing comes from the manifest or the validator refuses.
+//
+// What it does NOT acquire is a localization dependency. `resolveHost` would have supplied
+// the same path, but it reads the locale registry on the way — parsing LOCALES, reading
+// DEFAULT_LOCALE, failing closed on manifest/registry drift. This validator checks links,
+// orphans, hub structure, titles and alt text; it is localization-neutral by design, and
+// routing it through `resolveHost` would make a monolingual host's site validation fail on
+// a locale registry it has no reason to own. `resolveRoutes` resolves manifest §3 alone.
+//
+// It reads no policy file, no census fact and no review state, and must not begin to.
 import { readFileSync, existsSync, statSync } from 'node:fs';
 import { join, dirname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRenderIndex } from './lib/render-index.mjs';
+import { resolveRoutes, HostRoutesError } from './lib/host-adapter.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const dist = join(root, 'dist');
+
+// `--manifest` points the validator at another host, the same affordance gates 4g, 4h and
+// 4i already expose. It is what makes the no-manifest and cross-host cases testable without
+// mutating this repository — a fail-closed path that can only be exercised by deleting a
+// file is a fail-closed path nobody exercises.
+const argv = process.argv.slice(2);
+const manifestFlag = argv.indexOf('--manifest') >= 0 ? argv[argv.indexOf('--manifest') + 1] : undefined;
+
+let dist, pageShape, ENTRY, EXEMPT;
+try {
+  const { routes } = resolveRoutes({ manifestPath: manifestFlag });
+  dist = routes.output;
+  pageShape = routes.pages;
+  // Which route the reachability walk starts from, and which routes stand outside the
+  // linked corpus, are host facts too — they were `'index.html'` and `'404.html'` written
+  // into this file. 404 is reachable by no link by construction; counting it would report
+  // a permanent orphan, and that exemption is the host's statement, not the framework's.
+  ENTRY = routes.entryPoint;
+  EXEMPT = new Set(routes.exempt);
+} catch (e) {
+  // The adapter's routes messages are verb phrases, written to be composed with a subject
+  // the consumer chooses ("rendered output is not declared…" in the gates). A malformed
+  // manifest is already a complete sentence and is relayed as one. Branching on the class
+  // is what the two classes are for — it is not string inspection.
+  console.error(
+    e instanceof HostRoutesError
+      ? `validate-site: route addressing ${e.message} — refusing to pass silently.`
+      : `validate-site: ${e.message}`
+  );
+  process.exit(1);
+}
 
 if (!existsSync(dist)) {
   console.error('validate-site: dist/ not found — run astro build first.');
@@ -46,7 +96,7 @@ if (!slugsMatch) {
 const HUB_SLUGS = [...slugsMatch[1].matchAll(/'([^']+)'/g)].map((m) => m[1]);
 
 // --- Collect every built HTML page, through the shared render index. ---
-const index = createRenderIndex(dist);
+const index = createRenderIndex(dist, { pages: pageShape });
 const pages = new Map(index.pages.map((p) => [p.key, p.html]));
 
 const SKIP = /^(https?:\/\/|\/\/|mailto:|tel:|sms:|data:|javascript:|#)/i;
@@ -61,7 +111,18 @@ function resolveLink(pageKey, raw) {
   return relative(dist, resolve(from, path.replace(/^\//, ''))).split(sep).join('/');
 }
 
-/** Find the dist file a resolved key points at (handles '/', '.html', dir/index). */
+/**
+ * Find the dist file a resolved key points at (handles '/', '.html', dir/index).
+ *
+ * KNOWN C-2 RESIDUE, DELIBERATELY NOT MIGRATED (F5 Phase 6). The candidate list below
+ * encodes a directory-index convention — `/x/` is served by `x/index.html` — which is a
+ * fact about the host's build format, not about this validator. Schema v1 has no key for
+ * it, and inventing one would be manifest expansion beyond declared routing, which this
+ * phase's stop conditions name explicitly. Recorded as declared debt with a named reader
+ * rather than migrated quietly; it is the same shape `pageGlob` was carried as before it
+ * had one. The same convention appears in render-index's `url` derivation and in the hub
+ * checks below.
+ */
 function targetExists(key) {
   if (key === '' || key === '.') return 'index.html';
   for (const candidate of [key, `${key}/index.html`, `${key}.html`, key.replace(/\/$/, '') + '.html']) {
@@ -95,7 +156,7 @@ for (const [pageKey, html] of pages) {
 
 // --- 2. Reachability from index.html. ---
 const reachable = new Set();
-const queue = ['index.html'];
+const queue = [ENTRY];
 while (queue.length) {
   const key = queue.pop();
   if (reachable.has(key) || !linkGraph.has(key)) continue;
@@ -103,8 +164,8 @@ while (queue.length) {
   queue.push(...linkGraph.get(key));
 }
 for (const pageKey of pages.keys()) {
-  if (pageKey === '404.html' || reachable.has(pageKey)) continue;
-  errors.push(`orphan page: ${pageKey} is not reachable from index.html via any link`);
+  if (EXEMPT.has(pageKey) || reachable.has(pageKey)) continue;
+  errors.push(`orphan page: ${pageKey} is not reachable from ${ENTRY} via any link`);
 }
 
 // --- 4 + 5. Title / meta-description uniqueness. ---
@@ -114,7 +175,7 @@ const descOf = (html) =>
 for (const [label, extract] of [['title', titleOf], ['meta description', descOf]]) {
   const seen = new Map(); // value -> first page
   for (const [pageKey, html] of pages) {
-    if (pageKey === '404.html') continue;
+    if (EXEMPT.has(pageKey)) continue;
     const value = extract(html);
     if (!value) continue; // absence is a Seo-component bug, caught elsewhere
     if (seen.has(value)) {

@@ -85,16 +85,25 @@
       "policy, not a routing algorithm — a build-hook engine that never walked a directory",
       "would still need both facts and would not change either.",
       "",
-      "`pageGlob` is declared and NOT YET READ: the render index hardcodes `**/*.html`, and",
-      "changing its signature would touch all six of its consumers for no behavioural gain",
-      "in this phase. It is required by schema v1 rather than optional because a routes",
-      "section that omits it describes half a routing policy. Recorded here so the omission",
-      "is a known debt with a named reader, not the silent kind (M-4)."
+      "`pageGlob` is READ as of F5 Phase 6. The adapter interprets it into a predicate and",
+      "the render index takes that predicate instead of testing `.html` itself. Only the",
+      "form `**/*.ext` is honoured; any other glob fails closed rather than being walked as",
+      "if it said `**/*.html`, because a resolver that accepted a narrower glob and then",
+      "returned the whole tree would describe a corpus this file did not declare.",
+      "",
+      "`entryPoint` and `exempt` are READ as of F5 Phase 6, by validate-site. They were",
+      "`'index.html'` and `'404.html'` written into that script, where they read as framework",
+      "constants and are in fact facts about this host's build. `exempt` names routes that",
+      "stand outside the linked corpus: 404 is reachable by no link by construction, so",
+      "orphan and uniqueness checks must not count it. Neither has a framework default —",
+      "an invented entry point silently reports either a whole site orphaned or nothing at all."
     ],
     "output": "dist",
     "pageGlob": "**/*.html",
     "localePrefix": "path-segment",
-    "defaultLocalePrefixed": false
+    "defaultLocalePrefixed": false,
+    "entryPoint": "index.html",
+    "exempt": ["404.html"]
   },
 
   "census": {

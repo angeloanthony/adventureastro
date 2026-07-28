@@ -27,21 +27,31 @@ import { readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 /**
- * Canonical traversal of rendered output: every `.html` file under `dir`, recursive,
- * in sorted order at every level.
+ * Canonical traversal of rendered output: every page file under `dir`, recursive, in
+ * sorted order at every level.
  *
  * Sorted is the standard. Before this module gates 4f and 4h walked unsorted while 4g
  * and 4i sorted, which made two gates' report ordering depend on filesystem order.
  * Ordering is presentation; it is not part of any gate's verdict. Counts and findings
  * are invariant under it.
+ *
+ * `match` DECIDES WHAT A PAGE IS, AND IT IS REQUIRED (F5 Phase 6). This function used to
+ * test `name.endsWith('.html')`, which is a fact about the host's build output living in
+ * the framework's traversal. It now takes the predicate the adapter interpreted from
+ * `routes.pageGlob`. There is deliberately no default: a default would be silently right
+ * for every host that renders HTML and silently wrong for the first that does not, and
+ * the caller that forgot to pass one would never find out. Fail closed instead.
  */
-export function distWalk(dir) {
+export function distWalk(dir, match) {
+  if (typeof match !== 'function') {
+    throw new TypeError('distWalk requires a `match` predicate — what counts as a page is a host fact (routes.pageGlob), not a framework constant');
+  }
   const out = [];
   (function walk(d) {
     for (const name of readdirSync(d).sort()) {
       const full = join(d, name);
       if (statSync(full).isDirectory()) walk(full);
-      else if (name.endsWith('.html')) out.push(full);
+      else if (match(name)) out.push(full);
     }
   })(dir);
   return out;

@@ -211,6 +211,61 @@ function createRoutesResolver(manifest, hostRoot, codes, defaultLocale) {
   };
 
   /**
+   * Interpret `routes.pageGlob` into a predicate over a dist-relative POSIX key.
+   *
+   * THE MANIFEST STATES A GLOB; THE ADAPTER INTERPRETS IT. That division is the whole
+   * discriminator: `**​/*.html` is a declarative statement about which rendered files are
+   * pages, and swapping this function for a full glob engine would not change one
+   * character of the manifest. A `walker` or `parser` field would fail that test, which
+   * is why none exists.
+   *
+   * ONLY `**​/*.ext` IS HONOURED, AND ANYTHING ELSE FAILS CLOSED. That is the honest
+   * bound: v1's traversal is a recursive walk with an extension test, and it cannot
+   * implement segment negation, brace alternation or a depth-limited prefix. A resolver
+   * that accepted `pages/*.html` and then walked every directory anyway would return a
+   * corpus the manifest did not describe — the silent wrong answer this series exists to
+   * remove, arriving through the very field meant to prevent it. Refusing is the only
+   * behaviour that keeps the declared fact load-bearing.
+   */
+  const pageMatcher = () => {
+    if (!section) {
+      throw new HostRoutesError('is not declared — the host manifest has no "routes" section', 'undeclared');
+    }
+    const glob = section.pageGlob;
+    const m = /^\*\*\/\*(\.[A-Za-z0-9.]+)$/.exec(glob);
+    if (!m) {
+      throw new HostRoutesError(
+        `declares pageGlob ${JSON.stringify(glob)}, which this engine cannot honour — it understands only the form "**/*.ext"`,
+        'unsupported'
+      );
+    }
+    const ext = m[1];
+    return Object.freeze({ ext, glob, match: (key) => key.endsWith(ext) });
+  };
+
+  /**
+   * Route identity within the declared output.
+   *
+   * `entryPoint` is the route a reachability walk starts from; `exempt` names routes that
+   * stand outside the linked corpus. Both were hardcoded in validate-site — `'index.html'`
+   * and `'404.html'` — where they read as constants of the framework and are in fact
+   * facts about this host's build. Undeclared is an error, not a default: a validator that
+   * invented an entry point would silently report a whole site orphaned, or silently
+   * report nothing, depending on which guess it made.
+   */
+  const entryPoint = () => {
+    if (!section) {
+      throw new HostRoutesError('is not declared — the host manifest has no "routes" section', 'undeclared');
+    }
+    if (!section.entryPoint) {
+      throw new HostRoutesError('declares no "entryPoint" — a reachability walk has no route to start from', 'undeclared');
+    }
+    return section.entryPoint;
+  };
+
+  const exempt = () => Object.freeze([...(section?.exempt ?? [])]);
+
+  /**
    * The locale a route key belongs to.
    *
    * The render index states route identity and refuses to name a locale, which is right:
@@ -220,6 +275,15 @@ function createRoutesResolver(manifest, hostRoot, codes, defaultLocale) {
   const localeOf = (key) => {
     if (!section) {
       throw new HostRoutesError('is not declared — the host manifest has no "routes" section', 'undeclared');
+    }
+    // Reached only from `resolveRoutes`, which resolves render addressing WITHOUT reading
+    // the locale registry. Attributing a route to a locale needs the registry, so the
+    // routes-only caller is refused rather than served a guess. See resolveRoutes.
+    if (!codes) {
+      throw new HostRoutesError(
+        'cannot attribute a route to a locale — this host was resolved for render addressing only, which does not read the locale registry',
+        'no-locales'
+      );
     }
     const seg = String(key).split('/')[0];
     if (codes.includes(seg)) return seg;
@@ -231,9 +295,46 @@ function createRoutesResolver(manifest, hostRoot, codes, defaultLocale) {
 
   return Object.freeze({
     get output() { return output(); },
+    get pages() { return pageMatcher(); },
+    get entryPoint() { return entryPoint(); },
+    get exempt() { return exempt(); },
     localeOf,
     declared: Boolean(section),
     describe: () => (section ? relFromHost(resolve(hostRoot, section.output)) : null),
+  });
+}
+
+/**
+ * Resolve render addressing ALONE — manifest §3 and nothing else.
+ *
+ * WHY THIS EXISTS (F5 Phase 6, Deliverable 0). `resolveHost` answers every host question
+ * at once, and answering them at once means reading the locale registry: it parses
+ * LOCALES, reads DEFAULT_LOCALE, and fails closed when the manifest's locale entries have
+ * drifted from it. That is correct for a gate, and wrong for validate-site.
+ *
+ * validate-site checks links, orphans, hub structure, titles and alt text. It is
+ * LOCALIZATION-NEUTRAL by design and must stay so. Routing it through `resolveHost` to
+ * learn where `dist/` is would have made a monolingual host's site validator fail on a
+ * locale registry it has no reason to own — acquiring a localization dependency through
+ * the adapter's front door, in the one component whose neutrality is an invariant.
+ *
+ * So the manifest IS a required dependency of the validator, and the locale registry is
+ * NOT. Those are two separate decisions and this function is what keeps them separate.
+ * The alternative — leaving the validator manifest-independent with a `join(root,'dist')`
+ * fallback — was rejected: a fallback that is correct only for the repository the
+ * framework happens to live in is coupling C-3's silent-wrong-answer failure, and putting
+ * it in the validator means a foreign host's build reports a clean site while validating
+ * adventureastro's output.
+ *
+ * @returns {Readonly<{routes: object, manifest: object}>} `routes.localeOf` throws here;
+ *   a caller that needs route-to-locale attribution wants `resolveHost`.
+ */
+export function resolveRoutes({ manifestPath } = {}) {
+  const { manifest, manifestDir } = loadManifest({ manifestPath });
+  const hostRoot = resolve(manifestDir, manifest.project.root);
+  return Object.freeze({
+    routes: createRoutesResolver(manifest, hostRoot, null, null),
+    manifest,
   });
 }
 

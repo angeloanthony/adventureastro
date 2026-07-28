@@ -74,9 +74,12 @@ try {
 // (manifest §3) rather than `join(root, 'dist')` — F5 Phase 5, coupling C-2: the old
 // default was correct only for the repository the framework happens to live in, which is
 // the same silent wrong-answer shape the policy migration removed one phase earlier.
-let dist;
+// What counts as a page comes from `routes.pageGlob` as of F5 Phase 6 — including for a
+// scratch corpus, which is rendered by the same host and therefore has the same shape.
+let dist, pages;
 try {
   dist = positional[0] ? resolve(positional[0]) : host.routes.output;
+  pages = host.routes.pages;
 } catch (e) {
   console.error(`gate-4h: rendered output ${e.message} — refusing to pass silently.`);
   process.exit(2);
@@ -152,7 +155,7 @@ const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 // ---------------------------------------------------------------------------
 const visibleText = (html) => extractVisibleText(html, { inlineSeparator: '' });
 
-const index = createRenderIndex(dist);
+const index = createRenderIndex(dist, { pages });
 
 // ---------------------------------------------------------------------------
 // Phase 2/3 — seam rules, with grammatical licensing built in.
