@@ -23,9 +23,10 @@
 // Frontmatter-level checks (missing author, missing tags, wrong hub,
 // nonexistent/oversized heroImage, tag format, date order) are enforced
 // earlier, by zod in content.config.ts.
-import { readdirSync, readFileSync, existsSync, statSync } from 'node:fs';
+import { readFileSync, existsSync, statSync } from 'node:fs';
 import { join, dirname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createRenderIndex } from './lib/render-index.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
@@ -44,18 +45,9 @@ if (!slugsMatch) {
 }
 const HUB_SLUGS = [...slugsMatch[1].matchAll(/'([^']+)'/g)].map((m) => m[1]);
 
-// --- Collect every built HTML page. ---
-const htmlFiles = [];
-(function walk(dir) {
-  for (const name of readdirSync(dir)) {
-    const full = join(dir, name);
-    if (statSync(full).isDirectory()) walk(full);
-    else if (name.endsWith('.html')) htmlFiles.push(full);
-  }
-})(dist);
-
-const toKey = (file) => relative(dist, file).split(sep).join('/');
-const pages = new Map(htmlFiles.map((f) => [toKey(f), readFileSync(f, 'utf8')]));
+// --- Collect every built HTML page, through the shared render index. ---
+const index = createRenderIndex(dist);
+const pages = new Map(index.pages.map((p) => [p.key, p.html]));
 
 const SKIP = /^(https?:\/\/|\/\/|mailto:|tel:|sms:|data:|javascript:|#)/i;
 

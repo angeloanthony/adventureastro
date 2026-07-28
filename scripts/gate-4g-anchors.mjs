@@ -41,7 +41,8 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { join, dirname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { distWalk, stripNonRendered, flattenElementText, foldPunctuation } from './lib/rendered-text.mjs';
+import { stripNonRendered, flattenElementText, foldPunctuation } from './lib/rendered-text.mjs';
+import { createRenderIndex } from './lib/render-index.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -157,19 +158,18 @@ function anchorsOf(html) {
   return out;
 }
 
-const htmlFiles = distWalk(dist);
+const index = createRenderIndex(dist);
 
 /** English anchor text, indexed by destination — the identity signal's reference set. */
 const enByHref = new Map();
 /** loc -> Map(anchor text -> {n, pages:Set, hrefs:Set}) */
 const byLocale = new Map();
 
-for (const file of htmlFiles) {
-  const pageKey = relative(dist, file).split(sep).join('/');
-  const seg = pageKey.split('/')[0];
+for (const page of index.pages) {
+  const seg = page.key.split('/')[0]; // the index states route identity; the locale rule is this gate's
   const loc = TARGETS.includes(seg) ? seg : DEFAULT_LOCALE;
-  const url = `/${pageKey.replace(/index\.html$/, '')}`;
-  for (const a of anchorsOf(readFileSync(file, 'utf8'))) {
+  const url = page.url;
+  for (const a of page.derive('anchors', anchorsOf)) {
     if (loc === DEFAULT_LOCALE) {
       if (!a.href.startsWith('/')) continue;
       if (!enByHref.has(a.href)) enByHref.set(a.href, new Set());

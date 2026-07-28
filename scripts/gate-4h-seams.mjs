@@ -30,7 +30,8 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { join, dirname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { distWalk, extractVisibleText } from './lib/rendered-text.mjs';
+import { extractVisibleText } from './lib/rendered-text.mjs';
+import { createRenderIndex } from './lib/render-index.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const CONFIG = join(root, 'i18n-gates', '4h-seams.json');
@@ -90,7 +91,7 @@ const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 // ---------------------------------------------------------------------------
 const visibleText = (html) => extractVisibleText(html, { inlineSeparator: '' });
 
-const htmlFiles = distWalk(dist);
+const index = createRenderIndex(dist);
 
 // ---------------------------------------------------------------------------
 // Phase 2/3 — seam rules, with grammatical licensing built in.
@@ -146,13 +147,12 @@ const findings = [];
 let pagesScanned = 0;
 const conserved = {};
 
-for (const file of htmlFiles) {
-  const pageKey = relative(dist, file).split(sep).join('/');
-  const loc = pageKey.split('/')[0];
+for (const page of index.pages) {
+  const loc = page.key.split('/')[0]; // the index states route identity; the locale rule is this gate's
   if (!TARGETS.includes(loc)) continue; // English pages are out of scope by definition
   const entry = config.locales[loc];
-  const url = `/${pageKey.replace(/index\.html$/, '')}`;
-  const raw = visibleText(readFileSync(file, 'utf8'));
+  const url = page.url;
+  const raw = page.derive('visibleText', visibleText);
   pagesScanned++;
 
   const imp = entry.imperative;

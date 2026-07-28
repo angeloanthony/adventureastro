@@ -31,7 +31,8 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { join, dirname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { distWalk, stripNonRendered, flattenElementText, foldPunctuation } from './lib/rendered-text.mjs';
+import { stripNonRendered, flattenElementText, foldPunctuation } from './lib/rendered-text.mjs';
+import { createRenderIndex } from './lib/render-index.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
@@ -88,7 +89,7 @@ const HEADING_TEXT = { numeric: false, nfc: false };
 const TOKEN = /[a-z][a-z'-]{2,}/g;
 
 // --- Phase 1: heading discovery from rendered HTML. ---
-const htmlFiles = distWalk(dist);
+const index = createRenderIndex(dist);
 
 /** Strip regions whose text is not rendered prose, then pull h1–h6. */
 function headingsOf(html) {
@@ -126,17 +127,16 @@ const blocking = [];
 const advisory = [];
 let scanned = 0;
 
-for (const file of htmlFiles) {
-  const pageKey = relative(dist, file).split(sep).join('/');
-  const seg = pageKey.split('/')[0];
+for (const page of index.pages) {
+  const seg = page.key.split('/')[0]; // the index states route identity; the locale rule is this gate's
   if (!TARGETS.includes(seg)) continue; // English pages are out of scope by definition
   const loc = seg;
   const entry = config.locales[loc];
   const markers = new Set(entry.markers ?? []);
   const licensed = licensedFor(loc);
-  const url = `/${pageKey.replace(/index\.html$/, '')}`;
+  const url = page.url;
 
-  for (const h of headingsOf(readFileSync(file, 'utf8'))) {
+  for (const h of page.derive('headings', headingsOf)) {
     scanned++;
     const hits = [...new Set(residueOf(h.text, licensed).toLowerCase().match(TOKEN) ?? [])]
       .filter((w) => markers.has(w));
