@@ -27,8 +27,8 @@
 // HONEST RESULT. Unlike 4f, this gate does not report zero by construction. On the
 // corpus it was built against it finds one real defect that C6/C7 missed, because
 // those passes censused `请` and this seam duplicates `向`.
-import { readFileSync, existsSync } from 'node:fs';
-import { join, dirname, relative, resolve, sep } from 'node:path';
+import { existsSync } from 'node:fs';
+import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { extractVisibleText } from './lib/rendered-text.mjs';
 import { createRenderIndex } from './lib/render-index.mjs';
@@ -86,7 +86,7 @@ const TARGETS = host.targets;
 
 for (const loc of TARGETS) {
   if (!config.locales?.[loc]) {
-    console.error(`gate-4h: locale "${loc}" is registered by the host but has no entry in ${relative(root, CONFIG)} — refusing to pass silently.`);
+    console.error(`gate-4h: locale "${loc}" is registered by the host but has no entry in ${host.policy.describe('seams')} — refusing to pass silently.`);
     process.exit(2);
   }
 }
@@ -289,7 +289,7 @@ if (drift.length) {
   }
   console.warn(
     `\n  A count moves legitimately when pages are added or removed. If this change was\n` +
-      `  intended, update "expected" in ${relative(root, CONFIG).split(sep).join('/')}.\n`
+      `  intended, update "expected" in ${host.policy.describe('seams')}.\n`
   );
 }
 
