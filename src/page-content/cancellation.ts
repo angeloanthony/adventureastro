@@ -1403,9 +1403,212 @@ const ZH = `
 
 `;
 
+// ── Arabic (AR-1 pilot page) ────────────────────────────────────────────────
+//
+// The ONLY Arabic page in the repository, and it is infrastructure, not corpus.
+// This page was chosen as the pilot because it is the densest bidi surface on
+// the site relative to its length: a currency amount ($1,000), a parenthesised
+// US phone number, percentages, "+"-suffixed durations, and Latin brand and
+// vehicle-class runs (Adventure Tours Vernal, UTV) all sit inside Arabic
+// sentences. Translating a page with no numbers would have proved nothing.
+//
+// BIDI ISOLATION — `<bdi>`, never invisible control characters.
+//   `(435) 219-9447` is the worst case on this site and the reason isolation is
+//   not optional: U+0028/U+0029 are Bidi_Mirrored, so an unisolated
+//   `(435) 219-9447` inside an Arabic paragraph renders its brackets flipped,
+//   and the neutral runs around the digit groups resolve against the paragraph
+//   direction. `<bdi>` makes each such run its own bidi-isolated sequence,
+//   is a no-op in LTR context, and — unlike an embedded U+200F — is visible in
+//   a diff, greppable, and cannot be silently dropped by an editor.
+//   The same treatment is applied to `$1,000` and to bare Latin brand runs at a
+//   clause boundary, where a following Arabic comma would otherwise reorder.
+//   AR-2 should lift this into a shared formatter; see docs/rtl/AR2-backlog.md.
+//
+// LINKS — `/booking/` and `/` stay ENGLISH here, deliberately. Gate 4b: this is
+//   the only Arabic route that exists, so an `/ar/booking/` href would be a hard
+//   validator failure, not a graceful fallback. These become `/ar/…` in the
+//   central link pass once Arabic route coverage lands (Gate 4d), never before.
+//
+// NUMERALS — Western digits throughout, per policy §3. No ٠-٩ appears here or
+//   anywhere in the Arabic corpus.
+const AR = `
+
+<!-- ================================================
+     PAGE SUMMARY BLOCK — feeds Google AI Overviews
+     ================================================ -->
+<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+  سياسة الإلغاء لدى Adventure Tours Vernal لجولات UTV بصحبة مرشد في Vernal بولاية يوتا. الإلغاء قبل 72 ساعة أو أكثر يمنحك استرداداً كاملاً. الإلغاء قبل أقل من 72 ساعة يمنحك 50٪. الإلغاء قبل أقل من 48 ساعة لا يمنحك أي استرداد. لأي استفسار اتصل على <bdi>(435) 219-9447</bdi>.
+</p>
+
+<section class="policy-section">
+  <div class="container">
+    <div class="section-header">
+      <h1 class="section-title">سياسة الإلغاء</h1>
+      <p class="section-subtitle">يرجى الاطلاع على الشروط والأحكام قبل حجز مغامرتك</p>
+    </div>
+
+    <div class="policy-container">
+
+      <!-- CANCELLATION & REFUNDS -->
+      <div class="policy-card">
+        <div class="policy-icon">📅</div>
+        <h2 class="policy-heading">الإلغاء واسترداد المبالغ</h2>
+
+        <div class="policy-table">
+          <div class="policy-row">
+            <div class="policy-timeframe">أقل من 48 ساعة</div>
+            <div class="policy-refund refund-none">لا استرداد</div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-timeframe">أقل من 72 ساعة</div>
+            <div class="policy-refund refund-partial">استرداد 50٪</div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-timeframe">قبل 72 ساعة أو أكثر</div>
+            <div class="policy-refund refund-full">استرداد 100٪</div>
+          </div>
+          <div class="policy-row highlight">
+            <div class="policy-timeframe">المجموعات من 5 مركبات فأكثر</div>
+            <div class="policy-refund refund-full">قبل أسبوعين أو أكثر: استرداد 100٪<br>بعد ذلك: لا استرداد</div>
+          </div>
+        </div>
+
+        <div class="policy-note">
+          <strong>ملاحظة:</strong> تُحتسب جميع مواعيد الإلغاء ابتداءً من وقت انطلاق جولتك المحدد.
+        </div>
+      </div>
+
+      <!-- WEATHER POLICY -->
+      <div class="policy-card">
+        <div class="policy-icon">🌦️</div>
+        <h2 class="policy-heading">سياسة الأحوال الجوية</h2>
+        <p>نُسيّر جولاتنا في الشمس والمطر على حد سواء. أما في حالات الطقس القاسي، أو إذا اضطرت <bdi>Adventure Tours Vernal</bdi> إلى الإلغاء لظروف أخرى خارجة عن إرادتها، فيحق لك إعادة الجدولة أو استرداد المبلغ كاملاً.</p>
+        <p><strong>مهم:</strong> إذا اخترت عدم المشاركة بسبب المطر، تُطبَّق سياسة الإلغاء المعتادة على الاسترداد. أما إذا ألغينا نحن بسبب طقس قاسٍ، فتسترد المبلغ كاملاً.</p>
+      </div>
+
+      <!-- REQUIRED AGREEMENTS -->
+      <div class="policy-card">
+        <div class="policy-icon">📝</div>
+        <h2 class="policy-heading">الإقرارات والتنازلات المطلوبة</h2>
+        <p>يتعين على جميع الضيوف توقيع <strong>إقرار المشاركة والتنازل وتحمّل المخاطر</strong> للمشاركة في الأنشطة. ويوقّع الوالدان أو الأوصياء القانونيون نيابةً عن الأطفال القاصرين. كما يتعين على من يقود مركبة UTV توقيع <strong>إقرار السائق</strong>.</p>
+
+        <div class="policy-warning">
+          <strong>⚠️ مهم:</strong> إن لم تُوقَّع هذه الإقرارات، فلن يُسمح لك بالمشاركة في مغامرتك. ولا يُعد الامتناع عن التوقيع سبباً للاسترداد، وتُطبَّق سياسة الإلغاء المعتادة.
+        </div>
+      </div>
+
+      <!-- VEHICLE DAMAGE WAIVER -->
+      <div class="policy-card">
+        <div class="policy-icon">🛡️</div>
+        <h2 class="policy-heading">التنازل عن أضرار المركبة</h2>
+        <p class="required-badge">مطلوب لجميع الجولات</p>
+
+        <p>يحدّ التنازل عن أضرار المركبة من تكاليفك المباشرة عند وقوع حادث، فتقتصر على مبلغ التحمّل مضافاً إليه الضريبة مقابل الأضرار التي تلحق بمعداتنا.</p>
+
+        <div class="policy-list">
+          <h3>يسقط التنازل عن الأضرار في الحالات التالية:</h3>
+          <ul>
+            <li>أن يكون الضرر ناتجاً عن قيادة متهورة</li>
+            <li>عدم الالتزام بتعليمات المرشد</li>
+            <li>ثبوت وجود أي كحول أو مخدرات في جسمك وقت وقوع الضرر</li>
+          </ul>
+        </div>
+
+        <div class="deductible-info">
+          <h3>معلومات مبلغ التحمّل:</h3>
+          <p>بتوقيعك على إقرار جولاتنا المصحوبة بمرشد تصبح سائقاً مشمولاً بتأمين المسؤولية لدينا، وفقاً لجميع شروط الوثيقة وأحكامها. وتتضمن هذه التغطية <strong>مبلغ تحمّل قدره <bdi>$1,000</bdi> لكل حادث</strong>، أي أنك توافق على دفع <bdi>$1,000</bdi> لنا وقت الحادث إذا تعرضت لحادث مع أي شخص أو مركبة أو ممتلكات أخرى، بصرف النظر عن المسؤولية عن الحادث.</p>
+        </div>
+      </div>
+
+      <!-- LIABILITY COVERAGE -->
+      <div class="policy-card">
+        <div class="policy-icon">📋</div>
+        <h2 class="policy-heading">تغطية المسؤولية</h2>
+        <p>توفّر تغطيتنا حدود المسؤولية التالية:</p>
+
+        <div class="coverage-details">
+          <div class="coverage-item">
+            <span class="coverage-label">الإصابات الجسدية لكل شخص:</span>
+            <span class="coverage-amount">تواصل معنا للتفاصيل</span>
+          </div>
+          <div class="coverage-item">
+            <span class="coverage-label">الأضرار بالممتلكات:</span>
+            <span class="coverage-amount">تواصل معنا للتفاصيل</span>
+          </div>
+          <div class="coverage-item">
+            <span class="coverage-label">الإجمالي لكل حادث:</span>
+            <span class="coverage-amount">تواصل معنا للتفاصيل</span>
+          </div>
+        </div>
+
+        <div class="policy-disclaimer">
+          <p><strong>إخلاء مسؤولية بشأن التأمين:</strong> تختلف احتياجات التأمين من شخص لآخر، ولا نُقرّ بأن حدود المسؤولية لدينا كافية لك. ولسنا وسطاء تأمين ولا وكلاء ولا مزوّدي خدمات تأمينية. وإذا كانت لديك أسئلة حول التغطيات، ننصحك بمراجعة وكيل أو وسيط التأمين الخاص بك.</p>
+        </div>
+      </div>
+
+      <!-- RULES & REQUIREMENTS -->
+      <div class="policy-card">
+        <div class="policy-icon">⚖️</div>
+        <h2 class="policy-heading">القواعد والاشتراطات</h2>
+
+        <div class="policy-list">
+          <h3>الالتزام بالموعد:</h3>
+          <ul>
+            <li>إذا حضر بعض أفراد مجموعتك في الموعد، فسنصطحب كل من حضر في وقته ووقّع الإقرارات على النحو الصحيح، حتى إن لم يكن صاحب الحجز حاضراً.</li>
+            <li>لا يُرد أي مبلغ للضيوف الذين لم يصلوا في موعد مغامرتهم.</li>
+          </ul>
+
+          <h3>سياسة الكحول والمخدرات:</h3>
+          <ul>
+            <li>يُمنع منعاً باتاً اصطحاب أي كحول في مغامرتك.</li>
+            <li>لن يُسمح لك بالمشاركة إذا رأى مرشدك أنك تحت تأثير الكحول أو المخدرات، سواء كانت مشروعة أو غير مشروعة.</li>
+            <li>لا يُرد أي مبلغ إذا تعذّرت مشاركتك بسبب تعاطي الكحول أو المخدرات.</li>
+          </ul>
+
+          <h3>تعليمات المرشد:</h3>
+          <ul>
+            <li>مهمة مرشدك أن يضمن لك مغامرة آمنة.</li>
+            <li>يتعين عليك الالتزام بجميع تعليمات المرشد في كل وقت.</li>
+          </ul>
+
+          <h3>تعديل برنامج الرحلة:</h3>
+          <ul>
+            <li>برنامج رحلتك دليل استرشادي وليس عقداً.</li>
+            <li>يجوز تعديل البرنامج في أي وقت قبل مغامرتك أو أثناءها.</li>
+            <li>لا يُعد تعديل البرنامج سبباً للاسترداد.</li>
+          </ul>
+
+          <h3>إجراءات الاسترداد:</h3>
+          <ul>
+            <li>تُرد أي مبالغ مستحقة إلى الجهة التي أجرت الحجز الأصلي.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CONTACT CTA -->
+      <div class="policy-cta">
+        <h3>لديك أسئلة حول سياستنا؟</h3>
+        <p>إذا كانت لديك أي أسئلة حول سياسة الإلغاء أو الشروط، فلا تتردد في التواصل معنا قبل الحجز.</p>
+        <div class="cta-buttons">
+          <a href="tel:435-219-9447" class="cta-button primary">📞 اتصل على <bdi>(435) 219-9447</bdi></a>
+          <a href="/booking/" class="cta-button secondary">احجز جولتك</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Mobile Sticky CTA -->
+<div class="mobile-sticky-cta">
+  <button onclick="location.href='/booking/'">احجز جولتك الآن</button>
+</div>
+
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3A, Italian P6,
- * French P8-P6, German inline batch, Japanese P10K).
+ * French P8-P6, German inline batch, Japanese P10K, Arabic AR-1).
  * Every locale without a committed variant falls back to English. Callers
  * that don't need locale awareness keep importing `bodyHtml` directly.
  */
@@ -1417,5 +1620,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'de') return DE;
   if (locale === 'zh') return ZH;
   if (locale === 'ja') return JA;
+  if (locale === 'ar') return AR;
   return bodyHtml;
 }

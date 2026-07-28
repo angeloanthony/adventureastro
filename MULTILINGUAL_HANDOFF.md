@@ -622,6 +622,42 @@ structural markers (§1) and must not be read as editorial sign-off.
 
 ### 10.2 RTL infrastructure — Arabic Stage 0 (a separate initiative)
 
+> **STATUS 2026-07-28 — Stage 0 STARTED. AR-1 is complete; see `docs/rtl/`.**
+> `AR1-rtl-audit.md` (D1) · `AR1-arabic-policy.md` (D2) ·
+> `AR1-gate-characterization.md` (D6 + fail-closed matrix + bootstrap) ·
+> `AR2-backlog.md` (everything AR-1 deliberately did not fix).
+>
+> `ar` is registered (`dir: 'rtl'`, `hreflang: 'ar'`, `ogLocale: 'ar_AR'`), the
+> Arabic chrome dictionary is complete at 102/102 keys, and exactly one pilot page
+> ships: `/ar/cancellation-policy/`. 620 pages; 611 of the 619 pre-existing pages
+> are byte-identical, the other 8 differ only by the required `hreflang="ar"`
+> reciprocity and switcher option.
+>
+> **Two findings from AR-1 that change what this section says below:**
+>
+> 1. **The direction plumbing was already correct.** `dir="rtl"` reached
+>    `<html>` with no code change — `BaseLayout` had read `LOCALES[].dir` through
+>    `isRtl()` since P1, and registration was the only missing input. The first
+>    bullet below is therefore already done, and *no stop condition fired*: no
+>    second stylesheet (ParkingWay ships RTL with zero `[dir="rtl"]` selectors),
+>    no runtime bidi library, no locale-specific component fork.
+> 2. **§7 stage 1 had silently stopped being executable at P34 — now repaired.**
+>    "Register the locale with an empty slug set and confirm the build stays
+>    byte-identical before any content lands" had not been true since gate 4j
+>    landed: 4j *and* the `Record<Locale, GalleryDictionary>` total map both
+>    demanded a complete 105-slide gallery dictionary the moment a locale appeared
+>    in `LOCALES`. Arabic was simply the first locale registered since, and **any
+>    future LTR locale would have hit it identically.**
+>
+>    Fixed in AR-2 B-0: `GALLERY_TEXT` is partial, and a registered locale must
+>    appear in **exactly one** of `GALLERY_TEXT` (it renders the gallery) or
+>    `GALLERY_EXEMPT` (it does not, with the reason). Absence is still illegal —
+>    only *declared* absence is legal — and `renderGallery()` throws if an exempt
+>    locale is ever rendered, so the declaration cannot rot. **§7 stage 1 is
+>    executable again.** When registering a new locale, expect to add one
+>    `GALLERY_EXEMPT` line at stage 1 and remove it when its homepage lands.
+
+
 **Arabic is not "locale #8 in this pipeline."** Every locale so far has been a *content*
 task against a frozen LTR architecture — which is exactly why §1 could stay frozen through
 seven of them. Arabic breaks that premise: the work is bidirectional-layout engineering

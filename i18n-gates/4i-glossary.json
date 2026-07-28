@@ -4,7 +4,6 @@
     "phase": "P37",
     "origin": "Review items A6, A7, A8, C2, C4, C8 and the locale preambles in src/lib/ui.ts.",
     "invariant": "A concept that the repository has locked to one rendering in a locale must appear in that rendering, must not appear in any competing rendering, and must not fall below its frozen count.",
-
     "what_this_gate_is_not": [
       "It is not a translation-quality check. It never asks whether a word is the best",
       "word — only whether the corpus still honours a decision the repository already",
@@ -13,7 +12,6 @@
       "It is also not a cross-locale check. Each locale is validated against its own",
       "locks alone: no locale's corpus is ever compared to another's."
     ],
-
     "why_rendered": [
       "Locks are propositions about what a reader sees, so the artifact scanned is",
       "dist/, not src/ (methodology principle 5). The extractor is deliberately",
@@ -22,7 +20,6 @@
       "frozen here could not be compared with 4h's.",
       "src/lib/ui.ts is read as well, but only for the dictionary anchors — see below."
     ],
-
     "anchors_make_ui_ts_the_authority": [
       "A frozen JSON file left on its own would be a second source of truth competing",
       "with the repository. The anchors close that gap: each one names a real key in a",
@@ -32,7 +29,6 @@
       "the mis-assigned-locale failure loud: a phrase filed under the wrong locale",
       "cannot match a key in that locale's dictionary."
     ],
-
     "counts_are_frozen_measurements": [
       "THE FIGURES ARE NO LONGER IN THIS FILE (F5 Phase 5). They were, from P37 until",
       "then: fifty numbers measured on the rendered corpus and typed in beside the lock",
@@ -56,7 +52,6 @@
       "transcription step removed. `min` and `count` are now REFUSED here, not ignored: a",
       "leftover figure would look like configuration and silently do nothing."
     ],
-
     "licensed_compounds": [
       "Methodology principle 7. A forbidden term is masked inside any compound listed",
       "in its licensedIn before it is counted, because a bare-stem sweep silently",
@@ -64,7 +59,6 @@
       "correct inside `荒野保护区` (*wilderness area*), a different referent entirely.",
       "The gate therefore counts residue, not occurrences."
     ],
-
     "measured_not_forbidden": [
       "Terms that look like glossary drift, were censused at P37, and are NOT declared",
       "forbidden — recorded here so the next phase does not re-propose them:",
@@ -81,7 +75,6 @@
       "  de `Trail` 134 — proper names of English-named trails. A4 localised the generic",
       "    noun and left these; there is no enumerable correct value for the residue."
     ],
-
     "enforce_levels": [
       "block  — the decision was taken AND applied to this locale, so a correct value is",
       "         enumerable and a hit is a regression.",
@@ -91,20 +84,30 @@
       "         Failing the build on an open owner decision would be inventing policy,",
       "         so these are counted and printed and never block (P30 governing rule)."
     ],
-
     "baseline": {
       "measured_at": "P37, on the 619-page build of 2026-07-27",
       "pages_per_locale": 77
     }
   },
-
   "locales": {
     "de": {
       "script": "latin",
       "anchors": [
-        { "lock": "dinosaur-country", "key": "footer.tagline", "contains": "Land der Dinosaurier" },
-        { "lock": "key-takeaways", "key": "section.keyTakeaways", "contains": "Das Wichtigste in Kürze" },
-        { "lock": "offroad-trail", "key": "nav.trails", "contains": "Pisten" }
+        {
+          "lock": "dinosaur-country",
+          "key": "footer.tagline",
+          "contains": "Land der Dinosaurier"
+        },
+        {
+          "lock": "key-takeaways",
+          "key": "section.keyTakeaways",
+          "contains": "Das Wichtigste in Kürze"
+        },
+        {
+          "lock": "offroad-trail",
+          "key": "nav.trails",
+          "contains": "Pisten"
+        }
       ],
       "locks": [
         {
@@ -114,10 +117,26 @@
           "provenance": "A8 (P23) — 18 English residues normalised; ui.ts DE preamble line 660",
           "bound": "floor",
           "forbidden": [
-            { "text": "Dinosaur Country", "enforce": "block", "why": "untranslated English identity — A8 swept all 18 to zero" },
-            { "text": "Dinosaurierland", "enforce": "block", "why": "a competing German rendering; A8 established the identity has exactly one" },
-            { "text": "Land der Saurier", "enforce": "block", "why": "competing German rendering" },
-            { "text": "Dinoland", "enforce": "block", "why": "competing German rendering" }
+            {
+              "text": "Dinosaur Country",
+              "enforce": "block",
+              "why": "untranslated English identity — A8 swept all 18 to zero"
+            },
+            {
+              "text": "Dinosaurierland",
+              "enforce": "block",
+              "why": "a competing German rendering; A8 established the identity has exactly one"
+            },
+            {
+              "text": "Land der Saurier",
+              "enforce": "block",
+              "why": "competing German rendering"
+            },
+            {
+              "text": "Dinoland",
+              "enforce": "block",
+              "why": "competing German rendering"
+            }
           ]
         },
         {
@@ -127,7 +146,11 @@
           "provenance": "A7 (P22) — 41 English occurrences normalised; the staging sense stays Treffpunkt",
           "bound": "floor",
           "forbidden": [
-            { "text": "Trailhead", "enforce": "block", "why": "the English loanword A7 removed; German was the only Latin-script locale keeping it" }
+            {
+              "text": "Trailhead",
+              "enforce": "block",
+              "why": "the English loanword A7 removed; German was the only Latin-script locale keeping it"
+            }
           ]
         },
         {
@@ -137,8 +160,16 @@
           "provenance": "ui.ts DE preamble lines 661–662 — reuses the locked P9 MDX phrase, not a new translation",
           "bound": "floor",
           "forbidden": [
-            { "text": "Key Takeaways", "enforce": "block", "why": "the untranslated English heading the lock exists to replace" },
-            { "text": "Wichtigste Erkenntnisse", "enforce": "block", "why": "competing German rendering" }
+            {
+              "text": "Key Takeaways",
+              "enforce": "block",
+              "why": "the untranslated English heading the lock exists to replace"
+            },
+            {
+              "text": "Wichtigste Erkenntnisse",
+              "enforce": "block",
+              "why": "competing German rendering"
+            }
           ]
         },
         {
@@ -193,12 +224,20 @@
         }
       ]
     },
-
     "es": {
       "script": "latin",
       "anchors": [
-        { "lock": "dinosaur-country", "key": "footer.tagline", "contains": "Tierra de los Dinosaurios", "ci": true },
-        { "lock": "key-takeaways", "key": "section.keyTakeaways", "contains": "Puntos Clave" }
+        {
+          "lock": "dinosaur-country",
+          "key": "footer.tagline",
+          "contains": "Tierra de los Dinosaurios",
+          "ci": true
+        },
+        {
+          "lock": "key-takeaways",
+          "key": "section.keyTakeaways",
+          "contains": "Puntos Clave"
+        }
       ],
       "locks": [
         {
@@ -208,7 +247,11 @@
           "provenance": "C4 (P21) cross-locale table — every locale translates the identity",
           "bound": "floor",
           "forbidden": [
-            { "text": "Dinosaur Country", "enforce": "report", "why": "English residue C4 measured and placed out of scope for es; an owner decision, not a regression" }
+            {
+              "text": "Dinosaur Country",
+              "enforce": "report",
+              "why": "English residue C4 measured and placed out of scope for es; an owner decision, not a regression"
+            }
           ]
         },
         {
@@ -218,7 +261,11 @@
           "provenance": "A6 (P15) — the lock holds for Latin-script locales; es was measured at 6/8 and left undecided",
           "bound": "floor",
           "forbidden": [
-            { "text": "No Dejar Rastro", "enforce": "report", "why": "A6 recorded es translating the programme name twice in one file; never swept" }
+            {
+              "text": "No Dejar Rastro",
+              "enforce": "report",
+              "why": "A6 recorded es translating the programme name twice in one file; never swept"
+            }
           ]
         },
         {
@@ -228,7 +275,11 @@
           "provenance": "ui.ts ES dictionary section.keyTakeaways",
           "bound": "floor",
           "forbidden": [
-            { "text": "Key Takeaways", "enforce": "block", "why": "untranslated English heading" }
+            {
+              "text": "Key Takeaways",
+              "enforce": "block",
+              "why": "untranslated English heading"
+            }
           ]
         },
         {
@@ -251,12 +302,20 @@
         }
       ]
     },
-
     "it": {
       "script": "latin",
       "anchors": [
-        { "lock": "dinosaur-country", "key": "footer.tagline", "contains": "Terra dei Dinosauri", "ci": true },
-        { "lock": "key-takeaways", "key": "section.keyTakeaways", "contains": "Punti Chiave" }
+        {
+          "lock": "dinosaur-country",
+          "key": "footer.tagline",
+          "contains": "Terra dei Dinosauri",
+          "ci": true
+        },
+        {
+          "lock": "key-takeaways",
+          "key": "section.keyTakeaways",
+          "contains": "Punti Chiave"
+        }
       ],
       "locks": [
         {
@@ -266,7 +325,11 @@
           "provenance": "C4 (P21) cross-locale table",
           "bound": "floor",
           "forbidden": [
-            { "text": "Dinosaur Country", "enforce": "block", "why": "C4 measured 0 English residue in it — a hit is a regression" }
+            {
+              "text": "Dinosaur Country",
+              "enforce": "block",
+              "why": "C4 measured 0 English residue in it — a hit is a regression"
+            }
           ]
         },
         {
@@ -284,7 +347,11 @@
           "provenance": "ui.ts IT dictionary section.keyTakeaways",
           "bound": "floor",
           "forbidden": [
-            { "text": "Key Takeaways", "enforce": "block", "why": "untranslated English heading" }
+            {
+              "text": "Key Takeaways",
+              "enforce": "block",
+              "why": "untranslated English heading"
+            }
           ]
         },
         {
@@ -307,12 +374,20 @@
         }
       ]
     },
-
     "pt": {
       "script": "latin",
       "anchors": [
-        { "lock": "dinosaur-country", "key": "footer.tagline", "contains": "Terra dos Dinossauros", "ci": true },
-        { "lock": "key-takeaways", "key": "section.keyTakeaways", "contains": "Pontos-Chave" }
+        {
+          "lock": "dinosaur-country",
+          "key": "footer.tagline",
+          "contains": "Terra dos Dinossauros",
+          "ci": true
+        },
+        {
+          "lock": "key-takeaways",
+          "key": "section.keyTakeaways",
+          "contains": "Pontos-Chave"
+        }
       ],
       "locks": [
         {
@@ -322,7 +397,11 @@
           "provenance": "C4 (P21) cross-locale table",
           "bound": "floor",
           "forbidden": [
-            { "text": "Dinosaur Country", "enforce": "block", "why": "C4 measured 0 English residue in pt — a hit is a regression" }
+            {
+              "text": "Dinosaur Country",
+              "enforce": "block",
+              "why": "C4 measured 0 English residue in pt — a hit is a regression"
+            }
           ]
         },
         {
@@ -340,7 +419,11 @@
           "provenance": "ui.ts PT dictionary section.keyTakeaways",
           "bound": "floor",
           "forbidden": [
-            { "text": "Key Takeaways", "enforce": "block", "why": "untranslated English heading" }
+            {
+              "text": "Key Takeaways",
+              "enforce": "block",
+              "why": "untranslated English heading"
+            }
           ]
         },
         {
@@ -363,12 +446,20 @@
         }
       ]
     },
-
     "fr": {
       "script": "latin",
       "anchors": [
-        { "lock": "dinosaur-country", "key": "footer.tagline", "contains": "Terre des Dinosaures", "ci": true },
-        { "lock": "key-takeaways", "key": "section.keyTakeaways", "contains": "Points Clés" }
+        {
+          "lock": "dinosaur-country",
+          "key": "footer.tagline",
+          "contains": "Terre des Dinosaures",
+          "ci": true
+        },
+        {
+          "lock": "key-takeaways",
+          "key": "section.keyTakeaways",
+          "contains": "Points Clés"
+        }
       ],
       "locks": [
         {
@@ -378,7 +469,11 @@
           "provenance": "C4 (P21) cross-locale table",
           "bound": "floor",
           "forbidden": [
-            { "text": "Dinosaur Country", "enforce": "block", "why": "C4 measured 0 English residue in fr — a hit is a regression" }
+            {
+              "text": "Dinosaur Country",
+              "enforce": "block",
+              "why": "C4 measured 0 English residue in fr — a hit is a regression"
+            }
           ]
         },
         {
@@ -396,7 +491,11 @@
           "provenance": "ui.ts FR dictionary section.keyTakeaways",
           "bound": "floor",
           "forbidden": [
-            { "text": "Key Takeaways", "enforce": "block", "why": "untranslated English heading" }
+            {
+              "text": "Key Takeaways",
+              "enforce": "block",
+              "why": "untranslated English heading"
+            }
           ]
         },
         {
@@ -419,13 +518,24 @@
         }
       ]
     },
-
     "ja": {
       "script": "japanese",
       "anchors": [
-        { "lock": "dinosaur-country", "key": "footer.tagline", "contains": "恐竜の国" },
-        { "lock": "key-takeaways", "key": "section.keyTakeaways", "contains": "要点まとめ" },
-        { "lock": "vernal", "key": "section.exploreVernal", "contains": "バーナル" }
+        {
+          "lock": "dinosaur-country",
+          "key": "footer.tagline",
+          "contains": "恐竜の国"
+        },
+        {
+          "lock": "key-takeaways",
+          "key": "section.keyTakeaways",
+          "contains": "要点まとめ"
+        },
+        {
+          "lock": "vernal",
+          "key": "section.exploreVernal",
+          "contains": "バーナル"
+        }
       ],
       "locks": [
         {
@@ -439,7 +549,9 @@
               "text": "Dinosaur Country",
               "enforce": "report",
               "why": "English residue C4 measured in ja and placed out of scope — an owner decision, not a regression",
-              "licensedIn": ["恐竜の国（Dinosaur Country）"],
+              "licensedIn": [
+                "恐竜の国（Dinosaur Country）"
+              ],
               "licensedWhy": "first-use gloss led by the locked Japanese term — the same good practice A6 kept in de/camping"
             }
           ]
@@ -451,7 +563,11 @@
           "provenance": "ui.ts JA preamble line 785 — reuses the phrase locked during the P10 MDX batches",
           "bound": "floor",
           "forbidden": [
-            { "text": "Key Takeaways", "enforce": "block", "why": "untranslated English heading" }
+            {
+              "text": "Key Takeaways",
+              "enforce": "block",
+              "why": "untranslated English heading"
+            }
           ]
         },
         {
@@ -461,7 +577,11 @@
           "provenance": "A7's cross-locale sense table; B3/B4 (P24/P25) confirmed the ja rendering",
           "bound": "floor",
           "forbidden": [
-            { "text": "Trailhead", "enforce": "block", "why": "untranslated English loanword — ja renders it in katakana" }
+            {
+              "text": "Trailhead",
+              "enforce": "block",
+              "why": "untranslated English loanword — ja renders it in katakana"
+            }
           ]
         },
         {
@@ -500,14 +620,29 @@
         }
       ]
     },
-
     "zh": {
       "script": "han",
       "anchors": [
-        { "lock": "dinosaur-country", "key": "footer.tagline", "contains": "恐龙之乡" },
-        { "lock": "key-takeaways", "key": "section.keyTakeaways", "contains": "要点速览" },
-        { "lock": "guides", "key": "nav.guides", "contains": "攻略" },
-        { "lock": "offroad-trail", "key": "nav.trails", "contains": "越野路线" }
+        {
+          "lock": "dinosaur-country",
+          "key": "footer.tagline",
+          "contains": "恐龙之乡"
+        },
+        {
+          "lock": "key-takeaways",
+          "key": "section.keyTakeaways",
+          "contains": "要点速览"
+        },
+        {
+          "lock": "guides",
+          "key": "nav.guides",
+          "contains": "攻略"
+        },
+        {
+          "lock": "offroad-trail",
+          "key": "nav.trails",
+          "contains": "越野路线"
+        }
       ],
       "locks": [
         {
@@ -517,13 +652,41 @@
           "provenance": "C4 (P21) — 503 occurrences reviewed, 503 retained, 15 alternatives all measured at 0; ui.ts ZH preamble line 926",
           "bound": "floor",
           "forbidden": [
-            { "text": "恐龙之地", "enforce": "block", "why": "C4 counted 15 competing renderings; every one measured 0" },
-            { "text": "恐龙乐园", "enforce": "block", "why": "C4 competing rendering, measured 0" },
-            { "text": "恐龙王国", "enforce": "block", "why": "C4 competing rendering, measured 0" },
-            { "text": "恐龙之都", "enforce": "block", "why": "C4 competing rendering, measured 0" },
-            { "text": "恐龙国度", "enforce": "block", "why": "C4 competing rendering, measured 0" },
-            { "text": "恐龙地区", "enforce": "block", "why": "C4 competing rendering, measured 0" },
-            { "text": "恐龙圣地", "enforce": "block", "why": "C4 competing rendering, measured 0" }
+            {
+              "text": "恐龙之地",
+              "enforce": "block",
+              "why": "C4 counted 15 competing renderings; every one measured 0"
+            },
+            {
+              "text": "恐龙乐园",
+              "enforce": "block",
+              "why": "C4 competing rendering, measured 0"
+            },
+            {
+              "text": "恐龙王国",
+              "enforce": "block",
+              "why": "C4 competing rendering, measured 0"
+            },
+            {
+              "text": "恐龙之都",
+              "enforce": "block",
+              "why": "C4 competing rendering, measured 0"
+            },
+            {
+              "text": "恐龙国度",
+              "enforce": "block",
+              "why": "C4 competing rendering, measured 0"
+            },
+            {
+              "text": "恐龙地区",
+              "enforce": "block",
+              "why": "C4 competing rendering, measured 0"
+            },
+            {
+              "text": "恐龙圣地",
+              "enforce": "block",
+              "why": "C4 competing rendering, measured 0"
+            }
           ]
         },
         {
@@ -534,11 +697,31 @@
           "provenance": "C4 (P21) — the other half of the split; ui.ts ZH preamble lines 913–916 keep places with no established Chinese name in Latin",
           "bound": "floor",
           "forbidden": [
-            { "text": "恐龙国家纪念地", "enforce": "block", "why": "C4 — an unauthorised translation of the place name; measured 0" },
-            { "text": "恐龙国家公园", "enforce": "block", "why": "C4 unauthorised translation, measured 0" },
-            { "text": "恐龙国家保护区", "enforce": "block", "why": "C4 unauthorised translation, measured 0" },
-            { "text": "恐龙国家遗址", "enforce": "block", "why": "C4 unauthorised translation, measured 0" },
-            { "text": "恐龙化石国家纪念地", "enforce": "block", "why": "C4 unauthorised translation, measured 0" }
+            {
+              "text": "恐龙国家纪念地",
+              "enforce": "block",
+              "why": "C4 — an unauthorised translation of the place name; measured 0"
+            },
+            {
+              "text": "恐龙国家公园",
+              "enforce": "block",
+              "why": "C4 unauthorised translation, measured 0"
+            },
+            {
+              "text": "恐龙国家保护区",
+              "enforce": "block",
+              "why": "C4 unauthorised translation, measured 0"
+            },
+            {
+              "text": "恐龙国家遗址",
+              "enforce": "block",
+              "why": "C4 unauthorised translation, measured 0"
+            },
+            {
+              "text": "恐龙化石国家纪念地",
+              "enforce": "block",
+              "why": "C4 unauthorised translation, measured 0"
+            }
           ]
         },
         {
@@ -548,12 +731,18 @@
           "provenance": "C8 (P27) — 113 sites across 9 files normalised to the house standard; 纪念区 driven to 0",
           "bound": "floor",
           "forbidden": [
-            { "text": "纪念区", "enforce": "block", "why": "C8 drift — not an NPS designation at all; swept to 0" },
+            {
+              "text": "纪念区",
+              "enforce": "block",
+              "why": "C8 drift — not an NPS designation at all; swept to 0"
+            },
             {
               "text": "保护区",
               "enforce": "block",
               "why": "C8 drift — means protected area / reserve, a different NPS designation",
-              "licensedIn": ["荒野保护区"],
+              "licensedIn": [
+                "荒野保护区"
+              ],
               "licensedWhy": "wilderness area — a genuine and different referent; C8 kept all 5 survivors deliberately (methodology principle 7)"
             }
           ]
@@ -581,7 +770,11 @@
           "provenance": "ui.ts ZH preamble line 927",
           "bound": "floor",
           "forbidden": [
-            { "text": "Key Takeaways", "enforce": "block", "why": "untranslated English heading" }
+            {
+              "text": "Key Takeaways",
+              "enforce": "block",
+              "why": "untranslated English heading"
+            }
           ]
         },
         {
@@ -648,6 +841,67 @@
           "provenance": "ui.ts ZH preamble line 933 — brand, NAP, prices and fleet never appear in translated form",
           "bound": "floor",
           "forbidden": []
+        }
+      ]
+    },
+    "ar": {
+      "$doc": [
+        "AR-1. TWO locks, not three. The AR-1 glossary froze a third identity — Key Takeaways ->",
+        "أبرز النقاط — and it is deliberately NOT locked here, because no Arabic page renders a",
+        "Key Takeaways block yet. Its census figure would be 0, and a floor of 0 is a lock that",
+        "can never fail: it would read as enforcement in the config and enforce nothing. It is",
+        "added the phase a page renders it, with the floor the census then measures.",
+        "",
+        "Both locks below are floors of 1, measured on the single pilot page. Small, but real:",
+        "the phrase is verified present in RENDERED output and anchored to the ui.ts key it came",
+        "from, so a dictionary edit that drops it fails the gate immediately."
+      ],
+      "script": "arabic",
+      "anchors": [
+        {
+          "lock": "dinosaur-country",
+          "key": "footer.tagline",
+          "contains": "أرض الديناصورات"
+        },
+        {
+          "lock": "offroad-trail",
+          "key": "nav.trails",
+          "contains": "المسارات"
+        }
+      ],
+      "locks": [
+        {
+          "id": "dinosaur-country",
+          "concept": "Dinosaur Country — the destination identity",
+          "phrase": "أرض الديناصورات",
+          "provenance": "AR-1 — policy §4 decided ahead of the corpus, not recovered from it; ui.ts AR preamble LOCKED TERMS",
+          "bound": "floor",
+          "forbidden": [
+            {
+              "text": "بلاد الديناصورات",
+              "enforce": "report",
+              "why": "competing Arabic rendering; AR-1 fixed one identity, but with a one-page corpus there is no measurement to justify blocking yet"
+            },
+            {
+              "text": "أرض الدينوصورات",
+              "enforce": "report",
+              "why": "orthographic variant of the same phrase — report until a corpus shows which spelling the corpus actually uses"
+            }
+          ]
+        },
+        {
+          "id": "offroad-trail",
+          "concept": "trail (the route) — never a blanket word covering vehicle class",
+          "phrase": "المسارات",
+          "provenance": "AR-1 — ui.ts AR preamble LOCKED TERMS: مسار is the route; UTV/ATV/Jeep stay Latin beside it",
+          "bound": "floor",
+          "forbidden": [
+            {
+              "text": "الدروب",
+              "enforce": "report",
+              "why": "competing rendering; unmeasured on a one-page corpus"
+            }
+          ]
         }
       ]
     }

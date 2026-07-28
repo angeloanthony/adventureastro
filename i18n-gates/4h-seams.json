@@ -4,7 +4,6 @@
     "phase": "P36",
     "origin": "Review items C6, C7 and C9.",
     "invariant": "A locked phrase joined into surrounding prose must not leave a structural seam: no duplicated imperative inside one clause, no coordinator binding a redundant second imperative, no repeated lead-in particle at the join, no repeated connective.",
-
     "why_rendered": [
       "C7 is the reason this gate reads dist/ and never src/. The C6 fix verified clean in",
       "plain source text and still left 326 defects on the page, because inline markup sits",
@@ -14,7 +13,6 @@
       "P36 confirmed this is not historical: the one live finding on the current corpus is",
       "invisible in both the .mdx source and the raw HTML, and appears only after extraction."
     ],
-
     "why_rules_not_lists": [
       "Phase 3 of the P36 brief forbids encoding C9's 28 held shapes as an allow-list, and",
       "the rules below do not contain them. C9 is expressed as a grammatical test instead:",
@@ -25,7 +23,6 @@
       "New shapes obeying the same grammar are licensed automatically; new shapes breaking",
       "it are caught without being enumerated first."
     ],
-
     "measured_baselines": {
       "note": [
         "THE FIGURES ARE NO LONGER HERE (F5 Phase 5). They live in the phrase census, which",
@@ -39,7 +36,6 @@
         "Methodology principle 1 — a recorded size is a hypothesis about the measurement window."
       ]
     },
-
     "clause_boundary_derivation": [
       "`、` is an enumeration comma and is NOT a clause boundary (C7 trap 1); treating it as",
       "one hides real seams. ASCII parentheses hold inline phone numbers and are likewise",
@@ -48,7 +44,6 @@
       "`——` IS a boundary. Measured at P36: excluding it produces 8 false positives on",
       "sentences carrying two genuinely separate requests (`都请向官方渠道核实——夏季请尽早预订`)."
     ],
-
     "bound_morphemes": [
       "Methodology principle 7. `请` is a bound morpheme in 申请/邀请/聘请/请求 and a plain",
       "verb meaning `to hire` in `请向导`. These are masked before any imperative is counted,",
@@ -56,7 +51,6 @@
       "the language, not a list of historical defects. The rendered corpus contains 邀请 (3)",
       "and 申请 (2)."
     ],
-
     "scope_boundary": [
       "This gate checks the SEAM at a lock boundary. It deliberately does not verify that the",
       "lock itself is present, complete or undrifted — that is gate 4i (P37). It reports",
@@ -67,11 +61,32 @@
       "connectives only."
     ]
   },
-
-  "clauseBoundaries": ["，", "。", "；", "：", "！", "？", "!", "?", ";", "——"],
-  "nonBoundaries": ["、", "(", ")", "（", "）"],
-  "sentenceBoundaries": ["。", "！", "？", "!", "?"],
-
+  "clauseBoundaries": [
+    "，",
+    "。",
+    "；",
+    "：",
+    "！",
+    "？",
+    "!",
+    "?",
+    ";",
+    "——"
+  ],
+  "nonBoundaries": [
+    "、",
+    "(",
+    ")",
+    "（",
+    "）"
+  ],
+  "sentenceBoundaries": [
+    "。",
+    "！",
+    "？",
+    "!",
+    "?"
+  ],
   "locales": {
     "zh": {
       "state": "complete",
@@ -79,15 +94,39 @@
       "locks": [
         {
           "core": "官方渠道核实",
-          "leadIns": ["请", "向"]
+          "leadIns": [
+            "请",
+            "向"
+          ]
         }
       ],
       "imperative": {
         "particle": "请",
-        "boundMorphemes": ["申请", "邀请", "聘请", "请求", "请假", "请柬", "请帖", "请示", "请向导"],
-        "coordinators": ["并", "先"]
+        "boundMorphemes": [
+          "申请",
+          "邀请",
+          "聘请",
+          "请求",
+          "请假",
+          "请柬",
+          "请帖",
+          "请示",
+          "请向导"
+        ],
+        "coordinators": [
+          "并",
+          "先"
+        ]
       },
-      "connectives": ["并", "而", "或", "但", "和", "与", "及"]
+      "connectives": [
+        "并",
+        "而",
+        "或",
+        "但",
+        "和",
+        "与",
+        "及"
+      ]
     },
     "ja": {
       "state": "complete",
@@ -95,46 +134,106 @@
       "locks": [
         {
           "core": "公式情報をご確認ください",
-          "leadIns": ["で", "に", "を"]
+          "leadIns": [
+            "で",
+            "に",
+            "を"
+          ]
         }
       ],
       "imperative": null,
-      "connectives": ["および", "また", "かつ", "そして", "ただし"]
+      "connectives": [
+        "および",
+        "また",
+        "かつ",
+        "そして",
+        "ただし"
+      ]
     },
     "de": {
       "state": "complete",
       "script": "latin",
       "locks": [],
       "imperative": null,
-      "connectives": ["und", "oder", "aber", "sowie", "denn"]
+      "connectives": [
+        "und",
+        "oder",
+        "aber",
+        "sowie",
+        "denn"
+      ]
     },
     "fr": {
       "state": "complete",
       "script": "latin",
       "locks": [],
       "imperative": null,
-      "connectives": ["et", "ou", "mais", "donc", "ainsi"]
+      "connectives": [
+        "et",
+        "ou",
+        "mais",
+        "donc",
+        "ainsi"
+      ]
     },
     "es": {
       "state": "complete",
       "script": "latin",
       "locks": [],
       "imperative": null,
-      "connectives": ["y", "o", "pero", "aunque"]
+      "connectives": [
+        "y",
+        "o",
+        "pero",
+        "aunque"
+      ]
     },
     "it": {
       "state": "complete",
       "script": "latin",
       "locks": [],
       "imperative": null,
-      "connectives": ["e", "o", "ma", "oppure"]
+      "connectives": [
+        "e",
+        "o",
+        "ma",
+        "oppure"
+      ]
     },
     "pt": {
       "state": "complete",
       "script": "latin",
       "locks": [],
       "imperative": null,
-      "connectives": ["e", "ou", "mas", "porém"]
+      "connectives": [
+        "e",
+        "ou",
+        "mas",
+        "porém"
+      ]
+    },
+    "ar": {
+      "$doc": [
+        "AR-1. Registered with NO locks, deliberately. 4h detects damage at the JOIN SEAM of a",
+        "locked phrase; Arabic has no locked sentence-level phrase yet, because the corpus that",
+        "would have produced one is a single pilot page. Declaring a lock here to make the entry",
+        "look populated would be config nothing measures — the F2 M-4 defect.",
+        "",
+        "No \"imperative\" block either. The zh imperative rule is built on a detachable particle",
+        "(请) that can be duplicated at a seam. Arabic marks the imperative in the VERB STEM",
+        "itself (احجز, اطّلع), so there is no separable particle to duplicate and the zh rule has",
+        "no Arabic analogue. Whether Arabic has its own seam hazard — the proclitic و, the",
+        "definite article ال assimilating across a join — is an AR-2 question that needs a corpus",
+        "to answer. It is left open rather than guessed at.",
+        "",
+        "script \"arabic\" is a new value for this gate. See AR1-gate-characterization.md G-3:",
+        "the connective regex branches on script === \"latin\" and otherwise falls through to the",
+        "CJK-shaped branch, which is wrong for Arabic. With no locks and no connectives declared,",
+        "that path is unreachable today; it must be resolved before Arabic locks are added."
+      ],
+      "state": "in-progress",
+      "script": "arabic",
+      "locks": []
     }
   }
 }

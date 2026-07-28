@@ -1175,7 +1175,9 @@ const GALLERY_TEXT: Partial<Readonly<Record<Locale, GalleryDictionary>>> = {
  * locale gains a homepage; the build will tell you the moment you forget.
  */
 export const GALLERY_EXEMPT: Readonly<Record<string, string>> = {
-  // Empty today: every registered locale ships a homepage and therefore a gallery.
+  ar: 'AR-1 pilot locale: the only Arabic route is /ar/cancellation-policy/, so no ' +
+      'page calls renderGallery("ar"). Remove this entry together with the phase ' +
+      'that adds an /ar/ homepage, and add GALLERY_TEXT_AR in the same change.',
 };
 
 /** Indentation of a slide element inside `<div class="carousel-track">`. */

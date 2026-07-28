@@ -65,7 +65,8 @@
       "fr": { "role": "target" },
       "de": { "role": "target" },
       "ja": { "role": "target" },
-      "zh": { "role": "target" }
+      "zh": { "role": "target" },
+      "ar": { "role": "target" }
     }
   },
 

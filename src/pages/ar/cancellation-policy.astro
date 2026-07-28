@@ -1,0 +1,54 @@
+---
+// ar/cancellation-policy.astro — the AR-1 pilot page, and the only Arabic route
+// in the repository. Structurally identical to zh/cancellation-policy.astro:
+// that identity IS the deliverable. If an RTL locale had needed a forked route
+// file, a forked layout or a locale-specific component, that would have been a
+// stop condition (AR-1 "components require locale-specific forks"). It did not.
+//
+// Nothing here mentions direction. `dir="rtl"` reaches <html> because
+// BaseLayout asks isRtl(lang), which reads LOCALES[].dir — the single source
+// the direction invariant requires. This file, the layout, the header, the
+// footer and the breadcrumbs are all direction-agnostic by construction.
+//
+// The Footer links stay on ENGLISH routes on purpose (Gate 4b): this is the
+// only Arabic page that exists, so `/ar/#tours` would be a broken link, not a
+// fallback. The Footer HEADING is localized while its TARGETS are not, which is
+// precisely the existence-aware split the framework is built around.
+import { getBodyHtml } from '../../page-content/cancellation';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+---
+<BaseLayout bodyClass="policy-page-body">
+  <Fragment slot="head">
+    <Seo
+      title="سياسة الإلغاء | Adventure Tours Vernal — Vernal, Utah"
+      description="سياسة الإلغاء والاسترداد لجولات UTV بصحبة مرشد مع Adventure Tours Vernal في Vernal بولاية يوتا. الإلغاء قبل 72 ساعة أو أكثر يمنحك استرداداً كاملاً. لأي استفسار اتصل على (435) 219-9447."
+      path="/ar/cancellation-policy/"
+      type="website"
+      ogTitle="سياسة الإلغاء | Adventure Tours Vernal"
+      ogDescription="اطّلع على سياسة الإلغاء والاسترداد لجولات UTV بصحبة مرشد في Vernal بولاية يوتا. الإخطار قبل 72 ساعة أو أكثر يمنحك استرداداً كاملاً. اتصل على (435) 219-9447."
+    />
+  </Fragment>
+  <Header slot="body" active="cancellation-policy" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.cancellationPolicy', lang) }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: t('footer.quickLinks', lang),
+      links: [
+        { href: '/#tours', label: t('footer.link.ourTours', lang) },
+        { href: '/#vehicles', label: t('footer.link.ourFleet', lang) },
+        { href: '/#gallery', label: t('footer.link.photoGallery', lang) },
+        { href: '/booking/', label: t('cta.bookNow', lang) },
+      ],
+    }}
+  />
+</BaseLayout>

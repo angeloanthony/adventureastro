@@ -1049,9 +1049,191 @@ const ZH: Dict = {
   'hub.guides': '攻略',
 };
 
+// ── Arabic chrome dictionary (AR-1) — Modern Standard Arabic, dir="rtl" ─────
+//
+// The FIRST right-to-left dictionary in this file. It ships complete and ahead
+// of any Arabic corpus, on purpose: t() fails soft, so a partial Arabic
+// dictionary would render English chrome on an RTL page and still pass the
+// build, the validator and every gate — the exact JA failure of 2026-07-22,
+// made harder to spot because English chrome inside an RTL layout reads as a
+// direction bug rather than a missing translation. Chrome first, corpus later.
+//
+// REGISTER — Modern Standard Arabic (فصحى معاصرة), never a regional dialect.
+//   The house register across locales is informal-but-respectful (de = du,
+//   zh = 你, ja = です・ます). Arabic's equivalent is direct second-person
+//   address WITHOUT honorific distancing (حضرتك / سيادتكم are wrong here).
+//   Arabic marks gender on verbs, pronouns and imperatives, so the policy is
+//   two-part and deliberate:
+//     • Prefer impersonal / verbal-noun phrasing wherever the English does not
+//       actually address the reader ('Drive time' → 'مدة القيادة', not a verb).
+//     • Where the English DOES address the reader, use masculine singular as
+//       the unmarked form ('احجز الآن'). This is a linguistic default, not an
+//       assumption about the reader; Arabic has no gender-neutral imperative,
+//       and the alternatives (احجز/ي, أو صيغة الجمع) are worse: slash-forms are
+//       unreadable by screen readers and plural forms read as corporate.
+//   Recorded in full, with the rejected alternatives, in
+//   docs/rtl/AR1-arabic-policy.md §2 — do not re-decide it per string.
+//
+// NUMERALS — Western digits (0-9) corpus-wide, never Arabic-Indic (٠-٩).
+//   Every number on this site is a US fact a reader must match against a road
+//   sign, a booking screen or a phone keypad. See policy §3, and the ⚠ on
+//   LocaleMeta.hreflang in i18n.ts: the machine-formatted half of this policy
+//   is enforced by the locale tag, not by anything written here.
+//
+// PROPER NOUNS — mixed strategy, by function, not by category (policy §4):
+//   • ARABIC where an established exonym exists and the reader will never need
+//     to match the Latin form on the ground: يوتا (Utah), سولت ليك سيتي,
+//     دنفر, كولورادو, جبال روكي.
+//   • LATIN, verbatim, for every wayfinding name — the reader navigates rural
+//     Utah on English signage and books through an English system:
+//     Vernal · Dinosaur National Monument · Uintas · Kawasaki KRX 1000 ·
+//     Adventure Tours Vernal · Google · UTV / ATV / Jeep.
+//   A Latin run inside Arabic prose is therefore NORMAL here, not an oversight,
+//   which is exactly why bidi isolation is a first-class concern for this
+//   locale rather than an edge case.
+//
+// LOCKED TERMS — Dinosaur Country → أرض الديناصورات · Key Takeaways →
+//   أبرز النقاط · trail (the route) → مسار · backcountry → عمق البرية ·
+//   petroglyphs / rock art → النقوش والرسوم الصخرية · tour (the product) →
+//   جولة · hub (the content grouping) → قسم · guide (the article) → دليل.
+//   Never one blanket word for 'trail': مسار is the route, and the vehicle
+//   classes (UTV/ATV/Jeep) stay Latin beside it.
+const AR: Dict = {
+  // — Navigation —
+  'nav.home': 'الرئيسية',
+  'nav.about': 'من نحن',
+  'nav.trails': 'المسارات',
+  'nav.thingsToDo': 'الأنشطة',
+  'nav.dinosaurMonument': 'Dinosaur Monument',
+  'nav.guides': 'الأدلة',
+  'nav.food': 'المطاعم',
+  'nav.info': 'معلومات',
+  'nav.cancellationPolicy': 'سياسة الإلغاء',
+  'nav.privacyPolicy': 'سياسة الخصوصية',
+  'nav.faq': 'الأسئلة الشائعة',
+  'nav.safetyGuidelines': 'إرشادات السلامة',
+  'nav.whatToBring': 'ما تحتاج إحضاره',
+  'nav.itineraries': 'برامج الرحلات',
+
+  // — CTAs —
+  'cta.bookNow': 'احجز الآن',
+  'cta.bookYourAdventure': 'احجز مغامرتك',
+
+  // — Accessibility (aria-labels) —
+  'a11y.toggleMenu': 'إظهار القائمة أو إخفاؤها',
+  'a11y.breadcrumb': 'مسار التنقل',
+  'a11y.relatedArticles': 'مقالات ذات صلة',
+  'a11y.allArticlesInHub': 'جميع المقالات في هذا القسم',
+  'a11y.keyTakeaways': 'أبرز النقاط',
+  'a11y.relatedGuides': 'أدلة ذات صلة',
+
+  // — Section headings —
+  'section.faq': 'الأسئلة الشائعة',
+  'section.exploreThisHub': 'استكشف هذا القسم',
+  'section.youMightAlsoLike': 'قد يعجبك أيضاً',
+  'section.keyTakeaways': 'أبرز النقاط',
+  'section.exploreVernal': 'استكشف Vernal',
+  'section.moreVernalGuides': 'المزيد من أدلة Vernal',
+
+  // — Footer chrome —
+  'footer.tagline': 'عش مغامرة العمر في أرض الديناصورات بولاية يوتا.',
+  'footer.ourTrails': 'مساراتنا',
+  'footer.information': 'معلومات',
+  'footer.contactInfo': 'معلومات التواصل',
+  'footer.copyrightSuffix': ' - جميع الحقوق محفوظة.',
+  'footer.link.utvTrailsTours': 'مسارات وجولات UTV',
+  'footer.link.thingsToDo': 'الأنشطة',
+  'footer.link.dinosaurNationalMonument': 'Dinosaur National Monument',
+  'footer.link.guides': 'الأدلة',
+  'footer.link.visitingFromSLC': 'قادم من سولت ليك سيتي',
+  'footer.quickLinks': 'روابط سريعة',
+  'footer.link.ourTours': 'جولاتنا',
+  'footer.link.ourFleet': 'أسطولنا',
+  'footer.link.photoGallery': 'معرض الصور',
+
+  // — TourCta —
+  'tour.value.family': 'الجولة التي تختم بها معظم العائلات رحلتها إلى Vernal.',
+  'tour.value.adventure': 'جولات بصحبة مرشد على متن Kawasaki KRX 1000 عبر أرض الديناصورات.',
+  'tour.value.sunset': 'مسارات عند الغروب، ونقوش صخرية، ومطلات في عمق البرية.',
+  'tour.value.generic': 'جولات UTV بصحبة مرشد عبر أرض الديناصورات.',
+  'tour.callForPricing': 'اتصل للاستفسار عن السعر',
+  'tour.threeHours': '3 ساعات',
+  // `{n}` is always 2 here, but the phrasing is chosen to stay grammatical for
+  // any n: Arabic changes the noun's case and number after 3-10 and again after
+  // 11, so 'حتى {n} راكبين' would be wrong for every value except 2.
+  'tour.upToRiders': 'حتى {n} من الركاب',
+
+  // — TrustBadge —
+  'reviews.googleReviews': 'تقييمات Google',
+  'reviews.ratedAria': 'حصلت على {value} من 5 بناءً على {count} تقييماً على Google',
+
+  // — AuthorByline + AuthorLayout —
+  'author.writtenBy': 'بقلم',
+  'author.updated': 'آخر تحديث',
+  'author.areasOfExpertise': 'مجالات الخبرة',
+  'author.credentials': 'المؤهلات والخبرة',
+  'author.aboutBusiness': 'عن Adventure Tours Vernal',
+  'author.articlesBy': 'مقالات بقلم {name}',
+
+  // — ItineraryDay —
+  'time.morning': 'صباحاً',
+  'time.lunch': 'الغداء',
+  'time.afternoon': 'بعد الظهر',
+  'time.dinner': 'العشاء',
+  'time.evening': 'المساء',
+  'itinerary.weatherBackup': 'خطة بديلة لسوء الأحوال الجوية',
+
+  // — GatewayRoutes —
+  'gateway.heading': 'قادم من خارج المدينة؟ ابدأ بمسار الوصول.',
+  'gateway.note.saltLakeCity': 'الطريق الكلاسيكي عبر جبال Uintas، نحو 3 ساعات بالسيارة.',
+  'gateway.note.denver': 'رحلة نصف يوم غرباً عبر جبال روكي.',
+  'gateway.note.grandJunction': 'أقرب نقطة انطلاق من ولاية كولورادو.',
+  'gateway.seeAllItineraries': 'اطّلع على جميع برامج الرحلات في Vernal',
+
+  // — TourDecisionGuide —
+  'decision.heading': 'غير متأكد من الجولة المناسبة؟ ابدأ من هنا.',
+  'decision.intro': 'أخبرنا بما يهمك أكثر، ونرشدك إلى الدليل المناسب.',
+  'decision.q.firstTime': 'أول مرة تقود مركبة UTV؟',
+  'decision.a.firstTime': 'ابدأ بدليل المبتدئين',
+  'decision.q.children': 'برفقة أطفال؟',
+  'decision.a.children': 'اطّلع على دليل UTV للعائلات',
+  'decision.q.couple': 'مسافران فقط؟',
+  'decision.a.couple': 'احجز جولة خاصة لشخصين',
+  'decision.q.scenery': 'تبحث عن المناظر الطبيعية؟',
+  'decision.a.scenery': 'قارن بين أجمل المسارات',
+  'decision.q.history': 'تبحث عن التاريخ؟',
+  'decision.a.history': 'استكشف النقوش والرسوم الصخرية',
+  'decision.q.adventure': 'تريد أقصى قدر من المغامرة؟',
+  'decision.a.adventure': 'توغّل في عمق البرية',
+  'decision.q.shortTime': 'وقتك ضيق؟',
+  'decision.a.shortTime': 'احجز الجولة القادمة التي تستغرق 3 ساعات',
+  'decision.q.group': 'مجموعة كبيرة؟',
+  'decision.a.group': 'خطّط لجولة جماعية',
+
+  // — CityLayout QuickFacts —
+  'city.driveTime': 'مدة القيادة',
+  'city.distance': 'المسافة',
+  'city.route': 'الطريق',
+  'city.nearestAirport': 'أقرب مطار',
+  'city.driveTimeValue': '{n} ساعات',
+  'city.distanceValue': '{n} ميل',
+
+  // — Hub display names —
+  'hub.utv': 'مسارات وجولات UTV',
+  'hub.atv': 'مسارات ATV',
+  'hub.jeep': 'مسارات Jeep',
+  'hub.dinosaur-national-monument': 'Dinosaur National Monument',
+  'hub.things-to-do': 'أنشطة في Vernal',
+  'hub.hiking': 'المشي في الطبيعة',
+  'hub.camping': 'التخييم',
+  'hub.fishing': 'صيد الأسماك',
+  'hub.scenic-drives': 'الطرق الخلابة',
+  'hub.guides': 'الأدلة',
+};
+
 // One entry per locale. es (P3A), it (P6), pt (P7A), fr (P8-P6), de
-// (P9-inline), ja (P10K), and zh (Z2) are all real dictionaries now — every
-// registered locale has a translated UI chrome.
+// (P9-inline), ja (P10K), zh (Z2) and ar (AR-1) are all real dictionaries now —
+// every registered locale has a translated UI chrome.
 const UI_STRINGS: Partial<Record<Locale, Dict>> = {
   en: EN,
   es: ES,
@@ -1061,6 +1243,7 @@ const UI_STRINGS: Partial<Record<Locale, Dict>> = {
   de: DE,
   ja: JA,
   zh: ZH,
+  ar: AR,
 };
 
 /**

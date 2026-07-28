@@ -20,7 +20,24 @@ export interface LocaleMeta {
   dir: 'ltr' | 'rtl';
   /** Open Graph og:locale value. */
   ogLocale: string;
-  /** hreflang attribute value (region-qualified). */
+  /**
+   * hreflang attribute value. Region-qualified where the locale targets a
+   * region; UNQUALIFIED where it deliberately does not (see `ar`).
+   *
+   * ⚠ This field has two consumers with different requirements, and Arabic is
+   * the first locale where they can disagree. `getIntlLocale()` reuses it as
+   * the BCP-47 tag for `Intl` — so this value silently decides the NUMBERING
+   * SYSTEM every formatted date and number renders in:
+   *
+   *     'ar'    -> 28 يوليو 2026   (numberingSystem: latn)
+   *     'ar-EG' -> ٢٨ يوليو ٢٠٢٦   (numberingSystem: arab)
+   *
+   * The AR-1 numeral policy is Western digits corpus-wide. Nothing in the
+   * dictionary, the corpus, or any gate enforces that for machine-formatted
+   * output — this field does, alone. Changing `ar` to a region whose CLDR
+   * default is `arab` would violate the policy site-wide without touching a
+   * single translated string. See docs/rtl/AR1-arabic-policy.md §3.
+   */
   hreflang: string;
 }
 
@@ -37,6 +54,14 @@ export const LOCALES = [
   { code: 'de', name: 'Deutsch',    dir: 'ltr', ogLocale: 'de_DE', hreflang: 'de-DE' },
   { code: 'ja', name: '日本語',      dir: 'ltr', ogLocale: 'ja_JP', hreflang: 'ja-JP' },
   { code: 'zh', name: '简体中文',    dir: 'ltr', ogLocale: 'zh_CN', hreflang: 'zh-CN' },
+  // AR-1. The first rtl locale. `dir` is the ONLY place page direction is
+  // decided: BaseLayout reads it through isRtl(), and no component branches on
+  // the locale code. `hreflang` is deliberately unqualified — Arabic has no
+  // single target region for a Utah inbound-travel site, and qualifying it
+  // would exclude every other Arabic region from the alternate set. It also
+  // resolves to latn digits under Intl, which is what the numeral policy
+  // requires; see the field doc above before ever regionalizing it.
+  { code: 'ar', name: 'العربية',     dir: 'rtl', ogLocale: 'ar_AR', hreflang: 'ar' },
 ] as const satisfies readonly LocaleMeta[];
 
 export const DEFAULT_LOCALE = 'en';
@@ -440,6 +465,16 @@ const ZH_SLUGS = new Set<string>([
   'from/salt-lake-city', 'things-to-do/best-restaurants-vernal-utah',
 ]);
 
+// AR-1 (Arabic). Registered with a single pilot slug, not a corpus. The pilot's
+// only job is to exercise direction, bidi, chrome and navigation end to end;
+// spoke translation is AR-2 and later. Registration is STRUCTURAL — a locale is
+// "present" for a page because its slug is in this Set, never because a file
+// happens to exist on disk. That distinction is load-bearing: file presence
+// alone has mis-tagged a locale as complete before (see MULTILINGUAL_HANDOFF §7).
+const AR_SLUGS = new Set<string>([
+  'cancellation-policy', // AR-1 pilot page
+]);
+
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {
   es: ES_SLUGS,
   it: IT_SLUGS,
@@ -448,6 +483,7 @@ const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {
   de: DE_SLUGS,
   ja: JA_SLUGS,
   zh: ZH_SLUGS,
+  ar: AR_SLUGS,
 };
 
 /**

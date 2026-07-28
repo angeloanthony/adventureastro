@@ -3,9 +3,10 @@
   "censusVersion": 1,
   "provenance": {
     "measuredAt": "2026-07-28",
-    "manifest": "sha256:50138b80a5b3f4e399f107e3c4f17e80807a75a166f09328c0de7ba02f953669",
+    "manifest": "sha256:0ce9a20ddf2120161a9cd4c005da04d31a6388ea03321a80f61d6ec71622c3f5",
     "corpus": {
       "pages": {
+        "ar": 1,
         "de": 77,
         "en": 80,
         "es": 77,
@@ -15,12 +16,40 @@
         "pt": 77,
         "zh": 77
       },
-      "fingerprint": "sha256:74429ecc2a71a26b32f81d6a66fb7bb944aeda1d5824fbc0d2f747286a29e165"
+      "fingerprint": "sha256:3b0f03ef53fbb8e522fe9afc2632bea3678603762b35b680b3304f2f2b4d40fc"
     },
     "engine": "astro-localization-gates@0.0.0+inrepo",
     "invocation": "census phrase-count --phrases census/phrase-set.json --measured-at 2026-07-28"
   },
   "facts": [
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "ar",
+        "phrase": "أرض الديناصورات",
+        "surface": "prose"
+      },
+      "value": 1,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 1,
+        "pagesWithPhrase": 1
+      }
+    },
+    {
+      "kind": "phrase-count",
+      "key": {
+        "locale": "ar",
+        "phrase": "المسارات",
+        "surface": "prose"
+      },
+      "value": 1,
+      "extractor": "visibleText@1",
+      "evidence": {
+        "pages": 1,
+        "pagesWithPhrase": 1
+      }
+    },
     {
       "kind": "phrase-count",
       "key": {
