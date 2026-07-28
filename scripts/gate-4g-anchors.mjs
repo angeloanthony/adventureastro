@@ -56,8 +56,12 @@ const flag = (name) => {
 };
 const positional = argv.filter((a, i) => !a.startsWith('--') && !argv[i - 1]?.startsWith('--'));
 const dist = positional[0] ? resolve(positional[0]) : join(root, 'dist');
-const CONFIG = resolve(flag('--config') ?? join(root, 'i18n-gates', '4g-anchors.json'));
-const LICENSED = resolve(flag('--licensed') ?? join(root, 'i18n-gates', '4f-headings.json'));
+// `--config` and `--licensed` are GONE as of F5 Phase 2. They resolved policy paths in
+// this gate — `join(root, 'i18n-gates', …)` against the FRAMEWORK root — which is the
+// coupling the phase removes. Their scratch-testing purpose is fully served by
+// `--manifest`, which points at a host whose own policy section names whatever files the
+// test needs. One seam, at the boundary, instead of one per artifact.
+//
 // `--i18n` is no longer resolved here: where the locale registry lives is host shape, and
 // this gate is not permitted to know it. The flag is passed through to the adapter, which
 // is the only component that may turn it into a path.
@@ -76,33 +80,6 @@ const rel = (p) => relative(root, p).split(sep).join('/');
 // because an absent dictionary degraded quietly instead of failing. An advisory gate
 // that cannot run must say so; silently reporting "0 candidates" would be worse than
 // blocking, because it reads as a clean corpus.
-for (const [label, path] of [['config', CONFIG], ['4f licensed registry', LICENSED]]) {
-  if (!existsSync(path)) {
-    console.error(`gate-4g: ${label} not found at ${rel(path)} — refusing to report silently.`);
-    process.exit(2);
-  }
-}
-if (!existsSync(dist)) {
-  console.error('gate-4g: dist/ not found — this gate reads rendered output; run astro build first.');
-  process.exit(2);
-}
-
-let config, licensedCfg;
-try {
-  config = JSON.parse(readFileSync(CONFIG, 'utf8'));
-} catch (e) {
-  console.error(`gate-4g: config is not valid JSON — ${e.message}`);
-  process.exit(2);
-}
-try {
-  licensedCfg = JSON.parse(readFileSync(LICENSED, 'utf8'));
-} catch (e) {
-  console.error(`gate-4g: ${rel(LICENSED)} is not valid JSON — ${e.message}`);
-  process.exit(2);
-}
-
-// --- Registered locales come from the host adapter, so a new language cannot reach
-//     production without either an entry here or a deliberate exit 2. ---
 let host;
 try {
   host = resolveHost({ registryModule: I18N_OVERRIDE, manifestPath: MANIFEST_OVERRIDE });
@@ -110,6 +87,40 @@ try {
   console.error(`gate-4g: ${e.message}`);
   process.exit(2);
 }
+
+let config, licensedCfg;
+try {
+  config = host.policy.load('anchors');
+} catch (e) {
+  console.error(
+    e.kind === 'invalid'
+      ? `gate-4g: config ${e.message}`
+      : `gate-4g: config ${e.message} — refusing to report silently.`
+  );
+  process.exit(2);
+}
+try {
+  // C-7: 4g reads 4f's licensed.global deliberately — one frozen proper-noun registry
+  // for the repository, not two that can drift apart. Now resolved through the same
+  // manifest as everything else, so the cross-read cannot reach another host's copy.
+  licensedCfg = host.policy.load('headings');
+} catch (e) {
+  console.error(
+    e.kind === 'invalid'
+      ? `gate-4g: ${host.policy.describe('headings')} ${e.message}`
+      : `gate-4g: 4f licensed registry ${e.message} — refusing to report silently.`
+  );
+  process.exit(2);
+}
+
+if (!existsSync(dist)) {
+  console.error('gate-4g: dist/ not found — this gate reads rendered output; run astro build first.');
+  process.exit(2);
+}
+
+// --- Registered locales come from the host adapter, so a new language cannot reach
+//     production without either an entry here or a deliberate exit 2. Resolved once,
+//     above, alongside the policy it governs. ---
 const LOCALE_CODES = host.localeCodes;
 const DEFAULT_LOCALE = host.defaultLocale;
 const TARGETS = host.targets;
@@ -120,7 +131,7 @@ if (!TARGETS.length) {
 for (const loc of TARGETS) {
   if (!config.locales?.[loc]) {
     console.error(
-      `gate-4g: locale "${loc}" is registered by the host but has no entry in ${rel(CONFIG)} — refusing to report silently.`
+      `gate-4g: locale "${loc}" is registered by the host but has no entry in ${host.policy.describe('anchors')} — refusing to report silently.`
     );
     process.exit(2);
   }
@@ -398,7 +409,7 @@ say('');
 say('  A candidate is a question, not a defect. B4 measured 597 correct English anchors');
 say('  against 55 genuine corrections, so this gate reports shape and count and leaves');
 say('  every judgement to a reviewer. Confirming one as correct means adding it to');
-say(`  "identities" in ${rel(CONFIG)}; confirming one as drift means a corpus-wide sweep`);
+say(`  "identities" in ${host.policy.describe('anchors')}; confirming one as drift means a corpus-wide sweep`);
 say('  per Gate 4c, never a file-by-file edit.');
 say('');
 

@@ -45,7 +45,10 @@ const flag = (name) => {
 };
 const positional = argv.filter((a, i) => !a.startsWith('--') && !argv[i - 1]?.startsWith('--'));
 const dist = positional[0] ? resolve(positional[0]) : join(root, 'dist');
-const CONFIG = resolve(flag('--config') ?? join(root, 'i18n-gates', '4i-glossary.json'));
+// `--config` is GONE as of F5 Phase 2: it resolved a policy path in this gate, against
+// the FRAMEWORK root, which is the coupling the phase removes. `--manifest` serves the
+// same scratch-testing purpose at the boundary instead of per artifact.
+// `--ui` stays: the UI dictionary is coupling C-5, not policy, and is not yet migrated.
 const UI = resolve(flag('--ui') ?? join(root, 'src', 'lib', 'ui.ts'));
 // `--i18n` is no longer resolved here: where the locale registry lives is host shape, and
 // this gate is not permitted to know it. The flag is passed through to the adapter, which
@@ -63,7 +66,27 @@ const rel = (p) => relative(root, p).split(sep).join('/');
 // Missing inputs are exit 2, never a silent pass — the ja UI-chrome fail-open lesson
 // (handoff §7, Gate 4a): that locale shipped 57 pages of English chrome precisely
 // because an absent dictionary degraded quietly instead of failing.
-for (const [label, path] of [['config', CONFIG], ['ui dictionary', UI]]) {
+let host;
+try {
+  host = resolveHost({ registryModule: I18N_OVERRIDE, manifestPath: MANIFEST_OVERRIDE });
+} catch (e) {
+  console.error(`gate-4i: ${e.message}`);
+  process.exit(2);
+}
+
+let config;
+try {
+  config = host.policy.load('glossary');
+} catch (e) {
+  console.error(
+    e.kind === 'invalid'
+      ? `gate-4i: config ${e.message}`
+      : `gate-4i: config ${e.message} — refusing to pass silently.`
+  );
+  process.exit(2);
+}
+
+for (const [label, path] of [['ui dictionary', UI]]) {
   if (!existsSync(path)) {
     console.error(`gate-4i: ${label} not found at ${rel(path)} — refusing to pass silently.`);
     process.exit(2);
@@ -71,14 +94,6 @@ for (const [label, path] of [['config', CONFIG], ['ui dictionary', UI]]) {
 }
 if (!existsSync(dist)) {
   console.error('gate-4i: dist/ not found — this gate reads rendered output; run astro build first.');
-  process.exit(2);
-}
-
-let config;
-try {
-  config = JSON.parse(readFileSync(CONFIG, 'utf8'));
-} catch (e) {
-  console.error(`gate-4i: config is not valid JSON — ${e.message}`);
   process.exit(2);
 }
 
@@ -95,14 +110,8 @@ const parse = parseSourceFile;
 //
 //     F4 Phase 1: this gate no longer knows which module holds the registry, what the
 //     registry is called, or how it is written. It receives resolved facts. The
-//     fail-closed exit 2 below is gate policy and stays here. ---
-let host;
-try {
-  host = resolveHost({ registryModule: I18N_OVERRIDE, manifestPath: MANIFEST_OVERRIDE });
-} catch (e) {
-  console.error(`gate-4i: ${e.message}`);
-  process.exit(2);
-}
+//     fail-closed exit 2 below is gate policy and stays here. Resolved once, above,
+//     alongside the policy it governs. ---
 const LOCALE_CODES = host.localeCodes;
 const DEFAULT_LOCALE = host.defaultLocale;
 const TARGETS = host.targets;
@@ -113,7 +122,7 @@ if (!TARGETS.length) {
 for (const loc of TARGETS) {
   if (!config.locales?.[loc]) {
     console.error(
-      `gate-4i: locale "${loc}" is registered in ${rel(I18N)} but has no entry in ${rel(CONFIG)} — refusing to pass silently.`
+      `gate-4i: locale "${loc}" is registered by the host but has no entry in ${host.policy.describe('glossary')} — refusing to pass silently.`
     );
     process.exit(2);
   }
@@ -216,7 +225,7 @@ for (const loc of TARGETS) {
 }
 
 if (configErrors.length) {
-  console.error(`\ngate-4i: the lock registry ${rel(CONFIG)} is internally inconsistent — ${configErrors.length} problem(s):\n`);
+  console.error(`\ngate-4i: the lock registry ${host.policy.describe('glossary')} is internally inconsistent — ${configErrors.length} problem(s):\n`);
   for (const e of configErrors) console.error(e);
   console.error('\nA lock registry that contradicts itself cannot verify anything. Fixing the registry is\nan engineering change; it is never a reason to edit a translation.\n');
   process.exit(2);
@@ -459,7 +468,7 @@ if (findings.length) {
   console.error(
     'Each violation is a locked rendering the corpus no longer honours. Fix it as one\n' +
       'corpus-wide pass (Gate 4c), never file by file. If a count moved because pages were\n' +
-      `added or removed, re-measure and update the frozen figure in ${rel(CONFIG)} —\n` +
+      `added or removed, re-measure and update the frozen figure in ${host.policy.describe('glossary')} —\n` +
       'deliberately, as a re-baseline, which is what a conserved count is for.\n'
   );
   process.exit(1);

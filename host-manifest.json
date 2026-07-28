@@ -67,5 +67,32 @@
       "ja": { "role": "target" },
       "zh": { "role": "target" }
     }
+  },
+
+  "policy": {
+    "$doc": [
+      "WHERE policy lives. Never WHAT policy means.",
+      "",
+      "Paths only. Marker lexicons, licensed registries, seam rules, glossary locks and every",
+      "census output stay in the files below, host-owned. If a glossary entry, a marker, a seam",
+      "rule or a lock semantic ever appears in this section, the manifest has absorbed procedure",
+      "and the change must be reverted rather than extended.",
+      "",
+      "Resolved relative to THIS FILE's directory, not the framework's. Before F5 Phase 2 each",
+      "gate computed `join(frameworkRoot, 'i18n-gates', …)`, so a gate pointed at another host",
+      "silently applied adventureastro's policy to a foreign corpus — a wrong answer, not a crash.",
+      "",
+      "`parity` is null: gate 4j has no config file by design (F1 §1.1). `validate` is absent",
+      "rather than null because validate-site reads no policy file at all today; declaring a key",
+      "for it would be config nothing reads, which is the M-4 defect this manifest exists to end."
+    ],
+    "dir": "i18n-gates",
+    "gates": {
+      "headings": "4f-headings.json",
+      "anchors": "4g-anchors.json",
+      "seams": "4h-seams.json",
+      "glossary": "4i-glossary.json",
+      "parity": null
+    }
   }
 }

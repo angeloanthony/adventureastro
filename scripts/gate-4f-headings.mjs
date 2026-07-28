@@ -37,35 +37,16 @@ import { resolveHost } from './lib/host-adapter.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
-const CONFIG = join(root, 'i18n-gates', '4f-headings.json');
 
-// Missing config is exit 2, never a silent pass — the ja UI-chrome fail-open
-// lesson (handoff §7, Gate 4a): that locale shipped 57 pages of English chrome
-// precisely because an absent dictionary degraded quietly instead of failing.
-if (!existsSync(CONFIG)) {
-  console.error(`gate-4f: config not found at ${relative(root, CONFIG)} — refusing to pass silently.`);
-  process.exit(2);
-}
-if (!existsSync(dist)) {
-  console.error('gate-4f: dist/ not found — this gate reads rendered output; run astro build first.');
-  process.exit(2);
-}
-
-let config;
-try {
-  config = JSON.parse(readFileSync(CONFIG, 'utf8'));
-} catch (e) {
-  console.error(`gate-4f: config is not valid JSON — ${e.message}`);
-  process.exit(2);
-}
-
-// --- Registered locales come from the host adapter, so a new language cannot reach
-//     production without either a marker list or a deliberate exit 2.
+// --- Registered locales AND policy both come from the host adapter.
 //
-//     F4 Phase 1: the regex that used to live here — /LOCALES\s*=\s*\[…\]\s*as const/
-//     over src/lib/i18n.ts — was one of three byte-identical copies. Where the registry
-//     lives and how it is written is host shape, and this gate is no longer permitted
-//     to know either. ---
+//     F4 Phase 1 removed the regex that used to find LOCALES here — one of three
+//     byte-identical copies of /LOCALES\s*=\s*\[…\]\s*as const/ over src/lib/i18n.ts.
+//     F5 Phase 2 removed the other half: CONFIG was join(root, 'i18n-gates', …) with
+//     root = the FRAMEWORK repository, so this gate pointed at another host's dist/
+//     applied adventureastro's marker lexicon to a foreign corpus. Wrong answer, no
+//     crash. Neither where the registry lives nor where policy lives is this gate's
+//     business now, and there is no default policy to fall back to. ---
 let host;
 try {
   host = resolveHost();
@@ -73,13 +54,34 @@ try {
   console.error(`gate-4f: ${e.message}`);
   process.exit(2);
 }
+
+// Missing config is exit 2, never a silent pass — the ja UI-chrome fail-open
+// lesson (handoff §7, Gate 4a): that locale shipped 57 pages of English chrome
+// precisely because an absent dictionary degraded quietly instead of failing.
+let config;
+try {
+  config = host.policy.load('headings');
+} catch (e) {
+  console.error(
+    e.kind === 'invalid'
+      ? `gate-4f: config ${e.message}`
+      : `gate-4f: config ${e.message} — refusing to pass silently.`
+  );
+  process.exit(2);
+}
+
+if (!existsSync(dist)) {
+  console.error('gate-4f: dist/ not found — this gate reads rendered output; run astro build first.');
+  process.exit(2);
+}
+
 const LOCALE_CODES = host.localeCodes;
 const DEFAULT_LOCALE = host.defaultLocale;
 const TARGETS = host.targets;
 
 for (const loc of TARGETS) {
   if (!config.locales?.[loc]) {
-    console.error(`gate-4f: locale "${loc}" is registered by the host but has no entry in ${relative(root, CONFIG)} — refusing to pass silently.`);
+    console.error(`gate-4f: locale "${loc}" is registered by the host but has no entry in ${host.policy.describe('headings')} — refusing to pass silently.`);
     process.exit(2);
   }
 }
@@ -169,7 +171,7 @@ if (blocking.length) {
   for (const f of blocking) console.error(render(f));
   console.error(
     'Localize the heading, or — if it is a proper noun or a locked programme name —\n' +
-      `add it to "licensed" in ${relative(root, CONFIG).split(sep).join('/')}.\n`
+      `add it to "licensed" in ${host.policy.describe('headings')}.\n`
   );
   process.exit(1);
 }

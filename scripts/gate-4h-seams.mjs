@@ -35,28 +35,42 @@ import { createRenderIndex } from './lib/render-index.mjs';
 import { resolveHost } from './lib/host-adapter.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const CONFIG = join(root, 'i18n-gates', '4h-seams.json');
 // An explicit dist path lets the gate be exercised against a scratch corpus
 // without touching the repository (P36 phase 6). Defaults to ./dist.
 const dist = process.argv[2] ? resolve(process.argv[2]) : join(root, 'dist');
 
-// Missing inputs are exit 2, never a silent pass — the ja UI-chrome fail-open
-// lesson (handoff §7, Gate 4a): that locale shipped 57 pages of English chrome
-// precisely because an absent dictionary degraded quietly instead of failing.
-if (!existsSync(CONFIG)) {
-  console.error(`gate-4h: config not found at ${relative(root, CONFIG)} — refusing to pass silently.`);
-  process.exit(2);
-}
-if (!existsSync(dist)) {
-  console.error('gate-4h: dist/ not found — this gate reads rendered output; run astro build first.');
+// --- F5 Phase 2: policy comes from the host manifest, not from a path this gate
+//     computes. Before this, CONFIG was join(root, 'i18n-gates', …) with root = the
+//     FRAMEWORK repository, so pointing this gate at another host's dist/ applied
+//     adventureastro's seam rules to a foreign corpus — silently, and with a wrong
+//     answer rather than a crash. This gate can now only read the policy its host
+//     declares, and there is no default to fall back to. ---
+let host;
+try {
+  host = resolveHost();
+} catch (e) {
+  console.error(`gate-4h: ${e.message}`);
   process.exit(2);
 }
 
+// Missing inputs are exit 2, never a silent pass — the ja UI-chrome fail-open
+// lesson (handoff §7, Gate 4a): that locale shipped 57 pages of English chrome
+// precisely because an absent dictionary degraded quietly instead of failing.
 let config;
 try {
-  config = JSON.parse(readFileSync(CONFIG, 'utf8'));
+  config = host.policy.load('seams');
 } catch (e) {
-  console.error(`gate-4h: config is not valid JSON — ${e.message}`);
+  // `kind` chooses the sentence shape; the rendered path is already in `e.message`.
+  console.error(
+    e.kind === 'invalid'
+      ? `gate-4h: config ${e.message}`
+      : `gate-4h: config ${e.message} — refusing to pass silently.`
+  );
+  process.exit(2);
+}
+
+if (!existsSync(dist)) {
+  console.error('gate-4h: dist/ not found — this gate reads rendered output; run astro build first.');
   process.exit(2);
 }
 
@@ -65,14 +79,7 @@ try {
 //
 //     F4 Phase 1: the last of the three byte-identical regex copies. Where the registry
 //     lives and how it is written is host shape, and this gate is no longer permitted
-//     to know either. ---
-let host;
-try {
-  host = resolveHost();
-} catch (e) {
-  console.error(`gate-4h: ${e.message}`);
-  process.exit(2);
-}
+//     to know either. Resolved once, above, alongside the policy it governs. ---
 const LOCALE_CODES = host.localeCodes;
 const DEFAULT_LOCALE = host.defaultLocale;
 const TARGETS = host.targets;

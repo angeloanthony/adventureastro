@@ -193,6 +193,13 @@ export function validateManifest(manifest, label = MANIFEST_FILENAME) {
  * Read and validate the manifest. `manifestPath` overrides the default location so the
  * manifest can be exercised against a scratch instance without touching the repository —
  * the same affordance gates 4g and 4i already expose through `--i18n`.
+ *
+ * Returns `{ manifest, manifestDir, label }`. `manifestDir` is load-bearing: every host
+ * artifact resolves relative to THE MANIFEST'S OWN LOCATION, never to the framework's.
+ * Before F5 Phase 2 the adapter joined declared paths onto the framework root, so a
+ * manifest loaded from another repository still addressed adventureastro. That is the
+ * same silent wrong-answer failure as C-3, one layer up, and it is why the caller is
+ * given the directory rather than left to assume one.
  */
 export function loadManifest({ manifestPath } = {}) {
   const file = manifestPath ? resolve(manifestPath) : join(root, MANIFEST_FILENAME);
@@ -209,7 +216,7 @@ export function loadManifest({ manifestPath } = {}) {
     throw new HostManifestError(`${label} is not valid JSON — ${e.message}`);
   }
 
-  return validateManifest(raw, label);
+  return { manifest: validateManifest(raw, label), manifestDir: dirname(file), label };
 }
 
 export const __testing = { root };
