@@ -1,6 +1,9 @@
 # F5 Phase 3 — Census Contract & Policy Schema
 
-**Status: DESIGN ONLY. No code was written, no gate was changed, no config was edited.** Read after
+**Status: RATIFIED. `phrase-count` IMPLEMENTED at F5 Phase 4; `marker-lexicon` specified but not
+built.** See §4.5, "AS IMPLEMENTED", for the four places the shipped producer departs from the design
+below — including the withdrawal of §7's policy→census edge. Originally written as design only: no
+code, no gate change, no config edit. Read after
 [F1](./F1-architecture.md) and [F2](./F2-architecture-decisions.md). Every measurement below was taken
 from the working tree at `723e71a` (clean), with all five gates green.
 
@@ -242,6 +245,29 @@ counts carry no masking today (M-14: 2 `licensedIn` entries, both on forbidden t
 needs a mask in its key. If a masked baseline is ever required, **the mask set joins the key** — it must
 never become an unkeyed transformation of the value.
 
+### 4.5 AS IMPLEMENTED — F5 Phase 4, `phrase-count`
+
+The contract above is the DESIGN. Four things differ in what shipped, and one deliverable was
+deliberately withheld. Each is a decision, not drift; none widened the schema.
+
+| Designed | Shipped | Why |
+|---|---|---|
+| **Census reads authored policy as input** (§7, "the one edge that surprises") — it must consult the lock registry to know which phrases to count | **The phrase set is an explicit `--phrases` argument. The census reads no policy at all.** | The edge is unnecessary, and the second host proves it: `forebearfindastro` has no `i18n-gates/` and its phrases are still perfectly countable. WHERE an operator got a phrase list is not the producer's business, and making it so is the one thing that would stop the tool being portable. **The contract is narrowed, not widened.** §7's `census ◀── reads policy as INPUT` edge is withdrawn. |
+| Corpus location resolved from the manifest | **`--dist` is a required operator argument** | The census is the first framework artifact that needs to know where rendered output lives — manifest §3 `routes.output`, coupling C-2, which adventureastro does not declare yet. The alternatives were to teach the producer to compute a host path (C-1 reintroduced) or to widen the manifest in a phase forbidden from touching it. Recorded rather than resolved: **`routes.output` is the first thing the C-2 phase should land.** |
+| `provenance.invocation` | Shipped as designed, **verbatim** | Implementation shows it carries whatever paths the operator typed, so a census produced with absolute paths is machine-specific and will diff against the same census produced elsewhere — defeating the review method §9 exists to support. The fix is a **usage rule, not a schema change**: produce with host-relative arguments. A producer that rewrote its own provenance would be a producer that lies about how it was run. |
+| `extractor` per fact | Shipped as designed, **with a recorded hole** | `'visibleText@1'` is a constant in the producer, while the view it names lives in `scripts/lib/rendered-text.mjs`. A change to the view that forgets to bump the string leaves stale counts undetectable — precisely the staleness the field exists to catch. The version belongs beside the view; it moves there when a second version exists to move it for. |
+
+**The sample census was produced but not committed.** `census/phrase-count.json` has no reader: the
+manifest `census` section (§8.1) is out of scope for Phase 4, and no consumer has been migrated. A
+committed artifact that nothing reads and nothing addresses is the M-4 defect this contract exists to
+end, so the 51-fact adventureastro census and the 35-fact `forebearfindastro` census live in the phase's
+scratchpad. Committing them is one command once §8.1 lands.
+
+**What the implementation confirmed rather than changed:** D-1 collapses exactly as designed. The
+single measured fact `{zh, 官方渠道核实, prose} = 982` reproduces both `4h.expected` and `4i.count`, and
+`{ja, 公式情報をご確認ください, prose} = 940` supplies the row 4i never had. All 52 frozen baselines
+(4 exact counts, 46 floors, 2 seam cores) are reproduced by the producer with no re-baselining.
+
 ---
 
 ## 5. Minimal canonical examples
@@ -360,10 +386,15 @@ decisions the gate reads, not artifacts the census would generate.
      census ──▶ CI                     regeneration destroys the freeze (ADR-3)
 ```
 
-**The one edge that surprises.** Census **reads** authored policy: it cannot count a phrase nobody has
-locked, and it must consult `refusals.json` before proposing anything. That direction is required and
-safe. The reverse — census writing policy — is the boundary, and it is the whole reason proposals are a
-human-readable report rather than a committed artifact (§11).
+⚠ **The `census ◀── reads policy` edge above was WITHDRAWN at F5 Phase 4.** The design reasoned that
+the census must consult the lock registry to know what to count. Implementation showed the phrase set
+is better supplied as an argument, and the second host settles it: `forebearfindastro` has no policy
+directory at all, and its phrases count perfectly. The producer reads **no policy**, and the graph is
+one edge simpler than drawn. The only surviving policy-adjacent obligation is the refusal ledger, which
+`--propose` must consult — and no proposer has been built. See §4.5.
+
+The reverse direction — census writing policy — was never in doubt, and is the whole reason proposals
+are a human-readable report rather than a committed artifact (§11).
 
 ---
 

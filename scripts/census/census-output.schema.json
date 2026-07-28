@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "astro-localization-gates/schemas/census-output.schema.json",
+  "title": "Census output (F5 Phase 3 contract)",
+
+  "$comment": [
+    "THE CENSUS PRODUCES FACTS. A fact is a function from a declared key to a measured",
+    "value, plus the evidence that produced it. It never produces diagnostics, gate",
+    "findings, policy decisions or localization judgments.",
+    "",
+    "The admission test for any new `kind`: can it be named without naming a gate, and",
+    "can its value be recomputed from the corpus alone? `marker-lexicon` and",
+    "`phrase-count` pass. A `seam-baseline` fails the first; a `licensed-phrase` fails",
+    "the second.",
+    "",
+    "This schema declares BOTH v1 kinds. F5 Phase 4 implements only `phrase-count`;",
+    "`marker-lexicon` is blocked on the manifest `state` migration, because deriving a",
+    "marker lexicon from a corpus that has not been reviewed self-excludes the tokens of",
+    "the defects already in it. Declaring the full contract while shipping one producer",
+    "follows the manifest precedent (schema complete, instance minimal) — the schema is a",
+    "contract, and a contract that grows per implementation is not one.",
+    "",
+    "UNKNOWN KEYS ARE REJECTED, NOT IGNORED, everywhere. A typo'd key that silently does",
+    "nothing is the `nonBoundaries` defect (F2 M-4) reproduced in the contract layer."
+  ],
+
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["censusVersion", "provenance", "facts"],
+
+  "properties": {
+    "$schema": { "type": "string" },
+
+    "censusVersion": {
+      "const": 1,
+      "$comment": "The OUTPUT SCHEMA version. Refused forward and backward — an engine that guesses at an unknown version applies the wrong contract silently. Distinct from the per-fact `extractor` version and from the corpus fingerprint; see the three axes in F5-census-contract.md §9."
+    },
+
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["measuredAt", "manifest", "corpus", "engine", "invocation"],
+      "properties": {
+        "measuredAt": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+          "$comment": "An explicit argument, never a wall clock. A census that embeds Date.now() cannot be diffed, and diffing regenerated output against committed output is the only review method that scales."
+        },
+        "manifest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "$comment": "Hash of the CANONICALIZED manifest object, not of the file bytes: the contract is what was resolved, not how it was formatted."
+        },
+        "corpus": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["pages", "fingerprint"],
+          "properties": {
+            "pages": {
+              "type": "object",
+              "additionalProperties": { "type": "integer", "minimum": 0 },
+              "$comment": "Pages walked, per locale. Locales with no rendered pages are absent rather than zero — the census reports what it measured."
+            },
+            "fingerprint": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+          }
+        },
+        "engine": { "type": "string", "minLength": 1 },
+        "invocation": { "type": "string", "minLength": 1 }
+      }
+    },
+
+    "facts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/fact" },
+      "$comment": "Sorted by kind, then by key, in code-unit order. Determinism is the contract: same corpus + same manifest + same census version => byte-identical output."
+    }
+  },
+
+  "$defs": {
+    "fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "key", "value", "extractor", "evidence"],
+      "properties": {
+        "kind": { "enum": ["phrase-count", "marker-lexicon"] },
+        "key": { "type": "object" },
+        "value": {},
+        "extractor": {
+          "type": "string",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9]*@[0-9]+$",
+          "$comment": "The render-index view that produced the value, versioned. PER FACT, not per file: a phrase-count from visibleText@1 and a marker-lexicon from headings@1 go stale under different conditions. A value whose extractor version the engine does not recognize cannot be compared and is exit 2."
+        },
+        "evidence": { "type": "object" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "kind": { "const": "phrase-count" } } },
+          "then": { "$ref": "#/$defs/phraseCount" }
+        },
+        {
+          "if": { "properties": { "kind": { "const": "marker-lexicon" } } },
+          "then": { "$ref": "#/$defs/markerLexicon" }
+        }
+      ]
+    },
+
+    "phraseCount": {
+      "properties": {
+        "key": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["locale", "phrase", "surface"],
+          "properties": {
+            "locale": { "type": "string", "pattern": "^[a-z]{2}(-[A-Za-z0-9]+)*$" },
+            "phrase": { "type": "string", "minLength": 1 },
+            "surface": { "enum": ["prose"] }
+          }
+        },
+        "value": {
+          "type": "integer",
+          "minimum": 0,
+          "$comment": "Non-overlapping occurrences across the locale's rendered pages. UNMASKED: which compounds license a term is a decision, applied by the consumer at read time. If a masked baseline is ever needed, the mask set joins the KEY — it must never become an unkeyed transformation of the value."
+        },
+        "evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["pages", "pagesWithPhrase"],
+          "properties": {
+            "pages": { "type": "integer", "minimum": 0 },
+            "pagesWithPhrase": { "type": "integer", "minimum": 0 }
+          }
+        }
+      }
+    },
+
+    "markerLexicon": {
+      "$comment": "Declared, not yet produced. Blocked on the manifest `state` migration (F5-census-contract.md §10 F-1).",
+      "properties": {
+        "key": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["locale", "surface", "polarity"],
+          "properties": {
+            "locale": { "type": "string", "pattern": "^[a-z]{2}(-[A-Za-z0-9]+)*$" },
+            "surface": { "enum": ["headings", "anchors"] },
+            "polarity": { "enum": ["english-absent", "target-present"] }
+          }
+        },
+        "value": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["referenceTokens", "occurrenceThreshold", "localeTokens", "pages"],
+          "properties": {
+            "referenceTokens": { "type": "integer", "minimum": 0 },
+            "occurrenceThreshold": { "type": "integer", "minimum": 1 },
+            "localeTokens": { "type": "integer", "minimum": 0 },
+            "pages": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } }
+          }
+        }
+      }
+    }
+  }
+}
