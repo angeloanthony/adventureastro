@@ -19,6 +19,12 @@
 import { SITE } from '../../config/site';
 import { getLangFromUrl, localeHref } from '../../lib/i18n';
 import { t } from '../../lib/ui';
+// AR-2 B-2. The footer phone is the second of the two runs the census measured still bare
+// on the Arabic page. All three `phoneDisplay` sites below are migrated, not just the one
+// that renders there today: they are one shared source rendered by three branches of one
+// component, and isolating the measured branch alone would leave the other two to be
+// rediscovered the first time a different Arabic page picks a different footer variant.
+import Bidi from '../Bidi.astro';
 
 interface LinkItem { href: string; label: string; class?: string }
 interface FooterColumn { heading: string; links: LinkItem[] }
@@ -119,7 +125,7 @@ const phoneHref = contactConfig && contactConfig.phoneFormat === 'plus' ? SITE.p
 {variant === 'compact' ? (
   <footer style="background:var(--charcoal);color:rgba(255,255,255,0.6);text-align:center;padding:30px 20px;font-size:0.9rem;">
     <p>&copy; 2026 {SITE.name} &middot; <a href={fh('privacy-policy')} style="color:var(--burnt-orange);">{t('nav.privacyPolicy', lang)}</a> &middot; <a href={fh('cancellation-policy')} style="color:var(--burnt-orange);">{t('nav.cancellationPolicy', lang)}</a></p>
-    <p style="margin-top:8px;">{`${SITE.address.street}, ${SITE.address.city}, ${SITE.address.region} ${SITE.address.postalCode}`} &middot; <a href={SITE.phoneHrefDash} style="color:var(--burnt-orange);">{SITE.phoneDisplay}</a></p>
+    <p style="margin-top:8px;">{`${SITE.address.street}, ${SITE.address.city}, ${SITE.address.region} ${SITE.address.postalCode}`} &middot; <a href={SITE.phoneHrefDash} style="color:var(--burnt-orange);"><Bidi>{SITE.phoneDisplay}</Bidi></a></p>
   </footer>
 ) : (
   <footer>
@@ -130,7 +136,7 @@ const phoneHref = contactConfig && contactConfig.phoneFormat === 'plus' ? SITE.p
         </div>
         <p>{tagline}</p>
         {brandPhone && (
-          <div class="footer-phone-highlight"><a href={SITE.phoneHrefPlus} class="footer-phone-link">&#128222; {SITE.phoneDisplay}</a></div>
+          <div class="footer-phone-highlight"><a href={SITE.phoneHrefPlus} class="footer-phone-link">&#128222; <Bidi>{SITE.phoneDisplay}</Bidi></a></div>
         )}
         {showSocial && (
           <div class="social-links">
@@ -164,7 +170,7 @@ const phoneHref = contactConfig && contactConfig.phoneFormat === 'plus' ? SITE.p
           <h4>{contactConfig.heading}</h4>
           <p>&#128205; {`${contactConfig.showStreet ? `${SITE.address.street}, ` : ''}${SITE.address.city}, ${SITE.address.region === 'UT' ? 'Utah' : SITE.address.region} ${SITE.address.postalCode}`}</p>
           <p class="footer-phone-highlight">
-            <a href={phoneHref} class="footer-phone-link">&#128222; {SITE.phoneDisplay}</a>
+            <a href={phoneHref} class="footer-phone-link">&#128222; <Bidi>{SITE.phoneDisplay}</Bidi></a>
           </p>
           <p>&#9993;&#65039; {contactConfig.emailAsLink ? <a href={`mailto:${SITE.email}`}>{SITE.email}</a> : SITE.email}</p>
           {contactConfig.showHours && <p>&#8987; {SITE.hoursDisplay}</p>}

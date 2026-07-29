@@ -7,6 +7,11 @@
 // identically on nested hub/spoke routes.
 import { SITE } from '../../config/site';
 import LanguageSwitcher from './LanguageSwitcher.astro';
+// AR-2 B-2. The nav phone is one of the two runs the census measured still bare on the
+// Arabic page: `(435) 219-9447` carries two Bidi_Mirrored brackets, and this text node
+// has no Arabic in it at all — the hazard comes from <html dir="rtl">, not from what is
+// next to it. Isolation is the formatter's decision, never this component's.
+import Bidi from '../Bidi.astro';
 import { getLangFromUrl, localeHref } from '../../lib/i18n';
 import { t } from '../../lib/ui';
 
@@ -47,7 +52,7 @@ const bookingHref = nav('booking');
           <li><a href={nav('guides/what-to-bring')} class:list={[{ active: active === 'what-to-bring' }]}>{t('nav.whatToBring', lang)}</a></li>
         </ul>
       </li>
-      <li><a href={SITE.phoneHrefDash} class="nav-phone">&#128222; {SITE.phoneDisplay}</a></li>
+      <li><a href={SITE.phoneHrefDash} class="nav-phone">&#128222; <Bidi>{SITE.phoneDisplay}</Bidi></a></li>
       <LanguageSwitcher />
       <li><a href={bookingHref} class="nav-book-btn">{t('cta.bookNow', lang)}</a></li>
     </ul>

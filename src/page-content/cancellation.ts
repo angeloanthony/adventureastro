@@ -2,6 +2,11 @@
 // truth for this page's body; rendered via set:html. Spanish variant
 // added P3A (formal "usted").
 import { DEFAULT_LOCALE } from '../lib/i18n';
+// AR-2 B-2. AR-1 authored these five isolations by hand, which is the one thing the
+// formatter invariant forbids a caller to do. Migrating them changes no rendered byte —
+// the helpers emit exactly the same markup — and moves the DECISION out of the corpus,
+// where a translator editing Arabic prose would otherwise be the person maintaining it.
+import { phoneDisplay, currencyDisplay, brandRun } from '../lib/bidi';
 
 export const bodyHtml = `
 
@@ -1437,7 +1442,7 @@ const AR = `
      PAGE SUMMARY BLOCK — feeds Google AI Overviews
      ================================================ -->
 <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
-  سياسة الإلغاء لدى Adventure Tours Vernal لجولات UTV بصحبة مرشد في Vernal بولاية يوتا. الإلغاء قبل 72 ساعة أو أكثر يمنحك استرداداً كاملاً. الإلغاء قبل أقل من 72 ساعة يمنحك 50٪. الإلغاء قبل أقل من 48 ساعة لا يمنحك أي استرداد. لأي استفسار اتصل على <bdi>(435) 219-9447</bdi>.
+  سياسة الإلغاء لدى Adventure Tours Vernal لجولات UTV بصحبة مرشد في Vernal بولاية يوتا. الإلغاء قبل 72 ساعة أو أكثر يمنحك استرداداً كاملاً. الإلغاء قبل أقل من 72 ساعة يمنحك 50٪. الإلغاء قبل أقل من 48 ساعة لا يمنحك أي استرداد. لأي استفسار اتصل على ${phoneDisplay('(435) 219-9447')}.
 </p>
 
 <section class="policy-section">
@@ -1482,7 +1487,7 @@ const AR = `
       <div class="policy-card">
         <div class="policy-icon">🌦️</div>
         <h2 class="policy-heading">سياسة الأحوال الجوية</h2>
-        <p>نُسيّر جولاتنا في الشمس والمطر على حد سواء. أما في حالات الطقس القاسي، أو إذا اضطرت <bdi>Adventure Tours Vernal</bdi> إلى الإلغاء لظروف أخرى خارجة عن إرادتها، فيحق لك إعادة الجدولة أو استرداد المبلغ كاملاً.</p>
+        <p>نُسيّر جولاتنا في الشمس والمطر على حد سواء. أما في حالات الطقس القاسي، أو إذا اضطرت ${brandRun('Adventure Tours Vernal')} إلى الإلغاء لظروف أخرى خارجة عن إرادتها، فيحق لك إعادة الجدولة أو استرداد المبلغ كاملاً.</p>
         <p><strong>مهم:</strong> إذا اخترت عدم المشاركة بسبب المطر، تُطبَّق سياسة الإلغاء المعتادة على الاسترداد. أما إذا ألغينا نحن بسبب طقس قاسٍ، فتسترد المبلغ كاملاً.</p>
       </div>
 
@@ -1516,7 +1521,7 @@ const AR = `
 
         <div class="deductible-info">
           <h3>معلومات مبلغ التحمّل:</h3>
-          <p>بتوقيعك على إقرار جولاتنا المصحوبة بمرشد تصبح سائقاً مشمولاً بتأمين المسؤولية لدينا، وفقاً لجميع شروط الوثيقة وأحكامها. وتتضمن هذه التغطية <strong>مبلغ تحمّل قدره <bdi>$1,000</bdi> لكل حادث</strong>، أي أنك توافق على دفع <bdi>$1,000</bdi> لنا وقت الحادث إذا تعرضت لحادث مع أي شخص أو مركبة أو ممتلكات أخرى، بصرف النظر عن المسؤولية عن الحادث.</p>
+          <p>بتوقيعك على إقرار جولاتنا المصحوبة بمرشد تصبح سائقاً مشمولاً بتأمين المسؤولية لدينا، وفقاً لجميع شروط الوثيقة وأحكامها. وتتضمن هذه التغطية <strong>مبلغ تحمّل قدره ${currencyDisplay('$1,000')} لكل حادث</strong>، أي أنك توافق على دفع ${currencyDisplay('$1,000')} لنا وقت الحادث إذا تعرضت لحادث مع أي شخص أو مركبة أو ممتلكات أخرى، بصرف النظر عن المسؤولية عن الحادث.</p>
         </div>
       </div>
 
@@ -1590,7 +1595,7 @@ const AR = `
         <h3>لديك أسئلة حول سياستنا؟</h3>
         <p>إذا كانت لديك أي أسئلة حول سياسة الإلغاء أو الشروط، فلا تتردد في التواصل معنا قبل الحجز.</p>
         <div class="cta-buttons">
-          <a href="tel:435-219-9447" class="cta-button primary">📞 اتصل على <bdi>(435) 219-9447</bdi></a>
+          <a href="tel:435-219-9447" class="cta-button primary">📞 اتصل على ${phoneDisplay('(435) 219-9447')}</a>
           <a href="/booking/" class="cta-button secondary">احجز جولتك</a>
         </div>
       </div>
