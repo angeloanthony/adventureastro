@@ -491,7 +491,7 @@ ${HOME_CAROUSEL_JS}
           <span class="highlight">10% Off</span> Lodging
         </div>
         <p class="bw-badge-detail">
-          Book at <strong>Best Western Vernal</strong> &mdash; mention <strong>&ldquo;Adventure Tours&rdquo;</strong> when you call.
+          Book at <strong>Best Western Vernal</strong> &mdash; use discount code <strong>&ldquo;rocco&rdquo;</strong> when you book.
         </p>
         <div class="bw-badge-cta-row">
           <span class="bw-badge-button">Book Lodging &rarr;</span>
@@ -947,7 +947,7 @@ ${HOME_CAROUSEL_JS}
           <span class="highlight">10% de Descuento</span> en Hospedaje
         </div>
         <p class="bw-badge-detail">
-          Reserve en <strong>Best Western Vernal</strong> &mdash; mencione <strong>&ldquo;Adventure Tours&rdquo;</strong> al llamar.
+          Reserve en <strong>Best Western Vernal</strong> &mdash; use el código de descuento <strong>&ldquo;rocco&rdquo;</strong> al reservar.
         </p>
         <div class="bw-badge-cta-row">
           <span class="bw-badge-button">Reserve Hospedaje &rarr;</span>
@@ -1403,7 +1403,7 @@ ${HOME_CAROUSEL_JS}
           <span class="highlight">10% di Sconto</span> sull'Alloggio
         </div>
         <p class="bw-badge-detail">
-          Prenoti presso <strong>Best Western Vernal</strong> &mdash; menzioni <strong>&ldquo;Adventure Tours&rdquo;</strong> quando chiama.
+          Prenoti presso <strong>Best Western Vernal</strong> &mdash; usi il codice sconto <strong>&ldquo;rocco&rdquo;</strong> al momento della prenotazione.
         </p>
         <div class="bw-badge-cta-row">
           <span class="bw-badge-button">Prenoti l'Alloggio &rarr;</span>
@@ -1859,7 +1859,7 @@ ${HOME_CAROUSEL_JS}
           <span class="highlight">10% de Desconto</span> em Alojamento
         </div>
         <p class="bw-badge-detail">
-          Reserva no <strong>Best Western Vernal</strong> &mdash; menciona <strong>&ldquo;Adventure Tours&rdquo;</strong> quando ligares.
+          Reserva no <strong>Best Western Vernal</strong> &mdash; usa o código de desconto <strong>&ldquo;rocco&rdquo;</strong> ao reservares.
         </p>
         <div class="bw-badge-cta-row">
           <span class="bw-badge-button">Reserva Alojamento &rarr;</span>
@@ -2315,7 +2315,7 @@ ${HOME_CAROUSEL_JS}
           <span class="highlight">10% de Réduction</span> sur l'Hébergement
         </div>
         <p class="bw-badge-detail">
-          Réservez chez <strong>Best Western Vernal</strong> &mdash; mentionnez <strong>&ldquo;Adventure Tours&rdquo;</strong> lors de votre appel.
+          Réservez chez <strong>Best Western Vernal</strong> &mdash; utilisez le code de réduction <strong>&ldquo;rocco&rdquo;</strong> lors de votre réservation.
         </p>
         <div class="bw-badge-cta-row">
           <span class="bw-badge-button">Réservez l'Hébergement &rarr;</span>
@@ -2771,7 +2771,7 @@ ${HOME_CAROUSEL_JS}
           <span class="highlight">10% Rabatt</span> auf Unterkunft
         </div>
         <p class="bw-badge-detail">
-          Buche im <strong>Best Western Vernal</strong> &mdash; erwähne <strong>"Adventure Tours"</strong>, wenn du anrufst.
+          Buche im <strong>Best Western Vernal</strong> &mdash; nutze den Rabattcode <strong>"rocco"</strong>, wenn du buchst.
         </p>
         <div class="bw-badge-cta-row">
           <span class="bw-badge-button">Unterkunft buchen &rarr;</span>
@@ -3227,7 +3227,7 @@ ${HOME_CAROUSEL_JS}
           <span class="highlight">10%オフ</span> 宿泊料金
         </div>
         <p class="bw-badge-detail">
-          ご予約は<strong>Best Western Vernal</strong>へ &mdash; お電話の際に<strong>&ldquo;Adventure Tours&rdquo;</strong>とお伝えください。
+          ご予約は<strong>Best Western Vernal</strong>へ &mdash; ご予約の際に割引コード<strong>&ldquo;rocco&rdquo;</strong>をご利用ください。
         </p>
         <div class="bw-badge-cta-row">
           <span class="bw-badge-button">宿泊を予約する &rarr;</span>
@@ -3683,7 +3683,7 @@ ${HOME_CAROUSEL_JS}
           <span class="highlight">10% 优惠</span> 住宿
         </div>
         <p class="bw-badge-detail">
-          在 <strong>Best Western Vernal</strong> 预订 &mdash; 来电时请提及 <strong>&ldquo;Adventure Tours&rdquo;</strong>。
+          在 <strong>Best Western Vernal</strong> 预订 &mdash; 预订时请使用优惠码 <strong>&ldquo;rocco&rdquo;</strong>。
         </p>
         <div class="bw-badge-cta-row">
           <span class="bw-badge-button">预订住宿 &rarr;</span>
