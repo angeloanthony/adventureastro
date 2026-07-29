@@ -9,7 +9,7 @@
 // CSS change. Every href points to an EXISTING page and each link is unique.
 // Styling mirrors the site's existing cards via the same CSS variable TourCta
 // uses, with a hard-coded fallback.
-import { getLangFromUrl, localeHref } from '../../lib/i18n';
+import { affordanceArrow, getLangFromUrl, localeHref } from '../../lib/i18n';
 import { t } from '../../lib/ui';
 
 interface Props {
@@ -52,14 +52,14 @@ const ROUTES = [
     {ROUTES.map((r) => (
       <li class="gr-card">
         <a class="gr-link" href={r.href}>
-          <span class="gr-city">{r.city} <span class="gr-arrow" aria-hidden="true">→</span></span>
+          <span class="gr-city">{r.city} <span class="gr-arrow" aria-hidden="true">{affordanceArrow(lang)}</span></span>
           <span class="gr-note">{r.note}</span>
         </a>
       </li>
     ))}
   </ul>
   {showHubLink && (
-    <p class="gr-hub"><a href={localeHref('itineraries', lang)}>{t('gateway.seeAllItineraries', lang)} &rarr;</a></p>
+    <p class="gr-hub"><a href={localeHref('itineraries', lang)}>{t('gateway.seeAllItineraries', lang)} {affordanceArrow(lang)}</a></p>
   )}
 </section>
 

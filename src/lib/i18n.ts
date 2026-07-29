@@ -85,6 +85,32 @@ export function isRtl(code: string): boolean {
 }
 
 /**
+ * The arrow for a UI affordance meaning ONWARD — "read on", "book this", "see
+ * all". It follows the locale's reading direction, so it points right in ltr and
+ * left in rtl.
+ *
+ * WHY THIS EXISTS AT ALL (AR-2 B-6). `→` is `Bidi_Mirrored=No`: unlike the 1,004
+ * `›` chevrons on this site, the bidi algorithm will NOT flip it, so an affordance
+ * written as a literal glyph keeps pointing at the start of the line in Arabic —
+ * i.e. backwards. It has to be chosen, and this is the one place that chooses it.
+ *
+ * IT IS NOT A TRANSLATION, so it does not live in the `ui.ts` dictionaries. It is
+ * derived from `dir` and nothing else, which is why it sits beside `isRtl()`:
+ * direction is decided in the registry above and read here, and a component that
+ * branched on a locale CODE to pick a glyph would be a second source of truth for
+ * the same fact. Registering another rtl locale must be enough to make every
+ * affordance on the site point the right way; see ADR-9.
+ *
+ * NOT EVERY ARROW IS ONE OF THESE. "Vernal → Flaming Gorge" relates two places;
+ * it is body content whose rtl behaviour is a bidi-isolation question about the
+ * runs around it, not a glyph choice. Gate 4o enforces exactly this split and
+ * gate 4n judges the other half — do not route content arrows through here.
+ */
+export function affordanceArrow(code: string): '→' | '←' {
+  return isRtl(code) ? '←' : '→';
+}
+
+/**
  * Detect the active locale from a URL path.
  * '/es/hiking/' -> 'es'; '/hiking/' -> 'en' (default, unprefixed).
  */

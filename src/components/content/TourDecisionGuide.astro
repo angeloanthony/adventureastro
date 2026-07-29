@@ -9,7 +9,7 @@
 //
 // Styling mirrors the site's existing cards (burnt-orange accents, rounded
 // corners) via the same CSS variables TourCta uses, with hard-coded fallbacks.
-import { getLangFromUrl, localeHref } from '../../lib/i18n';
+import { affordanceArrow, getLangFromUrl, localeHref } from '../../lib/i18n';
 import { t } from '../../lib/ui';
 
 interface Props {
@@ -42,7 +42,7 @@ const CHOICES = [
       <li class="tdg-card">
         <a class="tdg-link" href={c.href}>
           <span class="tdg-q">{c.q}</span>
-          <span class="tdg-a">{c.a} <span class="tdg-arrow" aria-hidden="true">→</span></span>
+          <span class="tdg-a">{c.a} <span class="tdg-arrow" aria-hidden="true">{affordanceArrow(lang)}</span></span>
         </a>
       </li>
     ))}
