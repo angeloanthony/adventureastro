@@ -281,6 +281,25 @@ that shape. Deferred from AR-1 because it changes rendered bytes on all 620 page
 
 ## Layout and mirroring *(from the RTL audit)*
 
+> **Track B brief, 2026-07-28: [`AR2-TrackB-brief.md`](AR2-TrackB-brief.md).** Separates
+> detection (done — `rtl-inventory.mjs`) from policy promotion (open, and the real work) from
+> browser verification (blocked on a *surface*, not on a browser). Two findings change the
+> sizing of everything below:
+>
+> **(1) All three items render on ZERO rtl routes today.** The one Arabic route is a policy
+> page: 0 arrows, 0 gradients, 0 carousel, 0 `box-physical`, and its single `left:` is the
+> direction-neutral `-9999px` clip. `home.ts` has no `AR` block. So there is nothing to
+> browser-verify yet, every item is prospective, and the backlog's own sequencing (§7,
+> "expansion comes only after Track B") is circular as written — the fixes need a populated
+> RTL surface that only expansion creates. The brief's §5 resolves it by generalizing B-1's
+> substitution test: flip `de` to `dir:'rtl'`, rebuild, get 77 populated RTL routes, revert.
+>
+> **(2) `mirror-required` is not a work list.** 472 source hits, but `gradient-directional`
+> (216, `135deg` colour washes ×8 locale blocks) and `rotate` (13, symmetric glyphs) are
+> decoration the classifier cannot distinguish from the real ones. Real population ≈ **243**.
+> Promoting the audit to blocking as it stands is a 48% false-positive gate — the ADR-10
+> situation again. Fourth instance of the recorded-size-is-a-hypothesis lesson.
+
 ### B-5 — Carousel is direction-blind *(R-1, R-2)*
 
 16 sliders (`home.ts` × 8 locale blocks, `utv.ts` × 8) drive
