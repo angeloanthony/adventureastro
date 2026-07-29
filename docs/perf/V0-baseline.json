@@ -1,0 +1,252 @@
+{
+  "$doc": [
+    "V-1 phase V-0 item 5 — the LABORATORY baseline. Machine-written; do not hand-edit.",
+    "Regenerate with: node scripts/perf/page-weight.mjs --measured-at YYYY-MM-DD --out <path>",
+    "",
+    "Deterministic and reproducible: same build in, same numbers out. It measures what the",
+    "repository can prove — bytes in the file, elements in the DOM, requests the page issues",
+    "without interaction. It CANNOT measure transfer size of referenced resources: a YouTube",
+    "player is several hundred KB to a few MB and none of it lives in dist/.",
+    "",
+    "The FIELD baseline — LCP, CLS, INP, Lighthouse, PSI — is the other half, is collected",
+    "by hand against a deployed site, and is recorded in docs/perf/V1-video-facade.md §6.2.",
+    "Neither substitutes for the other: this one is the regression target, that one is",
+    "contextual evidence.",
+    "",
+    "READ FIRST in any post-migration diff: youtube.playerBootstraps. That is the count of",
+    "players booted with no user interaction, and driving it toward zero is the point of V-1."
+  ],
+  "measuredAt": "2026-07-28",
+  "focusPages": {
+    "index.html": {
+      "htmlBytes": 70021,
+      "domElements": 741,
+      "inlineScriptBytes": 15992,
+      "inlineStyleBytes": 0,
+      "requests": {
+        "total": 118,
+        "sameOrigin": 108,
+        "thirdParty": 10
+      },
+      "thirdPartyHosts": [
+        "fonts.googleapis.com",
+        "img.youtube.com",
+        "player.vimeo.com",
+        "www.googletagmanager.com",
+        "www.nps.gov",
+        "www.youtube.com"
+      ],
+      "youtube": {
+        "playerBootstraps": 5,
+        "thumbnails": 1,
+        "distinctVideos": 5
+      }
+    },
+    "zh/index.html": {
+      "htmlBytes": 71199,
+      "domElements": 741,
+      "inlineScriptBytes": 16047,
+      "inlineStyleBytes": 0,
+      "requests": {
+        "total": 118,
+        "sameOrigin": 108,
+        "thirdParty": 10
+      },
+      "thirdPartyHosts": [
+        "fonts.googleapis.com",
+        "img.youtube.com",
+        "player.vimeo.com",
+        "www.googletagmanager.com",
+        "www.nps.gov",
+        "www.youtube.com"
+      ],
+      "youtube": {
+        "playerBootstraps": 5,
+        "thumbnails": 1,
+        "distinctVideos": 5
+      }
+    },
+    "about/index.html": {
+      "htmlBytes": 30753,
+      "domElements": 294,
+      "inlineScriptBytes": 8023,
+      "inlineStyleBytes": 538,
+      "requests": {
+        "total": 14,
+        "sameOrigin": 5,
+        "thirdParty": 9
+      },
+      "thirdPartyHosts": [
+        "fonts.googleapis.com",
+        "www.googletagmanager.com",
+        "www.youtube.com"
+      ],
+      "youtube": {
+        "playerBootstraps": 7,
+        "thumbnails": 0,
+        "distinctVideos": 7
+      }
+    },
+    "zh/about/index.html": {
+      "htmlBytes": 31085,
+      "domElements": 294,
+      "inlineScriptBytes": 8023,
+      "inlineStyleBytes": 538,
+      "requests": {
+        "total": 14,
+        "sameOrigin": 5,
+        "thirdParty": 9
+      },
+      "thirdPartyHosts": [
+        "fonts.googleapis.com",
+        "www.googletagmanager.com",
+        "www.youtube.com"
+      ],
+      "youtube": {
+        "playerBootstraps": 7,
+        "thumbnails": 0,
+        "distinctVideos": 7
+      }
+    },
+    "utv/index.html": {
+      "htmlBytes": 46460,
+      "domElements": 465,
+      "inlineScriptBytes": 7912,
+      "inlineStyleBytes": 3040,
+      "requests": {
+        "total": 32,
+        "sameOrigin": 6,
+        "thirdParty": 26
+      },
+      "thirdPartyHosts": [
+        "fonts.googleapis.com",
+        "www.googletagmanager.com",
+        "www.youtube.com"
+      ],
+      "youtube": {
+        "playerBootstraps": 24,
+        "thumbnails": 0,
+        "distinctVideos": 21
+      }
+    },
+    "zh/utv/index.html": {
+      "htmlBytes": 47827,
+      "domElements": 465,
+      "inlineScriptBytes": 7946,
+      "inlineStyleBytes": 3040,
+      "requests": {
+        "total": 32,
+        "sameOrigin": 6,
+        "thirdParty": 26
+      },
+      "thirdPartyHosts": [
+        "fonts.googleapis.com",
+        "www.googletagmanager.com",
+        "www.youtube.com"
+      ],
+      "youtube": {
+        "playerBootstraps": 24,
+        "thumbnails": 0,
+        "distinctVideos": 21
+      }
+    },
+    "guides/moab-utv-tours/index.html": {
+      "htmlBytes": 39819,
+      "domElements": 433,
+      "inlineScriptBytes": 10772,
+      "inlineStyleBytes": 2480,
+      "requests": {
+        "total": 7,
+        "sameOrigin": 4,
+        "thirdParty": 3
+      },
+      "thirdPartyHosts": [
+        "fonts.googleapis.com",
+        "www.googletagmanager.com",
+        "www.youtube.com"
+      ],
+      "youtube": {
+        "playerBootstraps": 1,
+        "thumbnails": 0,
+        "distinctVideos": 1
+      }
+    },
+    "zh/guides/moab-utv-tours/index.html": {
+      "htmlBytes": 41498,
+      "domElements": 433,
+      "inlineScriptBytes": 10962,
+      "inlineStyleBytes": 2480,
+      "requests": {
+        "total": 7,
+        "sameOrigin": 4,
+        "thirdParty": 3
+      },
+      "thirdPartyHosts": [
+        "fonts.googleapis.com",
+        "www.googletagmanager.com",
+        "www.youtube.com"
+      ],
+      "youtube": {
+        "playerBootstraps": 1,
+        "thumbnails": 0,
+        "distinctVideos": 1
+      }
+    }
+  },
+  "site": {
+    "pages": 620,
+    "htmlBytes": 42324504,
+    "domElements": 313766,
+    "inlineScriptBytes": 8267804,
+    "requests": 4803,
+    "thirdPartyRequests": 1560,
+    "youtubePlayerBootstraps": 296,
+    "pagesWithVideo": 32,
+    "thirdPartyHosts": [
+      "fonts.googleapis.com",
+      "img.youtube.com",
+      "player.vimeo.com",
+      "www.googletagmanager.com",
+      "www.nps.gov",
+      "www.youtube.com"
+    ]
+  },
+  "perLocale": {
+    "en": {
+      "pages": 80,
+      "youtubePlayerBootstraps": 37
+    },
+    "ar": {
+      "pages": 1,
+      "youtubePlayerBootstraps": 0
+    },
+    "de": {
+      "pages": 77,
+      "youtubePlayerBootstraps": 37
+    },
+    "es": {
+      "pages": 77,
+      "youtubePlayerBootstraps": 37
+    },
+    "fr": {
+      "pages": 77,
+      "youtubePlayerBootstraps": 37
+    },
+    "it": {
+      "pages": 77,
+      "youtubePlayerBootstraps": 37
+    },
+    "ja": {
+      "pages": 77,
+      "youtubePlayerBootstraps": 37
+    },
+    "pt": {
+      "pages": 77,
+      "youtubePlayerBootstraps": 37
+    },
+    "zh": {
+      "pages": 77,
+      "youtubePlayerBootstraps": 37
+    }
+  }
+}
