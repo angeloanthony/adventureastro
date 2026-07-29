@@ -53,7 +53,7 @@ byte-identical to `rtl-inventory.mjs`, so the sub-totals reconcile exactly:
 | class | raw | sites | action |
 |---|---:|---:|---|
 | `not-css` | 3 | 3 | **no work** — census artifact |
-| `dead-superseded` | 1 | 1 | **no work** — already zeroed by the `*` reset (§4.3) |
+| `fails-ownership-probe` | 5 | 5 | **no work** — dead code or redundant (§5.2) |
 | `symmetric-both-edges` | 58 | 30 | **no work** — mirroring is a no-op |
 | `symmetric-full-bleed` | 17 | 17 | **no work** — mirroring is a no-op |
 | `symmetric-centering` | 14 | 14 | **no work** — mirroring is a no-op |
@@ -73,12 +73,12 @@ byte-identical to `rtl-inventory.mjs`, so the sub-totals reconcile exactly:
 | action | declarations |
 |---|---:|
 | no work — census artifact | 3 |
-| no work — dead declaration | 1 |
+| no work — fails the ownership probe (§5.2) | 5 |
 | no work — symmetric | **95** |
 | keep physical by decision | 10 |
 | owner decision — **excluded from the sweep** | 5 |
 | convert, only with B-5b | 4 |
-| **convert** | **65** |
+| **convert** | **61** |
 
 `sites` deduplicates by selector + declaration: `convert-edge-anchored` is 35 raw
 but 14 sites because three of its declarations are the eight byte-identical
@@ -269,6 +269,68 @@ the phase's own headline example. What it buys is the demonstration that the
 classification is falsifiable at all: five predictions held under measurement and
 one did not, and the one that did not was the one argued most confidently. A
 classification nobody can check is a longer census.
+
+---
+
+### 5.2 The ownership probe — a third filter, and a harness that had to be disproved first
+
+The classification says a declaration *should* be logical. §4.3 showed that is a
+different question from whether it *does* anything. So every convertible
+declaration went through a third filter:
+
+| stage | question |
+|---|---|
+| census | does a candidate exist? |
+| classification | should it be logical or physical? |
+| **ownership probe** | **does this declaration decide the rendered result?** |
+
+**Method — intervention, not cascade reasoning.** Blank the declaration in the
+live stylesheet over CDP, re-measure computed style and geometry, restore. If
+nothing moves, the declaration does not own the result. B-1's substitution logic
+applied to CSS: prove causation by removing the cause.
+
+**Result: 5 of 66 do not survive.**
+
+| declaration | why it fails | evidence |
+|---|---|---|
+| `.crowd-col.moab-col { border-right: 3px }` | markup exists nowhere | 0 of 620 dist pages, 0 in `src/` |
+| `@1024 .crowd-col.moab-col { border-right: none }` | same | same |
+| `.arch-text .highlight-quote { border-left: 4px }` | same | same |
+| `.policy-list ul { padding-left: 0 }` | redundant (§4.3) | removing it: `0px → 0px` |
+| `.lang-menu { right: 0 }` | redundant **in RTL** | removing it: `0px → 0px`, box unmoved |
+
+The three orphans also retire §4.4: the `border-radius` companion on
+`.arch-text .highlight-quote` was a correct observation about a rule that renders
+on no page, and the `.crowd-col.moab-col` media-override pairing from §5.1 goes
+with it. **Two of this phase's four "not mechanical" findings turned out to
+concern dead code.**
+
+⚠ `.lang-menu { right: 0 }` was measured **on the Arabic page only**, where the
+element's static position happens to coincide with `right: 0`. It may own on the
+eight LTR locales, so it stays in the sweep pending an LTR measurement.
+**Ownership can be direction-dependent — a verdict from one document direction is
+not a global verdict.**
+
+**⚠ The harness produced 18 false "dead" verdicts, and only a control caught it.**
+A batched probe — one CDP session, many declarations — reported 18 dead.
+Re-testing each with a single-declaration harness in a fresh process showed
+**16 of the 18 actually own their result**: `.carousel-prev` `20px → 0px`,
+`.dropdown-menu` `0 → -147px`, `.logo@768` `15px → 20px`, `.policy-list
+li::before` `0 → 794px`, `.comparison-table thead th` `left → center`, and so on.
+Four structural fixes — longer settle, one page load per candidate, sheet
+resolved from the element's own matched rules, recycling the CSS agent — changed
+nothing; only the fresh process did. The root cause is unidentified, so the
+batched runner is **retired, not fixed**.
+
+The lesson is not about CDP. A measurement harness is an instrument, and an
+unchecked instrument is not evidence:
+
+> A probe that reports "no effect" must first be shown capable of reporting
+> "effect". Run the positive control *before* trusting any negative result.
+
+Believing the batched run would have dropped 16 live declarations from the sweep
+as dead code — including every carousel anchor and the checkmark bullet visibly
+broken in §5.1's own screenshot.
 
 ---
 
