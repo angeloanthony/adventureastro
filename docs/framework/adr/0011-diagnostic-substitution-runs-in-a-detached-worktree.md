@@ -128,9 +128,55 @@ B-5a baseline) without interfering with each other or with the primary tree.
 accumulate silently — `git worktree list` is the only thing that shows them, and a
 stale one holds a `HEAD` reference. Dispose deliberately.
 
+⚠ **Disposal order matters on Windows: remove the junction first.**
+`git worktree remove --force` fails on the `node_modules` junction with
+`failed to delete …: Invalid argument`, and it fails **partway** — the checkout is
+already gone and the registry entry is stale, so a second `remove` then reports
+`is not a working tree`. Recovery is `git worktree prune` followed by `rm -rf`. The
+clean sequence:
+
+```
+cmd /c rmdir <worktree>\node_modules     # removes the link, never the target
+git worktree remove --force <worktree>
+```
+
+`rmdir` on a junction does not follow it. Verify the real `node_modules` survived
+before doing anything else — this is the one step in the technique that can damage the
+primary tree.
+
 **Neutral.** A worktree sees the same `node_modules` through the junction, so a
 diagnostic cannot test a dependency change. Nothing here needs that; a diagnostic that
 did would need a real install.
+
+### 5.1 ⚠ A worktree checkout may not be byte-identical to the primary tree
+
+Found while landing B-5a, and it will bite anyone who compares build output *across*
+trees rather than within one.
+
+`.gitattributes` here is `* text=auto`, so the repository stores LF and a checkout
+converts. **`git worktree add` performed that conversion; the primary working copy
+never had it.** Measured on the same commit:
+
+| file | primary tree | worktree checkout |
+|---|---:|---:|
+| `src/page-content/home.ts` | 246,171 B, **0** CR | 250,308 B, **4,137** CR |
+| `src/page-content/utv.ts` | 181,255 B, **0** CR | 184,457 B, **3,202** CR |
+
+Content identical after stripping CR; every line differs before. This matters more
+than a cosmetic diff, because these files are **template literals whose newlines are
+part of the emitted string** — the inline `<script>` blocks carry their line endings
+into `dist`. So a worktree build and a primary-tree build of the same commit produce
+HTML that differs in exactly those bytes.
+
+**The rule that follows: a byte-identity proof must be a *within-tree* before/after.**
+B-5a's was (baseline and after both built in the worktree, 858 files, 0 differences),
+so it stands. Comparing a worktree `dist` against a primary-tree `dist` would have
+produced thousands of spurious differences and no real signal.
+
+Corollary for landing the change: verify the transform *itself* transfers, rather than
+re-running the proof. Applying the same script to the primary tree and asserting
+`tr -d '\r' < worktree-file == primary-file` shows the identical edit was made without
+pretending the two trees' bytes are comparable.
 
 ---
 

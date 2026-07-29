@@ -16,6 +16,71 @@ import { SITE } from "../config/site";
 import { DEFAULT_LOCALE } from "../lib/i18n";
 import { renderGallery } from "./home-gallery";
 
+// The homepage carousel, hoisted out of the eight locale blocks (B-5a).
+// Byte-identical in all eight before this change and interpolated verbatim
+// now, so the rendered output is unchanged — the same proof P31 used for
+// the gallery. Direction handling is B-5b: this constant is the single
+// place the transform sign, the ArrowLeft/ArrowRight mapping and the swipe
+// sign will be made direction-aware.
+const HOME_CAROUSEL_JS = `    class Carousel {
+      constructor() {
+        this.track = document.querySelector('.carousel-track');
+        this.slides = Array.from(document.querySelectorAll('.carousel-slide'));
+        this.prevBtn = document.querySelector('.carousel-prev');
+        this.nextBtn = document.querySelector('.carousel-next');
+        this.indicatorsContainer = document.querySelector('.carousel-indicators');
+        this.currentIndex = 0;
+        this.autoPlayInterval = null;
+        this.isTransitioning = false;
+        this.init();
+      }
+      init() {
+        this.createIndicators();
+        this.prevBtn.addEventListener('click', () => this.prevSlide());
+        this.nextBtn.addEventListener('click', () => this.nextSlide());
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft') this.prevSlide();
+          if (e.key === 'ArrowRight') this.nextSlide();
+        });
+        this.addTouchSupport();
+        this.startAutoPlay();
+        this.track.parentElement.parentElement.addEventListener('mouseenter', () => this.stopAutoPlay());
+        this.track.parentElement.parentElement.addEventListener('mouseleave', () => this.startAutoPlay());
+      }
+      createIndicators() {
+        this.slides.forEach((_, index) => {
+          const indicator = document.createElement('button');
+          indicator.classList.add('carousel-indicator');
+          if (index === 0) indicator.classList.add('active');
+          indicator.addEventListener('click', () => this.goToSlide(index));
+          this.indicatorsContainer.appendChild(indicator);
+        });
+        this.indicators = Array.from(this.indicatorsContainer.querySelectorAll('.carousel-indicator'));
+      }
+      updateCarousel() {
+        if (this.isTransitioning) return;
+        this.isTransitioning = true;
+        this.track.style.transform = \`translateX(-\${this.currentIndex * 100}%)\`;
+        this.slides.forEach((slide, index) => slide.classList.toggle('active', index === this.currentIndex));
+        this.indicators.forEach((indicator, index) => indicator.classList.toggle('active', index === this.currentIndex));
+        setTimeout(() => { this.isTransitioning = false; }, 500);
+      }
+      nextSlide() { this.currentIndex = (this.currentIndex + 1) % this.slides.length; this.updateCarousel(); }
+      prevSlide() { this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length; this.updateCarousel(); }
+      goToSlide(index) { this.currentIndex = index; this.updateCarousel(); }
+      startAutoPlay() { this.autoPlayInterval = setInterval(() => this.nextSlide(), 5000); }
+      stopAutoPlay() { if (this.autoPlayInterval) { clearInterval(this.autoPlayInterval); this.autoPlayInterval = null; } }
+      addTouchSupport() {
+        let touchStartX = 0;
+        this.track.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
+        this.track.addEventListener('touchend', (e) => {
+          const diff = touchStartX - e.changedTouches[0].screenX;
+          if (Math.abs(diff) > 50) diff > 0 ? this.nextSlide() : this.prevSlide();
+        });
+      }
+    }
+    if (document.querySelector('.carousel-track')) new Carousel();`;
+
 export const bodyHtml = `
 
   <!-- AI Summary Block -->
@@ -375,64 +440,7 @@ ${renderGallery("en")}
     });
 
     // Carousel
-    class Carousel {
-      constructor() {
-        this.track = document.querySelector('.carousel-track');
-        this.slides = Array.from(document.querySelectorAll('.carousel-slide'));
-        this.prevBtn = document.querySelector('.carousel-prev');
-        this.nextBtn = document.querySelector('.carousel-next');
-        this.indicatorsContainer = document.querySelector('.carousel-indicators');
-        this.currentIndex = 0;
-        this.autoPlayInterval = null;
-        this.isTransitioning = false;
-        this.init();
-      }
-      init() {
-        this.createIndicators();
-        this.prevBtn.addEventListener('click', () => this.prevSlide());
-        this.nextBtn.addEventListener('click', () => this.nextSlide());
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowLeft') this.prevSlide();
-          if (e.key === 'ArrowRight') this.nextSlide();
-        });
-        this.addTouchSupport();
-        this.startAutoPlay();
-        this.track.parentElement.parentElement.addEventListener('mouseenter', () => this.stopAutoPlay());
-        this.track.parentElement.parentElement.addEventListener('mouseleave', () => this.startAutoPlay());
-      }
-      createIndicators() {
-        this.slides.forEach((_, index) => {
-          const indicator = document.createElement('button');
-          indicator.classList.add('carousel-indicator');
-          if (index === 0) indicator.classList.add('active');
-          indicator.addEventListener('click', () => this.goToSlide(index));
-          this.indicatorsContainer.appendChild(indicator);
-        });
-        this.indicators = Array.from(this.indicatorsContainer.querySelectorAll('.carousel-indicator'));
-      }
-      updateCarousel() {
-        if (this.isTransitioning) return;
-        this.isTransitioning = true;
-        this.track.style.transform = \`translateX(-\${this.currentIndex * 100}%)\`;
-        this.slides.forEach((slide, index) => slide.classList.toggle('active', index === this.currentIndex));
-        this.indicators.forEach((indicator, index) => indicator.classList.toggle('active', index === this.currentIndex));
-        setTimeout(() => { this.isTransitioning = false; }, 500);
-      }
-      nextSlide() { this.currentIndex = (this.currentIndex + 1) % this.slides.length; this.updateCarousel(); }
-      prevSlide() { this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length; this.updateCarousel(); }
-      goToSlide(index) { this.currentIndex = index; this.updateCarousel(); }
-      startAutoPlay() { this.autoPlayInterval = setInterval(() => this.nextSlide(), 5000); }
-      stopAutoPlay() { if (this.autoPlayInterval) { clearInterval(this.autoPlayInterval); this.autoPlayInterval = null; } }
-      addTouchSupport() {
-        let touchStartX = 0;
-        this.track.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
-        this.track.addEventListener('touchend', (e) => {
-          const diff = touchStartX - e.changedTouches[0].screenX;
-          if (Math.abs(diff) > 50) diff > 0 ? this.nextSlide() : this.prevSlide();
-        });
-      }
-    }
-    if (document.querySelector('.carousel-track')) new Carousel();
+${HOME_CAROUSEL_JS}
 
     // Floating video
     function closeFloatingVideo() {
@@ -888,64 +896,7 @@ ${renderGallery("es")}
     });
 
     // Carousel
-    class Carousel {
-      constructor() {
-        this.track = document.querySelector('.carousel-track');
-        this.slides = Array.from(document.querySelectorAll('.carousel-slide'));
-        this.prevBtn = document.querySelector('.carousel-prev');
-        this.nextBtn = document.querySelector('.carousel-next');
-        this.indicatorsContainer = document.querySelector('.carousel-indicators');
-        this.currentIndex = 0;
-        this.autoPlayInterval = null;
-        this.isTransitioning = false;
-        this.init();
-      }
-      init() {
-        this.createIndicators();
-        this.prevBtn.addEventListener('click', () => this.prevSlide());
-        this.nextBtn.addEventListener('click', () => this.nextSlide());
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowLeft') this.prevSlide();
-          if (e.key === 'ArrowRight') this.nextSlide();
-        });
-        this.addTouchSupport();
-        this.startAutoPlay();
-        this.track.parentElement.parentElement.addEventListener('mouseenter', () => this.stopAutoPlay());
-        this.track.parentElement.parentElement.addEventListener('mouseleave', () => this.startAutoPlay());
-      }
-      createIndicators() {
-        this.slides.forEach((_, index) => {
-          const indicator = document.createElement('button');
-          indicator.classList.add('carousel-indicator');
-          if (index === 0) indicator.classList.add('active');
-          indicator.addEventListener('click', () => this.goToSlide(index));
-          this.indicatorsContainer.appendChild(indicator);
-        });
-        this.indicators = Array.from(this.indicatorsContainer.querySelectorAll('.carousel-indicator'));
-      }
-      updateCarousel() {
-        if (this.isTransitioning) return;
-        this.isTransitioning = true;
-        this.track.style.transform = \`translateX(-\${this.currentIndex * 100}%)\`;
-        this.slides.forEach((slide, index) => slide.classList.toggle('active', index === this.currentIndex));
-        this.indicators.forEach((indicator, index) => indicator.classList.toggle('active', index === this.currentIndex));
-        setTimeout(() => { this.isTransitioning = false; }, 500);
-      }
-      nextSlide() { this.currentIndex = (this.currentIndex + 1) % this.slides.length; this.updateCarousel(); }
-      prevSlide() { this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length; this.updateCarousel(); }
-      goToSlide(index) { this.currentIndex = index; this.updateCarousel(); }
-      startAutoPlay() { this.autoPlayInterval = setInterval(() => this.nextSlide(), 5000); }
-      stopAutoPlay() { if (this.autoPlayInterval) { clearInterval(this.autoPlayInterval); this.autoPlayInterval = null; } }
-      addTouchSupport() {
-        let touchStartX = 0;
-        this.track.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
-        this.track.addEventListener('touchend', (e) => {
-          const diff = touchStartX - e.changedTouches[0].screenX;
-          if (Math.abs(diff) > 50) diff > 0 ? this.nextSlide() : this.prevSlide();
-        });
-      }
-    }
-    if (document.querySelector('.carousel-track')) new Carousel();
+${HOME_CAROUSEL_JS}
 
     // Floating video
     function closeFloatingVideo() {
@@ -1401,64 +1352,7 @@ ${renderGallery("it")}
     });
 
     // Carousel
-    class Carousel {
-      constructor() {
-        this.track = document.querySelector('.carousel-track');
-        this.slides = Array.from(document.querySelectorAll('.carousel-slide'));
-        this.prevBtn = document.querySelector('.carousel-prev');
-        this.nextBtn = document.querySelector('.carousel-next');
-        this.indicatorsContainer = document.querySelector('.carousel-indicators');
-        this.currentIndex = 0;
-        this.autoPlayInterval = null;
-        this.isTransitioning = false;
-        this.init();
-      }
-      init() {
-        this.createIndicators();
-        this.prevBtn.addEventListener('click', () => this.prevSlide());
-        this.nextBtn.addEventListener('click', () => this.nextSlide());
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowLeft') this.prevSlide();
-          if (e.key === 'ArrowRight') this.nextSlide();
-        });
-        this.addTouchSupport();
-        this.startAutoPlay();
-        this.track.parentElement.parentElement.addEventListener('mouseenter', () => this.stopAutoPlay());
-        this.track.parentElement.parentElement.addEventListener('mouseleave', () => this.startAutoPlay());
-      }
-      createIndicators() {
-        this.slides.forEach((_, index) => {
-          const indicator = document.createElement('button');
-          indicator.classList.add('carousel-indicator');
-          if (index === 0) indicator.classList.add('active');
-          indicator.addEventListener('click', () => this.goToSlide(index));
-          this.indicatorsContainer.appendChild(indicator);
-        });
-        this.indicators = Array.from(this.indicatorsContainer.querySelectorAll('.carousel-indicator'));
-      }
-      updateCarousel() {
-        if (this.isTransitioning) return;
-        this.isTransitioning = true;
-        this.track.style.transform = \`translateX(-\${this.currentIndex * 100}%)\`;
-        this.slides.forEach((slide, index) => slide.classList.toggle('active', index === this.currentIndex));
-        this.indicators.forEach((indicator, index) => indicator.classList.toggle('active', index === this.currentIndex));
-        setTimeout(() => { this.isTransitioning = false; }, 500);
-      }
-      nextSlide() { this.currentIndex = (this.currentIndex + 1) % this.slides.length; this.updateCarousel(); }
-      prevSlide() { this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length; this.updateCarousel(); }
-      goToSlide(index) { this.currentIndex = index; this.updateCarousel(); }
-      startAutoPlay() { this.autoPlayInterval = setInterval(() => this.nextSlide(), 5000); }
-      stopAutoPlay() { if (this.autoPlayInterval) { clearInterval(this.autoPlayInterval); this.autoPlayInterval = null; } }
-      addTouchSupport() {
-        let touchStartX = 0;
-        this.track.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
-        this.track.addEventListener('touchend', (e) => {
-          const diff = touchStartX - e.changedTouches[0].screenX;
-          if (Math.abs(diff) > 50) diff > 0 ? this.nextSlide() : this.prevSlide();
-        });
-      }
-    }
-    if (document.querySelector('.carousel-track')) new Carousel();
+${HOME_CAROUSEL_JS}
 
     // Floating video
     function closeFloatingVideo() {
@@ -1914,64 +1808,7 @@ ${renderGallery("pt")}
     });
 
     // Carousel
-    class Carousel {
-      constructor() {
-        this.track = document.querySelector('.carousel-track');
-        this.slides = Array.from(document.querySelectorAll('.carousel-slide'));
-        this.prevBtn = document.querySelector('.carousel-prev');
-        this.nextBtn = document.querySelector('.carousel-next');
-        this.indicatorsContainer = document.querySelector('.carousel-indicators');
-        this.currentIndex = 0;
-        this.autoPlayInterval = null;
-        this.isTransitioning = false;
-        this.init();
-      }
-      init() {
-        this.createIndicators();
-        this.prevBtn.addEventListener('click', () => this.prevSlide());
-        this.nextBtn.addEventListener('click', () => this.nextSlide());
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowLeft') this.prevSlide();
-          if (e.key === 'ArrowRight') this.nextSlide();
-        });
-        this.addTouchSupport();
-        this.startAutoPlay();
-        this.track.parentElement.parentElement.addEventListener('mouseenter', () => this.stopAutoPlay());
-        this.track.parentElement.parentElement.addEventListener('mouseleave', () => this.startAutoPlay());
-      }
-      createIndicators() {
-        this.slides.forEach((_, index) => {
-          const indicator = document.createElement('button');
-          indicator.classList.add('carousel-indicator');
-          if (index === 0) indicator.classList.add('active');
-          indicator.addEventListener('click', () => this.goToSlide(index));
-          this.indicatorsContainer.appendChild(indicator);
-        });
-        this.indicators = Array.from(this.indicatorsContainer.querySelectorAll('.carousel-indicator'));
-      }
-      updateCarousel() {
-        if (this.isTransitioning) return;
-        this.isTransitioning = true;
-        this.track.style.transform = \`translateX(-\${this.currentIndex * 100}%)\`;
-        this.slides.forEach((slide, index) => slide.classList.toggle('active', index === this.currentIndex));
-        this.indicators.forEach((indicator, index) => indicator.classList.toggle('active', index === this.currentIndex));
-        setTimeout(() => { this.isTransitioning = false; }, 500);
-      }
-      nextSlide() { this.currentIndex = (this.currentIndex + 1) % this.slides.length; this.updateCarousel(); }
-      prevSlide() { this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length; this.updateCarousel(); }
-      goToSlide(index) { this.currentIndex = index; this.updateCarousel(); }
-      startAutoPlay() { this.autoPlayInterval = setInterval(() => this.nextSlide(), 5000); }
-      stopAutoPlay() { if (this.autoPlayInterval) { clearInterval(this.autoPlayInterval); this.autoPlayInterval = null; } }
-      addTouchSupport() {
-        let touchStartX = 0;
-        this.track.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
-        this.track.addEventListener('touchend', (e) => {
-          const diff = touchStartX - e.changedTouches[0].screenX;
-          if (Math.abs(diff) > 50) diff > 0 ? this.nextSlide() : this.prevSlide();
-        });
-      }
-    }
-    if (document.querySelector('.carousel-track')) new Carousel();
+${HOME_CAROUSEL_JS}
 
     // Floating video
     function closeFloatingVideo() {
@@ -2427,64 +2264,7 @@ ${renderGallery("fr")}
     });
 
     // Carousel
-    class Carousel {
-      constructor() {
-        this.track = document.querySelector('.carousel-track');
-        this.slides = Array.from(document.querySelectorAll('.carousel-slide'));
-        this.prevBtn = document.querySelector('.carousel-prev');
-        this.nextBtn = document.querySelector('.carousel-next');
-        this.indicatorsContainer = document.querySelector('.carousel-indicators');
-        this.currentIndex = 0;
-        this.autoPlayInterval = null;
-        this.isTransitioning = false;
-        this.init();
-      }
-      init() {
-        this.createIndicators();
-        this.prevBtn.addEventListener('click', () => this.prevSlide());
-        this.nextBtn.addEventListener('click', () => this.nextSlide());
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowLeft') this.prevSlide();
-          if (e.key === 'ArrowRight') this.nextSlide();
-        });
-        this.addTouchSupport();
-        this.startAutoPlay();
-        this.track.parentElement.parentElement.addEventListener('mouseenter', () => this.stopAutoPlay());
-        this.track.parentElement.parentElement.addEventListener('mouseleave', () => this.startAutoPlay());
-      }
-      createIndicators() {
-        this.slides.forEach((_, index) => {
-          const indicator = document.createElement('button');
-          indicator.classList.add('carousel-indicator');
-          if (index === 0) indicator.classList.add('active');
-          indicator.addEventListener('click', () => this.goToSlide(index));
-          this.indicatorsContainer.appendChild(indicator);
-        });
-        this.indicators = Array.from(this.indicatorsContainer.querySelectorAll('.carousel-indicator'));
-      }
-      updateCarousel() {
-        if (this.isTransitioning) return;
-        this.isTransitioning = true;
-        this.track.style.transform = \`translateX(-\${this.currentIndex * 100}%)\`;
-        this.slides.forEach((slide, index) => slide.classList.toggle('active', index === this.currentIndex));
-        this.indicators.forEach((indicator, index) => indicator.classList.toggle('active', index === this.currentIndex));
-        setTimeout(() => { this.isTransitioning = false; }, 500);
-      }
-      nextSlide() { this.currentIndex = (this.currentIndex + 1) % this.slides.length; this.updateCarousel(); }
-      prevSlide() { this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length; this.updateCarousel(); }
-      goToSlide(index) { this.currentIndex = index; this.updateCarousel(); }
-      startAutoPlay() { this.autoPlayInterval = setInterval(() => this.nextSlide(), 5000); }
-      stopAutoPlay() { if (this.autoPlayInterval) { clearInterval(this.autoPlayInterval); this.autoPlayInterval = null; } }
-      addTouchSupport() {
-        let touchStartX = 0;
-        this.track.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
-        this.track.addEventListener('touchend', (e) => {
-          const diff = touchStartX - e.changedTouches[0].screenX;
-          if (Math.abs(diff) > 50) diff > 0 ? this.nextSlide() : this.prevSlide();
-        });
-      }
-    }
-    if (document.querySelector('.carousel-track')) new Carousel();
+${HOME_CAROUSEL_JS}
 
     // Floating video
     function closeFloatingVideo() {
@@ -2940,64 +2720,7 @@ ${renderGallery("de")}
     });
 
     // Carousel
-    class Carousel {
-      constructor() {
-        this.track = document.querySelector('.carousel-track');
-        this.slides = Array.from(document.querySelectorAll('.carousel-slide'));
-        this.prevBtn = document.querySelector('.carousel-prev');
-        this.nextBtn = document.querySelector('.carousel-next');
-        this.indicatorsContainer = document.querySelector('.carousel-indicators');
-        this.currentIndex = 0;
-        this.autoPlayInterval = null;
-        this.isTransitioning = false;
-        this.init();
-      }
-      init() {
-        this.createIndicators();
-        this.prevBtn.addEventListener('click', () => this.prevSlide());
-        this.nextBtn.addEventListener('click', () => this.nextSlide());
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowLeft') this.prevSlide();
-          if (e.key === 'ArrowRight') this.nextSlide();
-        });
-        this.addTouchSupport();
-        this.startAutoPlay();
-        this.track.parentElement.parentElement.addEventListener('mouseenter', () => this.stopAutoPlay());
-        this.track.parentElement.parentElement.addEventListener('mouseleave', () => this.startAutoPlay());
-      }
-      createIndicators() {
-        this.slides.forEach((_, index) => {
-          const indicator = document.createElement('button');
-          indicator.classList.add('carousel-indicator');
-          if (index === 0) indicator.classList.add('active');
-          indicator.addEventListener('click', () => this.goToSlide(index));
-          this.indicatorsContainer.appendChild(indicator);
-        });
-        this.indicators = Array.from(this.indicatorsContainer.querySelectorAll('.carousel-indicator'));
-      }
-      updateCarousel() {
-        if (this.isTransitioning) return;
-        this.isTransitioning = true;
-        this.track.style.transform = \`translateX(-\${this.currentIndex * 100}%)\`;
-        this.slides.forEach((slide, index) => slide.classList.toggle('active', index === this.currentIndex));
-        this.indicators.forEach((indicator, index) => indicator.classList.toggle('active', index === this.currentIndex));
-        setTimeout(() => { this.isTransitioning = false; }, 500);
-      }
-      nextSlide() { this.currentIndex = (this.currentIndex + 1) % this.slides.length; this.updateCarousel(); }
-      prevSlide() { this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length; this.updateCarousel(); }
-      goToSlide(index) { this.currentIndex = index; this.updateCarousel(); }
-      startAutoPlay() { this.autoPlayInterval = setInterval(() => this.nextSlide(), 5000); }
-      stopAutoPlay() { if (this.autoPlayInterval) { clearInterval(this.autoPlayInterval); this.autoPlayInterval = null; } }
-      addTouchSupport() {
-        let touchStartX = 0;
-        this.track.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
-        this.track.addEventListener('touchend', (e) => {
-          const diff = touchStartX - e.changedTouches[0].screenX;
-          if (Math.abs(diff) > 50) diff > 0 ? this.nextSlide() : this.prevSlide();
-        });
-      }
-    }
-    if (document.querySelector('.carousel-track')) new Carousel();
+${HOME_CAROUSEL_JS}
 
     // Floating video
     function closeFloatingVideo() {
@@ -3453,64 +3176,7 @@ ${renderGallery("ja")}
     });
 
     // Carousel
-    class Carousel {
-      constructor() {
-        this.track = document.querySelector('.carousel-track');
-        this.slides = Array.from(document.querySelectorAll('.carousel-slide'));
-        this.prevBtn = document.querySelector('.carousel-prev');
-        this.nextBtn = document.querySelector('.carousel-next');
-        this.indicatorsContainer = document.querySelector('.carousel-indicators');
-        this.currentIndex = 0;
-        this.autoPlayInterval = null;
-        this.isTransitioning = false;
-        this.init();
-      }
-      init() {
-        this.createIndicators();
-        this.prevBtn.addEventListener('click', () => this.prevSlide());
-        this.nextBtn.addEventListener('click', () => this.nextSlide());
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowLeft') this.prevSlide();
-          if (e.key === 'ArrowRight') this.nextSlide();
-        });
-        this.addTouchSupport();
-        this.startAutoPlay();
-        this.track.parentElement.parentElement.addEventListener('mouseenter', () => this.stopAutoPlay());
-        this.track.parentElement.parentElement.addEventListener('mouseleave', () => this.startAutoPlay());
-      }
-      createIndicators() {
-        this.slides.forEach((_, index) => {
-          const indicator = document.createElement('button');
-          indicator.classList.add('carousel-indicator');
-          if (index === 0) indicator.classList.add('active');
-          indicator.addEventListener('click', () => this.goToSlide(index));
-          this.indicatorsContainer.appendChild(indicator);
-        });
-        this.indicators = Array.from(this.indicatorsContainer.querySelectorAll('.carousel-indicator'));
-      }
-      updateCarousel() {
-        if (this.isTransitioning) return;
-        this.isTransitioning = true;
-        this.track.style.transform = \`translateX(-\${this.currentIndex * 100}%)\`;
-        this.slides.forEach((slide, index) => slide.classList.toggle('active', index === this.currentIndex));
-        this.indicators.forEach((indicator, index) => indicator.classList.toggle('active', index === this.currentIndex));
-        setTimeout(() => { this.isTransitioning = false; }, 500);
-      }
-      nextSlide() { this.currentIndex = (this.currentIndex + 1) % this.slides.length; this.updateCarousel(); }
-      prevSlide() { this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length; this.updateCarousel(); }
-      goToSlide(index) { this.currentIndex = index; this.updateCarousel(); }
-      startAutoPlay() { this.autoPlayInterval = setInterval(() => this.nextSlide(), 5000); }
-      stopAutoPlay() { if (this.autoPlayInterval) { clearInterval(this.autoPlayInterval); this.autoPlayInterval = null; } }
-      addTouchSupport() {
-        let touchStartX = 0;
-        this.track.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
-        this.track.addEventListener('touchend', (e) => {
-          const diff = touchStartX - e.changedTouches[0].screenX;
-          if (Math.abs(diff) > 50) diff > 0 ? this.nextSlide() : this.prevSlide();
-        });
-      }
-    }
-    if (document.querySelector('.carousel-track')) new Carousel();
+${HOME_CAROUSEL_JS}
 
     // Floating video
     function closeFloatingVideo() {
@@ -3966,64 +3632,7 @@ ${renderGallery("zh")}
     });
 
     // Carousel
-    class Carousel {
-      constructor() {
-        this.track = document.querySelector('.carousel-track');
-        this.slides = Array.from(document.querySelectorAll('.carousel-slide'));
-        this.prevBtn = document.querySelector('.carousel-prev');
-        this.nextBtn = document.querySelector('.carousel-next');
-        this.indicatorsContainer = document.querySelector('.carousel-indicators');
-        this.currentIndex = 0;
-        this.autoPlayInterval = null;
-        this.isTransitioning = false;
-        this.init();
-      }
-      init() {
-        this.createIndicators();
-        this.prevBtn.addEventListener('click', () => this.prevSlide());
-        this.nextBtn.addEventListener('click', () => this.nextSlide());
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowLeft') this.prevSlide();
-          if (e.key === 'ArrowRight') this.nextSlide();
-        });
-        this.addTouchSupport();
-        this.startAutoPlay();
-        this.track.parentElement.parentElement.addEventListener('mouseenter', () => this.stopAutoPlay());
-        this.track.parentElement.parentElement.addEventListener('mouseleave', () => this.startAutoPlay());
-      }
-      createIndicators() {
-        this.slides.forEach((_, index) => {
-          const indicator = document.createElement('button');
-          indicator.classList.add('carousel-indicator');
-          if (index === 0) indicator.classList.add('active');
-          indicator.addEventListener('click', () => this.goToSlide(index));
-          this.indicatorsContainer.appendChild(indicator);
-        });
-        this.indicators = Array.from(this.indicatorsContainer.querySelectorAll('.carousel-indicator'));
-      }
-      updateCarousel() {
-        if (this.isTransitioning) return;
-        this.isTransitioning = true;
-        this.track.style.transform = \`translateX(-\${this.currentIndex * 100}%)\`;
-        this.slides.forEach((slide, index) => slide.classList.toggle('active', index === this.currentIndex));
-        this.indicators.forEach((indicator, index) => indicator.classList.toggle('active', index === this.currentIndex));
-        setTimeout(() => { this.isTransitioning = false; }, 500);
-      }
-      nextSlide() { this.currentIndex = (this.currentIndex + 1) % this.slides.length; this.updateCarousel(); }
-      prevSlide() { this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length; this.updateCarousel(); }
-      goToSlide(index) { this.currentIndex = index; this.updateCarousel(); }
-      startAutoPlay() { this.autoPlayInterval = setInterval(() => this.nextSlide(), 5000); }
-      stopAutoPlay() { if (this.autoPlayInterval) { clearInterval(this.autoPlayInterval); this.autoPlayInterval = null; } }
-      addTouchSupport() {
-        let touchStartX = 0;
-        this.track.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
-        this.track.addEventListener('touchend', (e) => {
-          const diff = touchStartX - e.changedTouches[0].screenX;
-          if (Math.abs(diff) > 50) diff > 0 ? this.nextSlide() : this.prevSlide();
-        });
-      }
-    }
-    if (document.querySelector('.carousel-track')) new Carousel();
+${HOME_CAROUSEL_JS}
 
     // Floating video
     function closeFloatingVideo() {

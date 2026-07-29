@@ -9,6 +9,34 @@
 import { SITE } from '../config/site';
 import { DEFAULT_LOCALE } from '../lib/i18n';
 
+// The Doc's Beach carousel, hoisted out of the eight locale blocks (B-5a).
+// Byte-identical in all eight before this change. See home.ts for the pair;
+// this one has no keyboard or swipe handling, only the transform sign.
+const DOCS_BEACH_CAROUSEL_JS = `    // Doc's Beach Carousel
+    (function() {
+      var track = document.querySelector('.docs-beach-carousel-track');
+      var slides = document.querySelectorAll('.docs-beach-carousel-slide');
+      var dots = document.querySelectorAll('.docs-beach-dot');
+      var prevBtn = document.querySelector('.docs-beach-carousel-btn.prev');
+      var nextBtn = document.querySelector('.docs-beach-carousel-btn.next');
+      var current = 0;
+      var total = slides.length;
+
+      function goTo(index) {
+        current = (index + total) % total;
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        dots.forEach(function(d, i) {
+          d.classList.toggle('active', i === current);
+        });
+      }
+
+      prevBtn.addEventListener('click', function() { goTo(current - 1); });
+      nextBtn.addEventListener('click', function() { goTo(current + 1); });
+      dots.forEach(function(dot) {
+        dot.addEventListener('click', function() { goTo(parseInt(this.dataset.index)); });
+      });
+    })();`;
+
 export const bodyHtml = `
 
   <!-- HERO -->
@@ -377,30 +405,7 @@ export const bodyHtml = `
   </div>
 
   <script is:inline>
-    // Doc's Beach Carousel
-    (function() {
-      var track = document.querySelector('.docs-beach-carousel-track');
-      var slides = document.querySelectorAll('.docs-beach-carousel-slide');
-      var dots = document.querySelectorAll('.docs-beach-dot');
-      var prevBtn = document.querySelector('.docs-beach-carousel-btn.prev');
-      var nextBtn = document.querySelector('.docs-beach-carousel-btn.next');
-      var current = 0;
-      var total = slides.length;
-
-      function goTo(index) {
-        current = (index + total) % total;
-        track.style.transform = 'translateX(-' + (current * 100) + '%)';
-        dots.forEach(function(d, i) {
-          d.classList.toggle('active', i === current);
-        });
-      }
-
-      prevBtn.addEventListener('click', function() { goTo(current - 1); });
-      nextBtn.addEventListener('click', function() { goTo(current + 1); });
-      dots.forEach(function(dot) {
-        dot.addEventListener('click', function() { goTo(parseInt(this.dataset.index)); });
-      });
-    })();
+${DOCS_BEACH_CAROUSEL_JS}
   </script>
 `;
 
@@ -772,30 +777,7 @@ const ES = `
   </div>
 
   <script is:inline>
-    // Doc's Beach Carousel
-    (function() {
-      var track = document.querySelector('.docs-beach-carousel-track');
-      var slides = document.querySelectorAll('.docs-beach-carousel-slide');
-      var dots = document.querySelectorAll('.docs-beach-dot');
-      var prevBtn = document.querySelector('.docs-beach-carousel-btn.prev');
-      var nextBtn = document.querySelector('.docs-beach-carousel-btn.next');
-      var current = 0;
-      var total = slides.length;
-
-      function goTo(index) {
-        current = (index + total) % total;
-        track.style.transform = 'translateX(-' + (current * 100) + '%)';
-        dots.forEach(function(d, i) {
-          d.classList.toggle('active', i === current);
-        });
-      }
-
-      prevBtn.addEventListener('click', function() { goTo(current - 1); });
-      nextBtn.addEventListener('click', function() { goTo(current + 1); });
-      dots.forEach(function(dot) {
-        dot.addEventListener('click', function() { goTo(parseInt(this.dataset.index)); });
-      });
-    })();
+${DOCS_BEACH_CAROUSEL_JS}
   </script>
 `;
 
@@ -1171,30 +1153,7 @@ const IT = `
   </div>
 
   <script is:inline>
-    // Doc's Beach Carousel
-    (function() {
-      var track = document.querySelector('.docs-beach-carousel-track');
-      var slides = document.querySelectorAll('.docs-beach-carousel-slide');
-      var dots = document.querySelectorAll('.docs-beach-dot');
-      var prevBtn = document.querySelector('.docs-beach-carousel-btn.prev');
-      var nextBtn = document.querySelector('.docs-beach-carousel-btn.next');
-      var current = 0;
-      var total = slides.length;
-
-      function goTo(index) {
-        current = (index + total) % total;
-        track.style.transform = 'translateX(-' + (current * 100) + '%)';
-        dots.forEach(function(d, i) {
-          d.classList.toggle('active', i === current);
-        });
-      }
-
-      prevBtn.addEventListener('click', function() { goTo(current - 1); });
-      nextBtn.addEventListener('click', function() { goTo(current + 1); });
-      dots.forEach(function(dot) {
-        dot.addEventListener('click', function() { goTo(parseInt(this.dataset.index)); });
-      });
-    })();
+${DOCS_BEACH_CAROUSEL_JS}
   </script>
 `;
 
@@ -1571,30 +1530,7 @@ const PT = `
   </div>
 
   <script is:inline>
-    // Doc's Beach Carousel
-    (function() {
-      var track = document.querySelector('.docs-beach-carousel-track');
-      var slides = document.querySelectorAll('.docs-beach-carousel-slide');
-      var dots = document.querySelectorAll('.docs-beach-dot');
-      var prevBtn = document.querySelector('.docs-beach-carousel-btn.prev');
-      var nextBtn = document.querySelector('.docs-beach-carousel-btn.next');
-      var current = 0;
-      var total = slides.length;
-
-      function goTo(index) {
-        current = (index + total) % total;
-        track.style.transform = 'translateX(-' + (current * 100) + '%)';
-        dots.forEach(function(d, i) {
-          d.classList.toggle('active', i === current);
-        });
-      }
-
-      prevBtn.addEventListener('click', function() { goTo(current - 1); });
-      nextBtn.addEventListener('click', function() { goTo(current + 1); });
-      dots.forEach(function(dot) {
-        dot.addEventListener('click', function() { goTo(parseInt(this.dataset.index)); });
-      });
-    })();
+${DOCS_BEACH_CAROUSEL_JS}
   </script>
 `;
 
@@ -1966,30 +1902,7 @@ const FR = `
   </div>
 
   <script is:inline>
-    // Doc's Beach Carousel
-    (function() {
-      var track = document.querySelector('.docs-beach-carousel-track');
-      var slides = document.querySelectorAll('.docs-beach-carousel-slide');
-      var dots = document.querySelectorAll('.docs-beach-dot');
-      var prevBtn = document.querySelector('.docs-beach-carousel-btn.prev');
-      var nextBtn = document.querySelector('.docs-beach-carousel-btn.next');
-      var current = 0;
-      var total = slides.length;
-
-      function goTo(index) {
-        current = (index + total) % total;
-        track.style.transform = 'translateX(-' + (current * 100) + '%)';
-        dots.forEach(function(d, i) {
-          d.classList.toggle('active', i === current);
-        });
-      }
-
-      prevBtn.addEventListener('click', function() { goTo(current - 1); });
-      nextBtn.addEventListener('click', function() { goTo(current + 1); });
-      dots.forEach(function(dot) {
-        dot.addEventListener('click', function() { goTo(parseInt(this.dataset.index)); });
-      });
-    })();
+${DOCS_BEACH_CAROUSEL_JS}
   </script>
 `;
 
@@ -2368,30 +2281,7 @@ const DE = `
   </div>
 
   <script is:inline>
-    // Doc's Beach Carousel
-    (function() {
-      var track = document.querySelector('.docs-beach-carousel-track');
-      var slides = document.querySelectorAll('.docs-beach-carousel-slide');
-      var dots = document.querySelectorAll('.docs-beach-dot');
-      var prevBtn = document.querySelector('.docs-beach-carousel-btn.prev');
-      var nextBtn = document.querySelector('.docs-beach-carousel-btn.next');
-      var current = 0;
-      var total = slides.length;
-
-      function goTo(index) {
-        current = (index + total) % total;
-        track.style.transform = 'translateX(-' + (current * 100) + '%)';
-        dots.forEach(function(d, i) {
-          d.classList.toggle('active', i === current);
-        });
-      }
-
-      prevBtn.addEventListener('click', function() { goTo(current - 1); });
-      nextBtn.addEventListener('click', function() { goTo(current + 1); });
-      dots.forEach(function(dot) {
-        dot.addEventListener('click', function() { goTo(parseInt(this.dataset.index)); });
-      });
-    })();
+${DOCS_BEACH_CAROUSEL_JS}
   </script>
 `;
 
@@ -2763,30 +2653,7 @@ const JA = `
   </div>
 
   <script is:inline>
-    // Doc's Beach Carousel
-    (function() {
-      var track = document.querySelector('.docs-beach-carousel-track');
-      var slides = document.querySelectorAll('.docs-beach-carousel-slide');
-      var dots = document.querySelectorAll('.docs-beach-dot');
-      var prevBtn = document.querySelector('.docs-beach-carousel-btn.prev');
-      var nextBtn = document.querySelector('.docs-beach-carousel-btn.next');
-      var current = 0;
-      var total = slides.length;
-
-      function goTo(index) {
-        current = (index + total) % total;
-        track.style.transform = 'translateX(-' + (current * 100) + '%)';
-        dots.forEach(function(d, i) {
-          d.classList.toggle('active', i === current);
-        });
-      }
-
-      prevBtn.addEventListener('click', function() { goTo(current - 1); });
-      nextBtn.addEventListener('click', function() { goTo(current + 1); });
-      dots.forEach(function(dot) {
-        dot.addEventListener('click', function() { goTo(parseInt(this.dataset.index)); });
-      });
-    })();
+${DOCS_BEACH_CAROUSEL_JS}
   </script>
 `;
 
@@ -3158,30 +3025,7 @@ const ZH = `
   </div>
 
   <script is:inline>
-    // Doc's Beach Carousel
-    (function() {
-      var track = document.querySelector('.docs-beach-carousel-track');
-      var slides = document.querySelectorAll('.docs-beach-carousel-slide');
-      var dots = document.querySelectorAll('.docs-beach-dot');
-      var prevBtn = document.querySelector('.docs-beach-carousel-btn.prev');
-      var nextBtn = document.querySelector('.docs-beach-carousel-btn.next');
-      var current = 0;
-      var total = slides.length;
-
-      function goTo(index) {
-        current = (index + total) % total;
-        track.style.transform = 'translateX(-' + (current * 100) + '%)';
-        dots.forEach(function(d, i) {
-          d.classList.toggle('active', i === current);
-        });
-      }
-
-      prevBtn.addEventListener('click', function() { goTo(current - 1); });
-      nextBtn.addEventListener('click', function() { goTo(current + 1); });
-      dots.forEach(function(dot) {
-        dot.addEventListener('click', function() { goTo(parseInt(this.dataset.index)); });
-      });
-    })();
+${DOCS_BEACH_CAROUSEL_JS}
   </script>
 `;
 
