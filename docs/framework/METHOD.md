@@ -239,3 +239,39 @@ Never recommend additional implementation unless the evidence requires it.
 **Escalate rather than assume** when a stop condition fires, a measurement
 contradicts a frozen decision, the owner's product judgement is required, or a
 proof would require touching a parallel workstream's files.
+
+---
+
+## Citing this document
+
+This document became normative by being applied, not by a documentation sweep.
+Existing phase reports are **not** retrofitted: they were written before this
+vocabulary existed, and rewriting them in terms that postdate their evidence
+would misrepresent when the reasoning happened.
+
+New phase reports open with the rules they deliberately applied:
+
+```
+**Method rules applied:** 3 (ownership by intervention) · 4 (positive control
+before negatives) · 16 (corpus-dependent verification)
+```
+
+The body then demonstrates those rules against the phase's own evidence. This
+gives traceability in both directions: a rule points down to the phase that paid
+for it, and a phase points up to the rules it was run under. List only the rules
+the phase actually turned on a decision — a header that cites all seventeen
+carries no information.
+
+Two constraints make the citations durable:
+
+1. **Rule numbers are permanent identifiers and are never reused.** A retired
+   rule keeps its number and stays in place, marked `RETIRED` with the
+   measurement that retired it, exactly as a live rule carries the measurement
+   that earned it. Renumbering would silently re-point every citation already
+   written.
+2. **Cite the number *and* the name.** A citation should survive being read
+   without this file open, and a number-only reference is unverifiable at the
+   point of use.
+
+Retiring a rule is a normal outcome, not a failure of the document — that is
+what pairing each rule with its measurement is for.
