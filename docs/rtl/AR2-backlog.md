@@ -333,7 +333,10 @@ arrows need all of it. Do not size this from a glyph census — size it from
 > the `left:50%`+`translate(-50%)` idiom, `margin-left/right:auto`), 10 are kept
 > physical by decision, 5 are an owner call (**excluded from the sweep** — a
 > product decision, not a directionality defect), and 4 must land with B-5b.
-> **The sweep is 65 declarations at 44 sites in 11 files — and 9 of those are
+> **The sweep is 61 declarations in 11 files** (66 classified convertible, then
+> **5 retired by a computed-style ownership probe** — 3 rules whose markup exists
+> on 0 of 620 pages and in 0 source files, plus 2 redundant declarations).
+> **9 of the 66 are
 > invisible to every rule here**: asymmetric 4-value shorthands
 > (`padding: 8px 20px 8px 340px`), **five of which are the companion half of a
 > declaration the census does see**. Also *not* mechanical: `.arch-text
@@ -342,7 +345,7 @@ arrows need all of it. Do not size this from a glyph census — size it from
 > `border-right: none` override converted with its base.
 >
 > **B-7 is the first Track B item with LIVE defects** — unlike B-6's zero,
-> `dist/ar/cancellation-policy/` renders 21 of the 65, in shared chrome, so every
+> `dist/ar/cancellation-policy/` renders 21 of them, in shared chrome, so every
 > future Arabic page inherits them. **The presentation layer has now been opened
 > in a browser** (§5.1, Edge headless over CDP, read-only): 5 of 6 live groups
 > confirmed by computed style, **1 falsified** — `.policy-list ul { padding-left:

@@ -85,8 +85,7 @@ but 14 sites because three of its declarations are the eight byte-identical
 locale clones of `best-restaurants-vernal-utah.astro` — the same
 duplication-by-locale axis B-5a removed from the carousels.
 
-**The sweep is 65 declarations at 44 distinct sites across 11 files.** Not 174,
-and not "mechanical".
+**The sweep is 61 declarations across 11 files.** Not 174, and not "mechanical".
 
 ---
 
@@ -176,7 +175,8 @@ so there is no 40px left to survive. Measured on the rendered page:
 **dead** — converting it is a no-op, and so is deleting it.
 
 Reclassified `convert-list-indent` → `dead-superseded`. The convert total moves
-**66 → 65**; the live total in §5 moves **22 → 21**. `.author-credentials ul
+**66 → 65** here, and to **61** once the ownership probe (§5.2) retires four
+more. The live total in §5 moves **22 → 21**. `.author-credentials ul
 { padding-left: 20px }` is unaffected: it sets a positive value *over* the reset,
 so it remains a real conversion.
 
@@ -211,7 +211,7 @@ without them and B-5b picks them up.
 
 B-6 found zero: `ar` renders one route with no arrows on it. B-7 is different.
 `dist/ar/cancellation-policy/index.html` is `<html lang="ar" dir="rtl">` and
-renders six of the convert classes — **21 of the 65 declarations are live
+renders six of the convert classes — **21 of the declarations are live
 today**, every one of them since confirmed in a browser (§5.1):
 
 | element | declarations | what is wrong right now |
@@ -375,7 +375,8 @@ by roughly the same factor:
 |---|---|---|
 | B-5 | 16 carousel copies | 2 implementations |
 | B-6 | 204 arrow sites | 4 shared sites (+ a gate); **0 live defects** |
-| B-7 | 174 physical declarations | 65 to convert at 44 sites; 95 are no-ops |
+| B-7 (probe) | 66 classified as convertible | 61 that actually own the result |
+| B-7 | 174 physical declarations | 61 to convert; 95 no-ops + 5 dead |
 
 That is no longer coincidence, and the useful phrasing is not "inventories
 exaggerate":
@@ -415,7 +416,7 @@ changed the rule; here, reproduction killed a finding.
 
 ## 8. What the sweep is
 
-65 declarations, 44 sites, 11 files:
+61 declarations, 11 files:
 
 - `public/styles.css` — the great majority
 - `src/components/content/TourDecisionGuide.astro` — `.tdg-link` accent border
