@@ -325,6 +325,26 @@ arrows need all of it. Do not size this from a glyph census — size it from
 
 ### B-7 — 174 physical box/inset/text-align declarations *(R-6)*
 
+> **CLASSIFIED 2026-07-29** — full table:
+> [`AR2-B7-classification.md`](AR2-B7-classification.md). **This entry's own
+> sizing is wrong in both directions.** Of the 174: **3 are English prose**
+> (`…get this right: …` satisfies the `inset-physical` pattern), **95 are
+> symmetric no-ops** (`left:0` beside `right:0`, `left:0` beside `width:100%`,
+> the `left:50%`+`translate(-50%)` idiom, `margin-left/right:auto`), 10 are kept
+> physical by decision, 5 are an owner call, and 4 must land with B-5b. **The
+> sweep is 66 declarations at 45 sites in 11 files — and 9 of those 66 are
+> invisible to every rule here**: asymmetric 4-value shorthands
+> (`padding: 8px 20px 8px 340px`), **five of which are the companion half of a
+> declaration the census does see**. Also *not* mechanical: `.policy-list ul {
+> padding-left: 0 }` is a live defect (the UA indents with
+> `padding-inline-start`, so the physical reset misses it in RTL), and
+> `.arch-text .highlight-quote` needs its `border-radius` converted alongside its
+> `border-left`.
+>
+> **B-7 is the first Track B item with LIVE defects** — unlike B-6's zero,
+> `dist/ar/cancellation-policy/` renders 22 of the 66, in shared chrome, so every
+> future Arabic page inherits them.
+
 Mechanical conversion to logical properties: `inset-physical` 145,
 `box-physical` 26, `text-align: left` 3. Zero `float`/`clear`, zero
 `flex-direction: row-reverse`, zero `order:` — the hard cases are simply absent.
