@@ -1,0 +1,76 @@
+---
+// AmbientVideo.astro — V-1 Phase A (amended). The authority for DECORATIVE BACKGROUND
+// LOOPS, and the seam at which their hosting can change.
+//
+// PHASE A SHIPS THIS WITH NO CALLERS. Zero imports, zero rendered bytes, same discipline
+// as YouTubeEmbed.astro and AR-2 B-2 before it.
+//
+// WHY THIS IS NOT A MODE OF YouTubeEmbed. The brief's §2 gave one component two modes.
+// Splitting them separates the 256 placements where YouTube is the permanent contract
+// from the 40 where it is one replaceable backend. The two differ in provider commitment,
+// not in presentation, and provider commitment is the axis a future edit will move along.
+//
+// NO PLAY AFFORDANCE, BY CONSTRUCTION. Nobody clicks a background loop. A decorative
+// element that advertises itself as interactive is a worse defect than the bytes it
+// saves, so there is no button, no `aria-label`, and the container is `aria-hidden`.
+// A useful consequence: this component has NO chrome strings at all, so unlike the
+// facade it carries no Gate 4a surface.
+//
+// IDENTITY IS DECLARED, NOT INFERRED. `data-video-id` is emitted because gate 4m already
+// extracts that form (scripts/gate-4m-media.mjs:146) — the component conforms to the
+// gate's vocabulary rather than the gate being widened to fit the component, which is
+// 4m's own scope rule read from the other side. The facade needs no such attribute: its
+// poster is an `i.ytimg.com/vi/<id>/` URL, which 4m already sees. An ambient poster is
+// self-hosted and carries no id, so without this attribute the migration would make five
+// videos vanish from 4m's view — a green run reporting a page that lost its media.
+//
+// THE PLAYER IS NOT HERE. It is swapped in after load by one delegated listener in
+// `BaseLayout.astro`, for the reason given in YouTubeEmbed.astro: this project ships zero
+// JS bundles, so an `is:inline` script in a component is duplicated once per instance.
+// Until that swap runs, the poster IS the element — which is the point, since it is what
+// the LCP measurement sees.
+//
+// This component emits markup and state. It runs nothing.
+import { AMBIENT_CLIPS, type AmbientClipKey } from '../../lib/ambient-clips';
+
+interface Props {
+  /** Key into AMBIENT_CLIPS. The call site names a clip; it does not name a host. */
+  clip: AmbientClipKey;
+  /**
+   * Above the fold? Drives `fetchpriority`/`loading` on the poster. This is a property of
+   * the PLACEMENT, not of the clip, which is why it is a prop and not a registry field:
+   * `utv-cta` is the same kind of asset as `utv-hero` and sits below the fold.
+   */
+  priority?: boolean;
+  class?: string;
+}
+
+const { clip, priority = true, class: className } = Astro.props;
+
+const entry = AMBIENT_CLIPS[clip];
+if (!entry) {
+  // Build-time, not runtime. A bad key must not render an empty hero into 8 locales.
+  throw new Error(
+    `AmbientVideo: unknown clip "${clip}" — known clips are ${Object.keys(AMBIENT_CLIPS).join(', ')}`,
+  );
+}
+---
+
+<div
+  class:list={['ambient-video', className]}
+  data-ambient-clip={clip}
+  data-video-id={entry.youtubeId}
+  aria-hidden="true"
+  style="aspect-ratio:16/9;position:relative;overflow:hidden;"
+>
+  <img
+    src={entry.poster}
+    alt=""
+    width="1280"
+    height="720"
+    decoding="async"
+    fetchpriority={priority ? 'high' : 'auto'}
+    loading={priority ? 'eager' : 'lazy'}
+    style="width:100%;height:100%;object-fit:cover;display:block;"
+  />
+</div>
