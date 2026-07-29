@@ -348,6 +348,11 @@ The 8×-duplicated JS is the real cost here, not the fix.
 > handler live under RTL). Fix inherits a measured list: 2 transform sites,
 > 1 key-mapping policy call, 4 CSS declarations, 0 anchor work on utv. Swipe
 > (`home.ts:75-78`) stays unmeasured until a touch control exists (milestone 3).
+> The fix milestone's acceptance criteria are the doc's §2.5 — one
+> acceptance/falsifier pair per *mechanism* (transform / key mapping /
+> anchoring), all decided by re-running the instrument; the utv no-op is
+> proved by re-measurement, never by the absence of a diff, and the worktree's
+> detached HEAD is recorded at the start of every milestone measured in it.
 
 ### B-6 — 256 rendered `→` arrows do not mirror *(R-3)*
 

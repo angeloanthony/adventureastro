@@ -150,6 +150,39 @@ The fix milestone inherits a measured work list, not a suspicion:
 - **Swipe (`home.ts:75-78`) remains unmeasured**, and stays that way until a
   touch control exists (milestone 3).
 
+### 2.5 Acceptance and falsification for the fix milestone
+
+The work list above is three *mechanisms*, not four sites, and each mechanism
+gets the same proof structure: an observable this instrument already reads, an
+acceptance criterion, and an explicit falsifier. The fix milestone is accepted
+mechanism-by-mechanism, by re-running this instrument — not by inspecting the
+diff.
+
+| mechanism | acceptance | falsification |
+|---|---|---|
+| transform | every traversal path sharing the transform mechanism converges on 100% post-settle visibility | any traversal path sharing the mechanism still measures 0% visibility after the transform correction |
+| key mapping *(policy pending)* | after adopting the chosen policy, measured keypresses produce index deltas consistent with that policy | after the policy is implemented, a measured keypress produces an index delta inconsistent with the declared policy |
+| anchoring | gallery anchors become logical; `/utv/` reproduces the same measured anchor positions as before | re-measurement shows `/utv/` anchor positions changed, even if no `/utv/` code was intentionally modified |
+
+Two of these rows encode decisions, not just thresholds:
+
+- **The key-mapping row is not testable before the policy exists.** Its
+  acceptance criterion is deliberately written against "the chosen policy",
+  because §2.3 established only that the mapping does not respond to direction
+  at all — which mapping is *correct* is the owner call in §2.4. The row does
+  not pretend a measurement can precede that decision.
+- **The `/utv/` anchor no-op is demonstrated by measurement, not by diff.**
+  "We didn't edit that code" is not evidence — the mechanism is emergent (flex
+  following document direction), and shared logic can change the rendered
+  result without a textual edit to `/utv/`. B-7 already taught this in the
+  other direction: the delivery mechanism decides where a delta lands, so the
+  acceptance artifact for a claimed no-op is the reproduced anchor readings,
+  not the absence of a hunk.
+
+"Post-settle" in the transform row is load-bearing: the LTR baseline falsified
+instrument v1 on exactly this (§1), so an acceptance run that read boxes
+mid-transition would accept nothing and reject a working fix.
+
 ---
 
 ## 3. What this milestone deliberately does not do
@@ -184,3 +217,13 @@ surface milestone 3 (touch) needs, exactly as Track B's was for B-6/B-7.
 Dispose per ADR-11 §5 (junction first). Raw readings from this run:
 `b5b-m2-ltr.json` / `b5b-m2-rtl.json` in the session scratchpad; the instrument
 regenerates them in ~90 seconds against any built tree.
+
+**Provenance.** The worktree directory is not the evidentiary artifact — the
+artifact is the triple *(detached worktree, detached commit, measurement log)*.
+Without the recorded commit, a reading loses its claim to reproducibility,
+because nothing proves what tree was actually built and measured (rule 9's
+constant-tree requirement, extended across sessions). This run's commit is
+`e4d56c8` (§1). Standing procedure from here: **record the worktree's detached
+HEAD at the start of every milestone that measures in it**, before the first
+reading — `git -C <worktree> rev-parse HEAD` — and cite it next to the
+readings.
