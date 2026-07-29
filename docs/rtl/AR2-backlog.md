@@ -163,6 +163,29 @@ the registry's own answer is invisible in rendered output, correctly. That half 
 the substitution test instead. **The gate proves the declaration is well-formed; the
 substitution proves it is what renders.** B-2 and B-5–B-7 remain open and unaffected.
 
+### ~~B-2~~ — Shared bidi formatter — **RESOLVED 2026-07-28**
+
+> Full write-up: [`AR2-B2-bidi-formatter.md`](AR2-B2-bidi-formatter.md). Two commits:
+> **Phase A** `94f3bf9` + `9dfde3d` (formatter, all 620 pages byte-identical) and
+> **Phase B** `891872c` + `15f5429` (9 callers migrated, 619 pages changed). Arabic page
+> bare mirrored text nodes **2 → 0**; every gate figure unchanged.
+>
+> **The census overturned this entry's own sizing.** Three findings, none obvious: a bare
+> Western number in Arabic prose is *not* a hazard (UBA W2 — 101 across both corpora, all
+> false positives); an interior space is *not* one either (rule N1); and the hazard is a
+> property of the **document**, not the text node — the two runs still bare on the pilot
+> page contain no Arabic at all, and are broken because `<html dir="rtl">` sets the
+> paragraph direction. The shipped hazard set is just **mirrored characters and edge
+> neutrals**.
+>
+> **Still open, found by B-2:** `404.astro` hand-rolls its own nav instead of using
+> `Header.astro`, so it bypasses the formatter entirely (3 bare phone occurrences). Not
+> migrated — no `/ar/404` route exists, so nothing justifies it — and **nothing detects
+> it**: no gate perceives bidi isolation. A 4-series isolation gate is the natural
+> successor.
+
+<details><summary>Original entry, as filed by AR-1</summary>
+
 ### B-2 — Bidi isolation is per-page, not shared *(R-4)*
 
 AR-1 applied `<bdi>` to `(435) 219-9447`, `$1,000` and one Latin brand run **on
@@ -182,6 +205,8 @@ backwards inside Arabic prose.
 **External confirmation:** ParkingWay ships a live `ar/` route tree with zero
 isolation and `+39 327 1864779` bare in Arabic prose. This defect ships and nobody
 notices.
+
+</details>
 
 ### B-3 — `LocaleMeta.hreflang` serves two consumers with different requirements
 
