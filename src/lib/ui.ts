@@ -48,6 +48,7 @@ const EN: Dict = {
   'a11y.allArticlesInHub': 'All articles in this hub',
   'a11y.keyTakeaways': 'Key takeaways',
   'a11y.relatedGuides': 'Related guides',
+  'a11y.playVideo': 'Play video: {title}',
 
   // — Section headings (layouts + shared components) —
   'section.faq': 'Frequently Asked Questions',
@@ -184,6 +185,7 @@ const ES: Dict = {
   'a11y.allArticlesInHub': 'Todos los artículos de esta categoría',
   'a11y.keyTakeaways': 'Puntos clave',
   'a11y.relatedGuides': 'Guías relacionadas',
+  'a11y.playVideo': 'Reproducir video: {title}',
 
   'section.faq': 'Preguntas Frecuentes',
   'section.exploreThisHub': 'Explore Esta Categoría',
@@ -306,6 +308,7 @@ const IT: Dict = {
   'a11y.allArticlesInHub': 'Tutti gli articoli di questa categoria',
   'a11y.keyTakeaways': 'Punti chiave',
   'a11y.relatedGuides': 'Guide correlate',
+  'a11y.playVideo': 'Riproduci il video: {title}',
 
   'section.faq': 'Domande Frequenti',
   'section.exploreThisHub': 'Esplori Questa Categoria',
@@ -430,6 +433,7 @@ const PT: Dict = {
   'a11y.allArticlesInHub': 'Todos os artigos desta categoria',
   'a11y.keyTakeaways': 'Pontos-chave',
   'a11y.relatedGuides': 'Guias relacionados',
+  'a11y.playVideo': 'Reproduzir vídeo: {title}',
 
   'section.faq': 'Perguntas Frequentes',
   'section.exploreThisHub': 'Explora Esta Categoria',
@@ -555,6 +559,7 @@ const FR: Dict = {
   'a11y.allArticlesInHub': 'Tous les articles de cette catégorie',
   'a11y.keyTakeaways': 'Points clés',
   'a11y.relatedGuides': 'Guides connexes',
+  'a11y.playVideo': 'Lire la vidéo : {title}',
 
   'section.faq': 'Questions Fréquentes',
   'section.exploreThisHub': 'Explorez Cette Catégorie',
@@ -685,6 +690,7 @@ const DE: Dict = {
   'a11y.allArticlesInHub': 'Alle Artikel dieser Kategorie',
   'a11y.keyTakeaways': 'Das Wichtigste in Kürze',
   'a11y.relatedGuides': 'Verwandte Guides',
+  'a11y.playVideo': 'Video abspielen: {title}',
 
   'section.faq': 'Häufige Fragen',
   'section.exploreThisHub': 'Diese Kategorie Entdecken',
@@ -810,6 +816,7 @@ const JA: Dict = {
   'a11y.allArticlesInHub': 'このハブのすべての記事',
   'a11y.keyTakeaways': '要点まとめ',
   'a11y.relatedGuides': '関連ガイド',
+  'a11y.playVideo': '動画を再生：{title}',
 
   'section.faq': 'よくあるご質問',
   'section.exploreThisHub': 'このハブを見る',
@@ -957,6 +964,7 @@ const ZH: Dict = {
   'a11y.allArticlesInHub': '本专题的全部文章',
   'a11y.keyTakeaways': '要点速览',
   'a11y.relatedGuides': '相关攻略',
+  'a11y.playVideo': '播放视频：{title}',
 
   'section.faq': '常见问题',
   'section.exploreThisHub': '探索本专题',
@@ -1126,6 +1134,7 @@ const AR: Dict = {
   'a11y.allArticlesInHub': 'جميع المقالات في هذا القسم',
   'a11y.keyTakeaways': 'أبرز النقاط',
   'a11y.relatedGuides': 'أدلة ذات صلة',
+  'a11y.playVideo': 'تشغيل الفيديو: {title}',
 
   // — Section headings —
   'section.faq': 'الأسئلة الشائعة',

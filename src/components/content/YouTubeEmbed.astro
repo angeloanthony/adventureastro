@@ -1,0 +1,94 @@
+---
+// YouTubeEmbed.astro — V-1 Phase A. The single authority for embedding a YouTube video.
+//
+// PHASE A SHIPS THIS WITH NO CALLERS. Nothing imports it yet, so it renders nowhere and
+// changes no byte of `dist/`. That is the same ordering AR-2 B-2 used for the bidi
+// formatter: introduce the authority in one commit, migrate callers in another, so no
+// single commit both defines a contract and moves the corpus.
+//
+// THE INVARIANT (gate 4l, specified in docs/perf/V1-video-facade.md §6.1.1):
+// no page, layout, `page-content` block or MDX body writes `youtube.com/embed` directly.
+// A caller names a video and a mode and receives an embed.
+//
+// TWO MODES, BECAUSE THE CORPUS HAS TWO KINDS OF VIDEO — measured, not assumed:
+// 256 on-demand carousel slides and 40 ambient background loops.
+//
+//   facade    Click-to-play. A thumbnail and a real button; the player is created on
+//             activation and never before.
+//   ambient   A decorative muted loop (`autoplay&mute&loop&controls=0`). It gets a poster
+//             and NO play affordance at all — nobody clicks a background loop, and a
+//             decorative element advertising itself as interactive is a worse defect than
+//             the bytes it saves. The player is swapped in after load, so the poster is
+//             what the LCP measurement sees.
+//
+// WHY THERE IS NO <script> HERE. This project ships zero JS bundles — every script in the
+// corpus is `is:inline`, and `dist/` contains no `_astro/` directory. An `is:inline` script
+// inside this component would be duplicated once per instance, which on `/utv/` means 21
+// copies of the same listener. Activation is therefore ONE delegated listener in
+// `BaseLayout.astro`, matching the analytics instrumentation already there, and it lands in
+// Phase B with the first caller — adding it in Phase A would change all 620 pages, which is
+// exactly what Phase A promises not to do.
+//
+// This component emits markup and state. It runs nothing.
+import { t } from '../../lib/ui';
+
+interface Props {
+  /** The 11-character YouTube id. The only identity gate 4m records. */
+  videoId: string;
+  /** Human title. Required: it is the accessible name of the play control in `facade`. */
+  title: string;
+  mode?: 'facade' | 'ambient';
+  /**
+   * `ambient` only, and SELF-HOSTED by contract (§2). An ambient poster is an LCP
+   * candidate, and an LCP element must not depend on a third-party host that the page
+   * deliberately does not preconnect to.
+   */
+  poster?: string;
+  lang?: string;
+  class?: string;
+}
+
+const { videoId, title, mode = 'facade', poster, lang = 'en', class: className } = Astro.props;
+
+if (!/^[A-Za-z0-9_-]{11}$/.test(videoId)) {
+  // Fail at build time rather than rendering a broken embed. A malformed id produces a
+  // player that 404s silently in an iframe, which no gate and no visitor reports.
+  throw new Error(`YouTubeEmbed: "${videoId}" is not a YouTube video id (11 chars of [A-Za-z0-9_-])`);
+}
+if (mode === 'ambient' && !poster) {
+  throw new Error(`YouTubeEmbed: ambient mode requires a self-hosted poster (video ${videoId})`);
+}
+
+// `hqdefault`, never `maxresdefault`. maxres does not exist for every upload and YouTube
+// answers a missing one with a 120x90 grey placeholder rather than a 404 — an invisible
+// failure that cannot be feature-detected. The homepage already ships a maxresdefault
+// poster today (V1-video-facade.md §1.3a); this component is what stops that spreading.
+const thumb = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+---
+
+{mode === 'facade' ? (
+  <div class:list={['yt-embed', 'yt-embed--facade', className]} style="aspect-ratio:16/9;position:relative;">
+    <button
+      type="button"
+      class="yt-embed__activate"
+      data-yt-facade={videoId}
+      aria-label={t('a11y.playVideo', lang, { title })}
+      style="all:unset;display:block;width:100%;height:100%;cursor:pointer;position:relative;"
+    >
+      {/* alt="" is deliberate: the button carries the accessible name, so a described
+          thumbnail would make a screen reader announce the same video twice. */}
+      <img src={thumb} alt="" loading="lazy" decoding="async" width="480" height="360"
+           style="width:100%;height:100%;object-fit:cover;display:block;" />
+    </button>
+  </div>
+) : (
+  <div
+    class:list={['yt-embed', 'yt-embed--ambient', className]}
+    data-yt-ambient={videoId}
+    style="aspect-ratio:16/9;position:relative;overflow:hidden;"
+  >
+    {/* No button, no aria-label, aria-hidden: decorative by construction. */}
+    <img src={poster} alt="" aria-hidden="true" fetchpriority="high" decoding="async"
+         style="width:100%;height:100%;object-fit:cover;display:block;" />
+  </div>
+)}
