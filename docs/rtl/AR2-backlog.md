@@ -208,6 +208,39 @@ notices.
 
 </details>
 
+### ~~Track A~~ — Gate 4n, bidi isolation integrity — **RESOLVED 2026-07-28**
+
+> Full write-up: [`AR2-TrackA-gate-4n.md`](AR2-TrackA-gate-4n.md).
+> `scripts/gate-4n-isolation.mjs` + `scripts/lib/bidi-isolation.mjs`, `dist/`-reading,
+> **blocking, wired into `gates:dist`** between 4k and 4f. Implements
+> [ADR-10](../framework/adr/0010-isolation-is-a-flanking-type-rule.md), whose status moves to
+> IMPLEMENTED.
+>
+> **Not filed by AR-1.** This item was created by B-2's closure — *"nothing detects it: no
+> gate perceives bidi isolation. A 4-series isolation gate is the natural successor"* — and it
+> is the only backlog entry so far that a previous entry produced rather than the audit.
+>
+> **The gate is transcription; the proof is the phase.** A green 4n is evidence of nothing,
+> because the rule ADR-10 rejected *also* passes this corpus — the same-flank population here
+> is zero, so both algorithms return 0 findings. So both ship executable and
+> `npm run test:4n` runs them over nine committed fixtures chosen to make them **disagree**:
+> ADR-10 rule 7 findings, rejected rule 18, with two correct-flank cases the rejected rule
+> would have blocked. Cross-host: **24 vs 75** on ParkingWay.
+>
+> **Reproducing ADR-10's numbers before writing the gate changed the rule.** §2 records four
+> adventureastro nodes "spanning a direction change", but those four are the phone
+> `(435) 219-9447`, which has no strong character in it — so the figure only reproduces if a
+> **digit run counts as a flank**. The natural reading of the ADR gives 0, and would have
+> shipped a gate blind to this site's only defect class. Recorded as ADR-10 §8.1.
+>
+> **Fail-closed:** removing `<Bidi>` from one call site in `Header.astro` and rebuilding →
+> `validate-site`, 4m and 4k all pass, **4n alone exits 1**, naming the route, the character,
+> its element and its flanks. Every other gate passed a page with a visibly broken phone
+> number.
+>
+> **Still open, unchanged:** `404.astro` bypasses the formatter and 4n cannot see it, because
+> no `/ar/404` route exists. The day one does, this gate reports it.
+
 ### B-3 — `LocaleMeta.hreflang` serves two consumers with different requirements
 
 > **ADR WRITTEN 2026-07-28 — decision recorded, not yet implemented:**

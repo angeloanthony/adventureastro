@@ -1,7 +1,11 @@
 # ADR-10 — Bidi isolation is a flanking-type rule, not a character rule
 
-**Status:** DECIDED, not implemented. Records the invariant a future isolation gate must
-enforce, and the simpler rule that was measured and rejected.
+**Status:** **IMPLEMENTED 2026-07-28** as gate 4n (`scripts/gate-4n-isolation.mjs`), blocking
+and wired into `gates:dist`. The differential proof §7 demands is
+`scripts/test-4n-differential.mjs` (`npm run test:4n`). §8 records the two places where
+implementation had to decide something this ADR left open, and corrects one of §2's figures.
+Originally recorded DECIDED-not-implemented, so the rejected alternative would be preserved
+with its measurement rather than reconstructed later from a passing gate.
 **Context phase:** AR-2 B-2 built the shared bidi formatter
 ([`AR2-B2-bidi-formatter.md`](../../rtl/AR2-B2-bidi-formatter.md)). Nothing enforces it, and
 `404.astro` already bypasses it.
@@ -221,3 +225,59 @@ gate's name, and it would be wrong the day a second RTL locale registered.
   **(1) implement the invariant** — largely transcription from this ADR; **(2) construct the
   evidence that distinguishes it from the rejected invariant** — which requires importing or
   authoring a corpus this host does not contain. Only the first is transcription.
+
+---
+
+## 8. Implementation — what §1–§7 left open, and one figure corrected
+
+Added when gate 4n landed. Both entries are things the ADR's prose did not determine and
+implementation could not avoid deciding.
+
+### 8.1 A digit run is a flank. §2 could not have been reproduced otherwise
+
+§2 records that all four of adventureastro's mirrored-character nodes "span a direction
+change". Those four nodes are the phone `(435) 219-9447`, **which contains no strong
+character at all**. So whether they span a direction change depends entirely on a question
+§2 never asks: does a run of digits count as a flanking type, or is it transparent?
+
+Measured both ways before choosing, because the ADR's own numbers are the only arbiter:
+
+| | transparent digits | digits are a flank |
+|---|---:|---:|
+| adventureastro nodes spanning a direction change | **0** | **4** ← §2 |
+
+It is also right by the algorithm rather than merely by fit, which is what makes it
+keepable. In an RTL paragraph rule **I2** raises EN and AN to an even (left-to-right) level,
+exactly as it does L: a digit run is an LTR island inside RTL text. A bracket between Arabic
+and a digit run therefore stands at a genuine direction change — which is what a reader sees
+when the area code of a phone number lands at the far end of the line.
+
+Pinned by `defect-digit-flank.html` in the fixture corpus, so the choice is a row someone can
+argue with rather than a line of code someone has to notice.
+
+### 8.2 §2's parkingwayastro split is 51/24, not 53/22
+
+The classifier that produced §2 was a scratch script and is gone; only its numbers survived
+into this ADR. Reproducing them was the first acceptance test for the implementation:
+
+| | §2 recorded | gate 4n engine |
+|---|---:|---:|
+| adventureastro mirrored-character nodes | 4 | **4** ✔ |
+| …flanked by the same strong type | 0 | **0** ✔ |
+| …spanning a direction change | 4 | **4** ✔ |
+| parkingwayastro mirrored-character nodes | 75 | **75** ✔ |
+| …flanked by the same strong type | 53 | **51** |
+| …spanning a direction change, bare | 22 | **24** |
+
+Everything about this host reproduces exactly, and so does the foreign corpus's node total —
+which is the number that says the two tokenizers agree about what a text node is. The split
+differs by two nodes, and the two cannot be attributed: no artifact records which nodes the
+original classifier put on which side. **The reproducible figures are now the figures**, and
+`npm run test:4n` asserts the 75 rather than the split, so a future reader is not measured
+against a number nobody can reproduce.
+
+Recorded rather than quietly corrected because it is the fifth instance of this project's
+recurring lesson: *a recorded size is a hypothesis about the measurement window, not a fact.*
+The direction of the delta is also the safe one — the implemented rule blocks **more** than
+the ADR recorded, not less — and it changes nothing about the decision, because the
+difference that matters is 24 against the rejected rule's 75.
