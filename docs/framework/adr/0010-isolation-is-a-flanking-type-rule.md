@@ -206,3 +206,18 @@ gate's name, and it would be wrong the day a second RTL locale registered.
 - **The `same`-flank population is unexercised here** (§2.2). Whichever host is used to
   develop the gate, its fail-closed matrix must include a correct Arabic-parentheses case,
   or the clause that makes this rule usable will itself be untested.
+
+- **Test the gate DIFFERENTIALLY, against both algorithms.** The stronger form of the
+  requirement above, and the one to write into the implementation brief: it is not enough to
+  show the gate passes today's corpora, because **the rejected algorithm also passes
+  adventureastro** — its `same`-flank count is zero, so both rules return 0 findings there
+  and the corpus cannot tell them apart. The test must run the accepted and rejected rules
+  over a corpus containing correct-flank cases and show they **disagree**: 22 vs 75 on
+  parkingwayastro. That converts "the gate works" from an assertion about output into a
+  demonstration that the implemented rule is the specified one and not the plausible
+  alternative.
+
+  This splits Track A into two deliverables that need different kinds of work:
+  **(1) implement the invariant** — largely transcription from this ADR; **(2) construct the
+  evidence that distinguishes it from the rejected invariant** — which requires importing or
+  authoring a corpus this host does not contain. Only the first is transcription.
