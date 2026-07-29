@@ -2925,6 +2925,14 @@ const ZH = `
             <div class="docs-beach-carousel-slide">
               <div class="docs-beach-portrait-frame">
                 <div class="docs-beach-portrait-screen">
+                  <iframe src="https://www.youtube.com/embed/LsqbwVkwrbw" title="Doc's Beach Vernal Utah" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="docs-beach-carousel-slide">
+              <div class="docs-beach-portrait-frame">
+                <div class="docs-beach-portrait-screen">
                   <iframe src="https://www.youtube.com/embed/YQVFzCTh4m4" title="Doc's Beach Vernal Utah" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe>
                 </div>
               </div>

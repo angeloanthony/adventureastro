@@ -56,6 +56,16 @@ track is laid out in a horizontal row inside the viewport band. Lazy loading def
 *below* the fold, not what is *beside* it. This is asserted from the layout, not measured —
 see §5.
 
+**A facade already exists, hand-rolled, and the census missed it on the first pass.** The
+homepage hero is already click-to-load: `home.ts` renders
+`<img src="https://img.youtube.com/vi/eFfvKxkiyzU/maxresdefault.jpg">` and injects the player
+from an inline `<script>` on click — duplicated across all 8 locale blocks. So V-1 is not
+introducing the pattern; it is **consolidating an existing one and fixing it**. That poster
+uses `maxresdefault`, which §2 forbids for exactly the reason it is invisible here: if that
+upload has no maxres, YouTube serves a 120×90 grey placeholder rather than a 404, and the
+hero degrades silently. ⚠ **Unverified — checking it requires a network fetch nobody has
+made.** First thing to confirm in Phase B.
+
 **A Play-button facade is wrong for 40 of them.** The background loops are
 `autoplay=1&mute=1&loop=1&controls=0` — decorative, no user ever clicks them. They need a
 poster that *is* the LCP element with the loop swapped in after load, which is a different
@@ -115,7 +125,21 @@ halves of 4a apply: key-set diff *and* a rendered-output English scan.
 
 ## 3. Phasing
 
-### V-0 — measure and repair (no new code)
+### V-0 — measure and repair — **items 1–3 COMPLETE 2026-07-28**
+
+| | Status |
+|---|---|
+| 1. Repair the `zh` drift | ✔ `LsqbwVkwrbw` restored; all 8 blocks at 21 slides; diff is one hunk inside `const ZH` |
+| 2. Baseline for 4m | ✔ `i18n-gates/4m-media.json`, 32 pages, frozen **after** the repair |
+| 3. Build gate 4m | ✔ `scripts/gate-4m-media.mjs`, wired into `gates:dist`, 14/14 scratch cases |
+| 4. Instrument the booking funnel | ✘ **not started** — owner chose the validator half first |
+| 5. Performance baseline | ✘ **not captured** — depends on (4) for the conversion half |
+
+⚠ **V-0 is not complete.** Items 4 and 5 still gate Phase B, and item 4 is the one whose
+window closes: ship Phase B without it and the pre-migration conversion baseline is
+unrecoverable.
+
+
 
 1. Fix the `zh` `LsqbwVkwrbw` gap (§1.4). One slide, one locale block.
 2. Take the byte/timing baseline §5 says is missing, on `/utv/` and `/zh/utv/`.
@@ -231,7 +255,18 @@ migration-only check** — it is the standing invariant that keeps the contract 
 one convenience at a time, and it is the reason §2's invariant is worth writing down at all.
 Same logic as B-2 declining to export `isolate()`: a rule nothing enforces is a preference.
 
-#### 6.1.2 Gate 4m — video-ID multiset conserved (dist)
+#### 6.1.2 Gate 4m — video-ID set conserved (dist) — **BUILT 2026-07-28**
+
+> **Correction, forced by building it: the invariant is a SET, not a multiset.** `/utv/`
+> carries 24 references to 21 distinct videos — the ambient hero and one carousel slide are
+> the same upload. A count of *references* is not stable across the change this gate exists
+> to survive: the migration turns one `<iframe src=…/embed/ID>` into one
+> `<img src=…/vi/ID/…>`. Reference counts move on purpose; "which videos does this page
+> offer" does not. Shipped as **set = blocking, reference count = advisory**.
+>
+> The cost, stated rather than hidden: dropping a *duplicate* placement of a video that also
+> appears elsewhere on the same page is invisible to 4m. That is a layout regression, not a
+> media-identity loss, and it belongs to 4l and to review.
 
 Extracts the ordered multiset of video IDs per rendered page and compares against a committed
 baseline, the way `census/` holds the phrase counts. Dist rather than source because a raw

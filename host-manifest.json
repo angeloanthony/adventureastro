@@ -157,6 +157,7 @@
       "anchors": "4g-anchors.json",
       "seams": "4h-seams.json",
       "glossary": "4i-glossary.json",
+      "media": "4m-media.json",
       "parity": null
     }
   }
