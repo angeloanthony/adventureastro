@@ -282,9 +282,23 @@ before negatives) · 16 (corpus-dependent verification)
 
 The body then demonstrates those rules against the phase's own evidence. This
 gives traceability in both directions: a rule points down to the phase that paid
-for it, and a phase points up to the rules it was run under. List only the rules
-the phase actually turned on a decision — a header that cites all seventeen
-carries no information.
+for it, and a phase points up to the rules it was run under.
+
+**The test for whether to cite a rule is counterfactual, not thematic:**
+
+> If removing the rule would not change the implementation, the classification,
+> or the acceptance criteria described in the report, do not cite it.
+
+Adjacency is not application. A rule can be the right lens on a phase and still
+fail this test — B-5b measures behavioural response after validated
+instrumentation, so rule 3 (ownership by intervention) is adjacent to it and
+governs nothing in it. Leaving rule 3 out of that header demonstrates the
+discipline better than including it would.
+
+This matters because the failure mode is asymmetric: citing a rule costs
+nothing and omitting one feels like an admission, so headers drift toward
+completeness unless the test is a yes/no question rather than a judgement about
+coverage. A header that cites all seventeen rules carries no information.
 
 Two constraints make the citations durable:
 
@@ -299,3 +313,22 @@ Two constraints make the citations durable:
 
 Retiring a rule is a normal outcome, not a failure of the document — that is
 what pairing each rule with its measurement is for.
+
+### Upgrading a commit-only citation
+
+Rule 11 is the one rule whose evidence is anchored in version control rather
+than in a document: the prediction it falsified is written down
+([`AR2-B7-classification.md`](../rtl/AR2-B7-classification.md) §8, proof
+obligation 3) but the inverted outcome exists only in `88f83f8`'s message.
+
+**Do not manufacture a document to fix this.** Writing a phase report today for
+work that closed without one would be retrofitting under a different name. The
+convention is instead:
+
+> When a future phase naturally restates or extends a rule's proof shape, that
+> phase becomes the canonical citation. The commit reference is retained
+> alongside it as historical context, not deleted.
+
+This applies to any rule that ends up with a VCS-only anchor, not just rule 11.
+It costs nothing until the opportunity arises and it gives the citation graph a
+path off a dependency on commit history surviving intact.

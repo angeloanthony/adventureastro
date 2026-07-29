@@ -31,11 +31,14 @@ Follow the project's engineering method (`docs/framework/METHOD.md`):
 10. Escalate whenever a measurement contradicts a frozen decision or requires an
     owner judgement.
 
-Open a phase report with the rules you deliberately applied — number and name,
-only the ones that turned a decision:
+Open a phase report with the rules you deliberately applied — number and name:
 
     **Method rules applied:** 3 (ownership by intervention) · 4 (positive
     control before negatives)
+
+Cite a rule only if it passes this test: **if removing the rule would not change
+the implementation, the classification, or the acceptance criteria described in
+the report, do not cite it.** Adjacency is not application.
 
 When reviewing a phase, state:
 
