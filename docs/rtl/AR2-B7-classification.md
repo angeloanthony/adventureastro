@@ -53,7 +53,7 @@ byte-identical to `rtl-inventory.mjs`, so the sub-totals reconcile exactly:
 | class | raw | sites | action |
 |---|---:|---:|---|
 | `not-css` | 3 | 3 | **no work** — census artifact |
-| `fails-ownership-probe` | 5 | 5 | **no work** — dead code or redundant (§5.2) |
+| `fails-ownership-probe` | 4 | 4 | **no work** — dead code or redundant (§5.2) |
 | `symmetric-both-edges` | 58 | 30 | **no work** — mirroring is a no-op |
 | `symmetric-full-bleed` | 17 | 17 | **no work** — mirroring is a no-op |
 | `symmetric-centering` | 14 | 14 | **no work** — mirroring is a no-op |
@@ -73,19 +73,24 @@ byte-identical to `rtl-inventory.mjs`, so the sub-totals reconcile exactly:
 | action | declarations |
 |---|---:|
 | no work — census artifact | 3 |
-| no work — fails the ownership probe (§5.2) | 5 |
+| no work — fails the ownership probe (§5.2) | 4 |
 | no work — symmetric | **95** |
 | keep physical by decision | 10 |
 | owner decision — **excluded from the sweep** | 5 |
 | convert, only with B-5b | 4 |
-| **convert** | **61** |
+| **convert** | **62** |
 
 `sites` deduplicates by selector + declaration: `convert-edge-anchored` is 35 raw
 but 14 sites because three of its declarations are the eight byte-identical
 locale clones of `best-restaurants-vernal-utah.astro` — the same
 duplication-by-locale axis B-5a removed from the carousels.
 
-**The sweep is 61 declarations across 11 files.** Not 174, and not "mechanical".
+**The sweep is 62 declarations across 11 files.** Not 174, and not "mechanical".
+
+> **CLASSIFICATION FROZEN** at 62 (owner's instruction) once the `.lang-menu`
+> LTR measurement in §5.2.1 resolved the last open verdict. Nothing is added to
+> or removed from this set during implementation except on a **demonstrated**
+> ownership finding — the same standard §5.2 applied to everything else.
 
 ---
 
@@ -175,7 +180,7 @@ so there is no 40px left to survive. Measured on the rendered page:
 **dead** — converting it is a no-op, and so is deleting it.
 
 Reclassified `convert-list-indent` → `dead-superseded`. The convert total moves
-**66 → 65** here, and to **61** once the ownership probe (§5.2) retires four
+**66 → 65** here, and to **62** once the ownership probe (§5.2) retires three
 more. The live total in §5 moves **22 → 21**. `.author-credentials ul
 { padding-left: 20px }` is unaffected: it sets a positive value *over* the reset,
 so it remains a real conversion.
@@ -289,7 +294,7 @@ live stylesheet over CDP, re-measure computed style and geometry, restore. If
 nothing moves, the declaration does not own the result. B-1's substitution logic
 applied to CSS: prove causation by removing the cause.
 
-**Result: 5 of 66 do not survive.**
+**Result: 4 of 66 do not survive.**
 
 | declaration | why it fails | evidence |
 |---|---|---|
@@ -297,7 +302,6 @@ applied to CSS: prove causation by removing the cause.
 | `@1024 .crowd-col.moab-col { border-right: none }` | same | same |
 | `.arch-text .highlight-quote { border-left: 4px }` | same | same |
 | `.policy-list ul { padding-left: 0 }` | redundant (§4.3) | removing it: `0px → 0px` |
-| `.lang-menu { right: 0 }` | redundant **in RTL** | removing it: `0px → 0px`, box unmoved |
 
 The three orphans also retire §4.4: the `border-radius` companion on
 `.arch-text .highlight-quote` was a correct observation about a rule that renders
@@ -305,11 +309,28 @@ on no page, and the `.crowd-col.moab-col` media-override pairing from §5.1 goes
 with it. **Two of this phase's four "not mechanical" findings turned out to
 concern dead code.**
 
-⚠ `.lang-menu { right: 0 }` was measured **on the Arabic page only**, where the
-element's static position happens to coincide with `right: 0`. It may own on the
-eight LTR locales, so it stays in the sweep pending an LTR measurement.
-**Ownership can be direction-dependent — a verdict from one document direction is
-not a global verdict.**
+### 5.2.1 `.lang-menu { right: 0 }` — ownership is direction-dependent
+
+A fifth declaration looked dead and is not. Probed on the Arabic page it does
+nothing — `right: 0px → 0px`, box unmoved — because there the element's static
+position already coincides with `right: 0`. That verdict came from **one document
+direction**, which by this phase's own rule is not enough to conclude "no
+effect". Re-measured on an LTR route, with a positive control on the same page:
+
+```
+positive control  .logo { left: 20px }   →  20px → 240px   (box 20 → 240)
+subject           .lang-menu { right: 0 } →  0px → -86.05px (box 939 → 1025)
+```
+
+It **owns on LTR** and stays in the sweep. The general rule:
+
+> A "no effect" result is scoped to the conditions it was measured under.
+> Direction is one of those conditions, so an RTL-only null result says nothing
+> about the eight LTR locales.
+
+This is the same epistemic shape as the harness failure below — negative evidence
+needs its own positive control — arriving from a second direction. There, the
+control was a known-live declaration; here, it is a second document direction.
 
 **⚠ The harness produced 18 false "dead" verdicts, and only a control caught it.**
 A batched probe — one CDP session, many declarations — reported 18 dead.
@@ -375,8 +396,8 @@ by roughly the same factor:
 |---|---|---|
 | B-5 | 16 carousel copies | 2 implementations |
 | B-6 | 204 arrow sites | 4 shared sites (+ a gate); **0 live defects** |
-| B-7 (probe) | 66 classified as convertible | 61 that actually own the result |
-| B-7 | 174 physical declarations | 61 to convert; 95 no-ops + 5 dead |
+| B-7 (probe) | 66 classified as convertible | 62 that actually own the result |
+| B-7 | 174 physical declarations | 62 to convert; 95 no-ops + 4 dead |
 
 That is no longer coincidence, and the useful phrasing is not "inventories
 exaggerate":
@@ -416,7 +437,7 @@ changed the rule; here, reproduction killed a finding.
 
 ## 8. What the sweep is
 
-61 declarations, 11 files:
+62 declarations, 11 files:
 
 - `public/styles.css` — the great majority
 - `src/components/content/TourDecisionGuide.astro` — `.tdg-link` accent border

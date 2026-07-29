@@ -333,9 +333,13 @@ arrows need all of it. Do not size this from a glyph census — size it from
 > the `left:50%`+`translate(-50%)` idiom, `margin-left/right:auto`), 10 are kept
 > physical by decision, 5 are an owner call (**excluded from the sweep** — a
 > product decision, not a directionality defect), and 4 must land with B-5b.
-> **The sweep is 61 declarations in 11 files** (66 classified convertible, then
-> **5 retired by a computed-style ownership probe** — 3 rules whose markup exists
-> on 0 of 620 pages and in 0 source files, plus 2 redundant declarations).
+> **The sweep is 62 declarations in 11 files, and the classification is FROZEN**
+> (66 classified convertible, then **4 retired by a computed-style ownership
+> probe** — 3 rules whose markup exists on 0 of 620 pages and in 0 source files,
+> plus `.policy-list ul { padding-left: 0 }`). A 5th, `.lang-menu { right: 0 }`,
+> looked dead on the Arabic page and **owns on LTR** (`0 → -86px`) — ownership is
+> direction-dependent, so an RTL-only null result proves nothing about the 8 LTR
+> locales.
 > **9 of the 66 are
 > invisible to every rule here**: asymmetric 4-value shorthands
 > (`padding: 8px 20px 8px 340px`), **five of which are the companion half of a
