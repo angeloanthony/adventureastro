@@ -332,6 +332,22 @@ The 8×-duplicated JS is the real cost here, not the fix.
 > `isTransitioning` lock swallows a correctly-handled keypress without touching
 > the DOM. **No RTL finding may cite a negative until `npm run control:keyboard`
 > exits 0.** Swipe needs its own control before B-5b's touch negatives count.
+>
+> **B-5b MILESTONE 2 COMPLETE 2026-07-29** — the keyboard/CSS-observable
+> measurements, as an LTR/RTL differential over two builds of the same detached
+> worktree (ADR-11 substitution, `de → dir:'rtl'`). See
+> `AR2-B5b-measurements.md`; instrument `scripts/rtl/measure-carousel.mjs`
+> (`npm run measure:carousel`). The three answers: **(1) anchors** — the
+> gallery's absolutely-positioned buttons do not move under RTL (the four
+> physical declarations B-7 deferred here), while Doc's Beach's flex buttons
+> mirror perfectly with zero CSS — any sweep that "fixes" them breaks them;
+> **(2) transform sign** — unchanged `translateX(-N%)`, and behaviourally every
+> advance on both implementations presents **0% of the slide it just marked
+> active** (index 0 is the only visible position under RTL); **(3) key
+> mapping** — ArrowLeft/ArrowRight are direction-blind (−1/+1 in both builds,
+> handler live under RTL). Fix inherits a measured list: 2 transform sites,
+> 1 key-mapping policy call, 4 CSS declarations, 0 anchor work on utv. Swipe
+> (`home.ts:75-78`) stays unmeasured until a touch control exists (milestone 3).
 
 ### B-6 — 256 rendered `→` arrows do not mirror *(R-3)*
 

@@ -243,3 +243,7 @@ carousel anchors, transform sign, keyboard mapping, swipe direction. Swipe needs
 one more capability the control has not exercised — synthesised touch sequences
 via `Input.dispatchTouchEvent` — and by the rule at the top of this document
 that path needs its own positive control before any swipe negative is citable.
+
+> **Done for three of the four** — milestone 2 measured anchors, transform sign
+> and key mapping as an LTR/RTL differential: [`AR2-B5b-measurements.md`](AR2-B5b-measurements.md).
+> Swipe remains open, blocked on the touch control exactly as above.

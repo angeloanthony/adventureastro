@@ -25,6 +25,7 @@
     "probe:rtl": "node scripts/rtl/probe.mjs",
     "control:keyboard": "node scripts/rtl/control-keyboard.mjs",
     "control:keyboard:falsify": "node scripts/rtl/control-keyboard.mjs --falsify",
+    "measure:carousel": "node scripts/rtl/measure-carousel.mjs",
     "preview": "astro preview"
   },
   "dependencies": {
