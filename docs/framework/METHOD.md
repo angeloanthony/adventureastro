@@ -120,6 +120,8 @@ cannot go red is decoration.*
 >
 > Same shape as `npm run test:4n`: the differential ships beside gate 4n because
 > a green 4n proves nothing — the *rejected* rule also passes this corpus.
+> — [`AR2-B5b-instrument.md`](../rtl/AR2-B5b-instrument.md) §1, §2;
+> [`AR2-TrackA-gate-4n.md`](../rtl/AR2-TrackA-gate-4n.md) §3
 
 ### 6. Separate the measurement from the thing measured
 
@@ -129,6 +131,7 @@ identical.
 > B-5b's control has three exit codes — validated / assertion failed / never
 > reached a verdict — because one run in an early batch of 15 exited non-zero
 > with its output discarded and could not be attributed after the fact.
+> — [`AR2-B5b-instrument.md`](../rtl/AR2-B5b-instrument.md) §4.2
 
 ### 7. Test the finding you are most confident about first
 
@@ -136,6 +139,7 @@ identical.
 > classification and the one measurement falsified: an earlier `* { padding: 0 }`
 > had already zeroed the UA indent, so the declaration is dead, not defective.
 > A classification nobody can check is a longer census.
+> — [`AR2-B7-classification.md`](../rtl/AR2-B7-classification.md) §4.3, §5.1
 
 ### 8. A recorded size is a hypothesis about the measurement window
 
@@ -146,6 +150,8 @@ When a count looks wrong, re-census varying the **axis**, not the threshold.
 > rendered occurrences, because component `<style>` blocks are inlined per page.
 > B-5's 16 sites were really **32 of four kinds** — the first time a recorded
 > size grew.
+> — [`AR1-rtl-audit.md`](../rtl/AR1-rtl-audit.md) §0, §0.2;
+> [`AR2-B5a-carousel-consolidation.md`](../rtl/AR2-B5a-carousel-consolidation.md) §5
 
 ### 9. A differential is evidence only if the tree is constant across both builds
 
@@ -161,6 +167,9 @@ Verify what the tool **received**, not what you passed it.
 > Three instances: `git checkout --` re-materialised a stylesheet as CRLF and it
 > is copied verbatim into `dist/` (twice); Git Bash rewrote a lone `/` argument
 > into a Windows path before Node saw it.
+> — CRLF: [`AR2-B5a-carousel-consolidation.md`](../rtl/AR2-B5a-carousel-consolidation.md)
+> §6, then again in the B-7 conversion (`88f83f8`); argv:
+> [`AR2-B5b-instrument.md`](../rtl/AR2-B5b-instrument.md) §4.3
 
 ### 11. Where a delta lands is decided by the delivery mechanism, not the semantic effect
 
@@ -168,6 +177,9 @@ Verify what the tool **received**, not what you passed it.
 > **byte-identical** (external stylesheet) and **18 LTR pages changed** (inlined
 > component styles). The prediction was inverted, and the reverse-transform proof
 > was what made that safe to discover.
+> — commit `88f83f8`. The prediction is in
+> [`AR2-B7-classification.md`](../rtl/AR2-B7-classification.md) §8; the outcome
+> has no phase document, only the conversion commit's own message.
 
 ---
 
@@ -185,17 +197,27 @@ manufacturing edits.
 
 > B-6 and gate 4n both shipped against corpora with no live defect. Their proof
 > burden is therefore the fail-closed matrix, not a green run.
+> — [`AR2-B6-affordance-arrows.md`](../rtl/AR2-B6-affordance-arrows.md) §2.1;
+> [`AR2-TrackA-gate-4n.md`](../rtl/AR2-TrackA-gate-4n.md) §4, §5
 
 ### 14. Print every exclusion on success
 
 An exclusion nobody sees decays into a suppression list. Gates 4j and 4o print
 their exemptions and their out-of-scope decisions on every pass.
+— [`scripts/gate-4j-gallery-parity.mjs`](../../scripts/gate-4j-gallery-parity.mjs)
+§3a (the `GALLERY_EXEMPT` map);
+[`scripts/gate-4o-affordance-arrows.mjs`](../../scripts/gate-4o-affordance-arrows.mjs)
+(LTR-only content, out of scope by decision)
 
 ### 15. Record rejected candidate rules where the next census will see them
 
 > `de Startpunkt` (10), `zh 指南` (81, mostly 指南针 = compass), `zh 入口` (32),
 > `de Trail` (134), and the entire `gradient-directional` class (216) were all
 > measured and rejected. They live in the configs so they are not re-proposed.
+> — [`i18n-gates/4i-glossary.json`](../../i18n-gates/4i-glossary.json)
+> `notes.measured_not_forbidden`;
+> [`scripts/audit/rtl-inventory.mjs`](../../scripts/audit/rtl-inventory.mjs)
+> (`gradient-directional`)
 
 ### 16. Distinguish corpus-dependent from corpus-independent verification
 
@@ -206,6 +228,8 @@ certify that defect.
 > marker lexicon was frozen, so its own tokens self-excluded. The repair
 > precedent runs the other way — `ar`'s 4f/4g lexicon is the **union of all seven
 > completed locales'**, never an Arabic census.
+> — [`F1-architecture.md`](F1-architecture.md) §"Reviewed corpus";
+> [`AR1-gate-characterization.md`](../rtl/AR1-gate-characterization.md) §2.5
 
 Policy rules (numbering systems, script ranges) can ship before content.
 Census-derived rules (proper-noun drift) need a pilot batch first.
