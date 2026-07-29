@@ -19,6 +19,12 @@ between them.
 | [0010](0010-isolation-is-a-flanking-type-rule.md) | Bidi isolation is a flanking-type rule, not a character rule | **IMPLEMENTED** (AR-2 Track A, gate 4n, `aa92c3b`) |
 | [0011](0011-diagnostic-substitution-runs-in-a-detached-worktree.md) | A diagnostic that violates a repository invariant runs in a detached worktree | **IMPLEMENTED** (AR-2 Track B substitution build) |
 
+**How an ADR relates to the method.** An ADR records *what was decided* for one
+question; [`../METHOD.md`](../METHOD.md) records *how evidence is evaluated*
+across all of them. Several rules in METHOD.md were extracted from ADRs here —
+0010's rejected-rule preservation, 0011 §5.1's within-tree constraint — and the
+ADRs remain the primary source for their own measurements.
+
 **The filing rule (ADR-6):** *if a second host would need it to adopt the
 framework, it is framework documentation.* The first three ADRs here pass that test —
 0007 describes a registry shape any host with per-locale assets will hit, 0008
