@@ -53,6 +53,7 @@ byte-identical to `rtl-inventory.mjs`, so the sub-totals reconcile exactly:
 | class | raw | sites | action |
 |---|---:|---:|---|
 | `not-css` | 3 | 3 | **no work** — census artifact |
+| `dead-superseded` | 1 | 1 | **no work** — already zeroed by the `*` reset (§4.3) |
 | `symmetric-both-edges` | 58 | 30 | **no work** — mirroring is a no-op |
 | `symmetric-full-bleed` | 17 | 17 | **no work** — mirroring is a no-op |
 | `symmetric-centering` | 14 | 14 | **no work** — mirroring is a no-op |
@@ -65,25 +66,26 @@ byte-identical to `rtl-inventory.mjs`, so the sub-totals reconcile exactly:
 | `convert-accent-border` | 14 | 14 | **convert** |
 | `convert-shorthand` | 9 | 9 | **convert** |
 | `convert-text-align` | 3 | 3 | **convert** |
-| `convert-list-indent` | 2 | 2 | **convert** |
+| `convert-list-indent` | 1 | 1 | **convert** |
 | `convert-hover-indent` | 2 | 2 | **convert** |
 | `convert-margin-push` | 1 | 1 | **convert** |
 
 | action | declarations |
 |---|---:|
 | no work — census artifact | 3 |
+| no work — dead declaration | 1 |
 | no work — symmetric | **95** |
 | keep physical by decision | 10 |
-| owner decision | 5 |
+| owner decision — **excluded from the sweep** | 5 |
 | convert, only with B-5b | 4 |
-| **convert** | **66** |
+| **convert** | **65** |
 
 `sites` deduplicates by selector + declaration: `convert-edge-anchored` is 35 raw
 but 14 sites because three of its declarations are the eight byte-identical
 locale clones of `best-restaurants-vernal-utah.astro` — the same
 duplication-by-locale axis B-5a removed from the carousels.
 
-**The sweep is 66 declarations at 45 distinct sites across 11 files.** Not 174,
+**The sweep is 65 declarations at 44 distinct sites across 11 files.** Not 174,
 and not "mechanical".
 
 ---
@@ -150,7 +152,11 @@ moves to the start edge while the space reserved for it stays at the end — wor
 than leaving both physical. Same for the five `.nav-container` paddings and
 `.logo { left: 20px }`.
 
-### 4.3 `padding-left: 0` is a live rendering defect, not a tidy-up
+### 4.3 ~~`padding-left: 0` is a live rendering defect~~ — **FALSIFIED by the browser pass, see §5.1**
+
+> **This finding was wrong and is retained as written so the correction is
+> legible.** The claim below is sound CSS reasoning that does not survive
+> contact with *this* stylesheet.
 
 ```css
 .policy-list ul { list-style: none; padding-left: 0 }
@@ -161,6 +167,18 @@ that is the *right* side, so a physical `padding-left: 0` resets a side that was
 already zero and **the 40px indent survives**. This is the one class in B-7
 where the physical property does not merely point the wrong way — it silently
 fails to do the thing it was written to do.
+
+**Why it is wrong:** [`styles.css:22`](../../public/styles.css#L22) is
+`* { margin: 0; padding: 0; box-sizing: border-box }`. The universal reset has
+already zeroed the UA indent on *both* inline sides before this rule is reached,
+so there is no 40px left to survive. Measured on the rendered page:
+`padding-inline-start: 0px`, `padding-inline-end: 0px`. The declaration is
+**dead** — converting it is a no-op, and so is deleting it.
+
+Reclassified `convert-list-indent` → `dead-superseded`. The convert total moves
+**66 → 65**; the live total in §5 moves **22 → 21**. `.author-credentials ul
+{ padding-left: 20px }` is unaffected: it sets a positive value *over* the reset,
+so it remains a real conversion.
 
 ### 4.4 One conversion has a companion property that must move with it
 
@@ -193,34 +211,80 @@ without them and B-5b picks them up.
 
 B-6 found zero: `ar` renders one route with no arrows on it. B-7 is different.
 `dist/ar/cancellation-policy/index.html` is `<html lang="ar" dir="rtl">` and
-renders six of the convert classes — **22 of the 66 declarations are live
-today**:
+renders six of the convert classes — **21 of the 65 declarations are live
+today**, every one of them since confirmed in a browser (§5.1):
 
 | element | declarations | what is wrong right now |
 |---|---:|---|
-| `.logo` + `.nav-container` clearance | 3 + 5 | logo pinned to the physical left; the padding reserving space for it is also on the left |
-| `.dropdown-menu` | 4 | menu aligns to the physical left; accent bar and hover indent on the wrong edge |
+| `.logo` + `.nav-container` clearance | 3 + 5 | logo pinned to the physical left; the padding reserving space for it is on the same side, so the pair is wrong together |
+| `.dropdown-menu` | 4 | menu aligns to the physical left; accent bar and hover indent on the wrong edge (hover state — `opacity: 0` at rest) |
 | `.lang-menu` | 4 | same, mirrored |
-| `.policy-list` | 3 | indent reset misses (4.3), and the ✓ bullet lands at the far end of the line |
+| `.policy-list li::before` + `li` padding | 2 | the ✓ bullet lands at the far end of the Arabic line, with its 35px of reserved space |
 | `.policy-note` / `.policy-warning` | 2 | accent bar on the trailing edge, reading as a closing rule |
-| `.mobile-menu-toggle` | 1 | hamburger pushed to the wrong end below 1280px |
+| `.mobile-menu-toggle` | 1 | hamburger pushed to the *start* below 1280px — logo and toggle are exactly swapped |
 
 This changes B-7's standing relative to the rest of Track B. It is not
 prospective regression protection like gate 4n or the arrow helper — it is a
 visible defect on the only Arabic page that exists, in the site's shared chrome,
 and therefore on **every** Arabic page the content phase adds.
 
+### 5.1 Browser calibration — 5 of 6 confirmed, 1 falsified
+
+**The presentation layer has now been opened in a browser.** First time in this
+initiative. Method: `astro preview` over the existing `dist/`, Edge 150 headless
+driven over CDP with Node's built-in `WebSocket` (no dependency added, nothing
+installed, no repo state touched). Read-only.
+
+Screenshots alone would not have settled this — the calibration question is not
+"does it look wrong" but "**is the declaration I classified the one deciding the
+position**". So the pass collected `getComputedStyle` and bounding boxes for
+each live candidate at 1600px and 1100px, and used screenshots to confirm the
+computed numbers meant what they appeared to.
+
+| candidate | measured | verdict |
+|---|---|---|
+| `.logo` | `left: 20px`, box at l=20 while nav reads right-to-left | **confirmed** — logo sits at the *end* of an RTL header |
+| `.nav-container` | `padding-inline-start: 20px` / **`-inline-end: 240px`** | **confirmed, and it confirms §4.2** — the 240px clearance is on the same physical side as the logo, so the pair is consistently wrong *together* |
+| `.policy-note` / `.policy-warning` | `border-left-width: 4px`, `border-right-width: 0` | **confirmed** — both accent bars visibly on the trailing edge |
+| `.policy-list li::before` | `content: "✓"`, `left: 0`, with `padding-left: 35px` on the `li` | **confirmed** — every ✓ stranded at the far left, i.e. the *end* of its Arabic line |
+| `.mobile-menu-toggle` | at 1100px: `display: block`, `margin-left: 790px` (from `auto`), box at r=35 | **confirmed** — pushed to the *start*; logo and toggle are exactly swapped |
+| `.policy-list ul` | `padding-inline-start: 0px` — no indent to rescue | **FALSIFIED** — see §4.3 |
+
+Two things the pass added that the static classification could not:
+
+- **`.dropdown-menu` and `.lang-menu` compute `opacity: 0` at rest.** Their four
+  declarations each are real, but they are *hover-state* defects — not visible
+  on load. That does not change their class; it does change how the after-sweep
+  check must be performed, since a screenshot of the resting page cannot show
+  them.
+- **A third pair, not spotted statically.** `.crowd-col.moab-col` has
+  `border-right: 3px` with a `max-width: 1024px` override of `border-right: none`.
+  Convert only the base and the override stops cancelling it — in RTL
+  `border-right` resolves to `border-inline-*start*`, so the 3px divider would
+  reappear at the narrow breakpoint on the opposite edge. Both are already in
+  `convert-accent-border`; they must move in the same edit.
+
+**What the falsification costs, and what it buys.** One declaration of 66, and
+the phase's own headline example. What it buys is the demonstration that the
+classification is falsifiable at all: five predictions held under measurement and
+one did not, and the one that did not was the one argued most confidently. A
+classification nobody can check is a longer census.
+
 ---
 
 ## 6. Open for the owner
 
-**`decide-promo-anchor` (5 declarations).** The Best Western badge anchors
-bottom-start (`left: 20px`), the High Class Limousine badge middle-end
-(`right: 20px`), plus the floating video and two `max-width: 1024px` overrides.
-The two badges are deliberately on opposite edges so they cannot collide, and
-that relationship holds whichever way they mirror. Whether an advertisement
-follows the reading direction or stays pinned to the screen is a business call,
-not a correctness one — recorded here rather than decided.
+**`decide-promo-anchor` (5 declarations) — EXCLUDED from the B-7 sweep.** The
+Best Western badge anchors bottom-left (`left: 20px`), the High Class Limousine
+badge middle-right (`right: 20px`), plus the floating video and two
+`max-width: 1024px` overrides. The two badges are deliberately on opposite edges
+so they cannot collide, and that relationship holds whichever way they mirror.
+Whether an advertisement follows the reading direction or stays pinned to the
+screen is a **product decision, not a directionality defect** — no objectively
+incorrect RTL layout has been established for them, and none of the five renders
+on the one Arabic route. Folding them in would make B-7 a design change wearing
+a correctness sweep's proof. They stay open as an owner call; if the answer is
+"mirror them", that is a separate one-line commit with its own justification.
 
 *(Their close buttons are not part of this: `.bw-badge-close` / `.hcl-badge-close`
 `right: 10px` are the close affordance at the end corner of their own box, and
@@ -249,7 +313,7 @@ by roughly the same factor:
 |---|---|---|
 | B-5 | 16 carousel copies | 2 implementations |
 | B-6 | 204 arrow sites | 4 shared sites (+ a gate); **0 live defects** |
-| B-7 | 174 physical declarations | 66 to convert at 45 sites; 95 are no-ops |
+| B-7 | 174 physical declarations | 65 to convert at 44 sites; 95 are no-ops |
 
 That is no longer coincidence, and the useful phrasing is not "inventories
 exaggerate":
@@ -270,11 +334,26 @@ the one that breaks the layout if you miss it.** This is the seventh instance of
 "a recorded size is a hypothesis about the measurement window" — but the first
 where widening the window was the load-bearing move rather than narrowing it.
 
+And a second corollary, from §5.1: **a classification is a set of predictions, so
+it can be measured against the rendered page — and should be, once one exists.**
+Five held; the sixth did not, and it was the one this document argued most
+confidently, singled out as the sharpest finding of the phase. The reasoning was
+correct CSS and wrong about *this* stylesheet, because it never checked whether
+something upstream had already settled the question. The general form:
+
+> Reasoning about what a declaration *should* do is not a measurement of what it
+> *does*. Where a rendered surface exists, the classification is falsifiable —
+> and the item you are most confident about is the one worth testing first.
+
+Which is the same lesson Track A learned by reproducing ADR-10's numbers before
+implementing from them, arriving from the opposite side: there, reproduction
+changed the rule; here, reproduction killed a finding.
+
 ---
 
 ## 8. What the sweep is
 
-66 declarations, 45 sites, 11 files:
+65 declarations, 44 sites, 11 files:
 
 - `public/styles.css` — the great majority
 - `src/components/content/TourDecisionGuide.astro` — `.tdg-link` accent border
@@ -296,6 +375,14 @@ Proof obligations for that commit, following B-5a and B-6:
    `/ar/`. That is a sharper proof than B-6 had, and it is only available
    because the 95 no-ops are excluded — sweeping them would have moved bytes on
    every locale for no rendering change.
-4. ⚠ **Still nothing has been opened in a browser.** The 22 live declarations in
-   §5 make `/ar/cancellation-policy/` the first page in this initiative where
-   looking would actually discriminate. It should be looked at before and after.
+4. **The before-state is now measured, not assumed** (§5.1). The same CDP probe
+   re-run after the sweep is the after-check: each of the 21 live declarations
+   has a recorded computed value and bounding box to compare against, which is a
+   stronger check than a screenshot diff. ⚠ Two of the six groups
+   (`.dropdown-menu`, `.lang-menu`) compute `opacity: 0` at rest, so the
+   after-check must force the hover state — a resting screenshot cannot see
+   eight of the 21.
+5. ⚠ **`.crowd-col.moab-col` must convert base *and* its `max-width: 1024px`
+   `border-right: none` override together**, or the override stops cancelling in
+   RTL and a 3px divider reappears on the opposite edge at the narrow
+   breakpoint. Third pair of this kind in the phase (§4.2, §5.1).

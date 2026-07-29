@@ -331,19 +331,23 @@ arrows need all of it. Do not size this from a glyph census — size it from
 > (`…get this right: …` satisfies the `inset-physical` pattern), **95 are
 > symmetric no-ops** (`left:0` beside `right:0`, `left:0` beside `width:100%`,
 > the `left:50%`+`translate(-50%)` idiom, `margin-left/right:auto`), 10 are kept
-> physical by decision, 5 are an owner call, and 4 must land with B-5b. **The
-> sweep is 66 declarations at 45 sites in 11 files — and 9 of those 66 are
+> physical by decision, 5 are an owner call (**excluded from the sweep** — a
+> product decision, not a directionality defect), and 4 must land with B-5b.
+> **The sweep is 65 declarations at 44 sites in 11 files — and 9 of those are
 > invisible to every rule here**: asymmetric 4-value shorthands
 > (`padding: 8px 20px 8px 340px`), **five of which are the companion half of a
-> declaration the census does see**. Also *not* mechanical: `.policy-list ul {
-> padding-left: 0 }` is a live defect (the UA indents with
-> `padding-inline-start`, so the physical reset misses it in RTL), and
-> `.arch-text .highlight-quote` needs its `border-radius` converted alongside its
-> `border-left`.
+> declaration the census does see**. Also *not* mechanical: `.arch-text
+> .highlight-quote` needs its `border-radius` converted alongside its
+> `border-left`, and `.crowd-col.moab-col` needs its `max-width: 1024px`
+> `border-right: none` override converted with its base.
 >
 > **B-7 is the first Track B item with LIVE defects** — unlike B-6's zero,
-> `dist/ar/cancellation-policy/` renders 22 of the 66, in shared chrome, so every
-> future Arabic page inherits them.
+> `dist/ar/cancellation-policy/` renders 21 of the 65, in shared chrome, so every
+> future Arabic page inherits them. **The presentation layer has now been opened
+> in a browser** (§5.1, Edge headless over CDP, read-only): 5 of 6 live groups
+> confirmed by computed style, **1 falsified** — `.policy-list ul { padding-left:
+> 0 }` is dead, not defective, because `styles.css:22` `* { padding: 0 }` already
+> zeroed the UA indent on both sides.
 
 Mechanical conversion to logical properties: `inset-physical` 145,
 `box-physical` 26, `text-align: left` 3. Zero `float`/`clear`, zero
