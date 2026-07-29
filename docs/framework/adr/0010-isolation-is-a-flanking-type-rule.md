@@ -12,11 +12,32 @@ the registry through the adapter, never assume it — see §6.
 
 ## 0. The one-line invariant
 
-> **In a document whose declared direction is RTL, no shared source may emit a mirrored
-> character whose flanking strong types differ, outside an isolated run.**
+> **In a document whose declared direction is RTL, no rendered text node may contain a
+> mirrored character whose flanking strong types differ, outside an isolated run.**
 
 The load-bearing clause is *whose flanking strong types differ*. Without it the rule is
 wrong on real corpora, and §2 is the measurement that shows by how much.
+
+### 0.1 Why it says *rendered text node* and not *shared source*
+
+The invariant was first phrased as "no **shared source** may emit …", which is how the
+problem was discovered — B-2 migrated shared chrome. As an enforceable rule it is wrong in a
+way that matters, and the counter-example is already known:
+
+**`404.astro` is not a shared source.** It hand-rolls its own copy of the nav, phone markup
+included. It is the one confirmed bypass of the formatter in the repository, and a rule
+scoped to shared sources **would exempt precisely it.**
+
+The narrower phrasing also cannot be enforced by the kind of gate this must be. A
+`dist/`-reading gate sees rendered HTML and has no way to attribute a text node to
+`Header.astro` rather than to an author's MDX — recovering that would mean reasoning about
+implementation strategy, which is exactly the boundary 4k holds ("verify rendered truth, not
+implementation strategy", ADR §5). Origin is not a property of the corpus the gate reads.
+
+So the scope is every rendered text node in an RTL document, regardless of where it came
+from. That is strictly stronger, it is what the §5 dry run already measured — **0 blocked on
+adventureastro, 22 on parkingwayastro** — and it brings the known bypass inside the rule
+instead of outside it.
 
 ---
 
@@ -179,7 +200,9 @@ gate's name, and it would be wrong the day a second RTL locale registered.
   passing gate.
 - **`404.astro`** bypasses the shared chrome entirely and would be this gate's first real
   finding the day an `/ar/404` route exists. The fix is structural — use the shared
-  `Header` — and is not the gate's business.
+  `Header` — and is not the gate's business. It is also the counter-example that set the
+  invariant's scope (§0.1): it is not a shared source, so the narrower phrasing would have
+  exempted the one bypass anyone had actually found.
 - **The `same`-flank population is unexercised here** (§2.2). Whichever host is used to
   develop the gate, its fail-closed matrix must include a correct Arabic-parentheses case,
   or the clause that makes this rule usable will itself be untested.
