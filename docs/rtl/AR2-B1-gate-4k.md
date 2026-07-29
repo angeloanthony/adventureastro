@@ -182,8 +182,14 @@ switching from implicit to explicit `dir` is not a defect and must not block —
 a different path now builds the root element, and it should be visible in the diff of a
 green run.
 
-**No live defect found.** 4k is therefore wired into `build` immediately, unlike 4h and 4i,
-which are still unwired because each found a real defect on the shipped corpus.
+**No live defect found.** 4k is therefore wired into `build` immediately, with none of the
+delay 4h and 4i needed — each of those found a real defect on the shipped corpus and could
+not be wired until it was fixed.
+
+*(Corrected 2026-07-28: this paragraph originally said 4h and 4i "are still unwired". That
+was already false when written — P39 `acd2844` fixed their defects and P40 `640d92c` wired
+both into `gates:dist` on 2026-07-27. The wiring precedent 4k follows is P40's, not an
+exception to it.)*
 
 ---
 

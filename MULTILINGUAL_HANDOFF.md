@@ -362,10 +362,15 @@ npm run validate →  gates:src  →                  gates:dist
 | 1 | `gate-4j-gallery-parity` | **source** | blocking |
 | 2 | `astro build` | source → `dist/` | blocking |
 | 3 | `validate-site` | `dist/` | blocking |
-| 4 | `gate-4f-headings` | `dist/` | blocking |
-| 5 | `gate-4h-seams` | `dist/` | blocking |
-| 6 | `gate-4i-glossary` | `dist/` + `src/lib/ui.ts` | blocking |
-| 7 | `gate-4g-anchors` | `dist/` | **advisory** |
+| 4 | `gate-4k-direction` | `dist/` | blocking |
+| 5 | `gate-4f-headings` | `dist/` | blocking |
+| 6 | `gate-4h-seams` | `dist/` | blocking |
+| 7 | `gate-4i-glossary` | `dist/` + `src/lib/ui.ts` | blocking |
+| 8 | `gate-4g-anchors` | `dist/` | **advisory** |
+
+*(4k was added by AR-2 B-1 and wired at the same time; this table omitted it until
+2026-07-28. `package.json` is the authority for the order — if the two disagree, the
+table is the one that is wrong.)*
 
 **Why this order.**
 
@@ -383,6 +388,12 @@ npm run validate →  gates:src  →                  gates:dist
    green for content that was never built. The gates read rendered output by
    deliberate design — 4h exists precisely because C6's seams measured 0 in plain
    source and 249 as rendered — so the dependency cannot be relaxed.
+
+2b. **4k sits directly after `validate-site`, ahead of every content gate, for the same
+   reason `validate-site` leads: direction is a property of the *document*, not of the
+   prose.** If a page's effective direction is wrong, findings from 4f/4h/4i about that
+   page's text are describing a document that was mis-assembled. Structure first, then
+   direction, then content.
 
 3. **`validate-site` leads the `dist/` consumers because structure precedes content.**
    It checks routes, link resolution, and schema. If the site is structurally broken,
@@ -416,6 +427,44 @@ itself.
 **No duplicate work.** `gates:src` and `gates:dist` are single composite scripts shared
 by `build` and `validate`; no gate executes twice in one invocation. Individual gates
 remain runnable in isolation via `npm run gate:4f` etc. for iteration.
+
+---
+
+## 7.2 Gate index (all gates, scripted and not)
+
+§7.1 is the **pipeline** — what runs, in what order. This is the **catalogue** — what each
+gate is *for*, including the ones no script executes. The two answer different questions and
+neither replaces the other. Added 2026-07-28, when writing it found 4k missing from §7.1.
+
+**Enforcement is the column that matters.** Half of these gates are process rules a human
+performs; a reader who assumes `npm run build` covers everything numbered `4x` will ship the
+exact class of defect 4a exists to prevent.
+
+| Gate | Scope | Enforcement | Purpose |
+|------|-------|-------------|---------|
+| 4a | source | **manual** | UI-chrome parity — key-set diff vs a *finished* locale, plus a rendered-output English scan |
+| 4b | source | **manual** | Dependency-root ordering — translate roots before the pages that link to them |
+| 4c | process | **manual** | Corpus beats brief — a measured corpus overrules a brief's worked example |
+| 4d | `dist/` | **manual** | Cross-locale body-link audit — no route downgrades once a locale is covered |
+| 4e | `dist/` | **manual** | Locked-phrase seam check — grep the *join*, not just the phrase (scripted successor: 4h) |
+| 4f | `dist/` | `gates:dist` | Untranslated headings, via a frozen per-locale marker lexicon |
+| 4g | `dist/` | `gates:dist` | Anchor-text audit — **advisory by construction**, exit 0 is its only content outcome |
+| 4h | `dist/` | `gates:dist` | Rendered-seam detector — ungrammatical joins at a locked phrase |
+| 4i | `dist/` + `ui.ts` | `gates:dist` | Glossary-lock drift, with `licensedIn` compound masking |
+| 4j | **source** | `gates:src` | Gallery parity — every registered locale explicitly defines every key |
+| 4k | `dist/` | `gates:dist` | Direction integrity — tests *effective* direction, not the attribute |
+| **4l** | **source** | **specified, not built** | No `youtube.com/embed` outside the facade component — [`docs/perf/V1-video-facade.md`](docs/perf/V1-video-facade.md) §6.1.1 |
+| **4m** | `dist/` | **specified, not built** | Video-ID multiset conserved per rendered page — same doc, §6.1.2 |
+
+**4l and 4m do not exist.** They are specified in the V-1 brief and nothing enforces them
+today. They appear here so the next gate takes `4n`, and so the row can be changed rather
+than the gate re-invented — not as a claim about the current suite.
+
+**Drift risk, stated plainly.** This table duplicates facts that live in `package.json` and
+in the gate headers, and §7.1 already proved that duplicated facts drift — it was written at
+P40 with seven correct rows and was wrong the next day, when B-1 wired 4k without touching
+it. One day. Nothing checks either table. When one disagrees with `package.json`,
+`package.json` wins.
 
 ---
 
