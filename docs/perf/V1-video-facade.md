@@ -102,6 +102,46 @@ inside the diff.
 
 ---
 
+## 1.5 Two measurement lessons, generalized — carry these into Phase B
+
+Both defects V-0 found were invisible to a *reasonable* measurement and visible to a slightly
+different one. They are the same failure in two dresses, and neither is about video.
+
+> **Measure by observed host, not by expected provider.**
+>
+> The census asked "where are the YouTube embeds" and got a complete, correct answer to that
+> question. It could not report the NPS video or the dead Vimeo API, because it never asked
+> what the page *actually contacts*. The host list is cheap and it is exhaustive:
+
+| Third-party host | What it is | Pages |
+|---|---|---:|
+| `www.youtube.com` | video players | 32 |
+| `img.youtube.com` | facade thumbnails (§1.3a) | 8 |
+| `www.googletagmanager.com` | GA4 | 620 |
+| `fonts.googleapis.com` | webfonts | 620 |
+| `www.nps.gov` | **video embed on 8, not seen by 4m**; plain links on 8 more | 16 |
+| `player.vimeo.com` | **dead — no embeds exist** | 8 |
+
+Six hosts is the entire third-party surface of the site, and two of the six were news. The
+same question generalizes past video with no adaptation — fonts, maps, tag managers, chat and
+payment widgets are all found by asking what the page contacts rather than what you expect it
+to contact. **Re-run the host census in Phase B**, not just the video census: a facade that
+removes `www.youtube.com` from the critical path but leaves five other hosts has moved less
+than the YouTube numbers suggest.
+
+> **Classify by behaviour, not by presentation.**
+>
+> `tour-book-btn` is a phone link 16 times ([`V0-analytics-contract.md`](V0-analytics-contract.md) §1.2).
+> A class name records what an author *meant* at the moment they typed it; a destination
+> records what the thing *does*. When the two disagree the class is wrong and the code still
+> looks right, which is why the error survives review and shows up as plausible data.
+
+The shared shape: **the key you measure by decides what you are able to see.** A wrong key
+does not fail loudly — it returns a clean, complete-looking answer to a question nobody meant
+to ask. Every count in §1 and §6.2 should be read as "true for the key it was measured by".
+
+---
+
 ## 2. The contract
 
 **One invariant.** The component owns YouTube embedding. No `page-content` block, `.astro`
