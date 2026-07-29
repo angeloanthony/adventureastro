@@ -459,13 +459,30 @@ taken last.
    and is **not tagged**, so the `dist/` this census reads predates it. The blocker is
    therefore gone; the residual argument for waiting is only that V-0's baseline (§3) should
    be taken against a post-B-2 build, not the current one. Owner's call.
-2. **`ambient` — keep YouTube at all?** A self-hosted `<video>` for a short muted loop would
-   remove the third-party dependency from four page families. **Deliberately not decided, and
-   not to be pre-decided by the architecture** — the component's two-mode contract (§2) works
-   either way, so this stays a swap behind `ambient` rather than a premise of it. It turns on
-   encoded asset size, cache behaviour, autoplay reliability across browsers, CDN reach, and
-   measured CWV — none of which V-0 will have until its baseline exists. Revisit after §6.2,
-   not before.
+2. **`ambient` — keep YouTube at all?** Partly decidable from the repository, and measuring
+   it moved the answer. The component's two-mode contract (§2) works either way, so this
+   remains a swap behind `ambient` rather than a premise of it.
+
+   **Measured, and it favours self-hosting:**
+
+   | Criterion | Measurement | Reads |
+   |---|---|---|
+   | Do the loops churn? | The video set is **append-only**: 7 → 30 distinct videos, **23 added, 0 ever removed**, 2026-06-04 → 2026-07-28 | self-host |
+   | Do *these five* churn? | All 5 ambient ids are in the **original 7** and have never changed identity | self-host |
+   | Decorative and muted? | `autoplay&mute&loop&controls=0`, no controls, no affordance | self-host |
+   | Non-technical staff swapping them? | No replacement has ever occurred in 8 weeks of history | self-host |
+
+   **The finding that complicates it: all 5 ambient videos are also carousel slides.** They
+   are not separate hero footage — `YQVFzCTh4m4` is the `/utv/` ambient hero *and* a slide on
+   the same page. Self-hosting therefore does not remove YouTube from any page it is on; it
+   adds a second, derived asset (a trimmed muted loop) beside a full upload that still
+   streams. That is defensible — a 15-second loop is a different asset from the source video,
+   not a duplicate — but it is a content-pipeline commitment, not just a hosting one.
+
+   **Still unmeasurable here, and genuinely deciding:** clip duration, encoded size at
+   acceptable quality, and whether the loops are short enough that adaptive bitrate is
+   irrelevant. All three need the actual media or a network fetch. **No repository evidence
+   argues for keeping YouTube for `ambient`; the remaining case for it is operational.**
 3. **Hero CTA.** `/utv/`'s hero already carries headline, rating and meta above the fold with
    no Play required ([`utv.ts:26-38`](../../src/page-content/utv.ts#L26-L38)). Price and the
    book/call buttons are absent. That is a content change to eight locale blocks, adjacent to
