@@ -311,6 +311,28 @@ breakpoints) put "previous" on the leading edge.
 
 The 8×-duplicated JS is the real cost here, not the fix.
 
+> **B-5a RESOLVED `00e2313`** — 8 clones consolidated, 858 files 0 diffs. The
+> true remaining surface is **4 sites in 2 files**: transform sign
+> (`home.ts:63`, `utv.ts:27`), key mapping (`home.ts:41-43`), swipe sign
+> (`home.ts:75-78`).
+>
+> **B-5b MILESTONE 1 COMPLETE 2026-07-29** — the *instrument*, not a fix. See
+> `AR2-B5b-instrument.md`. B-7 proved a browser can answer these questions and
+> then threw the tooling away; B-5b's answers are mostly negatives ("the Arabic
+> carousel does not respond"), which read identically to a dead input path, so
+> the input path is disproved first. `scripts/rtl/probe.mjs` +
+> `scripts/rtl/control-keyboard.mjs`, control green and falsifiable on demand
+> (`--falsify`), 3 exit codes so an instrument error can never be read as a
+> behavioural finding. **Not a gate, not wired into `build`.**
+>
+> The control's shape is forced by the source: autoplay (`home.ts:71`,
+> `setInterval(nextSlide, 5000)`) satisfies "something changed after input" by
+> elapsed time alone, so the control presses **ArrowLeft** — the direction
+> autoplay cannot produce — and synchronises to a tick first, because the 500ms
+> `isTransitioning` lock swallows a correctly-handled keypress without touching
+> the DOM. **No RTL finding may cite a negative until `npm run control:keyboard`
+> exits 0.** Swipe needs its own control before B-5b's touch negatives count.
+
 ### B-6 — 256 rendered `→` arrows do not mirror *(R-3)*
 
 `Bidi_Mirrored=No`, so they point into the start of the line in RTL. 6 are shared
