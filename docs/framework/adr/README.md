@@ -16,6 +16,7 @@ between them.
 | [0007](0007-declared-absence-over-optional-presence.md) | Declared absence over optional presence | **IMPLEMENTED** (AR-2 B-0, `72ef2ac`) |
 | [0008](0008-hreflang-is-two-fields.md) | `hreflang` is two fields | **DECIDED, not implemented** |
 | [0009](0009-registry-indirection-over-manifest-duplication.md) | Registry indirection over manifest duplication | **IMPLEMENTED** for direction (AR-2 B-1, `11b83d3`); descriptive of `locales.registry`/`policy`/`census` as shipped; one violation outstanding |
+| [0010](0010-isolation-is-a-flanking-type-rule.md) | Bidi isolation is a flanking-type rule, not a character rule | **DECIDED, not implemented** (AR-2 B-2 produced it; the gate is a later phase) |
 
 **The filing rule (ADR-6):** *if a second host would need it to adopt the
 framework, it is framework documentation.* All three ADRs here pass that test —
@@ -23,6 +24,12 @@ framework, it is framework documentation.* All three ADRs here pass that test �
 describes a coupling any host that reuses one locale tag for SEO and formatting
 already has, whether or not it has noticed, and 0009 answers a question every host
 with a locale registry must answer to write a manifest at all.
+
+**0010 is the first ADR written *before* its implementation**, deliberately: its whole value
+is preserving the rule that was measured and **rejected** (a 70% false-positive rate on a
+real corpus), which would be unrecoverable from a passing gate afterwards. It is also the
+clearest example of the pattern running through F3, F5, B-1 and B-2 — the measurement made
+the problem *smaller*, and the ADR records the reduction rather than the result.
 
 **0009 is the first ADR here that is mostly retroactive.** It names a rule four
 shipped sections already follow, having been argued locally four times and
