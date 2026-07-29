@@ -48,8 +48,8 @@ const restaurantStyles = `
       overflow:hidden
     }
     .card-image::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top,rgba(0,0,0,0.18),transparent)}
-    .cuisine-badge{position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.96);backdrop-filter:blur(8px);padding:6px 16px;border-radius:22px;font-family:var(--font-heading);font-size:0.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--burnt-orange);box-shadow:0 4px 12px rgba(0,0,0,0.15);z-index:2}
-    .discount-tag{position:absolute;top:14px;left:14px;background:linear-gradient(135deg,#27AE60,#229954);color:white;padding:6px 14px;border-radius:22px;font-family:var(--font-heading);font-size:0.72rem;font-weight:700;letter-spacing:0.5px;box-shadow:0 4px 12px rgba(39,174,96,0.3);z-index:2;display:flex;align-items:center;gap:4px}
+    .cuisine-badge{position:absolute;top:14px;inset-inline-end:14px;background:rgba(255,255,255,0.96);backdrop-filter:blur(8px);padding:6px 16px;border-radius:22px;font-family:var(--font-heading);font-size:0.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--burnt-orange);box-shadow:0 4px 12px rgba(0,0,0,0.15);z-index:2}
+    .discount-tag{position:absolute;top:14px;inset-inline-start:14px;background:linear-gradient(135deg,#27AE60,#229954);color:white;padding:6px 14px;border-radius:22px;font-family:var(--font-heading);font-size:0.72rem;font-weight:700;letter-spacing:0.5px;box-shadow:0 4px 12px rgba(39,174,96,0.3);z-index:2;display:flex;align-items:center;gap:4px}
     .card-body{padding:26px 28px 20px;flex:1;display:flex;flex-direction:column}
     .card-body h3{font-family:var(--font-heading);font-size:1.35rem;font-weight:700;color:var(--charcoal);margin-bottom:8px;letter-spacing:-0.3px}
     .card-address{font-size:0.9rem;color:var(--charcoal);opacity:0.65;margin-bottom:14px;line-height:1.4}
@@ -74,7 +74,7 @@ const restaurantStyles = `
     .coupon-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:10000;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(5px)}
     .coupon-modal-overlay.visible{display:flex;animation:fadeInModal 0.3s ease}
     .coupon-modal{background:white;border-radius:28px;width:100%;max-width:400px;padding:45px 35px;text-align:center;position:relative;box-shadow:0 30px 80px rgba(0,0,0,0.35)}
-    .coupon-modal-close{position:absolute;top:14px;right:16px;background:rgba(0,0,0,0.06);border:none;width:36px;height:36px;border-radius:50%;font-size:1.4rem;cursor:pointer;transition:all 0.3s ease;display:flex;align-items:center;justify-content:center;color:var(--charcoal)}
+    .coupon-modal-close{position:absolute;top:14px;inset-inline-end:16px;background:rgba(0,0,0,0.06);border:none;width:36px;height:36px;border-radius:50%;font-size:1.4rem;cursor:pointer;transition:all 0.3s ease;display:flex;align-items:center;justify-content:center;color:var(--charcoal)}
     .coupon-modal-close:hover{background:rgba(0,0,0,0.1);transform:rotate(90deg)}
     .coupon-modal-icon{font-size:4rem;margin-bottom:12px}
     .coupon-modal h2{font-family:var(--font-heading);font-size:1.5rem;font-weight:800;color:var(--charcoal);margin-bottom:6px}
