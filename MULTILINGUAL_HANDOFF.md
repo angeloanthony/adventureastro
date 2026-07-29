@@ -362,15 +362,18 @@ npm run validate →  gates:src  →                  gates:dist
 | 1 | `gate-4j-gallery-parity` | **source** | blocking |
 | 2 | `astro build` | source → `dist/` | blocking |
 | 3 | `validate-site` | `dist/` | blocking |
-| 4 | `gate-4k-direction` | `dist/` | blocking |
-| 5 | `gate-4f-headings` | `dist/` | blocking |
-| 6 | `gate-4h-seams` | `dist/` | blocking |
-| 7 | `gate-4i-glossary` | `dist/` + `src/lib/ui.ts` | blocking |
-| 8 | `gate-4g-anchors` | `dist/` | **advisory** |
+| 4 | `gate-4m-media` | `dist/` | blocking |
+| 5 | `gate-4k-direction` | `dist/` | blocking |
+| 6 | `gate-4n-isolation` | `dist/` | blocking |
+| 7 | `gate-4f-headings` | `dist/` | blocking |
+| 8 | `gate-4h-seams` | `dist/` | blocking |
+| 9 | `gate-4i-glossary` | `dist/` + `src/lib/ui.ts` | blocking |
+| 10 | `gate-4g-anchors` | `dist/` | **advisory** |
 
 *(4k was added by AR-2 B-1 and wired at the same time; this table omitted it until
-2026-07-28. `package.json` is the authority for the order — if the two disagree, the
-table is the one that is wrong.)*
+2026-07-28. 4n was added by AR-2 Track A and 4m by V-1 phase V-0, both the same day.
+`package.json` is the authority for the order — if the two disagree, the table is the one
+that is wrong.)*
 
 **Why this order.**
 
@@ -389,11 +392,24 @@ table is the one that is wrong.)*
    deliberate design — 4h exists precisely because C6's seams measured 0 in plain
    source and 249 as rendered — so the dependency cannot be relaxed.
 
-2b. **4k sits directly after `validate-site`, ahead of every content gate, for the same
-   reason `validate-site` leads: direction is a property of the *document*, not of the
+2a. **4m sits first among the `dist/` gates after `validate-site` because it asks the
+   coarsest question of the three structural checks: is the page carrying the media it is
+   supposed to carry?** It reads no text, no direction and no locale dictionary, so nothing
+   upstream of it can make its findings noise — and a page missing its videos entirely is a
+   diagnosis a reader wants before a heading or seam report.
+
+2b. **4k then 4n sit directly after `validate-site`, ahead of every content gate, for the
+   same reason `validate-site` leads: direction is a property of the *document*, not of the
    prose.** If a page's effective direction is wrong, findings from 4f/4h/4i about that
    page's text are describing a document that was mis-assembled. Structure first, then
    direction, then content.
+
+   **4n depends on 4k specifically, not merely on ordering convention.** It classifies a
+   page's text against the direction the *registry declares*, never against the `dir` it
+   finds on the page — and those two agreeing is exactly 4k's invariant. Run 4n on a build
+   where a page's direction contradicts its declaration and every finding describes a
+   document that was assembled wrong; run it ahead of 4k and it would silently agree with a
+   page that lies.
 
 3. **`validate-site` leads the `dist/` consumers because structure precedes content.**
    It checks routes, link resolution, and schema. If the site is structurally broken,
@@ -453,12 +469,32 @@ exact class of defect 4a exists to prevent.
 | 4i | `dist/` + `ui.ts` | `gates:dist` | Glossary-lock drift, with `licensedIn` compound masking |
 | 4j | **source** | `gates:src` | Gallery parity — every registered locale explicitly defines every key |
 | 4k | `dist/` | `gates:dist` | Direction integrity — tests *effective* direction, not the attribute |
+| 4n | `dist/` | `gates:dist` | Bidi isolation — a mirrored character whose flanking strong types **differ**, outside an isolated run (ADR-10) |
+| 4m | `dist/` | `gates:dist` | Rendered media identity — per-page video-ID **set** vs a frozen baseline, plus cross-locale route parity |
 | **4l** | **source** | **specified, not built** | No `youtube.com/embed` outside the facade component — [`docs/perf/V1-video-facade.md`](docs/perf/V1-video-facade.md) §6.1.1 |
-| **4m** | `dist/` | **specified, not built** | Video-ID multiset conserved per rendered page — same doc, §6.1.2 |
 
-**4l and 4m do not exist.** They are specified in the V-1 brief and nothing enforces them
-today. They appear here so the next gate takes `4n`, and so the row can be changed rather
-than the gate re-invented — not as a claim about the current suite.
+**4l does not exist.** It is specified in the V-1 brief and nothing enforces it today. The
+row is here so the numbering does not collide, and so the gate gets built rather than
+re-invented — not as a claim about the current suite. Reserving numbers worked twice in one
+day: the isolation gate took `4n` on the strength of this table, and 4m shipped into the row
+that was held for it. **The next gate takes `4o`.**
+
+**4m counts distinct videos, not references, and that is the whole design.** `/utv/` renders
+24 references to 21 videos — the ambient hero and one carousel slide are the same upload.
+A reference count is not stable across a change of *embedding form*, and surviving exactly
+that change is the gate's purpose: the V-1 facade migration turns each `<iframe src=…/embed/ID>`
+into an `<img src=…/vi/ID/…>`, and a gate keyed to iframes would have to be rewritten by the
+migration it exists to verify. Reference counts are recorded and reported, never blocking.
+Its two blocking signals fail in different directions — a frozen baseline catches drift on
+an existing page but is blind to a new route until re-baselined; cross-locale parity covers
+new routes the moment they exist but is blind to a defect applied to every locale at once.
+
+**4n is the first gate that ships with a test rather than only a green run**
+(`npm run test:4n`). It is prospective — it guards one Arabic route and B-2 fixed the
+defects before it existed — so it is green on the day it lands and stays green until someone
+regresses. A green run therefore proves nothing about it, and worse, *the rule ADR-10
+rejected also passes this corpus*. The differential test is what distinguishes them. Treat
+"4n is green" as evidence of nothing until `test:4n` is green too.
 
 **Drift risk, stated plainly.** This table duplicates facts that live in `package.json` and
 in the gate headers, and §7.1 already proved that duplicated facts drift — it was written at

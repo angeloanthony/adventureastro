@@ -8,7 +8,7 @@
     "build": "npm run gates:src && astro build && npm run gates:dist",
     "validate": "npm run gates:src && npm run gates:dist",
     "gates:src": "node scripts/gate-4j-gallery-parity.mjs",
-    "gates:dist": "node scripts/validate-site.mjs && node scripts/gate-4k-direction.mjs && node scripts/gate-4n-isolation.mjs && node scripts/gate-4f-headings.mjs && node scripts/gate-4h-seams.mjs && node scripts/gate-4i-glossary.mjs && node scripts/gate-4g-anchors.mjs",
+    "gates:dist": "node scripts/validate-site.mjs && node scripts/gate-4m-media.mjs && node scripts/gate-4k-direction.mjs && node scripts/gate-4n-isolation.mjs && node scripts/gate-4f-headings.mjs && node scripts/gate-4h-seams.mjs && node scripts/gate-4i-glossary.mjs && node scripts/gate-4g-anchors.mjs",
     "census:phrases": "node scripts/census/phrase-set.mjs > census/phrase-set.json",
     "census:phrase-count": "node scripts/census/phrase-count.mjs --phrases census/phrase-set.json --out census/phrase-count.json --measured-at",
     "gate:4j": "node scripts/gate-4j-gallery-parity.mjs",

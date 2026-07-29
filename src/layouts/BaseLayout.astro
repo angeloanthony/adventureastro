@@ -85,6 +85,82 @@ const showHreflang = available.length > 1;
 
     gtag('config', 'G-MVCDESQ5GN');
   </script>
+  <!--
+    Conversion instrumentation — see docs/perf/V0-analytics-contract.md.
+
+    ONE DELEGATED LISTENER, MATCHING ON href. Not a handler per CTA: there are 1,801 phone
+    links and 3,082 booking links rendered from .astro components, page-content locale blocks
+    and MDX bodies, and a per-element approach would be re-broken by the next author to add a
+    button. Delegation means any anchor to /booking/ is instrumented the moment it renders.
+
+    href IS THE DISCRIMINATOR BECAUSE CLASS IS NOT. Measured in dist/: `cta-phone` (40),
+    `cta-button primary` (25) and `tour-book-btn` (16) all carry tel: links. A class-based
+    selector would file those 16 as bookings, and the error would be invisible — it would
+    look like more bookings than there were.
+
+    NO VIDEO EVENTS HERE. `video_start`/`video_progress` are GA4 enhanced-measurement names;
+    sending custom events under them merges two schemas irreversibly. The facade sets
+    `enablejsapi=1` and lets GA4 collect them natively instead.
+  -->
+  <script is:inline>
+    (function () {
+      var BOOKING = /^\/(?:[a-z]{2}\/)?booking\/$/;
+      // Measured in dist/, not assumed: 3,082 booking affordances are anchors, but 57 are
+      // <button onclick> — 49 navigating via location.href and 8 opening cal.com, which is a
+      // SECOND booking funnel with no /booking/ path at all. An anchor-only listener would
+      // have reported a clean, complete-looking booking number that silently excluded both.
+      var CALCOM = /(?:^|\.)cal\.com$/;
+      var NAV = /(?:location\.href\s*=\s*|window\.open\s*\(\s*)['"]([^'"]+)['"]/;
+
+      var isBooking = function (url) {
+        return BOOKING.test(url.pathname) || CALCOM.test(url.hostname);
+      };
+      var resolve = function (raw) {
+        try { return new URL(raw, location.href); } catch (err) { return null; }
+      };
+      var send = function (url) {
+        gtag('event', 'booking_click', {
+          page_path: location.pathname,
+          locale: document.documentElement.lang || '',
+          // Same-origin destinations report a path; cal.com reports its full URL, because
+          // "which funnel" is the distinction that matters and a bare path would hide it.
+          destination: url.origin === location.origin ? url.pathname : url.href,
+        });
+      };
+
+      document.addEventListener('click', function (e) {
+        if (!e.target || !e.target.closest) return;
+
+        var a = e.target.closest('a[href]');
+        if (a) {
+          var raw = a.getAttribute('href') || '';
+          if (raw.slice(0, 4).toLowerCase() === 'tel:') {
+            gtag('event', 'phone_click', {
+              page_path: location.pathname,
+              locale: document.documentElement.lang || '',
+              phone: raw.slice(4),
+            });
+            return;
+          }
+          // Resolve before matching: the contract is about where the click GOES, not how the
+          // href was spelled.
+          var u = resolve(a.href);
+          if (u && isBooking(u)) send(u);
+          return;
+        }
+
+        // Navigation expressed as an inline handler. Only a destination this pattern can
+        // actually read is considered, and only if it is a booking destination — so the
+        // carousel and accordion buttons that also carry onclick are untouched.
+        var el = e.target.closest('[onclick]');
+        if (!el) return;
+        var m = NAV.exec(el.getAttribute('onclick') || '');
+        if (!m) return;
+        var nu = resolve(m[1]);
+        if (nu && isBooking(nu)) send(nu);
+      });
+    })();
+  </script>
 </head>
 <body class={bodyClass}>
   <slot name="body" />
