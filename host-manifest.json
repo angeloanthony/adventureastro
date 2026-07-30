@@ -44,13 +44,18 @@
       "copying it for a reason this section states twice already: `LOCALES[].dir` is where the",
       "layout reads direction, so it is where the gate must read it. A `dir` in `entries` would",
       "render correctly and be checked against nothing — the framework would then be verifying",
-      "its own copy of the fact instead of the fact."
+      "its own copy of the fact instead of the fact.",
+      "",
+      "`intlField` is DECLARED as of AR-2 Track C (B-3 / ADR-8), on the same principle:",
+      "`LOCALES[].intl` is where `getIntlLocale()` reads the formatting tag, so it is where",
+      "gate 4p must read it."
     ],
     "registry": {
       "module": "src/lib/i18n.ts",
       "binding": "LOCALES",
       "codeField": "code",
-      "directionField": "dir"
+      "directionField": "dir",
+      "intlField": "intl"
     },
     "defaultBinding": "DEFAULT_LOCALE",
 

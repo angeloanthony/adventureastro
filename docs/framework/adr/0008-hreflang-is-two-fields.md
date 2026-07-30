@@ -1,11 +1,23 @@
 # ADR-8 — `hreflang` is two fields
 
-**Status:** DECIDED, **not implemented.** Tracked as AR-2 **B-3**.
+**Status:** IMPLEMENTED — AR-2 Track C (C-1/C-2), 2026-07-30. Tracked as AR-2 **B-3**.
 **Context phase:** discovered by AR-1 (Arabic readiness), 2026-07-28.
 
-Written now, ahead of implementation, because the evidence is measured and the
-rationale is explicit today; B-3's implementation is a separate change and does
-not block Gate 4k or the bidi formatter.
+Implemented exactly as §2 below: `LocaleMeta.intl` split from `hreflang`
+(`intl === hreflang` for all nine locales, dist/ byte-identical), and the §2.1
+check ships as **gate 4p** (`scripts/gate-4p-intl-numeral.mjs`, wired into
+`gates:src` — its own check, not folded into 4k, because it must run before a
+build exists). One finding beyond §2.1's sketch: `Intl.DateTimeFormat` on an
+unresolvable tag does not throw — it silently falls back to the system default
+locale, which is `latn`, so the two-outcome check sketched below would PASS the
+one registry state in which it measured nothing. The shipped gate adds a third
+outcome (INSTRUMENT FAILURE via `supportedLocalesOf`, exit 2, distinct from
+both verdicts). Acceptance record:
+[`AR2-TrackC-registry-contract.md`](../../rtl/AR2-TrackC-registry-contract.md).
+
+Written 2026-07-28 ahead of implementation, because the evidence was measured
+and the rationale explicit then; B-3's implementation was a separate change and
+did not block Gate 4k or the bidi formatter.
 
 ---
 

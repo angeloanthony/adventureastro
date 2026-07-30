@@ -87,6 +87,23 @@
                 "answering 'ltr', because an invented direction would silently approve an RTL",
                 "locale rendering left-to-right — the exact defect gate 4k exists to catch."
               ]
+            },
+            "intlField": {
+              "type": "string",
+              "minLength": 1,
+              "$doc": [
+                "Names the registry field carrying each locale's formatting tag — the BCP-47 tag",
+                "every machine-formatted date and number renders through (ADR-8: it is a separate",
+                "fact from hreflang, and Arabic is where the two diverge). Same class as",
+                "`directionField`: WHAT THE HOST CALLS the field, never how to recover it from bytes,",
+                "and it points at the registry rather than copying it because `getIntlLocale()` reads",
+                "the registry, so gate 4p must read the same fact, not a transcription of it.",
+                "",
+                "OPTIONAL, and its absence is a declared fact rather than a default. A host that does",
+                "not declare it cannot be asked which tag formats a locale: the adapter refuses",
+                "instead of guessing, because an invented tag would let gate 4p certify a numbering",
+                "system the site never renders — the exact silence ADR-8 exists to end."
+              ]
             }
           }
         },

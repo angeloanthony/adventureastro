@@ -241,10 +241,15 @@ notices.
 > **Still open, unchanged:** `404.astro` bypasses the formatter and 4n cannot see it, because
 > no `/ar/404` route exists. The day one does, this gate reports it.
 
-### B-3 — `LocaleMeta.hreflang` serves two consumers with different requirements
+### ~~B-3 — `LocaleMeta.hreflang` serves two consumers with different requirements~~ RESOLVED (Track C)
 
-> **Selected into Track C, 2026-07-30:** brief at
-> [`AR2-TrackC-brief.md`](AR2-TrackC-brief.md) (C-1/C-2). Not yet implemented.
+> **RESOLVED 2026-07-30 (Track C, C-1/C-2):** `intl` split from `hreflang` in
+> the registry (dist/ byte-identical — `intl === hreflang` for all nine), and
+> the policy is enforced by **gate 4p** (`scripts/gate-4p-intl-numeral.mjs`,
+> `gates:src`, three-way outcome: pass / violation / instrument failure). The
+> ADR-8 one-liner this entry warned about now fails the build before astro
+> runs. Acceptance record:
+> [`AR2-TrackC-registry-contract.md`](AR2-TrackC-registry-contract.md).
 
 > **ADR WRITTEN 2026-07-28 — decision recorded, not yet implemented:**
 > [`docs/framework/adr/0008-hreflang-is-two-fields.md`](../framework/adr/0008-hreflang-is-two-fields.md).
@@ -504,9 +509,11 @@ locale passes silently — exactly what the check exists to prevent.
 
 ### B-10 — No gate has the concept of a numbering system *(S6)*
 
-Arabic-Indic digits in rendered Arabic text pass everything. The AR-1 numeral
-policy is enforced by translator discipline plus one locale-tag default (B-3) and
-nothing else. Cheap to add: scan rendered text per locale for
+Arabic-Indic digits in rendered Arabic text pass everything. Since Track C
+(2026-07-30), the **machine-formatted** half of the AR-1 numeral policy is
+enforced at the registry by gate 4p (B-3, resolved); **author-typed** digits in
+prose remain covered by translator discipline and nothing else — that rendered
+half is this item. Cheap to add: scan rendered text per locale for
 `[٠-٩۰-۹]`.
 
 ### B-11 — Proper-noun drift is invisible in body prose *(S5)*
@@ -549,11 +556,12 @@ direction-blind carousel, unmirrored arrows and no bidi isolation would multiply
 every finding above by 77 routes.
 
 > **Status 2026-07-30:** the layout half of this precondition is met — B-5–B-7
-> are closed and browser-verified (Track B, closure note above). Still
-> outstanding before §7 expansion: **B-3** (ADR-8 recorded, ~9 lines
-> unimplemented), **B-4**, and the gate items **B-8/B-9** that must land before
-> the first Arabic glossary lock, plus **B-10** before Arabic prose ships at
-> volume. The presentation layer is no longer what blocks expansion.
+> are closed and browser-verified (Track B, closure note above), and **B-3 is
+> resolved** (Track C C-1/C-2, gate 4p — entry above). Still outstanding before
+> §7 expansion: **B-4** (Track C C-3, in progress), and the gate items
+> **B-8/B-9** that must land before the first Arabic glossary lock, plus
+> **B-10** before Arabic prose ships at volume. The presentation layer is no
+> longer what blocks expansion.
 
 **Also still open, as for `de`/`ja`/`zh`:** native-speaker review. Nothing in AR-1
 has been read by a native Arabic speaker.

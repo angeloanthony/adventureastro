@@ -6,9 +6,13 @@ differential) · 11 (delivery mechanism decides where the delta lands) ·
 13 (prevention or repair, stated) · 16 (corpus-dependent vs
 corpus-independent verification)
 
-**Status: BRIEF — no implementation has begun.** Written 2026-07-30, from a
-clean baseline: Track B closed at `a52d0fb`, working tree clean except
-`.claude/settings.json` (harness-owned, not touched).
+**Status: C-1/C-2 COMPLETE 2026-07-30** — acceptance record at
+[`AR2-TrackC-registry-contract.md`](AR2-TrackC-registry-contract.md); owner
+confirmed D1 (include the aria-label half, lands with C-3) and D2 (`gate-4p`
+in `gates:src`). **C-3 not begun.** Originally written 2026-07-30 as a brief
+with no implementation begun, from a clean baseline: Track B closed at
+`a52d0fb`, working tree clean except `.claude/settings.json` (harness-owned,
+not touched).
 
 ---
 

@@ -20,31 +20,23 @@ export interface LocaleMeta {
   dir: 'ltr' | 'rtl';
   /** Open Graph og:locale value. */
   ogLocale: string;
-  /**
-   * hreflang attribute value. Region-qualified where the locale targets a
-   * region; UNQUALIFIED where it deliberately does not (see `ar`).
-   *
-   * ⚠ This field has two consumers with different requirements, and Arabic is
-   * the first locale where they can disagree. `getIntlLocale()` reuses it as
-   * the BCP-47 tag for `Intl` — so this value silently decides the NUMBERING
-   * SYSTEM every formatted date and number renders in:
-   *
-   *     'ar'    -> 28 يوليو 2026   (numberingSystem: latn)
-   *     'ar-EG' -> ٢٨ يوليو ٢٠٢٦   (numberingSystem: arab)
-   *
-   * The AR-1 numeral policy is Western digits corpus-wide. Nothing in the
-   * dictionary, the corpus, or any gate enforces that for machine-formatted
-   * output — this field does, alone. Changing `ar` to a region whose CLDR
-   * default is `arab` would violate the policy site-wide without touching a
-   * single translated string. `ar-EG` and `ar-SA` both do; `ar` and `ar-MA` do
-   * not. See docs/rtl/AR1-arabic-policy.md §3.
-   *
-   * THE FIX IS DECIDED, NOT YET APPLIED: split this into `hreflang` (SEO) and
-   * `intl` (formatting), and assert every locale's `intl` tag resolves to
-   * `latn`. See docs/framework/adr/0008-hreflang-is-two-fields.md. Until then
-   * this comment is the only guard, which is exactly the ADR's complaint.
-   */
+  /** hreflang attribute value. SEO only. Region-qualified where the locale
+   *  targets a region; UNQUALIFIED where it deliberately does not (see `ar`).
+   *  NEVER read by Intl — see `intl`. */
   hreflang: string;
+  /**
+   * BCP-47 tag for every machine-formatted value: dates, numbers, JSON-LD
+   * inLanguage. Decides numbering system and calendar. Deliberately NOT
+   * derived from `hreflang`: the two answer different questions and Arabic is
+   * where they diverge (docs/framework/adr/0008-hreflang-is-two-fields.md).
+   *
+   * ENFORCED, not guarded by prose: gate 4p (`scripts/gate-4p-intl-numeral.mjs`,
+   * wired into `gates:src`) asserts every entry here resolves to numbering
+   * system `latn` — the AR-1 corpus-wide numeral policy
+   * (docs/rtl/AR1-arabic-policy.md §3). An edit that violates it fails the
+   * build before astro runs.
+   */
+  intl: string;
 }
 
 // The full roadmap of locales. `hasContent: false` means the locale is
@@ -52,22 +44,23 @@ export interface LocaleMeta {
 // (existence-awareness). Flip to true — or better, derive it from real
 // content existence in P2 — when that locale's pages are committed.
 export const LOCALES = [
-  { code: 'en', name: 'English',    dir: 'ltr', ogLocale: 'en_US', hreflang: 'en-US' },
-  { code: 'es', name: 'Español',    dir: 'ltr', ogLocale: 'es_US', hreflang: 'es-US' },
-  { code: 'it', name: 'Italiano',   dir: 'ltr', ogLocale: 'it_IT', hreflang: 'it-IT' },
-  { code: 'pt', name: 'Português',  dir: 'ltr', ogLocale: 'pt_PT', hreflang: 'pt-PT' },
-  { code: 'fr', name: 'Français',   dir: 'ltr', ogLocale: 'fr_FR', hreflang: 'fr-FR' },
-  { code: 'de', name: 'Deutsch',    dir: 'ltr', ogLocale: 'de_DE', hreflang: 'de-DE' },
-  { code: 'ja', name: '日本語',      dir: 'ltr', ogLocale: 'ja_JP', hreflang: 'ja-JP' },
-  { code: 'zh', name: '简体中文',    dir: 'ltr', ogLocale: 'zh_CN', hreflang: 'zh-CN' },
+  { code: 'en', name: 'English',    dir: 'ltr', ogLocale: 'en_US', hreflang: 'en-US', intl: 'en-US' },
+  { code: 'es', name: 'Español',    dir: 'ltr', ogLocale: 'es_US', hreflang: 'es-US', intl: 'es-US' },
+  { code: 'it', name: 'Italiano',   dir: 'ltr', ogLocale: 'it_IT', hreflang: 'it-IT', intl: 'it-IT' },
+  { code: 'pt', name: 'Português',  dir: 'ltr', ogLocale: 'pt_PT', hreflang: 'pt-PT', intl: 'pt-PT' },
+  { code: 'fr', name: 'Français',   dir: 'ltr', ogLocale: 'fr_FR', hreflang: 'fr-FR', intl: 'fr-FR' },
+  { code: 'de', name: 'Deutsch',    dir: 'ltr', ogLocale: 'de_DE', hreflang: 'de-DE', intl: 'de-DE' },
+  { code: 'ja', name: '日本語',      dir: 'ltr', ogLocale: 'ja_JP', hreflang: 'ja-JP', intl: 'ja-JP' },
+  { code: 'zh', name: '简体中文',    dir: 'ltr', ogLocale: 'zh_CN', hreflang: 'zh-CN', intl: 'zh-CN' },
   // AR-1. The first rtl locale. `dir` is the ONLY place page direction is
   // decided: BaseLayout reads it through isRtl(), and no component branches on
   // the locale code. `hreflang` is deliberately unqualified — Arabic has no
   // single target region for a Utah inbound-travel site, and qualifying it
-  // would exclude every other Arabic region from the alternate set. It also
-  // resolves to latn digits under Intl, which is what the numeral policy
-  // requires; see the field doc above before ever regionalizing it.
-  { code: 'ar', name: 'العربية',     dir: 'rtl', ogLocale: 'ar_AR', hreflang: 'ar' },
+  // would exclude every other Arabic region from the alternate set. `intl` is
+  // 'ar' because bare 'ar' resolves to latn digits, which the numeral policy
+  // requires (gate 4p enforces this) — and since ADR-8 split the fields, a
+  // future SEO regionalization of `hreflang` no longer touches formatting.
+  { code: 'ar', name: 'العربية',     dir: 'rtl', ogLocale: 'ar_AR', hreflang: 'ar', intl: 'ar' },
 ] as const satisfies readonly LocaleMeta[];
 
 export const DEFAULT_LOCALE = 'en';
@@ -594,10 +587,12 @@ export function switchLocalePath(currentPath: string, target: string): string {
 
 // --- Locale formatting utilities (P2B framework) ---
 
-/** BCP-47 tag for Intl APIs — reuses the region-qualified hreflang value
- *  ('en-US', 'es-US', 'it-IT', 'pt-PT'). One source, no second table. */
+/** BCP-47 tag for Intl APIs — the registry's `intl` field, NOT `hreflang`.
+ *  The two answer different questions (SEO audience vs numbering system and
+ *  calendar) and Arabic is where they diverge; see ADR-8. Gate 4p asserts
+ *  every `intl` value resolves to latn digits. */
 export function getIntlLocale(code: string): string {
-  return getLocaleMeta(code).hreflang;
+  return getLocaleMeta(code).intl;
 }
 
 /** JSON-LD `inLanguage` value for a locale (same BCP-47 tag). */

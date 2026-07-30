@@ -65,13 +65,14 @@ const relFromRoot = (p) => {
  * from bytes. Switching this function to a regex would not change one character of the
  * manifest — that is the discriminator, applied.
  *
- * `directionField`, when the manifest declares one, is read in the SAME PASS and returned
- * raw. Raw is deliberate: this function reports what the registry says, and whether what
- * it says is a legal direction is a judgement the direction resolver makes, once, where
+ * `directionField` and `intlField`, when the manifest declares them, are read in the SAME
+ * PASS and returned raw. Raw is deliberate: this function reports what the registry says,
+ * and whether what it says is a legal direction (or a resolvable BCP-47 tag) is a
+ * judgement the respective resolver — or the gate whose policy it is — makes, once, where
  * the vocabulary lives. Validating here would put a framework rule in a byte reader.
  */
 function readRegistryCodes(manifest, moduleFile, label) {
-  const { binding, codeField, directionField } = manifest.locales.registry;
+  const { binding, codeField, directionField, intlField } = manifest.locales.registry;
 
   if (!existsSync(moduleFile)) {
     throw new HostShapeError(`could not parse ${binding} from ${label}`);
@@ -85,6 +86,7 @@ function readRegistryCodes(manifest, moduleFile, label) {
 
   const codes = [];
   const directions = new Map();
+  const intls = new Map();
   for (const el of node.elements) {
     const obj = unwrap(el);
     if (!ts.isObjectLiteralExpression(obj)) continue;
@@ -97,10 +99,11 @@ function readRegistryCodes(manifest, moduleFile, label) {
     codes.push(code);
     // `undefined` here means one of two different things — the field is absent, or its
     // value is not a string literal this reader can recover. Both are recorded the same
-    // way and both fail closed downstream, because neither yields a direction.
+    // way and both fail closed downstream, because neither yields a direction (or a tag).
     if (directionField) directions.set(code, fieldOf(directionField));
+    if (intlField) intls.set(code, fieldOf(intlField));
   }
-  return { sf, codes, directions };
+  return { sf, codes, directions, intls };
 }
 
 /**
@@ -115,7 +118,7 @@ function readRegistryCodes(manifest, moduleFile, label) {
  * @returns {Readonly<{localeCodes: readonly string[], defaultLocale: string,
  *                     targets: readonly string[], roles: Readonly<Record<string,string|undefined>>,
  *                     diagnostics: Readonly<Record<string,string>>, direction: object,
- *                     routes: object, policy: object, census: object}>}
+ *                     intl: object, routes: object, policy: object, census: object}>}
  */
 export function resolveHost({ manifestPath, registryModule } = {}) {
   const { manifest, manifestDir } = loadManifest({ manifestPath });
@@ -130,7 +133,7 @@ export function resolveHost({ manifestPath, registryModule } = {}) {
   const moduleFile = registryModule ? resolve(registryModule) : resolve(hostRoot, declaredModule);
   const label = relFromRoot(moduleFile);
 
-  const { sf, codes, directions } = readRegistryCodes(manifest, moduleFile, label);
+  const { sf, codes, directions, intls } = readRegistryCodes(manifest, moduleFile, label);
 
   // The manifest's key set is checked against the host's real registry on every run.
   // A CHECKED second list is not a second source of truth; the stale 4-of-8 locale list
@@ -173,6 +176,7 @@ export function resolveHost({ manifestPath, registryModule } = {}) {
     diagnostics,
     routes: createRoutesResolver(manifest, hostRoot, codes, defaultLocale),
     direction: createDirectionResolver(manifest, codes, directions, label),
+    intl: createIntlResolver(manifest, codes, intls, label),
     policy: createPolicyResolver(manifest, hostRoot),
     census: createCensusResolver(manifest, hostRoot),
   });
@@ -267,6 +271,83 @@ function createDirectionResolver(manifest, codes, directions, label) {
     vocabulary: DIRECTIONS,
     /** Display label for report text only, on the `describe()` precedent. */
     describe: () => (directionField ? `${binding}[].${directionField}` : null),
+  });
+}
+
+/**
+ * The host's declared formatting tag could not be resolved.
+ *
+ * `.kind` mirrors HostDirectionError: `undeclared` when the manifest names no `intlField`
+ * — a fact about the host — versus `invalid`, the field was named and the registry does
+ * not carry a readable tag for some locale. The remedies differ: declare the field,
+ * versus fix the registry.
+ */
+export class HostIntlError extends Error {
+  constructor(message, kind) {
+    super(message);
+    this.name = 'HostIntlError';
+    this.kind = kind;
+  }
+}
+
+/**
+ * Resolve each locale's declared formatting tag (ADR-8's `intl`) from the host registry.
+ *
+ * THE SAME SHAPE AS DIRECTION, ONE JUDGEMENT FEWER. Direction has a closed vocabulary, so
+ * its resolver validates values against it. A formatting tag's "vocabulary" is whatever
+ * BCP-47 the runtime's ICU resolves — a fact about the environment, not about the host —
+ * so this resolver asserts only that every locale CARRIES a readable tag, and whether the
+ * tag resolves (and to which numbering system) is gate 4p's policy, judged against the
+ * ICU actually present where the gate runs. Validating resolvability here would freeze an
+ * environment fact into a byte reader.
+ *
+ * RESOLUTION IS LAZY, VALIDATION IS EAGER-ONCE, AND THERE IS NO DEFAULT — for the same
+ * reasons as direction, one for one. A locale answered with an invented tag would let
+ * gate 4p certify a numbering system the site never renders.
+ */
+function createIntlResolver(manifest, codes, intls, label) {
+  const { binding, intlField } = manifest.locales.registry;
+  let resolved = null;
+
+  const map = () => {
+    if (resolved) return resolved;
+    if (!intlField) {
+      throw new HostIntlError(
+        `is not declared — the host manifest's locales.registry names no "intlField", so ${label} cannot be asked which BCP-47 tag formats a locale`,
+        'undeclared'
+      );
+    }
+    const bad = [];
+    const out = {};
+    for (const code of codes) {
+      const value = intls.get(code);
+      if (typeof value === 'string' && value.length > 0) out[code] = value;
+      else bad.push(`"${code}" (no readable ${intlField})`);
+    }
+    if (bad.length) {
+      throw new HostIntlError(
+        `is declared as ${binding}[].${intlField} in ${label}, but ${bad.length} locale(s) carry no readable tag: ${bad.join(', ')}`,
+        'invalid'
+      );
+    }
+    resolved = Object.freeze(out);
+    return resolved;
+  };
+
+  return Object.freeze({
+    /** Every registered locale's declared formatting tag. Throws rather than answering partially. */
+    get map() { return map(); },
+    /** One locale's declared tag. An unregistered code is a caller defect, not a default. */
+    of(code) {
+      const m = map();
+      if (!(code in m)) {
+        throw new HostIntlError(`has no entry for "${code}" — it is not a registered locale`, 'invalid');
+      }
+      return m[code];
+    },
+    declared: Boolean(intlField),
+    /** Display label for report text only, on the `describe()` precedent. */
+    describe: () => (intlField ? `${binding}[].${intlField}` : null),
   });
 }
 

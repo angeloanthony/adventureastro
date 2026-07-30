@@ -109,7 +109,7 @@ function validateLocales(locales) {
   closeObject(locales, ['registry', 'defaultBinding', 'entries'], 'locales');
 
   const registry = requireObject(locales.registry, 'locales.registry');
-  closeObject(registry, ['module', 'binding', 'codeField', 'directionField'], 'locales.registry');
+  closeObject(registry, ['module', 'binding', 'codeField', 'directionField', 'intlField'], 'locales.registry');
   requireString(registry.module, 'locales.registry.module');
   // `binding` names WHAT THE HOST CALLS its registry, not how to find it. Switching the
   // adapter from regex to AST does not change the name — that is why it passes the
@@ -120,6 +120,8 @@ function validateLocales(locales) {
   // field is refused when asked for one, never answered `ltr`. Validated when present so a
   // typo fails here rather than surfacing as "this locale has no direction" much later.
   if ('directionField' in registry) requireString(registry.directionField, 'locales.registry.directionField');
+  // Same contract as directionField, for the formatting tag (ADR-8 / gate 4p).
+  if ('intlField' in registry) requireString(registry.intlField, 'locales.registry.intlField');
 
   requireString(locales.defaultBinding, 'locales.defaultBinding');
 
