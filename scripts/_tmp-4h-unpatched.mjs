@@ -144,50 +144,6 @@ for (const loc of TARGETS) {
 
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-// --- B-8a (AR-2 Track D, D-2): the connective matcher's script dispatch, made explicit
-//     and fail-closed. ---
-//
-// Rule D below read `entry.script === 'latin' ? wordBoundaryForm : cjkForm`, so any script
-// that was not `latin` inherited the adjacency form by DEFAULT rather than by decision.
-// The two forms answer different questions and Arabic is space-delimited, so the borrowed
-// form is wrong in both directions — measured on a scratch corpus (Track D phase report
-// §D-2.2): it MISSES the genuine repetition `و و`, and FLAGS `ووقت`, which is the proclitic
-// conjunction on a word that begins with the same letter.
-//
-// The repair is deliberately not a third branch. An Arabic connective rule cannot be
-// written without an Arabic corpus (B-8b), and a matcher for a list that does not exist is
-// config nothing measures — the F2 M-4 defect this file's `$doc` already refuses by name.
-// The repair is to make the fallthrough impossible: a script with no form of its own does
-// not borrow another language's, it stops the gate and names itself.
-//
-// The guard fires only when connectives are DECLARED, because that is precisely when a form
-// gets selected. `ar` registers today with zero, so this gate's answer for it is unchanged —
-// and on the day Track E populates that list, the gate refuses to guess instead of quietly
-// applying CJK adjacency rules to Arabic.
-const CONNECTIVE_FORMS = {
-  // `\b` is ASCII-only in JS, so it sees a boundary inside `frío` and reads
-  // `frío o una` as `o o`. Unicode letter classes are required, not optional.
-  latin: (c) => new RegExp(`(?<![\\p{L}\\p{N}_])(${escapeRe(c)})\\s+\\1(?![\\p{L}\\p{N}_])`, 'giu'),
-  // No inter-word space, so an immediate repetition *is* adjacency.
-  cjk: (c) => new RegExp(`(${escapeRe(c)})\\1`, 'g'),
-};
-
-for (const loc of TARGETS) {
-  const entry = config.locales[loc]; // presence asserted above
-  if (!entry.connectives?.length) continue; // rule D never runs, so no form is ever selected
-  if (CONNECTIVE_FORMS[entry.script]) continue;
-  console.error(
-    `gate-4h: locale "${loc}" declares script "${entry.script}" and ${entry.connectives.length} ` +
-      `connective(s), but this gate has a connective matcher only for ` +
-      `${Object.keys(CONNECTIVE_FORMS).map((s) => `"${s}"`).join(' and ')}. Refusing to select one ` +
-      `by fallthrough: the word-boundary form and the adjacency form answer different questions, ` +
-      `so borrowing one reports a wrong answer instead of failing. Add an explicit ` +
-      `"${entry.script}" form to CONNECTIVE_FORMS, or remove the connectives from ` +
-      `${host.policy.describe('seams')}.`
-  );
-  process.exit(2);
-}
-
 // ---------------------------------------------------------------------------
 // Phase 1 — rendered extraction. Visible text only.
 //
@@ -343,9 +299,11 @@ for (const page of index.pages) {
   // A coordinating connective is never licensed twice in succession, in any of
   // these languages — so this needs no per-locale exception.
   for (const c of entry.connectives ?? []) {
-    // Dispatch is a lookup, not a fallthrough — the form for an unregistered script was
-    // refused at config time above, so this can no longer resolve to another language's.
-    const re = CONNECTIVE_FORMS[entry.script](c);
+    // `\b` is ASCII-only in JS, so it sees a boundary inside `frío` and reads
+    // `frío o una` as `o o`. Unicode letter classes are required, not optional.
+    const re = entry.script === 'latin'
+      ? new RegExp(`(?<![\\p{L}\\p{N}_])(${escapeRe(c)})\\s+\\1(?![\\p{L}\\p{N}_])`, 'giu')
+      : new RegExp(`(${escapeRe(c)})\\1`, 'g');
     for (const m of raw.matchAll(re)) {
       findings.push({
         loc, url, type: 'duplicated-connective',
