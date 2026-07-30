@@ -9,10 +9,21 @@
 // evidence. Findings live in docs/rtl/AR2-B5b-measurements.md; this file only
 // makes them reproducible.
 //
-// The fourth question — swipe sign — is deliberately absent. It needs
-// `Input.dispatchTouchEvent`, a capability no positive control has validated
-// yet, and by the rule at the top of control-keyboard.mjs an unvalidated input
-// path may not produce citable negatives. Touch is the next milestone.
+// The fourth question — swipe sign — is behind `--swipe` (milestone 3). It was
+// deliberately absent from milestone 2 because `Input.dispatchTouchEvent` had
+// no positive control; control-touch.mjs now provides one, and no swipe
+// reading below may be cited unless that control exited 0 on the same day's
+// primary build. The flag is opt-in so a milestone-2 reproduction runs in the
+// exact environment the committed readings came from (touch emulation off).
+//
+// SWIPE READINGS CARRY THEIR HIT TARGET. Touch is coordinate-addressed, and
+// under a broken RTL transform the track ELEMENT can flee the visible pane
+// while the container stays put — a gesture at the container's centre is then
+// delivered to whatever is actually under the point, which may not be inside
+// the track's subtree, and the handler never hears it. A silence in that shape
+// is evidence about geometry, not about the handler. Every swipe reading
+// therefore records `hitTarget` (the element at the gesture point, and whether
+// the track contains it) so the two silences can never be conflated.
 //
 // HOW IT IS RUN. Twice per question, over two builds of the SAME worktree
 // (ADR-11: the dir flip never happens in the primary tree; ADR-11 §5.1: the
@@ -67,9 +78,16 @@ const ROOT = arg('--root');
 const HOME = arg('--home');
 const UTV = arg('--utv');
 const JSON_OUT = arg('--json');
+const SWIPE = process.argv.includes('--swipe');
 if (!ROOT || (!HOME && !UTV)) {
   process.stderr.write(
-    'usage: node scripts/rtl/measure-carousel.mjs --root <dist> [--home /de/] [--utv /de/utv/] [--json out.json]\n');
+    'usage: node scripts/rtl/measure-carousel.mjs --root <dist> [--home /de/] [--utv /de/utv/] [--swipe] [--json out.json]\n');
+  process.exit(2);
+}
+if (SWIPE && !HOME) {
+  // utv.ts has no touch handlers (milestone 1), so a swipe there is evidence
+  // of nothing — the flag only makes sense with a homepage target.
+  process.stderr.write('--swipe requires --home: the utv carousel has no touch handlers to measure\n');
   process.exit(2);
 }
 
@@ -228,6 +246,73 @@ async function measureHome(probe, pathname) {
     }
   }
 
+  // -- the two swipes (milestone 3), each inside a measured runway -------------
+  // Touch is coordinate-addressed where keydown was document-addressed, so the
+  // carousel is scrolled into the viewport first — `behavior: 'instant'`
+  // because the stylesheet's `html { scroll-behavior: smooth }` otherwise
+  // animates the scroll and the geometry is read mid-flight (control-touch.mjs's
+  // first run dispatched at y=4978 in a 1000px viewport). The rightward swipe
+  // goes first: on the LTR reference it predicts prevSlide, the sign autoplay
+  // cannot produce, so it is the reading with the strongest attribution.
+  if (SWIPE) {
+    await probe.evaluate(
+      `document.querySelector('.carousel-track-container').scrollIntoView({ block: 'center', behavior: 'instant' })`);
+    const vbox = await probe.waitFor(`(() => {
+      const r = document.querySelector('.carousel-track-container').getBoundingClientRect();
+      return r.top >= 0 && r.bottom <= innerHeight && r.width > 200
+        ? { l: Math.round(r.left), r: Math.round(r.right), t: Math.round(r.top), w: Math.round(r.width) }
+        : false;
+    })()`);
+    const cx = Math.round((vbox.l + vbox.r) / 2);
+    const cy = vbox.t + 200; // inside the track area, clear of the edge buttons
+
+    page.swipes = { gesturePoint: { x: cx, y: cy } };
+    for (const fingerMoves of ['right', 'left']) {
+      const dx = fingerMoves === 'right' ? 80 : -80;
+      // Geometry first, OUTSIDE the runway — everything between the
+      // synchronising tick and the dispatch is latency the runway pays for.
+      const hitTarget = await probe.evaluate(`(() => {
+        const el = document.elementFromPoint(${cx}, ${cy});
+        const track = document.querySelector('.carousel-track');
+        return {
+          at: el ? el.tagName + (el.className ? '.' + String(el.className).split(' ')[0] : '') : null,
+          insideTrack: Boolean(el && track && track.contains(el)),
+        };
+      })()`);
+      // Each swipe gets its own fresh synchronising tick: the first run of
+      // this section shared one tick across both gestures and both readings
+      // landed outside the runway (sinceSyncMs 7794 / 4590 vs a 4500 budget),
+      // which the instrument's own discipline refuses to attribute.
+      const pre = await probe.evaluate(HOME_STATE);
+      const sync = await watchHome(probe, pre.activeSlide, AUTOPLAY_MS + 2000);
+      if (!sync.moved) throw new Error(`no autoplay tick to synchronise on before the ${fingerMoves}ward swipe`);
+      syncAt = performance.now();
+      await sleep(TRANSITION_MS + 100);
+      const before = await probe.evaluate(HOME_STATE);
+      const dispatchedAt = performance.now();
+      await probe.swipe({ fromX: cx - dx, fromY: cy, toX: cx + dx, toY: cy });
+      const dispatchMs = Math.round(performance.now() - dispatchedAt);
+      const obs = await watchHome(probe, before.activeSlide, 1500);
+      const sinceSync = Math.round(performance.now() - syncAt);
+      if (obs.moved) await sleep(TRANSITION_MS + 150); // settle before the box read
+      page.swipes[fingerMoves] = {
+        via: 'cdp-touch',
+        displacementPx: 2 * dx,
+        hitTarget,
+        moved: obs.moved,
+        step: obs.moved ? signedStep(before.activeSlide, obs.state.activeSlide, n) : null,
+        from: before.activeSlide, to: obs.moved ? obs.state.activeSlide : before.activeSlide,
+        transform: obs.state.transform,
+        activeIndicator: obs.state.activeIndicator,
+        activeVisiblePct: visibility(...Object.values(await probe.evaluate(HOME_ACTIVE_BOX))),
+        dispatchMs,
+        observedMs: obs.elapsed,
+        sinceSyncMs: sinceSync,
+        insideRunway: sinceSync < AUTOPLAY_MS - TRANSITION_MS,
+      };
+    }
+  }
+
   return page;
 }
 
@@ -317,8 +402,10 @@ async function measureUtv(probe, pathname) {
 
 let probe;
 try {
-  probe = await openProbe({ root: ROOT });
-  process.stdout.write(`B-5b milestone 2 — carousel measurement over ${ROOT}\n`);
+  // Touch emulation only when swipe is being measured, so a milestone-2
+  // reproduction runs in the environment its committed readings came from.
+  probe = await openProbe({ root: ROOT, touch: SWIPE });
+  process.stdout.write(`B-5b — carousel measurement over ${ROOT}${SWIPE ? ' (with swipe)' : ''}\n`);
   if (HOME) {
     report.pages.home = await measureHome(probe, HOME);
     process.stdout.write(`  measured ${HOME} (gallery carousel, keyboard path)\n`);

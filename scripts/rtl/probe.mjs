@@ -243,10 +243,13 @@ async function readDevToolsPort(userDataDir, timeoutMs = 30_000) {
  * @param {string} [opts.root]     tree to serve (default: <repo>/dist)
  * @param {number} [opts.width]    viewport width  (default 1600)
  * @param {number} [opts.height]   viewport height (default 1000)
+ * @param {boolean} [opts.touch]   enable touch emulation (default false —
+ *                                 opt-in so the environment of the committed
+ *                                 keyboard/CSS measurements is unchanged)
  * @param {boolean} [opts.verbose] echo navigation + dispatch to stderr
  */
 export async function openProbe(opts = {}) {
-  const { root = path.join(REPO_ROOT, 'dist'), width = 1600, height = 1000, verbose = false } = opts;
+  const { root = path.join(REPO_ROOT, 'dist'), width = 1600, height = 1000, touch = false, verbose = false } = opts;
 
   const { server, origin } = await serveTree(root);
   const userDataDir = await mkdtemp(path.join(tmpdir(), 'rtl-probe-'));
@@ -286,6 +289,14 @@ export async function openProbe(opts = {}) {
     await cdp.send('Network.enable', {}, sessionId);
     await cdp.send('Emulation.setDeviceMetricsOverride',
       { width, height, deviceScaleFactor: 1, mobile: false }, sessionId);
+    // Touch is opt-in (milestone 3). Without this override Edge silently
+    // swallows Input.dispatchTouchEvent on a non-touch target — the dispatch
+    // reports success and no TouchEvent ever reaches the page, which is
+    // exactly the dead-input-path shape the controls exist to detect.
+    if (touch) {
+      await cdp.send('Emulation.setTouchEmulationEnabled',
+        { enabled: true, maxTouchPoints: 1 }, sessionId);
+    }
     // Third-party hosts the corpus embeds, refused so a measurement never waits
     // on (or varies with) the network. A blanket `*://*/*` would block the tree
     // under test as well, so the list is explicit.
@@ -355,6 +366,37 @@ export async function openProbe(opts = {}) {
         { type: 'rawKeyDown', ...spec, nativeVirtualKeyCode: spec.windowsVirtualKeyCode }, sessionId);
       await cdp.send('Input.dispatchKeyEvent',
         { type: 'keyUp', ...spec, nativeVirtualKeyCode: spec.windowsVirtualKeyCode }, sessionId);
+    },
+
+    /**
+     * One single-finger swipe: touchStart at (fromX, fromY), interpolated
+     * touchMoves, touchEnd. Requires openProbe({ touch: true }).
+     *
+     * The intermediate moves are load-bearing even for a handler that only
+     * reads touchstart/touchend: CDP's touchEnd carries an empty touchPoints
+     * list (all points released), so the release coordinate the page sees in
+     * `changedTouches` is wherever the LAST move left the finger. A
+     * start/end pair with no moves releases at the start point and every
+     * swipe measures as zero displacement.
+     *
+     * Like key(): this dispatches and returns. Whether anything listened is
+     * the caller's question, answered from observable DOM state.
+     */
+    async swipe({ fromX, fromY, toX, toY, steps = 8, stepDelayMs = 15 }) {
+      const round = Math.round;
+      const point = (x, y) => [{ x: round(x), y: round(y), radiusX: 2, radiusY: 2, force: 1 }];
+      log(`swipe (${round(fromX)},${round(fromY)}) -> (${round(toX)},${round(toY)})`);
+      await cdp.send('Input.dispatchTouchEvent',
+        { type: 'touchStart', touchPoints: point(fromX, fromY) }, sessionId);
+      for (let i = 1; i <= steps; i++) {
+        const t = i / steps;
+        await cdp.send('Input.dispatchTouchEvent',
+          { type: 'touchMove', touchPoints: point(fromX + (toX - fromX) * t, fromY + (toY - fromY) * t) },
+          sessionId);
+        await sleep(stepDelayMs);
+      }
+      await cdp.send('Input.dispatchTouchEvent',
+        { type: 'touchEnd', touchPoints: [] }, sessionId);
     },
 
     /** Computed style of the first match, for the properties named. */
