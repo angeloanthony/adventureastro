@@ -10,10 +10,20 @@
 // page, so it can never link to a 404. One component instance serves both
 // desktop and the mobile nav-menu (same markup; only CSS position changes
 // at the existing 1280px breakpoint, mirroring the Info dropdown).
+//
+// AR-2 C-3 (B-4). Every option carries its OWN `lang` and `dir`, read from the
+// registry — the same `LOCALES[].dir` gate 4k verifies at the document level
+// (ADR-9: one source). Without them `العربية` is an RTL run inside an LTR menu
+// (and every Latin name an LTR run inside the Arabic one), left to the bidi
+// algorithm to infer from characters rather than told. The toggle button above
+// deliberately gets NEITHER: it shows the CURRENT page's locale name, whose
+// script and direction already match the document's own — mirroring what
+// already agrees is how the B-5b anchors broke.
 import {
   getLangFromUrl, getAvailableLocales, getLocaleMeta,
   switchLocalePath, DEFAULT_LOCALE, LOCALE_CODES,
 } from '../../lib/i18n';
+import { t } from '../../lib/ui';
 
 const lang = getLangFromUrl(Astro.url);
 const segs = Astro.url.pathname.split('/').filter(Boolean);
@@ -35,7 +45,7 @@ const current = getLocaleMeta(lang);
     >
       {current.name} <span aria-hidden="true">&#9662;</span>
     </button>
-    <ul class="lang-menu" id="lang-switcher-menu" role="menu" aria-label="Language">
+    <ul class="lang-menu" id="lang-switcher-menu" role="menu" aria-label={t('a11y.languageMenu', lang)}>
       {available.map((code) => (
         <li role="none">
           <a
@@ -43,6 +53,8 @@ const current = getLocaleMeta(lang);
             tabindex="-1"
             href={switchLocalePath(Astro.url.pathname, code)}
             hreflang={code}
+            lang={code}
+            dir={getLocaleMeta(code).dir}
             aria-current={code === lang ? 'true' : undefined}
             class:list={['lang-option', { active: code === lang }]}
           >{getLocaleMeta(code).name}</a>

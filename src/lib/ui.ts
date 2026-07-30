@@ -43,6 +43,7 @@ const EN: Dict = {
 
   // — Accessibility (aria-labels) —
   'a11y.toggleMenu': 'Toggle menu',
+  'a11y.languageMenu': 'Language',
   'a11y.breadcrumb': 'Breadcrumb',
   'a11y.relatedArticles': 'Related articles',
   'a11y.allArticlesInHub': 'All articles in this hub',
@@ -180,6 +181,7 @@ const ES: Dict = {
   'cta.bookYourAdventure': 'Reserve Su Aventura',
 
   'a11y.toggleMenu': 'Alternar menú',
+  'a11y.languageMenu': 'Idioma',
   'a11y.breadcrumb': 'Ruta de navegación',
   'a11y.relatedArticles': 'Artículos relacionados',
   'a11y.allArticlesInHub': 'Todos los artículos de esta categoría',
@@ -303,6 +305,7 @@ const IT: Dict = {
   'cta.bookYourAdventure': 'Prenoti la Sua Avventura',
 
   'a11y.toggleMenu': 'Attiva/disattiva menu',
+  'a11y.languageMenu': 'Lingua',
   'a11y.breadcrumb': 'Percorso di navigazione',
   'a11y.relatedArticles': 'Articoli correlati',
   'a11y.allArticlesInHub': 'Tutti gli articoli di questa categoria',
@@ -428,6 +431,7 @@ const PT: Dict = {
   'cta.bookYourAdventure': 'Reserva a Tua Aventura',
 
   'a11y.toggleMenu': 'Alternar menu',
+  'a11y.languageMenu': 'Idioma',
   'a11y.breadcrumb': 'Localização',
   'a11y.relatedArticles': 'Artigos relacionados',
   'a11y.allArticlesInHub': 'Todos os artigos desta categoria',
@@ -554,6 +558,7 @@ const FR: Dict = {
   'cta.bookYourAdventure': 'Réservez Votre Aventure',
 
   'a11y.toggleMenu': 'Basculer le menu',
+  'a11y.languageMenu': 'Langue',
   "a11y.breadcrumb": "Fil d'Ariane",
   'a11y.relatedArticles': 'Articles connexes',
   'a11y.allArticlesInHub': 'Tous les articles de cette catégorie',
@@ -685,6 +690,7 @@ const DE: Dict = {
   'cta.bookYourAdventure': 'Buche Dein Abenteuer',
 
   'a11y.toggleMenu': 'Menü umschalten',
+  'a11y.languageMenu': 'Sprache',
   'a11y.breadcrumb': 'Brotkrümelnavigation',
   'a11y.relatedArticles': 'Verwandte Artikel',
   'a11y.allArticlesInHub': 'Alle Artikel dieser Kategorie',
@@ -811,6 +817,7 @@ const JA: Dict = {
   'cta.bookYourAdventure': '冒険を予約する',
 
   'a11y.toggleMenu': 'メニューの開閉',
+  'a11y.languageMenu': '言語',
   'a11y.breadcrumb': 'パンくずリスト',
   'a11y.relatedArticles': '関連記事',
   'a11y.allArticlesInHub': 'このハブのすべての記事',
@@ -959,6 +966,7 @@ const ZH: Dict = {
   'cta.bookYourAdventure': '预订你的冒险之旅',
 
   'a11y.toggleMenu': '切换菜单',
+  'a11y.languageMenu': '语言',
   'a11y.breadcrumb': '面包屑导航',
   'a11y.relatedArticles': '相关文章',
   'a11y.allArticlesInHub': '本专题的全部文章',
@@ -1129,6 +1137,7 @@ const AR: Dict = {
 
   // — Accessibility (aria-labels) —
   'a11y.toggleMenu': 'إظهار القائمة أو إخفاؤها',
+  'a11y.languageMenu': 'اللغة',
   'a11y.breadcrumb': 'مسار التنقل',
   'a11y.relatedArticles': 'مقالات ذات صلة',
   'a11y.allArticlesInHub': 'جميع المقالات في هذا القسم',

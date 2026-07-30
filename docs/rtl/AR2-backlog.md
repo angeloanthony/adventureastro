@@ -274,10 +274,16 @@ would violate the AR-1 numeral policy across the whole Arabic site without
 touching a translated string. Split the fields, or pin the numbering system
 explicitly. Guarded today only by a ⚠ comment in `src/lib/i18n.ts`.
 
-### B-4 — LanguageSwitcher options carry no `lang`/`dir`
+### ~~B-4 — LanguageSwitcher options carry no `lang`/`dir`~~ RESOLVED (Track C)
 
-> **Selected into Track C, 2026-07-30:** brief at
-> [`AR2-TrackC-brief.md`](AR2-TrackC-brief.md) (C-3). Not yet implemented.
+> **RESOLVED 2026-07-30 (Track C, C-3):** per-option `lang`/`dir` from the
+> registry (9 options → 8 `ltr` + 1 `rtl`, `lang == hreflang` 9/9) and
+> `aria-label` through `t('a11y.languageMenu')` in all 9 locales, which
+> **closes the open Gate 4a part-2 defect**. Measured delta: **617 pages, set-equal
+> to the switcher-rendering population** — this entry's "all 620" was the
+> hypothesis and it was wrong by three (404 and the two English-only author
+> bios render no switcher). Acceptance record:
+> [`AR2-TrackC-switcher.md`](AR2-TrackC-switcher.md).
 
 `LanguageSwitcher.astro:48` renders `{getLocaleMeta(code).name}` bare, so
 `العربية` is an RTL run inside an LTR menu (and vice versa) with no per-option
@@ -556,12 +562,12 @@ direction-blind carousel, unmirrored arrows and no bidi isolation would multiply
 every finding above by 77 routes.
 
 > **Status 2026-07-30:** the layout half of this precondition is met — B-5–B-7
-> are closed and browser-verified (Track B, closure note above), and **B-3 is
-> resolved** (Track C C-1/C-2, gate 4p — entry above). Still outstanding before
-> §7 expansion: **B-4** (Track C C-3, in progress), and the gate items
-> **B-8/B-9** that must land before the first Arabic glossary lock, plus
-> **B-10** before Arabic prose ships at volume. The presentation layer is no
-> longer what blocks expansion.
+> are closed and browser-verified (Track B, closure note above) — and **TRACK C
+> IS CLOSED**: B-3 (C-1/C-2, gate 4p) and B-4 (C-3, the switcher) are both
+> resolved, so the contract layer is done. Still outstanding before §7
+> expansion: only the corpus-gated gate items **B-8/B-9** (before the first
+> Arabic glossary lock) and **B-10** (before Arabic prose ships at volume).
+> Neither the presentation layer nor the contract layer blocks expansion now.
 
 **Also still open, as for `de`/`ja`/`zh`:** native-speaker review. Nothing in AR-1
 has been read by a native Arabic speaker.
