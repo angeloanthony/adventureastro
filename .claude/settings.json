@@ -99,7 +99,8 @@
       "Bash(awk 'NR==1195,NR==1210' src/page-content/things-to-do.ts)",
       "Bash(awk 'NR==10,NR==304' src/page-content/things-to-do.ts)",
       "Bash(grep -c '`')",
-      "Bash(grep -o '\\\\${[^}]*}')"
+      "Bash(grep -o '\\\\${[^}]*}')",
+      "Bash(python -c \"import json;d=json.load\\(open\\('package.json'\\)\\);print\\(json.dumps\\(d['scripts'],indent=1\\)\\)\")"
     ],
     "additionalDirectories": [
       "\\tmp",
