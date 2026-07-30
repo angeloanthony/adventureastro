@@ -19,9 +19,13 @@ import { renderGallery } from "./home-gallery";
 // The homepage carousel, hoisted out of the eight locale blocks (B-5a).
 // Byte-identical in all eight before this change and interpolated verbatim
 // now, so the rendered output is unchanged — the same proof P31 used for
-// the gallery. Direction handling is B-5b: this constant is the single
-// place the transform sign, the ArrowLeft/ArrowRight mapping and the swipe
-// sign will be made direction-aware.
+// the gallery. Direction handling landed in the B-5b fix milestone: the
+// transform sign, the ArrowLeft/ArrowRight mapping and the swipe sign all
+// mirror under an effective direction of rtl (read from computed style, not
+// the dir attribute — the two hosts declare direction differently, ADR-9).
+// The mapping policy is physical-direction semantics, adopted from measured
+// browser-native precedent (AR2-B5b-fix.md §1): keys and finger move the
+// view physically, so under RTL ArrowLeft/finger-right advance the deck.
 const HOME_CAROUSEL_JS = `    class Carousel {
       constructor() {
         this.track = document.querySelector('.carousel-track');
@@ -32,6 +36,7 @@ const HOME_CAROUSEL_JS = `    class Carousel {
         this.currentIndex = 0;
         this.autoPlayInterval = null;
         this.isTransitioning = false;
+        this.rtl = getComputedStyle(this.track).direction === 'rtl';
         this.init();
       }
       init() {
@@ -39,8 +44,8 @@ const HOME_CAROUSEL_JS = `    class Carousel {
         this.prevBtn.addEventListener('click', () => this.prevSlide());
         this.nextBtn.addEventListener('click', () => this.nextSlide());
         document.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowLeft') this.prevSlide();
-          if (e.key === 'ArrowRight') this.nextSlide();
+          if (e.key === 'ArrowLeft') this.rtl ? this.nextSlide() : this.prevSlide();
+          if (e.key === 'ArrowRight') this.rtl ? this.prevSlide() : this.nextSlide();
         });
         this.addTouchSupport();
         this.startAutoPlay();
@@ -60,7 +65,7 @@ const HOME_CAROUSEL_JS = `    class Carousel {
       updateCarousel() {
         if (this.isTransitioning) return;
         this.isTransitioning = true;
-        this.track.style.transform = \`translateX(-\${this.currentIndex * 100}%)\`;
+        this.track.style.transform = \`translateX(\${this.currentIndex * (this.rtl ? 100 : -100)}%)\`;
         this.slides.forEach((slide, index) => slide.classList.toggle('active', index === this.currentIndex));
         this.indicators.forEach((indicator, index) => indicator.classList.toggle('active', index === this.currentIndex));
         setTimeout(() => { this.isTransitioning = false; }, 500);
@@ -75,7 +80,8 @@ const HOME_CAROUSEL_JS = `    class Carousel {
         this.track.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
         this.track.addEventListener('touchend', (e) => {
           const diff = touchStartX - e.changedTouches[0].screenX;
-          if (Math.abs(diff) > 50) diff > 0 ? this.nextSlide() : this.prevSlide();
+          const forward = this.rtl ? -diff : diff;
+          if (Math.abs(forward) > 50) forward > 0 ? this.nextSlide() : this.prevSlide();
         });
       }
     }

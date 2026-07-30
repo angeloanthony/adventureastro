@@ -353,6 +353,26 @@ The 8×-duplicated JS is the real cost here, not the fix.
 > anchoring), all decided by re-running the instrument; the utv no-op is
 > proved by re-measurement, never by the absence of a diff, and the worktree's
 > detached HEAD is recorded at the start of every milestone measured in it.
+>
+> **B-5b MILESTONE 3 COMPLETE 2026-07-29** — the touch control and the swipe
+> measurement. See `AR2-B5b-touch.md`. Under RTL the swipe surface itself was
+> unreachable (`hitTarget` outside the off-pane track): swipe is downstream of
+> the transform mechanism — no fourth mechanism, no new fix site, and the
+> swipe-mapping question inherits the key-mapping policy call.
+>
+> **B-5b FIX COMPLETE — B-5 RESOLVED.** See `AR2-B5b-fix.md`. The policy call
+> was decided by measured browser-native precedent (`scripts/rtl/
+> native-precedent.mjs`, 12/12 readings physical): **physical-direction
+> semantics** — under RTL, ArrowLeft/finger-right advance. Landed exactly the
+> measured list: 2 transform signs (effective direction from computed style),
+> 1 key+swipe mapping, 4 anchor declarations to `inset-inline-*`, 0 utv anchor
+> work. Accepted by re-running the instrument with `--swipe` on both sides of
+> the differential: all four mechanisms green, `/utv/` anchors reproduce
+> milestone 2's readings exactly, LTR stability pair matches the committed
+> baseline, all four controls pass. The acceptance run also caught a real
+> instrument defect (probe leaked one Edge process tree per run since
+> milestone 1 — the launcher exits after handing off, so PID-based kills reach
+> nothing; teardown is now CDP `Browser.close` + profile-dir sweep).
 
 ### B-6 — 256 rendered `→` arrows do not mirror *(R-3)*
 

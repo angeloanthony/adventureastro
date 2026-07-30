@@ -11,7 +11,10 @@ import { DEFAULT_LOCALE } from '../lib/i18n';
 
 // The Doc's Beach carousel, hoisted out of the eight locale blocks (B-5a).
 // Byte-identical in all eight before this change. See home.ts for the pair;
-// this one has no keyboard or swipe handling, only the transform sign.
+// this one has no keyboard or swipe handling, only the transform sign —
+// made direction-aware in the B-5b fix milestone (effective direction from
+// computed style, same as home.ts; its buttons need no work, B-5b measured
+// the flex anchors mirroring for free).
 const DOCS_BEACH_CAROUSEL_JS = `    // Doc's Beach Carousel
     (function() {
       var track = document.querySelector('.docs-beach-carousel-track');
@@ -21,10 +24,11 @@ const DOCS_BEACH_CAROUSEL_JS = `    // Doc's Beach Carousel
       var nextBtn = document.querySelector('.docs-beach-carousel-btn.next');
       var current = 0;
       var total = slides.length;
+      var rtl = getComputedStyle(track).direction === 'rtl';
 
       function goTo(index) {
         current = (index + total) % total;
-        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        track.style.transform = 'translateX(' + (current * (rtl ? 100 : -100)) + '%)';
         dots.forEach(function(d, i) {
           d.classList.toggle('active', i === current);
         });

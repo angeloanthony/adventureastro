@@ -28,6 +28,7 @@
     "control:touch": "node scripts/rtl/control-touch.mjs",
     "control:touch:falsify": "node scripts/rtl/control-touch.mjs --falsify",
     "measure:carousel": "node scripts/rtl/measure-carousel.mjs",
+    "measure:native-precedent": "node scripts/rtl/native-precedent.mjs",
     "preview": "astro preview"
   },
   "dependencies": {

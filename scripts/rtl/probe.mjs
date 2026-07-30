@@ -91,6 +91,43 @@ const KEYS = {
   F7: { key: 'F7', code: 'F7', windowsVirtualKeyCode: 118 },
 };
 
+// TEARDOWN, MEASURED (B-5b fix milestone). The spawned msedge.exe is only a
+// launcher: it exits 0 within seconds of handing off to a re-parented browser
+// tree (~14 processes whose parent is outside the launcher's tree), so
+// neither ChildProcess.kill() nor `taskkill /T` on the held PID can ever
+// reach the actual browser — every probe run since milestone 1 leaked its
+// tree, and the accumulation (8 trees, ~130 processes) eventually broke the
+// probe itself: EBUSY on DevToolsActivePort, load-event timeouts, and one
+// false attribution surface in a falsification run. The authoritative
+// teardown is `Browser.close` over CDP (sent by close() below); this
+// function is the fallback for paths where CDP never came up, and it kills
+// by the one handle that survives the hand-off — the unique profile dir in
+// the browser's own command line.
+async function killByProfileDir(child, userDataDir) {
+  if (child.exitCode === null) child.kill();
+  if (process.platform !== 'win32') return;
+  const script =
+    `Get-CimInstance Win32_Process -Filter "Name='msedge.exe'" | ` +
+    `Where-Object { $_.CommandLine -like '*${userDataDir.replace(/'/g, "''")}*' } | ` +
+    `ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }`;
+  await new Promise((resolve) => {
+    const t = spawn('powershell.exe', ['-NoProfile', '-Command', script], { stdio: 'ignore' });
+    t.on('exit', resolve);
+    t.on('error', resolve);
+  });
+}
+
+// The profile dir can stay EBUSY-locked for a moment while the browser tree
+// shuts down; retry briefly rather than leaving temp profiles behind.
+async function rmProfileDir(userDataDir) {
+  for (let i = 0; i < 10; i++) {
+    try {
+      await rm(userDataDir, { recursive: true, force: true });
+      return;
+    } catch { await sleep(200); }
+  }
+}
+
 function findEdge() {
   const found = EDGE_CANDIDATES.find((p) => existsSync(p));
   if (!found) {
@@ -224,8 +261,13 @@ async function readDevToolsPort(userDataDir, timeoutMs = 30_000) {
   const file = path.join(userDataDir, 'DevToolsActivePort');
   for (let i = 0; i < timeoutMs / 50; i++) {
     if (existsSync(file)) {
-      const [port] = readFileSync(file, 'utf8').split('\n');
-      if (port && port.trim()) return Number(port.trim());
+      // Edge may still hold the file open for write; on Windows that read
+      // throws EBUSY. A locked port file is the same condition as an absent
+      // one — the browser is not ready yet — so keep polling.
+      try {
+        const [port] = readFileSync(file, 'utf8').split('\n');
+        if (port && port.trim()) return Number(port.trim());
+      } catch { /* locked mid-write; retry */ }
     }
     await sleep(50);
   }
@@ -310,9 +352,10 @@ export async function openProbe(opts = {}) {
       ],
     }, sessionId);
   } catch (err) {
-    edge.kill();
+    if (cdp) { try { await cdp.send('Browser.close'); } catch { /* not up */ } cdp.close(); }
+    await killByProfileDir(edge, userDataDir);
     server.close();
-    await rm(userDataDir, { recursive: true, force: true }).catch(() => {});
+    await rmProfileDir(userDataDir);
     throw err;
   }
 
@@ -420,10 +463,11 @@ export async function openProbe(opts = {}) {
     },
 
     async close() {
+      try { await cdp.send('Browser.close'); } catch { /* already gone */ }
       cdp.close();
-      edge.kill();
+      await killByProfileDir(edge, userDataDir);
       server.close();
-      await rm(userDataDir, { recursive: true, force: true }).catch(() => {});
+      await rmProfileDir(userDataDir);
     },
   };
 

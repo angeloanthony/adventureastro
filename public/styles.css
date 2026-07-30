@@ -257,8 +257,8 @@
  .carousel-btn span { font-size: 2.5rem; line-height: 1; color: var(--burnt-orange); font-weight: 300; }
  .carousel-btn:hover { background: var(--burnt-orange); transform: translateY(-50%) scale(1.1); box-shadow: 0 8px 25px rgba(212,118,78,0.4); }
  .carousel-btn:hover span { color: white; }
- .carousel-prev { left: 20px; }
- .carousel-next { right: 20px; }
+ .carousel-prev { inset-inline-start: 20px; }
+ .carousel-next { inset-inline-end: 20px; }
  .carousel-indicators { display: flex; justify-content: center; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
  .carousel-indicator { width: 12px; height: 12px; border-radius: 50%; background: rgba(212,118,78,0.3); border: none; cursor: pointer; transition: var(--transition-smooth); padding: 0; }
  .carousel-indicator:hover { background: rgba(212,118,78,0.6); transform: scale(1.2); }
@@ -506,8 +506,8 @@
   .carousel-main { height: 400px; border-radius: 15px; }
   .carousel-btn { width: 45px; height: 45px; }
   .carousel-btn span { font-size: 2rem; }
-  .carousel-prev { left: 10px; }
-  .carousel-next { right: 10px; }
+  .carousel-prev { inset-inline-start: 10px; }
+  .carousel-next { inset-inline-end: 10px; }
   .carousel-caption { font-size: 1.1rem; padding: 30px 20px 20px; }
   .video-frame-3d { padding: 25px; transform: rotateX(3deg); }
   .play-icon-circle { width: 60px; height: 60px; font-size: 24px; }
