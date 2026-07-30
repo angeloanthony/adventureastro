@@ -243,6 +243,9 @@ notices.
 
 ### B-3 — `LocaleMeta.hreflang` serves two consumers with different requirements
 
+> **Selected into Track C, 2026-07-30:** brief at
+> [`AR2-TrackC-brief.md`](AR2-TrackC-brief.md) (C-1/C-2). Not yet implemented.
+
 > **ADR WRITTEN 2026-07-28 — decision recorded, not yet implemented:**
 > [`docs/framework/adr/0008-hreflang-is-two-fields.md`](../framework/adr/0008-hreflang-is-two-fields.md).
 > Split the field (`hreflang` for SEO, `intl` for `Intl`) and add a registry
@@ -267,6 +270,9 @@ touching a translated string. Split the fields, or pin the numbering system
 explicitly. Guarded today only by a ⚠ comment in `src/lib/i18n.ts`.
 
 ### B-4 — LanguageSwitcher options carry no `lang`/`dir`
+
+> **Selected into Track C, 2026-07-30:** brief at
+> [`AR2-TrackC-brief.md`](AR2-TrackC-brief.md) (C-3). Not yet implemented.
 
 `LanguageSwitcher.astro:48` renders `{getLocaleMeta(code).name}` bare, so
 `العربية` is an RTL run inside an LTR menu (and vice versa) with no per-option
