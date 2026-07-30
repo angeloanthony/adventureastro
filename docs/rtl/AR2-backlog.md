@@ -569,5 +569,22 @@ every finding above by 77 routes.
 > Arabic glossary lock) and **B-10** (before Arabic prose ships at volume).
 > Neither the presentation layer nor the contract layer blocks expansion now.
 
+> **Track D planning baseline — `f2ade7a`.** That commit versions
+> [`AR2-TrackD-brief.md`](AR2-TrackD-brief.md), the Track D brief, and is the
+> verified planning baseline. Its commit message is `k`, written by the external
+> auto-commit process rather than the author, so the message is not evidence of
+> the commit's content — this line is the record. Decisions D1–D4 are resolved in
+> [`AR2-TrackD-decisions.md`](AR2-TrackD-decisions.md); implementation order is
+> fixed at **D-1 → D-2 → D-3** and no implementation has begun.
+>
+> The brief corrects one inherited claim above: **B-9 is not corpus-gated.** 4i
+> carries two `ar` locks landed at AR-1, so the missing `arabic` script case has
+> a live, unvalidated surface today. B-8 splits into B-8a (fail-closed dispatch,
+> corpus-independent, Track D) and B-8b (the Arabic seam rule, corpus-dependent,
+> Track E). B-10 splits into B-10a (registry, closed by gate 4p at `8e9f951`) and
+> B-10b (rendered scan, Track D, all nine locales per D3). B-8b and B-11 are the
+> only items still genuinely corpus-gated, and their prerequisite — the Arabic
+> prose pilot batch — is authorized as Track E on Track D's closure (D4).
+
 **Also still open, as for `de`/`ja`/`zh`:** native-speaker review. Nothing in AR-1
 has been read by a native Arabic speaker.
