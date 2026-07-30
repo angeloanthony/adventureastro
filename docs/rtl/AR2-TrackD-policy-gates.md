@@ -9,8 +9,8 @@ contains only files the change explains) · 13 (prevention or repair, stated)
 **Planning baseline:** [`AR2-TrackD-brief.md`](AR2-TrackD-brief.md) at `f2ade7a`;
 owner decisions at `7011032`. Working tree clean at both.
 
-**Status: D-1 CLOSED. D-2 and D-3 not begun.** This document is the phase report
-for the whole track and is appended to as each item lands.
+**Status: D-1 CLOSED. D-2 CLOSED. D-3 not begun.** This document is the phase
+report for the whole track and is appended to as each item lands.
 
 ---
 
@@ -230,3 +230,303 @@ here so the track-close backlog edit can file it; **not implemented.**
 
 **D-2 (B-8a, `gate-4h-seams.mjs`) is next, per the fixed order in
 [`AR2-TrackD-decisions.md`](AR2-TrackD-decisions.md) §6.**
+
+---
+
+## D-2 — B-8a: fail-closed dispatch in gate 4h
+
+### 1. The change
+
+One lookup table and one config-time guard, in
+[`scripts/gate-4h-seams.mjs`](../../scripts/gate-4h-seams.mjs) — 47 insertions,
+5 deletions, one file.
+
+```js
+const CONNECTIVE_FORMS = {                                       // lines 167-173
+  latin: (c) => new RegExp(`(?<![\\p{L}\\p{N}_])(${escapeRe(c)})\\s+\\1(?![\\p{L}\\p{N}_])`, 'giu'),
+  cjk:   (c) => new RegExp(`(${escapeRe(c)})\\1`, 'g'),
+};
+
+for (const loc of TARGETS) {                                     // lines 175-189
+  const entry = config.locales[loc];
+  if (!entry.connectives?.length) continue;   // rule D never runs; no form is ever selected
+  if (CONNECTIVE_FORMS[entry.script]) continue;
+  console.error(`gate-4h: locale "${loc}" declares script "${entry.script}" and … `);
+  process.exit(2);
+}
+...
+const re = CONNECTIVE_FORMS[entry.script](c);                    // line 348, was the ternary
+```
+
+**Both regex bodies are transcribed unchanged** — the `latin` form and the `cjk`
+form are the same strings the ternary built, moved without edit. That is why §4
+can assert byte-identical diagnostics rather than argue for them.
+
+`entry.script` is now read at exactly two executable sites — line 178 (the
+guard) and line 348 (the lookup) — and both are the dispatch. Before the change
+it was read at one. That is measured, and it is what bounds §4's blast radius.
+
+**Rule 13 — this is prevention.** `ar` declares **0** connectives, so the wrong
+branch is unreachable on today's registry. B-8a converts *latent because the
+data is empty* into *structurally impossible*, which is what makes Track E safe
+to populate that list without re-auditing the dispatcher.
+
+### 2. The defect, reproduced before repair (Rule 4)
+
+The brief asked for the CJK-form match on space-delimited text to be
+demonstrated. It is, and the demonstration is sharper than the prediction: **the
+wrong form does not change the number of findings, it changes which text is
+found.** That is why the defect was invisible.
+
+A scratch corpus was rendered into
+`scratch-dist/{ar,de}/pilot/index.html` with **byte-identical prose** in both
+files (verified by `diff` after neutralising the `lang`/`dir` attributes), and
+the gate was pointed at it through its own dist positional. The prose carries
+one of each hazard:
+
+- `المسار و و الطريق` — a genuine immediately-repeated conjunction (a real seam defect)
+- `ووقت الانطلاق` — the proclitic conjunction `و` on a word that *begins* with `و` (correct Arabic)
+
+Both forms were then measured against the gate's own extractor, at offsets
+rather than by reading snippet padding:
+
+| corpus | `latin` form (word-boundary) | `cjk` form (adjacency) |
+|---|---|---|
+| scratch `ar/pilot` | **1** at offset 32 — `"و و"` ✔ the real defect | **1** at offset 65 — `"وو"` ✘ inside `ووقت` |
+| real `ar/cancellation-policy` | **0** | **1** at offset 2884 — `"وو"` inside `وقته ووقّع` |
+| real `de` corpus (77 pages × 5 connectives) | **0** | **0** |
+
+Three findings, in order of weight:
+
+- **The counts collide; the matches are disjoint.** On identical text, both
+  forms report exactly one violation — at *different offsets*, on *different
+  strings*, one correct and one not. Any instrument comparing totals would have
+  called this unchanged. The defect is only visible at the offset.
+- **The false positive is live on shipped prose.** Case 5 runs the real
+  registry-perturbation against the real corpus: given one connective, the
+  unpatched dispatcher reports `وقته ووقّع` on
+  `/ar/cancellation-policy/` as a duplicated connective. It is not — it is `و` +
+  `وقّع`, one conjunction and one verb. On the only connected Arabic prose that
+  exists today, the fallthrough form's *entire output is a false positive* and
+  the correct form's output is empty.
+- **A misfiled Latin locale degrades silently and unobservably.** Both forms
+  return 0 across the whole German corpus, so case 7's unpatched control exits
+  **0** with the baseline success line. That exit code is not evidence German is
+  healthy; it is evidence that the check was swapped for a different question
+  and *nothing in the output could show it*. This is the ja UI-chrome fail-open
+  shape the gate's own header cites, arriving through the dispatcher.
+
+### 3. The fail-closed matrix
+
+Every case perturbs [`i18n-gates/4h-seams.json`](../../i18n-gates/4h-seams.json)
+transiently and restores it from the original buffer in a `finally`. Each ran
+through **two arms** — the patched gate and an unpatched copy at `a9b3e40` — so
+every line is attributable to the dispatch change and not to a pre-existing
+check firing on the perturbation.
+
+| # | corpus | perturbation | control | patched | verdict |
+|---|---|---|---|---|---|
+| 1 | real | none | 0 | **0** | byte-identical ✔ |
+| 2 | scratch | none (`ar` has 0 connectives) | 0 | **0** | ✔ |
+| 3 | scratch | `و` as a connective under **both** `ar` (arabic) **and** `de` (latin) | **1** — two findings at disjoint offsets | **2** ✘ | the defect, then the refusal |
+| 4 | scratch | `و` under `ar` alone | **1** — the false positive | **2** ✘ | ✔ |
+| 5 | real | `و` under `ar` alone | **1** — false positive on a live route | **2** ✘ | ✔ |
+| 6 | scratch | `و` under `ar` **declared `cjk`** (a registered script) | **1** | **1** | byte-identical ✔ |
+| 7 | real | `de.script` → `"arabic"`, 5 connectives | **0** — silent | **2** ✘ | ✔ |
+| 8 | real | `ar` explicitly 0 connectives (today) | 0 | **0** | guard correctly silent ✔ |
+
+The instrument-failure line in full (case 5):
+
+```
+gate-4h: locale "ar" declares script "arabic" and 1 connective(s), but this gate has a
+connective matcher only for "latin" and "cjk". Refusing to select one by fallthrough: the
+word-boundary form and the adjacency form answer different questions, so borrowing one
+reports a wrong answer instead of failing. Add an explicit "arabic" form to
+CONNECTIVE_FORMS, or remove the connectives from i18n-gates/4h-seams.json.
+```
+
+Locale, declared script, connective count, both known forms, and the two ways
+out are all named.
+
+**Cases 6 and 8 are the controls that keep the guard honest.** Case 6 gives `ar`
+a connective under a *registered* script: the guard must not fire, and both arms
+produce byte-identical output including the same seam finding. Case 8 is today's
+registry made explicit: `script: "arabic"` with zero connectives, guard silent,
+exit 0. Without these two, "the guard fires" would be indistinguishable from
+"the guard fires on everything."
+
+**Instrument failure stays distinct from policy failure.** gate-4h's exit
+classes are unchanged and the new guard reports through the existing exit-2
+channel: **2** = registry/instrument inconsistency, **1** = a seam violation
+against the rendered corpus, **0** = clean. Case 3 is the pair in one run — the
+control exits **1** (it answers, wrongly), the patched arm exits **2** (it
+refuses to answer). Cases 6 and 8 confirm the exit-1 and exit-0 surfaces are
+untouched.
+
+### 4. Existing behaviour unchanged
+
+Byte-identity was compared on the full `EXIT / STDOUT / STDERR` capture, patched
+vs control, not on the summary line:
+
+| # | scenario | result |
+|---|---|---|
+| 1 | real corpus, unperturbed registry | **byte-identical** (123 bytes) |
+| 6 | `ar` + connective under registered script `cjk`, scratch corpus | **byte-identical** (934 bytes) |
+| 8 | `ar` arabic + 0 connectives, real corpus | **byte-identical** (123 bytes) |
+
+`zh`/`ja` (cjk) and the five Latin locales are covered by cases 1 and 8, which
+scan all 540 pages across 8 locales: `gate-4h: ✔ 540 rendered pages across 8
+locales, 1922 locked phrases — no seam violations`, identical to the pre-change
+baseline. Rules A, B and C, the census/drift block, the reporting block and the
+exit-code contract were not touched.
+
+### 5. The rendering prediction — measured, not assumed
+
+| check | method | result |
+|---|---|---|
+| `dist/` unchanged | sha256 of every file under `dist/`, sorted by path, before vs after a full `npm run build` | **byte-identical, 863/863** |
+| `astro check` | full run, control copy removed first | **0 errors, 0 warnings, 268 hints** |
+| full suite | `npm run build` = `gates:src` + `astro build` + `gates:dist` | **exit 0** |
+| D-3 baseline | `[٠-٩۰-۹]` over `dist/`, text files only | **0 occurrences, 9 locales — unchanged** |
+
+Every gate's figures are unchanged from the D-1 close: 4j 840 entries · 4o 35
+files · 4p 9 locales · validate-site 620 pages · 4m 32 pages/30 videos · 4k 620
+pages/9 locales · 4n 1 rtl page · 4f 14404 headings · **4h 540 pages/1922 locked
+phrases** · 4i 52 locks/540 pages/3 advisory · 4g 42777 anchors/85 candidates.
+
+**D-3 baseline table (post-D-2), with its window stated (Rule 8):**
+
+| locale | text files | `[٠-٩۰-۹]` occurrences |
+|---|---|---|
+| en | 99 | 0 |
+| es | 77 | 0 |
+| it | 77 | 0 |
+| pt | 77 | 0 |
+| fr | 77 | 0 |
+| de | 77 | 0 |
+| ja | 77 | 0 |
+| zh | 77 | 0 |
+| **ar** | **1** | **0** |
+| **total** | **639** (224 binaries skipped) | **0** |
+
+Identical to the post-D-1 table, row for row. The instrument's own control was
+re-run rather than carried over (Rule 5): `[٠-٩۰-۹]` counts **4** in
+`<strong>٢٠٢٦</strong>` and **0** in `2026`.
+
+### 6. Two corrections to the recorded figures (Rule 8)
+
+Neither changes an implementation. Both are cases of a recorded number whose
+*measurement method* was not recorded alongside it.
+
+**6.1 — `dist/` is 863 files, not 815.** The D-1 report records "815 files"
+for the sha256 comparison. A full walk of `dist/` measures **863**, and the D-1
+report's own D-3 table implies the same figure: 639 text + 224 binaries = 863.
+The two numbers are in one document and cannot both describe the whole tree. The
+extension census is `620 html · 208 webp · 13 svg · 9 jpg · 5 png · 2 xml · 2
+txt · 1 jpeg · 1 ico · 1 css · 1 _redirects` = 863; unique hashes are 859 (four
+duplicate files). No subset of the tree yields 815 — not by directory, not by
+extension, not by hash-deduplication — so 815 was taken through a window whose
+definition was not written down and is not now recoverable.
+
+The claim D-1 was making is unaffected: `dist/` did not change. The lesson is
+the recurring one — **a recorded size is a hypothesis about the measurement
+window, and the window has to be recorded with it.** The method is stated
+verbatim in §5 above so this figure is reproducible.
+
+**6.2 — gate 4h and gate 4i run in `gates:dist`, not `gates:src`.** The brief §2
+records "B-9 and B-8a are *registry/config-time* (no `dist/` needed, run in
+`gates:src`)", and [`AR2-TrackD-decisions.md`](AR2-TrackD-decisions.md) §6
+repeats "Also `gates:src`, pre-build" for D-2. Read from `package.json`, which
+is the authority:
+
+- `gates:src` = 4j · 4o · 4p
+- `gates:dist` = validate-site · 4m · 4k · 4n · 4f · **4h** · **4i** · 4g
+
+Both D-1 and D-2 modified `gates:dist` gates. The *checks* they added are
+config-time — that part of the classification holds, and it is what the Rule 16
+split turned on — but "no `dist/` needed" is false for the gates carrying them:
+gate-4h exits 2 at line 101 when `dist/` is absent, and the new guard sits
+*after* that check, so it inherits the requirement. Leaving the guard where it
+is was deliberate (moving it would reorder existing error messages for no
+B-8a-required gain), and it is recorded here rather than silently fixed.
+
+**Consequence for D-3, which is the reason this matters:** the decisions doc
+§6 justifies D-3's last position partly with "It is the only `gates:dist` item."
+That premise is false — all three are. The *other* two reasons stand unchanged
+and are sufficient: D-3 is the only item that adds a file and wiring, and its
+baseline must be measured on a tree where D-1 and D-2 have landed. **The
+ordering is unaffected; only one of its three stated reasons is withdrawn.**
+
+### 7. Rule 9 — the differential, and an external commit inside the window
+
+**An external commit intervened mid-milestone.** At 14:29 the auto-commit
+process committed the working tree as `b78ff34` (message `k`, not authored by
+the author — see the standing note on this process), capturing two files:
+
+```
+scripts/_tmp-4h-unpatched.mjs | 380 ++++++
+scripts/gate-4h-seams.mjs     |  52 +++-
+```
+
+So the D-2 source change reached history under a message that does not describe
+it, **and it took the transient control instrument with it.** Verified before
+proceeding, and each of these is a measurement, not an assumption:
+
+- **No perturbed registry was ever committed.** `git diff a9b3e40 HEAD --
+  i18n-gates/ census/ src/` is empty. The transient injections in §3 were
+  restored inside their `finally` before the auto-commit fired; had one been
+  live at 14:29, a corrupted seam registry would now be in history.
+- **`b78ff34` carries nothing else.** Two files, both explained by this
+  milestone.
+- **HEAD's gate is the reviewed gate.** `git diff HEAD -- scripts/gate-4h-seams.mjs`
+  is empty.
+
+History was **not** rewritten, consistent with the precedent set for `f2ade7a`
+in [`AR2-TrackD-decisions.md`](AR2-TrackD-decisions.md); this section is the
+discoverability repair. The D-2 commit removes `scripts/_tmp-4h-unpatched.mjs`,
+which never belonged in the repository.
+
+**The control copy also perturbed a measurement, which is worth recording.**
+`astro check` reported **272** hints while the copy was on disk and **268** with
+it removed — `tsconfig.json` includes `**/*`, so the duplicated gate contributed
+its own four pre-existing unused-binding hints. The four-hint discrepancy was
+not the change; it was the instrument. Rule 9 applies to instruments too, and
+the temporary file was deleted before the figure in §5 was taken.
+
+No registry, dictionary, census, `src/` or `dist/` file appears in the D-2
+differential. No foreign file appears in it.
+
+### 8. Recorded, deliberately not implemented
+
+- **The `arabic` connective form itself.** Still B-8b, still corpus-gated, and
+  the measurement in §2 is now the first hard evidence of what it will have to
+  handle: the proclitic `و` fuses to the following word, so an Arabic form
+  cannot be the Latin word-boundary form either. `ووقت` and `وقته ووقّع` are
+  both correct prose that a naive `\s`-delimited rule would also have to
+  license. That is a finding for Track E's rule design, not a rule.
+- **The `ar` entry's `state: "in-progress"` marker** stays as-is. It describes
+  B-8b, and B-8a landing does not flip it — brief §4, unchanged.
+
+### 9. Acceptance — D-2
+
+- ✔ Defect reproduced **before** repair, on both a scratch corpus and the live
+  `ar` route, with the two forms' match offsets measured rather than inferred.
+- ✔ Arabic dispatch now validated through the intended path: an unregistered
+  script that declares connectives exits 2 naming the script, both known forms
+  and both remedies.
+- ✔ Existing script families byte-identical: `latin` and `cjk` diagnostics
+  unchanged on three scenarios compared over the full output capture, and all
+  540 pages across 8 locales report the pre-change figures.
+- ✔ Instrument failure (exit 2) stays distinguishable from policy failure
+  (exit 1) — demonstrated in a single run, case 3.
+- ✔ Guard controls in both directions: silent for a registered script (case 6)
+  and for a declared script with no connectives (case 8).
+- ✔ Full suite green, `astro check` 0 errors / 0 warnings / 268 hints.
+- ✔ No rendered-byte change: **863/863** `dist/` hashes identical after a full
+  build.
+- ✔ D-3 baseline re-measured post-D-2: **0 occurrences, 639 text files, 224
+  binaries excluded, 9 locales** — unchanged, window stated.
+- ✔ Two Rule 8 corrections recorded with the measurements that produced them.
+
+**D-3 (B-10b, `gate-4q-numeral-render.mjs`) is next.** Its baseline is the table
+in §5, and the platform under it is byte-identical to the one D-1 measured.
