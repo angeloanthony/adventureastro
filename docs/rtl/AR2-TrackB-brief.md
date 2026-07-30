@@ -4,6 +4,19 @@
 three questions Track B has been carrying as one, re-measures the population from today's
 tree rather than citing AR-1's, and ends with the decisions I cannot make.
 
+> **TRACK B CLOSED 2026-07-30 — this brief is historical.** Every question it
+> separated has since been answered: the substitution build ran (decision (a);
+> [`AR2-TrackB-substitution-build.md`](AR2-TrackB-substitution-build.md), which
+> records owner decisions (a)–(d) in its §6), B-6 closed `d3ca57c` with §6's
+> "clean promotion" sweep retired by re-census (zero live defects), B-7 closed
+> `88f83f8` (62 declarations, not 174), B-5a consolidated the 8× duplication
+> `00e2313` (decision (c): de-duplicate first), and B-5 closed `b76de42` after
+> the B-5b instrument → measurement → touch → fix series. §4's warning held:
+> `rtl-inventory.mjs` was never promoted to a blocking gate wholesale — gate 4o
+> and the B-7 frozen classification took that place. The only surviving item is
+> the 5 promo-badge anchors, a deferred product decision
+> ([`AR2-backlog.md`](AR2-backlog.md), Track B closure note).
+
 Covers **B-5** (carousel), **B-6** (arrow glyphs), **B-7** (physical CSS) and the browser
 verification all three were said to require.
 

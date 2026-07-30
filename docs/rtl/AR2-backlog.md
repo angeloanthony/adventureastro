@@ -279,7 +279,24 @@ that shape. Deferred from AR-1 because it changes rendered bytes on all 620 page
 
 ---
 
-## Layout and mirroring *(from the RTL audit)*
+## Layout and mirroring — ~~the presentation layer~~ CLOSED as Track B, 2026-07-30 *(from the RTL audit)*
+
+> **TRACK B CLOSED 2026-07-30.** B-5 `b76de42` · B-6 `d3ca57c` · B-7 `88f83f8`,
+> with B-5a `00e2313` (consolidation) and the substitution build
+> ([`AR2-TrackB-substitution-build.md`](AR2-TrackB-substitution-build.md), owner
+> decisions (a)–(d)) as supporting milestones. **The one surviving item from the
+> track is the 5 `decide-promo-anchor` declarations** (B-7 classification §2) —
+> an explicit product decision, deferred by the owner, not an RTL correctness
+> defect; it stays in the backlog as exactly that. Decision (d)'s residual
+> constraint ("Track B blocks expansion onto presentation-heavy routes") is
+> dissolved with the track — the presentation layer no longer blocks §7
+> expansion; what still does is listed at the bottom of this file. The
+> browser-lifecycle teardown lesson the fix milestone caught stays with the
+> instrument, not in METHOD: `probe.mjs`'s `TEARDOWN, MEASURED` block is the
+> permanent home (every control and instrument inherits it through
+> `openProbe()`), the fix report §4 is the measurement record, and the class is
+> already covered by METHOD rule 10 — a new rule fails the citation
+> counterfactual. Everything below in this section is historical record.
 
 > **Track B brief, 2026-07-28: [`AR2-TrackB-brief.md`](AR2-TrackB-brief.md).** Separates
 > detection (done — `rtl-inventory.mjs`) from policy promotion (open, and the real work) from
@@ -300,7 +317,7 @@ that shape. Deferred from AR-1 because it changes rendered bytes on all 620 page
 > Promoting the audit to blocking as it stands is a 48% false-positive gate — the ADR-10
 > situation again. Fourth instance of the recorded-size-is-a-hypothesis lesson.
 
-### B-5 — Carousel is direction-blind *(R-1, R-2)*
+### ~~B-5~~ — Carousel is direction-blind *(R-1, R-2)* — **RESOLVED 2026-07-30**
 
 16 sliders (`home.ts` × 8 locale blocks, `utv.ts` × 8) drive
 `translateX(-${index * 100}%)` with a hardcoded sign against a `display: flex`
@@ -360,7 +377,7 @@ The 8×-duplicated JS is the real cost here, not the fix.
 > the transform mechanism — no fourth mechanism, no new fix site, and the
 > swipe-mapping question inherits the key-mapping policy call.
 >
-> **B-5b FIX COMPLETE — B-5 RESOLVED.** See `AR2-B5b-fix.md`. The policy call
+> **B-5b FIX COMPLETE `b76de42` 2026-07-30 — B-5 RESOLVED.** See `AR2-B5b-fix.md`. The policy call
 > was decided by measured browser-native precedent (`scripts/rtl/
 > native-precedent.mjs`, 12/12 readings physical): **physical-direction
 > semantics** — under RTL, ArrowLeft/finger-right advance. Landed exactly the
@@ -374,7 +391,17 @@ The 8×-duplicated JS is the real cost here, not the fix.
 > milestone 1 — the launcher exits after handing off, so PID-based kills reach
 > nothing; teardown is now CDP `Browser.close` + profile-dir sweep).
 
-### B-6 — 256 rendered `→` arrows do not mirror *(R-3)*
+### ~~B-6~~ — 256 rendered `→` arrows do not mirror *(R-3)* — **RESOLVED 2026-07-28**
+
+> Full write-up: [`AR2-B6-affordance-arrows.md`](AR2-B6-affordance-arrows.md),
+> commit `d3ca57c`. **The 204-edit sweep this entry sized was retired by
+> re-census**: 64 of the 204 are comments, 136 are LTR-locale content rendered
+> only on LTR pages (where `→` points correctly), and the real shared-chrome
+> surface is 4 sites in 3 files — `ar` renders 1 route carrying 0 arrows, so
+> there were **zero live defects**. Shipped `affordanceArrow()` beside
+> `isRtl()` in `i18n.ts` and **gate 4o** (blocking, wired into `gates:src`),
+> whose discriminator is flanking, not the glyph; LTR body content is out of
+> scope *by decision* and the gate prints that scope on success.
 
 `Bidi_Mirrored=No`, so they point into the start of the line in RTL. 6 are shared
 chrome (`GatewayRoutes`, `ItineraryDay`, `RelatedArticles`, `TourDecisionGuide`,
@@ -386,7 +413,18 @@ work (`Bidi_Mirrored=Yes`, the algorithm flips them), while these decorative-loo
 arrows need all of it. Do not size this from a glyph census — size it from
 `\p{Bidi_Mirrored}`.
 
-### B-7 — 174 physical box/inset/text-align declarations *(R-6)*
+### ~~B-7~~ — 174 physical box/inset/text-align declarations *(R-6)* — **RESOLVED 2026-07-29**
+
+> **The sweep landed as frozen: commit `88f83f8`** — 62 declarations across 11
+> files converted to logical properties, nothing else. The predicted proof
+> shape was inverted (`/ar/` byte-identical, 18 LTR pages changed — the
+> delivery mechanism decides where a delta lands, METHOD rule 11), and by that
+> rule's recorded convention the outcome lives in the commit's own message: no
+> phase document exists and none should be manufactured. The prediction it
+> falsified is [`AR2-B7-classification.md`](AR2-B7-classification.md) §8. The
+> 4 `convert-carousel` declarations landed with B-5b (`b76de42`), and the only
+> classification row still open is `decide-promo-anchor` (5 declarations) —
+> the deferred product decision named in the Track B closure note above.
 
 > **CLASSIFIED 2026-07-29** — full table:
 > [`AR2-B7-classification.md`](AR2-B7-classification.md). **This entry's own
@@ -503,6 +541,13 @@ locale and runs `MULTILINGUAL_HANDOFF.md` §7 stages 2–6 with the `de`/`ja`/`z
 template. Not before: shipping 57 Arabic spokes onto a layout with a
 direction-blind carousel, unmirrored arrows and no bidi isolation would multiply
 every finding above by 77 routes.
+
+> **Status 2026-07-30:** the layout half of this precondition is met — B-5–B-7
+> are closed and browser-verified (Track B, closure note above). Still
+> outstanding before §7 expansion: **B-3** (ADR-8 recorded, ~9 lines
+> unimplemented), **B-4**, and the gate items **B-8/B-9** that must land before
+> the first Arabic glossary lock, plus **B-10** before Arabic prose ships at
+> volume. The presentation layer is no longer what blocks expansion.
 
 **Also still open, as for `de`/`ja`/`zh`:** native-speaker review. Nothing in AR-1
 has been read by a native Arabic speaker.

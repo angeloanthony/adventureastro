@@ -247,3 +247,10 @@ that path needs its own positive control before any swipe negative is citable.
 > **Done for three of the four** — milestone 2 measured anchors, transform sign
 > and key mapping as an LTR/RTL differential: [`AR2-B5b-measurements.md`](AR2-B5b-measurements.md).
 > Swipe remains open, blocked on the touch control exactly as above.
+>
+> **Then done for all four:** milestone 3 built that control and measured swipe
+> ([`AR2-B5b-touch.md`](AR2-B5b-touch.md) — the surface itself was unreachable
+> under RTL, no fourth mechanism), and the fix milestone closed B-5
+> ([`AR2-B5b-fix.md`](AR2-B5b-fix.md), commit `b76de42`). The fix's acceptance
+> run also hardened this instrument's teardown — see `probe.mjs`,
+> `TEARDOWN, MEASURED`.

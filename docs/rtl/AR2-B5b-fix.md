@@ -203,4 +203,4 @@ canonical, produced by the final instrument), `b5b-fix-ltr.json` /
 left standing as the continuing acceptance surface — at `e4d56c8`, carrying
 the one-line flip plus this fix as its only diff, RTL build intact. A future
 reproduction that starts fresh should detach a worktree at *this fix's
-commit* instead and apply only the flip.
+commit* (`b76de42`) instead and apply only the flip.
