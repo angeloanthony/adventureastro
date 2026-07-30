@@ -181,6 +181,7 @@ for (const loc of TARGETS) {
 // ---------------------------------------------------------------------------
 const HAN = /\p{Script=Han}/u;
 const KANA = /[\p{Script=Hiragana}\p{Script=Katakana}]/u;
+const ARABIC = /\p{Script=Arabic}/u;
 const CJK = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}]/u;
 
 const configErrors = [];
@@ -256,6 +257,9 @@ for (const loc of TARGETS) {
     }
     if (entry.script === 'japanese' && !latinLock && !KANA.test(lock.phrase) && !HAN.test(lock.phrase)) {
       cfgFail(loc, `lock "${id}" phrase "${lock.phrase}" contains no kana or kanji and is not marked "latinLock" — the phrase is filed under the wrong locale.`);
+    }
+    if (entry.script === 'arabic' && !latinLock && !ARABIC.test(lock.phrase)) {
+      cfgFail(loc, `lock "${id}" phrase "${lock.phrase}" contains no Arabic characters and is not marked "latinLock" — the phrase is filed under the wrong locale.`);
     }
 
     const seenForbidden = new Set();
