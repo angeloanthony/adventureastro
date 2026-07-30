@@ -680,6 +680,18 @@ every finding above by 77 routes.
 > now printed by gate 4q on every build: **`ar` renders 1 route and 4 254
 > characters of visible text, against 77 routes and ~2.6 M characters for every
 > other locale.**
+>
+> **Track E execution plan, 2026-07-30: [`AR2-TrackE-brief.md`](AR2-TrackE-brief.md).**
+> Pilot = the `utv` hub (7 spokes) + the 2 `dinosaur-national-monument` spokes
+> pending owner decision **E-D1**; 620 → 629 pages. Milestones E-0…E-5, with
+> **B-8b keyed to measurements M1–M3** and **B-11 to M4**. No gate code is
+> written: 4h (B-8a) and 4i (B-9) become *positive controls* for those two items,
+> 4q is the numeral-policy acceptance instrument, and **4n transitions from
+> prospective to live** with no code change. Two consequences the plan surfaces
+> that are not recorded elsewhere in this file: the two existing `ar` 4i floors of
+> **1** stop meaning anything on a 10-route corpus and must be re-measured, and
+> every B-11 wayfinding lock is a Latin phrase under `script: "arabic"` and so
+> **must carry `latinLock`** or D-1's branch exits 2.
 
 > **A correction this file carried, recorded so the next sweep does not
 > re-inherit it.** Track C's brief recorded *"B-9 — script validation for Arabic
