@@ -494,33 +494,130 @@ Two sizing traps AR-1 hit, recorded so AR-2 does not:
 
 ## Gate correctness
 
-### B-8 — Gate 4h's connective matcher has no Arabic branch *(G-3)*
+> **TRACK D CLOSED 2026-07-30.** D-1 `a9b3e40` (B-9) · D-2 `5c09e4a` (B-8a) ·
+> D-3 (B-10b, gate 4q). Full record:
+> [`AR2-TrackD-policy-gates.md`](AR2-TrackD-policy-gates.md); brief
+> [`AR2-TrackD-brief.md`](AR2-TrackD-brief.md); owner decisions
+> [`AR2-TrackD-decisions.md`](AR2-TrackD-decisions.md). **The policy layer is
+> closed.** All three items were prevention with zero live defects behind them,
+> so each is proven by a fail-closed matrix and not by a green run. `dist/`
+> byte-identical across the whole track (863/863), `astro check` 0/0/268.
+>
+> **Rule 16 is what unblocked this section.** Each item here bundled a
+> corpus-independent policy half with a census-derived half and inherited the
+> harder half's blocker. Split, three of the four halves shipped immediately and
+> needed no corpus at all.
 
-`entry.script === 'latin' ? wordBoundaryForm : cjkForm` — Arabic is neither and
-falls through to the CJK form, which assumes no word boundaries. Wrong for a
-space-delimited script. **Unreachable today** (`ar` declares no locks, no
-connectives) but must be fixed before the first Arabic lock is added.
+### ~~B-8~~ — split: **B-8a RESOLVED (D-2)**, B-8b open and corpus-gated
 
-Open linguistic question for the same gate: `zh`'s seam rule is built on a
-*detachable* imperative particle (`请`). Arabic marks the imperative in the verb
+#### ~~B-8a~~ — the script→matcher dispatch fails closed — **RESOLVED 2026-07-30**
+
+> `scripts/gate-4h-seams.mjs`, commit `5c09e4a`. `entry.script === 'latin' ?
+> wordBoundaryForm : cjkForm` is replaced by an explicit `CONNECTIVE_FORMS`
+> lookup plus a config-time guard: a script with no form of its own **that
+> declares connectives** exits 2 naming itself, instead of borrowing another
+> language's rule. Both regex bodies transcribed unchanged, so `latin` and `cjk`
+> diagnostics are byte-identical over the full output capture.
+>
+> **The defect was reproduced before repair, and the measurement was sharper
+> than the prediction: the wrong form does not change the number of findings, it
+> changes which text is found.** On identical prose under two declared scripts,
+> both forms report exactly one violation — the word-boundary form at offset 32
+> on the genuine repeated conjunction `و و`, the adjacency form at offset 65
+> inside `ووقت`, which is the proclitic conjunction on a word beginning with the
+> same letter. Any instrument comparing totals would have called this unchanged.
+> On the live `ar` route the fallthrough form's entire output is a false positive
+> (`وقته ووقّع` — one conjunction and one verb) and the correct form's output is
+> empty.
+>
+> **And a misfiled Latin locale degraded unobservably**: `de` flipped to
+> `script: "arabic"` with its five connectives exits **0** on the unpatched gate
+> across the whole German corpus. The check was answering a different question
+> and nothing in the output could show it.
+
+#### B-8b — the Arabic seam rule itself *(the corpus-dependent half)*
+
+Open, and **unspecifiable rather than deferred**. `zh`'s seam rule is built on a
+*detachable* imperative particle (`请`); Arabic marks the imperative in the verb
 stem, so there is no analogue. Whether Arabic has its own seam hazard — the
-proclitic `و`, `ال` assimilating across a join — needs a corpus to answer.
+proclitic `و`, `ال` assimilating across a join, and what belongs on the
+connective list — needs a corpus to answer. Writing that list without one
+produces config nothing measures, which is the F2 M-4 defect the 4h `$doc`
+already refuses by name.
 
-### B-9 — Gate 4i has no Arabic script validation *(G-4)*
+**B-8a is what makes populating it safe**: the day Track E adds an Arabic
+connective, the gate refuses to guess a matcher instead of silently applying CJK
+adjacency rules to a space-delimited script. No re-audit of the dispatcher is
+needed first.
 
-4i checks that a lock's phrase matches its locale's script (`latin` rejects CJK,
-`han` requires Han, `japanese` requires kana/Han). There is **no `arabic` case**,
-so Arabic locks get zero script validation and a phrase filed under the wrong
-locale passes silently — exactly what the check exists to prevent.
+⚠ **First hard evidence for the rule's shape, from D-2's measurement:** the
+Arabic form can be neither the Latin word-boundary form nor the CJK adjacency
+form. `ووقت` and `وقته ووقّع` are both correct prose, and a naive `\s`-delimited
+rule would have to license them. That is a finding for Track E's rule design,
+not a rule. The `ar` 4h entry's `state: "in-progress"` marker describes this
+item and correctly stayed as-is when B-8a landed.
 
-### B-10 — No gate has the concept of a numbering system *(S6)*
+### ~~B-9~~ — Gate 4i has no Arabic script validation *(G-4)* — **RESOLVED 2026-07-30**
 
-Arabic-Indic digits in rendered Arabic text pass everything. Since Track C
-(2026-07-30), the **machine-formatted** half of the AR-1 numeral policy is
-enforced at the registry by gate 4p (B-3, resolved); **author-typed** digits in
-prose remain covered by translator discipline and nothing else — that rendered
-half is this item. Cheap to add: scan rendered text per locale for
-`[٠-٩۰-۹]`.
+> `scripts/gate-4i-glossary.mjs`, commit `a9b3e40`. A fourth branch beside
+> `latin`/`han`/`japanese`: a lock under `script: "arabic"` whose phrase carries
+> no Arabic character, and which is not marked `latinLock`, is a registry
+> failure (exit 2). Follows the `han`/`japanese` shape exactly and reads the same
+> `latinLock` resolved once above all four branches.
+>
+> **This entry inherited a wrong classification and the correction is the reason
+> it shipped in Track D.** Track C's brief recorded B-9 as corpus-gated — *"no
+> Arabic lock exists to exercise it"*. Measured against the registry rather than
+> the record: `4i-glossary.json` carries **two** `ar` locks, `dinosaur-country`
+> (`أرض الديناصورات`) and `offroad-trail` (`المسارات`), **both landed at AR-1 and
+> enforced today**. The conflation was between two gates with two different lock
+> populations — 4h has none, 4i has two. So the surface was live and unvalidated
+> *then*, and validating it needed zero corpus.
+>
+> **The load-bearing case in the matrix:** `de` flipped to `script: "arabic"`
+> exits **0** on the unpatched gate — nine locks silently unvalidated — and
+> exits **2** on the patched gate with exactly **7** violations, the two `de`
+> locks already carrying `latinLock` exempted. The escape is `9 − 2`, counted
+> rather than asserted.
+>
+> **Still open, found by D-1 and deliberately not fixed there:** the `latin`
+> branch guards only against CJK, so a Latin-script locale carrying an *Arabic*
+> phrase is the mirror case and is not caught. Pre-existing, zero live instances
+> (all five Latin locales' phrases are Latin, measured), and outside D-1's work
+> list. Filed here.
+
+### ~~B-10~~ — No gate has the concept of a numbering system *(S6)* — **RESOLVED**
+
+> Split under Rule 16 and closed in two halves by two different mechanisms at
+> two different layers. **B-10a — machine-formatted digits**: gate 4p, registry,
+> `gates:src`, Track C `8e9f951` (see B-3). **B-10b — author-typed digits in
+> prose**: gate 4q, rendered, `gates:dist`, Track D D-3.
+>
+> `scripts/gate-4q-numeral-render.mjs` — a **forbidden-range** check over
+> Arabic-Indic (U+0660–U+0669) and Eastern Arabic-Indic (U+06F0–U+06F9), across
+> **all nine locales** by owner decision D3, on the extracted visible text of
+> every rendered page. Never a counted floor: today's corpus measures 0, and a
+> floor derived from it would be a lock that can never fail.
+>
+> **The measurement that justifies the gate.** `٢٠٢٦` injected into the `ar` and
+> `de` dictionaries and rebuilt renders **620 Arabic-Indic digits across 78
+> pages in 2 locales** — and `validate-site`, 4m, 4k, 4n, 4f, 4h, 4i and 4g
+> **all exit 0** on that build. Eight green gates, one corpus, 620 rendered
+> defects. 4q alone exits 1, naming locale · route · character · code point ·
+> offset · context.
+>
+> **Two traps, both measured rather than assumed.** A raw byte walk over `dist/`
+> flags **224 of 224** image files on compressed bytes; the gate opens 620 of
+> 863 files because its traversal takes the host's own `routes.pageGlob`, so a
+> binary is never opened rather than filtered out afterwards. And digits split
+> across inline markup (`<strong>٢٠</strong><em>٢٦</em>`) are found **contiguous**
+> — the three candidate extraction settings all report 4 matches, at different
+> offsets, and only `inlineSeparator: ''` reads the one number a reader sees.
+> The count was the last thing to move, exactly as in B-8a.
+>
+> **Fail-closed on absence, not just on presence:** a registered locale with no
+> rendered page is exit 2, not a clean zero — `ar` renders one route, and a build
+> that dropped it must not report a better result than a build that kept it.
 
 ### B-11 — Proper-noun drift is invisible in body prose *(S5)*
 
@@ -561,30 +658,53 @@ template. Not before: shipping 57 Arabic spokes onto a layout with a
 direction-blind carousel, unmirrored arrows and no bidi isolation would multiply
 every finding above by 77 routes.
 
-> **Status 2026-07-30:** the layout half of this precondition is met — B-5–B-7
-> are closed and browser-verified (Track B, closure note above) — and **TRACK C
-> IS CLOSED**: B-3 (C-1/C-2, gate 4p) and B-4 (C-3, the switcher) are both
-> resolved, so the contract layer is done. Still outstanding before §7
-> expansion: only the corpus-gated gate items **B-8/B-9** (before the first
-> Arabic glossary lock) and **B-10** (before Arabic prose ships at volume).
-> Neither the presentation layer nor the contract layer blocks expansion now.
+> **Status 2026-07-30, after Track D:** all three layers are closed.
+> **Presentation** — B-5–B-7, browser-verified (Track B). **Contract** — B-3
+> (gate 4p) and B-4 (the switcher) (Track C). **Policy** — B-9, B-8a and B-10b
+> (gates 4i, 4h and the new 4q) (Track D).
+>
+> **Nothing in this file blocks §7 expansion any longer.** The two items still
+> open — **B-8b** (the Arabic seam rule) and **B-11** (proper-noun drift in body
+> prose) — are both census-derived under Rule 16, and neither blocks expansion:
+> each *waits on* it. Their single shared prerequisite is an Arabic prose pilot
+> batch, and a floor measured against one policy page would mean nothing.
+>
+> **The circularity is broken and the exit is scheduled.** The inherited plan
+> gated prose on B-8 and B-8 on prose. With B-8 split — B-8a shipped, B-8b
+> waiting on corpus — and Track E authorized in advance on Track D's closure
+> (decision D4), neither half waits on the other. **Track E =
+> `MULTILINGUAL_HANDOFF.md` §7 stage 2 for `ar`, and it begins without a further
+> decision gate.**
+>
+> The corpus window that makes this the binding constraint is measured and is
+> now printed by gate 4q on every build: **`ar` renders 1 route and 4 254
+> characters of visible text, against 77 routes and ~2.6 M characters for every
+> other locale.**
 
+> **A correction this file carried, recorded so the next sweep does not
+> re-inherit it.** Track C's brief recorded *"B-9 — script validation for Arabic
+> locks — ✘ no Arabic lock exists to exercise it."* **Two `ar` glossary locks
+> landed at AR-1 and have been enforced since** — `dinosaur-country` and
+> `offroad-trail`, both `bound: floor`, in `4i-glossary.json`. The error was
+> conflating two gates with two different lock populations: **4h has no `ar`
+> locks and no connectives; 4i has two locks.** B-9 therefore had a live,
+> unvalidated surface for the whole of AR-2 and needed no corpus at any point.
+> This entry, as filed by AR-1, never made that error.
+>
 > **Track D planning baseline — `f2ade7a`.** That commit versions
 > [`AR2-TrackD-brief.md`](AR2-TrackD-brief.md), the Track D brief, and is the
 > verified planning baseline. Its commit message is `k`, written by the external
 > auto-commit process rather than the author, so the message is not evidence of
 > the commit's content — this line is the record. Decisions D1–D4 are resolved in
-> [`AR2-TrackD-decisions.md`](AR2-TrackD-decisions.md); implementation order is
-> fixed at **D-1 → D-2 → D-3** and no implementation has begun.
+> [`AR2-TrackD-decisions.md`](AR2-TrackD-decisions.md); the implementation order
+> was fixed at **D-1 → D-2 → D-3** and all three have landed.
 >
-> The brief corrects one inherited claim above: **B-9 is not corpus-gated.** 4i
-> carries two `ar` locks landed at AR-1, so the missing `arabic` script case has
-> a live, unvalidated surface today. B-8 splits into B-8a (fail-closed dispatch,
-> corpus-independent, Track D) and B-8b (the Arabic seam rule, corpus-dependent,
-> Track E). B-10 splits into B-10a (registry, closed by gate 4p at `8e9f951`) and
-> B-10b (rendered scan, Track D, all nine locales per D3). B-8b and B-11 are the
-> only items still genuinely corpus-gated, and their prerequisite — the Arabic
-> prose pilot batch — is authorized as Track E on Track D's closure (D4).
+> Two classification claims the brief made and the track then verified: B-8
+> splits into B-8a (fail-closed dispatch, corpus-independent — **shipped**) and
+> B-8b (the Arabic seam rule, corpus-dependent — **open**); B-10 splits into
+> B-10a (registry, gate 4p, `8e9f951`) and B-10b (rendered scan, gate 4q, all
+> nine locales per D3 — **shipped**). B-8b and B-11 are the only items still
+> genuinely corpus-gated.
 
 **Also still open, as for `de`/`ja`/`zh`:** native-speaker review. Nothing in AR-1
 has been read by a native Arabic speaker.

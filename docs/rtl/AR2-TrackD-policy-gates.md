@@ -9,8 +9,9 @@ contains only files the change explains) · 13 (prevention or repair, stated)
 **Planning baseline:** [`AR2-TrackD-brief.md`](AR2-TrackD-brief.md) at `f2ade7a`;
 owner decisions at `7011032`. Working tree clean at both.
 
-**Status: D-1 CLOSED. D-2 CLOSED. D-3 not begun.** This document is the phase
-report for the whole track and is appended to as each item lands.
+**Status: D-1 CLOSED. D-2 CLOSED. D-3 CLOSED — the track is closed.** This
+document is the phase report for the whole track and was appended to as each
+item landed.
 
 ---
 
@@ -530,3 +531,459 @@ differential. No foreign file appears in it.
 
 **D-3 (B-10b, `gate-4q-numeral-render.mjs`) is next.** Its baseline is the table
 in §5, and the platform under it is byte-identical to the one D-1 measured.
+
+---
+
+## D-3 — B-10b: the rendered numeral instrument (gate 4q)
+
+### 1. The change
+
+One new file and two lines of wiring.
+
+- [`scripts/gate-4q-numeral-render.mjs`](../../scripts/gate-4q-numeral-render.mjs)
+  — the production instrument.
+- [`package.json`](../../package.json) — `gate:4q` beside the other per-gate
+  entries, and `gate-4q-numeral-render.mjs` appended to `gates:dist`, **last**,
+  after `gate-4g-anchors.mjs`.
+
+No registry, dictionary, census, policy artifact, manifest or `src/` file was
+touched. The gate declares its forbidden range in code, exactly as gate 4p
+declares `latn` in code, and for the same reason: it is a policy constant with a
+document citation, not a tunable, and a config file for it would be config with
+one possible value.
+
+```js
+const FORBIDDEN = [
+  { name: 'Arabic-Indic',          from: 0x0660, to: 0x0669 },
+  { name: 'Extended Arabic-Indic', from: 0x06f0, to: 0x06f9 },
+];
+```
+
+The ranges are written as code points rather than as the literal class
+`[٠-٩۰-۹]`. That class is four RTL characters inside a left-to-right source
+file, and a reviewer cannot tell by looking whether the two ranges are the ones
+intended or whether an editor reordered them. This is the same reasoning that
+put the code point beside the character in the violation report (§5).
+
+**Rule 13 — this is prevention.** Zero occurrences exist in the corpus today,
+measured. A green run therefore proves nothing on its own and the proof burden
+is §§3–6.
+
+### 2. The corpus, and the three nested populations
+
+The instrument's whole design is a choice of *what to open*. Measured on the
+`dist/` at `5c09e4a`, three populations are in play and each is a strict subset
+of the one above it:
+
+| population | files | how it is defined | who uses it |
+|---|---|---|---|
+| every rendered artifact | **863** | the whole tree | the byte instrument's outer bound |
+| text files | **639** | extension in `{html, svg, xml, txt, css, _redirects}` | the D-1/D-2 scratch byte instrument |
+| **pages** | **620** | the host's own `routes.pageGlob` (`**/*.html`) | **gate 4q** |
+
+The excluded **224** are binary assets — `208 webp · 9 jpg · 5 png · 1 jpeg · 1
+ico` — and every one of them matches `[٠-٩۰-۹]` on compressed bytes. **The gate
+never opens them**, because the traversal takes the adapter's page predicate
+rather than filtering afterwards. That is the difference between excluding by
+design and excluding by post-processing: there is no filter to forget to apply,
+and the exclusion cannot regress independently of the host's own declaration of
+what a page is.
+
+**The 19-file gap between 620 and 639 is a real narrowing and it is bounded, not
+assumed.** The gate does not read the sitemap XML, the stylesheet, the SVGs,
+`robots.txt` or `_redirects`, because the manifest does not call them pages. The
+byte instrument, which does read all 19, reports **0** — so the gate's zero is
+not an artifact of the narrower window. The wider measurement bounds the
+narrower one, in the safe direction, and it is recorded here rather than
+inferred.
+
+### 3. The baseline, reproduced — and the method, which is the deliverable
+
+D-2 §6.1 corrected `815` to `863` and recorded the lesson that a size without
+its window is not reproducible. The figure below was re-derived from scratch on
+the post-D-2 tree and matches to the file:
+
+```
+total files        863
+text files         639
+binary files       224
+occurrences of [٠-٩۰-۹] in text files   0   (all nine locales)
+```
+
+The reproducible statement is the **extension census**, not the totals, because
+the totals depend on where the text/binary line is drawn and the census does
+not:
+
+```
+620 .html · 208 .webp · 13 .svg · 9 .jpg · 5 .png · 2 .txt · 2 .xml ·
+1 _redirects · 1 .jpeg · 1 .ico · 1 .css        = 863
+```
+
+Anyone can regenerate it, and from it any text/binary split is derivable:
+
+```sh
+node -e "
+const {readdirSync,statSync}=require('fs'),{join,extname,basename}=require('path');
+const c={};(function w(d){for(const n of readdirSync(d).sort()){const f=join(d,n);
+statSync(f).isDirectory()?w(f):(k=>c[k]=(c[k]??0)+1)(extname(n)||basename(n));}})('dist');
+const e=Object.entries(c).sort((a,b)=>b[1]-a[1]);
+console.log(e.map(([k,n])=>n+' '+k).join(' · '), '=', e.reduce((a,[,n])=>a+n,0));
+"
+```
+
+Nobody can regenerate `815`; anyone can regenerate `863`. That is the whole
+difference, and it is why the command is in this document.
+
+### 4. Rendered-population reconciliation — measured against an independent source
+
+The acceptance criterion asks that the scan's route count equal the **registered**
+route count per locale, reported rather than asserted. The registered count is
+not something the gate is told; it is `LOCALE_SLUGS` in
+[`src/lib/i18n.ts`](../../src/lib/i18n.ts#L503), the host's own content registry,
+whose own comment states the rule this reconciliation depends on — *"a locale is
+'present' for a page because its slug is in this Set, never because a file
+happens to exist on disk."* Read from that registry's AST and compared with what
+gate 4q actually scanned:
+
+| locale | `LOCALE_SLUGS` | pages scanned by 4q | visible-text chars | occurrences |
+|---|---:|---:|---:|---:|
+| en | n/a (master) | 80 | 2 274 516 | 0 |
+| es | 77 | **77** ✔ | 2 654 852 | 0 |
+| it | 77 | **77** ✔ | 2 655 745 | 0 |
+| pt | 77 | **77** ✔ | 2 588 750 | 0 |
+| fr | 77 | **77** ✔ | 2 797 154 | 0 |
+| de | 77 | **77** ✔ | 2 653 784 | 0 |
+| ja | 77 | **77** ✔ | 1 153 656 | 0 |
+| zh | 77 | **77** ✔ | 894 811 | 0 |
+| **ar** | **1** | **1** ✔ | **4 254** | **0** |
+| total | | **620** | 15 677 522 | **0** |
+
+Eight of eight target locales reconcile exactly. `en` is the default locale and
+has no slug set — it is the master every slug resolves to — and its **80** is
+`77 + 3`, the three English-only routes being `404` and the two author bios.
+That figure is not new arithmetic invented here: Track C independently measured
+the switcher-rendering population at **617 of 620**, naming those same three
+routes ([`AR2-TrackC-switcher.md`](AR2-TrackC-switcher.md)), and 620 − 3 = 617
+reconciles the two measurements against each other.
+
+**`chars` is in that table because the answer is a zero.** A zero over 4 254
+characters and a zero over 2 654 852 are the same number and not the same fact,
+and the column is the only thing in a green run's output that tells them apart.
+The `ar` window is **600× narrower** than any other locale's. Per Rule 8 that is
+the window this baseline was taken through, and it is printed by the gate on
+every successful run rather than living only in this document.
+
+### 5. The positive control at the source layer — and the finding that came with it
+
+The acceptance form of this control is a *dictionary* injection, not a rendered
+one, because the defect B-10b describes is a translator typing digits into a
+source string. Both halves of brief §7 D-3.1 were run in one cycle:
+`٢٠٢٦` appended to `nav.cancellationPolicy` for **`ar`** (the RTL locale) and for
+**`de`** (the Latin control that proves the rule is per-locale, owner decision
+D3), followed by a real `astro build`, restored in a `finally`.
+
+Measured on that build:
+
+| locale | pages carrying the digits | occurrences | shape |
+|---|---:|---:|---|
+| ar | 1 | **8** | 2 renderings × 4 digits, on `/ar/cancellation-policy/` |
+| de | 77 | **612** | 8 per page on 76 pages, 4 on `de/things-to-do/best-restaurants-vernal-utah/` |
+| **total** | **78** | **620** | |
+
+The gate reported exactly that — `620 rendered non-Western numeral(s) on 78
+page(s) across 2 locale(s)`, exit **1** — naming locale, route, character, code
+point, range, offset and rendered context for each.
+
+**The finding is what the other eight gates did.** The full `gates:dist` chain
+was run against that same perturbed build, in order:
+
+| gate | exit | reported |
+|---|---|---|
+| `validate-site` | **0** | ✔ 620 pages — links resolve, no orphans, hub structure intact |
+| `gate-4m` | **0** | ✔ 32 pages with video, 30 distinct videos |
+| `gate-4k` | **0** | ✔ 620 pages across 9 locales — every page renders its declared direction |
+| `gate-4n` | **0** | ✔ 1 rtl page — no unisolated mirrored character |
+| `gate-4f` | **0** | ✔ 14404 headings — no untranslated headings |
+| `gate-4h` | **0** | ✔ 540 pages, 1922 locked phrases — no seam violations |
+| `gate-4i` | **0** | ✔ 52 locks on 540 pages — 3 advisory |
+| `gate-4g` | **0** | ✔ 42777 anchors — advisory, never blocks |
+| **`gate-4q`** | **1** ✘ | **620 non-Western numerals on 78 pages** |
+
+**Eight green gates on a corpus with 620 Arabic-Indic digits rendered across 78
+pages in two locales.** This is D-2's German control arriving one layer out: an
+exit 0 certifies the question a gate asks, and nothing else. Before D-3 the
+corpus-wide numeral policy had exactly one enforcement point — gate 4p, at the
+registry — and 4p is by construction blind to an authored digit, because an
+authored digit never passes through `Intl`. The half of the policy that survived
+Track C was carried by translator discipline, and this run is what "carried by
+translator discipline" looks like when it fails: nothing objects.
+
+It is also, incidentally, the strongest available argument that this gate is
+worth its 620 file reads. Nine checks over the same corpus, one of which sees it.
+
+### 6. The fail-closed matrix on a scratch corpus
+
+Each case builds a nine-locale scratch corpus in the scratchpad and points the
+gate at it through its dist positional. The repository's registry and manifest
+are read unmodified; nothing under `src/`, `i18n-gates/` or `census/` is touched
+by any case.
+
+| # | corpus | expect | exit | what it establishes |
+|---|---|---|---|---|
+| C1 | clean, 9 locales | 0 | **0** ✔ | the scratch baseline the others move from |
+| C2 | `ar`: `<strong>٢٠</strong><em>٢٦</em>` in prose | 1 | **1** ✘ | **the C7 trap** — see §7 |
+| C3 | `de`: Arabic-Indic digits in a Latin locale | 1 | **1** ✘ | the rule is per-locale, not Arabic-only (D3) |
+| C4 | `fr`: Eastern Arabic-Indic `۲۰۲۶` | 1 | **1** ✘ | the second range fires; U+06F2 named, not U+0662 |
+| C5 | `ar`: digits **only** in `<script>`, `<style>`, a comment and two attributes | 0 | **0** ✔ | the scope limit, as a control that can fail |
+| C6 | `ar` absent from the corpus entirely | 2 | **2** ✘ | **zero pages is not zero violations** |
+| C7 | real `.webp` assets copied into the corpus | 0 | **0** ✔ | binaries excluded by design — both arms below |
+
+**C6 is the case worth the most.** A registered locale with no rendered page
+would otherwise print `ar 0 pages … 0 occurrence(s)` and exit 0 — a line
+indistinguishable from a locale that was measured and is clean. It exits 2
+instead, as an instrument failure, naming the locale:
+
+```
+gate-4q: INSTRUMENT FAILURE — the rendered numeral check could not run
+
+  ✖ locale "ar" is registered by the host but has no rendered page under … —
+    a forbidden-range check over an empty corpus reports zero violations and has
+    measured nothing
+
+Zero pages is not zero violations. Build the locale, or remove it from the
+registry — do not read this run as a pass.
+```
+
+This is the ja UI-chrome fail-open shape (handoff §7, Gate 4a) closed in
+advance, and it matters for exactly the locale this track exists for: `ar` today
+renders **one** page, and a build that dropped it would otherwise report a
+cleaner-looking result than a build that kept it.
+
+**C7 is a negative control with both arms measured**, because one arm alone
+proves nothing. A real image from `dist/` — one of the 224 that a raw byte walk
+flags — was copied into the scratch corpus at two paths. The gate reported 0.
+The same file, read as UTF-8 in the same process: **75 matches**. The false
+positive is live and available; the instrument does not inherit it.
+
+**C5 is the honest limit, stated as a control rather than as prose.** Forbidden
+digits inside a JSON-LD `<script>`, a `<style>` body, an HTML comment, a `title`
+attribute and an `alt` attribute are **not** visible text and are **not**
+reported. That is the same scope gates 4h and 4i have, and widening it would
+re-import the measurement problem the extractor exists to solve (§7). It has
+zero live instances — the 639-file byte instrument, which does see all of them,
+reports 0 — so it is a limit with nothing behind it, recorded so a green 4q is
+not over-read.
+
+### 7. The extraction contract, measured at the offset
+
+The gate's answer turns on one argument: `inlineSeparator: ''`. That argument
+was not taken on faith. The three candidate instruments were run over the same
+two scratch pages and their matches compared **by offset**, which is the
+discipline D-2 established when it found that the two connective forms reported
+the same count on different text:
+
+**C2 — four digits split across two inline tags, `<strong>٢٠</strong><em>٢٦</em>`:**
+
+| instrument | matches | offsets | what it reads |
+|---|---:|---|---|
+| raw HTML bytes | 4 | `92, 93, 107, 108` | two 2-digit runs 14 characters apart |
+| `inlineSeparator: ' '` | 4 | `8, 9, 11, 12` | `٢٠ ٢٦` — a space fabricated *inside the number* |
+| **`inlineSeparator: ''`** ← the gate | 4 | **`8, 9, 10, 11`** | `٢٠٢٦` — one number, which is what a reader sees |
+
+**All three report 4. Only one reports the right four.** This is D-2's finding
+recurring on a different surface and it is worth naming as a pattern: *when an
+instrument is measuring the wrong text, the count is often the last thing to
+move.* Had this been checked by count, all three instruments would have looked
+equivalent and the C7 lesson would have been re-learned in production.
+
+**C5 — the same regex where the digits are not prose:**
+
+| instrument | matches |
+|---|---:|
+| raw HTML bytes | **20** — every one a false positive |
+| `inlineSeparator: ' '` | 0 |
+| **`inlineSeparator: ''`** ← the gate | **0** |
+
+Here the count *does* move, 20 → 0. So the two traps are distinguishable by
+which measurement they disturb: the inline-markup trap moves the **offsets** and
+leaves the count intact; the raw-document trap moves the **count**. An instrument
+that checked only one of the two would pass one trap and fail the other, which
+is why both were measured.
+
+**And on the live corpus, the brief's own figure reproduced exactly.** Brief
+§D-3 constraint 1 recorded 465 ASCII digits of markup on the Arabic pilot page.
+Measured independently here:
+
+| `dist/ar/cancellation-policy/index.html` | chars | ASCII digits | `[٠-٩۰-۹]` |
+|---|---:|---:|---:|
+| raw HTML | 23 525 | **465** | 0 |
+| extracted visible text | 4 254 | 143 | 0 |
+
+**465 confirmed**, and the extracted view is 18% of the document. A raw-HTML
+instrument would be reading 5.5× more text than a reader sees, three-quarters of
+it markup, CSS and JSON-LD.
+
+### 8. The rendering prediction — measured, not assumed
+
+| check | method | result |
+|---|---|---|
+| `dist/` unchanged | sha256 of all 863 files, sorted by path, before the injection cycle vs after restore + full rebuild | **byte-identical, 863/863** |
+| `astro check` | full run | **0 errors, 0 warnings, 268 hints** |
+| full suite | `npm run build` = `gates:src` + `astro build` + `gates:dist` | **exit 0** |
+| gate 4q | on the rebuilt tree | **exit 0**, 620 pages, 9 locales, 0 occurrences |
+
+The hash comparison spans the *whole* injection cycle — snapshot taken before
+`src/lib/ui.ts` was perturbed, compared after the perturbation was restored and
+the tree fully rebuilt — so it certifies the control left nothing behind, not
+merely that adding a gate script renders nothing.
+
+**268 hints, unchanged from the D-2 close.** The new gate contributes **zero**,
+which is not automatic: `tsconfig.json` includes `**/*`, and D-2 §7 measured a
+temporary gate copy adding four unused-binding hints to exactly this figure. The
+count was taken with no scratch file inside the repository.
+
+Every gate's figures are unchanged from the D-2 close: 4j 840 entries · 4o 35
+files · 4p 9 locales · validate-site 620 pages · 4m 32 pages/30 videos · 4k 620
+pages/9 locales · 4n 1 rtl page · 4f 14404 headings · 4h 540 pages/1922 locked
+phrases · 4i 52 locks/540 pages/3 advisory · 4g 42777 anchors/85 candidates ·
+**4q 620 pages/9 locales/0 occurrences** (new).
+
+### 9. Corrections to the Track D planning assumptions (Rule 8)
+
+Recorded here rather than edited back into the brief and the decisions
+document, per this milestone's own instruction.
+
+**9.1 — the `gates:src` claim, now fully settled.** D-2 §6.2 corrected brief §2's
+"B-9 and B-8a … run in `gates:src`" and the decisions doc's "Also `gates:src`,
+pre-build" for D-2. The third instance closes with this milestone, in the
+opposite direction: the decisions doc §6 justified D-3's last position partly
+with *"It is the only `gates:dist` item."* **All three were `gates:dist` items.**
+The ordering itself was never affected — the other two reasons given for it (D-3
+is the only item adding a file and wiring; its baseline must be taken on a tree
+where D-1 and D-2 have landed) are each sufficient, and both held: this
+milestone did add a file and wiring, and §3's baseline was taken on the post-D-2
+tree and reproduced it exactly.
+
+**9.2 — "one new permanent verifier and no temporary instruments" held, but not
+literally.** Brief §8 predicted no temporary instruments. Four transient
+instruments were in fact written — a byte census, a scratch-corpus control
+harness, an extractor-arm comparator and a source-injection harness — and all
+four live in the scratchpad, outside the repository, so the *claim they were
+making* (no `probe.mjs`, no browser, no detached worktree, nothing new to
+maintain) holds exactly. The distinction worth keeping is between an instrument
+that must be **maintained** and one that must be **reproducible**: none of the
+four is maintained, and §3's command is what makes the one figure that outlives
+them regenerable.
+
+**9.3 — the acceptance criterion's "registered route count" exists.** It was not
+obvious that it did: no gate reads it, the adapter does not expose it, and the
+backlog's own B-0 note describes exposing `LOCALE_SLUGS` as an F-series
+extension. §4 reconciles against it by reading the registry's AST directly, in
+the report rather than in the gate, and gets 8/8 exact. The criterion was
+satisfiable as written; the gate simply is not the component entitled to check
+it (§10).
+
+### 10. Recorded, deliberately not implemented
+
+- **The reconciliation in §4 is not performed by the gate.** It would need the
+  host adapter to expose the content registry, which is the F-series extension
+  the B-0 closure note already names — the adapter returns *facts*, and
+  "how many routes does this locale register" is a fact it does not yet answer.
+  Doing it inside the gate would mean the gate parsing `src/lib/i18n.ts` itself,
+  which is precisely the five-copies coupling F4 Phase 1 removed. Left to the
+  report, where it is a verification rather than an enforcement.
+- **`\p{Nd}` minus ASCII was rejected as the range.** It would additionally
+  forbid Devanagari, Bengali, Thai and twenty more scripts, none of which this
+  corpus renders and none of which any decision has been taken about — config
+  nothing measures, in the direction of over-reach. Widening is a separate item
+  with its own decision, and owner decision D3 fixed this deliverable at the two
+  Arabic-Indic ranges.
+- **Attribute-borne and JSON-LD digits stay out of scope** (§6, C5). Zero live
+  instances, and reaching them means abandoning the extracted-text view that
+  §7 shows is load-bearing.
+- **The `ar` 4h entry's `state: "in-progress"`** stays as-is. It describes B-8b.
+
+### 11. Rule 9 — the differential
+
+Three tracked paths change, and each is explained by this milestone:
+
+```
+scripts/gate-4q-numeral-render.mjs   | new file
+package.json                         |  2 +-
+docs/rtl/AR2-TrackD-policy-gates.md  | this section
+docs/rtl/AR2-backlog.md              | the track-close edits
+```
+
+No registry, dictionary, census, manifest, `src/` or `dist/` file appears in it.
+All four transient instruments were written to the session scratchpad and never
+to the repository, so — unlike D-2, where a control copy reached history under
+the auto-commit's message and perturbed `astro check` by four hints — there was
+no window in which one could be captured. `src/lib/ui.ts` was perturbed and
+restored inside a `finally` within a single command, and `git status` was
+verified clean of it immediately afterwards, twice.
+
+### 12. Acceptance — D-3
+
+- ✔ **Identical baseline reproduction**: 863 total / 639 text / 224 binary / 0
+  occurrences across 9 locales, re-derived on the post-D-2 tree.
+- ✔ **Reproducible methodology documented**: the extension census, with the
+  command that regenerates it, replaces the bare totals as the recorded fact.
+- ✔ **Detection of injected rendered Arabic-Indic digits**, through the real
+  path — dictionary value → `astro build` → rendered page — in the RTL locale
+  (`ar`, 8 occurrences) and in a Latin one (`de`, 612), 620 total on 78 pages,
+  exit 1 naming locale · route · character · code point · offset · context.
+- ✔ **No findings from binary assets**, both arms measured: the gate opens 620
+  of 863 files and reports 0; the same `.webp` read as text yields 75 matches.
+- ✔ **The C7 trap defeated at the offset**, not by count: digits split across
+  `<strong>`/`<em>` are found contiguous at offsets 8–11, where the two rival
+  extraction settings report the same count on different text.
+- ✔ **Instrument failure stays distinct from policy failure**: exit 2 for a
+  registered locale with no rendered page, exit 1 for a violation, exit 0 with
+  the nine-row table.
+- ✔ **Rendered-population reconciliation against an independent source**: 8/8
+  target locales match `LOCALE_SLUGS` exactly; `en`'s 80 = 77 + 3 reconciles
+  with Track C's independently measured 617/620.
+- ✔ **Full suite green**, every pre-existing gate's figures unchanged;
+  `astro check` 0 errors / 0 warnings / 268 hints, the new gate contributing 0.
+- ✔ **`dist/` byte-identical across the whole injection cycle**: 863/863.
+- ✔ Three corrections to the planning assumptions recorded here rather than
+  edited backwards into the planning artifacts.
+
+---
+
+## Track D — closure
+
+**All three items are prevention, and all three shipped with zero live defects
+behind them** — that was true when the brief predicted it and it is still true
+measured: both `ar` glossary locks correct, `ar` connectives 0, Arabic-Indic
+digits in rendered prose 0. What the track changed is not the corpus but what
+happens the next time the corpus moves.
+
+| item | was | is |
+|---|---|---|
+| **B-9** | `ar` locks under no script validation; a locale misfiled as `arabic` exits 0 | fourth branch in 4i; the misfiling exits 2 and the `latinLock` escape is counted, not asserted |
+| **B-8a** | any non-`latin` script silently borrowed the CJK adjacency form | explicit `CONNECTIVE_FORMS` lookup; an unregistered script declaring connectives exits 2 naming itself |
+| **B-10b** | authored non-Western digits enforced by nothing; 8 gates blind | gate 4q, `gates:dist`, forbidden-range, 620 pages × 9 locales on every build |
+
+**The recurring lesson across the three milestones is one lesson.** D-2 found
+that the wrong connective form reports the *same count* at a different offset.
+D-3 found that three extraction settings report the *same count* on different
+text. In both cases the defect was invisible to a total and visible at an
+offset, and in both cases the instrument became more **discriminating** rather
+than more complicated. The D-1 case is the same shape from the other side: `de`
+misfiled under `script: "arabic"` exits 0 on the unpatched gate, so the *exit
+code* was the invariant hiding the defect, and the fix was to count what the
+branch added rather than to read the code.
+
+**What remains, and what it now waits on.** B-8b (the Arabic seam rule) and B-11
+(proper-noun drift in body prose) are the only Arabic items still open, both
+census-derived under Rule 16, both blocked on a single prerequisite: an Arabic
+prose pilot batch. D-2 §8 produced the first hard evidence for B-8b's shape —
+the proclitic `و` fuses to the following word, so the Arabic form can be neither
+the Latin word-boundary form nor the CJK adjacency form — which is a finding for
+Track E's rule design and still not a rule. The corpus window is unchanged and
+is printed by gate 4q on every build: **`ar` 1 route, 4 254 characters, against
+77 routes and ~2.6 M characters for every other locale.**
+
+Track E — `MULTILINGUAL_HANDOFF.md` §7 stage 2 for `ar` — is authorized on this
+closure by owner decision D4, without a further decision gate.
