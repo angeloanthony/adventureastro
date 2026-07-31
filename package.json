@@ -24,6 +24,7 @@
     "gate:4q": "node scripts/gate-4q-numeral-render.mjs",
     "test:4n": "node scripts/test-4n-differential.mjs",
     "test:4o": "node scripts/test-4o-fixtures.mjs",
+    "test:bidi-runs": "node scripts/test-bidi-runs.mjs",
     "probe:rtl": "node scripts/rtl/probe.mjs",
     "control:keyboard": "node scripts/rtl/control-keyboard.mjs",
     "control:keyboard:falsify": "node scripts/rtl/control-keyboard.mjs --falsify",

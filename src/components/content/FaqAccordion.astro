@@ -1,7 +1,39 @@
 ---
 // FaqAccordion.astro — renders Q&As AND emits FAQPage JSON-LD from the
 // same data, so visible content and schema can't drift (Build Guide §4.5).
+//
+// BIDI ISOLATION (AR-2 B-15). An FAQ answer is prose that arrives as one opaque string, so
+// until this component decomposed it there was nowhere to put isolation: `{a}` escapes, and
+// a `<bdi>` written into frontmatter arrived as literal text. Gate 4n measured the cost on
+// the first Arabic prose route, and E-1b measured a second defect no gate can see — the
+// bare `$349` rendering as `349$`.
+//
+// `splitNamedRuns` says WHERE the site's own runs are; `<Bidi>` decides how isolation is
+// expressed. Both halves already existed: B-2 §2.2 built `Bidi.astro` precisely so an
+// `.astro` template would never reach for `set:html` to isolate a run, and this component
+// had never called it.
+//
+// WHY ELEMENT NODES AND NOT `set:html`. Handing the formatter's string output to `set:html`
+// would switch Astro's escaping off for the whole answer and oblige this file to switch it
+// back on — a second definition of escaping to keep in step with Astro's own. Rendering an
+// ARRAY instead keeps every text slice on Astro's normal interpolation path, so the escape
+// is not preserved by care; it is never left. `set:html` appears nowhere below.
+//
+// WHY ALL NINE LOCALES AND NOT ONLY RTL ONES (owner decision, B-15 §8). `<bdi>` is a no-op
+// in an LTR context — the property that made B-2 Phase B safe across eight locales. Making
+// this path conditional on document direction would buy a few hundred bytes and cost the
+// component its single invariant: FAQ text is rendered through `Bidi`, always, and there is
+// one rendering path, one escaping model and one testing surface.
+//
+// BOTH FIELDS, NOT ONLY THE ANSWER. `q` renders in the same RTL paragraph context as `a`
+// and can carry the same runs. Isolating one and not the other would reintroduce, inside
+// this component, exactly the two-classes-of-prose split B-15 was raised to remove.
+//
+// `SchemaFaq` still receives the RAW strings. The isolation is a rendering concern; the
+// JSON-LD carries the text, so §4.5's single source survives with nothing to strip.
 import SchemaFaq from '../seo/SchemaFaq.astro';
+import Bidi from '../Bidi.astro';
+import { splitNamedRuns } from '../../lib/bidi-runs';
 
 interface Props { faq: { q: string; a: string }[] }
 const { faq } = Astro.props;
@@ -9,8 +41,8 @@ const { faq } = Astro.props;
 <div class="faq-accordion">
   {faq.map(({ q, a }, i) => (
     <details class="faq-item" name={`faq-${i}`}>
-      <summary class="faq-question">{q}</summary>
-      <div class="faq-answer">{a}</div>
+      <summary class="faq-question">{splitNamedRuns(q).map((p) => (p.run ? <Bidi>{p.text}</Bidi> : p.text))}</summary>
+      <div class="faq-answer">{splitNamedRuns(a).map((p) => (p.run ? <Bidi>{p.text}</Bidi> : p.text))}</div>
     </details>
   ))}
 </div>
