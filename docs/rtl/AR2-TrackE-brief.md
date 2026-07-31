@@ -73,7 +73,24 @@ is a hypothesis about the measurement window. **E-0 re-censuses these on rendere
 visible text, per file, before any Arabic is written**, and the divergence from
 this table is itself a finding.
 
+> **DONE — [`AR2-E0-census.md`](AR2-E0-census.md), 2026-07-30.** The divergence is real
+> and is per-term, not a constant factor. `(435) 219-9447` reproduces its 28 exactly in
+> the *body* window, which identifies the window this table was taken in; `Vernal` reads
+> 164 here against 163 body / 193 whole-page in the `utv` seven. The floor window gate 4i
+> actually compares against is the whole-page one. Three claims in §1.1–§1.2 did not
+> survive; they are corrected in place below.
+
 ### 1.2 E-D1 — owner decision: add the 2 `dinosaur-national-monument` spokes?
+
+> **RESOLVED 2026-07-30 — yes. Pilot = 9 files.** The decision stands, but on
+> justification #1 only: **#2 is false.** Measured on rendered output, 3 of the 7 `utv`
+> files *do* render a Key Takeaways block (`beginners-guide`, `family-utv-guide`,
+> `private-utv-tours`), so that identity unblocks at floor 3 without DNM, and E-D1 raises
+> it to 4 rather than unblocking it. Justification #1 survives and is strengthened:
+> `Dinosaur National Monument` renders **25 times in DNM body prose and 0 times in `utv`
+> body prose** — though every page on the site, `utv` included, renders it once in the
+> footer's *Explore* list, so "0 in `utv`" is true in the body window and false in the
+> floor window. See `AR2-E0-census.md` §2 F2 and F3.
 
 **Recommendation: yes. Pilot = 9 files, not 7.**
 
@@ -156,6 +173,17 @@ build that dropped the term from nine of ten pages. **Re-measuring the floor is 
 required pilot deliverable**, and it is the same class of error as a stale
 baseline: the number was correct when written and silently stops meaning what it
 meant.
+
+> **SHARPENED by the E-0 census (§2 F4).** Both locks are **100 % chrome** — measured by
+> provenance (`footer.tagline`, `nav.trails`) and by position (`المسارات` at offset 71 of
+> 4 254, `أرض الديناصورات` at 3 761). Their entire count comes from the nav and footer, so
+> re-measuring the floors to 10 makes them correct *and still measures nothing about the
+> translator's work*. They are dictionary-integrity locks and should be labelled as such,
+> not re-read as corpus locks after the pilot. The same fact sets E-4's trap in the other
+> direction: Arabic chrome already renders `Vernal` **7 times per page**, so a 10-page
+> corpus carries ~70 occurrences before a translator writes a word. **A B-11 floor must be
+> a margin above the measured chrome contribution, never a fraction of the observed
+> total** — and it cannot be set before E-1 reports the spoke-layout chrome constant.
 
 ⚠ **A11 is the known blind spot 4m documents about itself:** a frozen baseline is
 *blind to a new route until re-baselined*. The 9 new routes are new routes. (The
@@ -285,7 +313,13 @@ No new instrument. Two existing ones change state without changing code:
 
 ## 4. Milestones
 
-### E-0 — Brief and pre-census *(no Arabic written)*
+### E-0 — Brief and pre-census *(no Arabic written)* — **COMPLETE 2026-07-30**
+
+Deliverables: [`AR2-E0-census.md`](AR2-E0-census.md) (the re-census and the recorded
+predictions) and [`AR2-E0-batch-brief.md`](AR2-E0-batch-brief.md) (the translator brief).
+E-D1 resolved yes. Exit condition met: predictions recorded, zero repository content
+changed. One new backlog item raised — **B-14**, `<title>` element text is inside the
+`visibleText@1` window, which is the window E-4's floors will be written in.
 
 - Resolve **E-D1**.
 - Re-census §1.1's table on **rendered visible text**, per file, from the English

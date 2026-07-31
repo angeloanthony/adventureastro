@@ -647,6 +647,35 @@ fixing it is a nine-locale change and the owner's call, not AR-1's.
 Pre-existing, already documented in that file. Noted only because it is one of the
 few chrome strings no dictionary can reach.
 
+### B-14 — `<title>` element text is inside the `visibleText@1` window *(raised by E-0)*
+
+`stripNonRendered` removes `<script>`, `<style>`, `<template>`, `<noscript>` and
+comments — not `<head>`. `<meta>` content lives in attributes and is dropped with the
+tag, but the `<title>` element's **text** survives into `extractVisibleText`, so gates
+4h, 4i and 4q count the document title as rendered prose:
+
+```
+/utv/best-utv-trails-vernal/, first 160 chars of visible text:
+" Best UTV Trails Near Vernal, Utah | Adventure Tours Vernal Home About Trails …"
+```
+
+Gate 4q's header states its scope as excluding *"attribute values (`alt`, `title`,
+`content`)"* — accurate about the `title` **attribute**, silent about the `<title>`
+**element**, which is a different thing and is in scope. The stated and the actual
+window diverge.
+
+**Live impact is confined to gate 4i floors**, and it is measurable: it is why
+`Vernal`'s per-page chrome contribution is not constant — 6 on `best-utv-trails-vernal`,
+whose title carries the word twice, against 4 on most pages and 2 on
+`visiting-dinosaur-national-monument`. For 4q the impact is nil (no Arabic-Indic digit
+renders anywhere, in or out of a title); for 4h a `</title>` block replacement inserts a
+space, so no seam is fabricated.
+
+**Why it is filed rather than fixed:** E-4 is about to write B-11's floors *in this
+window*, and a floor set now and a window narrowed later disagree silently. Either
+narrow the extractor before E-4 or record that B-11 floors include title text —
+but not one and then the other. Measurement: `AR2-E0-census.md` §3.
+
 ---
 
 ## Then, and only then: the §7 content pipeline
@@ -692,6 +721,30 @@ every finding above by 77 routes.
 > **1** stop meaning anything on a 10-route corpus and must be re-measured, and
 > every B-11 wayfinding lock is a Latin phrase under `script: "arabic"` and so
 > **must carry `latinLock`** or D-1's branch exits 2.
+
+> **E-0 COMPLETE 2026-07-30 — E-D1 resolved yes, pilot = 9 files.** Deliverables:
+> [`AR2-E0-census.md`](AR2-E0-census.md) and
+> [`AR2-E0-batch-brief.md`](AR2-E0-batch-brief.md). No repository content changed.
+> The re-census on rendered visible text falsified three claims in the Track E brief
+> and produced one new item:
+>
+> - **The two `ar` 4i floors are 100 % chrome** (`footer.tagline` at offset 3 761 of
+>   4 254, `nav.trails` at offset 71). Re-measuring them to 10 makes them correct and
+>   still measures nothing about a translator's work — they are dictionary-integrity
+>   locks, not corpus locks.
+> - **Arabic chrome renders `Vernal` 7× per page and the phone 4× per page.** A 10-page
+>   `ar` corpus therefore carries ~70 `Vernal` occurrences before any prose exists, so a
+>   B-11 floor stated as a fraction of the observed total is satisfied by chrome alone.
+>   B-11 floors must be a margin above the measured chrome contribution — and cannot be
+>   set until **E-1** isolates the spoke-layout chrome constant.
+> - **`Key Takeaways` renders on 3 of the 7 `utv` files**, not 0 — E-D1's second
+>   justification is void; the decision stands on the first
+>   (`Dinosaur National Monument`: 25 body occurrences on DNM, 0 in `utv` body).
+> - **New: B-14** — `<title>` element text is inside the `visibleText@1` window.
+>
+> Confirmed unchanged: `(435) 219-9447` at **28** occurrences in `utv` body prose (33
+> across the 9), which is the `<bdi>`-in-MDX population; `→` at **0** in every window on
+> every file.
 
 > **A correction this file carried, recorded so the next sweep does not
 > re-inherit it.** Track C's brief recorded *"B-9 — script validation for Arabic
