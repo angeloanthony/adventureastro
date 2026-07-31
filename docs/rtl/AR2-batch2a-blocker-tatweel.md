@@ -5,8 +5,27 @@ build; **§7 is the investigation and the correction**, and it records that the 
 document originally proposed was itself **falsified by measurement**. No corpus was edited to
 resolve it, and the 28 editorial findings are untouched.
 
-**Evidence:** `scratchpad/batch2a-first-build.txt` (the preserved first build, exit 1),
-`batch2a-4n-after-fix.txt`, `repro-tatweel.mjs`, `measure-scriptext.mjs`.
+**Evidence — committed, because a citation into a session scratchpad dies when temp is cleaned:**
+[`evidence/batch2a-first-build.txt`](evidence/batch2a-first-build.txt) (the preserved first
+build, **exit 1**, `gate-4n: 30` at line 799) ·
+[`evidence/batch2a-4n-after-fix.txt`](evidence/batch2a-4n-after-fix.txt) (the same corpus
+through the corrected instrument, **28**) ·
+[`evidence/repro-tatweel.mjs`](evidence/repro-tatweel.mjs) (the single-variable reproducer, §7.1) ·
+[`evidence/measure-scriptext.mjs`](evidence/measure-scriptext.mjs) (the 63-codepoint measurement
+that **rejected** the `Script_Extensions` fix, §7.2).
+
+These four are **first-contact artifacts and must not be regenerated.** They record what the
+corpus looked like before anyone touched it; a re-run against the fixed instrument and the
+remediated corpus would print different numbers and prove nothing about the blocker. The green
+build they are contrasted against is summarised in
+[`AR2-rollout-batch-brief.md`](AR2-rollout-batch-brief.md) §1.1.1.
+
+⚠ **Concretely, `repro-tatweel.mjs` no longer reproduces its own output, and that is correct.**
+It imports the *live* `scripts/lib/bidi-isolation.mjs` by absolute path, so running it today
+exercises the **corrected** classifier and prints `clean` where §7.1 records `FINDING`. The
+recorded output is the evidence; the script is only the method that produced it. To re-derive
+the pre-fix numbers, point it at the reconstructed pre-fix classifier instead — the
+`3 → 0` figure in §7.4 was measured that way, not asserted.
 
 ---
 
@@ -136,7 +155,7 @@ The instrument was validated before its measurements were used.
 ### 7.1 Minimal reproducer
 
 Both findings reduce to a single `<li>` each, run through the gate's own `classifyPage`, with
-no build and no corpus (`scratchpad/repro-tatweel.mjs`):
+no build and no corpus ([`evidence/repro-tatweel.mjs`](evidence/repro-tatweel.mjs)):
 
 ```
 FINDING  فـ«عدم ترك أثر» يعني              "«" L…R
@@ -154,7 +173,7 @@ Single-variable isolation: removing U+0640 is the only difference between findin
 ### 7.2 ⚠ The fix proposed in §5 was WRONG, and the measurement is why
 
 §5 proposed swapping `\p{Script=Arabic}` for `\p{Script_Extensions=Arabic}`. Measured
-(`scratchpad/measure-scriptext.mjs`), the two properties differ over **63 codepoints** across
+([`evidence/measure-scriptext.mjs`](evidence/measure-scriptext.mjs)), the two properties differ over **63 codepoints** across
 the gate's seven RTL scripts. By general category:
 
 | category | count | Bidi_Class | correct today? |

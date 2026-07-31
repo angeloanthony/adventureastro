@@ -1,0 +1,84 @@
+
+> adventuretoursvernal@1.0.0 gate:4n
+> node scripts/gate-4n-isolation.mjs
+
+
+gate-4n: 28 unisolated mirrored character(s) at a direction change, on 8 page(s)
+
+Route:     /ar/hiking/alpine-lakes-hiking-high-uintas/   (ar, declared rtl)
+  "(" in <p>  flanked L … R
+      ئية في عمق منطقة High Uintas Wilderness (وقسم الأنواع أدناه يفصّل ذلك). فأيًّا ك
+  ")" in <div>  flanked L … R
+      يوتا وإدارة غابة Ashley National Forest) لمعرفة الرخصة والحدود والأنظمة الحالية
+  ")" in <div>  flanked L … R
+      لرسمي (إدارة غابة Ashley National Forest) لمعرفة أحوال المسارات والطرق والثلوج ا
+  ")" in <div>  flanked L … R
+      لرسمي (إدارة غابة Ashley National Forest) لمعرفة سبل الوصول الحالية.
+  ")" in <div>  flanked L … R
+      لرسمي (إدارة غابة Ashley National Forest) لمعرفة أي تنبيهات حالية قبل رحلتك.
+      … (1 more on this page)
+
+Route:     /ar/hiking/beginner-hiking-guide-near-vernal/   (ar, declared rtl)
+  ")" in <p>  flanked L … R
+      غابة Ashley National Forest وجبال Uintas)، والخيارات المناسبة للعائلات، والاعتبا
+  ")" in <div>  flanked L … R
+      Parks وإدارة غابة Ashley National Forest) لمعرفة المسارات والظروف الحالية قبل ال
+  ")" in <div>  flanked L … R
+      Parks وإدارة غابة Ashley National Forest) قبل الذهاب، وطالع دليل ما تحمله معك لأ
+  ")" in <div>  flanked L … R
+      Parks وإدارة غابة Ashley National Forest) لمعرفة الظروف الحالية قبل أن تخطّط حول
+
+Route:     /ar/hiking/best-hikes-in-dinosaur-national-monument/   (ar, declared rtl)
+  ")" in <div>  flanked L … R
+      لمصدر الرسمي (هيئة National Park Service) لمعرفة أوصاف المسارات الحالية قبل أن ت
+  ")" in <div>  flanked L … R
+      لمصدر الرسمي (هيئة National Park Service) لمعرفة سبل الوصول الحالية قبل الذهاب.
+  ")" in <div>  flanked L … R
+      لمصدر الرسمي (هيئة National Park Service). ويتناول دليلنا للنقوش والفنون الصخرية
+
+Route:     /ar/hiking/bird-watching-near-vernal/   (ar, declared rtl)
+  ")" in <p>  flanked L … R
+      (هيئة ￼ والجهات المديرة لـFlaming Gorge) لمعرفة الظروف الحالية، وطالع دليلَي Re
+  ")" in <div>  flanked L … R
+      Parks وإدارة غابة Ashley National Forest) قبل أن تبني يومًا حول موضع بعينه.
+
+Route:     /ar/hiking/dog-friendly-hiking-near-vernal/   (ar, declared rtl)
+  ")" in <p>  flanked L … R
+      ￼، وهيئة ￼ بشأن الخزّانات مثل Red Fleet) لمعرفة سياسة الحيوانات الأليفة ونظام ا
+  ")" in <div>  flanked L … R
+      لمصدر الرسمي (هيئة National Park Service) لمعرفة سياسة الحيوانات الأليفة الحالية
+  ")" in <div>  flanked L … R
+      Parks وإدارة غابة Ashley National Forest) لمعرفة القواعد الحالية حيث تنوي المشي.
+  ")" in <div>  flanked L … R
+      Parks وإدارة غابة Ashley National Forest) قبل أن تخطّط حول تاريخ محدّد، ولا تفتر
+
+Route:     /ar/hiking/fall-hiking-near-vernal/   (ar, declared rtl)
+  ")" in <p>  flanked L … R
+      ional Monument وRed Fleet وFlaming Gorge)، والحياة البرّية في الخريف، وفرص التصو
+  ")" in <div>  flanked L … R
+      onal Park Service وهيئة Utah State Parks) لمعرفة الظروف الحالية قبل أن تخطّط رحل
+  ")" in <div>  flanked L … R
+      onal Park Service وهيئة Utah State Parks) قبل أن تصعد.
+
+Route:     /ar/hiking/family-hiking-near-vernal/   (ar, declared rtl)
+  ")" in <div>  flanked L … R
+      Parks وإدارة غابة Ashley National Forest) قبل الذهاب.
+  ")" in <div>  flanked L … R
+      onal Park Service وهيئة Utah State Parks) قبل زيارتك.
+  ")" in <div>  flanked L … R
+      Parks وإدارة غابة Ashley National Forest) لمعرفة الخيارات المهيّأة الحالية قبل ا
+  ")" in <div>  flanked L … R
+      Parks وإدارة غابة Ashley National Forest) قبل الذهاب. وإن كنت تفضّل أن تُتولّى ع
+
+Route:     /ar/hiking/high-uintas-backpacking-guide/   (ar, declared rtl)
+  ")" in <div>  flanked L … R
+      لرسمي (إدارة غابة Ashley National Forest) لمعرفة أحوال الثلوج والمسارات والطرق ا
+  ")" in <div>  flanked L … R
+      لرسمي (إدارة غابة Ashley National Forest) لمعرفة أي تنبيهات مياه حالية، وابنِ عا
+
+Each of these renders a reversed bracket, or moves the run it encloses, because the
+neutral resolves to the paragraph direction rather than to its content (UAX #9 N2).
+Fix by asking `src/lib/bidi.ts` for the run — phoneDisplay, currencyDisplay, brandRun —
+never by inserting <bdi> or a control character at the call site, which is the
+convention this gate exists to keep enforceable.
+
