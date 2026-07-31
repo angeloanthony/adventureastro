@@ -181,6 +181,47 @@ Verify what the tool **received**, not what you passed it.
 > [`AR2-B7-classification.md`](../rtl/AR2-B7-classification.md) §8; the outcome
 > has no phase document, only the conversion commit's own message.
 
+### 18. A comparison is evidence only if it can distinguish the candidate answers
+
+Cardinality and identity fail in **opposite** directions, so a null result on one
+axis proves nothing until the other has been checked. Two instruments agreeing on
+a count have not agreed on an answer.
+
+> **Three independent recurrences, each of which set an acceptance criterion.**
+>
+> **D-2** — on identical Arabic prose under two declared scripts, the
+> word-boundary and adjacency connective forms both report **exactly one**
+> violation: the correct form at offset 32 on the genuine repeated conjunction
+> `و و`, the fallthrough form at offset 65 *inside* `ووقت`. Same count, disjoint
+> matched text. Any instrument comparing totals would have called the dispatch
+> defect unchanged.
+>
+> **D-3** — the three candidate extraction settings all report **4** matches on
+> `<strong>٢٠</strong><em>٢٦</em>`; only `inlineSeparator: ''` reads the one
+> number a reader sees. The converse appeared in the same phase: a raw-HTML walk
+> and the extracted visible text produce **identical offsets and different
+> counts**. Together they validate two independent properties — the extractor
+> invents no separators, and it inspects nothing invisible — which is a stronger
+> acceptance argument than "the injected digits were detected."
+>
+> **B-5b M3** — the same gesture count in both directions, a different element
+> receiving them: `hitTarget` showed the swipe landing on
+> `.carousel-track-container`, never inside `.carousel-track`, which is what
+> identified swipe as *downstream of the transform* rather than a fourth
+> mechanism.
+> — [`AR2-TrackD-policy-gates.md`](../rtl/AR2-TrackD-policy-gates.md) (D-2, D-3);
+> [`AR2-B5b-touch.md`](../rtl/AR2-B5b-touch.md)
+
+This is **not** rule 8. Rule 8 says a count may be wrong and tells you to
+re-census on another axis. This one says a count may be **right, stable, and
+still empty of information** — the failure survives precisely because the total
+is correct.
+
+> *Numbering is append-only: rule numbers are a permanent citation API, so a rule
+> earned after the process rules keeps the next free number rather than being
+> inserted where it belongs. 18 is a rule of evidence; its number records when it
+> was earned, not its section.*
+
 ---
 
 ## Rules of process

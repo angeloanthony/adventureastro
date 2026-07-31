@@ -30,6 +30,9 @@ Follow the project's engineering method (`docs/framework/METHOD.md`):
 9. Report exclusions, rejected candidates, and falsified predictions.
 10. Escalate whenever a measurement contradicts a frozen decision or requires an
     owner judgement.
+11. A comparison is evidence only if it can distinguish the candidate answers.
+    When a total is invariant, compare identity (offsets, matched text, the
+    element actually reached); when identity is invariant, compare the total.
 
 Open a phase report with the rules you deliberately applied — number and name:
 
