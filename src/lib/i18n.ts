@@ -499,6 +499,14 @@ const ZH_SLUGS = new Set<string>([
 const AR_SLUGS = new Set<string>([
   'cancellation-policy', // AR-1 pilot page
   'utv/best-utv-trails-vernal', // AR-2 Track E, E-1 — first prose spoke
+  'utv/backcountry-tours-vernal-utah', // AR-2 Track E, E-2
+  'utv/side-by-side-rentals-vernal-utah', // AR-2 Track E, E-2
+  'utv/group-utv-tours-vernal', // AR-2 Track E, E-2
+  'dinosaur-national-monument/petroglyphs-rock-art-vernal', // AR-2 Track E, E-2
+  'utv/private-utv-tours-vernal', // AR-2 Track E, E-2
+  'utv/beginners-guide-to-utv-tours-vernal', // AR-2 Track E, E-2
+  'utv/family-utv-guide-vernal', // AR-2 Track E, E-2
+  'dinosaur-national-monument/visiting-dinosaur-national-monument', // AR-2 Track E, E-2
 ]);
 
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {
