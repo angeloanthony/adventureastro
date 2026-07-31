@@ -896,6 +896,52 @@ every finding above by 77 routes.
 >   probe's `NOT MEASURABLE` class again correctly excluded the 1px `.page-summary` phone that
 >   a naive x-order read calls scrambled.
 >
+> **E-2 COMPLETE `e189f1c` + `fc23319` 2026-07-31 — the pilot is 9 spokes.**
+> [`AR2-E2-pilot.md`](AR2-E2-pilot.md). 621 → **629** pages, route delta exactly **+8**;
+> all 11 gates green; `ar` visible text **12 885 → 129 862** chars. Brief and
+> instrumentation unchanged, as scoped.
+>
+> - **⚠ Gate 4n's largest true-positive run: 15 findings on 4 pages, two classes.**
+>   **(A)** a bracket adjacent to a digit run, 13 sites — the ADR-10 §8.1 digit-flank rule
+>   firing on authored prose for the first time since Track A derived it. Fixed by authoring
+>   (`(3 ساعات)` → `(مدته 3 ساعات)`), not markup. **(B)** guillemets around a Latin run,
+>   2 sites — and here **the brief is wrong**: §3.2 says `«»` need no action because the
+>   algorithm flips them correctly, which is true in Arabic-only context and false when the
+>   quotation mark *is* the direction change. Measured over the wrong population and
+>   generalised (rule 18, in a brief rather than a census).
+> - **One of the 15 was in FAQ frontmatter — B-15 §6's residual, live and behaving exactly
+>   as specified**: gate-blocked, not silently shipped, remedied by rephrasing.
+> - **Gate 4i's first true positive on Arabic prose** — `offroad-trail` caught `الدروب` for
+>   `المسارات` in the first file authored. E-0 recorded both `ar` locks as 100 % chrome, so
+>   neither had ever tested a translator until now.
+> - **⚠ E-1 §5's per-term `ar` figures DO NOT REPRODUCE, and its `en` figures do.** On a file
+>   whose prose was never edited: `Vernal` 24 → **31**, `KRX 1000` 6 → **8**. Cause:
+>   `<main>` contains `section.related-articles`, whose contents depend on how many sibling
+>   routes are registered. **A per-term count over `<main>` is not stable across corpus
+>   growth** — E-1 §6.3's byte-diff hazard is also a *measurement* hazard. B-11 floors must
+>   use a prose window excluding `related-articles`/`tour-cta`/`author-byline`.
+> - **A8 floor inputs, re-measured on the completed pilot:** `dinosaur-country` body **23** /
+>   chrome **9**; `offroad-trail` body **32** / chrome **9**. E-0's "a floor ≤ 10 is
+>   satisfiable by chrome alone" holds at exactly the predicted magnitude; the margin that
+>   measures translator output is now 23 and 32. Chrome constant **929–953 chars/page**.
+> - Per-term `en`↔`ar` alignment on the prose window: **Δ 0 on all ten §4.2 terms**, per file
+>   and in total, incl. 33 isolated phone occurrences. ⚠ Reported with its caveat — the same
+>   author authored and measured, and one-for-one name preservation is one faithful
+>   translation strategy among several (E-1 compressed and would not read Δ 0).
+> - **Gate 4f advisories 2 → 42**, all `ar` in-progress: **41 `utv`** (policy §4.2 rendering
+>   correctly) + **1 `and`** — the English conjunction *inside* the §4.2 name
+>   `Dave and Trudy Wilson`. **Extends E-1 §6.1:** the 4f whitelist must cover function words
+>   inside a §4.2 name, not just the term list.
+> - **§5 challenge filed:** `VERIFY WITH OFFICIAL SOURCE` carries its scannability in
+>   **letter case**, which Arabic does not have. Rendered as a fixed phrase 24×; affects every
+>   caseless script (`ar`, `ja`, `zh`), so it is not an Arabic-only editorial call.
+> - **A schema budget the brief omits:** `description` is 120–165 chars and **3 of 9 files
+>   failed it** on first authoring (Arabic diacritics each cost a character). Build-time
+>   schema failure, invisible to every gate.
+> - **No new B-16-class defect.** B-16 renders on all 9 new spokes as predicted.
+> - **B-17 stays a proposal** — no second independent browser-only positional defect observed,
+>   so the owner's promotion bar is unmet.
+>
 > Confirmed unchanged: `(435) 219-9447` at **28** occurrences in `utv` body prose (33
 > across the 9), which is the `<bdi>`-in-MDX population; `→` at **0** in every window on
 > every file.
