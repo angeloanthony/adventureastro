@@ -983,6 +983,72 @@ every finding above by 77 routes.
 > across the 9), which is the `<bdi>`-in-MDX population; `→` at **0** in every window on
 > every file.
 
+> **E-4 PHASE 1 COMPLETE `0b82561` + `207bae1` 2026-07-31 — the non-prose contribution is
+> structurally bounded.** [`AR2-E4-phase1-ceiling.md`](AR2-E4-phase1-ceiling.md). No floors,
+> no gate change, no corpus.
+>
+> - **Four of five structural questions are properties of `RelatedArticles.astro`, not of the
+>   corpus:** `limit = 4` enforced in `take()`, no caller overrides it, exactly two
+>   contributing fields per card, and `inLocale()` makes the pool deterministic.
+> - **⚠ A CORRECTION TO E-3's MECHANISM.** E-3 said a new route flips a sibling's card from
+>   English to the locale. It does not — `inLocale()` means a locale with no siblings renders
+>   **no section at all**. Measured 0 cards → 4 cards. **Appear-then-saturate, already
+>   finished**, not a flip that drifts for the whole rollout.
+> - **⚠ THE CRITERION E-3 GOT WRONG.** E-3 ruled a candidate ineligible when
+>   `prose ≤ non_prose_observed` — that asks how much of today's count is template. The
+>   question a floor poses is whether a number exists the template CANNOT REACH:
+>   **`feasible ⟺ non_prose_ceiling < observed whole-page count`.** Observed non-prose is
+>   descriptive; only a ceiling is enforceable.
+> - **Six of thirteen verdicts reversed, in both directions.** Four E-3 called ineligible are
+>   feasible — including the live `dinosaur-country` lock — because their related ceiling is
+>   **structurally zero**: five §4.2 trail names and both Arabic locks appear in no spoke
+>   title or description anywhere. Two E-3 called eligible are infeasible.
+> - **Feasible ≠ strong.** Feasible detects total deletion; strong also detects partial drift.
+>   E-3's "a floor there is *no* evidence" was too strong — it is *weak* evidence.
+> - **⚠ Selection must rank on `prose ÷ non_prose_ceiling`** — never observed, never raw
+>   frequency. `Green River` at E-3's ratio ∞ is a term whose denominator has not arrived yet.
+
+> **E-4 PHASE 2 STEPS 1–2 COMPLETE `c866adb` 2026-07-31 — the tight ceiling changes no
+> verdict.** [`AR2-E4-phase2-tight-ceiling.md`](AR2-E4-phase2-tight-ceiling.md) +
+> `scripts/rtl/measure-related-ceiling.mjs`. No floors, no gate change, census not re-run.
+>
+> - **Phase 1's flag is answered and nothing moves.** `Dinosaur National Monument` still
+>   infeasible (by 28, not 47); `Adventure Tours Vernal` still feasible (headroom 7, not 5,
+>   and correctly labelled **weak**). **10 of 13 feasible, the same 3 infeasible.**
+> - **Two tightenings off `take()`:** `seen` is keyed on `hub/baseId`, so the four cards are
+>   four **distinct** entries; and it is pre-seeded with the current page, so a term's sole
+>   carrier contributes **nothing to its own page** — which is why DNM looked worse than it is.
+> - **⚠ THE POOL IS A SECOND AXIS, and it does most of the work.** Two sound tight ceilings:
+>   **MEASURED** (the 9 `ar` files, sharpest, expires on *any* registration and can expire
+>   **upward without limit**) and **SETTLED** (per registered page over the 57 `en` spokes, an
+>   upper bound at every corpus size to full rollout). They disagree on 3 terms.
+>   **`Green River` decides it:** measured ceiling **0** (no `ar` file carries it in
+>   frontmatter) vs settled **18**. A lock justified by a 0 ceiling dies to the next unrelated
+>   batch. **Only SETTLED may freeze policy;** MEASURED is recorded because the gap *is* the
+>   pending drift.
+> - **SETTLED is additive** — Σ of per-page rows — so Phase 1's residual narrows from
+>   "re-measure on page-count change" to **"add the precomputed row."** All 57 rows in `--json`.
+> - **⚠ (a) A CORRECTION TO E-3's FLOOR MODEL.** `floor_enforced = non_prose_observed +
+>   prose_margin` **cannot be written down.** F5 Phase 5 removed authored figures —
+>   `gate-4i-glossary.mjs:230` *refuses* a lock declaring `min`/`count`. The floor **is** the
+>   census's whole-page count at freeze; `prose_margin` has no home. Phase 1 corrected E-3's
+>   mechanism, this corrects its arithmetic, both toward the simpler model.
+> - **⚠ (b) NAME COLLISION.** The census key `surface: "prose"` means the **whole page**
+>   (`phrase-count.mjs:51` counts `visibleText` over the document); E-3/E-4 use "prose" for
+>   `main − related − cta − byline`. **One word, two windows** — the D-1 shape the census layer
+>   exists to prevent. It is also where Option B would have to land: the schema enum is
+>   `"surface": {"enum": ["prose"]}`.
+> - **⚠ (c) THE `ar` CENSUS IS STALE AND ENFORCES NOTHING.** Frozen 2026-07-28 at
+>   `corpus.pages.ar = 1`; both `ar` locks sit at **value 1** against a 9-page corpus whose
+>   whole-page counts are **32** and **41**. The gate is green because the floor is far below
+>   the corpus, not because the corpus is verified. **Smallest, most reversible piece of step 3
+>   and independent of the A/B question.**
+> - **Option B still recovers no term.** Under the tight ceiling the same three are infeasible
+>   for the same reason, so the architecture choice is Option A vs no additional engineering.
+> - **⚠ The strength label is purely relative.** `strong ⟺ head ≥ prose/2` is a chosen
+>   convention. `Doc's Beach` scores strong on a headroom of 3 that is *all* of its prose;
+>   E-3 called it marginal and on the absolute reading E-3 was right. Carry both readings.
+
 > **A correction this file carried, recorded so the next sweep does not
 > re-inherit it.** Track C's brief recorded *"B-9 — script validation for Arabic
 > locks — ✘ no Arabic lock exists to exercise it."* **Two `ar` glossary locks
