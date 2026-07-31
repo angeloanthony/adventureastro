@@ -942,6 +942,43 @@ every finding above by 77 routes.
 > - **B-17 stays a proposal** — no second independent browser-only positional defect observed,
 >   so the owner's promotion bar is unmet.
 >
+> **E-3 COMPLETE `59141cf` 2026-07-31 — the stable editorial measurement window.**
+> [`AR2-E3-measurement-window.md`](AR2-E3-measurement-window.md) +
+> [`AR2-E3-translator-addendum.md`](AR2-E3-translator-addendum.md) +
+> `scripts/rtl/measure-prose-window.mjs`. No corpus, no gate change, no brief edit.
+> ⚠ **Milestone naming diverges from the frozen brief, which defines E-3 as B-8b** — recorded,
+> not reconciled; **E-5 owns it**, and B-8b is unstarted and corpus-unblocked.
+>
+> - **The window: prose = `<main>` − `related-articles` − `tour-cta` − `author-byline`.** The
+>   five components are **disjoint and asserted to partition** the page — exact on 9/9. Sizes:
+>   prose 108 002 · related 7 429 · cta 855 · byline 570 · chrome 8 854.
+> - **⚠ THE INSTABILITY IS ISOLATED BY DIFFERENTIAL.** Two trees (1 vs 9 registered `ar`
+>   routes) share one route with exactly one documented prose edit between them. Result:
+>   `Vernal` prose **−1** / related **+8** / cta·byline·chrome **0** / whole **+7**; `KRX`
+>   related **+2**, everything else 0; the other ten candidates zero everywhere. **The entire
+>   instability is `related-articles`; the prose window moved only by the B-15 edit.**
+>   −1 + 8 = +7 reproduces E-2's unexplained figure exactly.
+> - **⚠ THE CONSTRAINT THAT DECIDES E-4:** `gate-4i-glossary.mjs:377` extracts over the
+>   **whole page**. So the **prose window decides** a floor and the **whole-page window
+>   enforces** it — a floor is meaningful only if it exceeds the non-prose contribution.
+> - **⚠ TWO CORRECTIONS TO RECORDED FIGURES, both ours.** (a) E-2 §5's `dinosaur-country`
+>   "body 23 / chrome 9" — **9 of that 23 is `div.tour-cta`**; translator contribution is
+>   **14**, exceeded by **18** template occurrences. **E-0 predicted this lock was
+>   chrome-dominated, was argued out of it by E-2's bigger number, and was right.**
+>   (b) `Vernal`'s 178 prose is only **1.63×** its non-prose — weaker than `Kawasaki KRX 1000`
+>   at 2.05× with a fifth the occurrences. **Absolute frequency is not floor strength; the
+>   ratio is.**
+> - **4 of 13 candidates can carry NO floor** (non-prose ≥ prose): `Doc's Beach` 3/9,
+>   `Asphalt Ridge` 9/9, `Ashley Gorge` 8/9, **`أرض الديناصورات` 14/18**. Give them no floor
+>   rather than lowering one until it passes — a green floor there is *no* evidence.
+> - **Eligible:** `Adventure Tours Vernal` 9.75× · `Uintah Basin` 11× · `Green River` ∞ ·
+>   `المسارات` 3.56× · `Kawasaki KRX 1000` 2.05×.
+> - **Floor model for E-4:** `floor_enforced = non_prose_observed + prose_margin`. ⚠
+>   `non_prose_observed` **expires with the corpus size it was measured at** — a floor left
+>   alone while `related` grows silently becomes template-satisfiable. The alternative that
+>   removes the expiry is a **4i window option** for `ar` floor locks — a gate change, out of
+>   E-3 scope, recorded as the recommendation E-4 weighs against re-measurement cost.
+>
 > Confirmed unchanged: `(435) 219-9447` at **28** occurrences in `utv` body prose (33
 > across the 9), which is the `<bdi>`-in-MDX population; `→` at **0** in every window on
 > every file.
