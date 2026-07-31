@@ -336,7 +336,73 @@ ceiling *and* feasible under a window-scoped one.
 
 ### 10.5 Still open after step 3
 
-- **The `surface` naming collision (§7.2)** — reported, not fixed.
+- **The `surface` naming collision (§7.2)** — reported, not fixed. ⚠ It is a **framework**
+  change, not a policy one: it lands in `census-output.schema.json` and `phrase-count.mjs`, the
+  portable engine that `forebearfindastro` consumes with no `i18n-gates/` at all. Deferring it
+  avoided a cross-host API change inside a localization milestone.
 - **The 11 remaining candidates** hold no lock. §4 says which could carry one; authoring them is
   a corpus decision, not a measurement one.
 - **B-8b**, unchanged and corpus-unblocked.
+
+---
+
+## 11. The expansion procedure — a required maintenance unit, not a reminder
+
+The settled ceiling is a **sum over the registered pages** and the floors are **corpus totals**.
+So an Arabic batch that registers routes and stops there leaves the frozen floors covering less
+of the corpus than shipped: the locks stay green while enforcing proportionally less. The ceiling
+extension and the census re-freeze are therefore **two halves of one operation**, and neither is
+optional.
+
+It is cheap by construction — §6 already reduced the ceiling side from rediscovery to a table
+sum — but cheap is not automatic.
+
+### 11.0 ⚠ First, extend the instruments' route list
+
+`measure-prose-window.mjs` hardcodes the nine pilot slugs in `PILOT` and measures
+`cancellation-policy` separately as `INLINE`. **A new route that is not added to `PILOT` is
+silently excluded from the window measurement while the census counts it** — which is exactly the
+population mismatch that produced §10.2's 32/41-vs-33/42 correction, and it will recur in the
+same shape at every expansion until the list is extended. Do this before anything else.
+
+`measure-related-ceiling.mjs` needs no such edit: it reads the pool from source frontmatter, so
+the settled ceiling re-sums over the new registered set on its own.
+
+### 11.1 The sequence
+
+```
+npm run build                                            # rebuild; page set must match HEAD
+node scripts/rtl/measure-prose-window.mjs --json w.json  # template constants + whole counts
+node scripts/rtl/measure-related-ceiling.mjs --window w.json --project --json c.json
+node scripts/rtl/measure-related-ceiling.mjs --window w.json --project --falsify   # control
+node scripts/census/phrase-set.mjs > new-set.json        # GUARD 1 — diff, must be identical
+npm run census:phrase-count -- <YYYY-MM-DD>              # re-freeze
+                                                         # GUARD 2 — diff every fact, check sign
+npm run gates:dist
+```
+
+### 11.2 The acceptance criteria, in the order they can fail
+
+| # | check | fails if |
+|---|---|---|
+| 1 | `phrase-set.json` re-derived and diffed | it differs — the lock registry drifted and the refresh is measuring a different question |
+| 2 | Assertion A inside the ceiling instrument | observed related exceeds the settled ceiling — §3.1's English-predicts-Arabic assumption is **falsified**, and the ceiling must be rebuilt from measured Arabic frontmatter before any floor is trusted |
+| 3 | `--falsify` control | it comes back green — the assertion is not wired to the ceiling |
+| 4 | whole-census differential, **by sign** | **any fact decreased.** Increases are expected; a decrease bakes a weaker floor into the baseline and is the failure mode a refresh actually has |
+| 5 | `ceilNP < frozen value`, per `ar` lock | a lock is no longer ceiling-safe — it must be dropped, not lowered until it passes |
+| 6 | `npm run gates:dist` | anything |
+
+⚠ **Check 5 must be computed over the page set the census measured**, not over the pilot spokes.
+§10.2 is the record of getting this wrong by one page; the error scales with the gap between the
+two lists, which is precisely what §11.0 exists to keep at zero.
+
+### 11.3 Scope of what this validates
+
+The framework is **measurement-complete, enforcement-live, and validated at pilot scale**. Nine
+translated spokes exercised every mechanism, established glossary enforcement, validated the
+floor model and closed the architectural question. They have **not** demonstrated behaviour
+across the full 57-spoke corpus, and this document does not claim they have.
+
+That gap is what §10.4's reopen condition is for. It is not an expectation of failure — it is the
+difference between *validated at pilot scale* and *assumed to generalize*, recorded so that
+rollout-scale evidence can reopen the design rather than having to argue against a closed one.

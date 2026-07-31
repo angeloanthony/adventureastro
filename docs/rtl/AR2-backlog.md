@@ -1079,6 +1079,19 @@ every finding above by 77 routes.
 > - **Verified:** `npm run build` over 629 pages, full `gates:dist` green — `gate-4i` ✔ 52
 >   locks across 8 locales on 549 rendered pages, same 3 pre-existing `ja`/`zh` advisories.
 > - **Still open:** the `surface` naming collision, the 11 unlocked candidates, **B-8b**.
+> - **⚠ E-5 INHERITS A REQUIRED MAINTENANCE UNIT, not a reminder** —
+>   [`AR2-E4-phase2-tight-ceiling.md` §11](AR2-E4-phase2-tight-ceiling.md). The settled ceiling
+>   sums over the **registered** pages and the floors are **corpus totals**, so a batch that
+>   registers routes without re-freezing leaves the locks green while enforcing proportionally
+>   less. Ceiling extension and census re-freeze are **two halves of one operation**. §11 carries
+>   the sequence and six ordered acceptance criteria, of which two are easy to skip: the
+>   differential must be checked **by sign** (a decrease is the real failure mode), and
+>   **`measure-prose-window.mjs` hardcodes `PILOT`** — a new route not added there is excluded
+>   from the window while the census counts it, which is §10.2's population mismatch set to
+>   recur at every expansion.
+> - **⚠ Scope claimed, and not more:** measurement-complete, enforcement-live, **validated at
+>   pilot scale**. Nine spokes exercised every mechanism; they have not demonstrated behaviour
+>   across the full 57-spoke corpus. The reopen condition marks that gap deliberately.
 
 > **A correction this file carried, recorded so the next sweep does not
 > re-inherit it.** Track C's brief recorded *"B-9 — script validation for Arabic
