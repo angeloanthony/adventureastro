@@ -498,6 +498,7 @@ const ZH_SLUGS = new Set<string>([
 // alone has mis-tagged a locale as complete before (see MULTILINGUAL_HANDOFF §7).
 const AR_SLUGS = new Set<string>([
   'cancellation-policy', // AR-1 pilot page
+  'utv/best-utv-trails-vernal', // AR-2 Track E, E-1 — first prose spoke
 ]);
 
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {

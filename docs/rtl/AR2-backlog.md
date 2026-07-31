@@ -676,6 +676,36 @@ window*, and a floor set now and a window narrowed later disagree silently. Eith
 narrow the extractor before E-4 or record that B-11 floors include title text —
 but not one and then the other. Measurement: `AR2-E0-census.md` §3.
 
+> **E-1 made this load-bearing rather than theoretical.** Of the 6 `Vernal` chrome occurrences on the first Arabic spoke, **2 are the `<title>` element**. So the whole-page floor window mixes a constant (nav/footer, 4), a per-page variable (title, 2 here) and the prose a B-11 floor is meant to measure. `AR2-E1-probe.md` §4.2.
+
+### B-15 — `faq[].a` is un-isolatable prose *(raised by E-1, **blocks E-2**)*
+
+[`FaqAccordion.astro:13`](../../src/components/content/FaqAccordion.astro#L13) renders `<div class="faq-answer">{a}</div>`. Astro escapes an interpolated expression, so markup written into `faq[].a` arrives as literal text — neither `<bdi>` nor `src/lib/bidi.ts` can reach the string from content. FAQ answers are rendered visible prose: they sit in the `visibleText@1` window and every dist-reading gate sees them.
+
+**Three requirements collide and any two can hold:** policy §3.2 (`(435) 219-9447` preserved exactly, `$349` symbol-first verbatim) · policy §5.2 / ADR-10 (a mirrored character at a direction change must be isolated) · the escaping delivery mechanism.
+
+**Measured, not predicted.** The first E-1 build exited 1 on exactly this site — gate 4n's first true positive on Arabic prose:
+
+```
+Route: /ar/utv/best-utv-trails-vernal/   (ar, declared rtl)
+  "(" in <div>  flanked R … N
+      وللاستفسار عن أسعار المجموعات، الرقم هو (435) 219-9447.
+```
+
+**Exposure:** 8 of the 9 pilot files carry parentheses in FAQ answers, 7 of 9 carry the phone, and **56 English spokes site-wide have `faq:` frontmatter**. E-1 landed by moving the phone out of the Arabic FAQ answer (recorded deviation, `AR2-E1-probe.md` §3.3); that workaround does **not** generalise — applying it corpus-wide means deleting the phone number and every parenthetical from Arabic FAQ answers, which is a content policy nobody decided. The fix belongs in the component (route `faq[].a` through the B-2 formatter) and needs an owner decision about where isolation lives. Gate 4n's own remedy line — *"ask `src/lib/bidi.ts` for the run … never insert `<bdi>` at the call site"* — is unreachable here, which is the point.
+
+⚠ **A sibling hazard in the same text that no gate can see:** `$349`/`$125` stay un-isolatable by the same mechanism, and 4n correctly ignores them — `$` is `Bidi_Mirrored=No`, outside ADR-10's scope. Whether they resolve correctly beside Arabic is unmeasured; it needs `scripts/rtl/probe.mjs` against the live route.
+
+### B-16 — `TourCta.astro:25` hardcodes `/machine` outside `t()` *(raised by E-1)*
+
+`` `$${SITE.pricing.baseTour}/machine` `` — the unit word is an English literal no dictionary reaches. Rendered live on the first Arabic prose page:
+
+```
+… جولات UTV بصحبة مرشد عبر أرض الديناصورات. $349/machine · 3 …
+```
+
+`TourCta` renders on every spoke, so every future Arabic spoke inherits it. Same class as B-12 and B-13 (chrome strings no dictionary can reach), but unlike those it is **live on a rendered Arabic page**. The price itself is isolated by the B-2 formatter (4n green), so this is a translation gap, not a bidi defect. Found only because E-1's per-term census surfaced a lock occurrence the author had not written.
+
 ---
 
 ## Then, and only then: the §7 content pipeline
@@ -741,6 +771,26 @@ every finding above by 77 routes.
 >   justification is void; the decision stands on the first
 >   (`Dinosaur National Monument`: 25 body occurrences on DNM, 0 in `utv` body).
 > - **New: B-14** — `<title>` element text is inside the `visibleText@1` window.
+>
+> **E-1 COMPLETE — the first Arabic prose route.** `AR2-E1-probe.md`. 620 → **621** pages,
+> route delta exactly +1; all 11 gates green; gate 4q's `ar` window moved **4 254 → 12 885**
+> characters, so the page is traversed and the run is not vacuous.
+>
+> - **Gate 4n fired on Arabic prose for the first time** and then went green on the fix.
+>   That is the positive control its own header says a green run cannot supply — delivered
+>   by the corpus, not staged. Its verdicts are citable now in a way they were not before.
+> - **The chrome constant is measured** and both E-0 predictions are falsified: `Vernal`
+>   **6** per page (not 7), phone **2** (not 4). E-0's figures were whole-page counts taken
+>   on a page with no `<main>`. Spoke chrome = 988 chars (`ar`) vs 998 (`en`).
+> - **Both 4i locks now have prose occurrences** (`dinosaur-country` body 2, `offroad-trail`
+>   body 5) — they stop being pure dictionary-integrity locks the moment prose exists.
+>   Chrome still contributes 1/page/lock, so **any E-4 floor must exceed 10** on a 10-page
+>   corpus.
+> - **Five §4.2 wayfinding names align `en`↔`ar` exactly** in the body window; 0
+>   transliterated `فيرنال`. Policy §4.2 survived contact with a translator.
+> - **New: B-15 (blocks E-2) and B-16.** Plus a 4f advisory recording that `UTV`/`ATV`/
+>   `Jeep` and the §4.2 list must be whitelisted *before* 4f's `ar` lexicon leaves
+>   in-progress, or promotion turns a policy into a build failure.
 >
 > Confirmed unchanged: `(435) 219-9447` at **28** occurrences in `utv` body prose (33
 > across the 9), which is the `<bdi>`-in-MDX population; `→` at **0** in every window on
