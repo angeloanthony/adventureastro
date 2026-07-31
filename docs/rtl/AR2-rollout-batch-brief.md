@@ -19,8 +19,9 @@ It supersedes nothing in `AR1-arabic-policy.md`.
 |---|---|---|
 | **2.2** | **⚠ CORRECTED — the apostrophe instruction is withdrawn.** It was unfollowable. | E-5 §5.1; all 31 pilot source occurrences were ASCII and 17 rendered curly anyway |
 | **3.2** | **⚠ CORRECTED — guillemets around a Latin run DO need action.** The pilot brief said they need none. | E-2 §2.2, 2 live gate-4n findings |
-| **3.4** | **⚠ NEW — brackets adjacent to a digit run.** The single largest defect class in the pilot. | E-2 §2.1, **13** gate-4n findings |
-| **3.5** | **⚠ NEW — the classifier-noun pattern before a Latin name.** | E-1 §6.4 |
+| **3.3** | **⚠ NEW — brackets adjacent to a digit run.** The single largest defect class in the pilot. | E-2 §2.1, **13** gate-4n findings |
+| **3.4** | **⚠ NEW — the classifier-noun pattern before a Latin name.** | E-1 §6.4 |
+| **3.5** | **⚠ NEW — a parenthetical that CLOSES on a Latin institution name.** The largest class in batch 2a; §3.3's digit class produced **zero**. | batch 2a, **28 of 30** gate-4n findings |
 | **2.4** | **⚠ NEW — the `description` frontmatter budget, and why Arabic hits it.** | E-2 §6.4, **3 of 9** files failed the build |
 | **5** | **⚠ NEW — M9 and M10 are still unreported.** The pilot did not deliver them. | E-5 §4 |
 | **5.1** | **⚠ NEW — the caseless editorial marker is an open challenge.** | E-2 §6.3 |
@@ -45,6 +46,47 @@ forward by E-D1; it does not run again. **48 spokes remain.**
 `high-uintas-backpacking-guide` · `high-uintas-day-hikes` · `kings-peak-hiking-guide` ·
 `photography-hikes-near-vernal` · `spring-hiking-near-vernal` · `summer-hiking-near-vernal` ·
 `wildflower-hiking-near-vernal` · `wildlife-hiking-guide-near-vernal` · `winter-hiking-near-vernal`
+
+### 1.1.1 Batch 2a — the first 8, closed
+
+`alpine-lakes-hiking-high-uintas` · `beginner-hiking-guide-near-vernal` ·
+`best-hikes-in-dinosaur-national-monument` · `bird-watching-near-vernal` ·
+`dog-friendly-hiking-near-vernal` · `fall-hiking-near-vernal` · `family-hiking-near-vernal` ·
+`high-uintas-backpacking-guide`
+
+**⚠ The batch-2a blocker was an INSTRUMENT defect, not an authoring defect.** The first build
+stopped at gate 4n with 30 findings. Two of them were false positives the gate manufactured:
+`bidi-isolation.mjs` classified ARABIC TATWEEL U+0640 as strong **L** because the character is
+`Script=Common` and only its `Script_Extensions` is Arabic, so `فـ«…»` — Arabic on both sides —
+reported flanks `L…R`. No corpus edit could have cleared them, and the only editorial workaround
+(deleting the tatweel from `فـ` / `لـ`) would have corrupted the orthography §3.4 measures. The
+gate was corrected by **one codepoint** (`ec54397`), on its own commit, before a single word of
+prose was touched. The wider fix — `Script` → `Script_Extensions` — was measured and **rejected**;
+it remains recorded as the measured non-solution in
+[`AR2-batch2a-blocker-tatweel.md`](AR2-batch2a-blocker-tatweel.md) §7.2 and in the code comment
+above `RTL_LETTER`, so it is not re-proposed. The remaining **28 were genuine** and were fixed by
+authoring alone, under §3.5.
+
+Lesson, for the fourth time: **a green gate run over a corpus that lacks the shape proves nothing
+about the shape.** The tatweel occurs in 15 of 18 registered `ar` pages including nine pilot pages
+that shipped 4n-green; the pilot passed only because no tatweel had yet landed next to a mirrored
+character.
+
+| | first build | green build |
+|---|---|---|
+| exit | **1** | **0** |
+| gate 4n | **30 findings on 8 pages** | ✔ 18 rtl pages, 0 findings |
+| gates behind 4n | **never ran** (`&&` chain) | 4f 4h 4i 4g 4q all ✔ |
+| routes | 637 | **637** (unchanged) |
+| `ar` pages | 18 | 18 |
+| `ar` visible text | 441 123 chars | 441 360 chars (**+237** — exactly the 13 `بحسب المنطقة` + 10 `نفسها` + 1 `العالية` authored, no other drift) |
+| 4i `ar` floors | unmeasured | **33 / 42 enforced**, rendered 94 / 219 |
+| 4g candidates | — | **270**, identical to the unremediated baseline |
+
+Every downstream gate was measured against a **reconstructed unremediated baseline** (the 28 edits
+reversed, proved exact by restoring the three tracked files byte-identical to `HEAD`), so "no
+regressions" is a measurement here and not an assertion. 4f, 4h, 4i and 4g are numerically
+identical; 4q moves by exactly the authored characters.
 
 ### 1.2 Two deliverables per file, not one — unchanged and still the top failure mode
 
@@ -225,6 +267,64 @@ and lands immediately before a Latin run only **9** times — 6.5 % — *because
 
 It costs nothing, it reads better, and it keeps the seam population small for the Arabic seam
 rule (B-8b / E-6), which is authorized and not yet built.
+
+### 3.5 ⚠ NEW — a parenthetical that CLOSES on a Latin institution name
+
+**The single largest defect class in batch 2a: 28 of 30 gate-4n findings** — and the class §3.3
+predicted, *bracket adjacent to a digit run*, produced **zero**. The digit guidance was followed.
+This is its mirror image: the direction change sits at the **closing** bracket, not the opening
+one.
+
+```
+")" in <div>  flanked L … R
+    تأكّد من المصدر الرسمي (هيئة National Park Service وهيئة Utah State Parks
+    وإدارة غابة Ashley National Forest) لمعرفة الظروف الحالية
+```
+
+The class is **created by two other rules of this brief acting together**: §2.1/§4.2 keeps agency
+names Latin, and the verify-the-source convention puts them in brackets. Every item in such a
+list is `<Arabic classifier> <Latin name>`, so every item — and therefore the list — *ends* in
+Latin. **Reordering cannot fix it.** Nothing was wrong with the translator's judgement; the brief
+simply never said how to end a parenthetical that closes on a Latin name.
+
+**In frontmatter (FAQ answers, `description`) — authoring, because markup cannot reach you.**
+`bidi-runs.ts` isolates only the *named* runs (phone, currency), so there is no `<bdi>` available
+and gate 4n **will** block the build. End the parenthetical on an Arabic word:
+
+```yaml
+✘  … (هيئة National Park Service وإدارة غابة Ashley National Forest)
+✔  … (هيئة National Park Service وإدارة غابة Ashley National Forest بحسب المنطقة)
+
+✘  … (إدارة غابة Ashley National Forest)
+✔  … (إدارة غابة Ashley National Forest نفسها)
+```
+
+Both closers carry meaning rather than padding: `بحسب المنطقة` is true — different agencies
+manage different areas — and `نفسها` is the ordinary Arabic emphatic for a single named body.
+This is §3.3's rule applied at the other bracket: **put an Arabic word at the boundary where the
+direction change is.**
+
+**In MDX body prose — `<bdi>` around the Latin run**, exactly as §3.1 already says. An isolate
+becomes a single *neutral* to the text around it, so the bracket's flank scans past it to the
+Arabic beyond and the flanks match.
+
+#### ⚠ 3.5.1 — where to put `<bdi>` when the Latin run is inside a link
+
+Isolate the **whole `<a>`**, not the run inside it, when an Arabic proclitic attaches to the
+Latin name with **no space** (`لـFlaming Gorge`, `وRed Fleet`):
+
+```mdx
+✘  <a href="…">لـ<bdi>Flaming Gorge</bdi></a>
+✔  <bdi><a href="…">لـFlaming Gorge</a></bdi>
+```
+
+Both isolate correctly and both clear gate 4n. The reason to prefer the second is **gate 4g**:
+its extractor flattens an element by replacing every tag with a **space**, so the first form
+turns the anchor identity `لـFlaming Gorge` into `لـ Flaming Gorge` and forks one link's text
+into two spellings. Measured on batch 2a: **4g review candidates 270 → 271, occurrences
+unchanged at 955** — advisory, never blocking, and still drift worth not introducing. Where a
+space already separates the two (`منطقة High Uintas Wilderness`, or a bare `Red Fleet`), the
+flattened text is unchanged and either placement is fine.
 
 ---
 

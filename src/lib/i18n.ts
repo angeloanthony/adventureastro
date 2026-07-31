@@ -508,6 +508,13 @@ const AR_SLUGS = new Set<string>([
   'utv/family-utv-guide-vernal', // AR-2 Track E, E-2
   'dinosaur-national-monument/visiting-dinosaur-national-monument', // AR-2 Track E, E-2
   'hiking/best-hikes-in-dinosaur-national-monument', // AR-2 Track E, batch 2a
+  'hiking/alpine-lakes-hiking-high-uintas', // AR-2 Track E, batch 2a
+  'hiking/beginner-hiking-guide-near-vernal', // AR-2 Track E, batch 2a
+  'hiking/bird-watching-near-vernal', // AR-2 Track E, batch 2a
+  'hiking/dog-friendly-hiking-near-vernal', // AR-2 Track E, batch 2a
+  'hiking/fall-hiking-near-vernal', // AR-2 Track E, batch 2a
+  'hiking/family-hiking-near-vernal', // AR-2 Track E, batch 2a
+  'hiking/high-uintas-backpacking-guide', // AR-2 Track E, batch 2a
 ]);
 
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {

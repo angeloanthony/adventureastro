@@ -231,6 +231,21 @@ A full `npm run build` was not re-run: neither content nor build code changed, o
 library and its test, so `dist/` is unchanged by construction. `gates:dist` was run end-to-end
 against the same bytes and still stops at 4n on the 28 editorial findings.
 
-### 7.6 What remains
+### 7.6 What remains — nothing; closed by the editorial commit
 
-The **28 editorial findings** (§6), untouched by design. They are the next milestone.
+The **28 editorial findings** (§6) were remediated on their own commit, after this one, with no
+further gate change. The full suite is green: 4n ✔ over 18 rtl pages, and 4f / 4h / 4i / 4g / 4q
+— which the `&&` chain had never let run on this batch — all ✔ behind it. Route count unchanged
+at 637; the `ar` glossary floors enforce at their refreshed **33 / 42** (rendered 94 / 219).
+
+**§6's count is corrected by the fix itself.** §6 apportioned the 28 as *FAQ 22 / page-summary 5 /
+body 1*. Measured against the gate's own node types once the instrument was right, it is
+**FAQ `<div>` 23 / `<p>` 5** — the same 28, one row moved. §6's substantive claim stands: the
+dominant class is the bracket closing on a Latin institution name, and the digit class §3.3
+predicted produced **zero**. That gap in the brief is now filled by
+[`AR2-rollout-batch-brief.md`](AR2-rollout-batch-brief.md) **§3.5**, written from these findings.
+
+⚠ The false-negative population flagged in §4 — a tatweel on a flank making two genuinely
+differing flanks compare equal, and so *suppressing* a real finding — is **still not measured**.
+The correction removes the cause going forward, but no one has re-checked the nine pilot pages
+that shipped 4n-green under the broken classifier. That is a real open item, not a closed one.
