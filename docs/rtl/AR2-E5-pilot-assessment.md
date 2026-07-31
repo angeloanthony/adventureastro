@@ -341,7 +341,7 @@ misses were diagnosable.
 | P2 | The settled ceiling grows by exactly the precomputed `hiking` rows: `Vernal` **+160** (88 → **248**), `Kawasaki` +64, `DNM` +95, `Adventure Tours Vernal` +64, `Uintah Basin` +48, `Green River` +32 | E-4 §6, the 57-row table — this is the direct test of the additivity claim |
 | P3 | The 4f advisory **profile shifts off `utv`** and the total falls well below 42 despite 16 files | 41 of 42 are the `utv` marker; `hiking` renders it rarely |
 | P4 | **~5 of 16** files exceed the `description` budget on first authoring | E-2: 3 of 9 |
-| P5 | `en`↔`ar` prose Δ **will not be 0** unless batch 2 is authored one-for-one as E-2 was | E-2 §4.2's own caveat |
+| P5 | `en`↔`ar` prose Δ **will not be 0** unless batch 2 is authored one-for-one as E-2 was | E-2 §4.2's own caveat — ✔ **instrument committed at E-5c** (`--align <locale>`); the pilot baseline reproduces at Δ 0 |
 
 P2 is the important one: if the measured related contribution after batch 2 exceeds those rows,
 **Assertion A fails and the ceiling model is falsified**, which is reopen condition R2.

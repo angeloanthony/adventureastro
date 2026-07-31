@@ -101,14 +101,65 @@ const CANDIDATES = [
   { term: 'المسارات', kind: 'arabic', lock: 'offroad-trail' },
 ];
 
+/**
+ * `--align` — the per-file `en`↔locale set. E-5c.
+ *
+ * WHY IT IS NOT `CANDIDATES`. The two lists answer different questions and their difference is
+ * deliberate. `CANDIDATES` is the B-11 **floor** set: terms that might carry a gate-4i lock, so
+ * an Arabic-script lock belongs in it and a price does not. This list is the **fidelity** set:
+ * terms policy §4.2 requires to survive translation byte-for-byte, so it includes the
+ * transactional runs — `$349`, `$125`, the phone — which will never carry a floor but are
+ * exactly what a translator is most likely to localize by reflex.
+ *
+ * It reproduces E-2 §4.2's ten rows exactly, so the historical figure and this instrument's
+ * figure are like-for-like. An Arabic-script term cannot appear here at all: alignment asks
+ * whether the SAME string survives, and a term with a different rendering in each locale has no
+ * common string to count. Those live in DIVERGENT below.
+ */
+const ALIGN = [
+  { term: 'Vernal' },
+  { term: "Doc's Beach", forms: ["Doc's Beach", 'Doc’s Beach'] },
+  { term: 'Moonshine Arch' },
+  { term: 'Outlaw Trail' },
+  { term: 'Asphalt Ridge' },
+  { term: 'Kawasaki KRX 1000' },
+  { term: 'Dinosaur National Monument' },
+  { term: '(435) 219-9447' },
+  { term: '$349' },
+  { term: '$125' },
+];
+
+/**
+ * `--align --falsify` — the control, per METHOD rule 5.
+ *
+ * A Δ 0 result is evidence only if the same measurement path can produce a non-zero one. The
+ * failure mode that would make Δ 0 meaningless is the instrument reading one tree twice, or
+ * reading the locale side as empty — both of which report Δ 0 for *every* term, indistinguishable
+ * from perfect compliance.
+ *
+ * These are terms the policy REQUIRES to diverge: the English string is translated, so counting
+ * it on the locale side must return a different number. If any of them reports Δ 0, the
+ * comparison is not comparing two trees and no Δ 0 above it may be believed.
+ */
+const DIVERGENT = {
+  ar: [
+    { term: 'Dinosaur Country', why: 'policy §4.1 exonym → أرض الديناصورات' },
+    { term: 'Key Takeaways', why: 'AR-1 glossary → أبرز النقاط' },
+    { term: 'Utah', why: 'policy §4.1 exonym → يوتا' },
+  ],
+};
+
 function parseArgs(argv) {
-  const out = { root: path.join(REPO_ROOT, 'dist'), baseline: null, json: null };
+  const out = { root: path.join(REPO_ROOT, 'dist'), baseline: null, json: null, align: null, falsify: false };
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === '--root') out.root = path.resolve(argv[++i]);
     else if (argv[i] === '--baseline') out.baseline = path.resolve(argv[++i]);
     else if (argv[i] === '--json') out.json = path.resolve(argv[++i]);
+    else if (argv[i] === '--align') out.align = argv[++i];
+    else if (argv[i] === '--falsify') out.falsify = true;
     else { process.stderr.write(`unknown argument: ${argv[i]}\n`); process.exit(2); }
   }
+  if (out.falsify && !out.align) { process.stderr.write('--falsify requires --align <locale>\n'); process.exit(2); }
   return out;
 }
 
@@ -176,13 +227,27 @@ const count = (hay, forms) =>
 const formsOf = (c) => c.forms ?? [c.term];
 const COMPONENTS = ['prose', 'related', 'cta', 'byline', 'chrome'];
 
-function measureTree(root) {
+/**
+ * Route path for a slug in a locale. English is the default locale and carries no URL segment
+ * (`astro.config` trailingSlash 'always', build.format 'directory'), which is why this is a
+ * function rather than a template — the `en` side of an alignment is not `dist/en/…`.
+ */
+const routePath = (root, locale, slug) =>
+  locale === 'en' ? path.join(root, slug, 'index.html') : path.join(root, locale, slug, 'index.html');
+
+/** Decompose the pilot routes of one locale. Missing routes are skipped, not faked. */
+function readPages(root, locale) {
   const pages = [];
   for (const slug of PILOT) {
-    const p = path.join(root, 'ar', slug, 'index.html');
+    const p = routePath(root, locale, slug);
     if (!existsSync(p)) continue;
     pages.push({ slug, parts: decompose(readFileSync(p, 'utf8')) });
   }
+  return pages;
+}
+
+function measureTree(root) {
+  const pages = readPages(root, 'ar');
   const inlinePath = path.join(root, 'ar', INLINE, 'index.html');
   const inline = existsSync(inlinePath)
     ? { slug: INLINE, parts: decompose(readFileSync(inlinePath, 'utf8')) } : null;
@@ -205,6 +270,101 @@ function measureTree(root) {
 }
 
 const args = parseArgs(process.argv.slice(2));
+
+// --- `--align <locale>` — the committed replacement for E-2 §4.2's throwaway census ---------
+//
+// E-5b §5.2 found that the pilot's most-cited quality result — Δ 0 per file across ten §4.2
+// terms — was produced by an uncommitted script and could not be reproduced from the
+// repository. This is that measurement, in the repository, over the same window and the same
+// ten terms. It is the alignment method that closed the German backlog: per-file, not totals,
+// because totals can cancel a +2 on one file against a −2 on another.
+if (args.align) {
+  const locale = args.align;
+  const set = args.falsify ? (DIVERGENT[locale] ?? []) : ALIGN;
+  if (args.falsify && set.length === 0) {
+    process.stderr.write(`--falsify: no DIVERGENT set defined for locale "${locale}"\n`);
+    process.exit(2);
+  }
+
+  let en, loc;
+  try { en = readPages(args.root, 'en'); loc = readPages(args.root, locale); }
+  catch (err) { process.stderr.write(`instrument failed: ${err.message}\n`); process.exit(2); }
+
+  // Compare only routes present on BOTH sides — rule 9: a differential over a tree that differs
+  // in membership measures the membership, not the thing.
+  const shared = en.filter((p) => loc.some((q) => q.slug === p.slug)).map((p) => p.slug);
+  if (shared.length === 0) {
+    process.stderr.write(`no route is present in both "en" and "${locale}" under ${args.root}\n`);
+    process.exit(2);
+  }
+
+  process.stdout.write(`\nroot ${args.root}   align en ↔ ${locale}   routes in both: ${shared.length}`
+    + (args.falsify ? '   ⚠ --falsify: the DIVERGENT set, every Δ MUST be non-zero\n' : '\n'));
+  process.stdout.write('window: prose = <main> − related-articles − tour-cta − author-byline\n');
+
+  const proseOf = (pages, slug) => pages.find((p) => p.slug === slug).parts.prose;
+  const rows = [];
+  for (const cand of set) {
+    const forms = formsOf(cand);
+    const per = shared.map((slug) => ({
+      slug,
+      en: count(proseOf(en, slug), forms),
+      loc: count(proseOf(loc, slug), forms),
+    }));
+    rows.push({
+      term: cand.term,
+      why: cand.why,
+      per,
+      en: per.reduce((a, r) => a + r.en, 0),
+      loc: per.reduce((a, r) => a + r.loc, 0),
+      filesOff: per.filter((r) => r.en !== r.loc).length,
+    });
+  }
+
+  process.stdout.write('\n=== PER-FILE ALIGNMENT (Δ per file, not just totals) ===\n');
+  process.stdout.write('  term'.padEnd(32) + 'en'.padStart(6) + locale.padStart(6)
+    + 'Δ'.padStart(6) + 'files off'.padStart(11) + '\n');
+  for (const r of rows) {
+    process.stdout.write('  ' + r.term.slice(0, 29).padEnd(30) + String(r.en).padStart(6)
+      + String(r.loc).padStart(6) + String(r.loc - r.en).padStart(6)
+      + `${r.filesOff}/${shared.length}`.padStart(11) + (r.why ? `   ${r.why}` : '') + '\n');
+  }
+  for (const r of rows.filter((x) => x.filesOff > 0)) {
+    process.stdout.write(`\n  ${r.term} — the ${r.filesOff} file(s) that differ:\n`);
+    for (const p of r.per.filter((x) => x.en !== x.loc)) {
+      process.stdout.write(`    ${p.slug.padEnd(48)} en ${p.en}  ${locale} ${p.loc}  Δ ${p.loc - p.en}\n`);
+    }
+  }
+
+  const aligned = rows.filter((r) => r.filesOff === 0).length;
+  if (args.falsify) {
+    // The control: every DIVERGENT term must show a difference. One that does not means the
+    // comparison is reading one tree twice, and every Δ 0 this instrument has ever printed
+    // would be worthless.
+    const silent = rows.filter((r) => r.filesOff === 0);
+    if (silent.length > 0) {
+      process.stderr.write(`\ncontrol FAILED: ${silent.map((r) => r.term).join(', ')} reported Δ 0 `
+        + `on a term policy requires to diverge — the comparison is not comparing two trees.\n`);
+      process.exit(2);
+    }
+    process.stdout.write(`\n  ✔ control red as required — all ${rows.length} divergent term(s) show a difference\n`);
+  } else {
+    process.stdout.write(`\n  ${aligned}/${rows.length} term(s) align per file with Δ 0 on every shared route\n`);
+    if (aligned < rows.length) {
+      process.stdout.write('  ⚠ a non-zero Δ is a finding, not a failure — this instrument asserts nothing\n');
+    }
+  }
+
+  if (args.json) {
+    writeFileSync(args.json, JSON.stringify({
+      root: args.root, mode: args.falsify ? 'falsify' : 'align',
+      locale, routes: shared, rows,
+    }, null, 2) + '\n', 'utf8');
+    process.stdout.write(`\nwrote ${args.json}\n`);
+  }
+  process.exit(0);
+}
+
 let current;
 try { current = measureTree(args.root); }
 catch (err) { process.stderr.write(`instrument failed: ${err.message}\n`); process.exit(2); }

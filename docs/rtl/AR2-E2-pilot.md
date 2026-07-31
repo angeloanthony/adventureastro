@@ -159,6 +159,23 @@ not that compliance is automatic.
 **33 occurrences of the phone across the pilot's Arabic prose**, every one isolated, against
 the brief's predicted 33 in the English sources — the §3 authoring requirement met exactly.
 
+> **⚠ ADDENDUM — E-5c (`measure-prose-window.mjs --align ar`).** The table above was produced by
+> a throwaway census that was never committed, so for four milestones this result could not be
+> re-derived from the repository (E-5b §5.2). It now can be.
+>
+> **The conclusion reproduces exactly: Δ 0 on all ten terms, on all nine files.** Eight of the
+> ten magnitudes are identical. **Two are not, and both are window/counting defects on *this*
+> table rather than corpus findings** — Δ 0 holds in both cases because both sides were affected
+> equally:
+>
+> - **`Doc's Beach` 3 → 20.** The ASCII apostrophe only; the term also renders curly, produced by
+>   the markdown renderer from the same ASCII source (E-0 F5, fixed at E-5b §3).
+> - **`$349` 38 → 29.** Measured: prose 29 + `div.tour-cta` 9 = `<main>` 38. **This row was taken
+>   over `<main>`, not over the prose window this section's own text defines.**
+>
+> Full account and controls: [`AR2-E5c-alignment-instrument.md`](AR2-E5c-alignment-instrument.md).
+> This table is left as written — it is the record of what was measured at `e189f1c`.
+
 ---
 
 ## 5. B-11 / 4i floor inputs, re-measured on the completed pilot (A8)

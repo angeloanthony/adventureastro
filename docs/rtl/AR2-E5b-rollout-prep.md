@@ -237,6 +237,12 @@ clean and nobody needed to re-derive it.
 Recorded as a recommendation, **not performed**: it is instrument work, and this milestone's
 authorization for that was scoped to P-2.
 
+> **✔ DONE at E-5c** — [`AR2-E5c-alignment-instrument.md`](AR2-E5c-alignment-instrument.md).
+> `--align <locale>` is committed with a `--falsify` control. **The Δ 0 conclusion reproduces
+> exactly** (10/10 terms, 9/9 files); **8 of 10 magnitudes are identical and 2 are not** —
+> `Doc's Beach` 3→20 (the apostrophe undercount, third appearance) and **`$349` 38→29, because
+> E-2's row was taken over `<main>` rather than over the prose window its own text declares**.
+
 ---
 
 ## 6. Acceptance

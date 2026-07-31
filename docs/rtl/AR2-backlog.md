@@ -1192,6 +1192,37 @@ every finding above by 77 routes.
 >   milestones because the number was clean). **Recommended before batch 2: an `--align <locale>`
 >   mode.** Not built — outside P-2's authorization.
 
+> **E-5c COMPLETE 2026-07-31 — THE ALIGNMENT MEASUREMENT IS REPRODUCIBLE; THE LAST KNOWN GAP IS
+> CLOSED.** [`AR2-E5c-alignment-instrument.md`](AR2-E5c-alignment-instrument.md) +
+> `measure-prose-window.mjs --align <locale>`. No corpus, translation, gate, gate-config or
+> census change.
+>
+> - **THE CONCLUSION REPRODUCES EXACTLY — Δ 0 on all 10 terms, on all 9 files**, from committed
+>   artifacts alone. **8 of 10 magnitudes identical; 2 are not, and both are defects in E-2's own
+>   table rather than corpus findings** (Δ 0 survives because both sides were affected equally).
+> - **⚠ `Doc's Beach` 3 → 20** — the ASCII-only undercount, **E-0 F5 landing for the THIRD time**
+>   (E-2's table, E-4's eligibility row, the historical figure). Fixed at E-5b; nothing new decided.
+> - **⚠ `$349` 38 → 29 — E-2 §4.2's row was taken over `<main>`, not over the prose window that
+>   section's own text declares.** Measured: prose **29** + `div.tour-cta` **9** = `<main>` **38**;
+>   the CTA renders the price once per page in both locales. **Cross-check that makes it a
+>   measurement:** the same extraction gives the `ar` cta 981 visible chars, and decoding the two
+>   `&middot;` per page as the instrument does yields **981 − 126 = 855** — E-3's committed cta
+>   total, exactly. **Rule 8's fourth appearance in this track, and the first found in a figure
+>   rather than a plan.**
+> - **CONTROLS (rule 5).** Positive: the 10 `ALIGN` terms return Δ 0. Negative: `--falsify`
+>   measures the `DIVERGENT` set — terms policy REQUIRES to differ (`Dinosaur Country` −14,
+>   `Key Takeaways` −4, `Utah` −63) — and **exits 2 if any reports Δ 0**, which is exactly what an
+>   instrument reading one tree twice would print. Control verified red.
+> - **⚠ INCIDENTAL FINDING — §4.1 and §4.2 OVERLAP, and §4.2 WINS.** `Utah` reports 2 on the
+>   Arabic side; both are Latin and both correct — a **postal address** (`1935 S 1500 E, Vernal,
+>   Utah`) and an **institution** (`Utah Field House of Natural History State Park Museum`).
+>   **Third instance of one pattern** (cf. E-2 §6.1's `and` inside `Dave and Trudy Wilson`):
+>   **an English word inside a §4.2 name or address stays**, whatever other rule would reach it.
+>   Carve-out added to the rollout brief §2.1. No corpus change — both sites are correct.
+> - **Limitations recorded:** `PILOT` still hardcoded (E-4 §11.0 applies); prose window only;
+>   shared-string terms only; **Δ 0 evidences this corpus, not that compliance is automatic** —
+>   **E-5 §8 P5 still predicts Δ ≠ 0 for batch 2, and this instrument now decides it.**
+
 > **A correction this file carried, recorded so the next sweep does not
 > re-inherit it.** Track C's brief recorded *"B-9 — script validation for Arabic
 > locks — ✘ no Arabic lock exists to exercise it."* **Two `ar` glossary locks

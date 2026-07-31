@@ -73,6 +73,22 @@ nine pilot pages. That is expected, and it is why floors are re-frozen per batch
 `Utah → يوتا` · `Salt Lake City → سولت ليك سيتي` · `Denver → دنفر` ·
 `Colorado → كولورادو` · `Rocky Mountains → جبال روكي`
 
+> **⚠ NEW — §4.1 and §4.2 overlap, and §4.2 wins inside an address or a proper name.**
+>
+> An exonym applies to the *place as a place reference*. It does **not** apply when the same word
+> sits inside something the reader must match against a map, a sign or a booking system:
+>
+> ```mdx
+> ✔  تقع Vernal في يوتا                                    ← the state, exonym
+> ✔  <bdi>1935 S 1500 E, Vernal, Utah</bdi>                ← a postal address, §4.2
+> ✔  <bdi>Utah Field House of Natural History State Park Museum</bdi>   ← an institution, §4.2
+> ```
+>
+> Both Latin cases occur in the pilot corpus and both are correct (E-5c §5). This is the third
+> instance of one pattern — E-2 §6.1 found the English conjunction `and` inside the §4.2 name
+> `Dave and Trudy Wilson`. **An English word inside a §4.2 name stays**, whatever other rule
+> would otherwise reach it.
+
 ### 2.2 Latin, verbatim — the wayfinding and transactional names
 
 `Vernal` · `Dinosaur National Monument` · `Moab` · `Flaming Gorge` · `Red Fleet` ·
