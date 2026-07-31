@@ -65,12 +65,20 @@ const LINKABLE = [
   'hiking', 'camping', 'fishing', 'scenic-drives', 'guides', 'itineraries',
 ];
 
-/** Identical to measure-prose-window.mjs's list — the same thirteen B-11 floor candidates. */
+/**
+ * Identical to measure-prose-window.mjs's list — the same thirteen B-11 floor candidates.
+ *
+ * ⚠ A candidate is `term` or `[term, ...alternate rendered forms]`, and every form is counted.
+ * `Doc's Beach` renders in two apostrophes (E-0 §2 F5, E-5 §5.1); the card pool is frontmatter,
+ * which markdown never processes, so the ASCII form is the only one expected here — but the
+ * expectation is asserted by measuring, not by assuming, because that assumption failing
+ * silently is precisely how the prose-window instrument came to report 41 % of the term.
+ */
 const CANDIDATES = [
-  'Vernal', "Doc's Beach", 'Moonshine Arch', 'Outlaw Trail', 'Asphalt Ridge', 'Ashley Gorge',
-  'Kawasaki KRX 1000', 'Dinosaur National Monument', 'Adventure Tours Vernal', 'Uintah Basin',
-  'Green River', 'أرض الديناصورات', 'المسارات',
-];
+  'Vernal', ["Doc's Beach", 'Doc’s Beach'], 'Moonshine Arch', 'Outlaw Trail', 'Asphalt Ridge',
+  'Ashley Gorge', 'Kawasaki KRX 1000', 'Dinosaur National Monument', 'Adventure Tours Vernal',
+  'Uintah Basin', 'Green River', 'أرض الديناصورات', 'المسارات',
+].map((c) => (Array.isArray(c) ? { term: c[0], forms: c } : { term: c, forms: [c] }));
 
 /** The rendered section heading, per locale — `t('section.youMightAlsoLike')` in src/lib/ui.ts. */
 const HEADING = { ar: 'قد يعجبك أيضاً', en: 'You Might Also Like' };
@@ -151,14 +159,16 @@ function readPool(locale) {
   return pool;
 }
 
-const count = (hay, needle) => (hay ? hay.split(needle).length - 1 : 0);
+const countOne = (hay, needle) => (hay ? hay.split(needle).length - 1 : 0);
+/** Sum over every rendered form of a candidate — see the `forms` note on CANDIDATES. */
+const count = (hay, forms) => forms.reduce((n, f) => n + countOne(hay, f), 0);
 
 /**
  * Per-entry card contribution: `<h3>{card.title}</h3>` + `<p>{card.description}</p>`.
  * `href` is an attribute and `extractVisibleText` strips tags, so the link contributes
  * nothing — E-4 Phase 1 §1 question 3.
  */
-const contribution = (entry, term) => count(entry.title, term) + count(entry.description, term);
+const contribution = (entry, cand) => count(entry.title, cand.forms) + count(entry.description, cand.forms);
 
 /**
  * The two bounds, per page.
@@ -170,10 +180,10 @@ const contribution = (entry, term) => count(entry.title, term) + count(entry.des
  * so a page is never its own card. It is keyed on collection+baseId, so a same-baseId entry
  * in a DIFFERENT hub stays in the pool — excluding it would be unsound, not merely loose.
  */
-function ceilings(pool, term, pages = pool) {
+function ceilings(pool, cand, pages = pool) {
   const per = [];
   for (const page of pages) {
-    const sibling = pool.filter((e) => e.key !== page.key).map((e) => contribution(e, term));
+    const sibling = pool.filter((e) => e.key !== page.key).map((e) => contribution(e, cand));
     const top = sibling.sort((a, b) => b - a).slice(0, args.limit);
     per.push({
       page: page.key,
@@ -203,18 +213,18 @@ process.stdout.write(`  ${pool.map((e) => e.key).join('\n  ')}\n`);
 // --- §0 soundness assertion B: the static heading must contribute nothing ------------------
 process.stdout.write('\n=== ASSERTION B — the static section heading contributes 0 ===\n');
 const heading = HEADING[args.locale] ?? '';
-const headingHits = CANDIDATES.filter((t) => count(heading, t) > 0);
+const headingHits = CANDIDATES.filter((c) => count(heading, c.forms) > 0).map((c) => c.term);
 process.stdout.write(headingHits.length === 0
   ? `  ok — "${heading}" contains none of the ${CANDIDATES.length} candidates\n`
   : `  ⚠ heading carries ${headingHits.join(', ')} — add it to the ceiling as a per-page constant\n`);
 
 // --- the tight ceiling --------------------------------------------------------------------
 const rows = [];
-for (const term of CANDIDATES) {
-  const per = ceilings(pool, term);
-  const contributions = pool.map((e) => contribution(e, term));
+for (const cand of CANDIDATES) {
+  const per = ceilings(pool, cand);
+  const contributions = pool.map((e) => contribution(e, cand));
   rows.push({
-    term,
+    term: cand.term,
     maxPerCard: Math.max(...contributions),
     carriers: contributions.filter((c) => c > 0).length,
     tight: per.reduce((a, r) => a + r.tight, 0),
@@ -270,11 +280,12 @@ if (args.project) {
   process.stdout.write('  term'.padEnd(32) + 'full'.padStart(7) + 'max/pg'.padStart(8)
     + 'SETTLED'.padStart(9) + '  (settled = Σ over the ' + registered.length + ' registered pages)\n');
   projection = []; settled = {};
-  for (const term of CANDIDATES) {
-    const per = ceilings(enPool, term);
+  for (const cand of CANDIDATES) {
+    const term = cand.term;
+    const per = ceilings(enPool, cand);
     const full = per.reduce((a, r) => a + r.tight, 0);
     const maxPerPage = Math.max(...per.map((r) => r.tight));
-    const here = ceilings(enPool, term, registered).reduce((a, r) => a + r.tight, 0);
+    const here = ceilings(enPool, cand, registered).reduce((a, r) => a + r.tight, 0);
     settled[term] = here;
     // The per-page rows are the point, not a detail: the settled ceiling is their SUM over
     // the registered pages, so registering a route adds its row instead of invalidating the

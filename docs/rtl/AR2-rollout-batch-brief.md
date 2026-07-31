@@ -1,0 +1,283 @@
+# AR-2 — Arabic rollout translator brief (batches 2–9)
+
+**Status:** active. This is the instruction set for every Arabic batch **after** the pilot.
+
+**It supersedes [`AR2-E0-batch-brief.md`](AR2-E0-batch-brief.md) for authoring purposes and
+does not replace it.** That document is the brief the 9-file pilot was authored against, and it
+stays unedited because E-5's assessment measures the pilot *against it* — amending it would
+destroy the record it is evidence for. Every change below is marked **⚠ NEW** or
+**⚠ CORRECTED** and cites the pilot measurement that produced it (METHOD rule 1: no rule here
+comes from taste).
+
+It supersedes nothing in `AR1-arabic-policy.md`.
+
+---
+
+## 0. What changed since the pilot brief, in one table
+
+| § | Change | Pilot evidence |
+|---|---|---|
+| **2.2** | **⚠ CORRECTED — the apostrophe instruction is withdrawn.** It was unfollowable. | E-5 §5.1; all 31 pilot source occurrences were ASCII and 17 rendered curly anyway |
+| **3.2** | **⚠ CORRECTED — guillemets around a Latin run DO need action.** The pilot brief said they need none. | E-2 §2.2, 2 live gate-4n findings |
+| **3.4** | **⚠ NEW — brackets adjacent to a digit run.** The single largest defect class in the pilot. | E-2 §2.1, **13** gate-4n findings |
+| **3.5** | **⚠ NEW — the classifier-noun pattern before a Latin name.** | E-1 §6.4 |
+| **2.4** | **⚠ NEW — the `description` frontmatter budget, and why Arabic hits it.** | E-2 §6.4, **3 of 9** files failed the build |
+| **5** | **⚠ NEW — M9 and M10 are still unreported.** The pilot did not deliver them. | E-5 §4 |
+| **5.1** | **⚠ NEW — the caseless editorial marker is an open challenge.** | E-2 §6.3 |
+| **6** | **⚠ NEW — floors now enforce.** Gate 4i's `ar` locks moved from 1 to 33 and 42. | `9282317` |
+
+---
+
+## 1. The batches
+
+Hub order is unchanged from `MULTILINGUAL_HANDOFF.md` §7 stage 2 and is **not re-derived**:
+utv(7) ✔ → **hiking(16)** → fishing(4) → camping(4) → scenic-drives(4) → guides(9) →
+itineraries(9) → things-to-do(2) → dinosaur-national-monument(2) ✔.
+
+**Pilot complete: `utv` 7 + `dinosaur-national-monument` 2 = 9 of 57.** The DNM hub was pulled
+forward by E-D1; it does not run again. **48 spokes remain.**
+
+### 1.1 Batch 2 — `hiking`, 16 files
+
+`alpine-lakes-hiking-high-uintas` · `beginner-hiking-guide-near-vernal` ·
+`best-hikes-in-dinosaur-national-monument` · `bird-watching-near-vernal` ·
+`dog-friendly-hiking-near-vernal` · `fall-hiking-near-vernal` · `family-hiking-near-vernal` ·
+`high-uintas-backpacking-guide` · `high-uintas-day-hikes` · `kings-peak-hiking-guide` ·
+`photography-hikes-near-vernal` · `spring-hiking-near-vernal` · `summer-hiking-near-vernal` ·
+`wildflower-hiking-near-vernal` · `wildlife-hiking-guide-near-vernal` · `winter-hiking-near-vernal`
+
+### 1.2 Two deliverables per file, not one — unchanged and still the top failure mode
+
+1. `src/content/<hub>/<slug>.ar.mdx` — presence alone emits the route.
+2. The `AR_SLUGS` entry in [`src/lib/i18n.ts`](../../src/lib/i18n.ts).
+
+They diverge silently in both directions. **⚠ And the registry entry is not bookkeeping — it
+edits every sibling Arabic route**, because `RelatedArticles` resolves against the registered
+locale corpus (E-1 §6.3, E-2 §4.1). Registering batch 2 will change the rendered content of all
+nine pilot pages. That is expected, and it is why floors are re-frozen per batch (§6.2).
+
+---
+
+## 2. Frozen — not re-decided per file
+
+| | Rule | Source |
+|---|---|---|
+| Variety | Modern Standard Arabic | policy §1 |
+| Register | Direct 2nd person, singular, **masculine unmarked**; prefer impersonal phrasing where it reads naturally | policy §2 |
+| Numerals | **Western digits 0–9, no exception** — never `٠-٩`, never `۰-۹` | policy §3 |
+| Punctuation | `،` not `,` · `؛` not `;` · `؟` not `?` — at sentence level only | policy §5.1 |
+| Isolation | `<bdi>` element. **Never** `U+200E`/`U+200F`/`U+2066`–`U+2069` | policy §5.2 |
+
+### 2.1 The five established exonyms
+
+`Utah → يوتا` · `Salt Lake City → سولت ليك سيتي` · `Denver → دنفر` ·
+`Colorado → كولورادو` · `Rocky Mountains → جبال روكي`
+
+### 2.2 Latin, verbatim — the wayfinding and transactional names
+
+`Vernal` · `Dinosaur National Monument` · `Moab` · `Flaming Gorge` · `Red Fleet` ·
+`Steinaker` · `Ashley National Forest` · `Uintas` · `Kings Peak` · `Doc's Beach` ·
+`Moonshine Arch` · `Outlaw Trail` · `Asphalt Ridge` · `Adventure Tours Vernal` ·
+`Kawasaki KRX 1000` · `Google` · `UTV` / `ATV` / `Jeep`
+
+The test is not what kind of name it is — it is whether the reader must match the string against
+a road sign, a booking system or a map. This diverges from `ja` on purpose (policy §4.2).
+
+> ### ⚠ CORRECTED — the apostrophe instruction is withdrawn
+>
+> The pilot brief said: *"`Doc's Beach` — use the ASCII apostrophe `'` (U+0027), not `’`
+> (U+2019) … the Arabic corpus picks one and holds it."*
+>
+> **Type the ASCII apostrophe — and know that it will not stay ASCII.** The pilot corpus
+> contains **31 ASCII occurrences and zero curly ones in source**, and renders **17 curly**.
+> Astro's markdown renderer applies smartypants to MDX **body** prose and rewrites `'` → `’`;
+> frontmatter (FAQ answers) and dictionary strings (the footer trail list) are never
+> markdown-processed and keep ASCII. **The split partitions by authoring surface, not by author
+> choice, and no brief can change it** (E-5 §5.1).
+>
+> Nothing is required of you. This paragraph exists so the next person to read a count that
+> disagrees with the source does not spend the afternoon looking for a translator error.
+
+### 2.3 Locked Arabic identities
+
+| English | Arabic | Enforced by |
+|---|---|---|
+| Dinosaur Country | `أرض الديناصورات` | gate 4i lock `dinosaur-country` — **floor 33** |
+| trail (the route) | `المسارات` / `مسار` | gate 4i lock `offroad-trail` — **floor 42** |
+| Key Takeaways | `أبرز النقاط` | AR-1 glossary; **not yet a lock** (measured at 4) |
+
+`مسار` is the route. It never becomes a blanket word covering vehicle class — `UTV`, `ATV` and
+`Jeep` stay Latin beside it.
+
+⚠ **The pilot's first authored file used `الدروب` for *trails* and gate 4i blocked the build**
+(E-2 §3). It was fixed at all four source sites, not only the flagged one — a lock is a
+terminology decision, not a per-site one.
+
+### 2.4 ⚠ NEW — the `description` frontmatter budget
+
+`content.config.ts` constrains `description` to **120–165 characters**. **Three of the nine pilot
+files exceeded it on first authoring** (by 30, 1 and 2 characters) and **failed the build at
+schema validation, before any gate ran** (E-2 §6.4).
+
+Arabic diacritics each consume one character of that budget — `مُرشَدة` carries two. Count the
+rendered string, not the word count. This is a schema failure, not a gate finding, so nothing in
+§6 will diagnose it for you.
+
+---
+
+## 3. Isolation — `<bdi>` in MDX body prose
+
+**The shared formatter does not reach you.** B-2's bidi formatter isolates values flowing
+through shared components (`SITE` NAP, `TourCta`, `TrustBadge`). A phone number, price or Latin
+brand run **typed directly into `.ar.mdx` prose passes through no formatter at all.**
+
+### 3.1 What to write
+
+```mdx
+اتصل على <bdi>(435) 219-9447</bdi> لحجز جولتك.
+
+تنطلق الجولة من <bdi>Doc's Beach</bdi> عبر <bdi>Outlaw Trail</bdi>.
+
+سعر الجولة يبدأ من <bdi>$1,000</bdi>.
+```
+
+**Wrap in `<bdi>`:** the phone number; any price; any Latin run at a clause boundary.
+**Do not wrap:** a Latin name mid-clause with Arabic on both sides and no mirrored character.
+
+The pilot met this exactly — **33 phone occurrences in Arabic prose, every one isolated**
+(E-2 §4.2).
+
+### 3.2 ⚠ CORRECTED — guillemets around a Latin run
+
+The pilot brief said: *"`›` `‹` `»` `«` are also `Bidi_Mirrored=Yes` and need **no** action — the
+algorithm flips them correctly."*
+
+**That is true of a guillemet in Arabic-only context and false of one wrapping a Latin run**,
+where the quotation mark *is* the direction change. The original claim was measured over
+guillemets in Arabic prose and generalised to all of them — rule 18, in a brief rather than a
+census. It produced **2 gate-4n findings** in the pilot (E-2 §2.2).
+
+```mdx
+✘  أو كانت كلمتا «متجاورة» و«UTV» جديدتين عليك
+✔  أو كانت كلمتا «متجاورة» و<bdi>UTV</bdi> جديدتين عليك
+```
+
+**Drop the guillemets around a Latin token and isolate it instead.** Guillemets around Arabic
+are still fine and still need nothing.
+
+`→` (U+2192) is `Bidi_Mirrored=No` and stays pointing the wrong way. There were **0** in the
+pilot's English sources; do not introduce one.
+
+### 3.3 ⚠ NEW — a bracket adjacent to a digit run *is* a direction change
+
+**The single largest defect class in the pilot: 13 of 15 gate-4n findings** (E-2 §2.1).
+
+```
+"(" in <h2>  flanked R … N
+    برنامج مقترح لنصف يوم (3 إلى 4 ساعات)
+```
+
+Arabic on the left, a **digit** on the right. Under UAX #9 I2 a digit run is raised to an even
+level and becomes an LTR island, so the bracket sits at a real direction change (ADR-10 §8.1).
+
+**The fix is authoring, not markup — put an Arabic word after the opening bracket:**
+
+```mdx
+✘  (3 إلى 4 ساعات)          ✔  (مدته 3 إلى 4 ساعات)
+✘  (نحو 2–5)                ✔  (من نحو سنتين إلى 5 سنوات)
+```
+
+The digits stay Western (policy §3) and the sentence keeps its meaning. **Wrapping the bracket in
+`<bdi>` is not the fix** — the bracket belongs to the Arabic sentence, not to the number.
+
+⚠ **This applies in frontmatter too, and there you have no other option.** `bidi-runs.ts`
+isolates only the *named* runs (phone, currency), so a bracket in an FAQ answer cannot be
+isolated at all and **gate 4n will block the build**. Rephrase. That residual was specified in
+advance by B-15 §6 and behaved exactly as specified on first contact with a corpus.
+
+### 3.4 ⚠ NEW — the classifier-noun pattern before a Latin name
+
+Prefix a Latin proper noun with an Arabic classifier noun wherever it reads naturally:
+
+```mdx
+مسار Doc's Beach     منطقة Uintah Basin     شركة Adventure Tours Vernal
+```
+
+Measured on the pilot's first file: the proclitic **و** attaches to an Arabic word **129** times
+and lands immediately before a Latin run only **9** times — 6.5 % — *because* of this pattern
+(E-1 §6.4). Corpus-wide it holds: **1 807 attached, 47 pre-Latin, 0 standalone**.
+
+It costs nothing, it reads better, and it keeps the seam population small for the Arabic seam
+rule (B-8b / E-6), which is authorized and not yet built.
+
+---
+
+## 4. Links — gate 4b allow-list
+
+**Every internal link keeps its English path**, except targets that already have both
+deliverables (§1.2). Today that is `cancellation-policy` **plus the 9 pilot slugs**.
+
+Do not hand-write a `/ar/…` path that outruns its `AR_SLUGS` entry. Links are switched by
+`localeHref()` reading the registry; a path that outruns it is a broken link and gate 4b names
+it. As a batch completes, the allow-list grows to include its slugs.
+
+---
+
+## 5. The challenge window — use it, do not defer
+
+**Arabic is the first locale whose policy predates its text.** Every §1–§5 decision is a
+prediction. A translator who contradicts policy §2 or §4 **with corpus evidence** is the pipeline
+working. At 16 files a reversal costs a 16-file sweep; at 57 it costs the locale.
+
+⚠ **Two census items the pilot was asked for and did not deliver** (E-5 §4). They are still
+owed, and they get more expensive every batch:
+
+- **M9 — register drift.** Count the places where masculine-unmarked 2nd person read wrong and
+  you used impersonal phrasing instead. A count, not an essay.
+- **M10 — plural/dual agreement in interpolated counts.** An explicit AR-1 non-decision. **Record
+  what you did; do not invent a rule.**
+
+Also expected:
+
+- **§4.2** — any name in the Latin list with a genuinely established Arabic form.
+  `Dinosaur National Monument` sits closest to the line.
+
+### 5.1 ⚠ NEW — the caseless editorial marker, an open challenge
+
+`VERIFY WITH OFFICIAL SOURCE` is rendered in every other locale as **uppercase** target-language
+text. Its scannability is carried entirely by **letter case, which Arabic does not have.** The
+pilot used a fixed phrase — `تأكّد من المصدر الرسمي`, 24 times across three files — preserving
+the meaning and losing the visual marker (E-2 §6.3).
+
+**Use the same fixed phrase for consistency.** Whether the marker needs a non-case mechanism is
+an open editorial decision affecting `ar`, `ja` and `zh` alike. Do not invent a per-file solution.
+
+---
+
+## 6. Acceptance — what runs against your files
+
+No new instrument. `npm run build` runs all 11 gates.
+
+| Gate | What it will tell you |
+|---|---|
+| **4n** | An unisolated Latin/Arabic flank — including §3.3's bracket-and-digit class |
+| **4q** | Any Arabic-Indic digit in rendered prose. Policy §3 has no exception |
+| **4k** | Every new page resolves effective direction `rtl` |
+| **4i** | The two locked identities in §2.3, **now at floors 33 and 42** |
+| **4o** | `→` count — expected 0 |
+| **4b** | Any internal link that left the English path without a registry entry |
+| *(schema)* | The `description` budget — §2.4, and it fails **before** any gate |
+
+### 6.1 ⚠ NEW — the floors are real now
+
+Through the whole pilot both `ar` glossary locks sat at a floor of **1** against a 10-page
+corpus: they could not fail for a content reason. They were re-frozen at **33** and **42** at
+`9282317`. A batch that drops `أرض الديناصورات` from Arabic prose now **fails the build**.
+
+### 6.2 ⚠ NEW — finishing a batch is two operations, not one
+
+Registering routes without re-freezing leaves the floors covering less of the corpus than
+shipped. The full procedure — instrument route lists, ceiling extension, census re-freeze, and
+the guards that must run in order — is
+[`AR2-E4-phase2-tight-ceiling.md` §11](AR2-E4-phase2-tight-ceiling.md). **Read it before starting
+a batch, not after finishing one.**

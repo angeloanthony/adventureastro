@@ -1154,6 +1154,44 @@ every finding above by 77 routes.
 > - **Reopen conditions in force: R1** (architecture A/B) · **R2** (ceiling model falsified) ·
 >   **R3** (B-17 promotion) · **R4** (4c policy challenge).
 
+> **E-5b COMPLETE 2026-07-31 — THE THREE ROLLOUT PRECONDITIONS ARE SATISFIED; BATCH 2 IS
+> UNBLOCKED.** [`AR2-E5b-rollout-prep.md`](AR2-E5b-rollout-prep.md) +
+> [`AR2-rollout-batch-brief.md`](AR2-rollout-batch-brief.md). No Arabic authored, no corpus
+> change, no gate or gate-config or census change. Numbered on the `E-1b` precedent so **`E-6`
+> stays reserved for B-8b**.
+>
+> - **P-1 ✔ — a NEW rollout brief; the pilot brief is unedited** (E-5 measures the pilot against
+>   it). Nine changes, each ⚠ NEW/⚠ CORRECTED and each citing its pilot measurement. Two
+>   candidate rules were **rejected for having no measurement behind them**.
+> - **P-2 ✔ — and ⚠ THE ROOT CAUSE EXONERATES THE TRANSLATOR.** All **31** `Doc's Beach` source
+>   occurrences are **ASCII**, exactly as the pilot brief §2.2 instructed; **17 render curly**
+>   because Astro's smartypants rewrites `'` → `’` in MDX **body** prose, while frontmatter (FAQ)
+>   and dictionary strings keep ASCII. **The split partitions by AUTHORING SURFACE, not author
+>   choice** → not a compliance defect, **no sweep**, and **the brief's rule was unfollowable** —
+>   withdrawn in the rollout brief. Corrected row: prose 3→**20**, whole 12→**29**, headroom
+>   3→**20**, class unchanged. **Re-ran end to end: no other row moved**, control still red.
+>   E-4 §5.1's thin-"strong" example is **withdrawn** — no candidate now demonstrates that gap.
+> - **P-3 ✔ — B-8b DEFERRED with named triggers, on measured evidence.** Census taken:
+>   **1 807** proclitic و attached · **47** pre-Latin · **0 standalone** · **8** locked phrases
+>   behind an attached proclitic (`والمسارات`, `بالمسارات`, `لأرض الديناصورات`…). ⚠ **D-2's
+>   prediction confirmed at corpus scale:** the `latin` matcher needs `و و` and the corpus has
+>   **0**; the `cjk` matcher would fire on all **1 807**. Neither inherited form is usable.
+>   **Deferred because:** `ar` has 0 4h locks **and so do `de`/`fr`/`es`/`it`/`pt` — 5 of 8
+>   shipped locales**, so an empty list is the normal state; B-8a's dispatcher is fail-closed;
+>   gate 4i counts by substring so all 8 seam sites already count correctly; and building a
+>   matcher for zero locks is engineering ahead of need. **Trigger 1:** first Arabic 4h seam lock
+>   proposal. **Trigger 2:** standalone `و` rising above 0. **Falsifier for the deferral:** any
+>   4h/4i finding caused by a proclitic-prefixed locked phrase.
+> - **⚠ THE PREDICTION REVIEW FOUND TWO INSTRUMENTATION GAPS.** **P1 and P4 are first-contact
+>   counts destroyed by their own remedy** — a green build afterwards is indistinguishable from a
+>   batch that never had them; batch 2 must capture the **first** build output before any
+>   remedial edit. **P5 has no committed instrument at all:** `measure-prose-window.mjs`
+>   hardcodes `dist/ar/` at two sites and cannot read the English side, so **E-2 §4.2's Δ 0 — the
+>   most-cited quality result of the pilot — is not reproducible from the repository.** It came
+>   from a throwaway census that was never committed (a rule 5 violation that survived four
+>   milestones because the number was clean). **Recommended before batch 2: an `--align <locale>`
+>   mode.** Not built — outside P-2's authorization.
+
 > **A correction this file carried, recorded so the next sweep does not
 > re-inherit it.** Track C's brief recorded *"B-9 — script validation for Arabic
 > locks — ✘ no Arabic lock exists to exercise it."* **Two `ar` glossary locks

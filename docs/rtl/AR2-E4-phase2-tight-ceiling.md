@@ -119,7 +119,7 @@ can require from prose.
 | `Asphalt Ridge` | 9 | 9 | 0 | 9 | 18 | **9** | feasible (strong) |
 | `Ashley Gorge` | 8 | 9 | 0 | 9 | 17 | **8** | feasible (strong) |
 | `Adventure Tours Vernal` | 39 | 2 | 34 | 36 | 43 | **7** | feasible (weak) |
-| `Doc's Beach` | 3 | 9 | 0 | 9 | 12 | **3** | feasible (strong ⚠ §5.1) |
+| `Doc's Beach` | ~~3~~ **20** | 9 | 0 | 9 | ~~12~~ **29** | ~~3~~ **20** | feasible (strong) ⚠ **corrected, see below** |
 | `Dinosaur National Monument` | 23 | 13 | 53 | 66 | 38 | −28 | **infeasible** |
 | `Uintah Basin` | 11 | 0 | 25 | 25 | 12 | −13 | **infeasible** |
 | `Green River` | 6 | 0 | 18 | 18 | 6 | −12 | **infeasible** |
@@ -157,10 +157,18 @@ construction separates translator output from template there.
 ### 5.1 ⚠ Where the strength label is doing less work than it appears
 
 `strong ⟺ head ≥ prose / 2` is a **chosen convention, not a derived threshold**, and it is
-purely *relative*. `Doc's Beach` scores strong because its headroom of 3 is all of its prose —
-but 3 occurrences is thin absolute evidence, and the label says nothing about that. Phase 1
-called the same term "marginal", and on the absolute reading Phase 1 was right. Both readings
-are worth carrying into step 3; neither is a substitute for the other.
+purely *relative*. The label says nothing about absolute evidence, and both readings are worth
+carrying forward; neither is a substitute for the other.
+
+> **⚠ CORRECTED at E-5b — the example this section originally used was wrong.** It cited
+> `Doc's Beach` as "strong on a headroom of 3 that is all of its prose". That row counted only
+> the **ASCII** apostrophe; the term also renders in a curly one, which Astro's markdown
+> renderer produces from the same ASCII source. **Its real figures are prose 20 / whole 29 /
+> headroom 20** — strong on the absolute reading too, so it never was an example of a thin
+> "strong". E-0 §2 F5 predicted this undercount to the occurrence ("3 body occurrences out of
+> 20") and it was applied three milestones late. Full account:
+> [`AR2-E5b-rollout-prep.md`](AR2-E5b-rollout-prep.md) §3. **No candidate now demonstrates the
+> relative/absolute gap** — the caveat above stands on principle, not on a live example.
 
 ---
 

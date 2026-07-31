@@ -223,6 +223,14 @@ wrong.
 **No other candidate is affected** — `Doc's Beach` is the only term in the set containing an
 apostrophe. **Nothing may be authored from E-4 §4's `Doc's Beach` row.**
 
+> **✔ RESOLVED at E-5b (P-2)** — [`AR2-E5b-rollout-prep.md`](AR2-E5b-rollout-prep.md) §3. Both
+> instruments now count every rendered form, the row is corrected in place, and re-running end
+> to end confirmed **no other row moved**. ⚠ **The root cause is the renderer, not the author:**
+> all 31 source occurrences are ASCII, exactly as the pilot brief instructed, and Astro's
+> smartypants rewrites `'` → `’` in MDX **body** prose only. The split partitions by authoring
+> surface, so this is **not a corpus compliance defect** and no sweep is warranted — and the
+> brief's rule was unfollowable, which the rollout brief withdraws.
+
 ### 5.2 The dictionary-integrity category was recorded at E-0 and dropped at E-4
 
 E-0 **F4** established a category: locks whose entire count is template, which *"are

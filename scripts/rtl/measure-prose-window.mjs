@@ -68,9 +68,26 @@ const INLINE = 'cancellation-policy';
  * Latin ones would need `latinLock` under D-1; the Arabic two must NOT have it. That
  * distinction is E-4's to apply — this file only counts.
  */
+/**
+ * ⚠ `forms` — a term may RENDER in more than one string, and the count must cover all of them.
+ *
+ * E-0 §2 F5 recorded that `Doc's Beach` renders in two apostrophes and that gate 4i folds
+ * neither. E-5 §5.1 found this file had carried the ASCII form only, so every figure it
+ * reported for that term was 41 % of the corpus — F5's own worked example ("3 body occurrences
+ * out of 20"), reproduced exactly, three milestones after it was written down.
+ *
+ * The cause is not authoring: all 31 source occurrences are ASCII. Astro's markdown renderer
+ * applies smartypants to MDX **body** prose and turns `'` into `’`, while frontmatter-derived
+ * text (FAQ answers) and dictionary strings (the footer trail list) are never markdown-processed
+ * and keep the ASCII form. So the split partitions by AUTHORING SURFACE, not by author choice,
+ * and no instruction in a translator brief can change it.
+ *
+ * Any term whose rendered string can be rewritten by the pipeline — an apostrophe, a quote, an
+ * ellipsis, a double hyphen — needs every form listed here. `forms` defaults to `[term]`.
+ */
 const CANDIDATES = [
   { term: 'Vernal', kind: 'latin' },
-  { term: "Doc's Beach", kind: 'latin' },
+  { term: "Doc's Beach", kind: 'latin', forms: ["Doc's Beach", 'Doc’s Beach'] },
   { term: 'Moonshine Arch', kind: 'latin' },
   { term: 'Outlaw Trail', kind: 'latin' },
   { term: 'Asphalt Ridge', kind: 'latin' },
@@ -152,7 +169,11 @@ function decompose(html) {
   };
 }
 
-const count = (hay, needle) => (hay ? hay.split(needle).length - 1 : 0);
+const countOne = (hay, needle) => (hay ? hay.split(needle).length - 1 : 0);
+/** Sum over every rendered form of a term — see the `forms` note on CANDIDATES. */
+const count = (hay, forms) =>
+  (Array.isArray(forms) ? forms : [forms]).reduce((n, f) => n + countOne(hay, f), 0);
+const formsOf = (c) => c.forms ?? [c.term];
 const COMPONENTS = ['prose', 'related', 'cta', 'byline', 'chrome'];
 
 function measureTree(root) {
@@ -167,14 +188,17 @@ function measureTree(root) {
     ? { slug: INLINE, parts: decompose(readFileSync(inlinePath, 'utf8')) } : null;
 
   const totals = {};
-  for (const { term } of CANDIDATES) {
+  for (const cand of CANDIDATES) {
+    const { term } = cand;
+    const forms = formsOf(cand);
     totals[term] = Object.fromEntries(COMPONENTS.map((c) => [c, 0]));
     totals[term].whole = 0;
     totals[term].perPageProse = [];
+    totals[term].forms = forms;
     for (const { parts } of pages) {
-      for (const c of COMPONENTS) totals[term][c] += count(parts[c], term);
-      totals[term].whole += count(parts.whole, term);
-      totals[term].perPageProse.push(count(parts.prose, term));
+      for (const c of COMPONENTS) totals[term][c] += count(parts[c], forms);
+      totals[term].whole += count(parts.whole, forms);
+      totals[term].perPageProse.push(count(parts.prose, forms));
     }
   }
   return { pages, inline, totals };
@@ -242,14 +266,16 @@ if (args.baseline) {
   process.stdout.write(`  routes present in BOTH trees: ${shared.length} (${shared.join(', ') || 'none'})\n`);
   process.stdout.write(`  ar routes: baseline ${base.pages.length}  current ${current.pages.length}\n\n`);
   process.stdout.write('  term'.padEnd(32) + COMPONENTS.map((c) => `Δ${c}`.padStart(10)).join('') + 'Δwhole'.padStart(9) + '\n');
-  for (const { term } of CANDIDATES) {
+  for (const cand of CANDIDATES) {
+    const { term } = cand;
+    const forms = formsOf(cand);
     // restrict both sides to the shared routes so the comparison is like-for-like
     const sub = (tree) => {
       const acc = Object.fromEntries(COMPONENTS.map((c) => [c, 0])); acc.whole = 0;
       for (const { slug, parts } of tree.pages) {
         if (!shared.includes(slug)) continue;
-        for (const c of COMPONENTS) acc[c] += count(parts[c], term);
-        acc.whole += count(parts.whole, term);
+        for (const c of COMPONENTS) acc[c] += count(parts[c], forms);
+        acc.whole += count(parts.whole, forms);
       }
       return acc;
     };
