@@ -107,6 +107,14 @@ const CASES = [
     why: 'The same address as the correct row, with `Italia` moved into a sibling block. A block boundary is a paragraph boundary, so the scan stops there and takes the base direction — the run really is unflanked now, and really does render differently.',
   },
   {
+    file: 'correct-tatweel-flank.html',
+    base: 'rtl',
+    accepted: 0,
+    coarse: 6,
+    isolatedNodes: 0,
+    why: 'REGRESSION — AR-2 batch 2a. ARABIC TATWEEL U+0640 on a mirrored character\'s flank. Its Script is Common and only its Script_Extensions is Arabic, so `\\p{Script=Arabic}` missed it and the classifier called a kashida strong LEFT-TO-RIGHT; `فـ«…»` reported L…R and blocked a build on false positives. Measured on this fixture: the pre-fix classifier reports 3, the corrected one 0. The wider fix — swapping Script for Script_Extensions — was measured and rejected: it would have made `،` `؛` `؟` and seven diacritics strong R across 12 837 rendered occurrences and SUPPRESSED real findings, so the correction is one codepoint, not one property.',
+  },
+  {
     file: 'scope-ltr-document.html',
     base: 'ltr',
     accepted: 1,

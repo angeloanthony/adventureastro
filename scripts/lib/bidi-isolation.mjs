@@ -43,11 +43,35 @@ const MIRRORED = /\p{Bidi_Mirrored}/u;
  * ECMAScript exposes `\p{Bidi_Mirrored}` and `\p{Bidi_Control}` but NOT `\p{Bidi_Class=…}`
  * — the latter is a syntax error, not a falsy test, so there is no runtime feature check to
  * make. The approximation is therefore deliberate and its edges are stated: letters of the
- * RTL scripts are treated as R (Bidi_Class R or AL), all other letters as L. It is exact for
- * every script either host renders and it is wrong only for unencoded corner cases that no
- * measured corpus contains — the honest form of a limit, per the 4k precedent.
+ * RTL scripts are treated as R (Bidi_Class R or AL), all other letters as L.
+ *
+ * ⚠ THE "NO MEASURED CORPUS CONTAINS IT" CLAIM WAS FALSE, AND U+0640 IS WHY.
+ * This comment used to end "it is wrong only for unencoded corner cases that no measured
+ * corpus contains". AR-2 batch 2a falsified that on first contact: ARABIC TATWEEL U+0640 is
+ * `Script=Common` (its Script_Extensions is Arabic, which `\p{Script=…}` does not consult),
+ * so it fell through to the `\p{L}` branch and was classified **L** — strong LEFT-TO-RIGHT —
+ * when its Bidi_Class is **AL**. It is a kashida: it exists only to elongate the join inside
+ * an Arabic word, and `فـ«…»` therefore reported flanks L…R and blocked the build on two
+ * false positives. It occurs 83 times in the rendered `ar` tree and in 15 of 18 registered
+ * `ar` pages, including nine pilot pages that shipped 4n-green — the pilot passed only
+ * because no tatweel happened to land adjacent to a mirrored character.
+ *
+ * ⚠ AND THE OBVIOUS FIX IS WRONG. Swapping `Script=` for `Script_Extensions=` was measured
+ * and REJECTED. The two properties differ over 63 codepoints; exactly ONE of them (U+0640)
+ * is a letter. The rest are 27 combining marks (Bidi_Class NSM), 8 punctuation marks and 27
+ * Hanifi Rohingya digits — all correctly neutral today. Eleven occur in this corpus, and the
+ * swap would have flipped ten of them from neutral to strong R across 12 837 rendered
+ * occurrences, including `،` (4 170), `؛` (336) and `؟` (300) — the three marks Arabic policy
+ * §5.1 mandates at sentence level. Making sentence punctuation strong would resolve flanks
+ * that genuinely differ into a false match and SUPPRESS real findings. A wider net would
+ * have been a worse instrument than the one it replaced.
+ *
+ * So the correction is exactly one codepoint, added explicitly rather than by widening a
+ * property. Measurement: `docs/rtl/AR2-batch2a-blocker-tatweel.md`.
  */
-const RTL_LETTER = /[\p{Script=Arabic}\p{Script=Hebrew}\p{Script=Syriac}\p{Script=Thaana}\p{Script=Nko}\p{Script=Samaritan}\p{Script=Mandaic}]/u;
+// ـ is written as an escape, never as the literal glyph: a bare tatweel in this
+// character class is invisible in a diff and would be deleted by accident.
+const RTL_LETTER = /[\p{Script=Arabic}\p{Script=Hebrew}\p{Script=Syriac}\p{Script=Thaana}\p{Script=Nko}\p{Script=Samaritan}\p{Script=Mandaic}\u0640]/u;
 const LETTER = /\p{L}/u;
 const DIGIT = /\p{Nd}/u;
 

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head><title>التطويل على حافة محرف معكوس</title></head>
+<body>
+  <!--
+    REGRESSION — AR-2 batch 2a. ARABIC TATWEEL U+0640 on the flank of a mirrored character.
+
+    Every mirrored character below is flanked by Arabic on BOTH sides, so N1 resolves it to R
+    and it renders correctly. The only thing standing between the bracket and an ordinary
+    Arabic letter is the tatweel of a proclitic — فـ / لـ — which is the corpus's normal
+    orthography for attaching a prefix to a following word or quoted phrase.
+
+    The classifier used to read U+0640 as strong L, because its Script is Common and only its
+    Script_Extensions is Arabic. That made these flanks differ and blocked a batch-2a build on
+    two false positives of exactly this shape. If it regresses, `accepted` goes 0 -> 3.
+
+    Only LEFT-flank tatweel is covered, and deliberately so: a tatweel immediately AFTER a
+    bracket is not Arabic orthography, and this corpus does not invent shapes it has not
+    measured. The engine-level symmetry is covered by the unit reproducer, not here.
+
+    The tatweel is written as a literal byte on purpose — this file is the corpus, not the
+    engine, and it must contain the character the engine has to classify.
+  -->
+  <p>فكل قمامة وفتات طعام يغادر معك. فـ«عدم ترك أثر» يعني أن يبدو الموضع بكرًا حين ترحل.</p>
+  <p>لا تخطّها بالطباشير ولا تلمسها أبدًا لـ«تحسين» صورة، فذلك يتلف موردًا لا يُعوَّض.</p>
+  <p>وتعامل مع الأمر بجدية فـ(الحرّ والجفاف) أكثر المخاطر شيوعًا في هذه الصحراء.</p>
+</body>
+</html>
