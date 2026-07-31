@@ -1154,7 +1154,7 @@ every finding above by 77 routes.
 > - **Reopen conditions in force: R1** (architecture A/B) · **R2** (ceiling model falsified) ·
 >   **R3** (B-17 promotion) · **R4** (4c policy challenge).
 
-> **E-5b COMPLETE 2026-07-31 — THE THREE ROLLOUT PRECONDITIONS ARE SATISFIED; BATCH 2 IS
+> **E-5b COMPLETE `0bbbcc5` 2026-07-31 — THE THREE ROLLOUT PRECONDITIONS ARE SATISFIED; BATCH 2 IS
 > UNBLOCKED.** [`AR2-E5b-rollout-prep.md`](AR2-E5b-rollout-prep.md) +
 > [`AR2-rollout-batch-brief.md`](AR2-rollout-batch-brief.md). No Arabic authored, no corpus
 > change, no gate or gate-config or census change. Numbered on the `E-1b` precedent so **`E-6`
