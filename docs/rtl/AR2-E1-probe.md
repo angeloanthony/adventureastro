@@ -277,6 +277,11 @@ this is a first reading, and B-8b remains corpus-gated on E-2.
 - **The `$349` browser measurement (§3.4).** No instrument answers it; the probe exists
   and was not run. E-1 was scoped to registration, and running a browser probe would have
   made this milestone about a second question.
+  > **Answered by E-1b — [`AR2-E1b-currency-probe.md`](AR2-E1b-currency-probe.md), and the
+  > answer is a defect.** Both bare prices render with the symbol on the wrong side —
+  > `349$`, `125$` — live on this route. §3.4's caution was correct and understated: the
+  > class is not merely unmeasured, it is one no gate can observe, because 4n reads shape
+  > and this defect is position. Filed as **B-17**.
 - **B-15 and B-16 fixes.** Both are component edits. E-1's scope was one page with
   instrumentation unchanged, and B-15 in particular deserves a decision about *where*
   isolation belongs, not a quick patch.

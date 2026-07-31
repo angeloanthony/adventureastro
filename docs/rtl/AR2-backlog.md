@@ -678,7 +678,22 @@ but not one and then the other. Measurement: `AR2-E0-census.md` §3.
 
 > **E-1 made this load-bearing rather than theoretical.** Of the 6 `Vernal` chrome occurrences on the first Arabic spoke, **2 are the `<title>` element**. So the whole-page floor window mixes a constant (nav/footer, 4), a per-page variable (title, 2 here) and the prose a B-11 floor is meant to measure. `AR2-E1-probe.md` §4.2.
 
-### B-15 — `faq[].a` is un-isolatable prose *(raised by E-1, **blocks E-2**)*
+### B-15 — `faq[].a` is un-isolatable prose *(raised by E-1, **architecture decided E-1b**, **still blocks E-2**)*
+
+> **Decided 2026-07-30 — [`AR2-B15-decision.md`](AR2-B15-decision.md).** `FaqAccordion`
+> splits `q`/`a` on the named runs the site owns and renders them through `Bidi.astro`;
+> no `set:html`, so Astro's escaping is untouched, and `SchemaFaq` keeps the raw string
+> so Build Guide §4.5's single source survives. **Not implemented** — one owner call is
+> open (does the split run for all nine locales or only RTL documents), and E-2 stays
+> blocked until it lands. The finding behind the decision: B-2 §2.2 built `Bidi.astro`
+> so that an `.astro` template would never reach for `set:html` to isolate a run, and
+> this component has never called it.
+>
+> **The recorded exposure was measured on the wrong window** (rule 18, ×5). The
+> *8 of 9 pilot files carry parentheses* figure below is an **English-source** count. A
+> census over all 449 `faq` blocks shows the one Arabic block that exists carries **zero**
+> mirrored characters — the translator rendered English parentheticals as Arabic prose.
+> The forced residue is policy §3.2's own literals (phone, prices), not arbitrary prose.
 
 [`FaqAccordion.astro:13`](../../src/components/content/FaqAccordion.astro#L13) renders `<div class="faq-answer">{a}</div>`. Astro escapes an interpolated expression, so markup written into `faq[].a` arrives as literal text — neither `<bdi>` nor `src/lib/bidi.ts` can reach the string from content. FAQ answers are rendered visible prose: they sit in the `visibleText@1` window and every dist-reading gate sees them.
 
@@ -694,7 +709,7 @@ Route: /ar/utv/best-utv-trails-vernal/   (ar, declared rtl)
 
 **Exposure:** 8 of the 9 pilot files carry parentheses in FAQ answers, 7 of 9 carry the phone, and **56 English spokes site-wide have `faq:` frontmatter**. E-1 landed by moving the phone out of the Arabic FAQ answer (recorded deviation, `AR2-E1-probe.md` §3.3); that workaround does **not** generalise — applying it corpus-wide means deleting the phone number and every parenthetical from Arabic FAQ answers, which is a content policy nobody decided. The fix belongs in the component (route `faq[].a` through the B-2 formatter) and needs an owner decision about where isolation lives. Gate 4n's own remedy line — *"ask `src/lib/bidi.ts` for the run … never insert `<bdi>` at the call site"* — is unreachable here, which is the point.
 
-⚠ **A sibling hazard in the same text that no gate can see:** `$349`/`$125` stay un-isolatable by the same mechanism, and 4n correctly ignores them — `$` is `Bidi_Mirrored=No`, outside ADR-10's scope. Whether they resolve correctly beside Arabic is unmeasured; it needs `scripts/rtl/probe.mjs` against the live route.
+⚠ **The sibling hazard is no longer a hazard — it is a live defect. Measured E-1b** ([`AR2-E1b-currency-probe.md`](AR2-E1b-currency-probe.md)): the bare `$349` and `$125` in these FAQ answers render **`349$`** and **`125$`** on `/ar/utv/best-utv-trails-vernal/`, symbol on the wrong side of its digits, today. 4n is still correct to ignore them (`$` is `Bidi_Mirrored=No`), which is the point — **policy §3.2 requires the price symbol-first, the source complies, and the delivery discards the compliance.** The cause is UBA **W2**: it retypes the digits `EN`→`AN` after an Arabic letter, so W5 never absorbs the `$`, W6 orphans it to `ON` and N1/N2 hands it to paragraph direction. Conditional on the preceding strong type — the same literal renders correctly paragraph-initially (`p.tour-cta-details`), so **a source-side census of bare `$` misclassifies it**.
 
 ### B-16 — `TourCta.astro:25` hardcodes `/machine` outside `t()` *(raised by E-1)*
 
@@ -704,7 +719,24 @@ Route: /ar/utv/best-utv-trails-vernal/   (ar, declared rtl)
 … جولات UTV بصحبة مرشد عبر أرض الديناصورات. $349/machine · 3 …
 ```
 
-`TourCta` renders on every spoke, so every future Arabic spoke inherits it. Same class as B-12 and B-13 (chrome strings no dictionary can reach), but unlike those it is **live on a rendered Arabic page**. The price itself is isolated by the B-2 formatter (4n green), so this is a translation gap, not a bidi defect. Found only because E-1's per-term census surfaced a lock occurrence the author had not written.
+`TourCta` renders on every spoke, so every future Arabic spoke inherits it. Same class as B-12 and B-13 (chrome strings no dictionary can reach), but unlike those it is **live on a rendered Arabic page**. The price itself renders correctly here — E-1b measured it `ltr` — but **not because it is isolated**: it is paragraph-initial, so no Arabic strong type precedes it and W2 never fires. Correct by position, not by construction. This remains a translation gap, not a bidi defect. Found only because E-1's per-term census surfaced a lock occurrence the author had not written.
+
+### B-17 — no gate perceives a **displaced neutral** *(raised by E-1b)*
+
+Gate 4n detects `\p{Bidi_Mirrored}` at a direction change and its scope is right: ADR-10's
+invariant is about characters that **flip shape**. E-1b measured a second defect class —
+a neutral that keeps its shape and **changes side**, because UBA W2 retyped its neighbour.
+`$349` → `349$`. Nothing in the eleven gates observes position, so this class ships unseen;
+it was found only by opening a browser.
+
+The instrument now exists ([`scripts/rtl/measure-currency.mjs`](../../scripts/rtl/measure-currency.mjs), exit 0/2, synthetic
+positive *and* negative controls). A **gate** does not, and building one is a blocking-policy
+decision for the owner rather than a measurement. Two constraints any such gate inherits,
+both measured rather than assumed: the verdict is **conditional on the preceding strong
+type**, so it cannot be taken from source text; and the reading must be taken on a
+**rendered, laid-out** page, so it is a browser gate — the first in the series — not a
+`dist/`-reading one. B-15's fix closes today's two instances by construction and closes
+nothing about the class.
 
 ---
 
@@ -791,6 +823,28 @@ every finding above by 77 routes.
 > - **New: B-15 (blocks E-2) and B-16.** Plus a 4f advisory recording that `UTV`/`ATV`/
 >   `Jeep` and the §4.2 list must be whitelisted *before* 4f's `ar` lexicon leaves
 >   in-progress, or promotion turns a policy into a build failure.
+>
+> **E-1b COMPLETE — the currency probe and the B-15 decision.** `AR2-E1b-currency-probe.md`
+> + `AR2-B15-decision.md`. No corpus change; `dist/` untouched.
+>
+> - **⚠ Two live rendering defects found.** The bare `$349`/`$125` in the Arabic FAQ
+>   answers render **`349$`**/**`125$`**. Cause is UBA **W2**, which retypes the digits to
+>   `AN` and orphans the `$` — so the intuitive derivation ("`$` is ET, ET adjacent to EN
+>   becomes EN, therefore fine") predicts the wrong answer. `src/lib/bidi.ts`'s
+>   `currencyDisplay` justification, previously reasoned, is now measured.
+> - **The defect is conditional on the preceding strong type** — the same literal renders
+>   correctly paragraph-initially. A source-side census cannot classify this class; the
+>   reading must come from a laid-out page. Same conclusion C7 reached for `zh` seams,
+>   from an unrelated direction.
+> - **B-15 decided, not implemented.** The answer was already in B-2 §2.2: `Bidi.astro`
+>   exists so an `.astro` template never reaches for `set:html`, and `FaqAccordion` has
+>   never called it. Split on named runs, isolate via the component, leave escaping and
+>   the schema path untouched. One owner call open (§8 of the decision).
+> - **E-1's exposure figure was an English-source measurement** (rule 18, ×5). Arabic FAQ
+>   answers carry 0 mirrored characters so far; the forced residue is policy §3.2's own
+>   literals, not arbitrary prose.
+> - **New: B-17** — no gate perceives a displaced neutral, and any gate for it must be a
+>   browser gate, the first in the series.
 >
 > Confirmed unchanged: `(435) 219-9447` at **28** occurrences in `utv` body prose (33
 > across the 9), which is the `<bdi>`-in-MDX population; `→` at **0** in every window on
