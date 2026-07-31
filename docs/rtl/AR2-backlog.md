@@ -1049,6 +1049,37 @@ every finding above by 77 routes.
 >   convention. `Doc's Beach` scores strong on a headroom of 3 that is *all* of its prose;
 >   E-3 called it marginal and on the absolute reading E-3 was right. Carry both readings.
 
+> **E-4 PHASE 2 STEP 3 COMPLETE `9282317` 2026-07-31 — the `ar` census refreshed; both locks
+> now enforce.** Owner-authorised. One artifact changed: `census/phrase-count.json`. Gate 4i
+> unmodified, no corpus authored.
+>
+> - **Both `ar` locks moved from `value: 1` to 33 (`أرض الديناصورات`) and 42 (`المسارات`)**
+>   over 10 `ar` routes. A build dropping the first from Arabic prose renders **at most 19**
+>   against a floor of **33** — the first time either lock could fail for a content reason.
+> - **⚠ THE RISK IN A REFRESH IS NOT THE TERMS YOU MEANT TO MOVE.** Re-running the producer
+>   re-freezes **all 53 facts across 8 locales**, so a count that drifted *down* elsewhere
+>   would bake a weaker floor in silently. Two guards ran first: `phrase-set.mjs` re-derived
+>   and diffed **byte-identical** (no lock-registry drift), and every fact diffed old → new:
+>   **51 unchanged · 2 increased · 0 DECREASED · 0 added · 0 removed.** No other locale moved.
+> - **⚠ A CORRECTION TO PHASE 2's PREDICTED FIGURES — METHOD rule 8 in miniature.** §7.3
+>   predicted **32/41**; frozen values are **33/42**. The gap is a measurement-window mismatch
+>   between two instruments in this program: `measure-prose-window.mjs` totals the **9 pilot
+>   spokes** (excluding `cancellation-policy` as `INLINE`); the census counts **all 10 `ar`
+>   routes**. The 10th was decomposed rather than assumed — **exactly 1 chrome occurrence per
+>   lock, no related block** (not a spoke, so `RelatedArticles` never renders), no cta, no
+>   byline, no prose. Headroom therefore unchanged at **14** and **32**, restated over the
+>   census's own 10-page set.
+> - **⚠ `cancellation-policy` is a CHROME-ONLY page** — raises ceiling and floor equally,
+>   contributes no prose. Negligible at 1 of 10; **worth watching at expansion.**
+> - **THE A/B DECISION IS RECORDED AS RESOLVED — OPTION A, no gate change.** Tested against
+>   the loose ceiling, the tight ceiling and the gate implementation; all three agree a
+>   prose-window variant expands the enforceable set by **zero terms**. Reopen only if a
+>   corpus yields a term infeasible under the settled ceiling *and* feasible under a
+>   window-scoped one.
+> - **Verified:** `npm run build` over 629 pages, full `gates:dist` green — `gate-4i` ✔ 52
+>   locks across 8 locales on 549 rendered pages, same 3 pre-existing `ja`/`zh` advisories.
+> - **Still open:** the `surface` naming collision, the 11 unlocked candidates, **B-8b**.
+
 > **A correction this file carried, recorded so the next sweep does not
 > re-inherit it.** Track C's brief recorded *"B-9 — script validation for Arabic
 > locks — ✘ no Arabic lock exists to exercise it."* **Two `ar` glossary locks
