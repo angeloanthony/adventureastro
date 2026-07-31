@@ -1,10 +1,10 @@
-# AR-2 Track E, E-4 Phase 2 (steps 1–2) — the tight structural ceiling, and the reclassification it produces
+# AR-2 Track E, E-4 Phase 2 — the tight structural ceiling, the reclassification it produces, and the census refresh
 
 **METHOD citation:** rules 1 · 5 · 8 · 18 (`docs/framework/METHOD.md`).
 
-**Status:** steps 1 and 2 complete. **Baseline:** `207bae1` (E-4 Phase 1). No floors selected,
-gate 4i unmodified, census not re-run, no corpus authored — step 3 is deliberately left open,
-and §7 explains why its shape changed.
+**Status:** complete — steps 1–2 (§§1–8) at `c866adb`, step 3 (§10) after owner authorisation.
+**Baseline:** `207bae1` (E-4 Phase 1). Gate 4i unmodified and no corpus authored throughout;
+step 3 changed exactly one artifact, `census/phrase-count.json`.
 
 **Instrument:** [`scripts/rtl/measure-related-ceiling.mjs`](../../scripts/rtl/measure-related-ceiling.mjs),
 with `--falsify` as its control.
@@ -253,11 +253,90 @@ asserts nothing about whether the corpus is right.
 
 ---
 
-## 9. Deliberately not done
+## 9. Deliberately not done (as of steps 1–2)
 
 - **No floors assigned and the census not re-run** — step 3, and §7 shows it is a census freeze
-  rather than a config edit.
-- **Gate 4i unmodified**, and the `surface` naming collision (§7.2) is reported, not fixed.
+  rather than a config edit. **Done at §10 after owner authorisation.**
+- **Gate 4i unmodified**, and the `surface` naming collision (§7.2) is reported, not fixed. Still
+  open after step 3.
 - **The A/B decision is still not formally recorded**, though §5 leaves Option B with no term it
-  would recover.
-- **No corpus authored**, and the briefs remain frozen.
+  would recover. **Recorded at §10.4.**
+- **No corpus authored**, and the briefs remain frozen. Unchanged by step 3.
+
+---
+
+## 10. Step 3 — the census refreshed
+
+The `ar` locks had been frozen at `pages.ar = 1` since 2026-07-28 and were enforcing a floor of
+**1** against a 9-spoke corpus. Re-running the producer is the smallest reversible change that
+makes CI enforce the policy §4 justifies.
+
+### 10.1 The two guards run first
+
+A census refresh re-freezes **every** locale, so the risk is not the `ar` locks — it is a figure
+somewhere else silently moving **down** and baking a weaker floor into the baseline. Both guards
+were run before the result was accepted:
+
+| guard | result |
+|---|---|
+| `phrase-set.mjs` re-derived from the lock registry and diffed | **byte-identical** — 53 requests, 8 locales, no lock-registry drift |
+| every fact diffed old → new | **51 unchanged · 2 increased · 0 decreased · 0 added · 0 removed** |
+
+Both increases are the `ar` locks. **No other locale's floor moved in either direction.**
+
+```
+ar|أرض الديناصورات    1 → 33   (pagesWithPhrase 1 → 10)
+ar|المسارات           1 → 42   (pagesWithPhrase 1 → 10)
+```
+
+### 10.2 ⚠ A correction to §4's figures: 33 and 42, not 32 and 41
+
+§7.3 predicted the frozen figures would be **32** and **41**. They are **33** and **42**, and the
+discrepancy is a measurement-window mismatch between two instruments in this same program —
+METHOD rule 8 in its smallest form:
+
+- `measure-prose-window.mjs` totals the **9 pilot spokes** (`cancellation-policy` is measured as
+  `INLINE` and deliberately excluded from `totals`).
+- the census counts **all 10 `ar` routes**.
+
+The 10th route was decomposed to confirm the delta rather than assume it, and it contributes
+**exactly 1 chrome occurrence per lock — no related block (it is not a spoke, so
+`RelatedArticles` never renders), no `tour-cta`, no byline, no prose.**
+
+### 10.3 The frozen floors clear the ceiling on the census's own page set
+
+Because the 10th page adds 1 to both the ceiling and the whole, the headroom is unchanged — but
+the check is re-stated over the 10-page set the census actually measured, since a ceiling
+computed on a different page set than the floor is exactly the error §10.2 describes:
+
+| lock | ceilNP (10 pages) | frozen floor | headroom | class |
+|---|---:|---:|---:|:--|
+| `أرض الديناصورات` | 10 chrome + 9 cta = **19** | **33** | **14** | feasible (strong) |
+| `المسارات` | 10 chrome = **10** | **42** | **32** | feasible (strong) |
+
+**Both locks are now ceiling-safe and enforcing.** A build that dropped `أرض الديناصورات` from
+Arabic prose entirely would render at most 19 and fail against 33 — which is the first time
+either lock has been able to fail for a content reason.
+
+⚠ `cancellation-policy` is a **chrome-only page**: it raises the ceiling and the floor equally
+and contributes no prose. A corpus that grew mainly in such pages would erode headroom without
+the term counts revealing it. Negligible at 1 of 10; worth watching at the §7 expansion.
+
+### 10.4 Verification, and the A/B decision recorded
+
+`npm run build` (629 pages) then the full `gates:dist` suite: **all green**, `gate-4i` ✔ 52 locks
+across 8 locales on 549 rendered pages, with the same 3 pre-existing advisory locks and no new
+finding. The advisories are unrelated `ja`/`zh` owner decisions carried since C4.
+
+**The A/B decision is recorded here as resolved in favour of Option A** — no gate change. It has
+now been tested against the loose ceiling, the tight ceiling, and the gate implementation, and
+all three agree that a prose-window variant expands the enforceable set by **zero terms**. It
+should be reopened only if a future corpus produces a term that is infeasible under the settled
+ceiling *and* feasible under a window-scoped one.
+
+### 10.5 Still open after step 3
+
+- **The `surface` naming collision (§7.2)** — reported, not fixed.
+- **The 11 remaining candidates** hold no lock. §4 says which could carry one; authoring them is
+  a corpus decision, not a measurement one.
+- **B-8b**, unchanged and corpus-unblocked.
