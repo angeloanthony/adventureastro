@@ -1192,7 +1192,7 @@ every finding above by 77 routes.
 >   milestones because the number was clean). **Recommended before batch 2: an `--align <locale>`
 >   mode.** Not built — outside P-2's authorization.
 
-> **E-5c COMPLETE 2026-07-31 — THE ALIGNMENT MEASUREMENT IS REPRODUCIBLE; THE LAST KNOWN GAP IS
+> **E-5c COMPLETE `c5776e2` 2026-07-31 — THE ALIGNMENT MEASUREMENT IS REPRODUCIBLE; THE LAST KNOWN GAP IS
 > CLOSED.** [`AR2-E5c-alignment-instrument.md`](AR2-E5c-alignment-instrument.md) +
 > `measure-prose-window.mjs --align <locale>`. No corpus, translation, gate, gate-config or
 > census change.
