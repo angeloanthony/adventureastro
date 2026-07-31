@@ -1093,7 +1093,7 @@ every finding above by 77 routes.
 >   pilot scale**. Nine spokes exercised every mechanism; they have not demonstrated behaviour
 >   across the full 57-spoke corpus. The reopen condition marks that gap deliberately.
 
-> **E-5 COMPLETE `<this commit>` 2026-07-31 — THE PILOT IS ASSESSED; ROLLOUT AUTHORIZED WITH
+> **E-5 COMPLETE `71cdbc3` 2026-07-31 — THE PILOT IS ASSESSED; ROLLOUT AUTHORIZED WITH
 > THREE PRECONDITIONS.** [`AR2-E5-pilot-assessment.md`](AR2-E5-pilot-assessment.md). No
 > engineering, gate, census or corpus change; the frozen brief is **not** edited.
 >
