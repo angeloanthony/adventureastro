@@ -1093,6 +1093,67 @@ every finding above by 77 routes.
 >   pilot scale**. Nine spokes exercised every mechanism; they have not demonstrated behaviour
 >   across the full 57-spoke corpus. The reopen condition marks that gap deliberately.
 
+> **E-5 COMPLETE `<this commit>` 2026-07-31 — THE PILOT IS ASSESSED; ROLLOUT AUTHORIZED WITH
+> THREE PRECONDITIONS.** [`AR2-E5-pilot-assessment.md`](AR2-E5-pilot-assessment.md). No
+> engineering, gate, census or corpus change; the frozen brief is **not** edited.
+>
+> - **⚠ MILESTONE DIVERGENCE RESOLVED — the executed record is adopted as authoritative.** The
+>   brief defines E-3 = B-8b and E-4 = B-11; **neither ran.** E-3 built the measurement window
+>   (because E-2 §4.1 showed B-11's floors could not be written at all until a stable window
+>   existed) and E-4 built the ceiling model. **B-11's stated deliverable — wayfinding locks in
+>   `4i-glossary.json` — does not exist**; what exists is the eligibility table. **B-8b was never
+>   started.** Re-filed: **E-6 = B-8b**, **E-7 = B-11 lock authoring**. The brief's §4 is
+>   superseded by record, not edited — 15 commits cite the executed numbering.
+> - **THE PREDICTIONS LEDGER.** E-0's pre-translation floor predictions vs measured over 10 `ar`
+>   routes: **2 exact** (`Kawasaki` 58, `أبرز النقاط` 4), **5 confirmed** (±1 to +4), **2
+>   refined** (`Vernal` −27, phone −18 — both track E-1 §4.1's already-falsified chrome
+>   constants), **2 falsified** (`أرض الديناصورات` 10→**33**, `المسارات` 10→**42**). ⚠ The two
+>   falsifications are **the pilot's most important measurement**: E-0 predicted body 0 because
+>   both locks were 100 % chrome; they became **genuine corpus locks** (prose 14 and 32) the
+>   moment translator prose existed, exactly as E-1 §4.3 predicted.
+> - **⚠ A11 WAS NEVER PERFORMED — AND THE BRIEF'S WARNING ABOUT IT IS FALSIFIED.**
+>   `4m-media.json` has **one commit in its entire history** and zero `/ar/` entries. But
+>   `gate-4m-media.mjs:219-225` enforces *"a page absent from the baseline must carry no video at
+>   all"*, so an unlisted route with a video is a **violation, not a blind spot**. A11 is a
+>   **mis-specified criterion**, not outstanding work — carrying it forward would schedule work
+>   that does nothing. Rule 4 with the sign reversed.
+> - **⚠ A8 WAS OPEN FOR THE ENTIRE LIFE OF THE PILOT.** E-2 §5 reported it green having produced
+>   the *measurement*; the floors stayed at **1** until `9282317`, three milestones later. The
+>   deferral was right, the record-keeping was not. **Rule: an acceptance criterion whose remedy
+>   is a config or census change is not met by measuring its inputs — mark it deferred.**
+> - **⚠ TWO DEFECTS IN THE PILOT'S OWN RECORD, both upstream findings a downstream milestone
+>   dropped.** (a) **`Doc's Beach` apostrophe split.** E-0 F5 predicted *"a lock written from the
+>   chrome spelling would measure 3 body occurrences out of 20"* — E-4 used the 3. Measured:
+>   ASCII prose 3 / whole 12; curly prose 17 / whole 17; **both = prose 20 / whole 29**. The
+>   verdict survives (feasible strong) but **headroom is 20, not 3**, so E-4 §5.1's use of it as
+>   the example of a thin "strong" was an artifact of counting 41 % of the term. **Nothing may be
+>   authored from that row.** (b) **The dictionary-integrity category** E-0 F4 named was dropped
+>   by E-4's binary predicate; `أبرز النقاط` (M6, **measured 4**, from `t('section.keyTakeaways')`)
+>   reads "infeasible" when it is a perfectly good dictionary lock. **Taxonomy needs three
+>   branches: corpus lock · dictionary-integrity lock · infeasible.**
+> - **⚠ THE PATTERN, ×3:** E-3 conflated feasible/strong; E-4 conflated corpus/dictionary lock and
+>   inherited the apostrophe split. **Each milestone's sharper predicate absorbed a distinction an
+>   earlier one had recorded.** Counter-measure: when narrowing a predicate, re-read the upstream
+>   **findings list**, not only the upstream numbers.
+> - **THE FOUR-WAY SEPARATION: main claim held, one branch falsified.** ✔ "Track E writes no gate
+>   code" — **exactly true**, no `gate-4*.mjs` touched. ✘ "No new instrument" — **two** were built
+>   (`measure-prose-window.mjs`, `measure-related-ceiling.mjs`). The brief had no category for
+>   them. **Fifth category: *policy-derivation instrument*** — measures to decide what a gate
+>   should enforce, committed per rule 5, carries its own falsifier, never runs in CI.
+> - **M-SERIES: 5 of 10 taken.** ✔ M4, M5, M6, M7, M8. ⚠ M1 one file only; ✘ **M2, M3 zero data**
+>   (B-8b); ✘ **M9, M10 never measured** — policy non-decisions the brief scheduled for the pilot.
+>   Cheap at 9 files, a locale-wide sweep after batch 2. **Last cheap moment is now.**
+> - **RECOMMENDATION: AUTHORIZE, with P-1 fold the pilot's four guidance corrections into the
+>   batch brief (E-2 §7 deferred this to E-5 by name); P-2 supersede the `Doc's Beach` row before
+>   any lock is authored; P-3 decide B-8b's status explicitly rather than by silence.**
+> - **⚠ Δ 0 `en`↔`ar` IS NOT A PREDICTION FOR BATCH 2** — E-2 §4.2's own caveat: same author,
+>   one-for-one authoring; E-1's compression style would not reproduce it.
+> - **FIVE FALSIFIABLE PREDICTIONS RECORDED FOR BATCH 2 (`hiking`, 16 files)**, §8 — the sharpest
+>   being **P2: the settled ceiling grows by exactly the precomputed rows, `Vernal` 88 → 248**.
+>   That is the direct test of E-4 §6's additivity claim.
+> - **Reopen conditions in force: R1** (architecture A/B) · **R2** (ceiling model falsified) ·
+>   **R3** (B-17 promotion) · **R4** (4c policy challenge).
+
 > **A correction this file carried, recorded so the next sweep does not
 > re-inherit it.** Track C's brief recorded *"B-9 — script validation for Arabic
 > locks — ✘ no Arabic lock exists to exercise it."* **Two `ar` glossary locks
