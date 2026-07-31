@@ -2,9 +2,9 @@
 
 **METHOD citation:** rules 1 · 3 · 8 · 11 · 15 · 18 (`docs/framework/METHOD.md`).
 
-**Status:** decided. **Not implemented** — §8 states the one call left to the owner and why
-stopping here is the instruction, not an omission.
-**Baseline:** `7a2c74f` (E-1), tree clean. **Blocks:** E-2.
+**Status:** **RESOLVED.** Decided `644c21e`, owner answered §8, implemented in two commits —
+`f327d72` (the contract) and `9695f05` (the corpus). §9 records the landing.
+**Baseline:** `7a2c74f` (E-1). **E-2 is unblocked.**
 
 ---
 
@@ -216,7 +216,17 @@ pages — the last being the direct evidence that the schema path was not distur
 
 ---
 
-## 8. The one call left to the owner
+## 8. The one call left to the owner — ✅ ANSWERED: uniform, all nine locales
+
+> **Owner, 2026-07-31: uniform.** The reasoning that settled it reframes the question rather
+> than splitting the difference — *"the earlier B-2 decision about the Salt Lake City pages
+> was made under a different question (**is this necessary?**). E-1 has changed the question
+> to **should the component have one invariant rendering contract?**"* The precedent does not
+> conflict once the two questions are separated: B-2 was scoping a **migration**, and this is
+> defining a **component contract**. The contract is now one sentence — *FAQ text is rendered
+> through `Bidi`* — instead of one sentence with a condition attached, and the operational
+> cost is the ~300 LTR no-op wrappers §8 predicted (measured: **447** total, of which
+> **445** are LTR).
 
 **Does the split run for all nine locales, or only for RTL documents?**
 
@@ -235,7 +245,81 @@ both defensible.
 
 ---
 
-## 9. Reproduce
+## 9. The landing — two commits, and what the proofs actually said
+
+Split the way B-0 and B-2 split: **`f327d72` changes the contract and moves no content;
+`9695f05` moves the content.** Neither commit both redefines how FAQ prose renders and
+edits what it says.
+
+| | |
+|---|---|
+| `src/lib/bidi-runs.ts` | recognizes the named runs — phone as an exact literal from `SITE`, currency by **shape** |
+| `FaqAccordion.astro` | maps the slices, wraps named ones in `<Bidi>`, both `q` and `a`, no `set:html` |
+| `scripts/test-bidi-runs.mjs` | `npm run test:bidi-runs` — **21/21**, every case also asserting the round-trip |
+
+**Currency is matched by shape, not by amount**, and that is a decision rather than
+convenience: the hazard belongs to the shape, so a `$50` written next year fails identically
+and **nothing would catch it** — `$` is `Bidi_Mirrored=No` and 4n is silent by design.
+Matching only `SITE.pricing`'s two amounts would have left the class open for nothing.
+
+### 9.1 The bootstrap test needed a correction before it could run at all
+
+§7 specified B-2 Phase B's test unchanged: strip `<bdi>` from the new build, require the old
+one back. **It cannot work in that form here, and the reason is a change in the corpus, not
+in the method.** Phase A's corpus carried *zero* isolation, so stripping one side was
+sufficient. Every page now carries the chrome wrappers Phase B added, so a one-sided strip
+removes those too and can never match — the first run reported 620 of 621 pages "differing",
+including pages with no FAQ at all. Stripping **both** sides tests the same invariant (the
+only difference between the builds is `<bdi>`) and is the form that survives a corpus which
+already isolates.
+
+A recorded test is a hypothesis about the corpus it was written against. That is rule 18
+again, arriving through a test rather than through a measurement.
+
+### 9.2 What the proofs said
+
+| Claim | Result |
+|---|---|
+| markup identical, `<bdi>` stripped both sides | **621 / 621** |
+| JSON-LD byte-identical | **621 / 621** — the schema path was not disturbed |
+| net `<bdi>` added | **447**, across all nine locales (`ar` 2 · `en`/`es`/`fr`/`it`/`ja`/`pt`/`zh` 56 · `de` 53) |
+| `astro check` | 0 errors / 0 warnings / 268 hints — unchanged |
+| build + all 11 gates | exit 0, 621 pages; 4q's `ar` window still 12 885 chars |
+| gate 4n | **9 mirrored nodes, 9 isolated** (E-1: 8 isolated, 1 bare — that one was the deviation) |
+| browser probe, `div.faq-answer` | `$349`, `$125`, `(435) 219-9447` all `isolated=true`, **`ltr`** |
+| JSON-LD carrying isolation markup | **0** of 2 129 blocks |
+
+**A second axis of change turned up, and it is measured rather than explained away.** Adding
+two imports to the component changed its module graph, and Vite emits per-page inlined
+`<style>` blocks in module-graph order — so 457 pages differ in **CSS rule order**. Asserting
+that this is harmless would be reasoning about the delivery mechanism instead of measuring
+it (B-7's lesson, and §7's own "any page that differs by something else is a defect"). So it
+was measured three ways: **CSS rule multiset identical on 621/621**, **total CSS length
+identical on 621/621**, and **every scope kept its internal rule order on 621/621** — only
+inter-component grouping moved, and Astro's scoped selectors are disjoint by construction, so
+no cascade resolution can change.
+
+Two smaller instrument notes, recorded because both are the shape that produces false
+findings: the JSON-LD markup scan's single hit was the Portuguese word **"a*bdi*car"** (a
+three-letter substring search over natural language); and the E-1b probe's `NOT MEASURABLE`
+classification earned itself again, still correctly excluding the 1px `.page-summary` phone.
+
+### 9.3 The deviation is closed
+
+E-1 §3.3's content deviation is **reverted** — the Arabic FAQ answer carries the phone
+sentence again, `(435) 219-9447` going 2 → 3 occurrences in the file, matching the English
+source. Per-term `en`/`ar` alignment on the raw-HTML body window is **Δ 0** on all three
+named runs (phone 4/4, `$349` 5/5, `$125` 3/3). ⚠ Those absolute counts are **not**
+comparable with E-1 §5's, which used `visibleText@1`; the deltas are.
+
+**The residual in §6 is unchanged and still real**: a mirrored character in some *other*
+Arabic FAQ run remains un-isolatable from frontmatter, and gate 4n still blocks the build if
+one appears. What changed is that the forced cases — the runs policy §3.2 requires verbatim —
+no longer reach that fallback.
+
+---
+
+## 10. Reproduce
 
 ```
 node scripts/rtl/measure-currency.mjs          # §1's live defect, §5's isolation readings

@@ -678,8 +678,23 @@ but not one and then the other. Measurement: `AR2-E0-census.md` §3.
 
 > **E-1 made this load-bearing rather than theoretical.** Of the 6 `Vernal` chrome occurrences on the first Arabic spoke, **2 are the `<title>` element**. So the whole-page floor window mixes a constant (nav/footer, 4), a per-page variable (title, 2 here) and the prose a B-11 floor is meant to measure. `AR2-E1-probe.md` §4.2.
 
-### B-15 — `faq[].a` is un-isolatable prose *(raised by E-1, **architecture decided E-1b**, **still blocks E-2**)*
+### ~~B-15~~ — `faq[].a` is un-isolatable prose — **RESOLVED 2026-07-31** *(raised by E-1)*
 
+> **RESOLVED — `f327d72` (contract) + `9695f05` (corpus). E-2 IS UNBLOCKED.** Owner chose
+> **uniform across all nine locales**, reframing the question that made B-2's `salt-lake-city`
+> precedent look contradictory: B-2 was scoping a *migration* ("is this necessary?"), this
+> defines a *component contract* ("should it have one invariant rendering path?"). Landed as
+> `src/lib/bidi-runs.ts` (recognizes the phone as a literal from `SITE`, currency **by shape**
+> so a future `$50` is covered too) + `FaqAccordion` mapping slices through `<Bidi>`, both `q`
+> and `a`, no `set:html`. `npm run test:bidi-runs` 21/21, every case asserting the round-trip.
+> **Markup identical on 621/621 pages with `<bdi>` stripped from both sides · JSON-LD
+> byte-identical 621/621 · 447 `<bdi>` added · 4n now 9 mirrored nodes / 9 isolated · the
+> browser probe reads all three FAQ runs `ltr`.** E-1 §3.3's content deviation is reverted.
+> ⚠ Two method notes in the decision doc §9: the §7 strip test **could not run as specified**
+> (Phase A's corpus had no isolation; this one does — strip both sides), and adding two
+> imports reordered Vite's CSS emission on 457 pages, proven inert three ways rather than
+> asserted.
+>
 > **Decided 2026-07-30 — [`AR2-B15-decision.md`](AR2-B15-decision.md).** `FaqAccordion`
 > splits `q`/`a` on the named runs the site owns and renders them through `Bidi.astro`;
 > no `set:html`, so Astro's escaping is untouched, and `SchemaFaq` keeps the raw string
@@ -728,6 +743,16 @@ invariant is about characters that **flip shape**. E-1b measured a second defect
 a neutral that keeps its shape and **changes side**, because UBA W2 retyped its neighbour.
 `$349` → `349$`. Nothing in the eleven gates observes position, so this class ships unseen;
 it was found only by opening a browser.
+
+> **Owner accepted the FRAMING 2026-07-31 — [`AR2-B17-proposal.md`](AR2-B17-proposal.md).**
+> This is a **new verification layer**, not an extension of 4n or 4q: *4n = bidi structure ·
+> 4q = rendered character policy · B-17 = visual ordering after layout.* Whether to build it
+> is still open, and the proposal records the three costs specific to this layer (a browser in
+> CI, seconds-per-page, font-dependent readings) plus the two policy questions that need
+> answers before code — what a `NOT MEASURABLE` reading should do, and how wide the scope is.
+> **The next gate letter is `4r`.** ⚠ B-15's fix closes today's instances **by construction
+> and closes nothing about the class**: a `$50` in an Arabic FAQ answer is now covered by
+> `bidi-runs.ts`, but the same amount in MDX body prose without a `<bdi>` is caught by nothing.
 
 The instrument now exists ([`scripts/rtl/measure-currency.mjs`](../../scripts/rtl/measure-currency.mjs), exit 0/2, synthetic
 positive *and* negative controls). A **gate** does not, and building one is a blocking-policy
@@ -845,6 +870,31 @@ every finding above by 77 routes.
 >   literals, not arbitrary prose.
 > - **New: B-17** — no gate perceives a displaced neutral, and any gate for it must be a
 >   browser gate, the first in the series.
+>
+> **B-15 RESOLVED `f327d72` + `9695f05` 2026-07-31 — E-2 IS UNBLOCKED.** Owner decided
+> **uniform across all nine locales**; B-17's framing accepted as a **new layer**, not a 4n/4q
+> extension. Two commits, contract then corpus.
+>
+> - **The §7 acceptance test could not run as written**, and the reason is the corpus, not the
+>   method: B-2 Phase B stripped `<bdi>` from one side because Phase A carried **zero**
+>   isolation. Every page now carries Phase B's chrome wrappers, so a one-sided strip reports
+>   620 of 621 pages "differing" — including pages with no FAQ. **Strip both sides.** A
+>   recorded test is a hypothesis about the corpus it was written against (rule 18, ×6, and
+>   the first time it arrived through a *test* rather than a measurement).
+> - **A second axis of change appeared and was measured, not explained away.** Two new imports
+>   reordered Vite's per-page CSS emission on 457 pages. Proven inert three ways: rule multiset
+>   identical 621/621, total CSS length identical 621/621, **every scope kept its internal rule
+>   order 621/621**. Only inter-component grouping moved and scoped selectors are disjoint.
+> - **Currency is matched by SHAPE, not by amount** — the hazard belongs to the shape, so a
+>   `$50` written next year fails identically and nothing would catch it (`$` is
+>   `Bidi_Mirrored=No`; 4n silent by design). Matching only `SITE.pricing`'s two amounts would
+>   have left the class open for nothing.
+> - E-1 §3.3's deviation **reverted**: the phone is back in the Arabic FAQ answer, 4n reads
+>   **9 isolated of 9** (E-1: 8 of 9, and the bare one was that sentence).
+> - ⚠ Two false-positive shapes worth remembering: the JSON-LD markup scan's only hit was the
+>   Portuguese word **"a*bdi*car"** (3-letter substring over natural language), and the E-1b
+>   probe's `NOT MEASURABLE` class again correctly excluded the 1px `.page-summary` phone that
+>   a naive x-order read calls scrambled.
 >
 > Confirmed unchanged: `(435) 219-9447` at **28** occurrences in `utv` body prose (33
 > across the 9), which is the `<bdi>`-in-MDX population; `→` at **0** in every window on
