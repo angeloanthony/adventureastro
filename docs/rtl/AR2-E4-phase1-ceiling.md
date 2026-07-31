@@ -140,7 +140,74 @@ that comparison is possible rather than rhetorical.
 
 ---
 
-## 6. Deliberately not done
+## 6. ⚠ Applying the ceiling reverses part of E-3's eligibility table — in both directions
+
+E-3 ruled a candidate ineligible when `prose ≤ non_prose_observed`. **That is the wrong test.**
+It asks how much of today's count is template; the question a floor actually poses is whether
+a number exists that the template *cannot reach*:
+
+```
+a floor is FEASIBLE  ⟺  non_prose_ceiling  <  observed whole-page count
+```
+
+Feasible means a floor can sit strictly above everything the template can produce while still
+passing on today's corpus. Run over the pilot (`ceilNP` = chrome + cta + byline + 4 × maxPerCard × 9):
+
+| Term | prose | ceilNP | whole | Feasible? | E-3 said |
+|---|---:|---:|---:|:--|:--|
+| `Vernal` | 178 | 144 | 287 | **yes** — headroom 143 | weak |
+| `المسارات` | 32 | 9 | 41 | **yes** — headroom 32 | eligible |
+| `Kawasaki KRX 1000` | 39 | 36 | 58 | **yes** — headroom 22 | eligible |
+| `Moonshine Arch` | 16 | 9 | 25 | **yes** — headroom 16 | weak |
+| **`أرض الديناصورات`** | 14 | 18 | 32 | **yes** — headroom 14 | **ineligible ✘** |
+| `Outlaw Trail` | 11 | 9 | 20 | **yes** — headroom 11 | weak |
+| **`Asphalt Ridge`** | 9 | 9 | 18 | **yes** — headroom 9 | **ineligible ✘** |
+| **`Ashley Gorge`** | 8 | 9 | 17 | **yes** — headroom 8 | **ineligible ✘** |
+| `Adventure Tours Vernal` | 39 | 38 | 43 | yes — headroom **5**, marginal | eligible |
+| **`Doc's Beach`** | 3 | 9 | 12 | **yes** — headroom 3, marginal | **ineligible ✘** |
+| **`Dinosaur National Monument`** | 23 | 85 | 38 | **no** — ceiling exceeds by 47 | **weak ✘** |
+| **`Uintah Basin`** | 11 | 36 | 12 | **no** — ceiling exceeds by 24 | **eligible ✘** |
+| **`Green River`** | 6 | 72 | 6 | **no** — ceiling exceeds by 66 | **eligible ✘** |
+
+**Six of thirteen change verdict, and not all in the same direction.** Four terms E-3 called
+ineligible are feasible — including the existing `dinosaur-country` lock — because their
+related ceiling is **zero**, so their entire denominator is the differential-stable
+chrome + `tour-cta` constant. Two terms E-3 called eligible are infeasible, and one it called
+weak is infeasible.
+
+### 6.1 Feasibility and strength are different questions
+
+E-3 conflated them. Both are worth carrying into Phase 2:
+
+- **Feasible** — a floor exists that the template alone cannot satisfy. It therefore detects
+  **total deletion** of the term from the corpus.
+- **Strong** — the headroom is large relative to prose, so the floor also detects **partial
+  drift**, not just wholesale removal.
+
+`أرض الديناصورات` is the clean example. E-3 said a floor on it would be "no evidence." That
+was **too strong**: with `ceilNP` 18 and whole 32, a floor of 24 requires at least 6
+occurrences to come from prose, so a build that dropped the term entirely fails. It is weak
+evidence — it catches deletion, not erosion — which is a materially different claim from none.
+
+### 6.2 What this does to the A/B decision
+
+It **supports the simpler model**, which is worth stating plainly because the ceiling is
+conservative and could have gone the other way: **10 of 13 candidates can carry a
+ceiling-safe whole-page floor**, so Option A is viable without any change to gate 4i. The
+three infeasible terms are infeasible for a reason Option B would not fix either — their
+related ceiling genuinely exceeds their observed total, so no whole-page floor can
+distinguish translator output there regardless of how the floor is computed. Those three
+simply get no lock.
+
+⚠ The ceiling is a **worst case** — it assumes all 4 cards on all 9 pages are the single
+highest-contributing sibling. A tighter sound bound is the sum of the **top-4 distinct**
+sibling contributions per page, and Phase 2 should compute it before rejecting
+`Dinosaur National Monument` (mean 0.16/card against a max of 2) or accepting
+`Adventure Tours Vernal` on a headroom of 5.
+
+---
+
+## 7. Deliberately not done
 
 - **No floors selected**, per scope.
 - **Gate 4i unmodified**, per scope — including the window option E-3 recommended, which §4
