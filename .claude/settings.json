@@ -100,7 +100,21 @@
       "Bash(awk 'NR==10,NR==304' src/page-content/things-to-do.ts)",
       "Bash(grep -c '`')",
       "Bash(grep -o '\\\\${[^}]*}')",
-      "Bash(python -c \"import json;d=json.load\\(open\\('package.json'\\)\\);print\\(json.dumps\\(d['scripts'],indent=1\\)\\)\")"
+      "Bash(python -c \"import json;d=json.load\\(open\\('package.json'\\)\\);print\\(json.dumps\\(d['scripts'],indent=1\\)\\)\")",
+      "Bash(grep -o \"VERIFY WITH OFFICIAL SOURCE\\\\|Key Takeaways\\\\|Wichtigste Erkenntnisse\\\\|[A-ZÄÖÜ]\\\\{4,\\\\} MIT [A-ZÄÖÜ]*\" src/content/utv/private-utv-tours-vernal.de.mdx)",
+      "Bash(grep -o \"。\\\\{0,1\\\\}.\\\\{0,20\\\\}官方.\\\\{0,20\\\\}\" src/content/utv/private-utv-tours-vernal.zh.mdx)",
+      "Bash(node \"C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/f7a64310-db20-438c-86c3-ebe329ab4c48/scratchpad/e2-census.mjs\")",
+      "Bash(find C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/f7a64310-db20-438c-86c3-ebe329ab4c48/scratchpad/dist-baseline -name *.html)",
+      "Bash(node scripts/rtl/measure-prose-window.mjs)",
+      "Bash(node scripts/rtl/measure-prose-window.mjs --baseline \"C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/f7a64310-db20-438c-86c3-ebe329ab4c48/scratchpad/dist-baseline\")",
+      "Bash(node --input-type=module -e ' *)",
+      "Bash(node scripts/rtl/measure-prose-window.mjs --json \"C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/f7a64310-db20-438c-86c3-ebe329ab4c48/scratchpad/e3.json\")",
+      "Bash(grep -c related-card __TRACKED_VAR__/ar/utv/best-utv-trails-vernal/index.html)",
+      "Bash(node scripts/rtl/measure-prose-window.mjs --json \"C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/f7a64310-db20-438c-86c3-ebe329ab4c48/scratchpad/e4.json\")",
+      "Bash(node scripts/rtl/measure-prose-window.mjs --json \"C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/6f841e22-8bc9-4280-84cb-cb19a95167d0/scratchpad/window.json\")",
+      "Bash(node scripts/rtl/measure-related-ceiling.mjs --window \"C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/6f841e22-8bc9-4280-84cb-cb19a95167d0/scratchpad/window.json\" --project --json \"C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/6f841e22-8bc9-4280-84cb-cb19a95167d0/scratchpad/ceiling.json\")",
+      "Bash(python -c ' *)",
+      "Bash(node scripts/rtl/measure-related-ceiling.mjs --window \"C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/6f841e22-8bc9-4280-84cb-cb19a95167d0/scratchpad/window.json\" --project)"
     ],
     "additionalDirectories": [
       "\\tmp",
