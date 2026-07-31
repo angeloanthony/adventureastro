@@ -507,6 +507,7 @@ const AR_SLUGS = new Set<string>([
   'utv/beginners-guide-to-utv-tours-vernal', // AR-2 Track E, E-2
   'utv/family-utv-guide-vernal', // AR-2 Track E, E-2
   'dinosaur-national-monument/visiting-dinosaur-national-monument', // AR-2 Track E, E-2
+  'hiking/best-hikes-in-dinosaur-national-monument', // AR-2 Track E, batch 2a
 ]);
 
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {
