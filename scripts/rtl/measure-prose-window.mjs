@@ -46,19 +46,35 @@ import { fileURLToPath } from 'node:url';
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
-/** The nine pilot spokes, plus the AR-1 inline page. Slug → the route under each locale. */
-const PILOT = [
-  'utv/best-utv-trails-vernal',
-  'utv/backcountry-tours-vernal-utah',
-  'utv/side-by-side-rentals-vernal-utah',
-  'utv/group-utv-tours-vernal',
-  'utv/private-utv-tours-vernal',
-  'utv/beginners-guide-to-utv-tours-vernal',
-  'utv/family-utv-guide-vernal',
-  'dinosaur-national-monument/petroglyphs-rock-art-vernal',
-  'dinosaur-national-monument/visiting-dinosaur-national-monument',
-];
 const INLINE = 'cancellation-policy';
+
+/**
+ * The registered Arabic prose spokes, plus the AR-1 inline page.
+ * Slug → the route under each locale.
+ *
+ * ⚠ This was a hardcoded list of the nine pilot slugs, and §11.0 of
+ * AR2-E4-phase2-tight-ceiling.md records why that was a standing hazard: a route
+ * not in the list is silently excluded from the window measurement while the
+ * census counts it, which is exactly the population mismatch behind §10.2's
+ * 32/41-vs-33/42 correction. §11.0 asked for the list to be extended at every
+ * expansion; by batch 2b it had already been missed once (batch 2a's eight
+ * hiking spokes were registered and never added here).
+ *
+ * Reading AR_SLUGS instead makes the population definitionally the registered
+ * one, so the mismatch cannot reappear at the next expansion. AR_SLUGS is the
+ * same registry the census and the routes resolve against, and it is the one
+ * §1.2 of the rollout brief calls the second deliverable of every file.
+ */
+function registeredArSpokes() {
+  const src = readFileSync(path.join(REPO_ROOT, 'src', 'lib', 'i18n.ts'), 'utf8');
+  const block = src.match(/const AR_SLUGS = new Set<string>\(\[([\s\S]*?)\]\);/);
+  if (!block) throw new Error('AR_SLUGS block not found in src/lib/i18n.ts');
+  return [...block[1].matchAll(/'([^']+)'/g)]
+    .map((m) => m[1])
+    .filter((slug) => slug !== INLINE);
+}
+
+const PILOT = registeredArSpokes();
 
 /**
  * B-11 floor candidates.
