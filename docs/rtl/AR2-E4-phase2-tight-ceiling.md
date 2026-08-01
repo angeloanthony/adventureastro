@@ -326,6 +326,16 @@ computed on a different page set than the floor is exactly the error §10.2 desc
 Arabic prose entirely would render at most 19 and fail against 33 — which is the first time
 either lock has been able to fail for a content reason.
 
+> **⚠⚠ TRUE WHEN WRITTEN, FALSE EIGHT PAGES LATER.** That claim is correct at the 10-page corpus it
+> was measured on and it does not survive growth. The template contributes ~2/page, so by the 18
+> pages batch 2a shipped it alone reached 36 > 33 and `أرض الديناصورات` **stopped enforcing** —
+> proved in E-9 §4.2 by running gate 4i against a tree with all Arabic prose deleted, where the
+> old floor stayed **green**. Re-frozen at 183/415 on 2026-08-01.
+>
+> The defect is in the *reasoning*, not the arithmetic: "ceiling-safe" was checked once and read as
+> a standing property, when it is a statement about one corpus size. That is why §11.2's criterion
+> list now leads with enforceability and why the re-freeze is not optional.
+
 ⚠ `cancellation-policy` is a **chrome-only page**: it raises the ceiling and the floor equally
 and contributes no prose. A corpus that grew mainly in such pages would erode headroom without
 the term counts revealing it. Negligible at 1 of 10; worth watching at the §7 expansion.
@@ -365,44 +375,69 @@ optional.
 It is cheap by construction — §6 already reduced the ceiling side from rediscovery to a table
 sum — but cheap is not automatic.
 
-### 11.0 ⚠ First, extend the instruments' route list
+### 11.0 ✔ RESOLVED — the instruments derive their own route list
 
-`measure-prose-window.mjs` hardcodes the nine pilot slugs in `PILOT` and measures
-`cancellation-policy` separately as `INLINE`. **A new route that is not added to `PILOT` is
-silently excluded from the window measurement while the census counts it** — which is exactly the
-population mismatch that produced §10.2's 32/41-vs-33/42 correction, and it will recur in the
-same shape at every expansion until the list is extended. Do this before anything else.
+This section originally required hand-extending `PILOT` in `measure-prose-window.mjs` before every
+batch, because a route missing from that list was silently excluded from the window while the
+census counted it — §10.2's 32/41-vs-33/42 correction.
 
-`measure-related-ceiling.mjs` needs no such edit: it reads the pool from source frontmatter, so
-the settled ceiling re-sums over the new registered set on its own.
+**`87fbcf9` removed the manual step:** `PILOT` is now derived from `AR_SLUGS`, so the population is
+definitionally the registered one and cannot drift. `cancellation-policy` is still measured
+separately as `INLINE` — it renders no RelatedArticles, CTA or byline, so it is not a spoke — and
+**E-9 closed the remaining half of the mismatch**: `--json` now emits that page's own per-term
+counts, so a consumer comparing against a census figure adds it explicitly instead of being one
+page short. Nothing to extend by hand here any more; check the emitted `spokes` count matches
+`AR_SLUGS` and move on.
+
+`measure-related-ceiling.mjs` and `measure-ar-frontmatter-ceiling.mjs` need no such edit either:
+both read the pool from source frontmatter and re-sum over the registered set on their own.
 
 ### 11.1 The sequence
 
+> **⚠ SUPERSEDED IN PART BY E-9.** The ceiling instrument for the **Arabic-script** locks is now
+> `measure-ar-frontmatter-ceiling.mjs` (Model B adopted), and the governing acceptance criterion is
+> **enforceability**, not the ceiling comparison. The sequence and criteria below are updated;
+> [`AR2-E9-floor-enforceability.md`](AR2-E9-floor-enforceability.md) is the record of why.
+
 ```
+node scripts/rtl/preflight-ar.mjs <the batch's .ar.mdx files>   # cheap failures first
 npm run build                                            # rebuild; page set must match HEAD
 node scripts/rtl/measure-prose-window.mjs --json w.json  # template constants + whole counts
-node scripts/rtl/measure-related-ceiling.mjs --window w.json --project --json c.json
-node scripts/rtl/measure-related-ceiling.mjs --window w.json --project --falsify   # control
-node scripts/census/phrase-set.mjs > new-set.json        # GUARD 1 — diff, must be identical
+                                                         #   (also emits the inline page + spokes)
+node scripts/rtl/measure-ar-frontmatter-ceiling.mjs --window w.json --json c.json
+                                                         #   → ENFORCEABILITY + PROJECTED REFRESH
+node scripts/rtl/measure-related-ceiling.mjs --window w.json --project --json lat.json  # Latin locks
+node scripts/census/phrase-set.mjs > new-set.json        # GUARD 1 — diff on NORMALISED content
 npm run census:phrase-count -- <YYYY-MM-DD>              # re-freeze
                                                          # GUARD 2 — diff every fact, check sign
 npm run gates:dist
 ```
 
+**Read the PROJECTED REFRESH table before running the refresh.** It prints the floor the re-freeze
+*would* set and checks it against both bars, so a refresh that would leave a floor non-enforcing is
+refused before it happens rather than discovered a batch later.
+
 ### 11.2 The acceptance criteria, in the order they can fail
 
 | # | check | fails if |
 |---|---|---|
-| 1 | `phrase-set.json` re-derived and diffed | it differs — the lock registry drifted and the refresh is measuring a different question |
-| 2 | Assertion A inside the ceiling instrument | observed related exceeds the settled ceiling — §3.1's English-predicts-Arabic assumption is **falsified**, and the ceiling must be rebuilt from measured Arabic frontmatter before any floor is trusted |
-| 3 | `--falsify` control | it comes back green — the assertion is not wired to the ceiling |
+| 0 | **`preflight-ar.mjs` on the batch's source files** | a schema budget, a §3.3/§3.5 class, an unregistered slug — **or a §2.3 lock phrase twice in one `title` + `description`**, which falsifies the adopted per-card ceiling and unsounds every `ar` floor |
+| 1 | `phrase-set.json` re-derived and diffed | it differs — the lock registry drifted and the refresh is measuring a different question. ⚠ Diff on **EOL-normalised content**: the committed file is CRLF and the producer emits LF, so a byte comparison always differs (E-9 §5) |
+| 2 | Assertion A inside the ceiling instrument | observed related exceeds the settled ceiling. ⚠ **DEMOTED for the Arabic locks** — its `--falsify` control does not go red, so it cannot discriminate and must not be cited (E-8 §5, E-9 §3). It remains load-bearing for the Latin locks |
+| 3 | `--falsify` control | for a **Latin** lock, it comes back green — the assertion is not wired to the ceiling. For the `ar` locks it is *expected* not to go red; the instrument exits 2 and says so |
 | 4 | whole-census differential, **by sign** | **any fact decreased.** Increases are expected; a decrease bakes a weaker floor into the baseline and is the failure mode a refresh actually has |
-| 5 | `ceilNP < frozen value`, per `ar` lock | a lock is no longer ceiling-safe — it must be dropped, not lowered until it passes |
-| 6 | `npm run gates:dist` | anything |
+| **5** | **ENFORCEABILITY — `survives < floor`, per `ar` lock**, where `survives = whole − prose` | **the floor would still be satisfied with every word of Arabic prose deleted.** This is the governing criterion: it needs no ceiling model, it is arithmetic on the measured window, and it is the check that caught a floor that had been dead for a full batch |
+| 6 | `ceilNP < frozen value`, per `ar` lock, `ceilNP` read from the **adopted (Model B)** column | a lock is no longer ceiling-safe — it must be dropped, not lowered until it passes |
+| 7 | `npm run gates:dist` | anything |
 
-⚠ **Check 5 must be computed over the page set the census measured**, not over the pilot spokes.
-§10.2 is the record of getting this wrong by one page; the error scales with the gap between the
-two lists, which is precisely what §11.0 exists to keep at zero.
+⚠ **Checks 5 and 6 must be computed over the page set the census measured**, not over the spokes.
+§10.2 is the record of getting this wrong by one page and E-9 §4.3 is the record of it recurring;
+`measure-prose-window.mjs --json` now emits the inline page's own counts so the correction is an
+explicit addition rather than something to remember.
+
+⚠ **Check 5 outranks check 6.** A tighter ceiling is not sufficient. The question a floor exists to
+answer is whether it fails when its corpus disappears, and only check 5 asks it. Where the two
+disagree, 5 governs.
 
 ### 11.3 Scope of what this validates
 

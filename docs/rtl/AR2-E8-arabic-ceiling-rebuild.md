@@ -2,6 +2,16 @@
 
 **Status:** measurement complete. **Re-freeze authorized, conditionally** — see §7.
 
+> **✔ CLOSED at E-9.** All three §7 conditions are satisfied and the census was re-frozen on
+> 2026-08-01 (33 → 183, 42 → 415). Both floors now fail a tree with all Arabic prose deleted —
+> demonstrated by running the real gate, not by arithmetic alone.
+> See [`AR2-E9-floor-enforceability.md`](AR2-E9-floor-enforceability.md).
+>
+> ⚠ **One figure below is corrected there:** §6's `survives` is **60 / 30**, not 59 / 29, and
+> `المسارات`'s margin is **12**, not 13. §6 compared a spoke-scoped `survives` against a
+> census-scoped floor; the 26th `ar` route contributes 1 chrome occurrence per lock. No verdict
+> changes — `أرض الديناصورات` was dead either way.
+
 Measurement and model repair only. No corpus authored, no gate modified, no lock changed, no
 census refreshed. Instrument: [`scripts/rtl/measure-ar-frontmatter-ceiling.mjs`](../../scripts/rtl/measure-ar-frontmatter-ceiling.mjs).
 

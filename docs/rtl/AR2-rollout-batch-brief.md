@@ -42,10 +42,11 @@ It supersedes nothing in `AR1-arabic-policy.md`.
 | **3.5** | **⚠ NEW — a parenthetical that CLOSES on a Latin institution name.** The largest class in batch 2a; §3.3's digit class produced **zero**. | batch 2a, **28 of 30** gate-4n findings |
 | **2.4** | **⚠ NEW — the `description` frontmatter budget, and why Arabic hits it.** | E-2 §6.4, **3 of 9** files failed the build |
 | **2.4** | **⚠ CORRECTED — `title` is capped at 65 too, and this brief never said so.** | batch 2b: first build stopped at schema, 69/65, before any gate ran |
-| **1.1.2** | **⚠ NEW — batch 2b closed; §3.5's class produced ZERO.** The §6.2 re-freeze is **blocked**, not done. | batch 2b, 1 gate-4n finding (a §3.2 guillemet); [`AR2-batch2b-assertion-A.md`](AR2-batch2b-assertion-A.md) |
+| **1.1.2** | **⚠ NEW — batch 2b closed; §3.5's class produced ZERO.** The §6.2 re-freeze was blocked, then **unblocked and done** at E-8/E-9. | batch 2b, 1 gate-4n finding (a §3.2 guillemet); [`AR2-batch2b-assertion-A.md`](AR2-batch2b-assertion-A.md) |
 | **5** | **⚠ NEW — M9 and M10 are still unreported.** The pilot did not deliver them. | E-5 §4 |
 | **5.1** | **⚠ NEW — the caseless editorial marker is an open challenge.** | E-2 §6.3 |
-| **6** | **⚠ NEW — floors now enforce.** Gate 4i's `ar` locks moved from 1 to 33 and 42. | `9282317` |
+| **6.1** | **⚠⚠ CORRECTED — one floor was DEAD for a whole batch.** 33 was reachable by the template alone from batch 2a on; re-frozen at **183** and **415**, and both now fail a prose-deleted tree. | [`AR2-E9-floor-enforceability.md`](AR2-E9-floor-enforceability.md) §4, gate run against a stripped `dist/` |
+| **2.4** | **⚠ NEW — a §2.3 lock phrase may appear at most ONCE across `title` + `description`.** A second occurrence unsounds every `ar` floor and no gate would say so. `preflight-ar.mjs` enforces it. | E-9 §2.2, control goes red on one added occurrence |
 | **6.3** | **⚠ NEW — freeze the downstream gate numbers BEFORE remediating.** The `&&` chain hides every gate behind the first red one. | batch 2a: 4f/4h/4i/4g/4q never ran; the baseline had to be reconstructed |
 | **6.4** | **⚠ NEW — a local commit may be published within minutes.** The `k` bot is a property of the environment, not an anomaly. | batch 2a: 3 articles pre-committed, 2 milestones auto-pushed |
 
@@ -134,8 +135,18 @@ identical afterwards, and 4q moved by **+6 characters** — exactly the characte
 
 ⚠ **The §6.2 second operation did NOT complete.** The census re-freeze stopped at §11.2 criterion 2:
 Assertion A is falsified for both `ar` locks, structurally rather than by anything batch 2b
-authored. See [`AR2-batch2b-assertion-A.md`](AR2-batch2b-assertion-A.md). The floors in force remain
-sound (criterion 5 passes with `ceilNP` 132 vs 33 and 389 vs 42) but under-scoped.
+authored. See [`AR2-batch2b-assertion-A.md`](AR2-batch2b-assertion-A.md).
+
+> **⚠⚠ CORRECTED — "under-scoped" was wrong, and in the dangerous direction.** This section
+> originally concluded the floors in force remained sound and merely covered less of the corpus.
+> They did not. E-8 rebuilt the broken settled ceiling and found the `أرض الديناصورات` floor of
+> **33 was already DEAD** — overtaken by template contributions alone during batch **2a**, one
+> batch earlier — and E-9 confirmed it by running the real gate against a tree with every word of
+> Arabic prose deleted: it stayed **green**. Closed by the re-freeze to 183/415 on 2026-08-01
+> ([`AR2-E9-floor-enforceability.md`](AR2-E9-floor-enforceability.md)).
+>
+> The lesson generalises past this lock: **a headroom figure is not an enforcement figure.** The
+> old reasoning checked the floor against a ceiling and never asked whether the floor could fail.
 
 ### 1.2 Two deliverables per file, not one — unchanged and still the top failure mode
 
@@ -235,6 +246,13 @@ schema validation, before any gate ran** (E-2 §6.4).
 >
 > Both budgets are now checked by `scripts/rtl/preflight-ar.mjs`, which reads source and takes a
 > second. Run it before you build.
+>
+> ⚠ **That script also now enforces a ceiling you cannot see from the file:** a lock phrase from
+> §2.3 may appear **at most once** across `title` + `description` combined. A related-articles
+> card renders exactly that pair, so a second occurrence raises the settled ceiling by 4 per page
+> and unsounds every `ar` glossary floor — and **no gate would say so**, because 4i only enforces
+> a minimum. Reword, or the floors have to be re-placed
+> ([`AR2-E9-floor-enforceability.md`](AR2-E9-floor-enforceability.md) §2).
 
 Arabic diacritics each consume one character of that budget — `مُرشَدة` carries two. Count the
 rendered string, not the word count. This is a schema failure, not a gate finding, so nothing in
@@ -438,24 +456,42 @@ No new instrument. `npm run build` runs all 11 gates.
 | **4n** | An unisolated Latin/Arabic flank — including §3.3's bracket-and-digit class |
 | **4q** | Any Arabic-Indic digit in rendered prose. Policy §3 has no exception |
 | **4k** | Every new page resolves effective direction `rtl` |
-| **4i** | The two locked identities in §2.3, **now at floors 33 and 42** |
+| **4i** | The two locked identities in §2.3, **now at floors 183 and 415** |
 | **4o** | `→` count — expected 0 |
 | **4b** | Any internal link that left the English path without a registry entry |
 | *(schema)* | The `description` budget — §2.4, and it fails **before** any gate |
 
-### 6.1 ⚠ NEW — the floors are real now
+### 6.1 ⚠ CORRECTED — the floors are real, and one of them stopped being real for a whole batch
 
 Through the whole pilot both `ar` glossary locks sat at a floor of **1** against a 10-page
 corpus: they could not fail for a content reason. They were re-frozen at **33** and **42** at
-`9282317`. A batch that drops `أرض الديناصورات` from Arabic prose now **fails the build**.
+`9282317`.
 
-### 6.2 ⚠ NEW — finishing a batch is two operations, not one
+> **⚠ 33 was already too low, and nobody noticed for a batch.** A page contributes ~2 chrome + CTA
+> occurrences of `أرض الديناصورات` on its own, so at the 18 pages batch 2a shipped the template
+> alone reached 36 > 33. From that point **the entire Arabic prose corpus could have been deleted
+> and gate 4i would have stayed green** — proved by running the real gate against a prose-deleted
+> tree, not inferred ([`AR2-E9-floor-enforceability.md`](AR2-E9-floor-enforceability.md) §4).
+>
+> Re-frozen at **183** and **415** on 2026-08-01 over the full 26-page `ar` corpus. Both now fail
+> that same experiment. A batch that drops either identity from Arabic prose fails the build.
+
+### 6.2 ⚠ CORRECTED — finishing a batch is two operations, and the second one has an invariant
 
 Registering routes without re-freezing leaves the floors covering less of the corpus than
-shipped. The full procedure — instrument route lists, ceiling extension, census re-freeze, and
-the guards that must run in order — is
+shipped — and §6.1 is what that costs. The full procedure — instrument route lists, ceiling
+extension, census re-freeze, and the guards that must run in order — is
 [`AR2-E4-phase2-tight-ceiling.md` §11](AR2-E4-phase2-tight-ceiling.md). **Read it before starting
 a batch, not after finishing one.**
+
+**The invariant it now enforces:**
+
+> Every frozen Arabic floor must demonstrably FAIL when the prose it protects is deleted.
+
+A floor that survives deletion of the corpus it protects is not a weak floor, it is not a floor.
+Criterion 5 checks it; `measure-ar-frontmatter-ceiling.mjs --window w.json` prints both the
+current verdict and the floor a re-freeze *would* set, so the check happens **before** the
+refresh rather than after.
 
 ### 6.3 ⚠ NEW — first contact: capture, then FREEZE THE DOWNSTREAM NUMBERS, then remediate
 
