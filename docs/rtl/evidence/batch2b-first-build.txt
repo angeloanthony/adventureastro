@@ -1,0 +1,39 @@
+
+> adventuretoursvernal@1.0.0 build
+> npm run gates:src && astro build && npm run gates:dist
+
+
+> adventuretoursvernal@1.0.0 gates:src
+> node scripts/gate-4j-gallery-parity.mjs && node scripts/gate-4o-affordance-arrows.mjs && node scripts/gate-4p-intl-numeral.mjs
+
+gate-4j: ✔ 105 slides x 8 gallery locales — 840 entries, complete (en 105/105 · es 105/105 · it 105/105 · pt 105/105 · fr 105/105 · de 105/105 · ja 105/105 · zh 105/105); 1 locale(s) render no gallery: "ar"
+gate-4o: ✔ 60 in-scope file(s) — 0 literal affordance glyphs (rtl: "ar"; ltr-only content is out of scope by decision (authored, rendered and correct as ltr))
+gate-4p: ✔ 9 registered locale(s) — every intl tag resolves to Western digits (numberingSystem latn)
+  en   intl "en-US"   -> latn
+  es   intl "es-US"   -> latn
+  it   intl "it-IT"   -> latn
+  pt   intl "pt-PT"   -> latn
+  fr   intl "fr-FR"   -> latn
+  de   intl "de-DE"   -> latn
+  ja   intl "ja-JP"   -> latn
+  zh   intl "zh-CN"   -> latn
+  ar   intl "ar"      -> latn
+  policy: docs/rtl/AR1-arabic-policy.md §3, enforced at the registry (ADR-8 §2.1)
+[2m23:18:08[22m [34m[content][39m Syncing content
+[33m[1m23:18:08[22m [WARN] [glob-loader][39m No files found matching "**/[^_]*.{md,mdx}" in directory "src\content\atv"
+[33m[1m23:18:08[22m [WARN] [glob-loader][39m No files found matching "**/[^_]*.{json,yaml,yml}" in directory "src\content\seasons"
+[33m[1m23:18:08[22m [WARN] [glob-loader][39m No files found matching "**/[^_]*.{json,yaml,yml}" in directory "src\content\months"
+[33m[1m23:18:08[22m [WARN] [glob-loader][39m No files found matching "**/[^_]*.{md,mdx}" in directory "src\content\jeep"
+[31m[InvalidContentEntryDataError][39m [1mhiking → high-uintas-day-hikes.ar[22m data does not match collection schema.
+
+  [1mtitle[22m: Too big: expected string to have <=65 characters
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mLocation:[22m
+    [4mC:\Users\deluc\Documents\adventureastro\src\content\hiking\high-uintas-day-hikes.ar.mdx:0:0[24m
+  [1mStack trace:[22m
+[2m    at getEntryData (C:\Users\deluc\Documents\adventureastro\node_modules\astro\dist\content\utils.js:122:16)
+    at async eval (C:\Users\deluc\Documents\adventureastro\node_modules\astro\dist\content\loaders\glob.js:211:13)[22m

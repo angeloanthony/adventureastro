@@ -1,0 +1,54 @@
+### gate:4f
+gate-4f: 42 finding(s) in in-progress locales (advisory)
+Locale: ar
+Page: /ar/dinosaur-national-monument/petroglyphs-rock-art-vernal/
+Unexpected English heading:
+  <h3> "دليل العائلة لجولات UTV: Vernal مع الأطفال والأجداد"
+  English marker: utv
+Expected:
+  localized heading or licensed exception
+Locale: ar
+Page: /ar/dinosaur-national-monument/petroglyphs-rock-art-vernal/
+Unexpected English heading:
+  <h3> "جولات UTV الخاصة في Vernal | للأزواج والمجموعات الصغيرة"
+### gate:4h
+gate-4h: ✔ 565 rendered pages across 8 locales, 1922 locked phrases — no seam violations
+### gate:4i
+gate-4i: 20 advisory occurrence(s) across 4 lock(s) — drift in a locale where the decision was never applied
+Locale: es
+Locked term:
+  Tierra de los Dinosaurios
+Observed:
+  Dinosaur Country   (7 sites)
+Expected:
+  Tierra de los Dinosaurios
+Why this is drift:
+  English residue C4 measured and placed out of scope for es; an owner decision, not a regression
+Sites:
+    /es/booking/
+### gate:4g
+gate-4g: advisory anchor audit — reports only, never blocks
+Locale: es
+  Anchors scanned:      6131
+  Latin-script anchors: 5977
+  Approved identities:  33 distinct (1027 occurrences)
+  Review candidates:    27 distinct (46 occurrences)
+  Approved identities — 33
+     116×  38p  Vernal
+     109×  43p  Dinosaur National Monument
+      93×  37p  Flaming Gorge
+      83×  27p  Red Fleet
+      71×  34p  Ashley National Forest
+### gate:4q
+gate-4q: ✔ 645 rendered pages across 9 locales — no Arabic-Indic or Eastern Arabic-Indic digits in visible text
+         en    80 pages    2274716 chars of visible text  0 occurrence(s)
+         es    77 pages    2655052 chars of visible text  0 occurrence(s)
+         it    77 pages    2655945 chars of visible text  0 occurrence(s)
+         pt    77 pages    2588950 chars of visible text  0 occurrence(s)
+         fr    77 pages    2797354 chars of visible text  0 occurrence(s)
+         de    77 pages    2653984 chars of visible text  0 occurrence(s)
+         ja    77 pages    1153856 chars of visible text  0 occurrence(s)
+         zh    77 pages     895011 chars of visible text  0 occurrence(s)
+         ar    26 pages     781421 chars of visible text  0 occurrence(s)
+         forbidden: Arabic-Indic U+0660–U+0669, Extended Arabic-Indic U+06F0–U+06F9 · view: visibleText@1 (inlineSeparator: "")
+         policy: docs/rtl/AR1-arabic-policy.md §3, enforced in rendered prose (ADR-8 §2.1)

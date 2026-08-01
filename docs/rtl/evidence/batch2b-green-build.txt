@@ -1,0 +1,2223 @@
+
+> adventuretoursvernal@1.0.0 build
+> npm run gates:src && astro build && npm run gates:dist
+
+
+> adventuretoursvernal@1.0.0 gates:src
+> node scripts/gate-4j-gallery-parity.mjs && node scripts/gate-4o-affordance-arrows.mjs && node scripts/gate-4p-intl-numeral.mjs
+
+gate-4j: ✔ 105 slides x 8 gallery locales — 840 entries, complete (en 105/105 · es 105/105 · it 105/105 · pt 105/105 · fr 105/105 · de 105/105 · ja 105/105 · zh 105/105); 1 locale(s) render no gallery: "ar"
+gate-4o: ✔ 60 in-scope file(s) — 0 literal affordance glyphs (rtl: "ar"; ltr-only content is out of scope by decision (authored, rendered and correct as ltr))
+gate-4p: ✔ 9 registered locale(s) — every intl tag resolves to Western digits (numberingSystem latn)
+  en   intl "en-US"   -> latn
+  es   intl "es-US"   -> latn
+  it   intl "it-IT"   -> latn
+  pt   intl "pt-PT"   -> latn
+  fr   intl "fr-FR"   -> latn
+  de   intl "de-DE"   -> latn
+  ja   intl "ja-JP"   -> latn
+  zh   intl "zh-CN"   -> latn
+  ar   intl "ar"      -> latn
+  policy: docs/rtl/AR1-arabic-policy.md §3, enforced at the registry (ADR-8 §2.1)
+[2m23:39:54[22m [34m[content][39m Syncing content
+[33m[1m23:39:54[22m [WARN] [glob-loader][39m No files found matching "**/[^_]*.{md,mdx}" in directory "src\content\jeep"
+[33m[1m23:39:54[22m [WARN] [glob-loader][39m No files found matching "**/[^_]*.{json,yaml,yml}" in directory "src\content\months"
+[33m[1m23:39:54[22m [WARN] [glob-loader][39m No files found matching "**/[^_]*.{json,yaml,yml}" in directory "src\content\seasons"
+[33m[1m23:39:54[22m [WARN] [glob-loader][39m No files found matching "**/[^_]*.{md,mdx}" in directory "src\content\atv"
+[2m23:39:56[22m [34m[content][39m Synced content
+[2m23:39:56[22m [34m[types][39m Generated [2m4.31s[22m
+[2m23:39:56[22m [34m[build][39m output: [34m"static"[39m
+[2m23:39:56[22m [34m[build][39m mode: [34m"static"[39m
+[2m23:39:56[22m [34m[build][39m directory: [34mC:\Users\deluc\Documents\adventureastro\dist\[39m
+[2m23:39:56[22m [34m[build][39m Collecting build info...
+[2m23:39:56[22m [34m[build][39m [32m✓ Completed in 4.49s.[39m
+[2m23:39:57[22m [34m[build][39m Building static entrypoints...
+[2m23:43:22[22m [34m[vite][39m [32m✓ built in 3m 25s[39m
+[2m23:43:23[22m [34m[vite][39m [32m✓ built in 886ms[39m
+[2m23:43:24[22m [34m[build][39m Rearranging server assets...
+
+[42m[30m generating static routes [39m[49m
+The collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+The collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+[2m23:43:24[22m   [34m├─[39m [2m/404.html[22m [2m(+35ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/about/dave/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+59ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/about/trudy/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+31ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/about/index.html[22m [2m(+9ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/ar/cancellation-policy/index.html[22m [2m(+12ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/atv-trails-vernal-utah/index.html[22m [2m(+11ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/booking/index.html[22m [2m(+10ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/camping/index.html[22m [2m(+27ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/cancellation-policy/index.html[22m [2m(+9ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/de/about/index.html[22m [2m(+10ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/de/atv-trails-vernal-utah/index.html[22m [2m(+9ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/de/booking/index.html[22m [2m(+6ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/de/camping/index.html[22m [2m(+13ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/de/cancellation-policy/index.html[22m [2m(+8ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/de/dinosaur-national-monument/index.html[22m [2m(+12ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/de/faq/index.html[22m [2m(+14ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/de/fishing/index.html[22m [2m(+11ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/de/from/salt-lake-city/index.html[22m [2m(+15ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/de/guides/index.html[22m [2m(+17ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/de/hiking/index.html[22m [2m(+22ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/de/itineraries/index.html[22m [2m(+12ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/de/jeep-trails-vernal-utah/index.html[22m [2m(+11ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/de/privacy-policy/index.html[22m [2m(+11ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/de/safety-guidelines/index.html[22m [2m(+9ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/de/scenic-drives/index.html[22m [2m(+19ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/de/things-to-do/best-restaurants-vernal-utah/index.html[22m [2m(+14ms)[22m 
+[2m23:43:24[22m   [34m├─[39m [2m/de/things-to-do/index.html[22m [2m(+16ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/de/utv/index.html[22m [2m(+16ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/de/index.html[22m [2m(+17ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/dinosaur-national-monument/index.html[22m [2m(+9ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/es/about/index.html[22m [2m(+7ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/es/atv-trails-vernal-utah/index.html[22m [2m(+7ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/es/booking/index.html[22m [2m(+8ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/es/camping/index.html[22m [2m(+14ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/es/cancellation-policy/index.html[22m [2m(+10ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/es/dinosaur-national-monument/index.html[22m [2m(+8ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/es/faq/index.html[22m [2m(+10ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/es/fishing/index.html[22m [2m(+13ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/es/from/salt-lake-city/index.html[22m [2m(+12ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/es/guides/index.html[22m [2m(+12ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/es/hiking/index.html[22m [2m(+26ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/es/itineraries/index.html[22m [2m(+11ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/es/jeep-trails-vernal-utah/index.html[22m [2m(+10ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/es/privacy-policy/index.html[22m [2m(+7ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/es/safety-guidelines/index.html[22m [2m(+9ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/es/scenic-drives/index.html[22m [2m(+15ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/es/things-to-do/best-restaurants-vernal-utah/index.html[22m [2m(+11ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/es/things-to-do/index.html[22m [2m(+10ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/es/utv/index.html[22m [2m(+14ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/es/index.html[22m [2m(+8ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/faq/index.html[22m [2m(+9ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/fishing/index.html[22m [2m(+12ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/fr/about/index.html[22m [2m(+8ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/fr/atv-trails-vernal-utah/index.html[22m [2m(+11ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/fr/booking/index.html[22m [2m(+9ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/fr/camping/index.html[22m [2m(+18ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/fr/cancellation-policy/index.html[22m [2m(+10ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/fr/dinosaur-national-monument/index.html[22m [2m(+11ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/fr/faq/index.html[22m [2m(+6ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/fr/fishing/index.html[22m [2m(+11ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/fr/from/salt-lake-city/index.html[22m [2m(+7ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/fr/guides/index.html[22m [2m(+14ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/fr/hiking/index.html[22m [2m(+27ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/fr/itineraries/index.html[22m [2m(+10ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/fr/jeep-trails-vernal-utah/index.html[22m [2m(+8ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/fr/privacy-policy/index.html[22m [2m(+6ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/fr/safety-guidelines/index.html[22m [2m(+9ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/fr/scenic-drives/index.html[22m [2m(+12ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/fr/things-to-do/best-restaurants-vernal-utah/index.html[22m [2m(+11ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/fr/things-to-do/index.html[22m [2m(+13ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/fr/utv/index.html[22m [2m(+10ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/fr/index.html[22m [2m(+7ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/from/salt-lake-city/index.html[22m [2m(+8ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/guides/index.html[22m [2m(+11ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/hiking/index.html[22m [2m(+17ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/it/about/index.html[22m [2m(+9ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/it/atv-trails-vernal-utah/index.html[22m [2m(+7ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/it/booking/index.html[22m [2m(+6ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/it/camping/index.html[22m [2m(+12ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/it/cancellation-policy/index.html[22m [2m(+8ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/it/dinosaur-national-monument/index.html[22m [2m(+7ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/it/faq/index.html[22m [2m(+7ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/it/fishing/index.html[22m [2m(+12ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/it/from/salt-lake-city/index.html[22m [2m(+9ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/it/guides/index.html[22m [2m(+10ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/it/hiking/index.html[22m [2m(+22ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/it/itineraries/index.html[22m [2m(+9ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/it/jeep-trails-vernal-utah/index.html[22m [2m(+7ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/it/privacy-policy/index.html[22m [2m(+6ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/it/safety-guidelines/index.html[22m [2m(+6ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/it/scenic-drives/index.html[22m [2m(+14ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/it/things-to-do/best-restaurants-vernal-utah/index.html[22m [2m(+10ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/it/things-to-do/index.html[22m [2m(+8ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/it/utv/index.html[22m [2m(+13ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/it/index.html[22m [2m(+9ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/itineraries/2-day-family-itinerary/index.html[22m [2m(+44ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/itineraries/3-day-adventure-itinerary/index.html[22m [2m(+27ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/itineraries/one-day-adventure-vernal/index.html[22m [2m(+25ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/itineraries/photography-weekend-vernal/index.html[22m [2m(+21ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/itineraries/romantic-weekend-dinosaur-country/index.html[22m [2m(+23ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/itineraries/weekend-fishing-trip-vernal/index.html[22m [2m(+21ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/itineraries/weekend-road-trip-from-denver/index.html[22m [2m(+22ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/itineraries/weekend-road-trip-from-grand-junction/index.html[22m [2m(+19ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/itineraries/weekend-road-trip-from-salt-lake-city/index.html[22m [2m(+21ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/itineraries/index.html[22m [2m(+16ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/ja/about/index.html[22m [2m(+6ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/ja/atv-trails-vernal-utah/index.html[22m [2m(+7ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/ja/booking/index.html[22m [2m(+5ms)[22m 
+[2m23:43:25[22m   [34m├─[39m [2m/ja/camping/index.html[22m [2m(+10ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/ja/cancellation-policy/index.html[22m [2m(+6ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/ja/dinosaur-national-monument/index.html[22m [2m(+9ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/ja/faq/index.html[22m [2m(+7ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/ja/fishing/index.html[22m [2m(+10ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/ja/from/salt-lake-city/index.html[22m [2m(+7ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/ja/guides/index.html[22m [2m(+18ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/ja/hiking/index.html[22m [2m(+17ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/ja/itineraries/index.html[22m [2m(+11ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/ja/jeep-trails-vernal-utah/index.html[22m [2m(+6ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/ja/privacy-policy/index.html[22m [2m(+7ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/ja/safety-guidelines/index.html[22m [2m(+6ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/ja/scenic-drives/index.html[22m [2m(+11ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/ja/things-to-do/best-restaurants-vernal-utah/index.html[22m [2m(+8ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/ja/things-to-do/index.html[22m [2m(+8ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/ja/utv/index.html[22m [2m(+9ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/ja/index.html[22m [2m(+7ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/jeep-trails-vernal-utah/index.html[22m [2m(+6ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/privacy-policy/index.html[22m [2m(+5ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/pt/about/index.html[22m [2m(+7ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/pt/atv-trails-vernal-utah/index.html[22m [2m(+6ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/pt/booking/index.html[22m [2m(+6ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/pt/camping/index.html[22m [2m(+12ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/pt/cancellation-policy/index.html[22m [2m(+7ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/pt/dinosaur-national-monument/index.html[22m [2m(+7ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/pt/faq/index.html[22m [2m(+6ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/pt/fishing/index.html[22m [2m(+11ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/pt/from/salt-lake-city/index.html[22m [2m(+7ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/pt/guides/index.html[22m [2m(+10ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/pt/hiking/index.html[22m [2m(+26ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/pt/itineraries/index.html[22m [2m(+10ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/pt/jeep-trails-vernal-utah/index.html[22m [2m(+9ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/pt/privacy-policy/index.html[22m [2m(+9ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/pt/safety-guidelines/index.html[22m [2m(+12ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/pt/scenic-drives/index.html[22m [2m(+20ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/pt/things-to-do/best-restaurants-vernal-utah/index.html[22m [2m(+12ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/pt/things-to-do/index.html[22m [2m(+12ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/pt/utv/index.html[22m [2m(+12ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/pt/index.html[22m [2m(+10ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/safety-guidelines/index.html[22m [2m(+8ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/scenic-drives/index.html[22m [2m(+18ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/things-to-do/best-restaurants-vernal-utah/index.html[22m [2m(+10ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/things-to-do/index.html[22m [2m(+12ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/utv/index.html[22m [2m(+11ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/zh/about/index.html[22m [2m(+7ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/zh/atv-trails-vernal-utah/index.html[22m [2m(+7ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/zh/booking/index.html[22m [2m(+10ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/zh/camping/index.html[22m [2m(+17ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/zh/cancellation-policy/index.html[22m [2m(+10ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/zh/dinosaur-national-monument/index.html[22m [2m(+16ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/zh/faq/index.html[22m [2m(+9ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/zh/fishing/index.html[22m [2m(+16ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/zh/from/salt-lake-city/index.html[22m [2m(+11ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/zh/guides/index.html[22m [2m(+14ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/zh/hiking/index.html[22m [2m(+21ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/zh/itineraries/index.html[22m [2m(+10ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/zh/jeep-trails-vernal-utah/index.html[22m [2m(+8ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/zh/privacy-policy/index.html[22m [2m(+13ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/zh/safety-guidelines/index.html[22m [2m(+8ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/zh/scenic-drives/index.html[22m [2m(+13ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/zh/things-to-do/best-restaurants-vernal-utah/index.html[22m [2m(+10ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/zh/things-to-do/index.html[22m [2m(+9ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/zh/utv/index.html[22m [2m(+12ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/zh/index.html[22m [2m(+8ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/de/itineraries/2-day-family-itinerary/index.html[22m [2m(+28ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/es/itineraries/2-day-family-itinerary/index.html[22m [2m(+28ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/fr/itineraries/2-day-family-itinerary/index.html[22m [2m(+30ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/it/itineraries/2-day-family-itinerary/index.html[22m [2m(+37ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/ja/itineraries/2-day-family-itinerary/index.html[22m [2m(+43ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/pt/itineraries/2-day-family-itinerary/index.html[22m [2m(+38ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/zh/itineraries/2-day-family-itinerary/index.html[22m [2m(+28ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/de/itineraries/3-day-adventure-itinerary/index.html[22m [2m(+27ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/es/itineraries/3-day-adventure-itinerary/index.html[22m [2m(+23ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/fr/itineraries/3-day-adventure-itinerary/index.html[22m [2m(+22ms)[22m 
+[2m23:43:26[22m   [34m├─[39m [2m/it/itineraries/3-day-adventure-itinerary/index.html[22m [2m(+25ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/ja/itineraries/3-day-adventure-itinerary/index.html[22m [2m(+20ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/pt/itineraries/3-day-adventure-itinerary/index.html[22m [2m(+21ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/zh/itineraries/3-day-adventure-itinerary/index.html[22m [2m(+18ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/de/itineraries/one-day-adventure-vernal/index.html[22m [2m(+28ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/es/itineraries/one-day-adventure-vernal/index.html[22m [2m(+22ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/fr/itineraries/one-day-adventure-vernal/index.html[22m [2m(+27ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/it/itineraries/one-day-adventure-vernal/index.html[22m [2m(+20ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/ja/itineraries/one-day-adventure-vernal/index.html[22m [2m(+19ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/pt/itineraries/one-day-adventure-vernal/index.html[22m [2m(+20ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/zh/itineraries/one-day-adventure-vernal/index.html[22m [2m(+18ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/de/itineraries/photography-weekend-vernal/index.html[22m [2m(+20ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/es/itineraries/photography-weekend-vernal/index.html[22m [2m(+24ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/fr/itineraries/photography-weekend-vernal/index.html[22m [2m(+20ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/it/itineraries/photography-weekend-vernal/index.html[22m [2m(+23ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/ja/itineraries/photography-weekend-vernal/index.html[22m [2m(+23ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/pt/itineraries/photography-weekend-vernal/index.html[22m [2m(+20ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/zh/itineraries/photography-weekend-vernal/index.html[22m [2m(+19ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/de/itineraries/romantic-weekend-dinosaur-country/index.html[22m [2m(+28ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/es/itineraries/romantic-weekend-dinosaur-country/index.html[22m [2m(+23ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/fr/itineraries/romantic-weekend-dinosaur-country/index.html[22m [2m(+26ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/it/itineraries/romantic-weekend-dinosaur-country/index.html[22m [2m(+27ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/ja/itineraries/romantic-weekend-dinosaur-country/index.html[22m [2m(+33ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/pt/itineraries/romantic-weekend-dinosaur-country/index.html[22m [2m(+28ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/zh/itineraries/romantic-weekend-dinosaur-country/index.html[22m [2m(+24ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/de/itineraries/weekend-fishing-trip-vernal/index.html[22m [2m(+30ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/es/itineraries/weekend-fishing-trip-vernal/index.html[22m [2m(+21ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/fr/itineraries/weekend-fishing-trip-vernal/index.html[22m [2m(+21ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/it/itineraries/weekend-fishing-trip-vernal/index.html[22m [2m(+20ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/ja/itineraries/weekend-fishing-trip-vernal/index.html[22m [2m(+19ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/pt/itineraries/weekend-fishing-trip-vernal/index.html[22m [2m(+22ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/zh/itineraries/weekend-fishing-trip-vernal/index.html[22m [2m(+20ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/de/itineraries/weekend-road-trip-from-denver/index.html[22m [2m(+21ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/es/itineraries/weekend-road-trip-from-denver/index.html[22m [2m(+28ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/fr/itineraries/weekend-road-trip-from-denver/index.html[22m [2m(+20ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/it/itineraries/weekend-road-trip-from-denver/index.html[22m [2m(+21ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/ja/itineraries/weekend-road-trip-from-denver/index.html[22m [2m(+25ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/pt/itineraries/weekend-road-trip-from-denver/index.html[22m [2m(+22ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/zh/itineraries/weekend-road-trip-from-denver/index.html[22m [2m(+21ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/de/itineraries/weekend-road-trip-from-grand-junction/index.html[22m [2m(+23ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/es/itineraries/weekend-road-trip-from-grand-junction/index.html[22m [2m(+24ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/fr/itineraries/weekend-road-trip-from-grand-junction/index.html[22m [2m(+24ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/it/itineraries/weekend-road-trip-from-grand-junction/index.html[22m [2m(+25ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/ja/itineraries/weekend-road-trip-from-grand-junction/index.html[22m [2m(+25ms)[22m 
+[2m23:43:27[22m   [34m├─[39m [2m/pt/itineraries/weekend-road-trip-from-grand-junction/index.html[22m [2m(+19ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/zh/itineraries/weekend-road-trip-from-grand-junction/index.html[22m [2m(+19ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/de/itineraries/weekend-road-trip-from-salt-lake-city/index.html[22m [2m(+19ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/es/itineraries/weekend-road-trip-from-salt-lake-city/index.html[22m [2m(+18ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/fr/itineraries/weekend-road-trip-from-salt-lake-city/index.html[22m [2m(+21ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/it/itineraries/weekend-road-trip-from-salt-lake-city/index.html[22m [2m(+25ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/ja/itineraries/weekend-road-trip-from-salt-lake-city/index.html[22m [2m(+22ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/pt/itineraries/weekend-road-trip-from-salt-lake-city/index.html[22m [2m(+21ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/zh/itineraries/weekend-road-trip-from-salt-lake-city/index.html[22m [2m(+19ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/ar/utv/backcountry-tours-vernal-utah/index.html[22m [2m(+14ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/de/utv/backcountry-tours-vernal-utah/index.html[22m [2m(+12ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/es/utv/backcountry-tours-vernal-utah/index.html[22m [2m(+17ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/fr/utv/backcountry-tours-vernal-utah/index.html[22m [2m(+14ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/it/utv/backcountry-tours-vernal-utah/index.html[22m [2m(+15ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/ja/utv/backcountry-tours-vernal-utah/index.html[22m [2m(+14ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/pt/utv/backcountry-tours-vernal-utah/index.html[22m [2m(+12ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/zh/utv/backcountry-tours-vernal-utah/index.html[22m [2m(+12ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/ar/utv/beginners-guide-to-utv-tours-vernal/index.html[22m [2m(+15ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/de/utv/beginners-guide-to-utv-tours-vernal/index.html[22m [2m(+17ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/es/utv/beginners-guide-to-utv-tours-vernal/index.html[22m [2m(+22ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/fr/utv/beginners-guide-to-utv-tours-vernal/index.html[22m [2m(+18ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/it/utv/beginners-guide-to-utv-tours-vernal/index.html[22m [2m(+19ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/ja/utv/beginners-guide-to-utv-tours-vernal/index.html[22m [2m(+15ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/pt/utv/beginners-guide-to-utv-tours-vernal/index.html[22m [2m(+14ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/zh/utv/beginners-guide-to-utv-tours-vernal/index.html[22m [2m(+15ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/ar/utv/best-utv-trails-vernal/index.html[22m [2m(+15ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/de/utv/best-utv-trails-vernal/index.html[22m [2m(+14ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/es/utv/best-utv-trails-vernal/index.html[22m [2m(+17ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/fr/utv/best-utv-trails-vernal/index.html[22m [2m(+15ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/it/utv/best-utv-trails-vernal/index.html[22m [2m(+13ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/ja/utv/best-utv-trails-vernal/index.html[22m [2m(+10ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/pt/utv/best-utv-trails-vernal/index.html[22m [2m(+11ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/zh/utv/best-utv-trails-vernal/index.html[22m [2m(+14ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/ar/utv/family-utv-guide-vernal/index.html[22m [2m(+14ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/de/utv/family-utv-guide-vernal/index.html[22m [2m(+13ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/es/utv/family-utv-guide-vernal/index.html[22m [2m(+13ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/fr/utv/family-utv-guide-vernal/index.html[22m [2m(+15ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/it/utv/family-utv-guide-vernal/index.html[22m [2m(+17ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/ja/utv/family-utv-guide-vernal/index.html[22m [2m(+14ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/pt/utv/family-utv-guide-vernal/index.html[22m [2m(+15ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/zh/utv/family-utv-guide-vernal/index.html[22m [2m(+14ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/ar/utv/group-utv-tours-vernal/index.html[22m [2m(+10ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/de/utv/group-utv-tours-vernal/index.html[22m [2m(+14ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/es/utv/group-utv-tours-vernal/index.html[22m [2m(+11ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/fr/utv/group-utv-tours-vernal/index.html[22m [2m(+11ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/it/utv/group-utv-tours-vernal/index.html[22m [2m(+10ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/ja/utv/group-utv-tours-vernal/index.html[22m [2m(+13ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/pt/utv/group-utv-tours-vernal/index.html[22m [2m(+11ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/zh/utv/group-utv-tours-vernal/index.html[22m [2m(+9ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/ar/utv/private-utv-tours-vernal/index.html[22m [2m(+13ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/de/utv/private-utv-tours-vernal/index.html[22m [2m(+13ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/es/utv/private-utv-tours-vernal/index.html[22m [2m(+10ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/fr/utv/private-utv-tours-vernal/index.html[22m [2m(+12ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/it/utv/private-utv-tours-vernal/index.html[22m [2m(+15ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/ja/utv/private-utv-tours-vernal/index.html[22m [2m(+13ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/pt/utv/private-utv-tours-vernal/index.html[22m [2m(+12ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/zh/utv/private-utv-tours-vernal/index.html[22m [2m(+14ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/ar/utv/side-by-side-rentals-vernal-utah/index.html[22m [2m(+12ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/de/utv/side-by-side-rentals-vernal-utah/index.html[22m [2m(+11ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/es/utv/side-by-side-rentals-vernal-utah/index.html[22m [2m(+10ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/fr/utv/side-by-side-rentals-vernal-utah/index.html[22m [2m(+11ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/it/utv/side-by-side-rentals-vernal-utah/index.html[22m [2m(+11ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/ja/utv/side-by-side-rentals-vernal-utah/index.html[22m [2m(+11ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/pt/utv/side-by-side-rentals-vernal-utah/index.html[22m [2m(+13ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/zh/utv/side-by-side-rentals-vernal-utah/index.html[22m [2m(+14ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/ar/dinosaur-national-monument/petroglyphs-rock-art-vernal/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+31ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/de/dinosaur-national-monument/petroglyphs-rock-art-vernal/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+31ms)[22m 
+[2m23:43:28[22m   [34m├─[39m [2m/es/dinosaur-national-monument/petroglyphs-rock-art-vernal/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+26ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/fr/dinosaur-national-monument/petroglyphs-rock-art-vernal/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+31ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/it/dinosaur-national-monument/petroglyphs-rock-art-vernal/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+35ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/ja/dinosaur-national-monument/petroglyphs-rock-art-vernal/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+33ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/pt/dinosaur-national-monument/petroglyphs-rock-art-vernal/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+29ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/zh/dinosaur-national-monument/petroglyphs-rock-art-vernal/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+30ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/ar/dinosaur-national-monument/visiting-dinosaur-national-monument/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+38ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/de/dinosaur-national-monument/visiting-dinosaur-national-monument/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+35ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/es/dinosaur-national-monument/visiting-dinosaur-national-monument/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+37ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/fr/dinosaur-national-monument/visiting-dinosaur-national-monument/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+36ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/it/dinosaur-national-monument/visiting-dinosaur-national-monument/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+39ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/ja/dinosaur-national-monument/visiting-dinosaur-national-monument/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+34ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/pt/dinosaur-national-monument/visiting-dinosaur-national-monument/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+32ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/zh/dinosaur-national-monument/visiting-dinosaur-national-monument/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+37ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/de/things-to-do/fun-things-to-do-vernal-utah-kids/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+31ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/es/things-to-do/fun-things-to-do-vernal-utah-kids/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+29ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/fr/things-to-do/fun-things-to-do-vernal-utah-kids/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+26ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/it/things-to-do/fun-things-to-do-vernal-utah-kids/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+29ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/ja/things-to-do/fun-things-to-do-vernal-utah-kids/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+27ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/pt/things-to-do/fun-things-to-do-vernal-utah-kids/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+29ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/zh/things-to-do/fun-things-to-do-vernal-utah-kids/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+27ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/de/things-to-do/vernal-utah-attractions/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+29ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/es/things-to-do/vernal-utah-attractions/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+30ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/fr/things-to-do/vernal-utah-attractions/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+28ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/it/things-to-do/vernal-utah-attractions/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+29ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/ja/things-to-do/vernal-utah-attractions/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+29ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/pt/things-to-do/vernal-utah-attractions/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+30ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/zh/things-to-do/vernal-utah-attractions/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+32ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/ar/hiking/alpine-lakes-hiking-high-uintas/index.html[22mEntry guides → ultimate-guide-to-ashley-national-forest.ar was not found.
+Entry camping → camping-in-ashley-national-forest.ar was not found.
+ [2m(+27ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/de/hiking/alpine-lakes-hiking-high-uintas/index.html[22m [2m(+25ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/es/hiking/alpine-lakes-hiking-high-uintas/index.html[22m [2m(+29ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/fr/hiking/alpine-lakes-hiking-high-uintas/index.html[22m [2m(+29ms)[22m 
+[2m23:43:29[22m   [34m├─[39m [2m/it/hiking/alpine-lakes-hiking-high-uintas/index.html[22m [2m(+23ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/ja/hiking/alpine-lakes-hiking-high-uintas/index.html[22m [2m(+93ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/pt/hiking/alpine-lakes-hiking-high-uintas/index.html[22m [2m(+37ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/zh/hiking/alpine-lakes-hiking-high-uintas/index.html[22m [2m(+25ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/ar/hiking/beginner-hiking-guide-near-vernal/index.html[22m [2m(+23ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/de/hiking/beginner-hiking-guide-near-vernal/index.html[22m [2m(+24ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/es/hiking/beginner-hiking-guide-near-vernal/index.html[22m [2m(+29ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/fr/hiking/beginner-hiking-guide-near-vernal/index.html[22m [2m(+33ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/it/hiking/beginner-hiking-guide-near-vernal/index.html[22m [2m(+42ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/ja/hiking/beginner-hiking-guide-near-vernal/index.html[22m [2m(+39ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/pt/hiking/beginner-hiking-guide-near-vernal/index.html[22m [2m(+39ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/zh/hiking/beginner-hiking-guide-near-vernal/index.html[22m [2m(+33ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/ar/hiking/best-hikes-in-dinosaur-national-monument/index.html[22mEntry scenic-drives → cub-creek-road-tour-of-the-tilted-rocks.ar was not found.
+Entry camping → camping-at-red-fleet-state-park.ar was not found.
+ [2m(+24ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/de/hiking/best-hikes-in-dinosaur-national-monument/index.html[22m [2m(+19ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/es/hiking/best-hikes-in-dinosaur-national-monument/index.html[22m [2m(+20ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/fr/hiking/best-hikes-in-dinosaur-national-monument/index.html[22m [2m(+17ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/it/hiking/best-hikes-in-dinosaur-national-monument/index.html[22m [2m(+20ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/ja/hiking/best-hikes-in-dinosaur-national-monument/index.html[22m [2m(+17ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/pt/hiking/best-hikes-in-dinosaur-national-monument/index.html[22m [2m(+17ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/zh/hiking/best-hikes-in-dinosaur-national-monument/index.html[22m [2m(+19ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/ar/hiking/bird-watching-near-vernal/index.html[22m [2m(+32ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/de/hiking/bird-watching-near-vernal/index.html[22m [2m(+26ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/es/hiking/bird-watching-near-vernal/index.html[22m [2m(+24ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/fr/hiking/bird-watching-near-vernal/index.html[22m [2m(+26ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/it/hiking/bird-watching-near-vernal/index.html[22m [2m(+36ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/ja/hiking/bird-watching-near-vernal/index.html[22m [2m(+31ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/pt/hiking/bird-watching-near-vernal/index.html[22m [2m(+24ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/zh/hiking/bird-watching-near-vernal/index.html[22m [2m(+23ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/ar/hiking/dog-friendly-hiking-near-vernal/index.html[22m [2m(+26ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/de/hiking/dog-friendly-hiking-near-vernal/index.html[22m [2m(+20ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/es/hiking/dog-friendly-hiking-near-vernal/index.html[22m [2m(+21ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/fr/hiking/dog-friendly-hiking-near-vernal/index.html[22m [2m(+23ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/it/hiking/dog-friendly-hiking-near-vernal/index.html[22m [2m(+25ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/ja/hiking/dog-friendly-hiking-near-vernal/index.html[22m [2m(+21ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/pt/hiking/dog-friendly-hiking-near-vernal/index.html[22m [2m(+23ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/zh/hiking/dog-friendly-hiking-near-vernal/index.html[22m [2m(+22ms)[22m 
+[2m23:43:30[22m   [34m├─[39m [2m/ar/hiking/fall-hiking-near-vernal/index.html[22m [2m(+27ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/de/hiking/fall-hiking-near-vernal/index.html[22m [2m(+21ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/es/hiking/fall-hiking-near-vernal/index.html[22m [2m(+20ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/fr/hiking/fall-hiking-near-vernal/index.html[22m [2m(+23ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/it/hiking/fall-hiking-near-vernal/index.html[22m [2m(+24ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/ja/hiking/fall-hiking-near-vernal/index.html[22m [2m(+20ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/pt/hiking/fall-hiking-near-vernal/index.html[22m [2m(+22ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/zh/hiking/fall-hiking-near-vernal/index.html[22m [2m(+31ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/ar/hiking/family-hiking-near-vernal/index.html[22mEntry things-to-do → fun-things-to-do-vernal-utah-kids.ar was not found.
+ [2m(+26ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/de/hiking/family-hiking-near-vernal/index.html[22m [2m(+21ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/es/hiking/family-hiking-near-vernal/index.html[22m [2m(+24ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/fr/hiking/family-hiking-near-vernal/index.html[22m [2m(+23ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/it/hiking/family-hiking-near-vernal/index.html[22m [2m(+29ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/ja/hiking/family-hiking-near-vernal/index.html[22m [2m(+23ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/pt/hiking/family-hiking-near-vernal/index.html[22m [2m(+23ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/zh/hiking/family-hiking-near-vernal/index.html[22m [2m(+23ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/ar/hiking/high-uintas-backpacking-guide/index.html[22m [2m(+28ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/de/hiking/high-uintas-backpacking-guide/index.html[22m [2m(+25ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/es/hiking/high-uintas-backpacking-guide/index.html[22m [2m(+23ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/fr/hiking/high-uintas-backpacking-guide/index.html[22m [2m(+23ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/it/hiking/high-uintas-backpacking-guide/index.html[22m [2m(+28ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/ja/hiking/high-uintas-backpacking-guide/index.html[22m [2m(+21ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/pt/hiking/high-uintas-backpacking-guide/index.html[22m [2m(+20ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/zh/hiking/high-uintas-backpacking-guide/index.html[22m [2m(+20ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/ar/hiking/high-uintas-day-hikes/index.html[22mEntry guides → ultimate-guide-to-ashley-national-forest.ar was not found.
+Entry camping → camping-in-ashley-national-forest.ar was not found.
+ [2m(+25ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/de/hiking/high-uintas-day-hikes/index.html[22m [2m(+21ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/es/hiking/high-uintas-day-hikes/index.html[22m [2m(+20ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/fr/hiking/high-uintas-day-hikes/index.html[22m [2m(+25ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/it/hiking/high-uintas-day-hikes/index.html[22m [2m(+25ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/ja/hiking/high-uintas-day-hikes/index.html[22m [2m(+20ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/pt/hiking/high-uintas-day-hikes/index.html[22m [2m(+25ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/zh/hiking/high-uintas-day-hikes/index.html[22m [2m(+23ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/ar/hiking/kings-peak-hiking-guide/index.html[22mEntry guides → ultimate-guide-to-ashley-national-forest.ar was not found.
+Entry camping → camping-in-ashley-national-forest.ar was not found.
+Entry scenic-drives → red-cloud-loop-scenic-drive.ar was not found.
+ [2m(+27ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/de/hiking/kings-peak-hiking-guide/index.html[22m [2m(+22ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/es/hiking/kings-peak-hiking-guide/index.html[22m [2m(+21ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/fr/hiking/kings-peak-hiking-guide/index.html[22m [2m(+20ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/it/hiking/kings-peak-hiking-guide/index.html[22m [2m(+20ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/ja/hiking/kings-peak-hiking-guide/index.html[22m [2m(+21ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/pt/hiking/kings-peak-hiking-guide/index.html[22m [2m(+19ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/zh/hiking/kings-peak-hiking-guide/index.html[22m [2m(+25ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/ar/hiking/photography-hikes-near-vernal/index.html[22m [2m(+28ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/de/hiking/photography-hikes-near-vernal/index.html[22m [2m(+30ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/es/hiking/photography-hikes-near-vernal/index.html[22m [2m(+23ms)[22m 
+[2m23:43:31[22m   [34m├─[39m [2m/fr/hiking/photography-hikes-near-vernal/index.html[22m [2m(+22ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/it/hiking/photography-hikes-near-vernal/index.html[22m [2m(+22ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/ja/hiking/photography-hikes-near-vernal/index.html[22m [2m(+24ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/pt/hiking/photography-hikes-near-vernal/index.html[22m [2m(+22ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/zh/hiking/photography-hikes-near-vernal/index.html[22m [2m(+21ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/ar/hiking/spring-hiking-near-vernal/index.html[22m [2m(+27ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/de/hiking/spring-hiking-near-vernal/index.html[22m [2m(+35ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/es/hiking/spring-hiking-near-vernal/index.html[22m [2m(+32ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/fr/hiking/spring-hiking-near-vernal/index.html[22m [2m(+34ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/it/hiking/spring-hiking-near-vernal/index.html[22m [2m(+37ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/ja/hiking/spring-hiking-near-vernal/index.html[22m [2m(+28ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/pt/hiking/spring-hiking-near-vernal/index.html[22m [2m(+20ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/zh/hiking/spring-hiking-near-vernal/index.html[22m [2m(+22ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/ar/hiking/summer-hiking-near-vernal/index.html[22m [2m(+22ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/de/hiking/summer-hiking-near-vernal/index.html[22m [2m(+24ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/es/hiking/summer-hiking-near-vernal/index.html[22m [2m(+22ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/fr/hiking/summer-hiking-near-vernal/index.html[22m [2m(+21ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/it/hiking/summer-hiking-near-vernal/index.html[22m [2m(+22ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/ja/hiking/summer-hiking-near-vernal/index.html[22m [2m(+35ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/pt/hiking/summer-hiking-near-vernal/index.html[22m [2m(+129ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/zh/hiking/summer-hiking-near-vernal/index.html[22m [2m(+27ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/ar/hiking/wildflower-hiking-near-vernal/index.html[22m [2m(+23ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/de/hiking/wildflower-hiking-near-vernal/index.html[22m [2m(+25ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/es/hiking/wildflower-hiking-near-vernal/index.html[22m [2m(+24ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/fr/hiking/wildflower-hiking-near-vernal/index.html[22m [2m(+20ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/it/hiking/wildflower-hiking-near-vernal/index.html[22m [2m(+21ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/ja/hiking/wildflower-hiking-near-vernal/index.html[22m [2m(+20ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/pt/hiking/wildflower-hiking-near-vernal/index.html[22m [2m(+31ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/zh/hiking/wildflower-hiking-near-vernal/index.html[22m [2m(+22ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/ar/hiking/wildlife-hiking-guide-near-vernal/index.html[22m [2m(+21ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/de/hiking/wildlife-hiking-guide-near-vernal/index.html[22m [2m(+21ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/es/hiking/wildlife-hiking-guide-near-vernal/index.html[22m [2m(+21ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/fr/hiking/wildlife-hiking-guide-near-vernal/index.html[22m [2m(+19ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/it/hiking/wildlife-hiking-guide-near-vernal/index.html[22m [2m(+20ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/ja/hiking/wildlife-hiking-guide-near-vernal/index.html[22m [2m(+22ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/pt/hiking/wildlife-hiking-guide-near-vernal/index.html[22m [2m(+28ms)[22m 
+[2m23:43:32[22m   [34m├─[39m [2m/zh/hiking/wildlife-hiking-guide-near-vernal/index.html[22m [2m(+26ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/ar/hiking/winter-hiking-near-vernal/index.html[22m [2m(+25ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/de/hiking/winter-hiking-near-vernal/index.html[22m [2m(+24ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/es/hiking/winter-hiking-near-vernal/index.html[22m [2m(+20ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/fr/hiking/winter-hiking-near-vernal/index.html[22m [2m(+22ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/it/hiking/winter-hiking-near-vernal/index.html[22m [2m(+23ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/ja/hiking/winter-hiking-near-vernal/index.html[22m [2m(+21ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/pt/hiking/winter-hiking-near-vernal/index.html[22m [2m(+24ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/zh/hiking/winter-hiking-near-vernal/index.html[22m [2m(+23ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/de/camping/camping-at-flaming-gorge/index.html[22m [2m(+20ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/es/camping/camping-at-flaming-gorge/index.html[22m [2m(+15ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/fr/camping/camping-at-flaming-gorge/index.html[22m [2m(+14ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/it/camping/camping-at-flaming-gorge/index.html[22m [2m(+14ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/ja/camping/camping-at-flaming-gorge/index.html[22m [2m(+12ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/pt/camping/camping-at-flaming-gorge/index.html[22m [2m(+16ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/zh/camping/camping-at-flaming-gorge/index.html[22m [2m(+15ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/de/camping/camping-at-red-fleet-state-park/index.html[22m [2m(+19ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/es/camping/camping-at-red-fleet-state-park/index.html[22m [2m(+28ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/fr/camping/camping-at-red-fleet-state-park/index.html[22m [2m(+25ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/it/camping/camping-at-red-fleet-state-park/index.html[22m [2m(+21ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/ja/camping/camping-at-red-fleet-state-park/index.html[22m [2m(+22ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/pt/camping/camping-at-red-fleet-state-park/index.html[22m [2m(+20ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/zh/camping/camping-at-red-fleet-state-park/index.html[22m [2m(+17ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/de/camping/camping-at-steinaker-state-park/index.html[22m [2m(+17ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/es/camping/camping-at-steinaker-state-park/index.html[22m [2m(+16ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/fr/camping/camping-at-steinaker-state-park/index.html[22m [2m(+15ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/it/camping/camping-at-steinaker-state-park/index.html[22m [2m(+16ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/ja/camping/camping-at-steinaker-state-park/index.html[22m [2m(+21ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/pt/camping/camping-at-steinaker-state-park/index.html[22m [2m(+14ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/zh/camping/camping-at-steinaker-state-park/index.html[22m [2m(+13ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/de/camping/camping-in-ashley-national-forest/index.html[22m [2m(+16ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/es/camping/camping-in-ashley-national-forest/index.html[22m [2m(+19ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/fr/camping/camping-in-ashley-national-forest/index.html[22m [2m(+14ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/it/camping/camping-in-ashley-national-forest/index.html[22m [2m(+14ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/ja/camping/camping-in-ashley-national-forest/index.html[22m [2m(+15ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/pt/camping/camping-in-ashley-national-forest/index.html[22m [2m(+15ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/zh/camping/camping-in-ashley-national-forest/index.html[22m [2m(+14ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/de/fishing/fishing-flaming-gorge/index.html[22m [2m(+13ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/es/fishing/fishing-flaming-gorge/index.html[22m [2m(+13ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/fr/fishing/fishing-flaming-gorge/index.html[22m [2m(+12ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/it/fishing/fishing-flaming-gorge/index.html[22m [2m(+13ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/ja/fishing/fishing-flaming-gorge/index.html[22m [2m(+10ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/pt/fishing/fishing-flaming-gorge/index.html[22m [2m(+13ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/zh/fishing/fishing-flaming-gorge/index.html[22m [2m(+17ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/de/fishing/fishing-red-fleet-reservoir/index.html[22m [2m(+14ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/es/fishing/fishing-red-fleet-reservoir/index.html[22m [2m(+13ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/fr/fishing/fishing-red-fleet-reservoir/index.html[22m [2m(+13ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/it/fishing/fishing-red-fleet-reservoir/index.html[22m [2m(+13ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/ja/fishing/fishing-red-fleet-reservoir/index.html[22m [2m(+13ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/pt/fishing/fishing-red-fleet-reservoir/index.html[22m [2m(+14ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/zh/fishing/fishing-red-fleet-reservoir/index.html[22m [2m(+13ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/de/fishing/fishing-steinaker-reservoir/index.html[22m [2m(+17ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/es/fishing/fishing-steinaker-reservoir/index.html[22m [2m(+15ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/fr/fishing/fishing-steinaker-reservoir/index.html[22m [2m(+14ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/it/fishing/fishing-steinaker-reservoir/index.html[22m [2m(+14ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/ja/fishing/fishing-steinaker-reservoir/index.html[22m [2m(+31ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/pt/fishing/fishing-steinaker-reservoir/index.html[22m [2m(+17ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/zh/fishing/fishing-steinaker-reservoir/index.html[22m [2m(+13ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/de/fishing/green-river-fly-fishing/index.html[22m [2m(+14ms)[22m 
+[2m23:43:33[22m   [34m├─[39m [2m/es/fishing/green-river-fly-fishing/index.html[22m [2m(+14ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/fr/fishing/green-river-fly-fishing/index.html[22m [2m(+12ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/it/fishing/green-river-fly-fishing/index.html[22m [2m(+15ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/ja/fishing/green-river-fly-fishing/index.html[22m [2m(+16ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/pt/fishing/green-river-fly-fishing/index.html[22m [2m(+14ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/zh/fishing/green-river-fly-fishing/index.html[22m [2m(+15ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/de/scenic-drives/cub-creek-road-tour-of-the-tilted-rocks/index.html[22m [2m(+16ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/es/scenic-drives/cub-creek-road-tour-of-the-tilted-rocks/index.html[22m [2m(+15ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/fr/scenic-drives/cub-creek-road-tour-of-the-tilted-rocks/index.html[22m [2m(+19ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/it/scenic-drives/cub-creek-road-tour-of-the-tilted-rocks/index.html[22m [2m(+16ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/ja/scenic-drives/cub-creek-road-tour-of-the-tilted-rocks/index.html[22m [2m(+36ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/pt/scenic-drives/cub-creek-road-tour-of-the-tilted-rocks/index.html[22m [2m(+20ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/zh/scenic-drives/cub-creek-road-tour-of-the-tilted-rocks/index.html[22m [2m(+16ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/de/scenic-drives/flaming-gorge-uintas-scenic-byway/index.html[22m [2m(+19ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/es/scenic-drives/flaming-gorge-uintas-scenic-byway/index.html[22m [2m(+18ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/fr/scenic-drives/flaming-gorge-uintas-scenic-byway/index.html[22m [2m(+16ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/it/scenic-drives/flaming-gorge-uintas-scenic-byway/index.html[22m [2m(+15ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/ja/scenic-drives/flaming-gorge-uintas-scenic-byway/index.html[22m [2m(+16ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/pt/scenic-drives/flaming-gorge-uintas-scenic-byway/index.html[22m [2m(+19ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/zh/scenic-drives/flaming-gorge-uintas-scenic-byway/index.html[22m [2m(+15ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/de/scenic-drives/red-cloud-loop-scenic-drive/index.html[22m [2m(+16ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/es/scenic-drives/red-cloud-loop-scenic-drive/index.html[22m [2m(+15ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/fr/scenic-drives/red-cloud-loop-scenic-drive/index.html[22m [2m(+16ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/it/scenic-drives/red-cloud-loop-scenic-drive/index.html[22m [2m(+16ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/ja/scenic-drives/red-cloud-loop-scenic-drive/index.html[22m [2m(+15ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/pt/scenic-drives/red-cloud-loop-scenic-drive/index.html[22m [2m(+17ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/zh/scenic-drives/red-cloud-loop-scenic-drive/index.html[22m [2m(+16ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/de/scenic-drives/sheep-creek-geological-loop/index.html[22m [2m(+16ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/es/scenic-drives/sheep-creek-geological-loop/index.html[22m [2m(+21ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/fr/scenic-drives/sheep-creek-geological-loop/index.html[22m [2m(+15ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/it/scenic-drives/sheep-creek-geological-loop/index.html[22m [2m(+15ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/ja/scenic-drives/sheep-creek-geological-loop/index.html[22m [2m(+15ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/pt/scenic-drives/sheep-creek-geological-loop/index.html[22m [2m(+15ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/zh/scenic-drives/sheep-creek-geological-loop/index.html[22m [2m(+14ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/de/guides/moab-utv-tours/index.html[22m [2m(+12ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/es/guides/moab-utv-tours/index.html[22m [2m(+13ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/fr/guides/moab-utv-tours/index.html[22m [2m(+13ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/it/guides/moab-utv-tours/index.html[22m [2m(+13ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/ja/guides/moab-utv-tours/index.html[22m [2m(+16ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/pt/guides/moab-utv-tours/index.html[22m [2m(+13ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/zh/guides/moab-utv-tours/index.html[22m [2m(+13ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/de/guides/ultimate-guide-to-ashley-national-forest/index.html[22m [2m(+18ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/es/guides/ultimate-guide-to-ashley-national-forest/index.html[22m [2m(+17ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/fr/guides/ultimate-guide-to-ashley-national-forest/index.html[22m [2m(+16ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/it/guides/ultimate-guide-to-ashley-national-forest/index.html[22m [2m(+14ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/ja/guides/ultimate-guide-to-ashley-national-forest/index.html[22m [2m(+44ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/pt/guides/ultimate-guide-to-ashley-national-forest/index.html[22m [2m(+21ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/zh/guides/ultimate-guide-to-ashley-national-forest/index.html[22m [2m(+16ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/de/guides/ultimate-guide-to-flaming-gorge/index.html[22m [2m(+16ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/es/guides/ultimate-guide-to-flaming-gorge/index.html[22m [2m(+17ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/fr/guides/ultimate-guide-to-flaming-gorge/index.html[22m [2m(+15ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/it/guides/ultimate-guide-to-flaming-gorge/index.html[22m [2m(+16ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/ja/guides/ultimate-guide-to-flaming-gorge/index.html[22m [2m(+17ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/pt/guides/ultimate-guide-to-flaming-gorge/index.html[22m [2m(+17ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/zh/guides/ultimate-guide-to-flaming-gorge/index.html[22m [2m(+19ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/de/guides/ultimate-guide-to-red-fleet-state-park/index.html[22m [2m(+18ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/es/guides/ultimate-guide-to-red-fleet-state-park/index.html[22m [2m(+16ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/fr/guides/ultimate-guide-to-red-fleet-state-park/index.html[22m [2m(+15ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/it/guides/ultimate-guide-to-red-fleet-state-park/index.html[22m [2m(+14ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/ja/guides/ultimate-guide-to-red-fleet-state-park/index.html[22m [2m(+15ms)[22m 
+[2m23:43:34[22m   [34m├─[39m [2m/pt/guides/ultimate-guide-to-red-fleet-state-park/index.html[22m [2m(+16ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/zh/guides/ultimate-guide-to-red-fleet-state-park/index.html[22m [2m(+16ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/de/guides/ultimate-guide-to-steinaker-state-park/index.html[22m [2m(+18ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/es/guides/ultimate-guide-to-steinaker-state-park/index.html[22m [2m(+15ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/fr/guides/ultimate-guide-to-steinaker-state-park/index.html[22m [2m(+14ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/it/guides/ultimate-guide-to-steinaker-state-park/index.html[22m [2m(+20ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/ja/guides/ultimate-guide-to-steinaker-state-park/index.html[22m [2m(+14ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/pt/guides/ultimate-guide-to-steinaker-state-park/index.html[22m [2m(+13ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/zh/guides/ultimate-guide-to-steinaker-state-park/index.html[22m [2m(+14ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/de/guides/ultimate-guide-to-vernal-utah/index.html[22m [2m(+13ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/es/guides/ultimate-guide-to-vernal-utah/index.html[22m [2m(+15ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/fr/guides/ultimate-guide-to-vernal-utah/index.html[22m [2m(+13ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/it/guides/ultimate-guide-to-vernal-utah/index.html[22m [2m(+12ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/ja/guides/ultimate-guide-to-vernal-utah/index.html[22m [2m(+12ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/pt/guides/ultimate-guide-to-vernal-utah/index.html[22m [2m(+13ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/zh/guides/ultimate-guide-to-vernal-utah/index.html[22m [2m(+13ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/de/guides/vernal-weather-guide/index.html[22m [2m(+11ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/es/guides/vernal-weather-guide/index.html[22m [2m(+12ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/fr/guides/vernal-weather-guide/index.html[22m [2m(+12ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/it/guides/vernal-weather-guide/index.html[22m [2m(+14ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/ja/guides/vernal-weather-guide/index.html[22m [2m(+11ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/pt/guides/vernal-weather-guide/index.html[22m [2m(+11ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/zh/guides/vernal-weather-guide/index.html[22m [2m(+11ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/de/guides/what-to-bring/index.html[22m [2m(+11ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/es/guides/what-to-bring/index.html[22m [2m(+13ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/fr/guides/what-to-bring/index.html[22m [2m(+13ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/it/guides/what-to-bring/index.html[22m [2m(+14ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/ja/guides/what-to-bring/index.html[22m [2m(+15ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/pt/guides/what-to-bring/index.html[22m [2m(+15ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/zh/guides/what-to-bring/index.html[22m [2m(+14ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/de/guides/what-to-wear-utv-tour/index.html[22m [2m(+12ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/es/guides/what-to-wear-utv-tour/index.html[22m [2m(+15ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/fr/guides/what-to-wear-utv-tour/index.html[22m [2m(+16ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/it/guides/what-to-wear-utv-tour/index.html[22m [2m(+15ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/ja/guides/what-to-wear-utv-tour/index.html[22m [2m(+17ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/pt/guides/what-to-wear-utv-tour/index.html[22m [2m(+14ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/zh/guides/what-to-wear-utv-tour/index.html[22m [2m(+10ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/utv/backcountry-tours-vernal-utah/index.html[22m [2m(+11ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/utv/beginners-guide-to-utv-tours-vernal/index.html[22m [2m(+15ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/utv/best-utv-trails-vernal/index.html[22m [2m(+13ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/utv/family-utv-guide-vernal/index.html[22m [2m(+13ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/utv/group-utv-tours-vernal/index.html[22m [2m(+10ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/utv/private-utv-tours-vernal/index.html[22m [2m(+12ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/utv/side-by-side-rentals-vernal-utah/index.html[22m [2m(+10ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/dinosaur-national-monument/petroglyphs-rock-art-vernal/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+27ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/dinosaur-national-monument/visiting-dinosaur-national-monument/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+36ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/things-to-do/fun-things-to-do-vernal-utah-kids/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+33ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/things-to-do/vernal-utah-attractions/index.html[22mThe collection "atv" does not exist or is empty. Please check your content config file for errors.
+The collection "jeep" does not exist or is empty. Please check your content config file for errors.
+ [2m(+27ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/hiking/alpine-lakes-hiking-high-uintas/index.html[22m [2m(+21ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/hiking/beginner-hiking-guide-near-vernal/index.html[22m [2m(+23ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/hiking/best-hikes-in-dinosaur-national-monument/index.html[22m [2m(+18ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/hiking/bird-watching-near-vernal/index.html[22m [2m(+20ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/hiking/dog-friendly-hiking-near-vernal/index.html[22m [2m(+19ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/hiking/fall-hiking-near-vernal/index.html[22m [2m(+22ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/hiking/family-hiking-near-vernal/index.html[22m [2m(+26ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/hiking/high-uintas-backpacking-guide/index.html[22m [2m(+19ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/hiking/high-uintas-day-hikes/index.html[22m [2m(+19ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/hiking/kings-peak-hiking-guide/index.html[22m [2m(+18ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/hiking/photography-hikes-near-vernal/index.html[22m [2m(+24ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/hiking/spring-hiking-near-vernal/index.html[22m [2m(+21ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/hiking/summer-hiking-near-vernal/index.html[22m [2m(+22ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/hiking/wildflower-hiking-near-vernal/index.html[22m [2m(+22ms)[22m 
+[2m23:43:35[22m   [34m├─[39m [2m/hiking/wildlife-hiking-guide-near-vernal/index.html[22m [2m(+22ms)[22m 
+[2m23:43:36[22m   [34m├─[39m [2m/hiking/winter-hiking-near-vernal/index.html[22m [2m(+22ms)[22m 
+[2m23:43:36[22m   [34m├─[39m [2m/camping/camping-at-flaming-gorge/index.html[22m [2m(+15ms)[22m 
+[2m23:43:36[22m   [34m├─[39m [2m/camping/camping-at-red-fleet-state-park/index.html[22m [2m(+16ms)[22m 
+[2m23:43:36[22m   [34m├─[39m [2m/camping/camping-at-steinaker-state-park/index.html[22m [2m(+16ms)[22m 
+[2m23:43:36[22m   [34m├─[39m [2m/camping/camping-in-ashley-national-forest/index.html[22m [2m(+14ms)[22m 
+[2m23:43:36[22m   [34m├─[39m [2m/fishing/fishing-flaming-gorge/index.html[22m [2m(+12ms)[22m 
+[2m23:43:36[22m   [34m├─[39m [2m/fishing/fishing-red-fleet-reservoir/index.html[22m [2m(+11ms)[22m 
+[2m23:43:36[22m   [34m├─[39m [2m/fishing/fishing-steinaker-reservoir/index.html[22m [2m(+14ms)[22m 
+[2m23:43:36[22m   [34m├─[39m [2m/fishing/green-river-fly-fishing/index.html[22m [2m(+14ms)[22m 
+[2m23:43:36[22m   [34m├─[39m [2m/scenic-drives/cub-creek-road-tour-of-the-tilted-rocks/index.html[22m [2m(+15ms)[22m 
+[2m23:43:36[22m   [34m├─[39m [2m/scenic-drives/flaming-gorge-uintas-scenic-byway/index.html[22m [2m(+15ms)[22m 
+[2m23:43:36[22m   [34m├─[39m [2m/scenic-drives/red-cloud-loop-scenic-drive/index.html[22m [2m(+15ms)[22m 
+[2m23:43:36[22m   [34m├─[39m [2m/scenic-drives/sheep-creek-geological-loop/index.html[22m [2m(+16ms)[22m 
+[2m23:43:36[22m   [34m├─[39m [2m/guides/moab-utv-tours/index.html[22m [2m(+13ms)[22m 
+[2m23:43:36[22m   [34m├─[39m [2m/guides/ultimate-guide-to-ashley-national-forest/index.html[22m [2m(+17ms)[22m 
+[2m23:43:36[22m   [34m├─[39m [2m/guides/ultimate-guide-to-flaming-gorge/index.html[22m [2m(+17ms)[22m 
+[2m23:43:36[22m   [34m├─[39m [2m/guides/ultimate-guide-to-red-fleet-state-park/index.html[22m [2m(+18ms)[22m 
+[2m23:43:36[22m   [34m├─[39m [2m/guides/ultimate-guide-to-steinaker-state-park/index.html[22m [2m(+22ms)[22m 
+[2m23:43:36[22m   [34m├─[39m [2m/guides/ultimate-guide-to-vernal-utah/index.html[22m [2m(+16ms)[22m 
+[2m23:43:36[22m   [34m├─[39m [2m/guides/vernal-weather-guide/index.html[22m [2m(+13ms)[22m 
+[2m23:43:36[22m   [34m├─[39m [2m/guides/what-to-bring/index.html[22m [2m(+17ms)[22m 
+[2m23:43:36[22m   [34m├─[39m [2m/guides/what-to-wear-utv-tour/index.html[22m [2m(+11ms)[22m 
+[2m23:43:36[22m   [34m├─[39m [2m/index.html[22m [2m(+7ms)[22m 
+[2m23:43:36[22m [32m✓ Completed in 12.24s.
+[39m
+[2m23:43:36[22m [34m[build][39m [32m✓ Completed in 3m 39s.[39m
+[2m23:43:36[22m [34m[@astrojs/sitemap][39m `sitemap-index.xml` created at `dist`
+[2m23:43:36[22m [34m[build][39m 645 page(s) built in [1m3m 45s[22m
+[2m23:43:36[22m [34m[build][39m [1mComplete![22m
+
+> adventuretoursvernal@1.0.0 gates:dist
+> node scripts/validate-site.mjs && node scripts/gate-4m-media.mjs && node scripts/gate-4k-direction.mjs && node scripts/gate-4n-isolation.mjs && node scripts/gate-4f-headings.mjs && node scripts/gate-4h-seams.mjs && node scripts/gate-4i-glossary.mjs && node scripts/gate-4g-anchors.mjs && node scripts/gate-4q-numeral-render.mjs
+
+validate-site: ✔ 645 pages — links resolve, no orphans, hub structure intact.
+
+validate-site: 5 owner-input TODO(s) (non-blocking):
+  ⚠ author photo missing for Dave — /about/dave/ shows an initials monogram (add public/images/dave.webp)
+  ⚠ author sameAs missing for Dave — no profile/social URLs (owner input)
+  ⚠ author photo missing for Trudy — /about/trudy/ shows an initials monogram (add public/images/trudy.webp)
+  ⚠ author bio missing for Trudy — Person schema has no description (owner-supplied copy)
+  ⚠ author sameAs missing for Trudy — no profile/social URLs (owner input)
+gate-4m: ✔ 32 page(s) with video across 645 scanned — 30 distinct video(s), 304 reference(s); 4 route(s) checked for cross-locale parity
+gate-4k: ✔ 645 pages across 9 locales — every page renders its declared direction; 1 rtl locale(s): "ar"
+         en  ltr    80 pages  (80 implicit)
+         es  ltr    77 pages  (77 implicit)
+         it  ltr    77 pages  (77 implicit)
+         pt  ltr    77 pages  (77 implicit)
+         fr  ltr    77 pages  (77 implicit)
+         de  ltr    77 pages  (77 implicit)
+         ja  ltr    77 pages  (77 implicit)
+         zh  ltr    77 pages  (77 implicit)
+         ar  rtl    26 pages  (26 explicit)
+gate-4n: ✔ 26 rtl page(s) across 1 locale(s) ("ar") — no unisolated mirrored character at a direction change
+         674 text node(s) carry a mirrored character; 104 of them are isolated
+
+gate-4f: 42 finding(s) in in-progress locales (advisory)
+
+Locale: ar
+Page: /ar/dinosaur-national-monument/petroglyphs-rock-art-vernal/
+
+Unexpected English heading:
+  <h3> "دليل العائلة لجولات UTV: Vernal مع الأطفال والأجداد"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/dinosaur-national-monument/petroglyphs-rock-art-vernal/
+
+Unexpected English heading:
+  <h3> "جولات UTV الخاصة في Vernal | للأزواج والمجموعات الصغيرة"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/dinosaur-national-monument/petroglyphs-rock-art-vernal/
+
+Unexpected English heading:
+  <h3> "دليل المبتدئين لجولات UTV في Vernal بولاية يوتا"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/dinosaur-national-monument/visiting-dinosaur-national-monument/
+
+Unexpected English heading:
+  <h2> "أين تندرج جولة UTV في إجازة Vernal"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/dinosaur-national-monument/visiting-dinosaur-national-monument/
+
+Unexpected English heading:
+  <h3> "دليل العائلة لجولات UTV: Vernal مع الأطفال والأجداد"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/dinosaur-national-monument/visiting-dinosaur-national-monument/
+
+Unexpected English heading:
+  <h3> "دليل المبتدئين لجولات UTV في Vernal بولاية يوتا"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/dinosaur-national-monument/visiting-dinosaur-national-monument/
+
+Unexpected English heading:
+  <h3> "جولات UTV الجماعية في Vernal | العائلات والمجموعات الخاصة"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/backcountry-tours-vernal-utah/
+
+Unexpected English heading:
+  <h2> "مرشداك: Dave and Trudy Wilson"
+  English marker: and
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/backcountry-tours-vernal-utah/
+
+Unexpected English heading:
+  <h3> "دليل العائلة لجولات UTV: Vernal مع الأطفال والأجداد"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/backcountry-tours-vernal-utah/
+
+Unexpected English heading:
+  <h3> "جولات UTV الخاصة في Vernal | للأزواج والمجموعات الصغيرة"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/backcountry-tours-vernal-utah/
+
+Unexpected English heading:
+  <h3> "دليل المبتدئين لجولات UTV في Vernal بولاية يوتا"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/backcountry-tours-vernal-utah/
+
+Unexpected English heading:
+  <h3> "تأجير المركبات المتجاورة قرب Vernal | جولات UTV مُرشَدة"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/beginners-guide-to-utv-tours-vernal/
+
+Unexpected English heading:
+  <h1> "دليل المبتدئين لجولات UTV في Vernal بولاية يوتا"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/beginners-guide-to-utv-tours-vernal/
+
+Unexpected English heading:
+  <h3> "دليل العائلة لجولات UTV: Vernal مع الأطفال والأجداد"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/beginners-guide-to-utv-tours-vernal/
+
+Unexpected English heading:
+  <h3> "جولات UTV الخاصة في Vernal | للأزواج والمجموعات الصغيرة"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/beginners-guide-to-utv-tours-vernal/
+
+Unexpected English heading:
+  <h3> "جولات البراري في Vernal بولاية يوتا | مغامرات UTV مُرشَدة"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/beginners-guide-to-utv-tours-vernal/
+
+Unexpected English heading:
+  <h3> "جولات UTV الجماعية في Vernal | العائلات والمجموعات الخاصة"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/best-utv-trails-vernal/
+
+Unexpected English heading:
+  <h1> "أفضل مسارات UTV قرب Vernal في يوتا"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/best-utv-trails-vernal/
+
+Unexpected English heading:
+  <h2> "لماذا Vernal لقيادة مركبات UTV"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/best-utv-trails-vernal/
+
+Unexpected English heading:
+  <h3> "دليل العائلة لجولات UTV: Vernal مع الأطفال والأجداد"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/best-utv-trails-vernal/
+
+Unexpected English heading:
+  <h3> "جولات UTV الخاصة في Vernal | للأزواج والمجموعات الصغيرة"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/best-utv-trails-vernal/
+
+Unexpected English heading:
+  <h3> "دليل المبتدئين لجولات UTV في Vernal بولاية يوتا"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/best-utv-trails-vernal/
+
+Unexpected English heading:
+  <h3> "جولات البراري في Vernal بولاية يوتا | مغامرات UTV مُرشَدة"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/family-utv-guide-vernal/
+
+Unexpected English heading:
+  <h1> "دليل العائلة لجولات UTV: القيادة في Vernal مع الأطفال والأجداد"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/family-utv-guide-vernal/
+
+Unexpected English heading:
+  <h3> "دليل المبتدئين لجولات UTV في Vernal بولاية يوتا"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/family-utv-guide-vernal/
+
+Unexpected English heading:
+  <h3> "جولات UTV الخاصة في Vernal | للأزواج والمجموعات الصغيرة"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/family-utv-guide-vernal/
+
+Unexpected English heading:
+  <h3> "جولات البراري في Vernal بولاية يوتا | مغامرات UTV مُرشَدة"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/family-utv-guide-vernal/
+
+Unexpected English heading:
+  <h3> "جولات UTV الجماعية في Vernal | العائلات والمجموعات الخاصة"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/group-utv-tours-vernal/
+
+Unexpected English heading:
+  <h1> "جولات UTV الجماعية في Vernal بولاية يوتا"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/group-utv-tours-vernal/
+
+Unexpected English heading:
+  <h3> "دليل العائلة لجولات UTV: Vernal مع الأطفال والأجداد"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/group-utv-tours-vernal/
+
+Unexpected English heading:
+  <h3> "دليل المبتدئين لجولات UTV في Vernal بولاية يوتا"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/group-utv-tours-vernal/
+
+Unexpected English heading:
+  <h3> "جولات UTV الخاصة في Vernal | للأزواج والمجموعات الصغيرة"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/group-utv-tours-vernal/
+
+Unexpected English heading:
+  <h3> "جولات البراري في Vernal بولاية يوتا | مغامرات UTV مُرشَدة"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/private-utv-tours-vernal/
+
+Unexpected English heading:
+  <h1> "جولات UTV الخاصة في Vernal بولاية يوتا"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/private-utv-tours-vernal/
+
+Unexpected English heading:
+  <h3> "دليل العائلة لجولات UTV: Vernal مع الأطفال والأجداد"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/private-utv-tours-vernal/
+
+Unexpected English heading:
+  <h3> "دليل المبتدئين لجولات UTV في Vernal بولاية يوتا"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/private-utv-tours-vernal/
+
+Unexpected English heading:
+  <h3> "جولات البراري في Vernal بولاية يوتا | مغامرات UTV مُرشَدة"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/private-utv-tours-vernal/
+
+Unexpected English heading:
+  <h3> "تأجير المركبات المتجاورة قرب Vernal | جولات UTV مُرشَدة"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/side-by-side-rentals-vernal-utah/
+
+Unexpected English heading:
+  <h3> "دليل العائلة لجولات UTV: Vernal مع الأطفال والأجداد"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/side-by-side-rentals-vernal-utah/
+
+Unexpected English heading:
+  <h3> "جولات UTV الخاصة في Vernal | للأزواج والمجموعات الصغيرة"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/side-by-side-rentals-vernal-utah/
+
+Unexpected English heading:
+  <h3> "دليل المبتدئين لجولات UTV في Vernal بولاية يوتا"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+Locale: ar
+Page: /ar/utv/side-by-side-rentals-vernal-utah/
+
+Unexpected English heading:
+  <h3> "جولات البراري في Vernal بولاية يوتا | مغامرات UTV مُرشَدة"
+  English marker: utv
+
+Expected:
+  localized heading or licensed exception
+
+gate-4f: ✔ 15073 headings across 8 locales — no untranslated headings (42 advisory)
+gate-4h: ✔ 565 rendered pages across 8 locales, 1922 locked phrases — no seam violations
+
+gate-4i: 20 advisory occurrence(s) across 4 lock(s) — drift in a locale where the decision was never applied
+
+Locale: es
+
+Locked term:
+  Tierra de los Dinosaurios
+
+Observed:
+  Dinosaur Country   (7 sites)
+
+Expected:
+  Tierra de los Dinosaurios
+
+Why this is drift:
+  English residue C4 measured and placed out of scope for es; an owner decision, not a regression
+
+Sites:
+    /es/booking/
+      "…stas panorámicas de 360 grados de Dinosaur Country, las Montañas Uintah y el vasto a…"
+    /es/camping/camping-in-ashley-national-forest/
+      "…: Ashley National Forest es donde Dinosaur Country se vuelve vertical: un vasto y al…"
+    /es/camping/camping-in-ashley-national-forest/
+      "…viaje de acampada más amplio por Dinosaur Country, combinando el bosque de altura c…"
+    /es/dinosaur-national-monument/
+      "…un día completo de exploración de Dinosaur Country que cubre tanto el registro fósil…"
+    /es/dinosaur-national-monument/
+      "…en un día completo de aventura en Dinosaur Country. Agregue Aventura a Su Viaje al M…"
+    /es/faq/
+      "…en la zona agreste circundante de Dinosaur Country. 11 ¿POR QUÉ ELEGIR ADVENTURE TOU…"
+    /es/hiking/alpine-lakes-hiking-high-uintas/
+      "…de entrada, y explore camping en Dinosaur Country para convertir un fin de semana e…"
+
+Lock: dinosaur-country
+Established by: C4 (P21) cross-locale table — every locale translates the identity
+
+Locale: es
+
+Locked term:
+  Leave No Trace
+
+Observed:
+  No Dejar Rastro   (2 sites)
+
+Expected:
+  Leave No Trace
+
+Why this is drift:
+  A6 recorded es translating the programme name twice in one file; never swept
+
+Sites:
+    /es/fishing/
+      "…otra. Y practique el principio de No Dejar Rastro: recoja toda la línea, el aparejo…"
+    /es/hiking/alpine-lakes-hiking-high-uintas/
+      "…sulte nuestra guía de Kings Peak. No Dejar Rastro en Orillas Frágiles Las orillas d…"
+
+Lock: leave-no-trace-programme
+Established by: A6 (P15) — the lock holds for Latin-script locales; es was measured at 6/8 and left undecided
+
+Locale: ja
+
+Locked term:
+  恐竜の国
+
+Observed:
+  Dinosaur Country   (2 sites)
+
+Expected:
+  恐竜の国
+
+Why this is drift:
+  English residue C4 measured in ja and placed out of scope — an owner decision, not a regression
+
+Licensed compounds already excluded:
+  恐竜の国（Dinosaur Country） — first-use gloss led by the locked Japanese term — the same good practice A6 kept in de/camping
+
+Sites:
+    /ja/booking/
+      "…sphalt Ridge Asphalt Ridgeの頂上まで登り、Dinosaur Country、Uintah Mountains、そして眼下に広がる広大な高地砂漠…"
+    /ja/faq/
+      "…eが管理する別の施設です。午前中をモニュメントで過ごし、午後は周辺のDinosaur Countryのバックカントリーを走るUTVツアーに参加される方が多くいらっしゃい…"
+
+Lock: dinosaur-country
+Established by: C4 (P21) cross-locale table; ui.ts JA preamble line 785
+
+Locale: ar
+
+Locked term:
+  المسارات
+
+Observed:
+  الدروب   (9 sites)
+
+Expected:
+  المسارات
+
+Why this is drift:
+  competing rendering; unmeasured on a one-page corpus
+
+Sites:
+    /ar/hiking/spring-hiking-near-vernal/
+      "…تُفتح وتجفّ أولًا، بينما تصعد بعض الدروب الأعلى، كالامتدادات الجبلية من در…"
+    /ar/hiking/spring-hiking-near-vernal/
+      "…حقًا، مع فتح الطرق المرتفعة، تصعد الدروب إلى المرتفعات وهي تذوب. والمقاربة…"
+    /ar/hiking/spring-hiking-near-vernal/
+      "…h State Parks) لمعرفة حالة الطرق والدروب الحالية قبل الانطلاق. المشي مقابل…"
+    /ar/hiking/summer-hiking-near-vernal/
+      "…مشيات عائلية لطيفة قرب المخيّمات والدروب إلى صعود جادّ إلى الأحواض العالية…"
+    /ar/hiking/summer-hiking-near-vernal/
+      "…h State Parks) لمعرفة حالة الطرق والدروب الحالية قبل الانطلاق. المشي مقابل…"
+    /ar/hiking/winter-hiking-near-vernal/
+      "…و اللعبة كلها في هذا الموسم. فبعض الدروب الأعلى في المنطقة، كالامتدادات ال…"
+    /ar/hiking/winter-hiking-near-vernal/
+      "…دنيا المصانة والأجزاء الميسورة من الدروب فقد تسلّم ميلًا بعد ميل من الصخر…"
+    /ar/hiking/winter-hiking-near-vernal/
+      "…h State Parks) لمعرفة حالة الطرق والدروب الحالية قبل الانطلاق. المشي مقابل…"
+    … and 1 more site(s)
+
+Lock: offroad-trail
+Established by: AR-1 — ui.ts AR preamble LOCKED TERMS: مسار is the route; UTV/ATV/Jeep stay Latin beside it
+
+  These are open owner decisions, not regressions: the same drift class was measured
+  and placed out of scope by the item that decided the lock elsewhere. They never block.
+  Deciding one means changing "enforce" to "block" here, after the sweep.
+
+gate-4i: ✔ 52 glossary locks across 8 locales verified on 565 rendered pages (20 dictionary anchors intact) — 4 advisory lock(s) reported
+
+gate-4g: advisory anchor audit — reports only, never blocks
+
+Locale: es
+
+  Anchors scanned:      6131
+  Latin-script anchors: 5977
+  Approved identities:  33 distinct (1027 occurrences)
+  Review candidates:    27 distinct (46 occurrences)
+
+  Approved identities — 33
+     116×  38p  Vernal
+     109×  43p  Dinosaur National Monument
+      93×  37p  Flaming Gorge
+      83×  27p  Red Fleet
+      71×  34p  Ashley National Forest
+      62×  61p  Doc's Beach
+      62×  61p  Moonshine Arch
+      61×  61p  Ashley Gorge
+      61×  61p  Asphalt Ridge
+      61×  61p  Outlaw Trail
+      46×  21p  High Uintas
+      42×  15p  Steinaker
+      22×  19p  Red Fleet State Park
+      20×  16p  Red Cloud Loop
+      18×  10p  Green River
+      17×  14p  Flaming Gorge–Uintas Scenic Byway
+      14×   7p  Flaming Gorge–Uintas Byway
+      14×  13p  Steinaker State Park
+      11×   9p  Sheep Creek Geological Loop
+       9×   6p  Salt Lake City
+       6×   4p  Kings Peak
+       5×   5p  Adventure Tours Vernal
+       4×   3p  Cub Creek Road
+       4×   4p  High Uintas Wilderness
+       3×   2p  Quarry Exhibit Hall
+       2×   2p  Grand Junction
+       2×   1p  Quarry Visitor Center
+       2×   1p  Tour of the Tilted Rocks
+       2×   2p  Uinta Mountains
+       2×   2p  Uintas
+       1×   1p  Cub Creek Road (Tour of the Tilted Rocks)
+       1×   1p  Denver
+       1×   1p  Flaming Gorge Reservoir
+
+  Probable untranslated anchors — 26
+       7×   6p  tour
+             identical to English anchor for the same destination
+             e.g. /es/itineraries/2-day-family-itinerary/ → /es/booking/
+       4×   2p  camping
+             identical to English anchor for the same destination
+             e.g. /es/hiking/best-hikes-in-dinosaur-national-monument/ → /es/camping/
+       3×   2p  byway
+             identical to English anchor for the same destination
+             e.g. /es/itineraries/romantic-weekend-dinosaur-country/ → /es/scenic-drives/flaming-gorge-uintas-scenic-byway/
+       3×   3p  things to do in Vernal
+             residue: things to do in
+             identical to English anchor for the same destination
+             e.g. /es/dinosaur-national-monument/visiting-dinosaur-national-monument/ → /es/things-to-do/
+       2×   2p  guide to petroglyphs and rock art near Vernal
+             residue: guide to petroglyphs and rock art near
+             identical to English anchor for the same destination
+             e.g. /es/things-to-do/fun-things-to-do-vernal-utah-kids/ → /es/dinosaur-national-monument/petroglyphs-rock-art-vernal/
+       2×   2p  guide to visiting Dinosaur National Monument
+             residue: guide to visiting
+             identical to English anchor for the same destination
+             e.g. /es/things-to-do/fun-things-to-do-vernal-utah-kids/ → /es/dinosaur-national-monument/visiting-dinosaur-national-monument/
+       2×   1p  petroglyphs and rock art near Vernal
+             residue: petroglyphs and rock art near
+             identical to English anchor for the same destination
+             e.g. /es/dinosaur-national-monument/visiting-dinosaur-national-monument/ → /es/dinosaur-national-monument/petroglyphs-rock-art-vernal/
+       2×   1p  Ultimate Guide to Ashley National Forest
+             residue: Ultimate Guide to
+             identical to English anchor for the same destination
+             e.g. /es/camping/camping-in-ashley-national-forest/ → /es/guides/ultimate-guide-to-ashley-national-forest/
+       2×   2p  Ultimate Guide to Red Fleet State Park
+             residue: Ultimate Guide to
+             identical to English anchor for the same destination
+             e.g. /es/things-to-do/fun-things-to-do-vernal-utah-kids/ → /es/guides/ultimate-guide-to-red-fleet-state-park/
+       2×   2p  Ultimate Guide to Steinaker State Park
+             residue: Ultimate Guide to
+             identical to English anchor for the same destination
+             e.g. /es/things-to-do/fun-things-to-do-vernal-utah-kids/ → /es/guides/ultimate-guide-to-steinaker-state-park/
+       1×   1p  family-focused things to do in Vernal
+             residue: family-focused things to do in
+             identical to English anchor for the same destination
+             e.g. /es/dinosaur-national-monument/visiting-dinosaur-national-monument/ → /es/things-to-do/fun-things-to-do-vernal-utah-kids/
+       1×   1p  Flaming Gorge byway
+             residue: byway
+             identical to English anchor for the same destination
+             e.g. /es/itineraries/ → /es/scenic-drives/flaming-gorge-uintas-scenic-byway/
+       1×   1p  fun things to do in Vernal with kids
+             residue: fun things to do in with kids
+             identical to English anchor for the same destination
+             e.g. /es/things-to-do/vernal-utah-attractions/ → /es/things-to-do/fun-things-to-do-vernal-utah-kids/
+       1×   1p  guided UTV tour
+             residue: guided tour
+             identical to English anchor for the same destination
+             e.g. /es/dinosaur-national-monument/visiting-dinosaur-national-monument/ → /es/utv/
+       1×   1p  guided UTV trail tours
+             residue: guided trail tours
+             identical to English anchor for the same destination
+             e.g. /es/things-to-do/vernal-utah-attractions/ → /es/utv/
+       1×   1p  Outlaw Trail UTV tour
+             residue: tour
+             identical to English anchor for the same destination
+             e.g. /es/dinosaur-national-monument/petroglyphs-rock-art-vernal/ → /es/utv/
+       1×   1p  Salt Lake City to Vernal travel guide
+             residue: to travel guide
+             identical to English anchor for the same destination
+             e.g. /es/dinosaur-national-monument/visiting-dinosaur-national-monument/ → /es/from/salt-lake-city/
+       1×   1p  the best restaurants in Vernal
+             residue: the best restaurants in
+             identical to English anchor for the same destination
+             e.g. /es/dinosaur-national-monument/visiting-dinosaur-national-monument/ → /es/things-to-do/best-restaurants-vernal-utah/
+       1×   1p  top attractions in Vernal
+             residue: top attractions in
+             identical to English anchor for the same destination
+             e.g. /es/things-to-do/fun-things-to-do-vernal-utah-kids/ → /es/things-to-do/vernal-utah-attractions/
+       1×   1p  top Vernal attractions
+             residue: top attractions
+             identical to English anchor for the same destination
+             e.g. /es/dinosaur-national-monument/visiting-dinosaur-national-monument/ → /es/things-to-do/vernal-utah-attractions/
+       1×   1p  Ultimate Guide to Dinosaur National Monument
+             residue: Ultimate Guide to
+             identical to English anchor for the same destination
+             e.g. /es/dinosaur-national-monument/petroglyphs-rock-art-vernal/ → /es/dinosaur-national-monument/visiting-dinosaur-national-monument/
+       1×   1p  Ultimate Guide to Flaming Gorge
+             residue: Ultimate Guide to
+             identical to English anchor for the same destination
+             e.g. /es/things-to-do/vernal-utah-attractions/ → /es/guides/ultimate-guide-to-flaming-gorge/
+       1×   1p  UTV tour
+             residue: tour
+             identical to English anchor for the same destination
+             e.g. /es/dinosaur-national-monument/visiting-dinosaur-national-monument/ → /es/utv/
+       1×   1p  UTV trail tours
+             residue: trail tours
+             identical to English anchor for the same destination
+             e.g. /es/dinosaur-national-monument/visiting-dinosaur-national-monument/ → /es/utv/
+       1×   1p  Vernal weather
+             residue: weather
+             identical to English anchor for the same destination
+             e.g. /es/dinosaur-national-monument/visiting-dinosaur-national-monument/ → /es/guides/vernal-weather-guide/
+       1×   1p  what to bring
+             identical to English anchor for the same destination
+             e.g. /es/dinosaur-national-monument/visiting-dinosaur-national-monument/ → /es/guides/what-to-bring/
+
+  Probable proper nouns (name-shaped, not in the registry) — 1
+       1×   1p  Dinosaur Country
+             identical to English anchor for the same destination
+             e.g. /es/camping/camping-in-ashley-national-forest/ → /es/camping/
+
+  Repeated English phrases (≥5 pages; cross-cutting view of the groups above) — 1
+       7×   6p  tour   [probable-untranslated]
+
+Locale: it
+
+  Anchors scanned:      6131
+  Latin-script anchors: 5977
+  Approved identities:  37 distinct (1178 occurrences)
+  Review candidates:    12 distinct (172 occurrences)
+
+  Approved identities — 37
+     177×  71p  Dinosaur National Monument
+     116×  38p  Vernal
+      93×  37p  Flaming Gorge
+      83×  27p  Red Fleet
+      77×  77p  Dinosaur Monument
+      71×  34p  Ashley National Forest
+      62×  61p  Doc's Beach
+      62×  61p  Moonshine Arch
+      61×  61p  Ashley Gorge
+      61×  61p  Asphalt Ridge
+      61×  61p  Outlaw Trail
+      46×  21p  High Uintas
+      42×  15p  Steinaker
+      22×  19p  Red Fleet State Park
+      20×  11p  Green River
+      20×  16p  Red Cloud Loop
+      17×  14p  Flaming Gorge–Uintas Scenic Byway
+      14×   7p  Flaming Gorge–Uintas Byway
+      14×  13p  Steinaker State Park
+      11×   9p  Sheep Creek Geological Loop
+       9×   6p  Salt Lake City
+       7×   4p  Kings Peak
+       5×   5p  Adventure Tours Vernal
+       4×   3p  Cub Creek Road
+       4×   4p  High Uintas Wilderness
+       3×   2p  Quarry Exhibit Hall
+       2×   2p  Flaming Gorge Reservoir
+       2×   2p  Grand Junction
+       2×   1p  Quarry Visitor Center
+       2×   1p  Tour of the Tilted Rocks
+       2×   2p  Uinta Mountains
+       1×   1p  Cub Creek Road (Tour of the Tilted Rocks)
+       1×   1p  Denver
+       1×   1p  Red Fleet Reservoir
+       1×   1p  Steinaker Reservoir
+       1×   1p  Uintas
+       1×   1p  Wall of Bones
+
+  Probable untranslated anchors — 11
+      10×   7p  tour
+             identical to English anchor for the same destination
+             e.g. /it/itineraries/2-day-family-itinerary/ → /it/booking/
+       7×   4p  byway
+             identical to English anchor for the same destination
+             e.g. /it/itineraries/romantic-weekend-dinosaur-country/ → /it/scenic-drives/flaming-gorge-uintas-scenic-byway/
+       3×   1p  Ultimate Guide to Ashley National Forest
+             residue: Ultimate Guide to
+             identical to English anchor for the same destination
+             e.g. /it/hiking/kings-peak-hiking-guide/ → /it/guides/ultimate-guide-to-ashley-national-forest/
+       2×   1p  scenic byway
+             identical to English anchor for the same destination
+             e.g. /it/itineraries/photography-weekend-vernal/ → /it/scenic-drives/flaming-gorge-uintas-scenic-byway/
+       2×   1p  Sheep Creek loop
+             residue: loop
+             identical to English anchor for the same destination
+             e.g. /it/itineraries/photography-weekend-vernal/ → /it/scenic-drives/sheep-creek-geological-loop/
+       1×   1p  backcountry tours
+             residue: tours
+             identical to English anchor for the same destination
+             e.g. /it/itineraries/photography-weekend-vernal/ → /it/utv/backcountry-tours-vernal-utah/
+       1×   1p  Cub Creek drive
+             identical to English anchor for the same destination
+             e.g. /it/itineraries/weekend-road-trip-from-grand-junction/ → /it/scenic-drives/cub-creek-road-tour-of-the-tilted-rocks/
+       1×   1p  Flaming Gorge byway
+             residue: byway
+             identical to English anchor for the same destination
+             e.g. /it/itineraries/ → /it/scenic-drives/flaming-gorge-uintas-scenic-byway/
+       1×   1p  Outlaw Trail UTV tour
+             residue: tour
+             identical to English anchor for the same destination
+             e.g. /it/dinosaur-national-monument/petroglyphs-rock-art-vernal/ → /it/utv/
+       1×   1p  Ultimate Guide to Steinaker State Park
+             residue: Ultimate Guide to
+             identical to English anchor for the same destination
+             e.g. /it/fishing/fishing-steinaker-reservoir/ → /it/guides/ultimate-guide-to-steinaker-state-park/
+       1×   1p  Ultimate Guide to Vernal
+             residue: Ultimate Guide to
+             identical to English anchor for the same destination
+             e.g. /it/fishing/fishing-steinaker-reservoir/ → /it/guides/ultimate-guide-to-vernal-utah/
+
+  Probable proper nouns (name-shaped, not in the registry) — 1
+     142×  77p  Home
+             identical to English anchor for the same destination
+             e.g. /it/ → /it/
+
+  Repeated English phrases (≥5 pages; cross-cutting view of the groups above) — 2
+      10×   7p  tour   [probable-untranslated]
+     142×  77p  Home   [proper-noun]
+
+Locale: pt
+
+  Anchors scanned:      6130
+  Latin-script anchors: 5976
+  Approved identities:  34 distinct (1175 occurrences)
+  Review candidates:    4 distinct (18 occurrences)
+
+  Approved identities — 34
+     177×  71p  Dinosaur National Monument
+     116×  38p  Vernal
+      92×  37p  Flaming Gorge
+      83×  27p  Red Fleet
+      77×  77p  Dinosaur Monument
+      71×  34p  Ashley National Forest
+      62×  61p  Doc's Beach
+      62×  61p  Moonshine Arch
+      61×  61p  Ashley Gorge
+      61×  61p  Asphalt Ridge
+      61×  61p  Outlaw Trail
+      46×  21p  High Uintas
+      42×  15p  Steinaker
+      22×  19p  Red Fleet State Park
+      20×  11p  Green River
+      20×  16p  Red Cloud Loop
+      17×  14p  Flaming Gorge–Uintas Scenic Byway
+      14×   7p  Flaming Gorge–Uintas Byway
+      14×  13p  Steinaker State Park
+      11×   9p  Sheep Creek Geological Loop
+       9×   6p  Salt Lake City
+       6×   6p  Adventure Tours Vernal
+       6×   4p  Kings Peak
+       5×   5p  High Uintas Wilderness
+       4×   3p  Cub Creek Road
+       3×   2p  Quarry Exhibit Hall
+       2×   2p  Grand Junction
+       2×   1p  Quarry Visitor Center
+       2×   1p  Tour of the Tilted Rocks
+       2×   2p  Uinta Mountains
+       2×   2p  Uintas
+       1×   1p  Cub Creek Road (Tour of the Tilted Rocks)
+       1×   1p  Denver
+       1×   1p  Wall of Bones
+
+  Probable untranslated anchors — 4
+       9×   5p  byway
+             identical to English anchor for the same destination
+             e.g. /pt/itineraries/romantic-weekend-dinosaur-country/ → /pt/scenic-drives/flaming-gorge-uintas-scenic-byway/
+       6×   3p  tour
+             identical to English anchor for the same destination
+             e.g. /pt/itineraries/3-day-adventure-itinerary/ → /pt/booking/
+       2×   1p  town
+             identical to English anchor for the same destination
+             e.g. /pt/itineraries/one-day-adventure-vernal/ → /pt/things-to-do/
+       1×   1p  things to do in Vernal
+             residue: things to do in
+             identical to English anchor for the same destination
+             e.g. /pt/scenic-drives/sheep-creek-geological-loop/ → /pt/things-to-do/
+
+  Repeated English phrases (≥5 pages; cross-cutting view of the groups above) — 1
+       9×   5p  byway   [probable-untranslated]
+
+Locale: fr
+
+  Anchors scanned:      6126
+  Latin-script anchors: 5972
+  Approved identities:  34 distinct (1168 occurrences)
+  Review candidates:    10 distinct (179 occurrences)
+
+  Approved identities — 34
+     177×  71p  Dinosaur National Monument
+     115×  38p  Vernal
+      92×  37p  Flaming Gorge
+      82×  27p  Red Fleet
+      77×  77p  Dinosaur Monument
+      71×  34p  Ashley National Forest
+      62×  61p  Doc's Beach
+      62×  61p  Moonshine Arch
+      61×  61p  Ashley Gorge
+      61×  61p  Asphalt Ridge
+      61×  61p  Outlaw Trail
+      46×  21p  High Uintas
+      41×  15p  Steinaker
+      22×  19p  Red Fleet State Park
+      20×  11p  Green River
+      20×  16p  Red Cloud Loop
+      16×  13p  Flaming Gorge–Uintas Scenic Byway
+      14×   7p  Flaming Gorge–Uintas Byway
+      14×  13p  Steinaker State Park
+      11×   9p  Sheep Creek Geological Loop
+       9×   6p  Salt Lake City
+       7×   4p  Kings Peak
+       5×   5p  Adventure Tours Vernal
+       4×   3p  Cub Creek Road
+       4×   4p  High Uintas Wilderness
+       3×   2p  Quarry Exhibit Hall
+       2×   2p  Grand Junction
+       2×   1p  Quarry Visitor Center
+       2×   2p  Uintas
+       1×   1p  Cub Creek Road (Tour of the Tilted Rocks)
+       1×   1p  Denver
+       1×   1p  Tour of the Tilted Rocks
+       1×   1p  Uinta Mountains
+       1×   1p  Wall of Bones
+
+  Probable untranslated anchors — 8
+      12×   7p  camping
+             identical to English anchor for the same destination
+             e.g. /fr/hiking/alpine-lakes-hiking-high-uintas/ → /fr/camping/
+       7×   4p  byway
+             identical to English anchor for the same destination
+             e.g. /fr/itineraries/romantic-weekend-dinosaur-country/ → /fr/scenic-drives/flaming-gorge-uintas-scenic-byway/
+       6×   4p  monument
+             identical to English anchor for the same destination
+             e.g. /fr/itineraries/ → /fr/dinosaur-national-monument/
+       3×   1p  Ultimate Guide to Ashley National Forest
+             residue: Ultimate Guide to
+             identical to English anchor for the same destination
+             e.g. /fr/hiking/alpine-lakes-hiking-high-uintas/ → /fr/guides/ultimate-guide-to-ashley-national-forest/
+       2×   1p  tour
+             identical to English anchor for the same destination
+             e.g. /fr/itineraries/3-day-adventure-itinerary/ → /fr/booking/
+       1×   1p  attractions
+             identical to English anchor for the same destination
+             e.g. /fr/itineraries/weekend-fishing-trip-vernal/ → /fr/things-to-do/vernal-utah-attractions/
+       1×   1p  Flaming Gorge byway
+             residue: byway
+             identical to English anchor for the same destination
+             e.g. /fr/itineraries/ → /fr/scenic-drives/flaming-gorge-uintas-scenic-byway/
+       1×   1p  UTV hub
+             residue: hub
+             identical to English anchor for the same destination
+             e.g. /fr/itineraries/weekend-road-trip-from-denver/ → /fr/utv/
+
+  Probable proper nouns (name-shaped, not in the registry) — 2
+     142×  77p  Guides
+             identical to English anchor for the same destination
+             e.g. /fr/ → /fr/guides/
+       4×   4p  Camping
+             identical to English anchor for the same destination
+             e.g. /fr/camping/camping-at-flaming-gorge/ → /fr/camping/
+
+  Repeated English phrases (≥5 pages; cross-cutting view of the groups above) — 2
+      12×   7p  camping   [probable-untranslated]
+     142×  77p  Guides   [proper-noun]
+
+Locale: de
+
+  Anchors scanned:      6131
+  Latin-script anchors: 5977
+  Approved identities:  37 distinct (1171 occurrences)
+  Review candidates:    9 distinct (188 occurrences)
+
+  Approved identities — 37
+     177×  71p  Dinosaur National Monument
+     116×  38p  Vernal
+      92×  37p  Flaming Gorge
+      83×  27p  Red Fleet
+      77×  77p  Dinosaur Monument
+      71×  34p  Ashley National Forest
+      62×  61p  Doc's Beach
+      62×  61p  Moonshine Arch
+      61×  61p  Ashley Gorge
+      61×  61p  Asphalt Ridge
+      61×  61p  Outlaw Trail
+      46×  21p  High Uintas
+      41×  15p  Steinaker
+      22×  19p  Red Fleet State Park
+      20×  11p  Green River
+      19×  15p  Red Cloud Loop
+      18×  13p  Flaming Gorge–Uintas Scenic Byway
+      15×  13p  Steinaker State Park
+      10×   8p  Sheep Creek Geological Loop
+       9×   4p  Flaming Gorge–Uintas Byway
+       9×   6p  Salt Lake City
+       6×   4p  Kings Peak
+       5×   5p  Adventure Tours Vernal
+       4×   4p  High Uintas Wilderness
+       4×   2p  Quarry Exhibit Hall
+       3×   2p  Cub Creek Road
+       2×   2p  Flaming Gorge Reservoir
+       2×   2p  Grand Junction
+       2×   1p  Quarry Visitor Center
+       2×   1p  Tour of the Tilted Rocks
+       2×   2p  Uinta Mountains
+       2×   2p  Uintas
+       1×   1p  Cub Creek Road (Tour of the Tilted Rocks)
+       1×   1p  Denver
+       1×   1p  Red Fleet Reservoir
+       1×   1p  Steinaker Reservoir
+       1×   1p  Wall of Bones
+
+  Probable untranslated anchors — 5
+       7×   3p  Ultimate Guide to Ashley National Forest
+             residue: Ultimate Guide to
+             identical to English anchor for the same destination
+             e.g. /de/camping/camping-in-ashley-national-forest/ → /de/guides/ultimate-guide-to-ashley-national-forest/
+       5×   2p  Ultimate Guide to Red Fleet State Park
+             residue: Ultimate Guide to
+             identical to English anchor for the same destination
+             e.g. /de/camping/camping-at-red-fleet-state-park/ → /de/guides/ultimate-guide-to-red-fleet-state-park/
+       4×   2p  Ultimate Guide to Flaming Gorge
+             residue: Ultimate Guide to
+             identical to English anchor for the same destination
+             e.g. /de/camping/camping-at-flaming-gorge/ → /de/guides/ultimate-guide-to-flaming-gorge/
+       2×   1p  things to do in Vernal
+             residue: things to do in
+             identical to English anchor for the same destination
+             e.g. /de/hiking/alpine-lakes-hiking-high-uintas/ → /de/things-to-do/
+       2×   2p  Ultimate Guide to Vernal
+             residue: Ultimate Guide to
+             identical to English anchor for the same destination
+             e.g. /de/fishing/fishing-red-fleet-reservoir/ → /de/guides/ultimate-guide-to-vernal-utah/
+
+  Probable proper nouns (name-shaped, not in the registry) — 4
+     152×  77p  Guides
+             identical to English anchor for the same destination
+             e.g. /de/ → /de/guides/
+      13×   9p  Camping
+             identical to English anchor for the same destination
+             e.g. /de/camping/camping-at-flaming-gorge/ → /de/camping/
+       2×   1p  Fishing Flaming Gorge
+             residue: Fishing
+             identical to English anchor for the same destination
+             e.g. /de/fishing/green-river-fly-fishing/ → /de/fishing/fishing-flaming-gorge/
+       1×   1p  Visiting Dinosaur National Monument
+             residue: Visiting
+             identical to English anchor for the same destination
+             e.g. /de/itineraries/2-day-family-itinerary/ → /de/dinosaur-national-monument/visiting-dinosaur-national-monument/
+
+  Repeated English phrases (≥5 pages; cross-cutting view of the groups above) — 2
+     152×  77p  Guides   [proper-noun]
+      13×   9p  Camping   [proper-noun]
+
+Locale: ja
+
+  Anchors scanned:      6127
+  Latin-script anchors: 2016
+  Approved identities:  46 distinct (1583 occurrences)
+  Review candidates:    1 distinct (26 occurrences)
+
+  Approved identities — 46
+     177×  71p  Dinosaur National Monument
+      93×  37p  Flaming Gorge
+      80×  27p  Red Fleet
+      77×  77p  Deutsch
+      77×  77p  Dinosaur Monument
+      77×  77p  English
+      77×  77p  Español
+      77×  77p  Français
+      77×  77p  Italiano
+      77×  77p  Português
+      71×  34p  Ashley National Forest
+      66×  66p  cozelosdata.com
+      62×  61p  Doc's Beach
+      62×  61p  Moonshine Arch
+      61×  61p  Ashley Gorge
+      61×  61p  Asphalt Ridge
+      61×  61p  Outlaw Trail
+      45×  20p  High Uintas
+      42×  15p  Steinaker
+      22×  19p  Red Fleet State Park
+      21×  11p  Green River
+      19×  14p  Flaming Gorge–Uintas Scenic Byway
+      19×  15p  Red Cloud Loop
+      14×  13p  Steinaker State Park
+      10×   8p  Sheep Creek Geological Loop
+       9×   4p  Flaming Gorge–Uintas Byway
+       9×   6p  Salt Lake City
+       7×   5p  Kings Peak
+       5×   5p  Adventure Tours Vernal
+       4×   4p  High Uintas Wilderness
+       3×   2p  Cub Creek Road
+       3×   2p  Quarry Exhibit Hall
+       2×   2p  Grand Junction
+       2×   1p  Quarry Visitor Center
+       2×   2p  Uinta Mountains
+       2×   2p  Uintas
+       1×   1p  1935 S 1500 E, Vernal, Utah
+       1×   1p  adventuretoursvernal.com
+       1×   1p  adventuretoursvernal@gmail.com
+       1×   1p  Cub Creek Road（Tour of the Tilted Rocks）
+       1×   1p  Dave Wilson
+       1×   1p  Denver
+       1×   1p  Doc's Beach、Moonshine Arch、Ashley Gorge、Outlaw Trail、Asphalt Ridge
+       1×   1p  Tour of the Tilted Rocks
+       1×   1p  Trudy Wilson
+       1×   1p  Wall of Bones
+
+  Probable proper nouns (name-shaped, not in the registry) — 1
+      26×  26p  العربية
+             e.g. /ja/cancellation-policy/ → /ar/cancellation-policy/
+
+  Repeated English phrases (≥5 pages; cross-cutting view of the groups above) — 1
+      26×  26p  العربية   [proper-noun]
+
+Locale: zh
+
+  Anchors scanned:      6131
+  Latin-script anchors: 2107
+  Approved identities:  47 distinct (1674 occurrences)
+  Review candidates:    1 distinct (26 occurrences)
+
+  Approved identities — 47
+     177×  71p  Dinosaur National Monument
+     116×  38p  Vernal
+      93×  37p  Flaming Gorge
+      83×  27p  Red Fleet
+      77×  77p  Deutsch
+      77×  77p  Dinosaur Monument
+      77×  77p  English
+      77×  77p  Español
+      77×  77p  Français
+      77×  77p  Italiano
+      77×  77p  Português
+      71×  34p  Ashley National Forest
+      66×  66p  cozelosdata.com
+      62×  61p  Doc's Beach
+      62×  61p  Moonshine Arch
+      61×  61p  Ashley Gorge
+      61×  61p  Asphalt Ridge
+      61×  61p  Outlaw Trail
+      46×  21p  High Uintas
+      42×  15p  Steinaker
+      22×  19p  Red Fleet State Park
+      21×  11p  Green River
+      19×  15p  Red Cloud Loop
+      14×  13p  Steinaker State Park
+       7×   6p  Flaming Gorge–Uintas Scenic Byway
+       6×   4p  Flaming Gorge–Uintas Byway
+       5×   5p  Adventure Tours Vernal
+       5×   4p  Kings Peak
+       5×   4p  Sheep Creek Geological Loop
+       4×   4p  High Uintas Wilderness
+       3×   2p  Cub Creek Road
+       3×   2p  Quarry Exhibit Hall
+       2×   2p  Grand Junction
+       2×   1p  Quarry Visitor Center
+       2×   1p  Salt Lake City
+       2×   2p  Uinta Mountains
+       2×   2p  Uintas
+       1×   1p  1935 S 1500 E, Vernal, Utah
+       1×   1p  adventuretoursvernal.com
+       1×   1p  adventuretoursvernal@gmail.com
+       1×   1p  Dave Wilson
+       1×   1p  Flaming Gorge Reservoir
+       1×   1p  Red Fleet Reservoir
+       1×   1p  Steinaker Reservoir
+       1×   1p  Tour of the Tilted Rocks
+       1×   1p  Trudy Wilson
+       1×   1p  Wall of Bones
+
+  Probable proper nouns (name-shaped, not in the registry) — 1
+      26×  26p  العربية
+             e.g. /zh/cancellation-policy/ → /ar/cancellation-policy/
+
+  Repeated English phrases (≥5 pages; cross-cutting view of the groups above) — 1
+      26×  26p  العربية   [proper-noun]
+
+Locale: ar
+
+  Anchors scanned:      2227
+  Latin-script anchors: 2175
+  Approved identities:  22 distinct (506 occurrences)
+  Review candidates:    269 distinct (1535 occurrences)
+
+  Approved identities — 22
+      75×  26p  Dinosaur National Monument
+      46×  16p  Vernal
+      26×  26p  cozelosdata.com
+      26×  26p  Deutsch
+      26×  26p  Dinosaur Monument
+      26×  25p  Doc's Beach
+      26×  26p  English
+      26×  26p  Español
+      26×  26p  Français
+      26×  26p  Italiano
+      26×  25p  Moonshine Arch
+      26×  26p  Português
+      25×  25p  Ashley Gorge
+      25×  25p  Asphalt Ridge
+      25×  25p  Outlaw Trail
+      23×  10p  Red Fleet
+      19×   9p  Flaming Gorge
+       4×   4p  Adventure Tours Vernal
+       1×   1p  1935 S 1500 E, Vernal, Utah
+       1×   1p  Ashley National Forest
+       1×   1p  Steinaker
+       1×   1p  Steinaker State Park
+
+  Probable untranslated anchors — 1
+       1×   1p  مواقع النقوش والفنون الصخرية قرب Vernal بولاية يوتا اكتشف النقوش والفنون الصخرية والأطلال القديمة قرب Vernal بولاية يوتا. استكشف مواقع Fremont وUte التي يعود عمرها لآلاف السنين في جولات UTV مُرشَدة عبر Uintah Basin.
+             residue: مواقع النقوش والفنون الصخرية قرب بولاية يوتا اكتشف النقوش والفنون الصخرية والأطلال القديمة قرب بولاية يوتا. استكشف مواقع Fremont وUte التي يعود عمرها لآلاف السنين في جولات مُرشَدة عبر Uintah Basin.
+             marker: uintah, basin
+             e.g. /ar/dinosaur-national-monument/visiting-dinosaur-national-monument/ → /ar/dinosaur-national-monument/petroglyphs-rock-art-vernal/
+
+  Probable proper nouns (name-shaped, not in the registry) — 268
+      52×  26p  إرشادات السلامة
+             e.g. /ar/cancellation-policy/ → /safety-guidelines/
+      52×  26p  احجز الآن
+             e.g. /ar/cancellation-policy/ → /booking/
+      52×  26p  الأدلة
+             e.g. /ar/cancellation-policy/ → /guides/
+      52×  26p  الأسئلة الشائعة
+             e.g. /ar/cancellation-policy/ → /faq/
+      52×  26p  الأنشطة
+             e.g. /ar/cancellation-policy/ → /things-to-do/
+      52×  26p  سياسة الإلغاء
+             e.g. /ar/cancellation-policy/ → /ar/cancellation-policy/
+      52×  26p  سياسة الخصوصية
+             e.g. /ar/cancellation-policy/ → /privacy-policy/
+      52×  26p  ما تحتاج إحضاره
+             e.g. /ar/cancellation-policy/ → /guides/what-to-bring/
+      51×  26p  الرئيسية
+             e.g. /ar/cancellation-policy/ → /
+      34×  19p  دليل الطقس في Vernal
+             residue: دليل الطقس في
+             e.g. /ar/hiking/alpine-lakes-hiking-high-uintas/ → /guides/vernal-weather-guide/
+      33×  26p  مسارات وجولات UTV
+             residue: مسارات وجولات
+             e.g. /ar/cancellation-policy/ → /utv/
+      32×  12p  جبال Uintas العالية
+             residue: جبال العالية
+             e.g. /ar/hiking/alpine-lakes-hiking-high-uintas/ → /guides/ultimate-guide-to-ashley-national-forest/
+      26×  26p  العربية
+             e.g. /ar/cancellation-policy/ → /ar/cancellation-policy/
+      26×  26p  المسارات
+             e.g. /ar/cancellation-policy/ → /utv/
+      26×  26p  المطاعم
+             e.g. /ar/cancellation-policy/ → /things-to-do/best-restaurants-vernal-utah/
+      26×  15p  دليل ما تحمله معك
+             e.g. /ar/hiking/alpine-lakes-hiking-high-uintas/ → /guides/what-to-bring/
+      26×  26p  قادم من سولت ليك سيتي
+             e.g. /ar/cancellation-policy/ → /from/salt-lake-city/
+      26×  26p  معلومات ▾
+             e.g. /ar/cancellation-policy/ → #
+      26×  26p  من نحن
+             e.g. /ar/cancellation-policy/ → /about/
+      25×  25p  احجز مغامرتك
+             e.g. /ar/dinosaur-national-monument/petroglyphs-rock-art-vernal/ → /booking/
+      25×  25p  بقلم Dave Wilson — Owner & Lead Guide
+             residue: بقلم — Owner & Lead Guide
+             e.g. /ar/dinosaur-national-monument/petroglyphs-rock-art-vernal/ → /about/dave/
+      24×  12p  غابة Ashley National Forest
+             residue: غابة
+             e.g. /ar/hiking/beginner-hiking-guide-near-vernal/ → /guides/ultimate-guide-to-ashley-national-forest/
+      17×   9p  لقسم المشي
+             e.g. /ar/hiking/bird-watching-near-vernal/ → /hiking/
+      16×  16p  احجز جولة UTV مع Adventure Tours Vernal
+             residue: احجز جولة مع
+             e.g. /ar/hiking/alpine-lakes-hiking-high-uintas/ → /booking/
+      16×  16p  المشي في الطبيعة
+             e.g. /ar/hiking/alpine-lakes-hiking-high-uintas/ → /hiking/
+      14×   8p  أشياء تفعلها في Vernal
+             residue: أشياء تفعلها في
+             e.g. /ar/dinosaur-national-monument/visiting-dinosaur-national-monument/ → /things-to-do/
+      14×   8p  قسم المشي
+             e.g. /ar/hiking/alpine-lakes-hiking-high-uintas/ → /hiking/
+      12×   7p  الطرق البديعة
+             e.g. /ar/hiking/high-uintas-day-hikes/ → /scenic-drives/
+      10×   6p  الطرق السياحية
+             e.g. /ar/hiking/alpine-lakes-hiking-high-uintas/ → /scenic-drives/
+      10×   8p  المشي لرؤية الحياة البرّية
+             e.g. /ar/hiking/beginner-hiking-guide-near-vernal/ → /hiking/wildlife-hiking-guide-near-vernal/
+      10×  10p  المشي للمبتدئين قرب Vernal: دليل من يمشي لأول مرة دليل محلي للمشي للمبتدئين قرب Vernal في يوتا: من أين تبدأ، وما الذي يجعل المسار مناسبًا للمبتدئين، وكيف تختار أول نزهة مشي لك.
+             residue: المشي للمبتدئين قرب : دليل من يمشي لأول مرة دليل محلي للمشي للمبتدئين قرب في يوتا: من أين تبدأ، وما الذي يجعل المسار مناسبًا للمبتدئين، وكيف تختار أول نزهة مشي لك.
+             e.g. /ar/hiking/alpine-lakes-hiking-high-uintas/ → /ar/hiking/beginner-hiking-guide-near-vernal/
+      10×   9p  دليلنا للمشي إلى البحيرات الجبلية
+             e.g. /ar/hiking/bird-watching-near-vernal/ → /hiking/alpine-lakes-hiking-high-uintas/
+       9×   8p  الأنشطة في Vernal
+             residue: الأنشطة في
+             e.g. /ar/hiking/alpine-lakes-hiking-high-uintas/ → /things-to-do/
+       8×   8p  دليل التخييم
+             e.g. /ar/hiking/beginner-hiking-guide-near-vernal/ → /camping/
+       8×   8p  دليل العائلة لجولات UTV: Vernal مع الأطفال والأجداد تخطّط لجولة UTV عائلية في Vernal بولاية يوتا؟ نصائح مرشد محلي للقيادة مع الأطفال والأجداد — الأعمار والراحة والسلامة وضبط إيقاع اليوم.
+             residue: دليل العائلة لجولات : مع الأطفال والأجداد تخطّط لجولة عائلية في بولاية يوتا؟ نصائح مرشد محلي للقيادة مع الأطفال والأجداد — الأعمار والراحة والسلامة وضبط إيقاع اليوم.
+             e.g. /ar/dinosaur-national-monument/petroglyphs-rock-art-vernal/ → /ar/utv/family-utv-guide-vernal/
+       8×   8p  دليل المبتدئين لجولات UTV في Vernal بولاية يوتا دليل المبتدئين لجولات UTV المُرشَدة في Vernal بولاية يوتا — لا تلزم خبرة في القيادة على الطرق الوعرة. مرشدون محليون خبراء، ومركبات Kawasaki KRX 1000، وحجز سهل.
+             residue: دليل المبتدئين لجولات في بولاية يوتا دليل المبتدئين لجولات المُرشَدة في بولاية يوتا — لا تلزم خبرة في القيادة على الطرق الوعرة. مرشدون محليون خبراء، ومركبات ، وحجز سهل.
+             e.g. /ar/dinosaur-national-monument/petroglyphs-rock-art-vernal/ → /ar/utv/beginners-guide-to-utv-tours-vernal/
+       8×   7p  دليلنا للطريق من سولت ليك سيتي إلى Vernal
+             residue: دليلنا للطريق من سولت ليك سيتي إلى
+             e.g. /ar/hiking/alpine-lakes-hiking-high-uintas/ → /from/salt-lake-city/
+       8×   8p  دليلنا من Salt Lake City إلى Vernal
+             residue: دليلنا من إلى
+             e.g. /ar/hiking/high-uintas-day-hikes/ → /from/salt-lake-city/
+       7×   7p  أفضل مسارات المشي في Dinosaur National Monument دليل محلي لأفضل مسارات المشي في Dinosaur National Monument قرب Vernal في يوتا — مسارات الأحافير وإطلالات الأخاديد ونزهات النقوش الصخرية ومسارات عائلية سهلة.
+             residue: أفضل مسارات المشي في دليل محلي لأفضل مسارات المشي في قرب في يوتا — مسارات الأحافير وإطلالات الأخاديد ونزهات النقوش الصخرية ومسارات عائلية سهلة.
+             e.g. /ar/hiking/beginner-hiking-guide-near-vernal/ → /ar/hiking/best-hikes-in-dinosaur-national-monument/
+       7×   3p  البحيرات الجبلية
+             e.g. /ar/hiking/high-uintas-backpacking-guide/ → /hiking/alpine-lakes-hiking-high-uintas/
+       7×   7p  المشي العائلي
+             e.g. /ar/hiking/beginner-hiking-guide-near-vernal/ → /hiking/family-hiking-near-vernal/
+       7×   4p  بالدليل الشامل لغابة Ashley National Forest
+             residue: بالدليل الشامل لغابة
+             e.g. /ar/hiking/alpine-lakes-hiking-high-uintas/ → /guides/ultimate-guide-to-ashley-national-forest/
+       7×   7p  جولات UTV الخاصة في Vernal | للأزواج والمجموعات الصغيرة جولات UTV خاصة مُرشَدة في Vernal بولاية يوتا للأزواج ومناسبات الذكرى السنوية والعائلات الصغيرة التي تريد المسار والإيقاع واليوم كله لنفسها وحدها.
+             residue: جولات الخاصة في | للأزواج والمجموعات الصغيرة جولات خاصة مُرشَدة في بولاية يوتا للأزواج ومناسبات الذكرى السنوية والعائلات الصغيرة التي تريد المسار والإيقاع واليوم كله لنفسها وحدها.
+             e.g. /ar/dinosaur-national-monument/petroglyphs-rock-art-vernal/ → /ar/utv/private-utv-tours-vernal/
+       7×   2p  دليلنا لغابة Ashley National Forest
+             residue: دليلنا لغابة
+             e.g. /ar/hiking/high-uintas-day-hikes/ → /guides/ultimate-guide-to-ashley-national-forest/
+       7×   4p  دليلنا لقمة Kings Peak
+             residue: دليلنا لقمة
+             e.g. /ar/hiking/alpine-lakes-hiking-high-uintas/ → /hiking/kings-peak-hiking-guide/
+       7×   7p  نزهات التصوير
+             e.g. /ar/hiking/beginner-hiking-guide-near-vernal/ → /hiking/photography-hikes-near-vernal/
+       7×   7p  نزهات اليوم الواحد في جبال Uintas العالية: بحيرات ومسارات بديعة دليل محلي لأفضل نزهات اليوم الواحد في جبال Uintas العالية قرب Vernal في يوتا — بحيرات جبلية ومسارات بديعة ونزهات عائلية وكيف تعيش المرتفعات في يوم.
+             residue: نزهات اليوم الواحد في جبال العالية: بحيرات ومسارات بديعة دليل محلي لأفضل نزهات اليوم الواحد في جبال العالية قرب في يوتا — بحيرات جبلية ومسارات بديعة ونزهات عائلية وكيف تعيش المرتفعات في يوم.
+             e.g. /ar/hiking/alpine-lakes-hiking-high-uintas/ → /ar/hiking/high-uintas-day-hikes/
+       6×   6p  المشي إلى البحيرات الجبلية في جبال Uintas العالية: دليل محلي دليل محلي للمشي إلى البحيرات الجبلية في جبال Uintas العالية قرب Vernal في يوتا — اختيار البحيرة، ونزهات اليوم الواحد، والصيد، والتصوير، والمرتفعات.
+             residue: المشي إلى البحيرات الجبلية في جبال العالية: دليل محلي دليل محلي للمشي إلى البحيرات الجبلية في جبال العالية قرب في يوتا — اختيار البحيرة، ونزهات اليوم الواحد، والصيد، والتصوير، والمرتفعات.
+             e.g. /ar/hiking/bird-watching-near-vernal/ → /ar/hiking/alpine-lakes-hiking-high-uintas/
+       6×   4p  النقوش الصخرية
+             e.g. /ar/hiking/beginner-hiking-guide-near-vernal/ → /dinosaur-national-monument/petroglyphs-rock-art-vernal/
+       6×   6p  بالتخييم في أرض الديناصورات
+             e.g. /ar/hiking/beginner-hiking-guide-near-vernal/ → /camping/
+       6×   6p  بطريق بديع
+             e.g. /ar/hiking/photography-hikes-near-vernal/ → /scenic-drives/
+       6×   6p  جولات البراري في Vernal بولاية يوتا | مغامرات UTV مُرشَدة جولات UTV مُرشَدة في براري Vernal بولاية يوتا. أخاديد نائية ونقوش صخرية ومسارات الخارجين عن القانون وأقواس مخفية، على متن Kawasaki KRX 1000. احجز اليوم.
+             residue: جولات البراري في بولاية يوتا | مغامرات مُرشَدة جولات مُرشَدة في براري بولاية يوتا. أخاديد نائية ونقوش صخرية ومسارات الخارجين عن القانون وأقواس مخفية، على متن . احجز اليوم.
+             e.g. /ar/utv/beginners-guide-to-utv-tours-vernal/ → /ar/utv/backcountry-tours-vernal-utah/
+       6×   6p  دليل نزهات التصوير
+             e.g. /ar/hiking/fall-hiking-near-vernal/ → /hiking/photography-hikes-near-vernal/
+       6×   6p  دليلنا المخصّص للمشي العائلي قرب Vernal
+             residue: دليلنا المخصّص للمشي العائلي قرب
+             e.g. /ar/hiking/photography-hikes-near-vernal/ → /hiking/family-hiking-near-vernal/
+       6×   6p  قمة Kings Peak على ارتفاع 13,528 قدمًا، أعلى نقطة في يوتا
+             residue: قمة على ارتفاع 13,528 قدمًا، أعلى نقطة في يوتا
+             e.g. /ar/hiking/beginner-hiking-guide-near-vernal/ → /hiking/kings-peak-hiking-guide/
+       6×   4p  لأفضل مسارات المشي في Dinosaur National Monument
+             residue: لأفضل مسارات المشي في
+             e.g. /ar/hiking/alpine-lakes-hiking-high-uintas/ → /hiking/best-hikes-in-dinosaur-national-monument/
+       6×   4p  ما تحضره معك
+             e.g. /ar/dinosaur-national-monument/visiting-dinosaur-national-monument/ → /guides/what-to-bring/
+       5×   5p  أفضل نزهات Dinosaur National Monument
+             residue: أفضل نزهات
+             e.g. /ar/hiking/photography-hikes-near-vernal/ → /hiking/best-hikes-in-dinosaur-national-monument/
+       5×   4p  الربيع
+             e.g. /ar/hiking/bird-watching-near-vernal/ → /hiking/spring-hiking-near-vernal/
+       5×   4p  حلقة Red Cloud Loop
+             residue: حلقة
+             e.g. /ar/hiking/alpine-lakes-hiking-high-uintas/ → /scenic-drives/red-cloud-loop-scenic-drive/
+    … and 208 more (report capped at 60 per group)
+
+  Repeated English phrases (≥5 pages; cross-cutting view of the groups above) — 53
+      52×  26p  إرشادات السلامة   [proper-noun]
+      52×  26p  احجز الآن   [proper-noun]
+      52×  26p  الأدلة   [proper-noun]
+      52×  26p  الأسئلة الشائعة   [proper-noun]
+      52×  26p  الأنشطة   [proper-noun]
+      52×  26p  سياسة الإلغاء   [proper-noun]
+      52×  26p  سياسة الخصوصية   [proper-noun]
+      52×  26p  ما تحتاج إحضاره   [proper-noun]
+      51×  26p  الرئيسية   [proper-noun]
+      34×  19p  دليل الطقس في Vernal   [proper-noun]
+      33×  26p  مسارات وجولات UTV   [proper-noun]
+      32×  12p  جبال Uintas العالية   [proper-noun]
+      26×  26p  العربية   [proper-noun]
+      26×  26p  المسارات   [proper-noun]
+      26×  26p  المطاعم   [proper-noun]
+      26×  15p  دليل ما تحمله معك   [proper-noun]
+      26×  26p  قادم من سولت ليك سيتي   [proper-noun]
+      26×  26p  معلومات ▾   [proper-noun]
+      26×  26p  من نحن   [proper-noun]
+      25×  25p  احجز مغامرتك   [proper-noun]
+      25×  25p  بقلم Dave Wilson — Owner & Lead Guide   [proper-noun]
+      24×  12p  غابة Ashley National Forest   [proper-noun]
+      17×   9p  لقسم المشي   [proper-noun]
+      16×  16p  احجز جولة UTV مع Adventure Tours Vernal   [proper-noun]
+      16×  16p  المشي في الطبيعة   [proper-noun]
+      14×   8p  أشياء تفعلها في Vernal   [proper-noun]
+      14×   8p  قسم المشي   [proper-noun]
+      12×   7p  الطرق البديعة   [proper-noun]
+      10×   6p  الطرق السياحية   [proper-noun]
+      10×   8p  المشي لرؤية الحياة البرّية   [proper-noun]
+      10×  10p  المشي للمبتدئين قرب Vernal: دليل من يمشي لأول مرة دليل محلي للمشي للمبتدئين قرب Vernal في يوتا: من أين تبدأ، وما الذي يجعل المسار مناسبًا للمبتدئين، وكيف تختار أول نزهة مشي لك.   [proper-noun]
+      10×   9p  دليلنا للمشي إلى البحيرات الجبلية   [proper-noun]
+       9×   8p  الأنشطة في Vernal   [proper-noun]
+       8×   8p  دليل التخييم   [proper-noun]
+       8×   8p  دليل العائلة لجولات UTV: Vernal مع الأطفال والأجداد تخطّط لجولة UTV عائلية في Vernal بولاية يوتا؟ نصائح مرشد محلي للقيادة مع الأطفال والأجداد — الأعمار والراحة والسلامة وضبط إيقاع اليوم.   [proper-noun]
+       8×   8p  دليل المبتدئين لجولات UTV في Vernal بولاية يوتا دليل المبتدئين لجولات UTV المُرشَدة في Vernal بولاية يوتا — لا تلزم خبرة في القيادة على الطرق الوعرة. مرشدون محليون خبراء، ومركبات Kawasaki KRX 1000، وحجز سهل.   [proper-noun]
+       8×   7p  دليلنا للطريق من سولت ليك سيتي إلى Vernal   [proper-noun]
+       8×   8p  دليلنا من Salt Lake City إلى Vernal   [proper-noun]
+       7×   7p  أفضل مسارات المشي في Dinosaur National Monument دليل محلي لأفضل مسارات المشي في Dinosaur National Monument قرب Vernal في يوتا — مسارات الأحافير وإطلالات الأخاديد ونزهات النقوش الصخرية ومسارات عائلية سهلة.   [proper-noun]
+       7×   7p  المشي العائلي   [proper-noun]
+       7×   7p  جولات UTV الخاصة في Vernal | للأزواج والمجموعات الصغيرة جولات UTV خاصة مُرشَدة في Vernal بولاية يوتا للأزواج ومناسبات الذكرى السنوية والعائلات الصغيرة التي تريد المسار والإيقاع واليوم كله لنفسها وحدها.   [proper-noun]
+       7×   7p  نزهات التصوير   [proper-noun]
+       7×   7p  نزهات اليوم الواحد في جبال Uintas العالية: بحيرات ومسارات بديعة دليل محلي لأفضل نزهات اليوم الواحد في جبال Uintas العالية قرب Vernal في يوتا — بحيرات جبلية ومسارات بديعة ونزهات عائلية وكيف تعيش المرتفعات في يوم.   [proper-noun]
+       6×   6p  المشي إلى البحيرات الجبلية في جبال Uintas العالية: دليل محلي دليل محلي للمشي إلى البحيرات الجبلية في جبال Uintas العالية قرب Vernal في يوتا — اختيار البحيرة، ونزهات اليوم الواحد، والصيد، والتصوير، والمرتفعات.   [proper-noun]
+       6×   6p  بالتخييم في أرض الديناصورات   [proper-noun]
+       6×   6p  بطريق بديع   [proper-noun]
+       6×   6p  جولات البراري في Vernal بولاية يوتا | مغامرات UTV مُرشَدة جولات UTV مُرشَدة في براري Vernal بولاية يوتا. أخاديد نائية ونقوش صخرية ومسارات الخارجين عن القانون وأقواس مخفية، على متن Kawasaki KRX 1000. احجز اليوم.   [proper-noun]
+       6×   6p  دليل نزهات التصوير   [proper-noun]
+       6×   6p  دليلنا المخصّص للمشي العائلي قرب Vernal   [proper-noun]
+       6×   6p  قمة Kings Peak على ارتفاع 13,528 قدمًا، أعلى نقطة في يوتا   [proper-noun]
+       5×   5p  أفضل نزهات Dinosaur National Monument   [proper-noun]
+       5×   5p  دليل المشي لرؤية الحياة البرّية   [proper-noun]
+       5×   5p  دليلنا لنزهات اليوم الواحد في جبال Uintas العالية   [proper-noun]
+
+gate-4g: ✔ 45134 anchors across 8 locales — 290 approved identities, 333 review candidates (63 repeated). Advisory: nothing here fails a build.
+
+  A candidate is a question, not a defect. B4 measured 597 correct English anchors
+  against 55 genuine corrections, so this gate reports shape and count and leaves
+  every judgement to a reviewer. Confirming one as correct means adding it to
+  "identities" in i18n-gates/4g-anchors.json; confirming one as drift means a corpus-wide sweep
+  per Gate 4c, never a file-by-file edit.
+
+gate-4q: ✔ 645 rendered pages across 9 locales — no Arabic-Indic or Eastern Arabic-Indic digits in visible text
+         en    80 pages    2274716 chars of visible text  0 occurrence(s)
+         es    77 pages    2655052 chars of visible text  0 occurrence(s)
+         it    77 pages    2655945 chars of visible text  0 occurrence(s)
+         pt    77 pages    2588950 chars of visible text  0 occurrence(s)
+         fr    77 pages    2797354 chars of visible text  0 occurrence(s)
+         de    77 pages    2653984 chars of visible text  0 occurrence(s)
+         ja    77 pages    1153856 chars of visible text  0 occurrence(s)
+         zh    77 pages     895011 chars of visible text  0 occurrence(s)
+         ar    26 pages     781427 chars of visible text  0 occurrence(s)
+         forbidden: Arabic-Indic U+0660–U+0669, Extended Arabic-Indic U+06F0–U+06F9 · view: visibleText@1 (inlineSeparator: "")
+         policy: docs/rtl/AR1-arabic-policy.md §3, enforced in rendered prose (ADR-8 §2.1)

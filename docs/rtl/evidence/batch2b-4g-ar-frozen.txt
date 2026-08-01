@@ -1,0 +1,14 @@
+Locale: ar
+
+  Anchors scanned:      2227
+  Latin-script anchors: 2175
+  Approved identities:  22 distinct (506 occurrences)
+  Review candidates:    269 distinct (1535 occurrences)
+
+  Approved identities — 22
+      75×  26p  Dinosaur National Monument
+      46×  16p  Vernal
+      26×  26p  cozelosdata.com
+      26×  26p  Deutsch
+      26×  26p  Dinosaur Monument
+      26×  25p  Doc's Beach
