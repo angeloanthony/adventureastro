@@ -26,6 +26,8 @@ It supersedes nothing in `AR1-arabic-policy.md`.
 | **5** | **⚠ NEW — M9 and M10 are still unreported.** The pilot did not deliver them. | E-5 §4 |
 | **5.1** | **⚠ NEW — the caseless editorial marker is an open challenge.** | E-2 §6.3 |
 | **6** | **⚠ NEW — floors now enforce.** Gate 4i's `ar` locks moved from 1 to 33 and 42. | `9282317` |
+| **6.3** | **⚠ NEW — freeze the downstream gate numbers BEFORE remediating.** The `&&` chain hides every gate behind the first red one. | batch 2a: 4f/4h/4i/4g/4q never ran; the baseline had to be reconstructed |
+| **6.4** | **⚠ NEW — a local commit may be published within minutes.** The `k` bot is a property of the environment, not an anomaly. | batch 2a: 3 articles pre-committed, 2 milestones auto-pushed |
 
 ---
 
@@ -397,3 +399,50 @@ shipped. The full procedure — instrument route lists, ceiling extension, censu
 the guards that must run in order — is
 [`AR2-E4-phase2-tight-ceiling.md` §11](AR2-E4-phase2-tight-ceiling.md). **Read it before starting
 a batch, not after finishing one.**
+
+### 6.3 ⚠ NEW — first contact: capture, then FREEZE THE DOWNSTREAM NUMBERS, then remediate
+
+**`gates:dist` is an `&&` chain, so the first red gate hides every gate behind it.** Batch 2a
+stopped at 4n and 4f / 4h / 4i / 4g / 4q **never ran** — leaving them with no numeric baseline at
+all, only a pass/fail probe. Proving "no regressions" afterwards then cost a full reconstruction:
+the 28 edits had to be reversed to rebuild the unremediated corpus, with exactness proved by
+restoring the tracked files byte-identical to `HEAD`. **That work is avoidable, and this is how.**
+
+Standing procedure for every batch from 2b on:
+
+1. **Author all files first.** Do not build incrementally — one build, on a complete batch.
+2. **Run exactly one first build** and preserve its complete output unedited. That capture is the
+   acceptance artifact, and it is a **first-contact** artifact: it is never regenerated.
+3. **If the chain short-circuits, do NOT start editing prose.** `astro build` has already written
+   a complete `dist/`, and every gate reads `dist/`, so the hidden gates can be run directly
+   against the *same bytes* the first build produced:
+
+   ```
+   npm run gate:4f   npm run gate:4h   npm run gate:4i   npm run gate:4g   npm run gate:4q
+   ```
+
+   ⚠ **Not `npm run validate`** — it is `gates:src && gates:dist`, so it re-enters the same chain
+   and short-circuits at the same gate. Individual `gate:*` scripts are the only way through.
+4. **Record those numbers.** They are the pre-remediation baseline, measured directly.
+5. **Only then remediate**, and re-run the chain to diff against the frozen numbers.
+
+The numbers worth freezing are the ones that move silently — the **advisory** counts, which never
+block and therefore never announce drift. In batch 2a exactly one moved (4g review candidates
+270 → 271, occurrences unchanged at 955) and it was a real, avoidable authoring artifact; the
+blocking verdicts were all identical. **A gate reading ✔ is not evidence its population is
+unchanged.**
+
+### 6.4 ⚠ A local commit may be published within minutes — this is a property of the environment
+
+An external process commits the working tree as `k` and pushes on its own schedule. During batch
+2a it had already swept **3 of the 8** articles into the repo *before* the session began (which
+is why that batch was 8 files, not the 5 that were visible), and it pushed the two milestone
+commits between one status check and the next. Nothing was damaged either time, but the
+consequences for procedure are permanent:
+
+- **Verify staged scope before every commit** — `git add <paths>` does not scope a commit;
+  `git diff --cached --stat` does (P19).
+- **Assume any commit is immediately public.** Do not rely on a follow-up "cleanup commit" to
+  explain intent, and do not leave a milestone in a state you would not publish.
+- **Check `git log` before assuming the tree is yours** — untracked files from a parallel
+  workstream may already be committed, and a batch may be larger than it looks.
