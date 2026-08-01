@@ -1,0 +1,51 @@
+
+AR FRONTMATTER CEILING — rebuilt settled bound for Arabic-script locks
+  en pool: 57 entries · registered ar spokes: 25 · card limit: 4
+
+=== ASSERTION C — ar frontmatter never exceeds its en source, per registered page ===
+  أرض الديناصورات  ⟷  Dinosaur Country
+     ar 4  ·  en 4  ·  pages where ar > en: 0/25   ✔
+  المسارات  ⟷  Trails
+     ar 1  ·  en 25  ·  pages where ar > en: 0/25   ✔
+  ✔ correspondence holds on every registered page — projecting through en never under-counts
+
+=== REBUILT SETTLED CEILING — tight bound over the en pool, counting the EN SOURCE ===
+  lock                   carriers  max/card  max/page  REBUILT   (Σ over the registered pages)
+  أرض الديناصورات              14         2         8      200
+  المسارات                     11         4        14      344
+
+=== MODEL B — per-card constant measured on ar frontmatter (tighter, same soundness) ===
+  lock                    max/card(ar)  per page  MODEL B   falsifier
+  أرض الديناصورات                    1         4      100   an ar frontmatter with > 1
+  المسارات                           1         4      100   an ar frontmatter with > 1
+
+=== ADDITIVITY — the ceiling is Σ over per-page rows, so registration ADDS ===
+  أرض الديناصورات      9p → 72   17p → 136   25p → 200   constant 8/page
+  المسارات             9p → 124   17p → 234   25p → 344   varies 12–14/page
+  Every row is ≥ 0 and independent of the others, so the sum is monotone
+  non-decreasing in the registered set: a new batch appends rows and can never lower it.
+
+=== ASSERTION A — rebuilt ceiling ≥ observed related, per lock ===
+  أرض الديناصورات      observed    9   rebuilt  200   ✔
+  المسارات             observed    4   rebuilt  344   ✔
+  ✔ all 2 lock(s) bounded
+
+=== COMPARISON — old settled vs rebuilt vs measured vs observed ===
+  lock                    oldSet  rebuilt  observed   prose   tmpl  ceilNP   whole   head  class
+  أرض الديناصورات              0      200         9     123     50     250     182    -68  infeasible
+  المسارات                     0      344         4     385     25     369     414     45  feasible (weak)
+
+  ⚠ A floor must sit strictly inside (ceilNP, whole]. Read ceilNP from the
+    REBUILT column — the old settled ceiling of 0 understates it and inflates headroom.
+
+=== ENFORCEABILITY — would the frozen floor survive total prose deletion? ===
+  lock                    floor   whole   prose  survives   verdict
+  أرض الديناصورات            33     182     123        59   ⚠ DEAD — template alone satisfies it
+  المسارات                   42     414     385        29   ✔ detects (margin 13)
+
+  A floor below `survives` enforces nothing: the page could lose every word of
+  Arabic prose and 4i would still be green. This test needs no ceiling model — it is
+  arithmetic on the measured window — so it holds whatever the projection turns out to be.
+
+wrote C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/09d24dcc-18d0-454f-b163-f95316fa3d9b/scratchpad/ar-ceiling.json
+
