@@ -41,6 +41,8 @@ It supersedes nothing in `AR1-arabic-policy.md`.
 | **3.4** | **⚠ NEW — the classifier-noun pattern before a Latin name.** | E-1 §6.4 |
 | **3.5** | **⚠ NEW — a parenthetical that CLOSES on a Latin institution name.** The largest class in batch 2a; §3.3's digit class produced **zero**. | batch 2a, **28 of 30** gate-4n findings |
 | **2.4** | **⚠ NEW — the `description` frontmatter budget, and why Arabic hits it.** | E-2 §6.4, **3 of 9** files failed the build |
+| **2.4** | **⚠ CORRECTED — `title` is capped at 65 too, and this brief never said so.** | batch 2b: first build stopped at schema, 69/65, before any gate ran |
+| **1.1.2** | **⚠ NEW — batch 2b closed; §3.5's class produced ZERO.** The §6.2 re-freeze is **blocked**, not done. | batch 2b, 1 gate-4n finding (a §3.2 guillemet); [`AR2-batch2b-assertion-A.md`](AR2-batch2b-assertion-A.md) |
 | **5** | **⚠ NEW — M9 and M10 are still unreported.** The pilot did not deliver them. | E-5 §4 |
 | **5.1** | **⚠ NEW — the caseless editorial marker is an open challenge.** | E-2 §6.3 |
 | **6** | **⚠ NEW — floors now enforce.** Gate 4i's `ar` locks moved from 1 to 33 and 42. | `9282317` |
@@ -107,6 +109,33 @@ Every downstream gate was measured against a **reconstructed unremediated baseli
 reversed, proved exact by restoring the three tracked files byte-identical to `HEAD`), so "no
 regressions" is a measurement here and not an assertion. 4f, 4h, 4i and 4g are numerically
 identical; 4q moves by exactly the authored characters.
+
+### 1.1.2 Batch 2b — the last 8, closed
+
+`high-uintas-day-hikes` · `kings-peak-hiking-guide` · `photography-hikes-near-vernal` ·
+`spring-hiking-near-vernal` · `summer-hiking-near-vernal` · `wildflower-hiking-near-vernal` ·
+`wildlife-hiking-guide-near-vernal` · `winter-hiking-near-vernal`
+
+**The `hiking` hub is complete: 16 of 16. 25 of 57 spokes, 645 routes, 26 `ar` pages.**
+
+Two findings, and neither was the class the brief predicted:
+
+1. **A schema cap the brief did not document** — `title` ≤ 65, hit at 69. See §2.4. The build
+   stopped before any gate ran, exactly as §2.4 warns schema failures do.
+2. **One gate-4n finding, of a class §3.2 already names** — a guillemet closing straight onto a
+   Latin run, `«المشي الجبلي في Uintas»`. Fixed by ending the quoted phrase on an Arabic word.
+
+**§3.5's parenthetical class — 28 of 30 findings in batch 2a — produced ZERO here.** The guidance
+was followed. So did §3.3's digit class, for the second batch running.
+
+Per §6.3 the gates hidden behind 4n were run individually against the same `dist/` **before**
+remediating, so "no regressions" is again a measurement: 4f, 4h, 4i and 4g are numerically
+identical afterwards, and 4q moved by **+6 characters** — exactly the characters the one edit added.
+
+⚠ **The §6.2 second operation did NOT complete.** The census re-freeze stopped at §11.2 criterion 2:
+Assertion A is falsified for both `ar` locks, structurally rather than by anything batch 2b
+authored. See [`AR2-batch2b-assertion-A.md`](AR2-batch2b-assertion-A.md). The floors in force remain
+sound (criterion 5 passes with `ceilNP` 132 vs 33 and 389 vs 42) but under-scoped.
 
 ### 1.2 Two deliverables per file, not one — unchanged and still the top failure mode
 
@@ -191,11 +220,21 @@ a road sign, a booking system or a map. This diverges from `ja` on purpose (poli
 (E-2 §3). It was fixed at all four source sites, not only the flagged one — a lock is a
 terminology decision, not a per-site one.
 
-### 2.4 ⚠ NEW — the `description` frontmatter budget
+### 2.4 ⚠ NEW — the `title` and `description` frontmatter budgets
 
 `content.config.ts` constrains `description` to **120–165 characters**. **Three of the nine pilot
 files exceeded it on first authoring** (by 30, 1 and 2 characters) and **failed the build at
 schema validation, before any gate ran** (E-2 §6.4).
+
+> **⚠ CORRECTED — `title` is capped at 65 characters, and this brief did not say so.**
+>
+> Batch 2b's first build stopped here, not at a gate: `high-uintas-day-hikes.ar` came in at **69**.
+> No Arabic batch had exceeded it before, so the cap had never been observed and §2.4 recorded only
+> the `description` budget. An Arabic title that reads naturally is easy to run long — the fix was
+> four characters — but the failure costs a **full build** to learn.
+>
+> Both budgets are now checked by `scripts/rtl/preflight-ar.mjs`, which reads source and takes a
+> second. Run it before you build.
 
 Arabic diacritics each consume one character of that budget — `مُرشَدة` carries two. Count the
 rendered string, not the word count. This is a schema failure, not a gate finding, so nothing in
