@@ -60,6 +60,30 @@ const LINKABLE = [
 const CARD_LIMIT = 4; // RelatedArticles.astro: `limit = 4`, enforced in take(). Structural.
 
 /**
+ * THE ADOPTED SETTLED CEILING (E-8 §7 condition 1, adopted here).
+ *
+ * Model B is the governing bound for an Arabic-script lock:
+ *
+ *     per page ≤ CARD_LIMIT × AR_MAX_PER_CARD
+ *
+ * It is adopted over Model A (project through the English source) because it is the simpler
+ * model that explains the observations — it needs no cross-language correspondence at all —
+ * it is tighter while equally sound, it keeps additivity, and Model A rates `dinosaur-country`
+ * INFEASIBLE (ceilNP 250 > whole 182), which would require dropping a live lock on the strength
+ * of a mapping rather than a measurement. Model A is retained below as the loose fallback if
+ * this constant's falsifier ever fires.
+ *
+ * ⚠ THIS NUMBER IS A FROZEN ASSUMPTION, NOT A MEASUREMENT. It was measured as 1 over 25 of 57
+ * spokes; every later batch must re-assert it. Two things hold it:
+ *   - this instrument fails if the measured max/card exceeds it (below), and
+ *   - `scripts/rtl/preflight-ar.mjs` fails any Arabic SOURCE file whose title + description
+ *     carries a lock phrase more than this many times — before the build, where it is cheap.
+ * Raising it here without raising it there (or the reverse) leaves the bound unasserted, so
+ * the two are cross-referenced by name in both files.
+ */
+const AR_MAX_PER_CARD = 1;
+
+/**
  * The Arabic-script locks and the English source each is the locked rendering of.
  *
  * `enSource` is read back out of the glossary's `concept` string rather than typed here, so
@@ -267,25 +291,40 @@ for (const lock of locks) {
 // It needs no cross-language mapping at all, which makes it the simpler of the two, and its
 // falsifier is a single source-level number that any batch can check before it builds: an
 // Arabic title+description carrying the lock phrase more than `maxPerCardAr` times.
-process.stdout.write('\n=== MODEL B — per-card constant measured on ar frontmatter (tighter, same soundness) ===\n');
+process.stdout.write('\n=== MODEL B — ADOPTED settled ceiling (per-card constant, measured on ar frontmatter) ===\n');
+process.stdout.write(`  adopted AR_MAX_PER_CARD = ${AR_MAX_PER_CARD}; the bound is CARD_LIMIT × that, summed per page.\n`);
 process.stdout.write('  lock'.padEnd(24) + 'max/card(ar)'.padStart(14) + 'per page'.padStart(10)
-  + 'MODEL B'.padStart(9) + '   falsifier\n');
+  + 'MODEL B'.padStart(9) + '   vs adopted\n');
+let bViolations = 0;
 for (const lock of locks) {
   const rec = out.locks.find((l) => l.id === lock.id);
   let maxPerCardAr = 0;
+  let worstFile = null;
   for (const slug of registered) {
     const [hub, ...rest] = slug.split('/');
     const arFile = path.join(CONTENT, hub, `${rest.join('/')}.ar.mdx`);
     if (!existsSync(arFile)) continue;
-    maxPerCardAr = Math.max(maxPerCardAr, contribution(frontmatter(arFile), [lock.phrase]));
+    const c = contribution(frontmatter(arFile), [lock.phrase]);
+    if (c > maxPerCardAr) { maxPerCardAr = c; worstFile = slug; }
   }
-  const perPage = limit * maxPerCardAr;
+  // The bound is computed from the ADOPTED constant, not from the measurement, because the
+  // frozen policy is what the floors were placed against. The measurement's only job here is
+  // to falsify it. Using max(measured, adopted) would silently absorb a violation into a
+  // higher ceiling and the floor placed under the old one would go quietly unsound.
+  const perPage = limit * AR_MAX_PER_CARD;
   const modelB = perPage * registered.length;
-  Object.assign(rec, { maxPerCardAr, modelB });
+  const ok = maxPerCardAr <= AR_MAX_PER_CARD;
+  if (!ok) bViolations += 1;
+  Object.assign(rec, { maxPerCardAr, maxPerCardArFile: worstFile, adoptedMaxPerCard: AR_MAX_PER_CARD, modelB, modelBSound: ok });
   process.stdout.write('  ' + lock.phrase.slice(0, 21).padEnd(22) + String(maxPerCardAr).padStart(14)
     + String(perPage).padStart(10) + String(modelB).padStart(9)
-    + `   an ar frontmatter with > ${maxPerCardAr}\n`);
+    + (ok ? '   ✔ within adopted\n' : `   ⚠ FALSIFIED by ${worstFile} (${maxPerCardAr} > ${AR_MAX_PER_CARD})\n`));
 }
+out.modelBViolations = bViolations;
+process.stdout.write(bViolations === 0
+  ? `  ✔ the adopted constant holds on all ${registered.length} registered ar frontmatters\n`
+  : '  ⚠ MODEL B FALSIFIED — the adopted ceiling is too low, every floor placed under it is\n'
+    + '    unsound, and preflight-ar.mjs should have caught this in source. Fall back to Model A.\n');
 
 // --- ADDITIVITY — the property that lets a batch add a row instead of invalidating the bound
 process.stdout.write('\n=== ADDITIVITY — the ceiling is Σ over per-page rows, so registration ADDS ===\n');
@@ -307,40 +346,54 @@ if (ARGS.window) {
   let win;
   try { win = JSON.parse(readFileSync(ARGS.window, 'utf8')); }
   catch (err) { process.stderr.write(`could not read --window: ${err.message}\n`); process.exit(2); }
-  process.stdout.write('\n=== ASSERTION A — rebuilt ceiling ≥ observed related, per lock ===\n');
+  // ⚠ RECORDED BUT DEMOTED (E-8 §5). This assertion is kept — it is load-bearing for the Latin
+  // locks, where `Vernal` observed 174 against a limit-1 ceiling of 75 — and it is asserted
+  // against the ADOPTED ceiling rather than the loose one. But for the Arabic locks the
+  // `--falsify` control does NOT go red, so per METHOD rule 5 it cannot discriminate a good
+  // bound from a bad one at this corpus scale and must not be cited as evidence of soundness.
+  // The label below says so on every run, so a future reader cannot take a green tick for more
+  // than it is worth. The check that discriminates is ENFORCEABILITY, further down.
+  process.stdout.write('\n=== ASSERTION A — adopted (Model B) ceiling ≥ observed related, per lock ===\n');
+  process.stdout.write('  ⚠ DEMOTED for these locks: the --falsify control does not go red (E-8 §5),\n'
+    + '    so a green tick here is NOT evidence the bound is sound. Reported, not cited.\n');
   for (const lock of locks) {
     const rec = out.locks.find((l) => l.id === lock.id);
     const observed = win.totals?.[lock.phrase]?.related ?? 0;
     rec.observedRelated = observed;
-    const ok = observed <= rec.rebuilt;
+    const ok = observed <= rec.modelB;
     if (!ok) aViolations += 1;
     process.stdout.write(`  ${lock.phrase.padEnd(20)} observed ${String(observed).padStart(4)}`
-      + `   rebuilt ${String(rec.rebuilt).padStart(4)}   ${ok ? '✔' : '⚠ UNSOUND'}\n`);
+      + `   adopted ${String(rec.modelB).padStart(4)}   (model A ${String(rec.rebuilt).padStart(4)})`
+      + `   ${ok ? '✔' : '⚠ UNSOUND'}\n`);
   }
   process.stdout.write(aViolations === 0
-    ? `  ✔ all ${locks.length} lock(s) bounded\n` : `  ⚠ ${aViolations} UNSOUND\n`);
+    ? `  ✔ all ${locks.length} lock(s) bounded — non-discriminating, see the note above\n`
+    : `  ⚠ ${aViolations} UNSOUND\n`);
 
   // --- the comparison the milestone exists to produce ------------------------------------
-  process.stdout.write('\n=== COMPARISON — old settled vs rebuilt vs measured vs observed ===\n');
-  process.stdout.write('  lock'.padEnd(24) + 'oldSet'.padStart(8) + 'rebuilt'.padStart(9)
-    + 'observed'.padStart(10) + 'prose'.padStart(8) + 'tmpl'.padStart(7)
+  process.stdout.write('\n=== COMPARISON — old settled vs model A vs ADOPTED model B vs observed ===\n');
+  process.stdout.write('  lock'.padEnd(24) + 'oldSet'.padStart(8) + 'modelA'.padStart(8)
+    + 'ADOPTED'.padStart(9) + 'observed'.padStart(10) + 'prose'.padStart(8) + 'tmpl'.padStart(7)
     + 'ceilNP'.padStart(8) + 'whole'.padStart(8) + 'head'.padStart(7) + '  class\n');
   for (const lock of locks) {
     const rec = out.locks.find((l) => l.id === lock.id);
     const t = win.totals?.[lock.phrase] ?? {};
     const prose = t.prose ?? 0, whole = t.whole ?? 0;
     const tmpl = (t.cta ?? 0) + (t.byline ?? 0) + (t.chrome ?? 0);
-    const ceilNP = tmpl + rec.rebuilt;
+    const ceilNP = tmpl + rec.modelB;          // ADOPTED — Model B, not the loose Model A
+    const ceilNPModelA = tmpl + rec.rebuilt;   // retained: the fallback if Model B is falsified
     const head = whole - ceilNP;
     const cls = ceilNP >= whole ? 'infeasible' : (head >= prose / 2 ? 'feasible (strong)' : 'feasible (weak)');
-    Object.assign(rec, { prose, whole, tmpl, ceilNP, headroom: head, class: cls });
+    Object.assign(rec, { prose, whole, tmpl, ceilNP, ceilNPModelA, headroom: head, class: cls });
     process.stdout.write('  ' + lock.phrase.slice(0, 21).padEnd(22)
-      + String(0).padStart(8) + String(rec.rebuilt).padStart(9) + String(rec.observedRelated).padStart(10)
+      + String(0).padStart(8) + String(rec.rebuilt).padStart(8) + String(rec.modelB).padStart(9)
+      + String(rec.observedRelated).padStart(10)
       + String(prose).padStart(8) + String(tmpl).padStart(7) + String(ceilNP).padStart(8)
       + String(whole).padStart(8) + String(head).padStart(7) + '  ' + cls + '\n');
   }
-  process.stdout.write('\n  ⚠ A floor must sit strictly inside (ceilNP, whole]. Read ceilNP from the\n'
-    + '    REBUILT column — the old settled ceiling of 0 understates it and inflates headroom.\n');
+  process.stdout.write('\n  ⚠ A floor must sit strictly inside (ceilNP, whole], read from the ADOPTED column.\n'
+    + '    Under model A `أرض الديناصورات` is infeasible (ceilNP exceeds whole) and the lock would\n'
+    + '    have to be dropped; that is the substantive consequence of the model choice.\n');
 
   // --- THE ENFORCEABILITY TEST -----------------------------------------------------------
   //
@@ -360,22 +413,70 @@ if (ARGS.window) {
         .map((f) => [f.key.phrase, f.value]));
     } catch { return {}; }
   })();
+  // ⚠ POPULATION. `whole`/`prose` above are summed over the registered SPOKES. The census
+  // freezes over EVERY registered ar route, which additionally includes the chrome-only
+  // `cancellation-policy` page. Comparing the two directly is the §10.2 mismatch that predicted
+  // 32/41 against a frozen 33/42, so the inline page's own counts are added rather than
+  // assumed — and if the window did not emit them, that is stated instead of silently ignored.
+  const inlineT = win.inline?.totals ?? null;
+  if (!inlineT) {
+    process.stdout.write('  ⚠ the window emitted no inline page — figures below are SPOKE-SCOPED and will\n'
+      + '    understate the census by that page\'s contribution. Re-run measure-prose-window.mjs.\n');
+  }
   process.stdout.write('  lock'.padEnd(24) + 'floor'.padStart(7) + 'whole'.padStart(8)
     + 'prose'.padStart(8) + 'survives'.padStart(10) + '   verdict\n');
   for (const lock of locks) {
     const rec = out.locks.find((l) => l.id === lock.id);
+    const it = inlineT?.[lock.phrase] ?? null;
     const floor = frozen[lock.phrase];
-    const survives = rec.whole - rec.prose; // what remains with all prose gone
+    const wholeC = rec.whole + (it?.whole ?? 0);
+    const proseC = rec.prose + (it?.prose ?? 0);
+    const tmplC = rec.tmpl + ((it?.cta ?? 0) + (it?.byline ?? 0) + (it?.chrome ?? 0));
+    const survives = wholeC - proseC; // what remains with every word of ar prose gone
     const detects = floor !== undefined && survives < floor;
-    rec.frozenFloor = floor; rec.survivesDeletion = survives; rec.detectsDeletion = detects;
+    Object.assign(rec, {
+      censusPages: registered.length + (win.inline ? 1 : 0),
+      wholeCensus: wholeC, proseCensus: proseC, tmplCensus: tmplC,
+      ceilNPCensus: tmplC + rec.modelB,
+      frozenFloor: floor, survivesDeletion: survives, detectsDeletion: detects,
+    });
     process.stdout.write('  ' + lock.phrase.slice(0, 21).padEnd(22)
-      + String(floor ?? '—').padStart(7) + String(rec.whole).padStart(8)
-      + String(rec.prose).padStart(8) + String(survives).padStart(10)
+      + String(floor ?? '—').padStart(7) + String(wholeC).padStart(8)
+      + String(proseC).padStart(8) + String(survives).padStart(10)
       + (detects ? `   ✔ detects (margin ${floor - survives})` : '   ⚠ DEAD — template alone satisfies it') + '\n');
   }
   process.stdout.write('\n  A floor below `survives` enforces nothing: the page could lose every word of\n'
     + '  Arabic prose and 4i would still be green. This test needs no ceiling model — it is\n'
     + '  arithmetic on the measured window — so it holds whatever the projection turns out to be.\n');
+
+  // --- THE PROJECTED REFRESH ---------------------------------------------------------------
+  //
+  // A census refresh sets each floor to the measured whole-page corpus total, so the floor it
+  // WILL freeze is computable before it is run. Projecting it first is what turns the refresh
+  // from a leap into a checked step: if the projection does not clear both bars, the refresh
+  // must not happen, because re-freezing is exactly how the dead floor got frozen in the
+  // first place. Both bars are E-8 §7 condition 3.
+  process.stdout.write('\n=== PROJECTED REFRESH — the floor a re-freeze would set, checked BEFORE running it ===\n');
+  process.stdout.write('  lock'.padEnd(24) + 'now'.padStart(6) + 'after'.padStart(7)
+    + 'ceilNP'.padStart(8) + 'survives'.padStart(10) + '   placement          enforceability\n');
+  let projFail = 0;
+  for (const lock of locks) {
+    const rec = out.locks.find((l) => l.id === lock.id);
+    const after = rec.wholeCensus;                       // what census:phrase-count would record
+    const placed = after > rec.ceilNPCensus && after <= rec.wholeCensus;  // inside (ceilNP, whole]
+    const enforces = rec.survivesDeletion < after;
+    if (!placed || !enforces) projFail += 1;
+    Object.assign(rec, { projectedFloor: after, projectedPlacementOk: placed, projectedEnforces: enforces });
+    process.stdout.write('  ' + lock.phrase.slice(0, 21).padEnd(22)
+      + String(rec.frozenFloor ?? '—').padStart(6) + String(after).padStart(7)
+      + String(rec.ceilNPCensus).padStart(8) + String(rec.survivesDeletion).padStart(10)
+      + (placed ? `   ✔ in (${rec.ceilNPCensus}, ${rec.wholeCensus}]` : `   ⚠ OUTSIDE (${rec.ceilNPCensus}, ${rec.wholeCensus}]`).padEnd(22)
+      + (enforces ? `✔ margin ${after - rec.survivesDeletion}` : '⚠ STILL DEAD') + '\n');
+  }
+  out.projectedRefreshOk = projFail === 0;
+  process.stdout.write(projFail === 0
+    ? '  ✔ every projected floor clears its ceiling AND detects total prose deletion — refresh is safe\n'
+    : `  ⚠ ${projFail} lock(s) would not be enforcing after a refresh — DO NOT re-freeze\n`);
 }
 
 if (ARGS.falsify) {
@@ -400,5 +501,8 @@ if (ARGS.falsify) {
 }
 
 if (ARGS.json) { writeFileSync(ARGS.json, JSON.stringify(out, null, 2)); process.stdout.write(`\nwrote ${ARGS.json}\n`); }
-if (cViolations > 0 && !ARGS.falsify) process.exit(2);
+// A falsified Model B is a failed soundness assertion on the ADOPTED ceiling, so it exits the
+// same way Assertion C does. Model A's soundness (cViolations) still matters because Model A is
+// the declared fallback: if B is falsified, A is what the program falls back to.
+if ((cViolations > 0 || bViolations > 0) && !ARGS.falsify) process.exit(2);
 process.stdout.write('\n');

@@ -462,6 +462,31 @@ if (args.baseline) {
 }
 
 if (args.json) {
-  writeFileSync(args.json, JSON.stringify({ root: args.root, candidates: CANDIDATES, totals: current.totals }, null, 2) + '\n', 'utf8');
+  // ⚠ POPULATION, emitted rather than left to be rediscovered.
+  //
+  // `totals` covers the registered SPOKES only: `cancellation-policy` is decomposed separately
+  // because it renders no RelatedArticles, no CTA and no byline, so averaging it into a window
+  // built out of those components would be a category error. The census, however, counts EVERY
+  // registered ar route. A consumer that compares a figure from here against a frozen census
+  // figure is therefore comparing two page sets — precisely the mismatch that produced 32/41
+  // against a frozen 33/42 (AR2-E4-phase2 §10.2). So emit the inline page's own per-term counts
+  // and the spoke list: the correction becomes an addition the consumer performs explicitly,
+  // and its absence becomes visible instead of silent.
+  const inlineTotals = {};
+  if (current.inline) {
+    for (const cand of CANDIDATES) {
+      const forms = formsOf(cand);
+      const { parts } = current.inline;
+      inlineTotals[cand.term] = Object.fromEntries(COMPONENTS.map((c) => [c, count(parts[c], forms)]));
+      inlineTotals[cand.term].whole = count(parts.whole, forms);
+    }
+  }
+  writeFileSync(args.json, JSON.stringify({
+    root: args.root,
+    candidates: CANDIDATES,
+    totals: current.totals,
+    spokes: current.pages.map((p) => p.slug),
+    inline: current.inline ? { slug: current.inline.slug, totals: inlineTotals } : null,
+  }, null, 2) + '\n', 'utf8');
   process.stdout.write(`\nwrote ${args.json}\n`);
 }

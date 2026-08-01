@@ -6,6 +6,35 @@ import { readFileSync } from 'node:fs';
 const LATIN = /[A-Za-z]/;
 const ARABIC_INDIC = /[٠-٩۰-۹]/;
 
+/**
+ * MODEL B'S FALSIFIER (AR-2 Track E, E-8 §7 condition 2).
+ *
+ * The adopted settled ceiling for an Arabic-script glossary lock is
+ * `CARD_LIMIT × AR_MAX_PER_CARD` — a RelatedArticles card renders exactly the target page's
+ * `title` and `description` (`RelatedArticles.astro:107-108,118-119`) and at most four cards
+ * render (`limit = 4`), so this constant is the whole model. The `ar` glossary floors are
+ * placed strictly above the ceiling it produces.
+ *
+ * ⚠ It is a FROZEN ASSUMPTION, measured over 25 of 57 spokes, not a law. One Arabic file whose
+ * title + description carries a lock phrase twice raises the real ceiling by 4 per page and
+ * makes every floor placed under the old one unsound — and nothing downstream would say so:
+ * gate 4i only enforces a MINIMUM, so a higher ceiling never turns it red. That is why the
+ * check lives here, in source, where it costs a second instead of a build.
+ *
+ * Cross-referenced with `AR_MAX_PER_CARD` in `scripts/rtl/measure-ar-frontmatter-ceiling.mjs`,
+ * which re-measures the same number across the whole registered corpus and fails if the two
+ * drift apart. Raising it in one place without the other leaves the bound unasserted.
+ */
+const AR_MAX_PER_CARD = 1;
+const AR_LOCKS = (() => {
+  try {
+    const g = JSON.parse(readFileSync('i18n-gates/4i-glossary.json', 'utf8'));
+    return (g.locales?.ar?.locks ?? []).map((l) => ({ id: l.id, phrase: l.phrase }));
+  } catch {
+    return null; // reported per file below — an unread registry must not read as "clean"
+  }
+})();
+
 let bad = 0;
 const say = (f, msg) => { console.log(`  ${f}: ${msg}`); bad++; };
 
@@ -27,6 +56,22 @@ for (const path of process.argv.slice(2)) {
   else {
     const n = [...desc[1]].length;
     if (n < 120 || n > 165) say(file, `description ${n} chars, outside 120-165`);
+  }
+
+  // The settled ceiling's falsifier. The "card" is title + description because that is
+  // exactly what RelatedArticles renders — the same pair the ceiling instrument counts.
+  if (AR_LOCKS === null) {
+    say(file, 'could not read i18n-gates/4i-glossary.json — the per-card ceiling is UNASSERTED');
+  } else {
+    const card = `${title?.[1] ?? ''}\n${desc?.[1] ?? ''}`;
+    for (const lock of AR_LOCKS) {
+      const n = card.split(lock.phrase).length - 1;
+      if (n > AR_MAX_PER_CARD) {
+        say(file, `lock "${lock.id}" occurs ${n}× in title+description, over the adopted per-card `
+          + `ceiling of ${AR_MAX_PER_CARD} — this FALSIFIES the settled ceiling and unsounds every `
+          + `ar glossary floor. Reword, or re-run measure-ar-frontmatter-ceiling.mjs and re-place the floors.`);
+      }
+    }
   }
 
   // policy §3 — no exception, anywhere
