@@ -181,6 +181,46 @@ occur was caught by `preflight-ar.mjs` **in source**, before any build.
 because a related card renders the target's description on every sibling page. §1.2 is not
 theoretical.
 
+### 1.4 Batch 4 — `camping`, 4 files, CLOSED
+
+`camping-at-flaming-gorge` · `camping-at-red-fleet-state-park` ·
+`camping-at-steinaker-state-park` · `camping-in-ashley-national-forest`
+
+**33 of 57 spokes · 653 routes · 34 `ar` pages · whole suite green on the first build.**
+**Gate 4n zero for the second batch running** — on a new hub, which is the harder test.
+
+Two findings, both caught before they could reach a gate:
+
+1. **§3.5 in frontmatter**, caught by `preflight-ar.mjs`: `(هيئة Utah Division of Wildlife
+   Resources)` closes on Latin, and frontmatter has no `<bdi>` available. Fixed with `نفسها`.
+2. **⚠ Terminology drift I introduced myself.** Two occurrences of `الدروب` — the *competing*
+   rendering that §2.3 warns about — went into `camping-in-ashley-national-forest`. Gate 4i caught
+   it as an **advisory** (20 → 22 occurrences), not a failure, because the `ar` decision was never
+   formally applied. Reverted to the locked `المسارات`; advisories back to 20.
+
+> **The lesson is about advisory gates.** A blocking gate would have stopped the build. This one
+> reported a number in a summary line, and the *only* reason it was noticed is that the batch
+> procedure diffs the advisory counts (§6.3). **Read the advisory deltas on every batch** — an
+> advisory that grows is drift entering the corpus, and the pre-existing 9 occurrences are exactly
+> how the first ones got in.
+
+### 1.5 ⚠ A trend to watch — `dinosaur-country` headroom is narrowing
+
+The settled ceiling grows **6.00/page** while the whole-page count grows **5.25/page**, because
+each new page adds a fixed 4 to the Model B bound plus ~2 of template, while its prose contributes
+less than that. So headroom shrinks ~**0.75/page**:
+
+| `ar` pages | ceilNP | whole | headroom |
+|---:|---:|---:|---:|
+| 26 (batch 2b) | 151 | 183 | **32** |
+| 30 (batch 3) | 175 | 203 | **28** |
+| 34 (batch 4) | 199 | 225 | **26** |
+
+Projected to the full 57-spoke corpus: headroom ≈ **8**. Still feasible, so nothing to act on — but
+this is the same shape as E-4 §10.3's "true when written, false eight pages later", and it is worth
+re-reading at every re-freeze rather than rediscovering. If it ever reaches 0 the lock becomes
+infeasible and §11.2 criterion 6 requires dropping it.
+
 ### 1.2 Two deliverables per file, not one — unchanged and still the top failure mode
 
 1. `src/content/<hub>/<slug>.ar.mdx` — presence alone emits the route.
@@ -253,8 +293,8 @@ a road sign, a booking system or a map. This diverges from `ja` on purpose (poli
 
 | English | Arabic | Enforced by |
 |---|---|---|
-| Dinosaur Country | `أرض الديناصورات` | gate 4i lock `dinosaur-country` — **floor 203** |
-| trail (the route) | `المسارات` / `مسار` | gate 4i lock `offroad-trail` — **floor 419** |
+| Dinosaur Country | `أرض الديناصورات` | gate 4i lock `dinosaur-country` — **floor 225** |
+| trail (the route) | `المسارات` / `مسار` | gate 4i lock `offroad-trail` — **floor 425** |
 
 > **⚠ NEW (batch 3) — two frontmatter rules these locks now carry.** Both are checked by
 > `preflight-ar.mjs`; neither is visible to any gate.

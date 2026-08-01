@@ -527,6 +527,10 @@ const AR_SLUGS = new Set<string>([
   'fishing/fishing-red-fleet-reservoir', // AR-2 Track E, batch 3
   'fishing/fishing-steinaker-reservoir', // AR-2 Track E, batch 3
   'fishing/green-river-fly-fishing', // AR-2 Track E, batch 3
+  'camping/camping-at-flaming-gorge', // AR-2 Track E, batch 4
+  'camping/camping-at-red-fleet-state-park', // AR-2 Track E, batch 4
+  'camping/camping-at-steinaker-state-park', // AR-2 Track E, batch 4
+  'camping/camping-in-ashley-national-forest', // AR-2 Track E, batch 4
 ]);
 
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {
