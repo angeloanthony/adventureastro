@@ -11,6 +11,24 @@ comes from taste).
 
 It supersedes nothing in `AR1-arabic-policy.md`.
 
+> ### The standing objective
+>
+> **Do not optimize for passing the current corpus. Optimize for making the next previously
+> unseen corpus measurable.**
+>
+> This is not the same instruction as *fix the current failures*, and where the two diverge this
+> one wins. The batch-2a blocker is the worked example: the cheap way to a green gate 4n was to
+> delete the tatweel from `فـ` / `لـ` — the corpus would have passed and the **instrument would
+> still have been wrong**, silently mis-measuring every Arabic page authored after it. The
+> correction that shipped (`ec54397`, one codepoint) made no page prettier; it made the next
+> unseen page measurable. The wider `Script` → `Script_Extensions` swap was rejected on the same
+> test, from the other side: it would have passed too, while suppressing real findings across
+> 12 837 occurrences.
+>
+> Practical consequences for a batch: prefer the fix that generalizes over the fix that clears
+> today's finding; when a gate is wrong, correct the gate on its own commit before touching prose
+> (§6.3); and record a defect **class**, not an instance (§3.3, §3.5 are both classes).
+
 ---
 
 ## 0. What changed since the pilot brief, in one table
