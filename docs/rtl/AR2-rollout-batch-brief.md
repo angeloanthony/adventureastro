@@ -148,6 +148,39 @@ authored. See [`AR2-batch2b-assertion-A.md`](AR2-batch2b-assertion-A.md).
 > The lesson generalises past this lock: **a headroom figure is not an enforcement figure.** The
 > old reasoning checked the floor against a ceiling and never asked whether the floor could fail.
 
+### 1.3 Batch 3 — `fishing`, 4 files, CLOSED
+
+`fishing-flaming-gorge` · `fishing-red-fleet-reservoir` · `fishing-steinaker-reservoir` ·
+`green-river-fly-fishing`
+
+**29 of 57 spokes · 649 routes · 30 `ar` pages · whole suite green on the first build.**
+
+**Gate 4n returned ZERO findings** — the first batch to clear the isolation gate on first contact.
+§3.3's digit class produced zero for the third batch running and §3.5's parenthetical class for the
+second, so both pieces of guidance are now carrying their own weight. The one §3.5 defect that did
+occur was caught by `preflight-ar.mjs` **in source**, before any build.
+
+> **⚠ THE BLOCKER WAS ASSERTION C, AND THE AUTHOR WAS THE CAUSE.** The Arabic `description` for
+> `fishing-flaming-gorge` added the destination identity `أرض الديناصورات` where the English
+> description never says "Dinosaur Country". Nothing was wrong with the sentence — it is exactly
+> what a good translator does — but Assertion C requires that an Arabic card never carry a lock
+> more often than the English card carried its source, and breaking it **retires Model A, the
+> declared fallback ceiling** ([`AR2-E9`](AR2-E9-floor-enforceability.md) §2).
+>
+> No gate would ever have reported this. It surfaced only because the ceiling instrument was run,
+> and it would have gone unnoticed in any batch that skipped §6.2's second operation.
+>
+> Fixed by mirroring the English frontmatter (the phrase stays in the body, where it raises the
+> floor and breaks nothing). **The check now runs in `preflight-ar.mjs`**, verified to go red on
+> the pre-fix file and clean on the corrected one. New rule, §2.3: **a §2.3 lock phrase may appear
+> in `title` + `description` only if the English sibling's frontmatter carries its English source
+> at least as often.**
+
+⚠ A second-order effect worth seeing: removing that one phrase from one description dropped
+`أرض الديناصورات`'s observed *related* contribution from **12 to 9** across the whole corpus,
+because a related card renders the target's description on every sibling page. §1.2 is not
+theoretical.
+
 ### 1.2 Two deliverables per file, not one — unchanged and still the top failure mode
 
 1. `src/content/<hub>/<slug>.ar.mdx` — presence alone emits the route.
@@ -220,8 +253,21 @@ a road sign, a booking system or a map. This diverges from `ja` on purpose (poli
 
 | English | Arabic | Enforced by |
 |---|---|---|
-| Dinosaur Country | `أرض الديناصورات` | gate 4i lock `dinosaur-country` — **floor 33** |
-| trail (the route) | `المسارات` / `مسار` | gate 4i lock `offroad-trail` — **floor 42** |
+| Dinosaur Country | `أرض الديناصورات` | gate 4i lock `dinosaur-country` — **floor 203** |
+| trail (the route) | `المسارات` / `مسار` | gate 4i lock `offroad-trail` — **floor 419** |
+
+> **⚠ NEW (batch 3) — two frontmatter rules these locks now carry.** Both are checked by
+> `preflight-ar.mjs`; neither is visible to any gate.
+>
+> 1. **At most once per card.** A lock phrase may appear at most **once** across `title` +
+>    `description` combined — a related-articles card renders exactly that pair, so a second
+>    occurrence raises the settled ceiling and unsounds every `ar` floor.
+> 2. **Never ahead of the English source.** A lock phrase may appear in `title` + `description`
+>    only if the **English sibling's** frontmatter carries its English source (`Dinosaur Country`,
+>    `trail`/`trails`) at least as often. Adding the destination identity to an Arabic description
+>    whose English lacks it breaks Assertion C and retires the fallback ceiling model.
+>
+> Neither restricts the **body**, where these phrases are wanted and where they raise the floor.
 | Key Takeaways | `أبرز النقاط` | AR-1 glossary; **not yet a lock** (measured at 4) |
 
 `مسار` is the route. It never becomes a blanket word covering vehicle class — `UTV`, `ATV` and
@@ -518,6 +564,34 @@ Standing procedure for every batch from 2b on:
    and short-circuits at the same gate. Individual `gate:*` scripts are the only way through.
 4. **Record those numbers.** They are the pre-remediation baseline, measured directly.
 5. **Only then remediate**, and re-run the chain to diff against the frozen numbers.
+
+> **⚠ NEW — the `ar` glossary floors now have ZERO downward slack, and remediation is where that
+> bites.** Since the 2026-08-01 re-freeze the frozen minimum and the corpus are the *same number*
+> (183 / 415, `actual == baseline`). Gate 4i fails when `actual < baseline`, so **any net removal
+> of a single occurrence** of `أرض الديناصورات` or `المسارات` anywhere in the existing `ar` pages
+> now fails the build. Through the pilot a floor of 33 against an actual of 182 absorbed anything;
+> it no longer does.
+>
+> Adding pages is safe — a new batch only grows the total. **The exposure is editing pages that
+> already shipped, which is exactly what step 5 does.** A §3.2 or §3.5 fix that rewords a sentence
+> carrying either locked identity will go red as a *glossary* failure, pointing at the lock rather
+> than at the edit that caused it.
+>
+> So, narrowly: **capture the enforceability comparison before any remediation pass on existing
+> Arabic pages, re-run it immediately after and before the full validation suite, and attribute any
+> decrease to the edit that introduced it** rather than letting it first surface as a downstream
+> gate 4i failure.
+>
+> ```
+> node scripts/rtl/measure-prose-window.mjs --json w-pre.json     # before remediating
+> node scripts/rtl/measure-ar-frontmatter-ceiling.mjs --window w-pre.json
+> …remediate…
+> node scripts/rtl/measure-prose-window.mjs --json w-post.json    # before gates:dist
+> node scripts/rtl/measure-ar-frontmatter-ceiling.mjs --window w-post.json
+> ```
+>
+> This is an ordering rule, not a framework change. Gate 4i is behaving exactly as designed; what
+> changed is that the margin it used to enjoy is gone.
 
 The numbers worth freezing are the ones that move silently — the **advisory** counts, which never
 block and therefore never announce drift. In batch 2a exactly one moved (4g review candidates

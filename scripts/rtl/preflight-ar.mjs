@@ -1,7 +1,7 @@
 // Authoring pre-flight for an Arabic batch. Not a gate and not a substitute for one:
 // gates read dist/, this reads source, so it can only catch what is decidable in source.
 // Its whole job is to fail the cheap way before `npm run build` fails the expensive way.
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 
 const LATIN = /[A-Za-z]/;
 const ARABIC_INDIC = /[٠-٩۰-۹]/;
@@ -26,6 +26,29 @@ const ARABIC_INDIC = /[٠-٩۰-۹]/;
  * drift apart. Raising it in one place without the other leaves the bound unasserted.
  */
 const AR_MAX_PER_CARD = 1;
+
+/**
+ * ASSERTION C, moved from measurement time to authoring time (AR-2 batch 3).
+ *
+ * Model A — the declared FALLBACK if `AR_MAX_PER_CARD` is ever falsified — projects an
+ * Arabic lock through its English source term, and that projection is sound only while an
+ * Arabic card never carries the lock more often than the English card carried its source.
+ * `measure-ar-frontmatter-ceiling.mjs` measures it as Assertion C.
+ *
+ * ⚠ Batch 3 falsified it on first contact, and the cause was ordinary translator instinct:
+ * the Arabic `description` for `fishing-flaming-gorge` added the destination identity
+ * `أرض الديناصورات` where the English description never says "Dinosaur Country". Nothing was
+ * wrong with the sentence — but it silently retired the fallback model, and no gate would
+ * ever have said so. Catching it here costs a second; catching it after a build costs a build,
+ * and catching it never costs the fallback.
+ *
+ * The English source forms are the ones the ceiling instrument projects through; they are
+ * duplicated here rather than imported because this script deliberately depends on nothing.
+ */
+const AR_LOCK_EN_SOURCES = {
+  'dinosaur-country': ['Dinosaur Country'],
+  'offroad-trail': ['Trails', 'Trail', 'trails', 'trail'],
+};
 const AR_LOCKS = (() => {
   try {
     const g = JSON.parse(readFileSync('i18n-gates/4i-glossary.json', 'utf8'));
@@ -34,6 +57,16 @@ const AR_LOCKS = (() => {
     return null; // reported per file below — an unread registry must not read as "clean"
   }
 })();
+
+/** Count `title` + `description` occurrences of any of `forms` in a file's frontmatter. */
+function cardCount(src, forms) {
+  const m = src.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
+  if (!m) return null;
+  const fm = m[1];
+  const one = (key) => (fm.match(new RegExp(`^${key}:\\s*"([\\s\\S]*?)"\\s*$`, 'm')) || [])[1] ?? '';
+  const card = `${one('title')}\n${one('description')}`;
+  return forms.reduce((n, f) => n + (card.split(f).length - 1), 0);
+}
 
 let bad = 0;
 const say = (f, msg) => { console.log(`  ${f}: ${msg}`); bad++; };
@@ -70,6 +103,18 @@ for (const path of process.argv.slice(2)) {
         say(file, `lock "${lock.id}" occurs ${n}× in title+description, over the adopted per-card `
           + `ceiling of ${AR_MAX_PER_CARD} — this FALSIFIES the settled ceiling and unsounds every `
           + `ar glossary floor. Reword, or re-run measure-ar-frontmatter-ceiling.mjs and re-place the floors.`);
+      }
+      // Assertion C — the fallback model's soundness, checked against the English sibling.
+      const enForms = AR_LOCK_EN_SOURCES[lock.id];
+      const enPath = path.replace(/\.ar\.mdx$/, '.mdx');
+      if (enForms && n > 0 && existsSync(enPath)) {
+        const enN = cardCount(readFileSync(enPath, 'utf8'), enForms);
+        if (enN !== null && n > enN) {
+          say(file, `lock "${lock.id}" occurs ${n}× in title+description but its English source `
+            + `"${enForms[0]}" occurs ${enN}× in the English sibling's — this breaks ASSERTION C and `
+            + `retires Model A, the declared fallback ceiling. Either mirror the English frontmatter `
+            + `or accept the fallback's loss deliberately, in writing.`);
+        }
       }
     }
   }
