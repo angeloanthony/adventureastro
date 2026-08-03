@@ -891,6 +891,45 @@ stated reason.
 
 ---
 
+### 3.6.2 ⚠⚠ NEW — a single-digit range hides behind the ONE classification the project ignores
+
+Batch 7b, probe slot 1, before a word was authored. The rule on record is
+*`reordered` is the defect signature, `rtl-reversed` never is* — it is what stops an author
+chasing every Arabic run the instrument reads back-to-front.
+
+**Nothing about that rule is wrong, and the instrument did not misreport anything.** The run
+did lay out right-to-left; `RTL` is the accurate description of what happened. What fails is
+using the *label* as the authoring decision. The author's question is not "was this run RTL or
+reordered" — it is **"would a reader see the intended sequence?"** — and on a numeric range the
+label stops carrying that information.
+
+| shape | bare reading | visual | isolated |
+|---|---|---|---|
+| `1–2` (en dash) | `RTL (visual = reversed logical)` | **`2–1`** | LTR ✔ |
+| `1-2` (ASCII hyphen) | `RTL (visual = reversed logical)` | **`2-1`** | — |
+| `10–11` (built-in control) | **`REORDERED`** | `11–10` | LTR ✔ |
+| `13,528` | `LTR` | `13,528` | not needed |
+| `5,000` | `LTR` | `5,000` | not needed |
+| `$349` (negative control) | **`REORDERED`** | `349$` | LTR ✔ |
+
+`1–2` and `10–11` are the **same layout event** — the batch-6a class, a bare
+digit-separator-digit run laying out right-to-left in Arabic prose. **The mechanism is
+identical; only the observable manifestation differs.** `10–11` retains multi-digit structure,
+so the flip shows up as a scramble the instrument can name `REORDERED` and a human can see at
+a glance. `1–2` has no interior structure left to disturb, so the same flip presents as a
+clean reversal — and lands under the one label the project has correctly learned to ignore.
+
+An author reading labels would see `RTL` on `1–2`, correctly recall that `rtl-reversed` is
+never the defect signature, and ship `اليوم 1–2` rendering as `اليوم 2–1`.
+
+> **Read the `visual` line, never the label.**
+
+That is a stronger operational rule than any refinement of the taxonomy, and it is the right
+division of labour: the instrument reports what the browser did, the author decides whether a
+reader would see the intended sequence. The classification is supporting evidence, not the
+thing to optimise. `13,528` and `5,000` are re-confirmed safe bare, so the discriminator
+remains the *separator*, not the digit count.
+
 ### 3.7 ⚠⚠ NEW — the bracket rule is the FLANKS, and the pre-flight now decides it that way
 
 §3.3 and §3.5 are two instances of **one** rule, and batch 5 already said so about guillemets:
