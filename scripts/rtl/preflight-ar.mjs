@@ -71,7 +71,18 @@ function cardCount(src, forms) {
 let bad = 0;
 const say = (f, msg) => { console.log(`  ${f}: ${msg}`); bad++; };
 
-for (const path of process.argv.slice(2)) {
+// FAIL CLOSED ON NO INPUT. This script takes paths as argv, so a bare invocation used to
+// loop zero times and print "clean" — a verifier reporting success for checking nothing,
+// indistinguishable from a real pass. Batch 7b ran it that way and believed the result.
+// The implementation was never wrong; the interface was.
+const INPUTS = process.argv.slice(2);
+if (INPUTS.length === 0) {
+  console.error('preflight-ar: no input files specified; nothing was checked.');
+  console.error('usage: node scripts/rtl/preflight-ar.mjs <file.ar.mdx> [...]');
+  process.exit(2);
+}
+
+for (const path of INPUTS) {
   const file = path.split(/[\\/]/).pop();
   const src = readFileSync(path, 'utf8');
   const m = src.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
@@ -194,7 +205,27 @@ for (const path of process.argv.slice(2)) {
       //    FAQ answers are untouched.
       .replace(/\s[a-zA-Z-]+="[^"]*"/g, ' ')
       .replace(/<bdi>[\s\S]*?<\/bdi>/g, 'ـ')
-      .replace(/\(\d{3}\)\s*\d{3}-\d{4}/g, 'ـ')
+      // ⚠ THE NAMED-RUN EXEMPTIONS ARE SURFACE-SCOPED, AND BATCH 7b IS WHY. `bidi-runs.ts`
+      // coverage is per-COMPONENT, not per-surface: FAQ frontmatter reaches the formatter
+      // through FaqAccordion -> <Bidi>, and raw MDX body prose reaches nothing. Exempting the
+      // phone on BOTH surfaces let a page through clean whose first build then stopped at
+      // gate 4n with 6 findings, all of them `(` flanked R … N on a bare body phone. Same
+      // shape as the batch-6b gap: the rule was right and the tool had not been brought along.
+      //
+      // Controls run before shipping (the batch-6a standard):
+      //   POSITIVE — reproduces gate 4n's 6 findings exactly on the reconstructed pre-fix file.
+      //   FALSE-POSITIVE — 0 findings across all 50 `.ar.mdx` bodies: every body phone in the
+      //   corpus is already isolated, in one of the two placements `<bdi><a>…</a></bdi>` or
+      //   `<a><bdi>…</bdi></a>`.
+      .replace(/\(\d{3}\)\s*\d{3}-\d{4}/g, where === 'frontmatter' ? 'ـ' : '$&')
+      // ⚠ CURRENCY STAYS EXEMPT ON BOTH SURFACES — MEASURED, NOT ASSUMED. The symmetry is
+      // tempting and it is wrong. `$` is Bidi_Mirrored=No, so gate 4n never had an opinion
+      // here, and the instrument that does — measure-currency.mjs — reads the corpus's bare
+      // body runs (`بسعر $349`, `من $329`, 11 of them across two shipped pages) as **LTR,
+      // visual = logical**. Scoping this the way the phone is scoped would manufacture
+      // findings against prose that measurably renders correctly. The frontmatter case that
+      // DOES reverse (E-1b, `349$` via a RelatedArticles description) is a different surface
+      // reached by a different component, and it is already covered above.
       .replace(/\$[\d,]+/g, 'ـ')
       // 5. MARKDOWN LINK TARGETS. `[نصّ](/some/path/)` renders as an anchor whose href is
       //    never a text node, so those parentheses are not brackets in rendered prose. Left
