@@ -139,6 +139,14 @@ for (const path of process.argv.slice(2)) {
     //   3. MDX comments, which are never rendered at all.
     const scan = text
       .replace(/\{\/\*[\s\S]*?\*\/\}/g, ' ')
+      // 4. HTML ATTRIBUTE VALUES. Gate 4n reads rendered TEXT NODES; an attribute is never
+      //    one, so a bracket inside `style="…var(--charcoal)…"` is not a direction change
+      //    anywhere. Found by batch 6a, the first Arabic file to carry a CSS custom
+      //    property: it reported a §3.5 finding that no gate could ever agree with, which
+      //    is the shape that trains an author to ignore this script. The YAML `key: "…"`
+      //    form does not match (it needs `=` immediately before the quote), so frontmatter
+      //    FAQ answers are untouched.
+      .replace(/\s[a-zA-Z-]+="[^"]*"/g, ' ')
       .replace(/<bdi>[\s\S]*?<\/bdi>/g, 'ـ')
       .replace(/\(\d{3}\)\s*\d{3}-\d{4}/g, 'ـ')
       .replace(/\$[\d,]+/g, 'ـ');
