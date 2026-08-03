@@ -82,6 +82,10 @@ function parseArgs(argv) {
 const reader = (needles) => `
 (() => {
   const NEEDLES = ${JSON.stringify(needles)};
+  // Literals used ONLY by the synthetic temperature controls below. Kept out of NEEDLES
+  // on purpose: NEEDLES is scanned over the corpus, and a needle the corpus cannot yet
+  // contain would report "0 found" as if that were a clean reading.
+  const TEMP_NEEDLES = ['95°F', '90–100°F', '95 درجة فهرنهايت'];
 
   function boxes(textNode, start, len) {
     const out = [];
@@ -131,12 +135,12 @@ const reader = (needles) => `
     return out;
   }
 
-  function scan(root, label) {
+  function scan(root, label, needles) {
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
     const found = [];
     let n;
     while ((n = walker.nextNode())) {
-      for (const needle of NEEDLES) {
+      for (const needle of needles || NEEDLES) {
         let idx = -1;
         while ((idx = n.data.indexOf(needle, idx + 1)) !== -1) {
           const chars = boxes(n, idx, needle.length);
@@ -162,6 +166,7 @@ const reader = (needles) => `
   // ---- synthetic controls, injected at runtime; dist is not touched ---------
   const AR_LEAD = 'وللاستفسار عن أسعار المجموعات، الرقم هو ';
   const AR_PRICE = 'تكلفة الجولة المُرشَدة هي ';
+  const AR_TEMP = 'تبلغ الحرارة العظمى في يوليو نحو ';
   const host = document.createElement('div');
   host.style.cssText = 'position:absolute;left:0;top:0;width:900px;font-size:16px;line-height:2;';
   host.innerHTML =
@@ -169,11 +174,23 @@ const reader = (needles) => `
     '<p id="pos-phone">'  + AR_LEAD  + '<bdi>(435) 219-9447</bdi>.</p>' +
     '<p id="neg-price">'  + AR_PRICE + '$349 للمركبة.</p>' +
     '<p id="pos-price">'  + AR_PRICE + '<bdi>$349</bdi> للمركبة.</p>' +
-    '<p id="neg-price-initial">$125 للشخص الواحد.</p>';
+    '<p id="neg-price-initial">$125 للشخص الواحد.</p>' +
+    // AR-2 batch 6. The guides hub is the first Arabic corpus to want a Fahrenheit
+    // temperature, and U+00B0 is Bidi_Mirrored=No, so the shape is invisible to gate 4n
+    // exactly as the bare price was. It is measured HERE, as a synthetic control,
+    // because the corpus does not contain it yet — which is the point: the reading
+    // decides how the batch is authored, not the other way round.
+    '<p id="neg-temp">' + AR_TEMP + '95°F.</p>' +
+    '<p id="pos-temp">' + AR_TEMP + '<bdi>95°F</bdi>.</p>' +
+    '<p id="neg-temp-range">' + AR_TEMP + '90–100°F.</p>' +
+    '<p id="alt-temp-spelled">' + AR_TEMP + '95 درجة فهرنهايت.</p>';
   document.body.appendChild(host);
   const synthetic = [];
   for (const id of ['neg-phone', 'pos-phone', 'neg-price', 'pos-price', 'neg-price-initial']) {
     for (const r of scan(document.getElementById(id), id)) synthetic.push(r);
+  }
+  for (const id of ['neg-temp', 'pos-temp', 'neg-temp-range', 'alt-temp-spelled']) {
+    for (const r of scan(document.getElementById(id), id, TEMP_NEEDLES)) synthetic.push(r);
   }
   host.remove();
 
