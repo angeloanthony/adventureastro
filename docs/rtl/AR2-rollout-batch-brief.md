@@ -425,6 +425,30 @@ still red.
 > `href="#…"` in the English source **before** authoring — the batch has four targets on
 > `one-day-adventure-vernal`, two on `romantic-weekend`, one each on `weekend-fishing-trip` and
 > `photography-weekend`, and none on the rest.
+>
+> **⚠ This is NOT an RTL rule and its home is not this brief.** Nothing about it involves
+> direction, script or rendering — it is reachable by every locale that translates a heading,
+> and by the English source, which translates nothing. Promoted to
+> [ADR-12](../framework/adr/0012-an-anchor-target-is-an-identity.md), now **implemented as gate
+> 4s** (`npm run gate:4s`), blocking and in `gates:dist`.
+>
+> **⚠ The convention you are following is NOT what the other locales are doing.** `de`/`es`/
+> `ja`/`zh` preserve anchor ids by *accident* — their trail headings are pure proper nouns
+> under the terminology lock, so nothing in them is translatable and the slug survives on its
+> own. The moment an Arabic classifier noun is added (§3.4, `## المسار 1: Doc's Beach`) the
+> slug changes, and on `utv/best-utv-trails-vernal` **all seven `<h2>` ids diverged in `ar` and
+> in `ar` alone**. Nothing linked them, so no audit could see it — until the `#tours` fix
+> pointed five footer links straight at them. Fixed by explicit English ids; ADR-12 §6.1.
+>
+> **So the practical rule for an Arabic batch:** any heading you touch with a classifier noun,
+> a translated word, or reordered text has a **different id than its English sibling**, even
+> where the other eight locales look compliant. Enumerate `href="#…"` in the English source
+> before authoring, and run `npm run gate:4s` after the build — it is the only thing that
+> reports this class.
+>
+> **⚠ If you author an explicit `<h2 id=…>` around text containing an apostrophe, type the
+> curly `’` literally.** Moving a heading out of markdown takes it out of smartypants' reach,
+> and `Doc's` vs `Doc’s` is a form this project has already been measured wrong by once.
 
 Advisory deltas, per §6.3 — the build was green so no gate was ever hidden:
 

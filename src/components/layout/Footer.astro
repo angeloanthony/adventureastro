@@ -58,8 +58,13 @@ const lang = getLangFromUrl(Astro.url);
 // nav follows — chrome links must never silently reset the chosen language.
 const fh = (slug: string) => localeHref(slug, lang);
 const bookingHref = fh('booking');
-// Home + hash anchor: the '#tours' fragment rides on the localized home URL.
-const toursHref = `${fh('')}#tours`;
+// Each trail links to its own section on the trail-systems page (ADR-12).
+// These five fragments were dead for the whole corpus as `/#tours`: the home
+// route resolved, the fragment never existed on any page in any locale. A
+// route-existence check and a fragment-existence check are different questions
+// — gate 4s (`scripts/gate-4s-fragments.mjs`) now answers the second.
+const trailsPage = fh('utv/best-utv-trails-vernal');
+const trailHref = (frag: string) => `${trailsPage}#${frag}`;
 const {
   variant = 'full',
   showSocial = true,
@@ -70,11 +75,11 @@ const {
     heading: t('footer.ourTrails', lang),
     // Trail names are place names — kept verbatim, never translated.
     links: [
-      { href: toursHref, label: "Doc's Beach" },
-      { href: toursHref, label: 'Moonshine Arch' },
-      { href: toursHref, label: 'Ashley Gorge' },
-      { href: toursHref, label: 'Outlaw Trail' },
-      { href: toursHref, label: 'Asphalt Ridge' },
+      { href: trailHref('1-docs-beach'), label: "Doc's Beach" },
+      { href: trailHref('2-moonshine-arch'), label: 'Moonshine Arch' },
+      { href: trailHref('3-ashley-gorge'), label: 'Ashley Gorge' },
+      { href: trailHref('4-outlaw-trail'), label: 'Outlaw Trail' },
+      { href: trailHref('5-asphalt-ridge'), label: 'Asphalt Ridge' },
       { href: bookingHref, label: t('cta.bookNow', lang), class: 'nav-book-btn' },
     ],
   },

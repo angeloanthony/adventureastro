@@ -10,10 +10,17 @@
 // the direction invariant requires. This file, the layout, the header, the
 // footer and the breadcrumbs are all direction-agnostic by construction.
 //
-// The Footer links stay on ENGLISH routes on purpose (Gate 4b): this is the
-// only Arabic page that exists, so `/ar/#tours` would be a broken link, not a
-// fallback. The Footer HEADING is localized while its TARGETS are not, which is
-// precisely the existence-aware split the framework is built around.
+// The Footer links stay on ENGLISH routes on purpose (Gate 4b). The Footer
+// HEADING is localized while its TARGETS are not, which is precisely the
+// existence-aware split the framework is built around.
+//
+// ⚠ This comment used to justify the choice with `/ar/#tours` being a broken
+// link. That example was wrong in an instructive way, and ADR-12 §3 records it:
+// the reasoning established that the ROUTE would not resolve and stopped there,
+// while the FRAGMENT had never resolved on any page in any locale — including
+// the English route this falls back to. Route existence and fragment existence
+// are different questions; gate 4s answers the second. The English-fallback
+// decision stands on its own (Gate 4b); it just never rested on that example.
 import { getBodyHtml } from '../../page-content/cancellation';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/layout/Header.astro';
@@ -44,7 +51,7 @@ const bodyHtml = getBodyHtml(lang);
     trails={{
       heading: t('footer.quickLinks', lang),
       links: [
-        { href: '/#tours', label: t('footer.link.ourTours', lang) },
+        { href: '/utv/', label: t('footer.link.ourTours', lang) },
         { href: '/#vehicles', label: t('footer.link.ourFleet', lang) },
         { href: '/#gallery', label: t('footer.link.photoGallery', lang) },
         { href: '/booking/', label: t('cta.bookNow', lang) },
