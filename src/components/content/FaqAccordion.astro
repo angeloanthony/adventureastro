@@ -49,6 +49,35 @@ const { faq } = Astro.props;
 <SchemaFaq faq={faq} />
 
 <style>
+  /* THIS COMPONENT OWNS ITS OWN OPEN STATE, AND THAT IS THE FIX FOR A LIVE REGRESSION.
+     `public/styles.css` collapses `.faq-answer` to `max-height: 0` and reopens it with
+     `.faq-toggle:checked ~ .faq-answer` — a contract that needs a checkbox SIBLING. The
+     standalone `/faq/` pages still ship that markup; this component ships `<details>`, which
+     can never satisfy it, so from the day the `<details>` rewrite landed every answer here
+     was clipped to zero height on screen while remaining in the DOM and in the JSON-LD.
+     No gate could see it: every gate reads markup, and the markup was correct.
+
+     So the rule below is scoped, not global — editing `.faq-answer` in the global sheet
+     would un-collapse the checkbox pages, trading one presentation defect for another. The
+     collapsed state is re-declared here too, so this component's behaviour no longer depends
+     on a global rule written for markup it does not use.
+
+     Padding lands only in the open state on purpose: `.faq-answer` has no inner wrapper to
+     carry it (the checkbox markup used `.answer-content`), and padding on a collapsed box
+     renders as visible height. */
+  .faq-answer { max-height: 0; overflow: hidden; }
+  details[open] .faq-answer {
+    max-height: none;
+    padding-block: 0 25px;
+    padding-inline: 30px;
+  }
+  /* The global `+` marker turns to `−` via the same checkbox selector, so it was stuck too. */
+  details[open] .faq-question::after {
+    content: '−';
+    transform: rotate(180deg);
+    background: linear-gradient(135deg, var(--burnt-orange), var(--rust-red));
+    color: white;
+  }
   .faq-item summary { cursor: pointer; }
   .faq-item summary:focus-visible { outline: 2px solid var(--burnt-orange, #d4764e); outline-offset: 2px; }
   @media (prefers-reduced-motion: reduce) {
