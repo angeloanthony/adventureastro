@@ -6,7 +6,7 @@
     "manifest": "sha256:2df4867cf2e086b57ae2b157eb496c5e6d4e54d261bc9620fece64b30901a7fc",
     "corpus": {
       "pages": {
-        "ar": 47,
+        "ar": 50,
         "de": 77,
         "en": 80,
         "es": 77,
@@ -16,7 +16,7 @@
         "pt": 77,
         "zh": 77
       },
-      "fingerprint": "sha256:22ba5a3065b1fac524fe7964a7cff92765ac22c0568d19eccaa8fd5dc93bfd0e"
+      "fingerprint": "sha256:883be1fe909f17aff1092b25679500bef2db3db9636a4480f699520326063bc5"
     },
     "engine": "astro-localization-gates@0.0.0+inrepo",
     "invocation": "census phrase-count --phrases census/phrase-set.json --measured-at 2026-08-03"
@@ -29,11 +29,11 @@
         "phrase": "أرض الديناصورات",
         "surface": "prose"
       },
-      "value": 321,
+      "value": 376,
       "extractor": "visibleText@1",
       "evidence": {
-        "pages": 47,
-        "pagesWithPhrase": 47
+        "pages": 50,
+        "pagesWithPhrase": 50
       }
     },
     {
@@ -43,11 +43,11 @@
         "phrase": "المسارات",
         "surface": "prose"
       },
-      "value": 469,
+      "value": 480,
       "extractor": "visibleText@1",
       "evidence": {
-        "pages": 47,
-        "pagesWithPhrase": 47
+        "pages": 50,
+        "pagesWithPhrase": 50
       }
     },
     {

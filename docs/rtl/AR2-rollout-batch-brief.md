@@ -54,6 +54,7 @@ It supersedes nothing in `AR1-arabic-policy.md`.
 | **1.5** | **⚠⚠ CORRECTED — the headroom trend REVERSED.** Projected ≈8 at 57 spokes; batch 5 measured headroom *widening* 26 → 40. `prose` is editorial, not structural. | batch 5 re-freeze |
 | **3.7** | **⚠⚠ NEW — the bracket rule is the FLANKS, and `preflight-ar.mjs` now decides it that way.** The old inner-text checks were structurally blind to two shapes, and reported *clean* on a batch whose first build then stopped at gate 4n. | batch 6b, **5** gate-4n findings after a clean preflight |
 | **1.47** | **⚠ NEW — batch 6b closed; the `guides` hub is complete at 9 of 9.** | batch 6b |
+| **1.48** | **⚠ NEW — batch 7a closed, and an in-page anchor must keep its ENGLISH id.** Translating an anchored heading silently breaks every link pointing at it. | batch 7a, 8 anchor targets across the hub |
 
 ---
 
@@ -383,6 +384,66 @@ the live gate agreeing rather than one standing in for the other.
 > from a catastrophic regression. It was only visible because the control tree "failed" too.
 > A proof whose control also fails is measuring its own harness.
 
+### 1.48 Batch 7a — `itineraries`, the first 3 files, CLOSED
+
+`one-day-adventure-vernal` · `2-day-family-itinerary` · `romantic-weekend-dinosaur-country`
+
+**49 of 57 spokes · 669 routes · 50 `ar` pages · whole suite green on the FIRST build.**
+6 spokes remain in this hub, 2 in `things-to-do`.
+
+**⚠ `itineraries` is split 3 / 3 / 3, not 4 / 5.** The hub's nine files are the longest in the
+corpus (292–366 source lines each, against `guides`' 207–309), and 6a/6b already established that
+a first-contact build has to stay small enough to attribute cleanly. Three is the size at which
+every advisory delta in this batch could be traced to a named page.
+
+**Gate 4n returned ZERO on first contact — the fourth batch to do so, and the first on a brand-new
+hub since `fishing`.** Nothing in the framework moved.
+
+**Probe slot 1 was used as designed, and it decided the authoring before a word was written.**
+The hub was expected to carry opening hours and road numbers, so the shapes were injected into a
+built Arabic page and read first — with the bare `$349` negative control red in the same run:
+
+| shape | reading |
+|---|---|
+| `9:00` · `8:30` · `17:30` (clock times) | **LTR unisolated** |
+| `24/7` (solidus) | **LTR unisolated** |
+| `I-70` · `US-40` (interstate designators) | **LTR unisolated** |
+
+Both the colon and the solidus are absorbed between two `AN` runs exactly as the derived AN/EN
+rule predicts — but that prediction is what reading UAX #9 also produced for the ASCII hyphen in
+batch 6a, where it was **wrong**. Measuring cost seconds and needed no rebuild. Slot 2 after the
+build: **97 measurable readings across the 3 pages, all LTR, 0 non-LTR, 0 unreachable**, controls
+still red.
+
+> **⚠ NEW — an in-page anchor must keep its ENGLISH id, and the hub convention already exists.**
+> `itineraries` is the first Arabic hub whose pages link to their own sections
+> (`<a href="#decision-framework">`). A markdown heading's id is generated from its text, so
+> translating `## Decision Framework` silently breaks every link pointing at it. The other eight
+> locales already solve this and the Arabic pages follow them exactly: the anchor **target**
+> becomes an explicit `<h2 id="decision-framework">إطار القرار</h2>`, and a target that sits on a
+> wrapper keeps its id there (`<div id="camping-vs-hotel" class="table-scroll">`). Enumerate
+> `href="#…"` in the English source **before** authoring — the batch has four targets on
+> `one-day-adventure-vernal`, two on `romantic-weekend`, one each on `weekend-fishing-trip` and
+> `photography-weekend`, and none on the rest.
+
+Advisory deltas, per §6.3 — the build was green so no gate was ever hidden:
+
+| | batch 6b | batch 7a | attribution |
+|---|---|---|---|
+| 4f | 54 advisory | **56** | **+2, both on new `ar` routes** — RelatedArticles card `<h3>`s carrying `utv` / `drive`, the accepted §2.2 class. Not drift |
+| 4h | 1922 locked phrases | identical | — |
+| 4i | **4 locks / 20 occurrences** | **identical** | no terminology drift, 3rd batch running |
+| 4g | 46853 anchors / 444 candidates | 47265 / 515 | new pages are link-dense; candidate growth is anchor identities, advisory |
+| 4q | ar 1 324 170 chars | ar 1 443 814 | the three authored pages |
+
+Re-freeze **321 → 376** and **469 → 480**; guard 1 identical (53 facts), guard 2 **51 unchanged /
+2 up / 0 down**. Both floors **proven** on a prose-deleted tree: `gate-4i` exits **1** at 129/376
+and 54/480 while the control tree on the same bytes exits **0**, and observed-under-deletion
+matches the instrument's predicted `survives` (129 / 54) **exactly** for the second batch running.
+
+**Framework held under measurement.** No rule was falsified, no instrument changed, and no
+implementation outside the three translated pages and their registry entries was touched.
+
 ### 1.5 ⚠ A trend to watch — `dinosaur-country` headroom is narrowing
 
 The settled ceiling grows **6.00/page** while the whole-page count grows **5.25/page**, because
@@ -397,6 +458,7 @@ less than that. So headroom shrinks ~**0.75/page**:
 | 38 (batch 5) | 222 | 262 | **40** |
 | 42 (batch 6a) | 246 | 275 | **29** |
 | 47 (batch 6b) | 276 | 320 | **44** |
+| 50 (batch 7a) | 301 | 375 | **74** |
 
 > **⚠⚠ CORRECTED (batch 5) — the trend REVERSED, and the projection was wrong.** This section
 > read the first three rows as a rate (whole +5.25/page, ceiling +6.00/page, headroom −0.75/page)
@@ -490,8 +552,8 @@ a road sign, a booking system or a map. This diverges from `ja` on purpose (poli
 
 | English | Arabic | Enforced by |
 |---|---|---|
-| Dinosaur Country | `أرض الديناصورات` | gate 4i lock `dinosaur-country` — **floor 321** |
-| trail (the route) | `المسارات` / `مسار` | gate 4i lock `offroad-trail` — **floor 469** |
+| Dinosaur Country | `أرض الديناصورات` | gate 4i lock `dinosaur-country` — **floor 376** |
+| trail (the route) | `المسارات` / `مسار` | gate 4i lock `offroad-trail` — **floor 480** |
 
 > **⚠ NEW (batch 5) — the `forbidden` list is the other half of a lock, and it is ADVISORY.**
 > Each lock carries competing renderings in `i18n-gates/4i-glossary.json` under `forbidden`
@@ -890,7 +952,7 @@ No new instrument. `npm run build` runs all 11 gates.
 | **4n** | An unisolated Latin/Arabic flank — including §3.3's bracket-and-digit class |
 | **4q** | Any Arabic-Indic digit in rendered prose. Policy §3 has no exception |
 | **4k** | Every new page resolves effective direction `rtl` |
-| **4i** | The two locked identities in §2.3, **now at floors 321 and 469** |
+| **4i** | The two locked identities in §2.3, **now at floors 376 and 480** |
 | **4o** | `→` count — expected 0 |
 | **4b** | Any internal link that left the English path without a registry entry |
 | *(schema)* | The `description` budget — §2.4, and it fails **before** any gate |
@@ -907,7 +969,7 @@ corpus: they could not fail for a content reason. They were re-frozen at **33** 
 > and gate 4i would have stayed green** — proved by running the real gate against a prose-deleted
 > tree, not inferred ([`AR2-E9-floor-enforceability.md`](AR2-E9-floor-enforceability.md) §4).
 >
-> Re-frozen again at **321** and **469** on 2026-08-03 over the 47-page batch-6b corpus, both
+> Re-frozen again at **376** and **480** on 2026-08-03 over the 50-page batch-7a corpus, both
 > proven on a prose-deleted tree (§1.45). Re-frozen at **183** and **415** on 2026-08-01 over the full 26-page `ar` corpus. Both now fail
 > that same experiment. A batch that drops either identity from Arabic prose fails the build.
 
