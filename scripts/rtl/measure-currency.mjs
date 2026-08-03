@@ -33,6 +33,29 @@
 // is reported with its reason and classified `null`. A reading that cannot be
 // taken is not a reading that came out clean.
 //
+// A SILENT EXCLUSION IS A CLAIM, AND IT HAS TO JUSTIFY ITSELF. Auditing this file's own
+// container guard — disabling it and measuring what it removed — found 665 suppressed
+// readings, of which 496 were already caught by the run-level check, 6 were the off-screen
+// summary behaving exactly as its justification says, and 76 were a LIVE PRODUCTION
+// REGRESSION: FAQ answers clipped to `max-height: 0` on 496 pages across all nine locales
+// since the `<details>` rewrite, invisible on screen while present in the DOM and the
+// JSON-LD (fixed in 3279b71). The guard was saying "not visually perceived" about prose that
+// was not visually PERCEIVABLE, and reporting nothing either way. So:
+//
+//   1. Disclosure widgets are OPENED before scanning. A closed `<details>` is a legitimate
+//      zero-height container whose content a reader can reach, so the honest reading is the
+//      opened one — not an exclusion. This is what turns 76 permanently-skipped readings
+//      into 76 measured ones.
+//   2. What is STILL zero-height after that is unreachable, and is reported as
+//      `kind: "unreachable"` in its own section rather than filed with the exclusions. The
+//      pre-fix tree produces 76 of these; the fixed tree produces none. That difference is
+//      the whole point, and `ctl-unreachable` below keeps the check honest by proving on
+//      every run that it can still fire.
+//
+// `<script>` and `<style>` are no longer walked at all. They are not rendered text, and
+// scanning them cost 382 readings a run — 35% of the total — on CSS rgba literals that only
+// ever reached the report as exclusions.
+//
 // CONTROLS ARE MANDATORY AND THEY ARE SYNTHETIC. A silent instrument proves
 // nothing. Each run injects, into the live document, both a POSITIVE control (an
 // isolated phone — the shape B-2 §3.2 asserts is correct) and a NEGATIVE control
@@ -92,6 +115,16 @@ const reader = (needles) => `
   const TEMP_NEEDLES = ['95°F', '90–100°F', '95 درجة فهرنهايت'];
   const RANGE_NEEDLES = ['10–11', '10-11', 'من 10 إلى 11'];
 
+  // Not rendered text. Walking these cost 35% of every run and produced nothing but
+  // exclusions — CSS rgba literals and the JSON-LD copy of prose measured elsewhere.
+  const NOT_RENDERED = { SCRIPT: 1, STYLE: 1, NOSCRIPT: 1, TEMPLATE: 1 };
+  const textOnly = {
+    acceptNode(n) {
+      const p = n.parentElement;
+      return p && NOT_RENDERED[p.tagName] ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT;
+    },
+  };
+
   function boxes(textNode, start, len) {
     const out = [];
     for (let i = 0; i < len; i++) {
@@ -148,12 +181,21 @@ const reader = (needles) => `
   function hiddenReason(node) {
     for (let el = node.parentElement; el && el !== document.documentElement; el = el.parentElement) {
       const cs = getComputedStyle(el);
-      if (cs.display === 'none' || cs.visibility === 'hidden') return 'ancestor is display:none/visibility:hidden';
-      const r = el.getBoundingClientRect();
-      if (r.width <= 1 || r.height <= 1) {
-        return 'ancestor is ' + Math.round(r.width) + 'x' + Math.round(r.height) + 'px — not visually perceived';
+      if (cs.display === 'none' || cs.visibility === 'hidden') {
+        return { kind: 'not-rendered', reason: 'ancestor is display:none/visibility:hidden' };
       }
-      if (r.right < 0 || r.bottom < 0) return 'ancestor is positioned off-screen';
+      const r = el.getBoundingClientRect();
+      const size = Math.round(r.width) + 'x' + Math.round(r.height) + 'px';
+      // WIDTH is the discriminator, and it separates a technique from a defect. The
+      // clip-to-1px and off-screen patterns are deliberate screen-reader-only text, where
+      // visual order has no reader. A container at FULL WIDTH and zero height is prose that
+      // was laid out and then collapsed — and after the details pass above, nothing can open
+      // it. That is the FAQ regression's exact signature: 1491x0.
+      if (r.height <= 1 && r.width > 1) {
+        return { kind: 'unreachable', reason: 'ancestor is ' + size + ' — full width, no height: prose collapsed with nothing left to open it' };
+      }
+      if (r.width <= 1) return { kind: 'assistive-only', reason: 'ancestor is ' + size + ' — clipped to assistive technology, which consumes DOM order' };
+      if (r.right < 0 || r.bottom < 0) return { kind: 'assistive-only', reason: 'ancestor is positioned off-screen' };
     }
     return null;
   }
@@ -169,7 +211,7 @@ const reader = (needles) => `
   }
 
   function scan(root, label, needles) {
-    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, textOnly);
     const found = [];
     let n;
     while ((n = walker.nextNode())) {
@@ -179,7 +221,9 @@ const reader = (needles) => `
           const chars = boxes(n, idx, needle.length);
           const anc = ancestry(n);
           const hidden = hiddenReason(n);
-          const m = hidden ? { measurable: false, reason: hidden } : measurability(chars);
+          const m = hidden
+            ? { measurable: false, reason: hidden.reason, kind: hidden.kind }
+            : Object.assign(measurability(chars), { kind: 'run' });
           found.push({
             source: label,
             needle,
@@ -193,6 +237,14 @@ const reader = (needles) => `
       }
     }
     return found;
+  }
+
+  // Put every disclosure widget into the state a reader can reach BEFORE measuring anything.
+  // A closed <details> is legitimately zero-height; measuring it closed and calling that an
+  // exclusion skips real prose, which is how 76 FAQ readings went unmeasured for a month.
+  let disclosuresOpened = 0;
+  for (const d of document.querySelectorAll('details')) {
+    if (!d.open) { d.open = true; disclosuresOpened++; }
   }
 
   const corpus = scan(document.body, 'corpus');
@@ -218,7 +270,7 @@ const reader = (needles) => `
   const SHAPE = /\\d[\\d,]*(?:[^\\p{L}\\p{N}\\s]\\d[\\d,]*)+|\\d[\\d,]*\\s?(?:°[A-Za-z]?|%)|[$€£]\\d[\\d,]*/gu;
   const shapeSet = new Set();
   {
-    const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, textOnly);
     let n;
     while ((n = w.nextNode())) {
       for (const m of n.data.matchAll(SHAPE)) shapeSet.add(m[0]);
@@ -256,10 +308,17 @@ const reader = (needles) => `
     '<p id="neg-range-endash">' + AR_RANGE + '10–11 ميلًا.</p>' +
     '<p id="neg-range-hyphen">' + AR_RANGE + '10-11 ميلًا.</p>' +
     '<p id="pos-range-endash">' + AR_RANGE + '<bdi>10–11</bdi> ميلًا.</p>' +
-    '<p id="alt-range-spelled">' + AR_RANGE + 'من 10 إلى 11 ميلًا.</p>';
+    '<p id="alt-range-spelled">' + AR_RANGE + 'من 10 إلى 11 ميلًا.</p>' +
+    // POSITIVE CONTROL FOR THE UNREACHABLE CHECK. Full width, zero height, prose inside —
+    // the shape of the FAQ regression, minus the FAQ. If this does not come back
+    // kind="unreachable" the check has stopped firing, and a clean run above means nothing.
+    // The same standard E-9 set for the floor falsifier: a control that cannot fail is decor.
+    '<div style="width:900px;height:0;overflow:hidden;">' +
+      '<p id="ctl-unreachable">' + AR_PRICE + '$349 للمركبة.</p>' +
+    '</div>';
   document.body.appendChild(host);
   const synthetic = [];
-  for (const id of ['neg-phone', 'pos-phone', 'neg-price', 'pos-price', 'neg-price-initial']) {
+  for (const id of ['neg-phone', 'pos-phone', 'neg-price', 'pos-price', 'neg-price-initial', 'ctl-unreachable']) {
     for (const r of scan(document.getElementById(id), id)) synthetic.push(r);
   }
   for (const id of ['neg-temp', 'pos-temp', 'neg-temp-range', 'alt-temp-spelled']) {
@@ -273,6 +332,7 @@ const reader = (needles) => `
   return {
     htmlDir: document.documentElement.dir,
     bodyDirection: getComputedStyle(document.body).direction,
+    disclosuresOpened,
     corpus,
     shapes,
     synthetic,
@@ -307,7 +367,10 @@ try {
 const LAYOUT = { ltr: 'LTR  (visual = logical)', 'rtl-reversed': 'RTL  (visual = reversed logical)', reordered: 'REORDERED' };
 
 for (const page of results) {
-  process.stdout.write(`\nroute ${page.route}   html[dir]=${page.htmlDir}   body direction=${page.bodyDirection}\n`);
+  process.stdout.write(
+    `\nroute ${page.route}   html[dir]=${page.htmlDir}   body direction=${page.bodyDirection}` +
+      `   disclosures opened=${page.disclosuresOpened ?? 0}\n`
+  );
   for (const [title, rows] of [
     ['CORPUS', page.corpus],
     ['SHAPE CANDIDATES (found by shape, not by name)', page.shapes ?? []],
@@ -324,6 +387,47 @@ for (const page of results) {
         `      in      ${r.path}\n`
       );
     }
+  }
+}
+
+// --- Unreachable prose, and the control that keeps the check honest. -------------------
+//
+// This section is the reason the container guard stopped being silent. Everything listed
+// here is prose that was laid out at full width, collapsed to no height, and cannot be
+// opened — after every <details> on the page was already opened. It is reported, never
+// excluded, because the last time this condition was filed as an exclusion it was a
+// production regression that had been live for three and a half weeks.
+const unreachable = [];
+let controlFired = false;
+for (const page of results) {
+  for (const r of [...(page.corpus ?? []), ...(page.shapes ?? [])]) {
+    if (r.kind === 'unreachable') unreachable.push({ route: page.route, ...r });
+  }
+  for (const r of page.synthetic ?? []) {
+    if (r.source === 'ctl-unreachable' && r.kind === 'unreachable') controlFired = true;
+  }
+}
+
+process.stdout.write(`\n=== UNREACHABLE PROSE — ${unreachable.length} reading(s) ===\n`);
+if (!controlFired) {
+  process.stdout.write(
+    '  ⚠ ctl-unreachable DID NOT FIRE. The check is not working, so an empty list above is\n' +
+      '    silence and not evidence. Nothing in this run is citable until the control passes.\n'
+  );
+} else if (!unreachable.length) {
+  process.stdout.write('  none — and the control fired, so this zero is a reading and not a silence.\n');
+} else {
+  const byRoute = new Map();
+  for (const r of unreachable) {
+    if (!byRoute.has(r.route)) byRoute.set(r.route, []);
+    byRoute.get(r.route).push(r);
+  }
+  for (const [route, list] of byRoute) {
+    process.stdout.write(`  ${route}   ${list.length} reading(s)\n`);
+    for (const r of list.slice(0, 3)) {
+      process.stdout.write(`      ${JSON.stringify(r.logical)}  in  ${r.path}\n          ${r.reason}\n`);
+    }
+    if (list.length > 3) process.stdout.write(`      … (${list.length - 3} more on this route)\n`);
   }
 }
 
