@@ -65,10 +65,14 @@ const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..
 const NEEDLES = ['$349', '$125', '(435) 219-9447'];
 
 function parseArgs(argv) {
-  const out = { root: path.join(REPO_ROOT, 'dist'), routes: [], json: null, verbose: false };
+  const out = { root: path.join(REPO_ROOT, 'dist'), routes: [], needles: [], json: null, verbose: false };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--root') out.root = path.resolve(argv[++i]);
+    // A corpus literal to read in addition to NEEDLES. NEEDLES stays the site-owned set;
+    // this is for asking a question of text that is already shipped — e.g. "does the digit
+    // range I authored last batch actually lay out the way I assumed?"
+    else if (a === '--needle') out.needles.push(argv[++i]);
     else if (a === '--route') out.routes.push(argv[++i]);
     else if (a === '--json') out.json = path.resolve(argv[++i]);
     else if (a === '--verbose') out.verbose = true;
@@ -86,6 +90,7 @@ const reader = (needles) => `
   // on purpose: NEEDLES is scanned over the corpus, and a needle the corpus cannot yet
   // contain would report "0 found" as if that were a clean reading.
   const TEMP_NEEDLES = ['95°F', '90–100°F', '95 درجة فهرنهايت'];
+  const RANGE_NEEDLES = ['10–11', '10-11', 'من 10 إلى 11'];
 
   function boxes(textNode, start, len) {
     const out = [];
@@ -167,6 +172,7 @@ const reader = (needles) => `
   const AR_LEAD = 'وللاستفسار عن أسعار المجموعات، الرقم هو ';
   const AR_PRICE = 'تكلفة الجولة المُرشَدة هي ';
   const AR_TEMP = 'تبلغ الحرارة العظمى في يوليو نحو ';
+  const AR_RANGE = 'يبلغ طول الطريق نحو ';
   const host = document.createElement('div');
   host.style.cssText = 'position:absolute;left:0;top:0;width:900px;font-size:16px;line-height:2;';
   host.innerHTML =
@@ -183,7 +189,16 @@ const reader = (needles) => `
     '<p id="neg-temp">' + AR_TEMP + '95°F.</p>' +
     '<p id="pos-temp">' + AR_TEMP + '<bdi>95°F</bdi>.</p>' +
     '<p id="neg-temp-range">' + AR_TEMP + '90–100°F.</p>' +
-    '<p id="alt-temp-spelled">' + AR_TEMP + '95 درجة فهرنهايت.</p>';
+    '<p id="alt-temp-spelled">' + AR_TEMP + '95 درجة فهرنهايت.</p>' +
+    // The separator question, raised by a LIVE defect batch 5 shipped: a numeric range
+    // written with U+2013 renders reversed. U+2013 is ON; U+002D is ES; UAX #9 W4 absorbs
+    // an ES between two numbers but only for EN, and W2 has already retyped these digits
+    // to AN in Arabic context — so whether the hyphen survives is genuinely undecided by
+    // reading the rules, and is measured here instead.
+    '<p id="neg-range-endash">' + AR_RANGE + '10–11 ميلًا.</p>' +
+    '<p id="neg-range-hyphen">' + AR_RANGE + '10-11 ميلًا.</p>' +
+    '<p id="pos-range-endash">' + AR_RANGE + '<bdi>10–11</bdi> ميلًا.</p>' +
+    '<p id="alt-range-spelled">' + AR_RANGE + 'من 10 إلى 11 ميلًا.</p>';
   document.body.appendChild(host);
   const synthetic = [];
   for (const id of ['neg-phone', 'pos-phone', 'neg-price', 'pos-price', 'neg-price-initial']) {
@@ -191,6 +206,9 @@ const reader = (needles) => `
   }
   for (const id of ['neg-temp', 'pos-temp', 'neg-temp-range', 'alt-temp-spelled']) {
     for (const r of scan(document.getElementById(id), id, TEMP_NEEDLES)) synthetic.push(r);
+  }
+  for (const id of ['neg-range-endash', 'neg-range-hyphen', 'pos-range-endash', 'alt-range-spelled']) {
+    for (const r of scan(document.getElementById(id), id, RANGE_NEEDLES)) synthetic.push(r);
   }
   host.remove();
 
@@ -216,7 +234,7 @@ const results = [];
 try {
   for (const route of args.routes) {
     await probe.goto(route);
-    const page = await probe.evaluate(reader(NEEDLES));
+    const page = await probe.evaluate(reader([...NEEDLES, ...args.needles]));
     results.push({ route, ...page });
   }
 } catch (err) {
