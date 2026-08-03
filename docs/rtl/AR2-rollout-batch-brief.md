@@ -252,6 +252,49 @@ guard 2 **51 unchanged / 2 up / 0 down**. Both new floors were **proven** on a p
 tree: the real `gate-4i <root>` exits **1** with both locks below floor, while the same gate on
 an unstripped copy of the same `dist/` exits **0**.
 
+### 1.46 Batch 6a — `guides`, the first 4 files, CLOSED
+
+`vernal-weather-guide` · `what-to-wear-utv-tour` · `moab-utv-tours` · `what-to-bring`
+
+**41 of 57 spokes · 661 routes · 42 `ar` pages · suite green.** `guides` is split 6a/6b on the
+`hiking` 2a/2b precedent: 9 files is too many for one first-contact build to attribute cleanly.
+**16 spokes remain**, 5 of them the cornerstone "ultimate guide" pages in 6b.
+
+**Gate 4n returned ZERO on first contact** — the third batch to do so. That is *not* the same as
+"nothing new happened": this hub surfaced **three** new classes, and every one of them was caught
+by something other than a gate.
+
+1. **⚠⚠ A LIVE DEFECT, and it was in batch 5's shipped corpus** — `10–11` rendering as `11–10`.
+   See §3.6. Found only because the guides FAQs are full of ranges, which prompted running the
+   E-1b visual-order instrument. **Reading UAX #9 gave the wrong answer** about the ASCII hyphen;
+   both separators break identically.
+2. **The `°F` shape**, measured *before* authoring rather than after (§3.6). Bare `95°F` renders
+   `F°95`.
+3. **A preflight false positive** — `style="…var(--charcoal)…"` reported as a §3.5 parenthetical.
+   Attributes are not text nodes, so no gate could ever have agreed. Fixed on its own commit,
+   with a positive control proving the check still fires.
+
+Two more findings worth keeping:
+
+- **Gate 4m, first Arabic contact.** The `ar` Moab page carries its English sibling's video, and
+  the media baseline had no `ar` row. Re-baselined (`--emit-baseline`, diffed: **exactly one key
+  added, zero existing keys changed**) rather than declaring the route `divergent` — the Arabic
+  page is a translation of the same landing page, so parity is what is *true*, and `divergent`
+  stays a record of real exceptions.
+- **⚠ §3.5.1's tag-flattening artifact reaches gate 4f too, not just 4g.** `بالـ<bdi>UTV</bdi>`
+  in the `<h1>` flattened to `بالـ UTV` — a space the source does not contain — so the heading and
+  its own frontmatter `title` disagreed. Removed the isolate: it was **decorative**, since there
+  is no mirrored character there and 4n stays at zero without it. *Isolate against a measured
+  hazard, never as a house style.*
+
+Advisory deltas, per §6.3: **4i 4 locks / 20 occurrences — UNCHANGED** (no terminology drift this
+batch, breaking a two-batch run). 4f 47 → 62 and 4g 407 → 426, both attributed: the 15 new 4f
+findings are all the accepted §2.2 class (`UTV`, `Moab`, `Adventure Tours Vernal` stay Latin in a
+heading), and 4g grows with new anchor identities.
+
+Re-freeze **263 → 276** and **430 → 446**; guard 1 identical, guard 2 **51 unchanged / 2 up /
+0 down**, both floors proven on a prose-deleted tree.
+
 ### 1.5 ⚠ A trend to watch — `dinosaur-country` headroom is narrowing
 
 The settled ceiling grows **6.00/page** while the whole-page count grows **5.25/page**, because
@@ -264,6 +307,7 @@ less than that. So headroom shrinks ~**0.75/page**:
 | 30 (batch 3) | 175 | 203 | **28** |
 | 34 (batch 4) | 199 | 225 | **26** |
 | 38 (batch 5) | 222 | 262 | **40** |
+| 42 (batch 6a) | 246 | 275 | **29** |
 
 > **⚠⚠ CORRECTED (batch 5) — the trend REVERSED, and the projection was wrong.** This section
 > read the first three rows as a rate (whole +5.25/page, ceiling +6.00/page, headroom −0.75/page)
@@ -357,8 +401,8 @@ a road sign, a booking system or a map. This diverges from `ja` on purpose (poli
 
 | English | Arabic | Enforced by |
 |---|---|---|
-| Dinosaur Country | `أرض الديناصورات` | gate 4i lock `dinosaur-country` — **floor 263** |
-| trail (the route) | `المسارات` / `مسار` | gate 4i lock `offroad-trail` — **floor 430** |
+| Dinosaur Country | `أرض الديناصورات` | gate 4i lock `dinosaur-country` — **floor 276** |
+| trail (the route) | `المسارات` / `مسار` | gate 4i lock `offroad-trail` — **floor 446** |
 
 > **⚠ NEW (batch 5) — the `forbidden` list is the other half of a lock, and it is ADVISORY.**
 > Each lock carries competing renderings in `i18n-gates/4i-glossary.json` under `forbidden`
@@ -574,6 +618,56 @@ into two spellings. Measured on batch 2a: **4g review candidates 270 → 271, oc
 unchanged at 955** — advisory, never blocking, and still drift worth not introducing. Where a
 space already separates the two (`منطقة High Uintas Wilderness`, or a bare `Red Fleet`), the
 flattened text is unchanged and either placement is fine.
+
+### 3.6 ⚠ NEW — a NUMBER carrying a unit or a range reverses, and no gate can see it
+
+**This class shipped a live defect.** `10–11` in two table cells of
+`/ar/scenic-drives/cub-creek-road-…/` rendered as **`11–10`** for a whole batch. It passed every
+gate, because every gate that could care is scoped elsewhere: gate 4n reads
+`\p{Bidi_Mirrored}` and neither `–` nor `°` is mirrored; gate 4q reads Arabic-Indic digits and
+these are Western. **The only instrument in the repo that can see it is
+`scripts/rtl/measure-currency.mjs`** — the visual-order probe E-1b built for exactly this
+reason, when a bare `$349` was measured rendering as `349$`.
+
+Measured, with the negative controls live in the same run:
+
+| authored | renders | verdict |
+|---|---|---|
+| `95°F` | `F°95` | ✘ reversed |
+| `90–100°F` | `F°100–90` | ✘ reversed |
+| `10–11` (en dash) | `11–10` | ✘ reversed |
+| `10-11` (**ASCII hyphen**) | `11-10` | ✘ **also reversed** |
+| `<bdi>95°F</bdi>` · `<bdi>10–11</bdi>` | as written | ✔ |
+| `95 درجة فهرنهايت` · `من 10 إلى 11` | as written | ✔ |
+
+> **⚠ Reading UAX #9 gave the WRONG answer, and that is the durable lesson.** The natural
+> hypothesis is that the ASCII hyphen is safe where the en dash is not — `-` is **ES**, `–` is
+> **ON**, and W4 absorbs an ES sitting between two numbers. It does not help: **W4 only absorbs
+> an ES between two `EN`, and W2 has already retyped these digits to `AN`** in Arabic context, so
+> there is no `EN` left for it to act on. Both separators break identically.
+>
+> So the rule is about the **shape, not the character**: *a bare digit run adjacent to a unit
+> symbol or another digit run, in Arabic prose, reverses.* Do not try to pick a safe separator.
+
+**Two fixes, and which one is legal depends on where you are:**
+
+- **MDX body prose** — either. `<bdi>10–11</bdi> ميلًا` is compact enough for a table cell;
+  `من 10 إلى 11 ميلًا` reads better in a sentence.
+- **Frontmatter — the spelled-out form ONLY.** `preflight-ar.mjs` rejects `<bdi>` in frontmatter
+  and `bidi-runs.ts` isolates only its *named* runs (phone, currency by shape), so a range in an
+  FAQ answer or a `description` **cannot be isolated at all**. Write `من 90 إلى 100 درجة فهرنهايت`.
+  This is the same residual §3.3 and §3.5 already hit, for a third reason.
+
+**Units follow the corpus, not the source.** The Arabic corpus already spells out measures —
+`70 ميلًا`, `13,528 قدمًا` — so a temperature is `درجة فهرنهايت`, not `°F`, wherever it reads
+naturally. Reach for `<bdi>` only where a compact form genuinely earns its place.
+
+> **⚠ One reading this instrument CANNOT classify.** Its `layout` verdict has three values —
+> `ltr` / `rtl-reversed` / `reordered` — and it can only decide a run that *should* be a single
+> LTR island. A mixed Arabic-plus-digit phrase like `95 درجة فهرنهايت` is correctly RTL with a
+> two-character LTR island inside it, which is neither, so it falls to `reordered` **by
+> construction**. That is not a finding. Cite this instrument only on runs that should be one
+> island.
 
 ---
 

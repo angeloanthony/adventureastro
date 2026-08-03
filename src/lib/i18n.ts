@@ -535,6 +535,10 @@ const AR_SLUGS = new Set<string>([
   'scenic-drives/sheep-creek-geological-loop', // AR-2 Track E, batch 5
   'scenic-drives/red-cloud-loop-scenic-drive', // AR-2 Track E, batch 5
   'scenic-drives/cub-creek-road-tour-of-the-tilted-rocks', // AR-2 Track E, batch 5
+  'guides/vernal-weather-guide', // AR-2 Track E, batch 6a
+  'guides/what-to-wear-utv-tour', // AR-2 Track E, batch 6a
+  'guides/moab-utv-tours', // AR-2 Track E, batch 6a
+  'guides/what-to-bring', // AR-2 Track E, batch 6a
 ]);
 
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {

@@ -17,7 +17,15 @@
     "",
     "divergent — routes where locales are ALLOWED to render different videos.",
     "Empty, and that is a measurement: all 4 route families are identical across all 8",
-    "locales. An entry here is a declared exception, never a silenced failure."
+    "locales. An entry here is a declared exception, never a silenced failure.",
+    "",
+    "2026-08-02, AR-2 batch 6a: ar/guides/moab-utv-tours added, +1 page, zVhDfvb3W3U —",
+    "the same single id its English sibling and all seven other locales carry. Emitted",
+    "with --emit-baseline and diffed: exactly one key added, zero existing keys changed.",
+    "Re-baselining rather than declaring the route divergent is the deliberate choice:",
+    "the Arabic page is a translation of the same landing page, so parity is what is",
+    "true, and `divergent` stays a record of real exceptions instead of absorbing a new",
+    "locale. Arabic is the ninth locale here and the first to reach this gate."
   ],
   "state": "active",
   "divergent": [],
@@ -30,6 +38,9 @@
       "m64J-ovzTf4",
       "p05cObabbjg",
       "tktE4GbS9gQ"
+    ],
+    "ar/guides/moab-utv-tours/index.html": [
+      "zVhDfvb3W3U"
     ],
     "de/about/index.html": [
       "AanVVzP0_oM",
@@ -361,6 +372,7 @@
   },
   "refCounts": {
     "about/index.html": 7,
+    "ar/guides/moab-utv-tours/index.html": 1,
     "de/about/index.html": 7,
     "de/guides/moab-utv-tours/index.html": 1,
     "de/index.html": 6,
