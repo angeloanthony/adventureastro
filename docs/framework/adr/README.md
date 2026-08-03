@@ -18,6 +18,7 @@ between them.
 | [0009](0009-registry-indirection-over-manifest-duplication.md) | Registry indirection over manifest duplication | **IMPLEMENTED** for direction (AR-2 B-1, `11b83d3`); descriptive of `locales.registry`/`policy`/`census` as shipped; one violation outstanding |
 | [0010](0010-isolation-is-a-flanking-type-rule.md) | Bidi isolation is a flanking-type rule, not a character rule | **IMPLEMENTED** (AR-2 Track A, gate 4n, `aa92c3b`) |
 | [0011](0011-diagnostic-substitution-runs-in-a-detached-worktree.md) | A diagnostic that violates a repository invariant runs in a detached worktree | **IMPLEMENTED** (AR-2 Track B substitution build) |
+| [0012](0012-an-anchor-target-is-an-identity.md) | An in-page anchor target is an identity, not a heading | **IMPLEMENTED** (gate 4s). Filed with a **live violation of itself** — `#tours`, 572 pages, all 9 locales — since fixed; corpus at 0 unresolved |
 
 **How an ADR relates to the method.** An ADR records *what was decided* for one
 question; [`../METHOD.md`](../METHOD.md) records *how evidence is evaluated*
@@ -46,6 +47,20 @@ technique here (B-1 for a gate, Track B for presentation), and a host adopting i
 needs to be told *where* to run it before it runs it in the wrong place. Filed as
 framework documentation on that basis; if the technique is ever dropped, this ADR
 goes with it rather than becoming site lore.
+
+**0012 is the second ADR written before its implementation, and for 0010's reason inverted.**
+0010 preserved a rejected rule that would have been *too noisy* (70% false positives). 0012
+preserves one that is too *quiet*: the rule as proposed — preserve a heading's anchor identity
+when translating it — returns **zero findings** across 669 pages and nine locales, because all
+nine already follow it. A gate built to that phrasing would have shipped green and looked
+correct. The rule that finds the live defect is scoped to *resolution* instead, and the corpus
+cannot tell the two apart, so the distinguishing evidence has to be constructed rather than
+observed. Recorded before implementation because none of that is recoverable from a passing
+gate later — and implementation then **corrected the ADR's own reasoning** (§6.1): the eight
+locales were not following an anchor convention at all, they were preserving slugs as a side
+effect of the place-name policy, and Arabic broke it the moment a correct Arabic authoring rule
+touched one of those headings. Filing early is what made that correction visible as a
+correction rather than as the original argument.
 
 **0009 is the first ADR here that is mostly retroactive.** It names a rule four
 shipped sections already follow, having been argued locally four times and
