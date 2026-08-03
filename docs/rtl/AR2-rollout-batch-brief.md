@@ -49,13 +49,16 @@ It supersedes nothing in `AR1-arabic-policy.md`.
 | **2.4** | **⚠ NEW — a §2.3 lock phrase may appear at most ONCE across `title` + `description`.** A second occurrence unsounds every `ar` floor and no gate would say so. `preflight-ar.mjs` enforces it. | E-9 §2.2, control goes red on one added occurrence |
 | **6.3** | **⚠ NEW — freeze the downstream gate numbers BEFORE remediating.** The `&&` chain hides every gate behind the first red one. | batch 2a: 4f/4h/4i/4g/4q never ran; the baseline had to be reconstructed |
 | **6.4** | **⚠ NEW — a local commit may be published within minutes.** The `k` bot is a property of the environment, not an anomaly. | batch 2a: 3 articles pre-committed, 2 milestones auto-pushed |
+| **3.2** | **⚠ CORRECTED — the discriminator is the FLANKS, not what the guillemets enclose.** A `«»` pair around *Arabic* still fails 4n when a Latin run precedes it. | batch 5, the batch's only 4n finding |
+| **2.3** | **⚠ NEW — the `forbidden` competing renderings are named inline, and they are ADVISORY.** Two batches running, the author introduced one and no blocking gate said so. | batch 4 (`الدروب`), batch 5 (`بلاد الديناصورات`) |
+| **1.5** | **⚠⚠ CORRECTED — the headroom trend REVERSED.** Projected ≈8 at 57 spokes; batch 5 measured headroom *widening* 26 → 40. `prose` is editorial, not structural. | batch 5 re-freeze |
 
 ---
 
 ## 1. The batches
 
 Hub order is unchanged from `MULTILINGUAL_HANDOFF.md` §7 stage 2 and is **not re-derived**:
-utv(7) ✔ → **hiking(16)** → fishing(4) → camping(4) → scenic-drives(4) → guides(9) →
+utv(7) ✔ → hiking(16) ✔ → fishing(4) ✔ → camping(4) ✔ → scenic-drives(4) ✔ → **guides(9)** →
 itineraries(9) → things-to-do(2) → dinosaur-national-monument(2) ✔.
 
 **Pilot complete: `utv` 7 + `dinosaur-national-monument` 2 = 9 of 57.** The DNM hub was pulled
@@ -204,6 +207,51 @@ Two findings, both caught before they could reach a gate:
 > advisory that grows is drift entering the corpus, and the pre-existing 9 occurrences are exactly
 > how the first ones got in.
 
+### 1.45 Batch 5 — `scenic-drives`, 4 files, CLOSED
+
+`cub-creek-road-tour-of-the-tilted-rocks` · `flaming-gorge-uintas-scenic-byway` ·
+`red-cloud-loop-scenic-drive` · `sheep-creek-geological-loop`
+
+**37 of 57 spokes · 657 routes · 38 `ar` pages · suite green.** 20 spokes remain.
+
+Two findings, one blocking and one advisory, and **I caused both**:
+
+1. **Gate 4n, 1 finding — §3.2's guillemet class, from the other side.** §3.2 is written about a
+   guillemet *wrapping* a Latin run. This one wrapped **Arabic** (`«جولة الصخور المائلة»`), which
+   §3.2 explicitly says needs nothing — but it was preceded by a Latin run
+   (`فطريق **Cub Creek Road** — «…`), so the `«` still sat at a real `L … R` change. **The
+   discriminator is the flanks, never which script is inside the quotes.** Fixed by authoring —
+   `المعروف بـ«…` puts an Arabic word at the boundary — not by markup.
+2. **⚠ Terminology drift I introduced myself, for the second batch running and on the *other*
+   lock.** Two occurrences of `بلاد الديناصورات` — a `forbidden` competing rendering of
+   `أرض الديناصورات` — went into `cub-creek-road`. Gate 4i reported it as an **advisory**:
+   locks 4 → 5, occurrences 20 → 22. Reverted to `أرض الديناصورات`; advisories back to 4 / 20.
+
+> **The batch-4 lesson held, and it is now the thing that works.** Batch 4 concluded "read the
+> advisory deltas on every batch". That is the *only* reason this was caught: the build was green
+> at the point the drift existed, and no blocking gate ever mentioned it. **One batch of evidence
+> was a lesson; two independent recurrences on two different locks make it a procedure.**
+>
+> Note the asymmetry that makes it dangerous: §2.3 tells an author which phrase to *use*, and
+> `forbidden` is where the near-miss synonyms live — but that list is in a JSON config, not in the
+> brief an author reads. §2.3 now names them inline.
+
+Per §6.3 the gates hidden behind 4n were run individually against the same `dist/` **before**
+remediating, so "no regressions" is again a measurement, not an assertion:
+
+| | pre-remediation | post | delta |
+|---|---|---|---|
+| 4f | ✔ 15445 headings, 47 advisory | identical | — |
+| 4h | ✔ 577 pages, 1922 locked phrases | identical | — |
+| 4i | ✔ **5 advisory locks / 22 occurrences** | ✔ **4 / 20** | the 2 I introduced, removed |
+| 4g | ✔ 46206 anchors, 293 identities, 407 candidates, 74 repeated | identical | — |
+| 4q | ar 1 174 411 chars | ar 1 174 419 chars | **+8 — exactly the two edits** |
+
+Re-freeze **225 → 263** and **425 → 430**; guard 1 phrase-set identical (EOL-normalised),
+guard 2 **51 unchanged / 2 up / 0 down**. Both new floors were **proven** on a prose-deleted
+tree: the real `gate-4i <root>` exits **1** with both locks below floor, while the same gate on
+an unstripped copy of the same `dist/` exits **0**.
+
 ### 1.5 ⚠ A trend to watch — `dinosaur-country` headroom is narrowing
 
 The settled ceiling grows **6.00/page** while the whole-page count grows **5.25/page**, because
@@ -215,11 +263,27 @@ less than that. So headroom shrinks ~**0.75/page**:
 | 26 (batch 2b) | 151 | 183 | **32** |
 | 30 (batch 3) | 175 | 203 | **28** |
 | 34 (batch 4) | 199 | 225 | **26** |
+| 38 (batch 5) | 222 | 262 | **40** |
 
-Projected to the full 57-spoke corpus: headroom ≈ **8**. Still feasible, so nothing to act on — but
-this is the same shape as E-4 §10.3's "true when written, false eight pages later", and it is worth
-re-reading at every re-freeze rather than rediscovering. If it ever reaches 0 the lock becomes
-infeasible and §11.2 criterion 6 requires dropping it.
+> **⚠⚠ CORRECTED (batch 5) — the trend REVERSED, and the projection was wrong.** This section
+> read the first three rows as a rate (whole +5.25/page, ceiling +6.00/page, headroom −0.75/page)
+> and projected headroom ≈ **8** at 57 spokes. Batch 5 measured whole **+9.25/page** against the
+> ceiling's **+5.75/page**, so headroom went **26 → 40** — it *widened*, and by more than the
+> projection said it could narrow.
+>
+> The cause is not subtle in hindsight: the ceiling grows a fixed 4/page from the Model B bound
+> plus template, but `prose` grows by **however often the authors actually write the phrase**, and
+> a `scenic-drives` corpus whose every article links the "Scenic Drives in Dinosaur Country"
+> pillar writes it far more often than a `camping` one does. **`prose` is an editorial quantity,
+> not a structural one, so a per-page rate fitted to three batches of one hub predicts nothing
+> about the next hub.**
+>
+> This is the **fifth** instance of the recorded-size lesson and the second in two batches: batch
+> 4 found the 4n finding count was never monotone, and now the headroom rate is not monotone
+> either. Keep measuring it at every re-freeze — but **do not project it**, and do not treat a
+> narrowing run as a forecast. If it ever actually reaches 0 the lock becomes infeasible and
+> §11.2 criterion 6 requires dropping it; that decision is made on a measurement, never on a
+> trend line.
 
 ### 1.2 Two deliverables per file, not one — unchanged and still the top failure mode
 
@@ -293,8 +357,16 @@ a road sign, a booking system or a map. This diverges from `ja` on purpose (poli
 
 | English | Arabic | Enforced by |
 |---|---|---|
-| Dinosaur Country | `أرض الديناصورات` | gate 4i lock `dinosaur-country` — **floor 225** |
-| trail (the route) | `المسارات` / `مسار` | gate 4i lock `offroad-trail` — **floor 425** |
+| Dinosaur Country | `أرض الديناصورات` | gate 4i lock `dinosaur-country` — **floor 263** |
+| trail (the route) | `المسارات` / `مسار` | gate 4i lock `offroad-trail` — **floor 430** |
+
+> **⚠ NEW (batch 5) — the `forbidden` list is the other half of a lock, and it is ADVISORY.**
+> Each lock carries competing renderings in `i18n-gates/4i-glossary.json` under `forbidden`
+> with `enforce: "report"` — `بلاد الديناصورات` and `أرض الدينوصورات` for the destination
+> identity, `الدروب` for the route. Writing one does **not** fail the build; it moves a number
+> in a summary line. Batch 4 introduced `الدروب` twice; batch 5 introduced `بلاد الديناصورات`
+> twice, on the *other* lock. **Both were caught only by diffing the advisory counts (§6.3),
+> never by a gate verdict.**
 
 > **⚠ NEW (batch 3) — two frontmatter rules these locks now carry.** Both are checked by
 > `preflight-ar.mjs`; neither is visible to any gate.
@@ -383,8 +455,22 @@ census. It produced **2 gate-4n findings** in the pilot (E-2 §2.2).
 ✔  أو كانت كلمتا «متجاورة» و<bdi>UTV</bdi> جديدتين عليك
 ```
 
-**Drop the guillemets around a Latin token and isolate it instead.** Guillemets around Arabic
-are still fine and still need nothing.
+**Drop the guillemets around a Latin token and isolate it instead.**
+
+> **⚠ CORRECTED (batch 5) — "guillemets around Arabic need nothing" was FALSE, and it was the
+> sentence that used to close this section.** What decides gate 4n is the pair of **flanks** the
+> mirrored character sits between, never the script it encloses. A `«»` pair around Arabic fails
+> just as hard when the character *before* it is Latin:
+>
+> ```mdx
+> ✘  فطريق **Cub Creek Road** — «جولة الصخور المائلة» داخل …     ← "«" flanked L … R
+> ✔  فطريق **Cub Creek Road** — المعروف بـ«جولة الصخور المائلة» داخل …
+> ```
+>
+> This is the same authoring fix §3.3 and §3.5 already prescribe — **put an Arabic word at the
+> boundary where the direction change is** — and it is now a third place that one rule applies.
+> The original claim was measured over guillemets in all-Arabic context and generalised; rule 18,
+> in a brief, for the second time in this same section.
 
 `→` (U+2192) is `Bidi_Mirrored=No` and stays pointing the wrong way. There were **0** in the
 pilot's English sources; do not introduce one.
@@ -542,7 +628,7 @@ No new instrument. `npm run build` runs all 11 gates.
 | **4n** | An unisolated Latin/Arabic flank — including §3.3's bracket-and-digit class |
 | **4q** | Any Arabic-Indic digit in rendered prose. Policy §3 has no exception |
 | **4k** | Every new page resolves effective direction `rtl` |
-| **4i** | The two locked identities in §2.3, **now at floors 183 and 415** |
+| **4i** | The two locked identities in §2.3, **now at floors 263 and 430** |
 | **4o** | `→` count — expected 0 |
 | **4b** | Any internal link that left the English path without a registry entry |
 | *(schema)* | The `description` budget — §2.4, and it fails **before** any gate |
@@ -559,7 +645,8 @@ corpus: they could not fail for a content reason. They were re-frozen at **33** 
 > and gate 4i would have stayed green** — proved by running the real gate against a prose-deleted
 > tree, not inferred ([`AR2-E9-floor-enforceability.md`](AR2-E9-floor-enforceability.md) §4).
 >
-> Re-frozen at **183** and **415** on 2026-08-01 over the full 26-page `ar` corpus. Both now fail
+> Re-frozen again at **263** and **430** on 2026-08-02 over the 38-page batch-5 corpus, both
+> proven on a prose-deleted tree (§1.45). Re-frozen at **183** and **415** on 2026-08-01 over the full 26-page `ar` corpus. Both now fail
 > that same experiment. A batch that drops either identity from Arabic prose fails the build.
 
 ### 6.2 ⚠ CORRECTED — finishing a batch is two operations, and the second one has an invariant

@@ -531,6 +531,10 @@ const AR_SLUGS = new Set<string>([
   'camping/camping-at-red-fleet-state-park', // AR-2 Track E, batch 4
   'camping/camping-at-steinaker-state-park', // AR-2 Track E, batch 4
   'camping/camping-in-ashley-national-forest', // AR-2 Track E, batch 4
+  'scenic-drives/flaming-gorge-uintas-scenic-byway', // AR-2 Track E, batch 5
+  'scenic-drives/sheep-creek-geological-loop', // AR-2 Track E, batch 5
+  'scenic-drives/red-cloud-loop-scenic-drive', // AR-2 Track E, batch 5
+  'scenic-drives/cub-creek-road-tour-of-the-tilted-rocks', // AR-2 Track E, batch 5
 ]);
 
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {
