@@ -130,6 +130,34 @@ const reader = (needles) => `
     };
   }
 
+  /**
+   * A run nobody can see has no visual order worth reading.
+   *
+   * The header already records one form of this: a run in the 1px .page-summary column
+   * wraps per character, so its x-order describes the column and not the bidi. That guard
+   * is NECESSARY BUT NOT SUFFICIENT, and batch 6a found the gap — a token with no internal
+   * break opportunity cannot wrap, so it lands on one baseline, passes the wrap check, and
+   * is reported REORDERED with full confidence. Four price runs in a visually-hidden,
+   * off-screen element read exactly that way, and not one of them is a defect: the element
+   * is at left:-9999px for assistive technology, which consumes DOM order, not layout.
+   *
+   * So measurability is asked of the CONTAINER as well as the run. Same lesson as every
+   * other time this project has met it — check that the window actually holds the thing
+   * being measured — arrived at from a third direction.
+   */
+  function hiddenReason(node) {
+    for (let el = node.parentElement; el && el !== document.documentElement; el = el.parentElement) {
+      const cs = getComputedStyle(el);
+      if (cs.display === 'none' || cs.visibility === 'hidden') return 'ancestor is display:none/visibility:hidden';
+      const r = el.getBoundingClientRect();
+      if (r.width <= 1 || r.height <= 1) {
+        return 'ancestor is ' + Math.round(r.width) + 'x' + Math.round(r.height) + 'px — not visually perceived';
+      }
+      if (r.right < 0 || r.bottom < 0) return 'ancestor is positioned off-screen';
+    }
+    return null;
+  }
+
   function ancestry(node) {
     const out = [];
     for (let el = node.parentElement; el && el !== document.documentElement; el = el.parentElement) {
@@ -150,7 +178,8 @@ const reader = (needles) => `
         while ((idx = n.data.indexOf(needle, idx + 1)) !== -1) {
           const chars = boxes(n, idx, needle.length);
           const anc = ancestry(n);
-          const m = measurability(chars);
+          const hidden = hiddenReason(n);
+          const m = hidden ? { measurable: false, reason: hidden } : measurability(chars);
           found.push({
             source: label,
             needle,
@@ -167,6 +196,35 @@ const reader = (needles) => `
   }
 
   const corpus = scan(document.body, 'corpus');
+
+  /**
+   * SHAPE DISCOVERY. NEEDLES answers "is this literal laid out correctly"; this answers
+   * "what in this page has the shape that breaks, whether or not anyone suspected it".
+   *
+   * The distinction is the whole reason this exists. The 10-to-11 range shipped reversed for
+   * a full batch and was found only because someone guessed the needle after the fact — a
+   * literal-only scan is structurally incapable of surfacing a shape nobody thought to name,
+   * which is the inventory-vs-classification failure this project keeps meeting. A run is a
+   * CANDIDATE here on shape alone; whether it is a defect is decided by the same measurement
+   * every other reading uses, never by this pattern.
+   *
+   * Three shapes, each a measured defect and not a guess:
+   *   digit RANGE          10-11 and its en-dash form  (both measured reversed)
+   *   digit + UNIT symbol  95 degrees F, 20 percent    (the degree form measured reversed)
+   *   CURRENCY + digits    a dollar amount             (measured reversed, E-1b)
+   * Runs already isolated are still reported, with isolated=true, so the scan doubles as
+   * confirmation that an existing isolate is doing its job.
+   */
+  const SHAPE = /\\d[\\d,]*(?:[^\\p{L}\\p{N}\\s]\\d[\\d,]*)+|\\d[\\d,]*\\s?(?:°[A-Za-z]?|%)|[$€£]\\d[\\d,]*/gu;
+  const shapeSet = new Set();
+  {
+    const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    let n;
+    while ((n = w.nextNode())) {
+      for (const m of n.data.matchAll(SHAPE)) shapeSet.add(m[0]);
+    }
+  }
+  const shapes = shapeSet.size ? scan(document.body, 'shape', [...shapeSet]) : [];
 
   // ---- synthetic controls, injected at runtime; dist is not touched ---------
   const AR_LEAD = 'وللاستفسار عن أسعار المجموعات، الرقم هو ';
@@ -216,6 +274,7 @@ const reader = (needles) => `
     htmlDir: document.documentElement.dir,
     bodyDirection: getComputedStyle(document.body).direction,
     corpus,
+    shapes,
     synthetic,
   };
 })()
@@ -249,7 +308,11 @@ const LAYOUT = { ltr: 'LTR  (visual = logical)', 'rtl-reversed': 'RTL  (visual =
 
 for (const page of results) {
   process.stdout.write(`\nroute ${page.route}   html[dir]=${page.htmlDir}   body direction=${page.bodyDirection}\n`);
-  for (const [title, rows] of [['CORPUS', page.corpus], ['SYNTHETIC CONTROLS (runtime DOM, dist untouched)', page.synthetic]]) {
+  for (const [title, rows] of [
+    ['CORPUS', page.corpus],
+    ['SHAPE CANDIDATES (found by shape, not by name)', page.shapes ?? []],
+    ['SYNTHETIC CONTROLS (runtime DOM, dist untouched)', page.synthetic],
+  ]) {
     process.stdout.write(`\n  === ${title} — ${rows.length} reading(s) ===\n`);
     for (const r of rows) {
       const verdict = r.measurable ? LAYOUT[r.layout] : `NOT MEASURABLE — ${r.reason}`;

@@ -662,6 +662,51 @@ Measured, with the negative controls live in the same run:
 `70 ميلًا`, `13,528 قدمًا` — so a temperature is `درجة فهرنهايت`, not `°F`, wherever it reads
 naturally. Reach for `<bdi>` only where a compact form genuinely earns its place.
 
+> **⚠⚠ CORRECTED, same batch — `bidi-runs.ts` coverage is per-COMPONENT, not per-surface, and a
+> `description` is NOT covered.** This section first said a bare currency was safe in frontmatter
+> because `bidi-runs.ts` isolates it by shape. That is true of an **FAQ answer**, which reaches the
+> reader through `FaqAccordion` → `<Bidi>` (B-15). It is **false of `description`**, which
+> `RelatedArticles` renders straight into a card with no formatter in the path.
+>
+> Measured: a bare `$349` in the Moab page's `description` rendered **`349$` on three other Arabic
+> pages** — every page whose related block carried that card. The defect is not on the page that
+> authored it, which is why no amount of reading that file would have found it.
+>
+> **So the frontmatter rule is the simple one, for every shape: spell it out.** `تبدأ من 349
+> دولارًا`, not `$349`. Isolation is unavailable in `title`/`description` and the one formatter
+> that could reach them does not.
+>
+> ➡ **Open, and an owner decision:** routing `RelatedArticles`' `title`/`description` through the
+> bidi formatter is the fix that *generalizes*, and it is exactly B-15's shape — a contract change
+> landing uniformly across all nine locales. Filed, not built.
+
+### 3.6.1 ⚠ NEW — the visual-order probe has TWO slots in the batch workflow
+
+The blind spot this class occupies is now demonstrated, not hypothetical: it produces correct
+HTML, passes every gate, and renders wrong. That earns routine observation rather than an
+after-the-fact investigation. **`scripts/rtl/measure-currency.mjs` is now part of the standard
+batch procedure, in two distinct places**, because it answers two different questions:
+
+1. **BEFORE authoring — synthetic controls, no build required.** Inject the shape you are about
+   to write into any already-built Arabic page and read it. This is how `°F` was settled before
+   nine files were authored against a guess. Cheap: seconds, no rebuild.
+2. **AFTER the build — `--scan-shapes` over the corpus.** The literal scan only ever finds
+   needles someone already suspected; that is why a reversed range shipped for a full batch and
+   was found by guessing the needle afterwards. **Shape discovery removes the guess**: it walks
+   rendered text for digit-range, digit-plus-unit and currency shapes and measures whatever it
+   finds, so a shape nobody predicted still gets read. Inventory-vs-classification, applied to
+   the instrument instead of the corpus.
+
+⚠ **A zero from this probe is only evidence while its negative controls are red.** Report the
+control states alongside the count, exactly as §6.3 requires for advisory numbers.
+
+⚠ **Measurability is asked of the CONTAINER, not just the run.** A run inside a visually-hidden
+element — the 1px off-screen `.page-summary` — has no visual order worth reading; assistive
+technology consumes DOM order, not layout. The original guard caught a run that *wraps* in that
+column and missed one that *cannot* wrap for want of a break opportunity, which then read
+`REORDERED` with full confidence. Four such readings were false positives. Now excluded with a
+stated reason.
+
 > **⚠ One reading this instrument CANNOT classify.** Its `layout` verdict has three values —
 > `ltr` / `rtl-reversed` / `reordered` — and it can only decide a run that *should* be a single
 > LTR island. A mixed Arabic-plus-digit phrase like `95 درجة فهرنهايت` is correctly RTL with a
