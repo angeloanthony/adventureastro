@@ -2,11 +2,11 @@
   "$schema": "astro-localization-gates/schemas/census-output.schema.json",
   "censusVersion": 1,
   "provenance": {
-    "measuredAt": "2026-08-02",
+    "measuredAt": "2026-08-03",
     "manifest": "sha256:2df4867cf2e086b57ae2b157eb496c5e6d4e54d261bc9620fece64b30901a7fc",
     "corpus": {
       "pages": {
-        "ar": 42,
+        "ar": 47,
         "de": 77,
         "en": 80,
         "es": 77,
@@ -16,10 +16,10 @@
         "pt": 77,
         "zh": 77
       },
-      "fingerprint": "sha256:2cd5a5032312f4e8edd4e48ac6c9e467231fcc6bcdc1f659820edb9318b00324"
+      "fingerprint": "sha256:22ba5a3065b1fac524fe7964a7cff92765ac22c0568d19eccaa8fd5dc93bfd0e"
     },
     "engine": "astro-localization-gates@0.0.0+inrepo",
-    "invocation": "census phrase-count --phrases census/phrase-set.json --measured-at 2026-08-02"
+    "invocation": "census phrase-count --phrases census/phrase-set.json --measured-at 2026-08-03"
   },
   "facts": [
     {
@@ -29,11 +29,11 @@
         "phrase": "أرض الديناصورات",
         "surface": "prose"
       },
-      "value": 276,
+      "value": 321,
       "extractor": "visibleText@1",
       "evidence": {
-        "pages": 42,
-        "pagesWithPhrase": 42
+        "pages": 47,
+        "pagesWithPhrase": 47
       }
     },
     {
@@ -43,11 +43,11 @@
         "phrase": "المسارات",
         "surface": "prose"
       },
-      "value": 446,
+      "value": 469,
       "extractor": "visibleText@1",
       "evidence": {
-        "pages": 42,
-        "pagesWithPhrase": 42
+        "pages": 47,
+        "pagesWithPhrase": 47
       }
     },
     {

@@ -539,6 +539,11 @@ const AR_SLUGS = new Set<string>([
   'guides/what-to-wear-utv-tour', // AR-2 Track E, batch 6a
   'guides/moab-utv-tours', // AR-2 Track E, batch 6a
   'guides/what-to-bring', // AR-2 Track E, batch 6a
+  'guides/ultimate-guide-to-flaming-gorge', // AR-2 Track E, batch 6b
+  'guides/ultimate-guide-to-ashley-national-forest', // AR-2 Track E, batch 6b
+  'guides/ultimate-guide-to-red-fleet-state-park', // AR-2 Track E, batch 6b
+  'guides/ultimate-guide-to-steinaker-state-park', // AR-2 Track E, batch 6b
+  'guides/ultimate-guide-to-vernal-utah', // AR-2 Track E, batch 6b
 ]);
 
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {

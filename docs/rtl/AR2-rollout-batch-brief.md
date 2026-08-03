@@ -52,6 +52,8 @@ It supersedes nothing in `AR1-arabic-policy.md`.
 | **3.2** | **⚠ CORRECTED — the discriminator is the FLANKS, not what the guillemets enclose.** A `«»` pair around *Arabic* still fails 4n when a Latin run precedes it. | batch 5, the batch's only 4n finding |
 | **2.3** | **⚠ NEW — the `forbidden` competing renderings are named inline, and they are ADVISORY.** Two batches running, the author introduced one and no blocking gate said so. | batch 4 (`الدروب`), batch 5 (`بلاد الديناصورات`) |
 | **1.5** | **⚠⚠ CORRECTED — the headroom trend REVERSED.** Projected ≈8 at 57 spokes; batch 5 measured headroom *widening* 26 → 40. `prose` is editorial, not structural. | batch 5 re-freeze |
+| **3.7** | **⚠⚠ NEW — the bracket rule is the FLANKS, and `preflight-ar.mjs` now decides it that way.** The old inner-text checks were structurally blind to two shapes, and reported *clean* on a batch whose first build then stopped at gate 4n. | batch 6b, **5** gate-4n findings after a clean preflight |
+| **1.47** | **⚠ NEW — batch 6b closed; the `guides` hub is complete at 9 of 9.** | batch 6b |
 
 ---
 
@@ -295,6 +297,92 @@ heading), and 4g grows with new anchor identities.
 Re-freeze **263 → 276** and **430 → 446**; guard 1 identical, guard 2 **51 unchanged / 2 up /
 0 down**, both floors proven on a prose-deleted tree.
 
+### 1.47 Batch 6b — `guides`, the last 5 files, CLOSED
+
+`ultimate-guide-to-flaming-gorge` · `ultimate-guide-to-ashley-national-forest` ·
+`ultimate-guide-to-red-fleet-state-park` · `ultimate-guide-to-steinaker-state-park` ·
+`ultimate-guide-to-vernal-utah`
+
+**The `guides` hub is complete: 9 of 9. 46 of 57 spokes · 666 routes · 47 `ar` pages · suite
+green.** 11 spokes remain — `itineraries` (9) and `things-to-do` (2). These were the five largest
+source files in the corpus (207–309 lines).
+
+> **⚠⚠ THE BLOCKER WAS THE PRE-FLIGHT, AND IT WAS BLIND BY CONSTRUCTION.** `preflight-ar.mjs`
+> reported **clean**, and the first build then stopped at gate 4n with **5 findings in 4 table
+> cells**. The script's two bracket checks looked only at the text *inside* the brackets —
+> §3.3 "opens on a digit" and §3.5 "closes on Latin" — and the two shapes that got through are
+> the exact mirror images of those two:
+>
+> ```
+> جبال Uinta (تمتدّ …            "(" preceded by LATIN    → flanked L … R
+> … البرّية (أُعلنت عام 1984)     ")" preceded by a DIGIT   → flanked N … R
+> ```
+>
+> **Batch 5 had already corrected the brief on precisely this point** — *"the discriminator is
+> the flanks, never which script is inside"* — and the instrument was never brought along. A
+> rule can be right in the brief and absent from the tool that is supposed to enforce it; that
+> gap is invisible until a corpus carries the shape. §3.7 is the correction, and it is a
+> strict superset of both old checks.
+>
+> Shipped only after **both** controls, the batch-6a standard:
+>
+> | control | result |
+> |---|---|
+> | POSITIVE — the reconstructed pre-fix files | reproduces gate 4n's **5 findings exactly**, in the gate's own `flanked X … Y` vocabulary |
+> | FALSE-POSITIVE — all 46 `.ar.mdx` sources, a corpus gate 4n passes | **0 findings** |
+>
+> The false-positive control earned its place immediately: it found **19 findings across 2 files
+> from markdown link targets** — `[نصّ](/path/)`, whose parentheses never reach a text node. That
+> is batch 6a's `style="…"` class in a second syntax, and it would have shipped a check that
+> trains the author to ignore the script.
+
+**The visual-order probe ran in both slots (§3.6.1), and slot 1 decided the authoring.** Before a
+word was written, the shapes these guides needed but the corpus had never carried were injected
+into a built Arabic page and read: decimals (`1.3`, `2.5`), comma-grouped magnitudes (`1,500`,
+`13,528`) and **highway designators** (`US-191`, `UT-44`) all laid out **LTR unisolated**, with the
+bare `$349` negative control red in the same run. So no `<bdi>` and no spelled-out workaround were
+needed for any of them — and §3.6's rule stayed confined to the shapes that actually reverse.
+After the build, shape discovery over the five pages found **16 distinct shapes, 59 measurable
+readings, all LTR, 0 unreachable**, negative controls still red.
+
+> ⚠ **A blind spot in shape discovery, measured not assumed.** Its regex requires a *leading*
+> digit, so `US-191` and `UT-44` are invisible to it — the class had to be measured by hand in
+> slot 1. It reads clean, so nothing is proposed: a check with no measured hazard behind it is
+> decoration (E-9). Recorded so the next batch does not rediscover the gap.
+
+Per §6.3 the gates hidden behind 4n were run individually against the same `dist/` **before**
+remediating, so "no regressions" is again a measurement:
+
+| | pre-remediation | post | delta |
+|---|---|---|---|
+| 4f | ✔ 15681 headings, **54 advisory** | identical | — |
+| 4h | ✔ 586 pages, 1922 locked phrases | identical | — |
+| 4i | ✔ **4 advisory locks / 20 occurrences** | identical | **— (no terminology drift)** |
+| 4g | ✔ 46853 anchors, 293 identities, 444 candidates, 80 repeated | identical | — |
+| 4q | ar 1 324 175 chars | ar 1 324 170 chars | **−5 — exactly the four edits** (+1 −1 −1 −4) |
+
+> **⚠ THE 4f ADVISORY FELL, 62 → 54, AND A DECREASE NEEDED EXPLAINING TOO.** Batch 4 and 5 taught
+> "diff the advisory deltas"; both times the finding was drift *entering*. This is the other
+> direction, and adding pages cannot remove an advisory — so the movement is not authoring.
+> Measured cause: **§1.2's registry effect.** Registering five new Arabic routes changes which
+> four cards `RelatedArticles` renders on every sibling, and **15 pre-existing `ar` pages now
+> carry a 6b title in their related block**, displacing `utv`-marked card headings that were the
+> advisory. None of the five new pages contributes a single 4f advisory of its own. *An advisory
+> that falls is still the registry editing pages this batch never opened.*
+
+Re-freeze **276 → 321** and **446 → 469**; guard 1 phrase-set identical (EOL-normalised, 53
+facts), guard 2 **51 unchanged / 2 up / 0 down**. Both floors **proven** on a prose-deleted tree:
+the real `gate-4i <dist>` exits **1** with `أرض الديناصورات` at 110/321 and `المسارات` at 51/469,
+while the same gate on an unstripped copy of the same bytes exits **0**. Observed-under-deletion
+matches the instrument's predicted `survives` (110 / 51) **exactly**, which is the arithmetic and
+the live gate agreeing rather than one standing in for the other.
+
+> ⚠ **The control is what caught the harness bug.** `gate-4i`'s positional argument is the
+> *rendered-output directory*, not a repo root. Passing the parent makes it find zero pages and
+> report `Observed: 0` for **every lock in every locale** — indistinguishable, in the output,
+> from a catastrophic regression. It was only visible because the control tree "failed" too.
+> A proof whose control also fails is measuring its own harness.
+
 ### 1.5 ⚠ A trend to watch — `dinosaur-country` headroom is narrowing
 
 The settled ceiling grows **6.00/page** while the whole-page count grows **5.25/page**, because
@@ -308,6 +396,7 @@ less than that. So headroom shrinks ~**0.75/page**:
 | 34 (batch 4) | 199 | 225 | **26** |
 | 38 (batch 5) | 222 | 262 | **40** |
 | 42 (batch 6a) | 246 | 275 | **29** |
+| 47 (batch 6b) | 276 | 320 | **44** |
 
 > **⚠⚠ CORRECTED (batch 5) — the trend REVERSED, and the projection was wrong.** This section
 > read the first three rows as a rate (whole +5.25/page, ceiling +6.00/page, headroom −0.75/page)
@@ -401,8 +490,8 @@ a road sign, a booking system or a map. This diverges from `ja` on purpose (poli
 
 | English | Arabic | Enforced by |
 |---|---|---|
-| Dinosaur Country | `أرض الديناصورات` | gate 4i lock `dinosaur-country` — **floor 276** |
-| trail (the route) | `المسارات` / `مسار` | gate 4i lock `offroad-trail` — **floor 446** |
+| Dinosaur Country | `أرض الديناصورات` | gate 4i lock `dinosaur-country` — **floor 321** |
+| trail (the route) | `المسارات` / `مسار` | gate 4i lock `offroad-trail` — **floor 469** |
 
 > **⚠ NEW (batch 5) — the `forbidden` list is the other half of a lock, and it is ADVISORY.**
 > Each lock carries competing renderings in `i18n-gates/4i-glossary.json` under `forbidden`
@@ -716,6 +805,40 @@ stated reason.
 
 ---
 
+### 3.7 ⚠⚠ NEW — the bracket rule is the FLANKS, and the pre-flight now decides it that way
+
+§3.3 and §3.5 are two instances of **one** rule, and batch 5 already said so about guillemets:
+*what makes a mirrored character a defect is the pair of flanks it sits between, never what it
+encloses.* §3.3 is that rule at an **opening** bracket beside a digit; §3.5 is it at a **closing**
+bracket beside a Latin name. Batch 6b found the other two corners of the same square:
+
+```
+✘  جبال Uinta (تمتدّ من الشرق إلى الغرب)        "(" preceded by LATIN   → flanked L … R
+✔  جبال Uinta الممتدّة من الشرق إلى الغرب
+
+✘  منطقة High Uintas البرّية (أُعلنت عام 1984)   ")" preceded by a DIGIT  → flanked N … R
+✔  منطقة High Uintas البرّية، أُعلنت عام 1984
+
+✘  Manila في يوتا (شمالًا) · Dutch John …        ")" flanked R … L
+✔  Manila في يوتا شمالًا، وDutch John …
+```
+
+**The remedy has not changed and does not need to**: put an Arabic word at the boundary where the
+direction change is, or — in body prose only — wrap the Latin run in `<bdi>`, which turns it into
+a single neutral so the bracket's flank scans past it. What changed is that the *instrument* now
+applies the rule the brief states.
+
+**`preflight-ar.mjs` classifies both flanks of every bracket** — `R` Arabic, `L` Latin, `N` digit,
+scanning past neutrals — and reports any mismatch in gate 4n's own vocabulary. That is a strict
+superset of the two checks it replaced, with the same exemptions: a `<bdi>` run collapses to a
+tatweel before scanning, a phone or currency run is a named run `bidi-runs.ts` isolates, and
+markdown link targets, HTML attributes and tag names are not text nodes at all.
+
+⚠ **Table cells are where this bites hardest.** A compact `<td>` puts a Latin name, a bracket and
+a bare year within a few characters of each other, and all five of batch 6b's findings were in
+table cells while several hundred body parentheticals passed. Prefer a comma to a parenthesis in
+a table cell.
+
 ## 4. Links — gate 4b allow-list
 
 **Every internal link keeps its English path**, except targets that already have both
@@ -767,7 +890,7 @@ No new instrument. `npm run build` runs all 11 gates.
 | **4n** | An unisolated Latin/Arabic flank — including §3.3's bracket-and-digit class |
 | **4q** | Any Arabic-Indic digit in rendered prose. Policy §3 has no exception |
 | **4k** | Every new page resolves effective direction `rtl` |
-| **4i** | The two locked identities in §2.3, **now at floors 263 and 430** |
+| **4i** | The two locked identities in §2.3, **now at floors 321 and 469** |
 | **4o** | `→` count — expected 0 |
 | **4b** | Any internal link that left the English path without a registry entry |
 | *(schema)* | The `description` budget — §2.4, and it fails **before** any gate |
@@ -784,7 +907,7 @@ corpus: they could not fail for a content reason. They were re-frozen at **33** 
 > and gate 4i would have stayed green** — proved by running the real gate against a prose-deleted
 > tree, not inferred ([`AR2-E9-floor-enforceability.md`](AR2-E9-floor-enforceability.md) §4).
 >
-> Re-frozen again at **263** and **430** on 2026-08-02 over the 38-page batch-5 corpus, both
+> Re-frozen again at **321** and **469** on 2026-08-03 over the 47-page batch-6b corpus, both
 > proven on a prose-deleted tree (§1.45). Re-frozen at **183** and **415** on 2026-08-01 over the full 26-page `ar` corpus. Both now fail
 > that same experiment. A batch that drops either identity from Arabic prose fails the build.
 
