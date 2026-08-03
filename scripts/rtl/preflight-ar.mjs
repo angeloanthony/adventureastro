@@ -127,10 +127,56 @@ for (const path of process.argv.slice(2)) {
   // frontmatter is not markup-processed; bidi-runs.ts isolates named runs only
   if (/<bdi>/.test(fm)) say(file, '<bdi> in frontmatter — it will render literally');
 
-  // §3.3 / §3.5, the two measured defect classes. In frontmatter there is no <bdi>
-  // available, so a bracket that opens on a digit or closes on Latin is unfixable
-  // by markup and gate 4n WILL block the build.
-  for (const [where, text, fixable] of [['frontmatter', fm, false], ['body', body, true]]) {
+  // §3.3 / §3.5 / §3.7 — the bracket classes, decided the way GATE 4n decides them: by the
+  // FLANKS. In frontmatter there is no <bdi> available, so any of these is unfixable by
+  // markup and gate 4n WILL block the build.
+  //
+  // ⚠ THIS REPLACED TWO NARROWER CHECKS, AND BATCH 6b IS WHY. The old pair looked only at the
+  // text INSIDE the brackets — "opens on a digit" (§3.3) and "closes on Latin" (§3.5) — and
+  // reported clean on a batch whose first build then stopped at gate 4n with 5 findings. The
+  // two shapes that got through are the mirror images of the two that were checked:
+  //
+  //     جبال Uinta (تمتدّ …          "(" preceded by LATIN   -> flanked L … R
+  //     … البرّية (أُعلنت عام 1984)   ")" preceded by a DIGIT  -> flanked N … R
+  //
+  // Batch 5 had already corrected the brief on exactly this point — "the discriminator is the
+  // FLANKS, never what the bracket encloses" — and this script had not been brought along. The
+  // flank test is a strict superset: a §3.3 bracket is R…N, a §3.5 bracket is L…R, and a run
+  // already wrapped in <bdi> collapses to a tatweel above so its flanks match, which is the
+  // same exemption the old check spelled out by hand.
+  //
+  // Validated against both controls before shipping (the batch-6a standard):
+  //   POSITIVE — reproduces gate 4n's 5 findings exactly on the reconstructed pre-fix files.
+  //   FALSE-POSITIVE — 0 findings across all 46 `.ar.mdx` sources, a corpus gate 4n passes.
+  // The false-positive control is what found the two exclusions below; neither was predicted.
+  const ARABIC_L = /\p{Script=Arabic}/u, LATIN_L = /\p{Script=Latin}/u, DIGIT_L = /\p{Nd}/u;
+  const dirClass = (ch) => !ch ? null
+    : ARABIC_L.test(ch) ? 'R' : LATIN_L.test(ch) ? 'L' : DIGIT_L.test(ch) ? 'N' : null;
+  /** Nearest directionally-classified character walking outward; neutrals are scanned past. */
+  const flankOf = (t, i, d) => {
+    for (let j = i + d; j >= 0 && j < t.length; j += d) {
+      const c = dirClass(t[j]);
+      if (c) return c;
+    }
+    return null;
+  };
+  const bracketFlankFindings = (t) => {
+    const out = [];
+    for (let i = 0; i < t.length; i++) {
+      if (t[i] !== '(' && t[i] !== ')') continue;
+      const before = flankOf(t, i, -1), after = flankOf(t, i, +1);
+      // A missing flank is a text-run edge, not a direction change. R…R / L…L / N…N are not
+      // changes either. Everything else is what gate 4n reports, in the gate's own vocabulary.
+      if (!before || !after || before === after) continue;
+      out.push({ ch: t[i], before, after, ctx: t.slice(Math.max(0, i - 40), i + 20).replace(/\s+/g, ' ').trim() });
+    }
+    return out;
+  };
+  // Frontmatter is scanned PER QUOTED SCALAR. Its YAML keys (`a:`, `q:`) are Latin letters
+  // that never reach a text node, so scanning the block whole would let one FAQ answer's
+  // closing bracket take its flank from the next answer's key.
+  const fmScalars = (fm.match(/"(?:[^"\\]|\\.)*"/g) || []).join('\n');
+  for (const [where, text, fixable] of [['frontmatter', fmScalars, false], ['body', body, true]]) {
     // Three things are not direction changes to the text around them, and scanning
     // them produces false positives rather than findings:
     //   1. anything already inside a <bdi> isolate;
@@ -149,14 +195,25 @@ for (const path of process.argv.slice(2)) {
       .replace(/\s[a-zA-Z-]+="[^"]*"/g, ' ')
       .replace(/<bdi>[\s\S]*?<\/bdi>/g, 'ـ')
       .replace(/\(\d{3}\)\s*\d{3}-\d{4}/g, 'ـ')
-      .replace(/\$[\d,]+/g, 'ـ');
-    for (const par of scan.match(/\([^()\n]{1,400}\)/g) || []) {
-      const inner = par.slice(1, -1);
-      if (/^\s*\d/.test(inner)) say(file, `${where} §3.3 bracket opens on a digit: ${par.slice(0, 60)}`);
-      const tail = inner.replace(/<\/?[a-z]+>/g, '').trimEnd();
-      if (LATIN.test(tail.slice(-1)) && !(fixable && /<\/bdi>\s*$/.test(inner.trimEnd()))) {
-        say(file, `${where} §3.5 parenthetical closes on Latin: …${par.slice(-60)}`);
-      }
+      .replace(/\$[\d,]+/g, 'ـ')
+      // 5. MARKDOWN LINK TARGETS. `[نصّ](/some/path/)` renders as an anchor whose href is
+      //    never a text node, so those parentheses are not brackets in rendered prose. Left
+      //    in, they produced 19 findings across 2 files that no gate could agree with — the
+      //    batch-6a `style="…"` class in a second syntax, found by the false-positive control.
+      .replace(/\]\([^()\s]*\)/g, ']')
+      // 6. TAGS BECOME NEUTRALS, NOT LETTERS. A tag's own name is not rendered text, so
+      //    `)</td>` must not read as flanked-by-Latin. Replacing the tag with whitespace
+      //    keeps the scan crossing element boundaries, which is what gate 4n itself does —
+      //    one of the batch-6b findings takes its flank from the NEXT table row.
+      .replace(/<[^>]*>/g, '\n');
+    for (const f of bracketFlankFindings(scan)) {
+      // Name the brief section by flank shape, so the finding arrives with its remedy.
+      const sec = f.before === 'N' || f.after === 'N' ? '§3.3'
+        : f.before === 'L' && f.after === 'R' ? '§3.5' : '§3.7';
+      const fix = fixable
+        ? 'put an Arabic word at the boundary, or wrap the Latin run in <bdi>'
+        : 'rephrase — frontmatter has no <bdi> available and gate 4n WILL block the build';
+      say(file, `${where} ${sec} "${f.ch}" flanked ${f.before} … ${f.after} — ${fix}: …${f.ctx}`);
     }
   }
 
