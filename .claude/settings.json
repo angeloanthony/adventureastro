@@ -114,7 +114,10 @@
       "Bash(node scripts/rtl/measure-prose-window.mjs --json \"C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/6f841e22-8bc9-4280-84cb-cb19a95167d0/scratchpad/window.json\")",
       "Bash(node scripts/rtl/measure-related-ceiling.mjs --window \"C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/6f841e22-8bc9-4280-84cb-cb19a95167d0/scratchpad/window.json\" --project --json \"C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/6f841e22-8bc9-4280-84cb-cb19a95167d0/scratchpad/ceiling.json\")",
       "Bash(python -c ' *)",
-      "Bash(node scripts/rtl/measure-related-ceiling.mjs --window \"C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/6f841e22-8bc9-4280-84cb-cb19a95167d0/scratchpad/window.json\" --project)"
+      "Bash(node scripts/rtl/measure-related-ceiling.mjs --window \"C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/6f841e22-8bc9-4280-84cb-cb19a95167d0/scratchpad/window.json\" --project)",
+      "Bash(rm -rf __TRACKED_VAR__/dist-stripped)",
+      "Bash(cp -r dist __TRACKED_VAR__/dist-stripped)",
+      "Bash(node \"C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/2eee831b-88ac-4ea2-aa7c-67631940e761/scratchpad/remaining.mjs\")"
     ],
     "additionalDirectories": [
       "\\tmp",

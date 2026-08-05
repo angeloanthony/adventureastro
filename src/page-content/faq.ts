@@ -2598,6 +2598,351 @@ document.addEventListener('DOMContentLoaded', function() {
 
 `;
 
+// AR — AR-2 Phase F batch 3. Every id, class, style attribute and the whole inline <script>
+// are preserved verbatim; only visible text is translated.
+//
+// ⚠ THE 16 ANCHOR IDENTITIES ARE A CONTRACT, NOT COPY (ADR-12 / gate 4s). `id="faq"` and
+// `id="faq1"`..`id="faq15"` are unchanged, and every `for=` attribute still points at the same
+// string. Three separate mechanisms depend on it: the checkbox/label pairing that opens an item
+// at all, the URL-hash handler at the foot of this block, and cross-page deep links. Batch 7a
+// established the rule — a translated page keeps its ENGLISH anchor ids — and batch 2 was the
+// first Phase F batch where it became load-bearing rather than vacuous. Translating an id here
+// would leave 15 questions that cannot be opened and every inbound #faqN dead.
+//
+// PROBE SLOT 1, run before a word of this was authored (negative controls red in the same pass):
+// 7:00 / 12:00 / 01 / 5.0 / CCPA / adventuretoursvernal.com all measured LTR bare and are
+// written bare. Prices did NOT: $349 renders 349$, so every price is spelled out with an Arabic
+// unit noun, exactly as batch 2 did for $1,000.
+const AR = `
+
+<!-- ================================================
+     كتلة ملخّص الصفحة — تغذّي Google AI Overviews
+     ================================================ -->
+<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+  تجيب شركة Adventure Tours Vernal عن الأسئلة الشائعة حول جولات UTV المُرشَدة في Vernal بولاية يوتا. وتشمل الموضوعات الأسعار وشروط العمر وما يلزم إحضاره وسياسة الطقس وجولات المجموعات وخيارات الجولات. نعمل يوميًا من 7 صباحًا حتى 7 مساءً. اتصل على <bdi>(435) 219-9447</bdi>.
+</p>
+
+<section id="faq" class="faq-section">
+  <div class="faq-watermark">INTEL</div>
+
+  <div class="container">
+    <div class="section-header">
+      <span class="status-badge">MISSION PREP</span>
+      <!-- ================================================
+           H1 — العنوان الرئيسي. الصفحة لم يكن فيها H1 إطلاقًا.
+           وبقي العنوان الأصلي H2 أدناه للحفاظ على تسلسل المحتوى.
+           ================================================ -->
+      <h1 class="section-title" style="font-size:clamp(1.8rem,3.5vw,2.8rem);">الأسئلة الشائعة عن جولات UTV — Adventure Tours Vernal</h1>
+      <p class="section-subtitle">تزوّد بالمعلومات كاملة قبل انطلاقك إلى المناطق النائية في يوتا.</p>
+      <p style="display:inline-flex;align-items:center;gap:8px;margin:14px auto 0;padding:7px 15px;border:1px solid rgba(212,118,78,0.5);border-radius:999px;background:#ffffff;box-shadow:0 1px 4px rgba(0,0,0,0.08);font-size:0.95rem;color:#4a4139;"><span aria-hidden="true" style="color:#e6a817;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count} مراجعة على Google</span></p>
+    </div>
+
+    <!-- ================================================
+         عناصر الأسئلة الخمسة عشر كاملة داخل faq-container.
+         ================================================ -->
+    <div class="faq-container">
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq1" class="faq-toggle">
+        <label for="faq1" class="faq-question">
+          <span class="faq-index">01</span> هل يمكنني إحضار مركبتي الخاصة؟
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p><strong>بكل تأكيد!</strong> إحضار مركبتك الخاصة يتيح جولات أكثر تخصيصًا، بل ومغامرات أشدّ إثارة. ويمكنك الحجز عبر الإنترنت، لكن إذا كنت ستحضر مركبتك أو ترغب في جولة مُفصّلة على مقاسك فالأفضل أن تتصل بنا أو تراسلنا أولًا لتشرح نوع القيادة الذي تريده.</p>
+            <p>نوفّر أجهزة اتصال لاسلكي، ونبذل ما بوسعنا ليستمتع الجميع مع بقائهم مرتاحين. وفي أصعب أجزاء المسار يسعدنا أن نعرض عليك بدائل أيسر. ونعتزّ بمعرفتنا الدقيقة بهذه المناطق وبالطرق الكثيرة للاستمتاع بها.</p>
+            <p>تحدّث بحرية مع مرشد جولتك. وإن لم تشعر بالارتياح لاجتياز جزء معيّن من المسار فقل ذلك صراحةً. السلامة أولويتنا الأولى، ويليها الاستمتاع مباشرةً.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq2" class="faq-toggle">
+        <label for="faq2" class="faq-question">
+          <span class="faq-index">02</span> هل يمكنني إحضار مجموعة؟
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>بالتأكيد! تواصل معنا لترتيب جولات مجموعتك. أخبرنا بعدد أفرادها وبما تودّون مشاهدته. لدينا خيارات كثيرة، ويمكننا بحث احتياجات المجموعة مثل محطات إضافية للمشاهدة، والمطاعم وأماكن الإقامة، والحياة الليلية، والأنشطة المناسبة للأطفال وغيرها. ويسعدنا أن نكون جزءًا من برنامج مجموعتك أثناء زيارتكم لمنطقة Uintah Basin الساحرة.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq3" class="faq-toggle">
+        <label for="faq3" class="faq-question">
+          <span class="faq-index">03</span> ماذا عن الطقس؟
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>نعمل في الصحو والمطر على حدّ سواء. غير أنه في حالات الطقس القاسي أو إذا اضطررنا إلى الإلغاء لظروف طارئة أخرى، سيكون أمامك خيار إعادة الجدولة أو استرداد المبلغ كاملًا.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq4" class="faq-toggle">
+        <label for="faq4" class="faq-question">
+          <span class="faq-index">04</span> ماذا ينبغي أن أحضر معي؟
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>سنقضي ساعات في الهواء الطلق، فاختر أغراضك بعناية. ونحرص على توفير المستلزمات الأساسية الطارئة في كل جولة، ومع ذلك إن ظننت أنك ستحتاج شيئًا بعينه فالأفضل أن تحضره معك. وواقي الشمس وطارد الحشرات ومرطّب الشفاه خيارات موفّقة دائمًا.</p>
+            <p>ننصحك بإحضار <strong>نظارة شمسية وقبعة وكاميرا وسترة وحذاء مغلق من الأمام.</strong> وهذه ليست إلزامية، لكن وجودها دون حاجة أفضل من الحاجة إليها دون وجود. وقد ترغب أيضًا في ارتداء طبقات متعددة لأن درجة الحرارة تتقلّب. ونوفّر لك الماء ووجبة خفيفة مجانًا. وإن كانت لديك أي حساسية فننصحك بإحضار ما يناسب نظامك الغذائي. والمساحة خلف المركبة محدودة، فإن لم تكن متأكدًا مما تحزمه فاسألنا.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq5" class="faq-toggle">
+        <label for="faq5" class="faq-question">
+          <span class="faq-index">05</span> متى ينبغي أن أصل إلى نقطة اللقاء؟
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>في جميع الجولات يُرجى الوصول قبل <strong>30 دقيقة</strong> من موعد الانطلاق. فموعد الحجز هو موعد الانطلاق الفعلي. ولن ننطلق قبل اكتمال التدريب على السلامة وتعرّفك على مركبتك. وقبل الانطلاق نستعرض معك التعليمات وإجراءات السلامة كافة، من إقرارات المسؤولية إلى اختيار المعدّات.</p>
+            <p>بعد إتمام حجزك ستصلك رسالة تأكيد بالبريد الإلكتروني تتضمّن معلومات مهمة عن الجولة التي اخترتها. اقرأها بعناية والتزم بما فيها. وإذا لم تكن حاضرًا وقد أنهيت الإجراءات واخترت معدّاتك عند بدء التعليمات فقد تفقد مقعدك في الجولة، وهو مقعد غير قابل للاسترداد. والأمر أشبه بلحاق حافلة المدرسة: من لم يحضر في الوقت المحدد تنطلق الحافلة دونه.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq6" class="faq-toggle">
+        <label for="faq6" class="faq-question">
+          <span class="faq-index">06</span> ما الحد الأدنى للعمر؟
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>لقيادة مركباتنا يجب ألّا يقلّ عمرك عن <strong>18 عامًا.</strong> وللركوب فيها راكبًا يجب ألّا يقلّ العمر عن <strong>سنتين.</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq7" class="faq-toggle">
+        <label for="faq7" class="faq-question">
+          <span class="faq-index">07</span> الإلغاء والعربون؟
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>اضغط <a href="/ar/cancellation-policy/" class="faq-link">هنا</a> للاطلاع على سياسة الإلغاء كاملة.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq8" class="faq-toggle">
+        <label for="faq8" class="faq-question">
+          <span class="faq-index">08</span> كم تكلفة جولات ATV؟
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>نقدّم جولة واحدة مُرشَدة مدتها 3 ساعات على مركبات Kawasaki KRX 1000 بمقعدين:</p>
+            <ul>
+              <li><strong>349 دولارًا للمركبة</strong> — تتّسع لراكبين اثنين</li>
+              <li><strong>125 دولارًا للمرافقة</strong> — أضف راكبًا ثالثًا مع أحد المرشدين</li>
+              <li><strong>99 دولارًا للساعة</strong> — لكل مركبة، لتمديد جولتك</li>
+            </ul>
+            <p>يُشترط حضور 3 أشخاص كحدّ أدنى، ونرحّب بمجموعات تصل إلى 12 ضيفًا على متن 6 مركبات. <strong>اتصل على <a href="tel:435-219-9447" class="faq-link"><bdi>(435) 219-9447</bdi></a> للاستعلام عن التوافر.</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq9" class="faq-toggle">
+        <label for="faq9" class="faq-question">
+          <span class="faq-index">09</span> هل أحتاج إلى خبرة سابقة بمركبات ATV؟
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p><strong>لا تُشترط أي خبرة سابقة بمركبات ATV.</strong> ترحّب شركة Adventure Tours Vernal بالمبتدئين تمامًا، وتوفّر تدريبًا كاملًا على السلامة قبل كل جولة.</p>
+            <p>ويشرح لك مرشدونا ذوو الخبرة طريقة تشغيل مركبات Kawasaki KRX 1000 بمقعدين خطوة بخطوة. ونرحّب بجميع المستويات، من المشاركين لأول مرة إلى السائقين المخضرمين.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq10" class="faq-toggle">
+        <label for="faq10" class="faq-question">
+          <span class="faq-index">10</span> هل يمكننا زيارة Dinosaur National Monument في الجوار؟
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p><strong>نعم!</strong> تستكشف <strong>جولتنا المُرشَدة التي تستغرق 3 ساعات</strong> المسارات النائية قرب Dinosaur National Monument، بما فيها التكوينات الصخرية القديمة والنقوش الصخرية.</p>
+            <p>أما جدار عظام الديناصورات الشهير داخل النصب فهو موقع منفصل تديره هيئة National Park Service نفسها، وكثير من الضيوف يجمعون بين صباح في النصب وجولة UTV بعد الظهر عبر أرض الديناصورات المحيطة بالمسارات النائية.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq11" class="faq-toggle">
+        <label for="faq11" class="faq-question">
+          <span class="faq-index">11</span> لماذا تختار شركة Adventure Tours Vernal تحديدًا؟
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>شركة Adventure Tours Vernal هي <strong>الشركة الوحيدة التي تقدّم جولات مُرشَدة بمركبات Kawasaki KRX 1000 في Vernal بولاية يوتا.</strong> ونوفّر وصولًا حصريًا إلى:</p>
+            <ul>
+              <li>مسارات خفية لا يعرفها إلا أهل المنطقة</li>
+              <li>نقوش صخرية وفنون جدارية قديمة</li>
+              <li>مخابئ Butch Cassidy</li>
+              <li>أقواس صخرية وتكوينات خلابة</li>
+            </ul>
+            <p>مرشدون محليون خبراء، ومعدّات سلامة احترافية، وترحيب بجميع المستويات. <strong>نعمل يوميًا من 7 صباحًا حتى 7 مساءً.</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq12" class="faq-toggle">
+        <label for="faq12" class="faq-question">
+          <span class="faq-index">12</span> كم تستغرق جولاتكم؟
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>تستغرق جولتنا المُرشَدة القياسية نحو <strong>3 ساعات</strong>، مع خمسة أنظمة من المسارات تختار بينها بما يناسب مجموعتك ومستوى خبرتك:</p>
+            <ul>
+              <li><strong>Doc's Beach</strong> و<strong>Moonshine Arch</strong> و<strong>Ashley Gorge</strong> و<strong>Outlaw Trail</strong> و<strong>Asphalt Ridge</strong></li>
+              <li>تختار نظام المسارات الذي تريده عند الحجز</li>
+              <li>هل ترغب في وقت أطول؟ مدّد جولتك مقابل 99 دولارًا للساعة لكل مركبة</li>
+            </ul>
+            <p>وتشمل كل جولة معدّات السلامة والتدريب والماء والوجبات الخفيفة.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq13" class="faq-toggle">
+        <label for="faq13" class="faq-question">
+          <span class="faq-index">13</span> هل جولاتكم مناسبة للعائلات؟
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p><strong>بالتأكيد!</strong> جولتنا المُرشَدة مثالية للعائلات التي لديها أطفال، وتتميّز بما يلي:</p>
+            <ul>
+              <li>مسارات سهلة بتضاريس لطيفة</li>
+              <li>إطلالات صحراوية آسرة</li>
+              <li>فرص رائعة للتصوير</li>
+              <li>مركبات بمقعدين، وتحجز العائلات عدة مركبات لتنطلق معًا</li>
+            </ul>
+            <p>لا تُشترط أي خبرة سابقة، فالتدريب الكامل على السلامة متوفّر. ويجب ألّا يقلّ عمر الأطفال عن سنتين للركوب مرافقين.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq14" class="faq-toggle">
+        <label for="faq14" class="faq-question">
+          <span class="faq-index">14</span> ما هي ساعات العمل؟
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>تعمل شركة Adventure Tours Vernal <strong>يوميًا من 7:00 صباحًا حتى 7:00 مساءً</strong> بالتوقيت الجبلي، طوال أيام الأسبوع السبعة.</p>
+            <p><strong>اتصل على <a href="tel:435-219-9447" class="faq-link"><bdi>(435) 219-9447</bdi></a></strong> لحجز جولة ATV، أو تفضّل بزيارة <a href="https://adventuretoursvernal.com" class="faq-link">adventuretoursvernal.com</a> في أي وقت.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <input type="checkbox" id="faq15" class="faq-toggle">
+        <label for="faq15" class="faq-question">
+          <span class="faq-index">15</span> ما خيارات الجولات المتاحة؟
+        </label>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>تقدّم شركة Adventure Tours Vernal جولة واحدة مُرشَدة مدتها 3 ساعات على مركبات Kawasaki KRX 1000 بمقعدين، مع خمسة أنظمة من المسارات تختار بينها عند الحجز:</p>
+            <ul>
+              <li>مسار Doc's Beach</li>
+              <li>مسار Moonshine Arch</li>
+              <li>مسار Ashley Gorge</li>
+              <li>مسار Outlaw Trail</li>
+              <li>مسار Asphalt Ridge</li>
+            </ul>
+            <p>وتشمل كل جولة مركبات Kawasaki KRX 1000 بمقعدين، ومرشدين محليين خبراء، ومعدّات السلامة والتدريب والماء والوجبات الخفيفة.</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- نهاية faq-container -->
+  </div>
+</section>
+
+<!-- زر الحجز الثابت على الجوال -->
+<div class="mobile-sticky-cta">
+  <button onclick="location.href='/ar/booking/'">احجز جولتك الآن</button>
+</div>
+
+<script is:inline>
+document.addEventListener('DOMContentLoaded', function() {
+
+  // Auto-close other FAQs when one opens
+  const faqToggles = document.querySelectorAll('.faq-toggle');
+  faqToggles.forEach(toggle => {
+    toggle.addEventListener('change', function() {
+      if (this.checked) {
+        faqToggles.forEach(otherToggle => {
+          if (otherToggle !== this && otherToggle.checked) {
+            otherToggle.checked = false;
+          }
+        });
+        setTimeout(() => {
+          this.parentElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 300);
+      }
+    });
+  });
+
+  // Keyboard navigation
+  const faqQuestions = document.querySelectorAll('.faq-question');
+  faqQuestions.forEach((question, index) => {
+    question.setAttribute('tabindex', '0');
+    question.setAttribute('role', 'button');
+    question.setAttribute('aria-expanded', 'false');
+    question.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const checkbox = this.previousElementSibling;
+        checkbox.checked = !checkbox.checked;
+        this.setAttribute('aria-expanded', checkbox.checked);
+        checkbox.dispatchEvent(new Event('change'));
+      }
+      if (e.key === 'ArrowDown') { e.preventDefault(); if (faqQuestions[index + 1]) faqQuestions[index + 1].focus(); }
+      if (e.key === 'ArrowUp') { e.preventDefault(); if (faqQuestions[index - 1]) faqQuestions[index - 1].focus(); }
+    });
+    question.addEventListener('click', function() {
+      const checkbox = this.previousElementSibling;
+      setTimeout(() => { this.setAttribute('aria-expanded', checkbox.checked); }, 10);
+    });
+  });
+
+  // URL hash linking
+  if (window.location.hash) {
+    const targetId = window.location.hash.substring(1);
+    const targetCheckbox = document.getElementById(targetId);
+    if (targetCheckbox && targetCheckbox.classList.contains('faq-toggle')) {
+      targetCheckbox.checked = true;
+      setTimeout(() => {
+        targetCheckbox.parentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 500);
+    }
+  }
+
+  // Smooth load animation
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach((item, index) => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+      item.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+      item.style.opacity = '1';
+      item.style.transform = 'translateY(0)';
+    }, 100 * index);
+  });
+});
+</script>
+
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3A). Every
  * locale without a committed variant falls back to English. Callers that
@@ -2611,5 +2956,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'de') return DE;
   if (locale === 'zh') return ZH;
   if (locale === 'ja') return JA;
+  if (locale === 'ar') return AR;
   return bodyHtml;
 }

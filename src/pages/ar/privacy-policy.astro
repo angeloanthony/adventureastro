@@ -1,0 +1,56 @@
+---
+// ar/privacy-policy.astro — Arabic privacy policy (AR-2 Phase F batch 3).
+// Mirrors src/pages/privacy-policy.astro.
+//
+// §4: `/utv/` and the two homepage fragments keep their English paths — neither target is
+// translated yet. The four `info` links are all registered: `cancellation-policy` is the AR-1
+// pilot, `safety-guidelines` came in batch 2, and `privacy-policy` + `faq` are registered by
+// this batch, which is the same self-reference batch 1 established when its two pages linked
+// to each other.
+import { getBodyHtml } from '../../page-content/privacy';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+---
+<BaseLayout bodyClass="policy-page-body">
+  <Fragment slot="head">
+    <Seo
+      title="سياسة الخصوصية | Adventure Tours Vernal"
+      description="سياسة الخصوصية لدى شركة Adventure Tours Vernal في Vernal بولاية يوتا. كيف نجمع معلوماتك ونستخدمها ونحميها عند حجز جولة UTV مُرشَدة. اتصل على (435) 219-9447."
+      path="/ar/privacy-policy/"
+      type="website"
+      ogDescription="كيف تجمع شركة Adventure Tours Vernal معلوماتك وتستخدمها وتحميها عند حجزك جولة UTV مُرشَدة في Vernal بولاية يوتا."
+    />
+  </Fragment>
+  <Header slot="body" active="privacy-policy" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.privacyPolicy', lang) }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: t('footer.quickLinks', lang),
+      links: [
+        { href: '/utv/', label: t('footer.link.ourTours', lang) },
+        { href: '/#vehicles', label: t('footer.link.ourFleet', lang) },
+        { href: '/#gallery', label: t('footer.link.photoGallery', lang) },
+        { href: '/ar/booking/', label: t('cta.bookNow', lang) },
+      ],
+    }}
+    contact={{ showStreet: false }}
+    info={{
+      heading: t('footer.information', lang),
+      links: [
+        { href: '/ar/cancellation-policy/', label: t('nav.cancellationPolicy', lang) },
+        { href: '/ar/privacy-policy/', label: t('nav.privacyPolicy', lang) },
+        { href: '/ar/faq/', label: t('nav.faq', lang) },
+        { href: '/ar/safety-guidelines/', label: t('nav.safetyGuidelines', lang) },
+      ],
+    }}
+  />
+</BaseLayout>

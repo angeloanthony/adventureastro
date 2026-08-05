@@ -74,7 +74,7 @@ which checks that surface does not carry.
    The two smallest modules, near-identical to each other, no gallery, no `HubIndex`, no
    homepage coupling. First contact with the `.ts` surface at minimum blast radius.
 2. **Batch 2 — shape A, site pages:** `about`, `booking`, `safety-guidelines`.
-3. **Batch 3 — shape A, site pages:** `faq`, `privacy-policy`.
+3. **Batch 3 — shape A, site pages:** `faq`, `privacy-policy`. **CLOSED — see §5.4.**
 4. **Shape A, the hub indexes:** `utv`, `dinosaur-national-monument`, `things-to-do`, and the
    standalone `things-to-do/best-restaurants-vernal-utah`.
 5. **Shape B — the inline `.astro` pillars:** `hiking`, `fishing`, `camping`, `scenic-drives`,
@@ -89,7 +89,20 @@ and 62/77, corrected to **60/77** and **63/77**. The running total was computed 
 the statics this phase has added" and silently omitted `cancellation-policy`, the AR-1 pilot,
 which was already a registered static route. **14 routes remain, not 15.** The check that catches
 it is arithmetic on `AR_SLUGS` itself rather than on a running tally — the registry is the fact,
-a tally is a memory of it.
+a tally is a memory of it. **Batch 3 closes at 65/77; 12 routes remain.**
+
+> ⚠⚠ **AND THE ARITHMETIC-ON-`AR_SLUGS` CHECK HAS A TRAP OF ITS OWN, FOUND IN BATCH 3.**
+> `measure-prose-window.mjs` derives its population by running a global single-quoted-string
+> match over the whole `AR_SLUGS` block — **comments included**. A possessive apostrophe in a
+> comment inside that array re-pairs every quote after it. Batch 3 added one and cut the
+> extracted list from 66 slugs to 6 real ones plus 60 fragments of English prose.
+>
+> It failed loudly (`no Arabic pilot routes found`) **only because the corruption reached the
+> spokes**. A comment after the final entry would damage just the tail and understate the
+> population in silence — and §3.2 already names that direction: a smaller `whole` gives a
+> smaller `survives`, which is what **reports a dead floor as enforcing**. The build was never
+> affected; comments do not change a `Set`. Only the source-parsing instrument was fooled, which
+> is the same shape as §3.1 — the rule was right and the tool read something else.
 
 The ordering is not a preference. The homepage combines three first-contact variables at once —
 the largest module (27 304 chars), the escaped-backtick extraction hazard (34 of them, and
@@ -425,6 +438,201 @@ unchanged at 312 and 462. That is a measurement, not a target.
 protected by the floor. But the share of the `ar` corpus classified 100 % chrome grows with every
 such page, and `survives` grows with it. Margins today are 312 and 462 — nowhere near. **Measure
 it at every re-freeze; do not project it** (§1.5's own rule about its own trend).
+
+---
+
+## 5.4 Batch 3 — `faq` + `privacy-policy`, CLOSED
+
+**65 of 77 ar routes · 684 site routes · 65 `ar` pages · whole suite GREEN on the first build.**
+**Gate 4n returned ZERO findings for the third Phase F batch running.**
+
+Both pages are pure shape A, and that was **re-derived from source before authoring** rather than
+read off §2's table — the audit that produced §2's own correction, run again on its own advice.
+Both carry a `src/page-content/*.ts` module with the same eight-locale block structure and a
+`getBodyHtml` dispatch. `from/salt-lake-city` was **not touched**; it is shape D and gets its own
+first-contact batch.
+
+### Probe slot 1 — and it closed the gap §5.3 left open
+
+Nine shapes measured before a word was authored, negative controls red in the same pass
+(`$349`→`349$`, `(435) 219-9447`→`9447-219 )435(`, `95°F`→`F°95`, `10–11`→`11–10`,
+`10-11`→`11-10`, `100%`→`%100`, `18+`→`+18`), and the unreachable control fired.
+
+| shape | visual | authored as |
+|---|---|---|
+| `7:00` · `12:00` | as written ✔ | bare |
+| `01` | `01` ✔ | bare — the 15 index labels |
+| `5.0` | `5.0` ✔ | bare |
+| `CCPA` | `CCPA` ✔ | bare (one control for the whole initialism class) |
+| `adventuretoursvernal.com` | as written ✔ | bare |
+| `7am–7pm` | **as written ✔** | *not used* — corpus form kept, see below |
+
+§5.3 recorded that `7am` and `7pm` measured safe individually and that **"the dashed range joining
+them was never measured"**, then spelled the pair out anyway. `faq.ts` carries `7am–7pm` twice, so
+the question could not be deferred again. It measured **LTR, safe bare** — while `10–11`, *the same
+en dash*, reverses in the same run.
+
+> ### ⚠⚠ §3.6 DOES NOT SEPARATE THOSE TWO — AND THE PROJECT ALREADY KNEW WHY, ELSEWHERE
+>
+> §3.6 concluded *"the rule is about the shape, not the character — do not try to pick a safe
+> separator."* That is correct as far as it goes and it **cannot distinguish `7am–7pm` from
+> `10–11`**: same shape, same separator, opposite results.
+>
+> ⚠ **The explanation was already measured and recorded — in the AN/EN context rule (2026-08-03,
+> 42-page corpus plus 8 synthetic controls, 17 constructs, no contradictions), which states the
+> W7 clause explicitly and already lists `7am – 7pm` among the shapes that are SAFE after
+> Arabic.** Batch 3 re-derived it from UAX #9 instead of reading it, because **§3.6 of the
+> rollout brief never cross-references that rule.** Two records of one mechanism, and the one an
+> author reaches for during a batch is the stale one. **That is the finding worth keeping**, and
+> it is [[inventory-vs-classification]] pointed at the documentation: the knowledge was in the
+> inventory and the classification of where it lives was wrong. ➡ §3.6 should cite the context
+> rule; filed, not edited here (§6.3 keeps instrument and brief changes off a prose commit).
+>
+> The mechanism, as already on record: a run lays out wrong iff **(a)** its digits resolve to
+> **AN** — the nearest preceding strong character is an Arabic letter (W2), and they take **L**
+> instead when it is a Latin letter (**W7**) — **and (b)** it carries a non-digit W4/W5 cannot
+> absorb. What batch 3 contributes is not the rule but **an independent test of it that could
+> have failed**, which matters because the standing note on that rule is *"it has never yet
+> caught a live defect first; the shape probe did that twice."*
+>
+> | shape | prediction | visual | |
+> |---|---|---|---|
+> | `7am–7` | LTR — letters precede the second operand | `7am–7` | ✔ |
+> | `7–7pm` | REVERSED — they do not | **`7pm–7`** | ✔ |
+>
+> Same characters, same dash, same length; only the side the letters sit on differs, and the two
+> came out opposite as predicted. **`7am–7` and `7–7pm` are a pair the context rule had not been
+> tested on**, and they discriminate it from every competing account — a length rule, a separator
+> rule and a "shape not character" rule all predict the two alike.
+>
+> The rule accounts for every reading the project holds, with no contradictions: `2.5` `5.0`
+> `7:00` `12:00` `1,500` `13,528` `210,000` `360` `01` are safe because a **CS** separator between
+> two digits is absorbed by W4, or there is no separator at all; `4x4` `FOX 2.5` `SPF 30`
+> `KRX 1000` `I-80` `7am–7pm` `7am–7` are safe because a Latin letter **precedes** the digit;
+> `10–11` `10-11` `~3` `2+` `18+` `100%` `$349` `$1,000` `95°F` `7–7pm` reverse because a
+> non-absorbable neutral sits beside an unanchored digit run. `95°F` is the sharp case — it *has*
+> a Latin letter, but **after** the digits, so it anchors nothing and it reverses.
+>
+> ⚠ **A RULE THIS GOOD STILL DOES NOT REPLACE SLOT 1.** It earns its place by predicting *what is
+> worth measuring*, not by licensing anything unmeasured — the project has been wrong reading
+> UAX #9 before (6a's ASCII-hyphen hypothesis), and the durable operational rule is unchanged:
+> **read the `visual` line, never the label.** Reopen it the first time a measured shape
+> contradicts it.
+>
+> **It changed no authoring here.** The corpus already ships `من 7 صباحًا حتى 7 مساءً` from
+> batch 2, and consistency across the corpus beats a newly-licensed compact form. What the
+> measurement bought is a closed question, not a rewrite.
+
+### Advisory movements, every one attributed — including the ones that did not move
+
+| number | batch 2 | batch 3 | attribution |
+|---|---:|---:|---|
+| routes | 682 | 684 | the two new pages |
+| 4n rtl pages | 63 | 65 | +2, **0 findings** |
+| 4o in-scope files | 97 | 99 | the two new `.astro` files |
+| 4f advisory | 70 | **71** | exactly 1 — the `/ar/faq/` `<h1>` carrying `UTV`, the §2.2 licensed class, same class as batches 1 and 2 |
+| 4g approved identities | 300 | **301** | exactly 1 — `adventuretoursvernal.com`, which is on the **global** identity registry, so its residue has no letters left |
+| 4g review candidates | 621 | **623** | exactly 2 — `هنا` and `✉️ راسلنا بالبريد`. All three new identities found by **set-difference against all 63 pre-existing `ar` pages**, not inferred |
+| 4s fragments | 2858 | **2862** | exactly 4 — `/#gallery` + `/#vehicles`, two per page. The bare `href="#"` is not a fragment identity (§5.2) |
+| 4i advisory | 20 / 4 locks | 20 / 4 locks | **steady** — no `forbidden` rendering introduced |
+| 4m | 34 pages / 312 refs | 34 pages / 312 refs | **steady** — neither page carries video, so §5.1's third deliverable does not arise |
+| 4s unresolved | 0 | 0 | **steady** — all 16 anchor identities preserved |
+
+**ADR-12: the 16 identities are unchanged.** `id="faq"` and `id="faq1"`…`id="faq15"`, every `for=`
+still pointing at the same string. Three mechanisms depend on it — the checkbox/label pairing that
+opens an item at all, the URL-hash handler at the foot of the block, and inbound deep links — and
+translating one id would leave 15 questions that cannot be opened.
+
+**Registering a slug is not a local act.** `Footer.astro` resolves its `info` block and its
+copyright bar through `localeHref`, so registering these two switched `/privacy-policy/` and
+`/faq/` links on **all 65** `ar` pages in the same build, not just the two added. Verified: 65
+pages link to each. The single remaining English `/privacy-policy/` inside `dist/ar/` is on
+`/ar/privacy-policy/` itself and is the **language switcher** (`hreflang="en" dir="ltr"`) — the
+switcher doing its job, not a missed path.
+
+### Census re-freeze + ceiling extension, one operation
+
+GUARD 1 clean (phrase-set identical, EOL-normalised). GUARD 2: **2 increased, 51 steady, 0
+decreased, 0 disappeared.** Floors re-frozen **502 → 505** and **538 → 545**; the increases (+3,
++7) equal the two pages' own rendered counts exactly — `faq` 2+6, `privacy-policy` 1+1, nothing
+left over. Criterion 6 from the adopted Model B column: `ceilNP` 368 < 505 and 307 < 545.
+
+**Criterion 5, proven by experiment.** The real gate 4i with the newly frozen floors, against a
+tree with every Arabic character inside `<main>` deleted from the 59 `ar` pages that have one
+(1 457 386 characters): **2 lock violations, exit 1.** The unmodified tree is green in the same
+pair of runs, and `npm run gates:dist` is green end to end afterwards.
+
+> ### ⚠ THE `decompose()` WATCH ITEM, MEASURED — THE MARGIN DID NOT MOVE AT ALL
+>
+> §5.3 asked for this to be measured at every re-freeze and never projected. Measured:
+> **6 of 65 `ar` pages now render no `<main>`** (was 4 of 63) — `about`, `booking`,
+> `safety-guidelines`, `cancellation-policy`, and **both** batch-3 pages. The prose-deletion
+> experiment therefore still strips **59** pages, exactly as it did at batch 1.
+>
+> Because a no-`<main>` page reports `prose = 0`, its entire lock contribution lands in
+> `survives`. So the floor rose by +3/+7 and `survives` rose by +3/+7 with it, and the
+> enforcement margin is **312 and 462 — unchanged to the character.**
+>
+> That is worth stating precisely, because it is neither the good case nor the feared one: such a
+> page does **not** narrow the margin, and it buys **no** enforcement strength either. It is
+> margin-neutral. The share of the `ar` corpus classified 100 % chrome is now 9.2 % (was 6.3 %),
+> and the thing to watch is unchanged: measure it, do not fit a line to it.
+
+### Framework findings — reported, not fixed in a prose batch
+
+None of these blocked the batch and none was remediated here; §6.3 keeps instrument changes off
+a content commit.
+
+1. **⚠⚠ `measure-currency.mjs` calls reachable prose unreachable, and the FAQ page is the class.**
+   The instrument opens `<details>` before scanning — which covers `FaqAccordion.astro` — but the
+   standalone FAQ **page** uses a checkbox/label disclosure reopened by
+   `.faq-toggle:checked ~ .faq-answer` (`public/styles.css:587`). The instrument does not know how
+   to check a checkbox, reports `disclosures opened=0`, and files every FAQ answer as
+   *"prose collapsed with nothing left to open it"* — a verdict that is **false**: a reader clicks
+   the label and it opens.
+   **This is pre-existing and cross-locale, not batch 3's doing:** `/faq/` and `/zh/faq/` report
+   **12** unreachable readings each, `/ar/faq/` reports 6 (fewer only because the Arabic spells
+   prices out, so the `$349`/`$125` needles find nothing), `/ar/privacy-policy/` reports **0**.
+   It is the mirror of the guard audit in the instrument's own header: there it suppressed
+   readings it should have taken; here it labels reachable prose unreachable.
+   ➡ **Consequence for this batch, stated plainly: slot 2 could not read a single run inside a
+   FAQ answer.** The `7:00` times, the spelled-out prices and the in-answer phone numbers have
+   **no post-build corpus confirmation — that is a silence, not a green.** The authoring rests on
+   slot 1, which is precisely the slot for shapes the corpus cannot yet show, and whose negative
+   controls were red; what is missing is the second, independent reading.
+   `/ar/privacy-policy/` reports 0 unreachable, so **its** clean scan is evidence.
+2. **`AR_SLUGS` comment parsing** — see the ⚠⚠ block in §2.1. An apostrophe in a comment inside
+   the array corrupts `measure-prose-window.mjs`'s population, and the silent direction of that
+   failure reports a dead floor as enforcing.
+3. **§3.6.1 names a flag that does not exist.** The brief prescribes `--scan-shapes` for slot 2;
+   `measure-currency.mjs` accepts only `--root`, `--needle`, `--route`, `--json`, `--verbose`.
+   The **capability is present** — shape discovery runs unconditionally and prints its own
+   `SHAPE CANDIDATES` section — so this is a stale name in the brief, not a missing instrument.
+   Left as-is; the brief is the thing to correct.
+4. **`preflight-ar.mjs` detects its surface by PATH, so a control staged elsewhere proves
+   nothing.** A copy of a `page-content` module placed in a scratch directory reports
+   *"unrecognised surface — NOTHING in this file was checked"* and exits without running a single
+   check. The first attempt at this batch's positive control did exactly that and would have been
+   read as "the checker is fine" by anyone not reading the line. Re-staged inside
+   `src/page-content/`, the same defect fired correctly. **A preflight control must live on the
+   path its surface is detected by** — and note the checker discriminated properly once it ran,
+   reporting the `)` flanked `L … R` and correctly staying silent on the `(`, which sits between
+   two Arabic words.
+
+**M9 / M10, recorded rather than invented.** M9: zero places where masculine-unmarked read wrong;
+both pages are impersonal by nature — a policy document and an FAQ — and the register never
+strained. M10: one dual, `راكبين اثنين` for "2 riders", which is the same choice batch 1 made for
+the same fixed capacity, reused rather than re-decided. `سنتين` for "2 years" is the ordinary dual
+and replaces the `2+` shape batch 2 measured reversing. **No rule invented.**
+
+**Legal initialisms.** `CCPA`, `GDPR` and `ISP` stay Latin and are glossed once on first use, per
+this file's own long-standing terminology note. ⚠ **No parenthetical closes on a Latin run**, and
+that cost two rewrites: English writes *"California Consumer Privacy Act (CCPA)"* and *"Internet
+Service Provider (ISP)"*, and **both are §3.5's defect class exactly**. The class is structural
+rather than stylistic — the gloss convention puts the initialism last and the bracket convention
+closes right after it, so obeying both produces the defect every time. Neither is bracketed here;
+expansion and initialism sit in apposition instead. §3.7's remedy with the boundary **removed**
+rather than padded.
 
 ---
 

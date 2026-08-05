@@ -508,6 +508,26 @@ const AR_SLUGS = new Set<string>([
   'about', // AR-2 Phase F batch 2
   'booking', // AR-2 Phase F batch 2
   'safety-guidelines', // AR-2 Phase F batch 2
+  // AR-2 Phase F batch 3. ⚠ Registering these two does more than emit two routes: `Footer.astro`
+  // resolves its `info` block and its copyright bar through `localeHref`, so the links to
+  // `/privacy-policy/` and `/faq/` on every EXISTING `ar` page switch to `/ar/…` on the same
+  // build. That is the registry working as designed — a link follows the reader into their
+  // locale the moment the target exists — but it means the advisory movement for a batch is
+  // not confined to the pages that batch adds.
+  //
+  // ⚠⚠ NO APOSTROPHE MAY APPEAR IN ANY COMMENT INSIDE THIS ARRAY — not even in a possessive.
+  // `measure-prose-window.mjs` derives its population with a global single-quoted-string match
+  // run over this entire block, comments included. One stray apostrophe re-pairs every quote
+  // after it. An earlier draft of the paragraph above used a possessive and cut the extracted
+  // list from 66 slugs to 6 real ones plus 60 fragments of English prose.
+  //
+  // It failed LOUDLY here — "no Arabic pilot routes found" — but only because the corruption
+  // reached the spokes. A comment sitting AFTER the final entry would damage only the tail and
+  // understate the population in silence, and §3.2 already records which way that errs: a
+  // smaller `whole` yields a smaller `survives`, and that is the direction which reports a DEAD
+  // FLOOR AS ENFORCING. Filed as a framework finding; until it is fixed, this note is the guard.
+  'faq', // AR-2 Phase F batch 3
+  'privacy-policy', // AR-2 Phase F batch 3
   'utv/best-utv-trails-vernal', // AR-2 Track E, E-1 — first prose spoke
   'utv/backcountry-tours-vernal-utah', // AR-2 Track E, E-2
   'utv/side-by-side-rentals-vernal-utah', // AR-2 Track E, E-2

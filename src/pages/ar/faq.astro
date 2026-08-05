@@ -1,0 +1,184 @@
+---
+// ar/faq.astro — Arabic FAQ page (AR-2 Phase F batch 3). Mirrors src/pages/faq.astro.
+//
+// The FAQPage schema mirrors the visible Arabic FAQ below — translated name/text for all 15
+// questions — matching the "schema mirrors visible FAQ verbatim" convention every other locale
+// follows (see zh/faq.astro).
+//
+// ⚠ THE SCHEMA IS A FRONTMATTER SURFACE, NOT A BODY SURFACE. It is JSON-LD: a <bdi> written in
+// here would be literal markup inside a structured-data string, not an isolate, so §3.6's
+// frontmatter rule applies with no escape hatch — every price is spelled out with an Arabic
+// unit noun and no parenthetical closes on a Latin run. That is the same residual B-15 §6
+// specified for FAQ answers, reached from a third surface.
+//
+// §4: `/utv/` and the two homepage fragments keep their English paths — neither target is
+// translated yet. `/ar/booking/` is registered (batch 2) and `/ar/cancellation-policy/` is the
+// AR-1 pilot; both are switched.
+import { getBodyHtml } from '../../page-content/faq';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../config/site';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "هل يمكنني إحضار مركبة ATV الخاصة بي في الجولات؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "نعم! إحضار مركبتك الخاصة يتيح جولات أكثر تخصيصًا بل ومغامرات أشدّ إثارة. وتوفّر شركة Adventure Tours Vernal أجهزة اتصال لاسلكي، وتعرض بدائل أيسر في أصعب أجزاء المسار. يُرجى الاتصال أو المراسلة لشرح نوع القيادة الذي تريده. السلامة أولويتنا الأولى، ويليها الاستمتاع مباشرةً."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "هل يمكنني إحضار مجموعة في جولات ATV في Vernal؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "بالتأكيد! ترحّب شركة Adventure Tours Vernal بجولات المجموعات بجميع أحجامها. تواصل معنا لبحث احتياجات مجموعتك، بما فيها المعالم الإضافية والمطاعم وأماكن الإقامة والحياة الليلية والأنشطة المناسبة للأطفال في منطقة Uintah Basin. اتصل على (435) 219-9447."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "ماذا عن الطقس في جولات ATV؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "تعمل شركة Adventure Tours Vernal في الصحو والمطر على حدّ سواء. غير أنه في حالات الطقس القاسي أو الظروف الطارئة غير المتوقّعة سيكون أمامك خيار إعادة الجدولة أو استرداد المبلغ كاملًا."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "ماذا ينبغي أن أحضر معي في جولة ATV؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "ننصحك بإحضار نظارة شمسية وقبعة وكاميرا وسترة وحذاء مغلق من الأمام، مع ارتداء طبقات متعددة لأن درجة الحرارة تتقلّب. وواقي الشمس وطارد الحشرات ومرطّب الشفاه خيارات موفّقة دائمًا. وتوفّر شركة Adventure Tours Vernal الماء ووجبة خفيفة مجانًا."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "متى ينبغي أن أصل إلى نقطة اللقاء؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "في جميع الجولات يُرجى الوصول قبل 30 دقيقة من موعد الانطلاق. فموعد الحجز هو موعد الانطلاق الفعلي، ولن تنطلق الجولة قبل اكتمال التدريب على السلامة وتعرّفك على مركبتك. وإذا لم تكن حاضرًا عند بدء التعليمات فقد تفقد مقعدك في الجولة، وهو مقعد غير قابل للاسترداد."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "ما الحد الأدنى للعمر في جولات ATV؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "لقيادة مركبات شركة Adventure Tours Vernal يجب ألّا يقلّ عمرك عن 18 عامًا. وللركوب فيها راكبًا يجب ألّا يقلّ العمر عن سنتين."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "ما سياسة الإلغاء والعربون؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "تجد سياسة الإلغاء كاملة على صفحة سياسة الإلغاء لدى شركة Adventure Tours Vernal. وللاستفسار عن حجز بعينه اتصل على (435) 219-9447."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "كم تكلفة جولات ATV في Vernal؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "تقدّم شركة Adventure Tours Vernal جولة واحدة مُرشَدة مدتها 3 ساعات على مركبات Kawasaki KRX 1000 بمقعدين: 349 دولارًا للمركبة وتتّسع لراكبين اثنين، و125 دولارًا لإضافة راكب ثالث مرافق مع أحد المرشدين، و99 دولارًا للساعة لكل مركبة لتمديد الجولة. ويُشترط حضور 3 أشخاص كحدّ أدنى، ونرحّب بمجموعات تصل إلى 12 ضيفًا على متن 6 مركبات."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "هل أحتاج إلى خبرة سابقة بمركبات ATV؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "لا تُشترط أي خبرة سابقة بمركبات ATV. ترحّب شركة Adventure Tours Vernal بالمبتدئين تمامًا وتوفّر تدريبًا كاملًا على السلامة قبل كل جولة. ويشرح المرشدون طريقة تشغيل مركبات Kawasaki KRX 1000 بمقعدين خطوة بخطوة، وترحّب الجولات بجميع المستويات."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "هل يمكننا زيارة Dinosaur National Monument في الجوار؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "نعم. تستكشف جولة UTV المُرشَدة التي تستغرق 3 ساعات المسارات النائية قرب Dinosaur National Monument، بما فيها التكوينات الصخرية القديمة والنقوش الصخرية. أما جدار عظام الديناصورات الشهير فهو موقع منفصل تديره هيئة National Park Service نفسها، وكثير من الضيوف يجمعون بين صباح في النصب وجولة بعد الظهر عبر أرض الديناصورات المحيطة."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "لماذا تختار شركة Adventure Tours Vernal تحديدًا؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "شركة Adventure Tours Vernal هي الشركة الوحيدة التي تقدّم جولات مُرشَدة بمركبات Kawasaki KRX 1000 في Vernal بولاية يوتا. ونوفّر وصولًا حصريًا إلى مسارات خفية ونقوش صخرية ومخابئ Butch Cassidy وأقواس صخرية خلابة. مرشدون محليون خبراء ومعدّات سلامة احترافية وترحيب بجميع المستويات. نعمل يوميًا من 7 صباحًا حتى 7 مساءً. اتصل على (435) 219-9447."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "كم تستغرق جولات ATV في Vernal؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "تقدّم شركة Adventure Tours Vernal جولة قياسية واحدة مُرشَدة تستغرق نحو 3 ساعات. هل ترغب في وقت أطول على المسار؟ يمكنك تمديد جولتك مقابل 99 دولارًا للساعة لكل مركبة. اتصل على (435) 219-9447 لترتيب جولة أطول."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "هل جولات ATV في Vernal مناسبة للعائلات؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "نعم. الجولة المُرشَدة مناسبة للعائلات، مع تعليمات سلامة كاملة قبل كل انطلاق وترحيب بالركاب المرافقين من عمر سنتين. وتتّسع كل مركبة Kawasaki KRX 1000 لراكبين اثنين، فتحجز العائلات عدة مركبات لتنطلق معًا، بما يصل إلى 6 مركبات و12 ضيفًا في الجولة الواحدة. ولا تُشترط أي خبرة سابقة، فالتدريب الكامل على السلامة متوفّر."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "ما ساعات عمل شركة Adventure Tours Vernal؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "تعمل شركة Adventure Tours Vernal يوميًا من 7:00 صباحًا حتى 7:00 مساءً بالتوقيت الجبلي، طوال أيام الأسبوع السبعة. اتصل على (435) 219-9447 لحجز جولة ATV، أو تفضّل بزيارة adventuretoursvernal.com في أي وقت."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "ما خيارات الجولات التي تقدّمها شركة Adventure Tours Vernal؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "تقدّم شركة Adventure Tours Vernal جولة واحدة مُرشَدة مدتها 3 ساعات على مركبات Kawasaki KRX 1000 بمقعدين في Vernal بولاية يوتا، مع خمسة أنظمة من المسارات تختار بينها عند الحجز: مسار Doc's Beach ومسار Moonshine Arch ومسار Ashley Gorge ومسار Outlaw Trail ومسار Asphalt Ridge. وتشمل كل جولة مرشدين محليين خبراء وتعليمات سلامة كاملة ومعدّات السلامة."
+        }
+      }
+    ]
+  }
+`;
+---
+<BaseLayout bodyClass="faq-page-body">
+  <Fragment slot="head">
+    <Seo
+      title="الأسئلة الشائعة | جولات UTV في Vernal بولاية يوتا"
+      description="إجابات عن الأسئلة الشائعة حول جولات UTV المُرشَدة في Vernal بولاية يوتا. شروط العمر والأسعار وما يلزم إحضاره وسياسة الطقس وغيرها. اتصل على (435) 219-9447."
+      path="/ar/faq/"
+      type="website"
+      ogTitle="الأسئلة الشائعة — Adventure Tours Vernal | جولات UTV مُرشَدة في يوتا"
+      ogDescription="كل ما تحتاج معرفته قبل جولتك المُرشَدة بمركبات Kawasaki KRX 1000 في Vernal بولاية يوتا: شروط العمر والأسعار وما يلزم إحضاره."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="faq" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.faq', lang) }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: t('footer.quickLinks', lang),
+      links: [
+        { href: '/utv/', label: t('footer.link.ourTours', lang) },
+        { href: '/#vehicles', label: t('footer.link.ourFleet', lang) },
+        { href: '/#gallery', label: t('footer.link.photoGallery', lang) },
+        { href: '/ar/booking/', label: t('cta.bookNow', lang) },
+      ],
+    }}
+  />
+</BaseLayout>

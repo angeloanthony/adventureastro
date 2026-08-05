@@ -2061,6 +2061,282 @@ const ZH = `
 
 `;
 
+// AR — AR-2 Phase F batch 3. Every class, style attribute and emoji is preserved verbatim;
+// only visible text is translated.
+//
+// LEGAL INITIALISMS STAY LATIN AND ARE GLOSSED ON FIRST USE. CCPA, GDPR and ISP follow the
+// same terminology decision this file's header already records for Spanish: they are the form
+// a reader has to match against the statute, which is §2.2's own test — not "what kind of name
+// is it" but "must the reader match the string against something outside this page". Each gets
+// its Arabic expansion once, before the initialism, and the bare form thereafter. Slot 1
+// measured CCPA rendering LTR bare in Arabic prose, so no isolation is needed for the run
+// itself.
+//
+// ⚠ NO PARENTHETICAL IN THIS BLOCK CLOSES ON A LATIN RUN, AND THAT COST TWO REWRITES. English
+// writes "California Consumer Privacy Act (CCPA)" and "Internet Service Provider (ISP)" — both
+// are §3.5's defect class exactly (")" flanked L … R), and both are structural rather than
+// stylistic: the gloss convention puts the initialism last, and the bracket convention closes
+// right after it, so following both rules produces the defect every time. Neither is bracketed
+// here; the expansion and the initialism sit in apposition instead. §3.7's remedy — put an
+// Arabic word at the boundary where the direction change is — with the boundary removed rather
+// than padded.
+const AR = `
+<section class="policy-section">
+    <div class="container">
+        <div class="section-header">
+            <h1 class="section-title">سياسة الخصوصية</h1>
+            <p class="section-subtitle">خصوصيتك تهمّنا. تعرّف على كيفية جمع معلوماتك واستخدامها وحمايتها.</p>
+            <p class="policy-effective-date">تاريخ السريان: فبراير 2026</p>
+        </div>
+
+        <div class="policy-container">
+
+            <!-- مقدمة -->
+            <div class="policy-card">
+                <div class="policy-icon">🔒</div>
+                <h2 class="policy-heading">التزامنا تجاه الخصوصية</h2>
+                <p>في شركة Adventure Tours Vernal، التي يمكن الوصول إليها عبر <strong>adventuretoursvernal.com</strong>، تأتي خصوصية زوّارنا في مقدّمة أولوياتنا. وتوضّح وثيقة سياسة الخصوصية هذه أنواع المعلومات التي تجمعها الشركة وتسجّلها وكيفية استخدامنا لها.</p>
+                <p>وإذا كانت لديك أسئلة إضافية أو رغبت في مزيد من المعلومات عن سياسة الخصوصية لدينا فلا تتردّد في التواصل معنا.</p>
+                <div class="policy-note">
+                    <strong>النطاق:</strong> تنطبق سياسة الخصوصية هذه على الأنشطة الإلكترونية وحدها، وتسري على زوّار موقعنا فيما يخصّ المعلومات التي يشاركونها أو التي تُجمع منهم. ولا تنطبق هذه السياسة على أي معلومات تُجمع خارج الإنترنت أو عبر قنوات أخرى غير هذا الموقع.
+                </div>
+            </div>
+
+            <!-- الموافقة -->
+            <div class="policy-card">
+                <div class="policy-icon">✅</div>
+                <h2 class="policy-heading">الموافقة</h2>
+                <p>باستخدامك موقعنا فإنك توافق بموجب ذلك على سياسة الخصوصية لدينا وتقبل شروطها.</p>
+            </div>
+
+            <!-- المعلومات التي نجمعها -->
+            <div class="policy-card">
+                <div class="policy-icon">📋</div>
+                <h2 class="policy-heading">المعلومات التي نجمعها</h2>
+
+                <p>سنوضّح لك المعلومات الشخصية المطلوب منك تقديمها وأسباب طلبها في اللحظة التي نطلب منك فيها تقديم معلوماتك الشخصية.</p>
+
+                <div class="policy-list">
+                    <h3>عند تواصلك معنا مباشرةً:</h3>
+                    <p>إذا تواصلت معنا مباشرةً فقد نتلقّى معلومات إضافية عنك، مثل:</p>
+                    <ul>
+                        <li>اسمك</li>
+                        <li>عنوان البريد الإلكتروني</li>
+                        <li>رقم الهاتف</li>
+                        <li>محتوى الرسالة وأي مرفقات قد ترسلها إلينا</li>
+                        <li>أي معلومات أخرى تختار تقديمها</li>
+                    </ul>
+
+                    <h3>عند إتمام عملية شراء أو حجز:</h3>
+                    <p>قد نطلب معلومات التواصل الخاصة بك، ومنها:</p>
+                    <ul>
+                        <li>الاسم</li>
+                        <li>اسم الشركة، إن وُجد</li>
+                        <li>العنوان</li>
+                        <li>عنوان البريد الإلكتروني</li>
+                        <li>رقم الهاتف</li>
+                        <li>بيانات بطاقة الائتمان لإتمام عملية الشراء</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- كيف نستخدم معلوماتك -->
+            <div class="policy-card">
+                <div class="policy-icon">🔧</div>
+                <h2 class="policy-heading">كيف نستخدم معلوماتك</h2>
+
+                <p>نستخدم المعلومات التي نجمعها بطرق متعددة، من بينها:</p>
+
+                <div class="usage-grid">
+                    <div class="usage-item">
+                        <div class="usage-icon">🌐</div>
+                        <div class="usage-text">
+                            <strong>تشغيل موقعنا وتقديمه</strong>
+                            <p>صيانة خدماتنا وتقديمها إليك</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">📈</div>
+                        <div class="usage-text">
+                            <strong>التحسين والتخصيص</strong>
+                            <p>تطوير تجربتك وتوسيع نطاق خدماتنا</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">📊</div>
+                        <div class="usage-text">
+                            <strong>تحليل الاستخدام</strong>
+                            <p>فهم طريقة استخدامك لموقعنا</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">💡</div>
+                        <div class="usage-text">
+                            <strong>تطوير ميزات جديدة</strong>
+                            <p>ابتكار منتجات وخدمات ووظائف جديدة</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">💬</div>
+                        <div class="usage-text">
+                            <strong>التواصل معك</strong>
+                            <p>خدمة العملاء والتحديثات والعروض التسويقية</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">📧</div>
+                        <div class="usage-text">
+                            <strong>إرسال تحديثات بالبريد الإلكتروني</strong>
+                            <p>رسائل ترويجية ومعلوماتية</p>
+                        </div>
+                    </div>
+                    <div class="usage-item">
+                        <div class="usage-icon">🛡️</div>
+                        <div class="usage-text">
+                            <strong>منع الاحتيال</strong>
+                            <p>كشف الأنشطة الاحتيالية والحدّ منها</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ملفات السجل -->
+            <div class="policy-card">
+                <div class="policy-icon">📁</div>
+                <h2 class="policy-heading">ملفات السجل</h2>
+
+                <p>تتّبع شركة Adventure Tours Vernal إجراءً معتادًا يقوم على استخدام ملفات السجل. وتسجّل هذه الملفات بيانات الزوّار عند زيارتهم المواقع الإلكترونية. وتفعل ذلك جميع شركات الاستضافة ضمن تحليلات خدمات الاستضافة لديها.</p>
+
+                <div class="info-box">
+                    <h3>المعلومات التي تجمعها ملفات السجل:</h3>
+                    <div class="info-items">
+                        <span class="info-tag">عناوين IP</span>
+                        <span class="info-tag">نوع المتصفّح</span>
+                        <span class="info-tag">مزوّد خدمة الإنترنت ISP</span>
+                        <span class="info-tag">ختم التاريخ والوقت</span>
+                        <span class="info-tag">صفحات الإحالة والخروج</span>
+                        <span class="info-tag">عدد النقرات</span>
+                    </div>
+                </div>
+
+                <p class="policy-disclaimer">وهذه البيانات غير مرتبطة بأي معلومات تحدّد هويتك الشخصية. والغرض منها تحليل الاتجاهات وإدارة الموقع وتتبّع حركة المستخدمين داخله وجمع معلومات ديموغرافية.</p>
+            </div>
+
+            <!-- ملفات تعريف الارتباط -->
+            <div class="policy-card">
+                <div class="policy-icon">🍪</div>
+                <h2 class="policy-heading">ملفات تعريف الارتباط وإشارات الويب</h2>
+
+                <p>شأن أي موقع آخر، تستخدم شركة Adventure Tours Vernal ملفات تعريف الارتباط. وتُستخدم هذه الملفات لتخزين معلومات تشمل تفضيلات الزوّار والصفحات التي فتحها الزائر داخل الموقع. وتُستخدم هذه المعلومات لتحسين تجربة المستخدمين عبر تخصيص محتوى صفحاتنا بناءً على نوع متصفّح الزائر أو غير ذلك من المعلومات.</p>
+
+                <div class="policy-warning">
+                    <strong>الخيار متاح لك:</strong> يمكنك تعطيل ملفات تعريف الارتباط من خلال إعدادات متصفّحك. وللاطلاع على معلومات أكثر تفصيلًا عن إدارة هذه الملفات في متصفّحات بعينها، تجد ذلك على المواقع الرسمية لتلك المتصفّحات.
+                </div>
+            </div>
+
+            <!-- حقوق CCPA -->
+            <div class="policy-card">
+                <div class="policy-icon">⚖️</div>
+                <h2 class="policy-heading">حقوق الخصوصية بموجب قانون CCPA وعدم بيع المعلومات الشخصية</h2>
+
+                <p>بموجب قانون خصوصية المستهلك في كاليفورنيا CCPA، يتمتّع المستهلكون في كاليفورنيا، إلى جانب حقوق أخرى، بالحق في:</p>
+
+                <div class="rights-list">
+                    <div class="right-item">
+                        <div class="right-number">1</div>
+                        <div class="right-content">
+                            <strong>طلب الإفصاح عن البيانات</strong>
+                            <p>مطالبة الشركة التي تجمع البيانات الشخصية للمستهلك بالإفصاح عن فئات البيانات الشخصية التي جمعتها عن المستهلكين وعن العناصر المحدّدة منها.</p>
+                        </div>
+                    </div>
+                    <div class="right-item">
+                        <div class="right-number">2</div>
+                        <div class="right-content">
+                            <strong>طلب حذف البيانات</strong>
+                            <p>مطالبة الشركة بحذف أي بيانات شخصية جمعتها عن المستهلك.</p>
+                        </div>
+                    </div>
+                    <div class="right-item">
+                        <div class="right-number">3</div>
+                        <div class="right-content">
+                            <strong>رفض بيع البيانات</strong>
+                            <p>مطالبة الشركة التي تبيع البيانات الشخصية للمستهلك بالامتناع عن بيعها.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="policy-note">
+                    <strong>مدة الاستجابة:</strong> إذا تقدّمت بطلب فأمامنا شهر واحد للردّ عليك. وإذا رغبت في ممارسة أي من هذه الحقوق فتواصل معنا.
+                </div>
+            </div>
+
+            <!-- حقوق GDPR -->
+            <div class="policy-card">
+                <div class="policy-icon">🇪🇺</div>
+                <h2 class="policy-heading">حقوق حماية البيانات بموجب لائحة GDPR الأوروبية</h2>
+
+                <p>نحرص على أن تكون على دراية تامة بجميع حقوقك في حماية البيانات وفق اللائحة العامة لحماية البيانات GDPR. ويتمتّع كل مستخدم بالحقوق التالية:</p>
+
+                <div class="gdpr-rights">
+                    <div class="gdpr-right">
+                        <h3>الحق في الاطّلاع</h3>
+                        <p>لك الحق في طلب نسخ من بياناتك الشخصية. وقد نتقاضى رسمًا رمزيًا مقابل هذه الخدمة.</p>
+                    </div>
+                    <div class="gdpr-right">
+                        <h3>الحق في التصحيح</h3>
+                        <p>لك الحق في مطالبتنا بتصحيح أي معلومات تعتقد أنها غير دقيقة، ولك كذلك الحق في مطالبتنا باستكمال المعلومات التي تعتقد أنها ناقصة.</p>
+                    </div>
+                    <div class="gdpr-right">
+                        <h3>الحق في المحو</h3>
+                        <p>لك الحق في مطالبتنا بمحو بياناتك الشخصية، وفق شروط معيّنة.</p>
+                    </div>
+                    <div class="gdpr-right">
+                        <h3>الحق في تقييد المعالجة</h3>
+                        <p>لك الحق في مطالبتنا بتقييد معالجة بياناتك الشخصية، وفق شروط معيّنة.</p>
+                    </div>
+                    <div class="gdpr-right">
+                        <h3>الحق في الاعتراض على المعالجة</h3>
+                        <p>لك الحق في الاعتراض على معالجتنا لبياناتك الشخصية، وفق شروط معيّنة.</p>
+                    </div>
+                    <div class="gdpr-right">
+                        <h3>الحق في نقل البيانات</h3>
+                        <p>لك الحق في مطالبتنا بنقل البيانات التي جمعناها إلى جهة أخرى أو إليك مباشرةً، وفق شروط معيّنة.</p>
+                    </div>
+                </div>
+
+                <div class="policy-note">
+                    <strong>مدة الاستجابة:</strong> إذا تقدّمت بطلب فأمامنا شهر واحد للردّ عليك. وإذا رغبت في ممارسة أي من هذه الحقوق فتواصل معنا.
+                </div>
+            </div>
+
+            <!-- معلومات الأطفال -->
+            <div class="policy-card">
+                <div class="policy-icon">👶</div>
+                <h2 class="policy-heading">معلومات الأطفال</h2>
+
+                <p>لا تجمع شركة Adventure Tours Vernal عن علم أي معلومات تحدّد الهوية الشخصية من الأطفال دون سنّ 13 عامًا.</p>
+
+                <div class="policy-warning">
+                    <strong>⚠️ مهم:</strong> إذا كنت تعتقد أن طفلك قدّم معلومات من هذا النوع على موقعنا فنشجّعك بشدّة على التواصل معنا فورًا، وسنبذل قصارى جهدنا لإزالة تلك المعلومات من سجلّاتنا دون تأخير.
+                </div>
+            </div>
+
+            <!-- دعوة للتواصل -->
+            <div class="policy-cta">
+                <h3>هل لديك أسئلة عن سياسة الخصوصية؟</h3>
+                <p>إذا كانت لديك أي أسئلة أو مخاوف بشأن طريقة تعاملنا مع بياناتك فلا تتردّد في التواصل معنا.</p>
+                <div class="cta-buttons">
+                    <a href="tel:435-219-9447" class="cta-button primary">📞 اتصل على <bdi>(435) 219-9447</bdi></a>
+                    <a href="mailto:adventuretoursvernal@gmail.com" class="cta-button secondary">✉️ راسلنا بالبريد</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3A, Italian P6,
  * French P8-P6, German P9-P6, Japanese P10K).
@@ -2075,5 +2351,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'de') return DE;
   if (locale === 'zh') return ZH;
   if (locale === 'ja') return JA;
+  if (locale === 'ar') return AR;
   return bodyHtml;
 }
