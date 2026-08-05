@@ -198,6 +198,99 @@ deliverable each time. `preflight-ar.mjs` checks the right one per surface:
 
 ---
 
+## 5.2 Batch 1 — `atv-trails-vernal-utah` + `jeep-trails-vernal-utah`, CLOSED
+
+**59 of 77 ar routes · 679 site routes · 60 `ar` pages · whole suite green on the first build.**
+**Gate 4n returned ZERO findings on first contact** — the first Phase F batch, on a surface the
+project had never authored Arabic into.
+
+**Probe slot 1, run before a word was authored.** Four shapes the corpus could not yet contain,
+all measured `visual = logical` and therefore written **bare**, on a run whose negative controls
+were red in the same pass (`$349`→`349$`, `(435) 219-9447`→`9447-219 )435(`, `95°F`→`F°95`,
+`10–11`→`11–10`):
+
+| shape | label | visual | authored as |
+|---|---|---|---|
+| `4x4` | LTR | `4x4` | bare |
+| `2.5` | LTR | `2.5` | bare |
+| `FOX 2.5` | LTR | `FOX 2.5` | bare |
+| `360` | LTR | `360` | bare |
+
+> **This REFINES 7c's class rather than contradicting it.** 7c established *any short bare run
+> whose leading marker carries the meaning* reverses — `~3`→`3~`, `2+`→`+2`. All four shapes here
+> carry their meaning in an **interior** separator with digits on both sides, and none reverses.
+> The discriminator is where the meaning-bearing character sits, not the run's length. Measured,
+> not reasoned: `2.5` was genuinely undecided by reading UAX #9, because W4 absorbs a CS between
+> two `EN` and W2 has already retyped these digits to `AN` — the identical trap 6a's ASCII-hyphen
+> hypothesis fell into.
+
+**Advisory movements, every one attributed** (§6.3 — including the numbers that did *not* move):
+
+| number | baseline | after F1 | attribution |
+|---|---:|---:|---|
+| routes | 677 | 679 | the two new pages |
+| gate 4n rtl pages | 58 | 60 | +2, **0 findings** |
+| `ar` visible text | 1 687 758 | 1 697 484 | the authored prose |
+| gate 4o in-scope files | 92 | 94 | the two new `.astro` files |
+| gate 4f headings | 15 987 | 16 017 | headings on two pages |
+| gate 4f advisory | 64 | **68** | exactly 4, all on these pages, all one class: an `<h2>`/`<h4>` carrying `UTV` or `Jeep`, which §2.2 **requires** to stay Latin. The gate's own message calls it a licensed exception, and the class already existed at baseline |
+| gate 4g anchors | 48 169 | 48 253 | anchors on two pages |
+| gate 4g review candidates | 610 | **618** | exactly 8 — the 8 related-article cards (4 per page), each flattened by 4g's extractor into one anchor identity |
+| gate 4g approved identities | 298 | 298 | **steady** |
+| gate 4i advisory | 20 / 4 locks | 20 / 4 locks | **steady** — no `forbidden` competing rendering introduced |
+| gate 4s fragments | 2849 | 2849 | **steady** — these pages carry only a bare `href="#"`, which is not a fragment identity |
+
+**Census re-freeze.** GUARD 1 clean (phrase-set identical, EOL-normalised). GUARD 2: 2 facts
+increased, 51 steady, **0 decreased, 0 disappeared**. The two increases are exact —
+`أرض الديناصورات` **+1** and `المسارات` **+19**, and the per-page visible-text counts of the two
+authored pages sum to precisely 1 and 19 with nothing left over. Floors re-frozen **497 → 498**
+and **509 → 528**.
+
+**Criterion 5, proven by experiment rather than arithmetic.** The real gate 4i, with the newly
+frozen floors, run against a tree with every Arabic character inside `<main>` removed from all 59
+`ar` pages that have one (1 457 386 characters): **2 lock violations, exit 1.** Both floors fail
+when the prose they protect is deleted. The unmodified tree is green in the same pair of runs.
+
+> ### ⚠ A STATIC PAGE CONTRIBUTES NO STRUCTURAL LOCK TEXT, AND THIS REVERSES §1.5's TREND
+>
+> Measured on these two pages: `أرض الديناصورات` appears **1** and **0** times — exactly what was
+> authored, and nothing else. A spoke carries **3** (1 authored + 2 structural). The difference is
+> that these pages render `Footer variant="compact"`, which omits the tagline, and no
+> RelatedArticles block at all. `survives` was **186 before and 186 after** adding two pages.
+>
+> So a Phase F page adds to `whole` and to `prose` and adds **nothing** to `ceilNP`. The rollout
+> brief's §1.5 headroom trend was fitted to spokes, each of which adds a fixed structural
+> contribution plus a Model B bound; **Phase F pages widen the enforcement margin instead of
+> narrowing it, for a structural reason rather than an editorial one.** Do not carry the §1.5
+> trend line into Phase F — it is describing a different kind of page. (Sixth instance of the
+> recorded-size lesson: a rate fitted to one population predicts nothing about another.)
+
+> ### The counterfactual that justifies `8d4b299`, measured
+>
+> `tightPerPage()` would have given each of these two pages a top-4 sibling bound of **8**
+> (`dinosaur-country`) and **14** (`offroad-trail`) had they been counted as spokes — against a
+> measured true structural contribution of **0**. Across all 19 Phase F pages that is **+152**
+> and **+266** of fictitious ceiling, which lands `ceilNP` at 513 against a floor of 498 and 556
+> against 528. **Both locks would have been reported INFEASIBLE, and §11.2 criterion 6's remedy
+> is to drop a live lock.** The population fix was not housekeeping.
+>
+> ⚠ Note this is larger than the flat `CARD_LIMIT × AR_MAX_PER_CARD` = 4/page estimate used when
+> the commit was written: `AR_MAX_PER_CARD` bounds the ARABIC per-card count, while the tight
+> bound sums the actual ENGLISH pool contributions, which exceed 1 per card.
+
+**Links (§4).** `/`, `/utv/` and `/booking/` kept their English paths — those three targets are
+still untranslated. All eight related-card targets are registered `ar` spokes and switched to
+`/ar/`; the two pages link to each other, which is legal because both are registered by this
+batch.
+
+**M9 / M10, recorded rather than invented.** M9 (register drift): zero places where masculine
+unmarked read wrong; the pages are instructional and impersonal phrasing was already the natural
+register. M10 (plural/dual): one dual, `راكبين اثنين` for "2 riders", chosen over a numeral-plus-
+plural because Arabic marks the dual grammatically and "2 riders" is a fixed capacity, not a
+count. **No rule invented — this is what was done, once, in one place.**
+
+---
+
 ## 6. Known deferred items, unchanged
 
 Tracked backlog, not Phase F translation work. Do not implement without the trigger:
