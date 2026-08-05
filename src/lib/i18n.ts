@@ -505,6 +505,9 @@ const AR_SLUGS = new Set<string>([
   // and out of the settled-ceiling sum.
   'atv-trails-vernal-utah', // AR-2 Phase F batch 1
   'jeep-trails-vernal-utah', // AR-2 Phase F batch 1
+  'about', // AR-2 Phase F batch 2
+  'booking', // AR-2 Phase F batch 2
+  'safety-guidelines', // AR-2 Phase F batch 2
   'utv/best-utv-trails-vernal', // AR-2 Track E, E-1 — first prose spoke
   'utv/backcountry-tours-vernal-utah', // AR-2 Track E, E-2
   'utv/side-by-side-rentals-vernal-utah', // AR-2 Track E, E-2

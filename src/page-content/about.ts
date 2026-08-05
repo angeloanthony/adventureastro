@@ -2027,6 +2027,271 @@ const ZH = `
  * Every locale without a committed variant falls back to English. Callers
  * that don't need locale awareness keep importing `bodyHtml` directly.
  */
+// AR — AR-2 Phase F batch 2. Every YouTube iframe, image and style attribute is preserved
+// verbatim; only visible text is translated.
+//
+// ⚠ `Wyoming` IS IN NEITHER FROZEN LIST — not a §2.1 exonym, not a §2.2 Latin-verbatim name —
+// and this page names it in the SAME SENTENCE as `Colorado` (`كولورادو`) and `Utah` (`يوتا`),
+// both of which are exonyms. Batch 7c met exactly this gap with `Grand Junction` and resolved
+// it by transliterating by analogy to the neighbouring exonyms, since it is a place reference
+// a reader never matches against a sign or a booking system. A US state in a list of US states
+// is the same case, so `وايومنغ` follows that precedent rather than inventing a second rule.
+// Leaving it Latin would have been the INCONSISTENT choice, not the conservative one: it would
+// ship `كولورادو` and `Wyoming` three words apart.
+// **Filed for the §5 challenge window as a decision made, not a rule found** — the frozen list
+// still omits it, and only the owner can add it.
+const AR = `
+<!-- ================================================
+     كتلة ملخّص الصفحة — تغذّي Google AI Overviews
+     و Bing Copilot. توضع في أعلى المحتوى.
+     ================================================ -->
+<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+  شركة Adventure Tours Vernal شركة محلية لجولات UTV في Vernal بولاية يوتا، أسّسها Dave and Trudy Wilson. ويعمل Dave Wilson مالكًا ومرشدًا رئيسيًا، ويقدّم جولات مُرشَدة بمركبات Kawasaki KRX 1000 بمقعدين عبر منطقة Uintah Basin. التقييم 5.0 نجوم من 82 مراجعة على Google. للاستفسار اتصل على <bdi>(435) 219-9447</bdi>.
+</p>
+
+<!-- قسم الواجهة — العنوان الرئيسي وثيق الصلة بالكلمات المفتاحية مع الحفاظ على نبرة العلامة -->
+<section class="about-hero" style="position:relative; overflow:hidden;">
+  <div class="about-hero-video-bg">
+    <iframe
+      src="https://www.youtube.com/embed/LsqbwVkwrbw?autoplay=1&mute=1&loop=1&playlist=LsqbwVkwrbw&controls=0&rel=0&playsinline=1"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+  </div>
+  <div class="about-hero-overlay"></div>
+  <div class="about-hero-content">
+    <h1 class="about-hero-title">جولات UTV في Vernal بولاية يوتا — صنعتها المغامرة</h1>
+    <p class="about-hero-subtitle">بوابتك إلى أعظم مغامرات منطقة Uintah Basin</p>
+    <p class="about-hero-subtitle" style="font-weight:600;">★★★★★ تقييم 5.0 من 82 مراجعة على Google — كل جولة يقودها شخصيًا Dave &amp; Trudy Wilson</p>
+  </div>
+</section>
+
+<!-- المحتوى الرئيسي -->
+<section class="about-main">
+  <div class="container">
+
+    <!-- بيان الرسالة -->
+    <div class="about-card mission-card">
+      <div class="mission-content">
+        <h2 class="about-heading">الأولى. الأفضل. تجربة UTV المثلى.</h2>
+        <p class="lead-text">نسعى لأن نكون أول وأفضل شركة لجولات UTV في منطقة Uintah Basin! تقدّم شركة Adventure Tours Vernal أكثر المغامرات أمانًا وإثارة باستخدام أفضل مركبات <strong>Kawasaki</strong> KRX بمقعدين.</p>
+        <p>تعرض جولاتنا مسارات مذهلة بين أخاديد بديعة وتاريخ عريق. ونشمل كنوزًا محلية مثل:</p>
+
+        <div class="highlights-grid">
+          <div class="highlight-item">
+            <div class="highlight-icon">🏞️</div>
+            <div class="highlight-text">
+              <strong>Flaming Gorge</strong>
+              <p>أخاديد خلابة من الصخر الأحمر ومياه صافية</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/tktE4GbS9gQ?si=PwYv9yMUs-yYAM4U"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🦕</div>
+            <div class="highlight-text">
+              <strong>Dinosaur Monument</strong>
+              <p>طبقات أحافير قديمة ومشاهد ما قبل التاريخ</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/PoCN4Lo9Lkk?si=OYkfE56RP_uMcHoF"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🛶</div>
+            <div class="highlight-text">
+              <strong>Green River</strong>
+              <p>وجهة عالمية المستوى للتجديف والصيد</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/p05cObabbjg?si=gjsw6MKCJHx6s6Vq"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🗿</div>
+            <div class="highlight-text">
+              <strong>النقوش الصخرية القديمة</strong>
+              <p>آلاف السنين من تاريخ السكان الأصليين</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/fwzaXWfuFdk?si=Xt1_DCIPRzqx7QDL"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">⛰️</div>
+            <div class="highlight-text">
+              <strong>جبال Uintah</strong>
+              <p>قمم شامخة وبرّية جبلية عالية</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/AanVVzP0_oM?si=5GOFOiI5MBc5dm1D"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🌈</div>
+            <div class="highlight-text">
+              <strong>Fantasy Canyon</strong>
+              <p>تشكيلات صخرية من عالم آخر وجمال صحراوي</p>
+            </div>
+            <div class="video-embed-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/m64J-ovzTf4?si=FLULmmhzbq8zDzV2"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- قصّتنا -->
+    <div class="our-story-section">
+      <div class="story-content">
+        <h2 class="section-title">تاريخنا</h2>
+        <div class="story-text">
+          <p class="story-intro">المغامرة ليست ما نفعله فحسب — بل هي من نكون.</p>
+
+          <p>بعد أن نشأت في وادي Salt Lake وقضيت شبابي في استكشاف جبال Wasatch وجبال Oquirrh، أدركت أنني وجدت شغف العمر. وبوصفي أحد مواليد الثمانينيات، بما توفّر لنا من حرية واسعة في التجوال، كنت أنا وإخوتي نمارس ركوب الدراجات الجبلية وقيادة Jeep والمشي والتزلّج على الجليد والدراجات الثلجية والتخييم وركوب الخيل والنزول بالحبال والقفز من المنحدرات واستكشاف الكهوف وغيرها. وقضينا عطلات أسبوعية لا تُنسى في كوخ العائلة.</p>
+
+          <p>ومنذ سنّ مبكرة عرفت أنّ اندفاع الأدرينالين هو ما أتوق إليه. وبعد بضع كسور، وربما محور أو محورين، لم أفقد يومًا شغفي بالهواء الطلق.</p>
+
+          <p>انتقلت مع زوجتي الجميلة المدهشة الرائعة وصديقتي المقرّبة Trudy إلى Vernal في يوتا. وبعد انتقالنا، وقعنا في حبّ منطقة Uintah Basin وقرّرنا أن نوجّه شغفنا نحو مشاركة العجائب الطبيعية التي أحببناها كثيرًا مع الأصدقاء والعائلة والزوّار.</p>
+        </div>
+      </div>
+
+      <!-- قسم صورة العائلة -->
+      <div class="family-section">
+        <div class="family-photo-container">
+          <img src="/images/wilson-family.webp" alt="Dave and Trudy Wilson مالكا شركة Adventure Tours Vernal مع عائلتهما" class="family-photo">
+          <div class="family-photo-caption">
+            <h3>تعرّف على عائلة Wilson</h3>
+            <p>Dave and Trudy Wilson مع أبنائهما الأربعة وحفيدهما</p>
+            <p class="family-names">8 Boys, Ansley, Trinity, Scott, and Chandler - Little Z-man</p>
+            <p class="guide-profile-links">تعرّف على مرشديك: <a href="/about/dave/">Dave Wilson</a> &amp; <a href="/about/trudy/">Trudy Wilson</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- مستقبلنا -->
+    <div class="about-card future-card">
+      <h2 class="about-heading">مستقبلنا</h2>
+      <div class="future-content">
+        <p class="lead-text">وُلدت شركة Adventure Tours Vernal من حبّنا للتجارب.</p>
+
+        <p>بعد انتقال عائلتنا بدأنا نستثمر في ذكريات العائلة. وقاد هذا الشغف الممتدّ إلى شراء مركبات ATV ودراجات جبلية ودراجات ثلجية وقارب ومعدات تخييم وصيد برّي وصيد سمك، وقبل ذلك كله الاستثمار في مجتمعنا المتّسع من الأصدقاء والعائلة.</p>
+
+        <p>ووجدت عائلتنا أنفسنا نكاد نتوسّل إلى الناس أن يأتوا ليروا الجمال الذي اكتشفناه في فناء دارنا! ففي نزهاتنا الخاصة اكتشفنا كهوفًا ومسارات، وعشنا التاريخ، واستمتعنا بمناظر بديعة فاقت توقّعاتنا.</p>
+
+        <p>واليوم نشارك تلك المعرفة المباشرة في كل جولة — من <a href="/ar/utv/backcountry-tours-vernal-utah/">جولاتنا المُرشَدة في المناطق النائية</a> عبر الأخاديد البعيدة ومواقع النقوش الصخرية إلى <a href="/ar/utv/best-utv-trails-vernal/">أنظمة المسارات الخمسة التي نشغّلها قرب Vernal</a>. إنها البلاد نفسها التي استكشفناها بأنفسنا، وقد صارت الآن مستطلَعة ومرسومة ومقودة شخصيًا.</p>
+
+        <p>وذلك "الفناء" أكبر من بلدة واحدة. إنه إقليم يمتدّ عبر عدة ولايات — Dinosaur National Monument الممتدّ من يوتا إلى كولورادو، وFlaming Gorge المنساب شمالًا إلى وايومنغ، ومرتفعات High Uintas الشامخة إلى الغرب — وتقع Vernal في قلبه تمامًا.</p>
+
+        <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+          <img src="/images/maps/vernal-dinosaur-country-overview.svg" alt="رسم تخطيطي توجيهي لأرض الديناصورات بوصفها الإقليم الممتدّ عبر عدة ولايات الذي تتّخذه شركة Adventure Tours Vernal موطنًا، ومركزه Vernal في يوتا بوصفها المعسكر الأساسي، مع أربعة نطاقات معنونة: Dinosaur National Monument الممتدّ بين يوتا وكولورادو، وFlaming Gorge الممتدّ من يوتا إلى وايومنغ، ومرتفعات High Uintas وغابة Ashley National Forest، ومنطقة Uintah Basin المحيطة. يعرض الرسم العلاقات الإقليمية فقط وليس بمقياس رسم ولا مسافة ولا اتجاه بوصلة؛ وتشير أسماء الولايات إلى الامتداد لا إلى حدود مرسومة." width="1600" height="1200" loading="lazy" decoding="async" />
+          <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">الفناء الذي نعنيه: إقليم يمتدّ عبر عدة ولايات ويصل إلى كولورادو ووايومنغ، وفي قلبه Vernal. رسم توجيهي، وليس بمقياس رسم.</figcaption>
+        </figure>
+
+        <div class="vision-box">
+          <h3>رؤيتنا</h3>
+          <p>شركة A.T.V. هنا لتنعم بالمشاهد المهيبة التي في فناء دارنا. تعال واسترخِ وامكث قليلًا، فلن تندم!</p>
+          <p>ونأمل أن تغادر بذكريات لا تُنسى عن منطقة Uintah Basin — وبصور جميلة وتاريخ آسر وحكايات ترويها لأصدقائك.</p>
+          <p><strong>ستعود للمزيد، ونحن نضمن ذلك!</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- لماذا تختارنا -->
+    <div class="why-choose-section">
+      <h2 class="section-title">لماذا تختار Adventure Tours Vernal؟</h2>
+      <div class="why-grid">
+        <div class="why-item">
+          <div class="why-icon">🏆</div>
+          <h3>الأولى والأفضل</h3>
+          <p>الشركة الرائدة لجولات UTV في منطقة Uintah Basin</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🛡️</div>
+          <h3>السلامة أولًا</h3>
+          <p>معدات من الطراز الأول ومرشدون خبراء</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🌟</div>
+          <h3>خبراء محليون</h3>
+          <p>نعرف هذه الأرض معرفة أهلها</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">❤️</div>
+          <h3>شغف عائلي</h3>
+          <p>نشارككم حبّنا للمغامرة</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🏔️</div>
+          <h3>كنوز خفيّة</h3>
+          <p>وصول إلى مسارات وإطلالات لا يعرفها غيرنا</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">✨</div>
+          <h3>لا تُنسى</h3>
+          <p>ذكريات تدوم مدى العمر</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- قسم الدعوة للحجز -->
+    <div class="about-cta">
+      <h2>مستعدّ لخوض المغامرة؟</h2>
+      <p>انضمّ إلى عائلة Wilson واكتشف لماذا تُعدّ Vernal في يوتا ملعب الهواء الطلق المثالي.</p>
+      <div class="cta-buttons">
+        <a href="/ar/booking/" class="cta-button primary">احجز مغامرتك</a>
+        <a href="tel:435-219-9447" class="cta-button secondary">📞 اتصل على <bdi>(435) 219-9447</bdi></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- شريط الحجز الثابت للجوال -->
+<div class="mobile-sticky-cta">
+  <button onclick="location.href='/ar/booking/'">احجز جولتك الآن</button>
+</div>
+`;
+
 export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'es') return ES;
   if (locale === 'it') return IT;
@@ -2035,5 +2300,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'de') return DE;
   if (locale === 'zh') return ZH;
   if (locale === 'ja') return JA;
+  if (locale === 'ar') return AR;
   return bodyHtml;
 }

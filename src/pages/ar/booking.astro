@@ -1,0 +1,51 @@
+---
+// ar/booking.astro — Arabic booking page (AR-2 Phase F batch 2).
+// Mirrors src/pages/booking.astro. The LocalBusiness schema's identity fields (name,
+// address, telephone, email, openingHours) are byte-identical to the English page — same
+// business entity, not page copy. Only `url` changes, because the route differs.
+import { getBodyHtml } from '../../page-content/booking';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Adventure Tours Vernal",
+    "url": "https://adventuretoursvernal.com/ar/booking/",
+    "image": "https://adventuretoursvernal.com/images/logo.webp",
+    "telephone": "+1-435-219-9447",
+    "email": "adventuretoursvernal@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1935 S 1500 E",
+      "addressLocality": "Vernal",
+      "addressRegion": "UT",
+      "postalCode": "84078",
+      "addressCountry": "US"
+    },
+    "openingHours": "Mo-Su 07:00-19:00"
+  }
+`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="احجز جولة UTV | Adventure Tours Vernal"
+      description="احجز جولة UTV مُرشَدة بمركبة Kawasaki KRX 1000 في Vernal بولاية يوتا. اختر من Doc's Beach أو Moonshine Arch أو Ashley Gorge أو Outlaw Trail أو Asphalt Ridge. نفتح يوميًا من 7 صباحًا حتى 7 مساءً."
+      path="/ar/booking/"
+      type="website"
+      ogDescription="احجز جولة UTV مُرشَدة بمركبة Kawasaki KRX 1000 في Vernal بولاية يوتا. تقويم مباشر مع حجز فوري. نفتح يوميًا من 7 صباحًا حتى 7 مساءً. اتصل على (435) 219-9447."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'احجز جولتك' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer slot="body" />
+</BaseLayout>

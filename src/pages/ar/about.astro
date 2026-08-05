@@ -1,0 +1,103 @@
+---
+// ar/about.astro — Arabic about page (AR-2 Phase F batch 2).
+// Mirrors src/pages/about.astro. Person + TouristInformationCenter schema: the descriptive
+// fields (jobTitle, description, knowsAbout) are page copy and are translated; the identity
+// fields (name, address, telephone, aggregateRating, founder) stay byte-identical to the
+// English page — same person, same business, not page-specific copy.
+//
+// §4: `/utv/` and the two homepage fragments keep their English paths (neither target is
+// translated); `/ar/booking/` is registered by this batch.
+import { getBodyHtml } from '../../page-content/about';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Dave Wilson",
+      "jobTitle": "المالك والمرشد الرئيسي",
+      "description": "Dave Wilson هو مالك شركة Adventure Tours Vernal ومرشدها الرئيسي، وهي الشركة الرائدة لجولات UTV في منطقة Uintah Basin. نشأ وهو يستكشف جبال Wasatch وجبال Oquirrh فتكوّن لديه شغف بمغامرات الهواء الطلق دام العمر كله. وبعد انتقاله إلى Vernal في يوتا مع زوجته Trudy، أسّس شركة Adventure Tours Vernal ليشارك عجائب منطقة Uintah Basin الطبيعية — من Dinosaur National Monument إلى Flaming Gorge — مع الزوّار وأهل المنطقة على حدّ سواء.",
+      "url": "https://adventuretoursvernal.com/ar/about/",
+      "image": "https://adventuretoursvernal.com/images/wilson-family.webp",
+      "worksFor": {
+        "@type": "TouristInformationCenter",
+        "name": "Adventure Tours Vernal",
+        "url": "https://adventuretoursvernal.com"
+      },
+      "knowsAbout": [
+        "جولات UTV في Vernal بولاية يوتا",
+        "Dinosaur National Monument",
+        "Flaming Gorge",
+        "مسارات المناطق النائية في Uintah Basin",
+        "جولات Kawasaki KRX 1000 بمقعدين",
+        "مغامرات الهواء الطلق في يوتا"
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristInformationCenter",
+      "name": "Adventure Tours Vernal",
+      "image": "https://adventuretoursvernal.com/images/logo.webp",
+      "telephone": "+1-435-219-9447",
+      "email": "adventuretoursvernal@gmail.com",
+      "url": "https://adventuretoursvernal.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1935 S 1500 E",
+        "addressLocality": "Vernal",
+        "addressRegion": "UT",
+        "postalCode": "84078",
+        "addressCountry": "US"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "82",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Dave Wilson"
+      }
+    }
+  ]
+`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="من نحن | Adventure Tours Vernal — Dave & Trudy Wilson"
+      description="تعرّف على Dave and Trudy Wilson مالكَي شركة Adventure Tours Vernal. شركة محلية لجولات UTV في Vernal بولاية يوتا. تقييم 5.0 من 82 مراجعة. اتصل على (435) 219-9447."
+      path="/ar/about/"
+      type="website"
+      image="https://adventuretoursvernal.com/images/wilson-family.webp"
+      ogTitle="عن Adventure Tours Vernal | تعرّف على عائلة Wilson"
+      ogDescription="يشارك Dave and Trudy Wilson شغفهما بمنطقة Uintah Basin عبر جولات UTV مُرشَدة بمركبات Kawasaki KRX 1000 في Vernal بولاية يوتا. تقييم خمس نجوم. اتصل على (435) 219-9447."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="about" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.about', lang) }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: t('footer.quickLinks', lang),
+      links: [
+        { href: '/utv/', label: t('footer.link.ourTours', lang) },
+        { href: '/#vehicles', label: t('footer.link.ourFleet', lang) },
+        { href: '/#gallery', label: t('footer.link.photoGallery', lang) },
+        { href: '/ar/booking/', label: t('cta.bookNow', lang) },
+      ],
+    }}
+  />
+</BaseLayout>

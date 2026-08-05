@@ -195,6 +195,7 @@ deliverable each time. `preflight-ar.mjs` checks the right one per surface:
 | `.ar.mdx` spoke | `AR_SLUGS` entry as `hub/base-id` | the route never emits |
 | `.astro` page | `AR_SLUGS` entry as the **static route** (`''` for the homepage) | the page builds, but the switcher and hreflang stay silent and `localeHref()` keeps sending links to English |
 | `page-content` module | the `if (locale === 'ar') return AR;` dispatch line | **every** `ar` page reading the module renders the ENGLISH fallback while the source looks translated |
+| **any page carrying video** | an `i18n-gates/4m-media.json` `pages` entry | gate 4m's baseline is blind to a *new* route by design, so the build goes red until it is re-baselined deliberately. ⚠ `--emit-baseline` prints only the `pages` map — merge it, never overwrite the file (§5.3) |
 
 ---
 
@@ -251,19 +252,27 @@ frozen floors, run against a tree with every Arabic character inside `<main>` re
 `ar` pages that have one (1 457 386 characters): **2 lock violations, exit 1.** Both floors fail
 when the prose they protect is deleted. The unmodified tree is green in the same pair of runs.
 
-> ### ⚠ A STATIC PAGE CONTRIBUTES NO STRUCTURAL LOCK TEXT, AND THIS REVERSES §1.5's TREND
+> ### ⚠ A STATIC PAGE CONTRIBUTES LITTLE STRUCTURAL LOCK TEXT — ⚠⚠ AND THIS PARAGRAPH WAS OVER-GENERALISED, SEE §5.3
 >
 > Measured on these two pages: `أرض الديناصورات` appears **1** and **0** times — exactly what was
 > authored, and nothing else. A spoke carries **3** (1 authored + 2 structural). The difference is
 > that these pages render `Footer variant="compact"`, which omits the tagline, and no
 > RelatedArticles block at all. `survives` was **186 before and 186 after** adding two pages.
 >
-> So a Phase F page adds to `whole` and to `prose` and adds **nothing** to `ceilNP`. The rollout
-> brief's §1.5 headroom trend was fitted to spokes, each of which adds a fixed structural
-> contribution plus a Model B bound; **Phase F pages widen the enforcement margin instead of
-> narrowing it, for a structural reason rather than an editorial one.** Do not carry the §1.5
-> trend line into Phase F — it is describing a different kind of page. (Sixth instance of the
-> recorded-size lesson: a rate fitted to one population predicts nothing about another.)
+> The rollout brief's §1.5 headroom trend was fitted to spokes, each of which adds a fixed
+> structural contribution plus a Model B bound. **Phase F pages do not narrow the enforcement
+> margin the way spokes do.** Do not carry the §1.5 trend line into Phase F — it is describing a
+> different kind of page. (Sixth instance of the recorded-size lesson: a rate fitted to one
+> population predicts nothing about another.)
+>
+> > **⚠⚠ CORRECTED (batch 2). "A Phase F page adds NOTHING to `ceilNP`" was this paragraph's
+> > original conclusion, and it was wrong in the same way §1.5 was wrong.** It generalised from
+> > **one lock on one footer variant** to "a Phase F page". Two things were true and neither was
+> > what was written: `variant="compact"` omits the footer tagline, which is why
+> > `أرض الديناصورات` scored 0 — and `المسارات` was **never** 0, scoring **+2 per page** even in
+> > batch 1, which the paragraph did not mention because it was framed around the other lock.
+> > Batch 2's full-footer pages score 1–2 and 2–5. Seventh instance, and the first where the
+> > over-generalisation was mine rather than inherited. See §5.3 for the measured table.
 
 > ### The counterfactual that justifies `8d4b299`, measured
 >
@@ -288,6 +297,106 @@ unmarked read wrong; the pages are instructional and impersonal phrasing was alr
 register. M10 (plural/dual): one dual, `راكبين اثنين` for "2 riders", chosen over a numeral-plus-
 plural because Arabic marks the dual grammatically and "2 riders" is a fixed capacity, not a
 count. **No rule invented — this is what was done, once, in one place.**
+
+---
+
+## 5.3 Batch 2 — `about` + `booking` + `safety-guidelines`, CLOSED
+
+**62 of 77 ar routes · 682 site routes · 63 `ar` pages · gate 4n ZERO findings for the second
+Phase F batch running.** The first build was **RED at gate 4m**; the cause was a repository
+contract, not authoring, and no prose was edited to clear it.
+
+**Probe slot 1 changed the authoring in three places.** Four shapes measured, three reverse:
+
+| shape | visual | authored as |
+|---|---|---|
+| `7am` / `7pm` | `7am` / `7pm` ✔ | spelled out anyway — the *dashed range* joining them was never measured |
+| `SPF 30` | `SPF 30` ✔ | bare |
+| `100%` | **`%100`** ✘ | reworded |
+| `$1,000` | **`1,000$`** ✘ | `1,000 دولار` |
+| `18+` | **`+18`** ✘ | `18 عامًا فأكثر` (and `2+` → `سنتان فأكثر`) |
+
+> `18+` reports **REORDERED** where 7c's `2+` reported **RTL** — the *same layout event*, labelled
+> differently only because `18` has interior structure left to scramble. Third independent
+> confirmation of *read the `visual` line, never the label*, now from a magnitude rather than a
+> shape. `#1` in "our #1 priority" is the same leading-neutral class and was reworded unmeasured.
+
+### The first build was red — gate 4m, and it is a REPOSITORY CONTRACT finding
+
+`ar/about/index.html` carries 7 videos "but is not in the baseline". That is the gate working as
+its own header documents: the baseline signal is *"blind to a newly added route until someone
+re-baselines"*, and `--emit-baseline` prints rather than writes because *"rewriting the baseline
+in place would make 'the gate is failing' and 'the gate has been silenced' the same command."*
+
+**A translated route that carries video is a THIRD deliverable**, alongside the `AR_SLUGS` entry
+and the `getBodyHtml` dispatch line. Added to §5.1's table.
+
+⚠ **`--emit-baseline` prints ONLY the `pages` map — it is not the file.** The committed file also
+carries `$doc`, `state`, `divergent` and `refCounts`; writing the emitted output over it would
+silently delete the divergent-exceptions record and the design rationale. Merged by hand into
+`pages`, with the merge refusing to proceed unless the diff was **add-only** and the `ar` set was
+proven **equal to the English set** first (it is — so parity is what is true, and `divergent`
+stays a record of real exceptions rather than absorbing a new locale, exactly as batch 6a decided).
+
+Per §6.3 the gates hidden behind 4m were run individually against the same `dist/` **before** the
+merge, so "no regressions" is a measurement: 4k, 4n, 4f, 4h, 4i, 4g and 4q are **numerically
+identical** afterwards. Only 4m moved — 33 → 34 pages, 305 → **312** references, exactly the 7
+iframes.
+
+**Advisory attribution, all exact:**
+
+| number | batch 1 | batch 2 | attribution |
+|---|---:|---:|---|
+| routes | 679 | 682 | the three new pages |
+| 4n rtl pages | 60 | 63 | +3, **0 findings** |
+| 4o in-scope files | 94 | 97 | the three new `.astro` files |
+| 4f advisory | 68 | **70** | exactly 2, both on `/ar/about/`, both the §2.2 licensed class (a heading carrying `UTV`) |
+| 4g approved identities | 298 | **300** | exactly 2 — `Dave Wilson` and `Trudy Wilson`, `/ar/about/` being the first Arabic page to carry the guide profile links; both on the global approved list |
+| 4g review candidates | 618 | **621** | exactly 3 — two `about` inline link texts and the `safety` CTA. Proven by set-difference against all 60 pre-existing `ar` pages, not inferred |
+| 4s fragments | 2849 | **2858** | exactly 9 — `/#gallery` + `/#vehicles` on `about` and `safety` (4), plus **5 on `booking`** |
+| 4i advisory | 20 / 4 locks | 20 / 4 locks | **steady** — no `forbidden` rendering introduced |
+
+> **ADR-12 stopped being a no-op.** Batch 1's fragment surface was a bare `href="#"`. `booking`'s
+> default `Footer` emits **five** links into `/ar/utv/best-utv-trails-vernal/#1-docs-beach` … and
+> **all five resolve** — because batch 7a's rule held: the Arabic spoke kept its **English** anchor
+> ids. A static page linking into a spoke's anchors is the first Phase F case where the fragment
+> identity contract is load-bearing rather than vacuous.
+
+**Census.** GUARD 1 clean. GUARD 2: 2 increased, 51 steady, **0 decreased, 0 disappeared**.
+Floors re-frozen **498 → 502** and **528 → 538**; the increases (+4, +10) equal the three pages'
+own counts exactly — `about` 1+2, `booking` 2+3, `safety` 1+5. Criterion 5 proven by experiment:
+the real gate 4i against a prose-deleted tree fails **both** locks, exit 1, real tree green.
+
+### ⚠ The structural contribution depends on the FOOTER VARIANT and on WHICH LOCK
+
+| page | footer | `أرض الديناصورات` structural | `المسارات` structural |
+|---|---|---:|---:|
+| `atv-trails` / `jeep-trails` | `variant="compact"` | **0** | 2 |
+| `about` | full | 1 | 2 |
+| `booking` | full | 2 | 3 |
+| `safety-guidelines` | full | 1 | 5 |
+
+This is what corrects §5.2's paragraph. The compact footer omits the tagline, which is the whole
+of the `أرض الديناصورات` zero; `المسارات` was never zero. **When the population changes,
+revalidate the population model before extrapolating** — batch 1 established that across page
+*classes*, and batch 2 shows it applies within one class too, because "static page" was not the
+variable that mattered.
+
+All three batch-2 pages contribute **prose = 0** for both locks, so the enforcement margin is
+unchanged at 312 and 462. That is a measurement, not a target.
+
+### ⚠ WATCH ITEM, recorded and deliberately NOT fixed — `decompose()` assumes a `<main>`
+
+`about`, `booking` and `safety-guidelines` render **no `<main>` element**. `decompose()` sets
+`main = ''` when it finds none, so their entire body lands in `chrome` and they report
+`prose = 0` — which is why the prose-deletion experiment strips 59 of 63 `ar` pages, not 63.
+
+**No verdict is wrong today and nothing is being changed.** `survives = whole − prose` is
+*inflated* by that classification, and criterion 5 asks `survives < floor`, so the error is in the
+**conservative** direction; gate 4i counts total occurrences regardless, so the text is still
+protected by the floor. But the share of the `ar` corpus classified 100 % chrome grows with every
+such page, and `survives` grows with it. Margins today are 312 and 462 — nowhere near. **Measure
+it at every re-freeze; do not project it** (§1.5's own rule about its own trend).
 
 ---
 

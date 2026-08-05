@@ -25,12 +25,22 @@
     "Re-baselining rather than declaring the route divergent is the deliberate choice:",
     "the Arabic page is a translation of the same landing page, so parity is what is",
     "true, and `divergent` stays a record of real exceptions instead of absorbing a new",
-    "locale. Arabic is the ninth locale here and the first to reach this gate."
+    "locale. Arabic is the ninth locale here and the first to reach this gate.",
+    "2026-08-05, AR-2 Phase F batch 2: ar/about added, +1 page, the same seven ids its English sibling and all seven other locales carry. Emitted with --emit-baseline and diffed: exactly one key added, zero existing keys changed or removed, and the ar set proven equal to the en set before merging. Merged into `pages` by hand rather than overwriting the file, because --emit-baseline prints ONLY the pages map — writing it over this file would silently delete $doc, state, divergent and refCounts. A newly translated route that carries video is a THIRD deliverable alongside the AR_SLUGS entry and the getBodyHtml dispatch line; the gate is blind to a new route by design (see the header) and says so rather than passing."
   ],
   "state": "active",
   "divergent": [],
   "pages": {
     "about/index.html": [
+      "AanVVzP0_oM",
+      "LsqbwVkwrbw",
+      "PoCN4Lo9Lkk",
+      "fwzaXWfuFdk",
+      "m64J-ovzTf4",
+      "p05cObabbjg",
+      "tktE4GbS9gQ"
+    ],
+    "ar/about/index.html": [
       "AanVVzP0_oM",
       "LsqbwVkwrbw",
       "PoCN4Lo9Lkk",
@@ -372,6 +382,7 @@
   },
   "refCounts": {
     "about/index.html": 7,
+    "ar/about/index.html": 7,
     "ar/guides/moab-utv-tours/index.html": 1,
     "de/about/index.html": 7,
     "de/guides/moab-utv-tours/index.html": 1,

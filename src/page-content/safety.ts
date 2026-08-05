@@ -1939,9 +1939,257 @@ const ZH = `
 </div>
 `;
 
+// AR — AR-2 Phase F batch 2. Four numeric shapes in the English source were measured at
+// probe slot 1 BEFORE authoring, and three of them reverse, so each is authored around
+// rather than isolated: `18+` renders `+18`, `2+` renders `+2`, `$1,000` renders `1,000$`,
+// and `#1` is the same leading-neutral class. `SPF 30` measured LTR and is written bare.
+// The spelled forms below (`18 عامًا فأكثر`, `1,000 دولار`) put an Arabic word where the
+// direction change was, which is §3.3's remedy applied to a non-bracket shape.
+const AR = `
+<!-- كتلة ملخّص الصفحة -->
+<p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+  إرشادات السلامة من شركة Adventure Tours Vernal لجولات UTV المُرشَدة في Vernal بولاية يوتا. يجب أن يكون عمر السائق 18 عامًا فأكثر، وعمر الراكب سنتين فأكثر. حزام الأمان إلزامي. لا تسامح مطلقًا مع الكحول أو المخدرات. تُقدَّم إحاطة سلامة كاملة قبل كل جولة. للاستفسار اتصل على <bdi>(435) 219-9447</bdi>.
+</p>
+
+<section class="policy-section">
+  <div class="container">
+    <div class="section-header">
+      <h1 class="section-title">إرشادات السلامة</h1>
+      <p class="section-subtitle">سلامتك أولويتنا الأولى. يُرجى مراجعة هذه الإرشادات قبل مغامرتك.</p>
+    </div>
+
+    <div class="policy-container">
+
+      <!-- قبل جولتك -->
+      <div class="policy-card">
+        <div class="policy-icon">📋</div>
+        <h2 class="policy-heading">قبل جولتك</h2>
+        <div class="policy-list">
+          <h3>الوصول وتسجيل الحضور:</h3>
+          <ul>
+            <li>احضر <strong>قبل 30 دقيقة</strong> من الموعد للتعريف بالجولة وإحاطة السلامة</li>
+            <li>أحضر رخصة قيادة سارية (مطلوبة من كل سائق)</li>
+            <li>أكمل جميع الإقرارات والاتفاقيات المطلوبة</li>
+            <li>احضر جلسة التعريف بالسلامة الإلزامية</li>
+          </ul>
+          <h3>الصحة والمتطلبات البدنية:</h3>
+          <ul>
+            <li>يجب أن يتمتّع جميع المشاركين بصحة بدنية جيدة</li>
+            <li>أبلغ مرشدك بأي حالات طبية أو إصابات أو مخاوف</li>
+            <li>ينبغي للحوامل استشارة الطبيب قبل المشاركة</li>
+            <li>إن كنت تعاني من مشكلات في الظهر أو الرقبة أو القلب، فأبلغنا مسبقًا</li>
+          </ul>
+          <h3>سياسة الكحول والمواد المخدّرة:</h3>
+          <ul>
+            <li><strong>لا تسامح مطلقًا</strong> مع الكحول أو المخدرات</li>
+            <li>لن يُسمح لك بالقيادة إذا كنت تحت تأثيرها</li>
+            <li>لا تُردّ أي مبالغ في حالات المخالفة</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- متطلبات العمر -->
+      <div class="policy-card">
+        <div class="policy-icon">👥</div>
+        <h2 class="policy-heading">متطلبات العمر</h2>
+        <div class="policy-table">
+          <div class="policy-row">
+            <div class="policy-timeframe">للقيادة</div>
+            <div class="policy-refund refund-full">18 عامًا فأكثر</div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-timeframe">للركوب كمرافق</div>
+            <div class="policy-refund refund-full">سنتان فأكثر</div>
+          </div>
+        </div>
+        <div class="policy-note">
+          <strong>مهم:</strong> يجب على كل سائق إبراز رخصة قيادة سارية. وعلى الوالدين أو الأوصياء توقيع الإقرارات نيابة عن القاصرين.
+        </div>
+      </div>
+
+      <!-- تشغيل المركبة -->
+      <div class="policy-card">
+        <div class="policy-icon">🚙</div>
+        <h2 class="policy-heading">تشغيل المركبة والسلامة</h2>
+        <div class="policy-list">
+          <h3>قيادة المركبة:</h3>
+          <ul>
+            <li>اربط حزام الأمان دائمًا - دون استثناء</li>
+            <li>أبقِ يديك وذراعيك داخل المركبة في كل الأوقات</li>
+            <li>لا تقف أبدًا أثناء حركة المركبة</li>
+            <li>اتّبع تعليمات مرشدك في كل الأوقات</li>
+            <li>حافظ على مسافة آمنة عن المركبات الأخرى</li>
+            <li>استخدم أجهزة اللاسلكي للتواصل مع مرشدك</li>
+          </ul>
+          <h3>معدات السلامة (إلزامية):</h3>
+          <ul>
+            <li>يجب أن يربط جميع الركاب أحزمة الأمان</li>
+            <li>الخوذ (تُقدَّم عند الطلب)</li>
+            <li>يُنصح بنظارات السلامة أو النظارات الشمسية</li>
+          </ul>
+          <h3>الممارسات الممنوعة:</h3>
+          <ul>
+            <li>السباق أو تجاوز السرعة</li>
+            <li>القيادة المتهوّرة أو الحركات الاستعراضية</li>
+            <li>مغادرة المسار المحدّد</li>
+            <li>قيادة المركبة تحت تأثير الكحول أو المخدرات</li>
+            <li>تجاهل تعليمات المرشد</li>
+          </ul>
+        </div>
+        <div class="policy-warning">
+          <strong>⚠️ تحذير:</strong> قد يؤدي عدم الالتزام بقواعد السلامة إلى إنهاء جولتك فورًا دون ردّ أي مبلغ. كما يُبطل السلوك المتهوّر جميع أشكال التأمين وإقرارات الأضرار.
+        </div>
+      </div>
+
+      <!-- التضاريس وسلامة المسارات -->
+      <div class="policy-card">
+        <div class="policy-icon">⛰️</div>
+        <h2 class="policy-heading">التضاريس وسلامة المسارات</h2>
+        <div class="policy-list">
+          <h3>أحوال المسارات:</h3>
+          <ul>
+            <li>قد تتضمّن المسارات صخورًا ومنحدرات حادة ومعابر مائية وتضاريس وعرة</li>
+            <li>قد يتغيّر الطقس سريعًا - كن مستعدًا</li>
+            <li>الغبار والأتربة أمر معتاد - أحضر واقيًا للعينين</li>
+            <li>قد تكون تغطية الهاتف محدودة في المناطق النائية</li>
+          </ul>
+          <h3>التزم المسار:</h3>
+          <ul>
+            <li>لا تغادر المسارات المحدّدة أبدًا</li>
+            <li>احترم الملكيات الخاصة واللافتات الإرشادية</li>
+            <li>اتّبع مبادئ Leave No Trace للحفاظ على الطبيعة</li>
+            <li>لا تُزعج الحياة البرّية أو النباتات</li>
+          </ul>
+          <h3>حالات الطوارئ:</h3>
+          <ul>
+            <li>أبلغ مرشدك فورًا إذا شعرت بعدم الأمان</li>
+            <li>استخدم جهاز اللاسلكي للتواصل</li>
+            <li>حقائب الإسعافات الأولية متوفّرة في كل جولة</li>
+            <li>مرشدك مدرَّب على الإسعافات الأولية في البرّية</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- الطقس والسلامة البيئية -->
+      <div class="policy-card">
+        <div class="policy-icon">🌦️</div>
+        <h2 class="policy-heading">الطقس والسلامة البيئية</h2>
+        <div class="policy-list">
+          <h3>الاستعداد للطقس:</h3>
+          <ul>
+            <li>نعمل في معظم الأحوال الجوية</li>
+            <li>قد تُلغى الجولات أو يُعاد جدولتها في الأحوال الجوية القاسية</li>
+            <li>قد تتفاوت درجات الحرارة كثيرًا - ارتدِ طبقات متعدّدة</li>
+            <li>أحضر ملابس واقية من المطر إذا بدا الطقس غير مستقر</li>
+          </ul>
+          <h3>الوقاية من الشمس:</h3>
+          <ul>
+            <li>شمس يوتا قوية - استخدم واقي شمس بمعامل SPF 30 أو أعلى</li>
+            <li>أحضر نظارة شمسية بحماية من الأشعة فوق البنفسجية</li>
+            <li>ارتدِ قبعة أو غطاء رأس</li>
+            <li>حافظ على ترطيب جسمك - الماء متوفّر</li>
+          </ul>
+          <h3>السلامة مع الحياة البرّية:</h3>
+          <ul>
+            <li>لا تقترب من الحيوانات البرّية ولا تُطعمها</li>
+            <li>حافظ على مسافة آمنة من جميع الحيوانات</li>
+            <li>انتبه للأفاعي، خصوصًا في الأشهر الدافئة</li>
+            <li>أبلغ مرشدك بأي مشاهدات للحياة البرّية</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- التواصل وسلامة المجموعة -->
+      <div class="policy-card">
+        <div class="policy-icon">📡</div>
+        <h2 class="policy-heading">التواصل وسلامة المجموعة</h2>
+        <div class="policy-list">
+          <h3>البقاء على اتصال:</h3>
+          <ul>
+            <li>تُقدَّم أجهزة لاسلكي لكل مركبة</li>
+            <li>أبقِ جهاز اللاسلكي مفتوحًا في كل الأوقات</li>
+            <li>أبلغ المرشد فورًا إذا احتجت إلى التوقف</li>
+            <li>لا تغادر المجموعة أبدًا دون إبلاغ مرشدك</li>
+          </ul>
+          <h3>إذا واجهت مشكلات:</h3>
+          <ul>
+            <li>توقّف بأمان واستخدم جهاز اللاسلكي</li>
+            <li>لا تحاول إصلاح الأعطال الميكانيكية بنفسك</li>
+            <li>انتظر مساعدة المرشد</li>
+            <li>لا تُكمل أبدًا إذا بدت المركبة غير آمنة</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- الأضرار والمسؤولية -->
+      <div class="policy-card">
+        <div class="policy-icon">🛡️</div>
+        <h2 class="policy-heading">الأضرار والمسؤولية</h2>
+        <div class="policy-list">
+          <h3>إقرار أضرار المركبة:</h3>
+          <ul>
+            <li>مطلوب في جميع الجولات</li>
+            <li>يحدّ من مسؤوليتك في حدود مبلغ التحمّل</li>
+            <li>يُبطل إذا نتج الضرر عن قيادة متهوّرة</li>
+            <li>يُبطل إذا كان الكحول أو المخدرات طرفًا في الحادث</li>
+          </ul>
+          <h3>إجراءات الحوادث:</h3>
+          <ul>
+            <li>توقّف فورًا وقيّم الإصابات</li>
+            <li>تواصل مع المرشد عبر جهاز اللاسلكي</li>
+            <li>لا تُحرّك المصابين إلا عند وجود خطر مباشر</li>
+            <li>وثّق الحادث بالصور إن أمكن</li>
+          </ul>
+        </div>
+        <div class="deductible-info">
+          <h3>معلومات مهمة عن التأمين:</h3>
+          <p>أنت مشمول بتأمين المسؤولية لدينا بمبلغ تحمّل قدره <strong>1,000 دولار عن كل حادث</strong>. وينطبق ذلك بصرف النظر عن المتسبّب. ويمكن لإقرار أضرار المركبة أن يساعد في الحدّ من نفقاتك المباشرة عن أضرار المركبة.</p>
+        </div>
+      </div>
+
+      <!-- مسؤولياتك -->
+      <div class="policy-card">
+        <div class="policy-icon">✅</div>
+        <h2 class="policy-heading">مسؤولياتك</h2>
+        <div class="policy-list">
+          <h3>بصفتك مشاركًا، فإنك توافق على:</h3>
+          <ul>
+            <li>اتّباع جميع تعليمات المرشد</li>
+            <li>قيادة المركبة بأمان ومسؤولية</li>
+            <li>احترام بقية السائقين والبيئة</li>
+            <li>الإبلاغ عن أي مخاوف فورًا</li>
+            <li>تعبئة جميع المستندات المطلوبة بصدق</li>
+            <li>تحمّل المسؤولية الشخصية عن سلامتك</li>
+          </ul>
+        </div>
+        <div class="policy-warning">
+          <strong>تذكّر:</strong> تنطوي قيادة ATV وUTV على مخاطر متأصّلة. ومع أننا نتّخذ كل احتياط لضمان سلامتك، فإنك تشارك على مسؤوليتك الخاصة. يُرجى قراءة جميع الإقرارات وفهمها قبل التوقيع.
+        </div>
+      </div>
+
+      <!-- دعوة للتواصل -->
+      <div class="policy-cta">
+        <h3>أسئلة عن السلامة؟</h3>
+        <p>إذا كانت لديك أي مخاوف أو أسئلة تتعلّق بالسلامة قبل جولتك، فتواصل معنا. نحن هنا لنضمن لك مغامرة آمنة ورائعة!</p>
+        <div class="cta-buttons">
+          <a href="tel:435-219-9447" class="cta-button primary">📞 اتصل على <bdi>(435) 219-9447</bdi></a>
+          <a href="/ar/booking/" class="cta-button secondary">احجز مغامرتك الآمنة</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- شريط الحجز الثابت للجوال -->
+<div class="mobile-sticky-cta">
+  <button onclick="location.href='/ar/booking/'">احجز جولتك الآن</button>
+</div>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3A, Italian P6,
- * French P8-P6, German P9, Japanese P10K).
+ * French P8-P6, German P9, Japanese P10K, Arabic AR-2 Phase F batch 2).
  * Every locale without a committed variant falls back to English. Callers
  * that don't need locale awareness keep importing `bodyHtml` directly.
  */
@@ -1953,5 +2201,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'de') return DE;
   if (locale === 'zh') return ZH;
   if (locale === 'ja') return JA;
+  if (locale === 'ar') return AR;
   return bodyHtml;
 }

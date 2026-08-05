@@ -1685,10 +1685,228 @@ const ZH = `
 </script>
 `;
 
+// AR — AR-2 Phase F batch 2. The Cal.com embed script, the `cal-booking-inline` element id,
+// every style attribute and both `${SITE.rating.*}` interpolations are preserved verbatim:
+// they are functional, not linguistic, exactly as the file header says of the other locales.
+//
+// Opening hours are SPELLED OUT rather than carried over as `7am – 7pm`. Probe slot 1
+// measured `7am` and `7pm` safe bare, but the dashed range joining them was not measured,
+// and §3.6's standing guidance is that the corpus spells measures out. Writing
+// `من 7 صباحًا حتى 7 مساءً` reads better in Arabic and removes the question entirely.
+const AR = `
+
+  <!-- الصفحة -->
+  <div class="booking-page">
+
+    <!-- الترويسة -->
+    <div class="page-header">
+      <h1 class="page-title">احجز مغامرتك</h1>
+      <p class="page-subtitle">تستخدم جميع الجولات مركبات Kawasaki KRX 1000 بمقعدين مع مرشدين محليين خبراء — اختر مسارك عند الحجز!</p>
+      <div style="text-align:center;margin-top:12px;"><span style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border:1px solid rgba(212,118,78,0.35);border-radius:999px;background:rgba(212,118,78,0.08);font-size:0.95rem;color:#4a4139;"><span aria-hidden="true" style="color:#e6a817;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count} تقييمًا على Google</span></span></div>
+      <div class="calendar-badge">
+        📅 تقويم مباشر &bull; حجز فوري &bull; اطّلع على الأوقات المتاحة
+      </div>
+
+      <!-- CAL.COM INLINE EMBED -->
+<div id="cal-booking-inline" style="width:100%; min-height:700px; margin-top:30px; border-radius:12px; overflow:hidden;"></div>
+    </div>
+
+    <!-- قسم المسارات -->
+    <section class="tours-section">
+      <div class="section-intro">
+        <h2>5 مسارات لاستكشافها</h2>
+        <p>تصفّح مساراتنا أدناه، ثم اضغط <strong>"احجز مغامرتك"</strong> لاختيار التاريخ والوقت والمسار — في مكان واحد.</p>
+      </div>
+
+      <p style="max-width:820px;margin:1rem auto 0;padding:0 1rem;text-align:center;line-height:1.7;">أيًّا كان المسار الذي تختاره أدناه، تنطلق كل جولة مُرشَدة من نقطة التجمّع نفسها في Vernal. ويوضّح هذا الرسم أنظمة المسارات الخمسة التي يمكنك الاختيار منها عند الحجز.</p>
+
+      <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+        <img src="/images/maps/vernal-utv-trail-systems.svg" alt="رسم تخطيطي للحجز يوضّح أنظمة مسارات UTV الخمسة التي يمكن للضيوف الاختيار منها قرب Vernal في يوتا — مسار Doc's Beach ومسار Moonshine Arch ومسار Ashley Gorge ومسار Asphalt Ridge ومسار Outlaw Trail — ويظهر كل منها فرعًا معنونًا يتفرّع من نقطة تجمّع الجولات الوحيدة في Vernal حيث تبدأ كل جولة. الرسم ليس بمقياس رسم، ولا يعرض طرقًا ولا مسافات ولا اتجاهات ولا مداخل مسارات." width="1600" height="1200" loading="lazy" decoding="async" />
+        <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">اختر أيًّا من أنظمة المسارات الخمسة عند الحجز — تنطلق كل الجولات من نقطة تجمّع واحدة في Vernal. رسم تخطيطي فقط، وليس بمقياس رسم.</figcaption>
+      </figure>
+
+      <div class="tours-grid">
+
+        <!-- Doc's Beach -->
+        <div class="tour-card">
+          <div class="tour-image" style="background-image: url('/images/Docs Beach.webp');">
+            <span class="difficulty-badge trail-badge">Doc's Beach</span>
+          </div>
+          <div class="tour-content">
+            <h3 class="tour-title">Doc's Beach</h3>
+            <p class="tour-description">انطلق نزولًا إلى واحدة من أحبّ وجهات Vernal على ضفاف النهر. المجاري الرملية الصحراوية والتضاريس المفتوحة والإطلالات الخلابة على ممر Green River تجعل منه مفضّلًا لكل المستويات.</p>
+            <div class="tour-details">
+              <div class="tour-detail">
+                <span class="tour-detail-icon">📍</span>
+                <span>منطقة Green River</span>
+              </div>
+              <div class="tour-detail">
+                <span class="tour-detail-icon">⭐</span>
+                <span>كل المستويات</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Moonshine Arch -->
+        <div class="tour-card">
+          <div class="tour-image" style="background-image: url('/images/Moonshine Arch.webp');">
+            <span class="difficulty-badge trail-badge">Moonshine Arch</span>
+          </div>
+          <div class="tour-content">
+            <h3 class="tour-title">Moonshine Arch</h3>
+            <p class="tour-description">تلوَّ في أخاديد الصخر الأحمر الوعرة وصولًا إلى قوس رملي طبيعي مذهل مخبّأ في عمق المناطق النائية. وجهة بديعة لا تُنسى تنافس أشهر منتزهات يوتا — دون زحام.</p>
+            <div class="tour-details">
+              <div class="tour-detail">
+                <span class="tour-detail-icon">📍</span>
+                <span>أخدود الصخر الأحمر</span>
+              </div>
+              <div class="tour-detail">
+                <span class="tour-detail-icon">⭐</span>
+                <span>بديع وتاريخي</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ashley Gorge -->
+        <div class="tour-card">
+          <div class="tour-image" style="background-image: url('/images/50a.webp');">
+            <span class="difficulty-badge trail-badge">Ashley Gorge</span>
+          </div>
+          <div class="tour-content">
+            <h3 class="tour-title">Ashley Gorge</h3>
+            <p class="tour-description">انحدر إلى ممر أخدود Ashley Gorge المهيب حيث تؤطّر الجدران الرملية الشاهقة واديًا نهريًا متعرّجًا. وهي من أكثر الجولات إبهارًا للنظر في منطقة Uintah Basin كلها.</p>
+            <div class="tour-details">
+              <div class="tour-detail">
+                <span class="tour-detail-icon">📍</span>
+                <span>غابة Ashley National Forest</span>
+              </div>
+              <div class="tour-detail">
+                <span class="tour-detail-icon">⭐</span>
+                <span>مغامرة أخاديد</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Outlaw Trail -->
+        <div class="tour-card">
+          <div class="tour-image" style="background-image: url('/images/51a.webp');">
+            <span class="difficulty-badge trail-badge">Outlaw Trail</span>
+          </div>
+          <div class="tour-content">
+            <h3 class="tour-title">Outlaw Trail</h3>
+            <p class="tour-description">اسلك الطريق الذي استخدمته يومًا عصابة Butch Cassidy and the Wild Bunch. يشقّ هذا المسار التاريخي في المناطق النائية بلاد الأخاديد وهضاب الصحراء المرتفعة المفتوحة حيث كان الخارجون على القانون يختفون في البرّية.</p>
+            <div class="tour-details">
+              <div class="tour-detail">
+                <span class="tour-detail-icon">📍</span>
+                <span>بلاد الأخاديد</span>
+              </div>
+              <div class="tour-detail">
+                <span class="tour-detail-icon">⭐</span>
+                <span>طريق تاريخي</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Asphalt Ridge -->
+        <div class="tour-card">
+          <div class="tour-image" style="background-image: url('/images/52a.webp');">
+            <span class="difficulty-badge trail-badge">Asphalt Ridge</span>
+          </div>
+          <div class="tour-content">
+            <h3 class="tour-title">Asphalt Ridge</h3>
+            <p class="tour-description">اصعد إلى قمة Asphalt Ridge لتحظى بإطلالات شاملة بزاوية 360 درجة على أرض الديناصورات وجبال Uintah والصحراء المرتفعة الشاسعة في الأسفل. إنها تجربة UTV المثلى على قمم الحواف قرب Vernal.</p>
+            <div class="tour-details">
+              <div class="tour-detail">
+                <span class="tour-detail-icon">📍</span>
+                <span>حافة Uintah Basin</span>
+              </div>
+              <div class="tour-detail">
+                <span class="tour-detail-icon">⭐</span>
+                <span>إطلالات بانورامية</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    <div style="text-align:center; margin-top:50px; padding:20px 0;">
+      <p style="font-size:1.05rem; color:#666; font-family:var(--font-body);">استخدم التقويم أعلاه لاختيار التاريخ والمسار.</p>
+    </div>
+
+    </section>
+
+    <!-- قسم المساعدة -->
+    <section class="help-section">
+      <h3>تحتاج مساعدة في الحجز؟</h3>
+      <p>اتصل بنا وسنساعدك شخصيًا على اختيار المسار الأنسب وإيجاد وقت يناسبك.</p>
+      <a href="tel:435-219-9447" class="phone-cta"><bdi>(435) 219-9447</bdi></a>
+      <p class="hours">نفتح يوميًا &bull; من 7 صباحًا حتى 7 مساءً بالتوقيت الجبلي</p>
+    </section>
+
+  </div>
+
+  <!-- شريط الحجز الثابت للجوال -->
+  <div class="mobile-sticky-cta">
+    <button onclick="window.open('https://cal.com/adventuretoursvernal/trails', '_blank')">احجز جولتك الآن</button>
+  </div>
+
+  <!-- Cal.com Inline Embed Script -->
+<script is:inline type="text/javascript">
+  (function (C, A, L) {
+    let p = function (a, ar) { a.q.push(ar); };
+    let d = C.document;
+    C.Cal = C.Cal || function () {
+      let cal = C.Cal; let ar = arguments;
+      if (!cal.loaded) {
+        cal.ns = {}; cal.q = cal.q || [];
+        d.head.appendChild(d.createElement("script")).src = A;
+        cal.loaded = true;
+      }
+      if (ar[0] === L) {
+        const api = function () { p(api, arguments); };
+        const namespace = ar[1];
+        api.q = api.q || [];
+        if (typeof namespace === "string") {
+          cal.ns[namespace] = cal.ns[namespace] || api;
+          p(cal.ns[namespace], ar);
+          p(cal, [L, namespace, ar[2]]);
+        } else p(cal, ar);
+        return;
+      }
+      p(cal, ar);
+    };
+  })(window, "https://app.cal.com/embed/embed.js", "init");
+
+  Cal("init", { origin: "https://cal.com" });
+
+  Cal("inline", {
+  elementOrSelector: "#cal-booking-inline",
+  calLink: "adventuretoursvernal/trails",
+  layout: "month_view",
+  config: {
+    duration: 180,
+    overlayCalendar: true
+  }
+});
+
+  Cal("ui", {
+    theme: "light",
+    styles: { branding: { brandColor: "#d4764e" } },
+    hideEventTypeDetails: false,
+    layout: "month_view"
+  });
+</script>
+`;
+
 /**
- * Locale-aware accessor (P2D pattern; Spanish populated P3A). Every
- * locale without a committed variant falls back to English. Callers that
- * don't need locale awareness keep importing `bodyHtml` directly.
+ * Locale-aware accessor (P2D pattern; Spanish populated P3A, Arabic AR-2 Phase F
+ * batch 2). Every locale without a committed variant falls back to English. Callers
+ * that don't need locale awareness keep importing `bodyHtml` directly.
  */
 export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'es') return ES;
@@ -1698,5 +1916,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'de') return DE;
   if (locale === 'zh') return ZH;
   if (locale === 'ja') return JA;
+  if (locale === 'ar') return AR;
   return bodyHtml;
 }

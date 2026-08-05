@@ -136,6 +136,19 @@ const reader = (needles) => `
   // 360 is a bare magnitude next to an Arabic unit word — expected safe, measured anyway,
   // because "expected safe" is what shipped the reversed range in batch 5.
   const F1_NEEDLES = ['4x4', '2.5', 'FOX 2.5', '360'];
+  // AR-2 Phase F batch 2 (about / booking / safety-guidelines). Four shapes the corpus
+  // cannot yet contain, chosen from the English blocks' own numeric inventory:
+  //   7am 7pm  a digit with a TRAILING letter suffix. F1 established the discriminator is
+  //            where the meaning-bearing character sits; here it trails, which is the side
+  //            7c measured reversing (2+ -> +2). Genuinely undecided, so measured.
+  //   100%     a digit with a trailing PERCENT sign. % is ET, not Bidi_Mirrored, so no gate
+  //            can see it — the same blind spot the bare price occupied.
+  //   SPF 30   a Latin abbreviation LEADING a digit, the mirror of KRX 1000's trailing one.
+  //   $1,000   comma-grouped currency. 1,500 measured LTR bare in 7c and $349 measured
+  //            REVERSED bare, so the combination is not predictable from either.
+  // 18+ and 2+ are re-measured rather than assumed: 7c measured 2+ on a different page,
+  // and a control that is not re-run is an assumption wearing a measurement's clothes.
+  const F2_NEEDLES = ['7am', '7pm', '100%', 'SPF 30', '$1,000', '18+'];
 
   // Not rendered text. Walking these cost 35% of every run and produced nothing but
   // exclusions — CSS rgba literals and the JSON-LD copy of prose measured elsewhere.
@@ -344,6 +357,15 @@ const reader = (needles) => `
     '<p id="f1-decimal">يبلغ ارتفاع المعلّق نحو 2.5 بوصة.</p>' +
     '<p id="f1-decimal-latin">تعمل المركبة بمعلّقات FOX 2.5 PODIUM المتطورة.</p>' +
     '<p id="f1-magnitude">تكشف القمة إطلالة بزاوية 360 درجة على الحوض.</p>' +
+    // AR-2 Phase F batch 2 synthetic controls — see F2_NEEDLES above.
+    '<p id="f2-time">تعمل خدمة الحجز من 7am حتى 7pm يوميًا.</p>' +
+    '<p id="f2-time-spelled">تعمل خدمة الحجز من 7 صباحًا حتى 7 مساءً يوميًا.</p>' +
+    '<p id="f2-pct">يُستردّ 100% من المبلغ عند الإلغاء المبكر.</p>' +
+    '<p id="f2-pct-spelled">يُستردّ المبلغ كاملًا عند الإلغاء المبكر.</p>' +
+    '<p id="f2-spf">استخدم واقي شمس بمعامل SPF 30 أو أعلى.</p>' +
+    '<p id="f2-money">تبلغ قيمة التأمين $1,000 لكل مركبة.</p>' +
+    '<p id="f2-money-spelled">تبلغ قيمة التأمين 1,000 دولار لكل مركبة.</p>' +
+    '<p id="f2-agefloor">تشترط الجولة أن يكون السائق 18+ عامًا.</p>' +
     // POSITIVE CONTROL FOR THE UNREACHABLE CHECK. Full width, zero height, prose inside —
     // the shape of the FAQ regression, minus the FAQ. If this does not come back
     // kind="unreachable" the check has stopped firing, and a clean run above means nothing.
@@ -367,6 +389,10 @@ const reader = (needles) => `
   }
   for (const id of ['f1-4x4', 'f1-4x4-bdi', 'f1-decimal', 'f1-decimal-latin', 'f1-magnitude']) {
     for (const r of scan(document.getElementById(id), id, F1_NEEDLES)) synthetic.push(r);
+  }
+  for (const id of ['f2-time', 'f2-time-spelled', 'f2-pct', 'f2-pct-spelled', 'f2-spf',
+                    'f2-money', 'f2-money-spelled', 'f2-agefloor']) {
+    for (const r of scan(document.getElementById(id), id, F2_NEEDLES)) synthetic.push(r);
   }
   host.remove();
 
