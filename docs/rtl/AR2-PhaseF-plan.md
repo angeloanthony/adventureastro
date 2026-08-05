@@ -42,9 +42,26 @@ one new surface at a time:
 | shape | pages | where the Arabic prose lives | `<bdi>` available? |
 |---|---:|---|---|
 | **A** | 12 | a `const AR = \`…\`` literal in `src/page-content/*.ts` | yes — it is HTML |
-| **B** | 5 | inline in the `.astro` template (`hiking`, `fishing`, `camping`, `scenic-drives`, `itineraries`) | yes |
-| **C** | 1 | almost none — `guides` is `HubIndex`-driven | n/a |
+| **B** | 7 | inline in the `.astro` template | yes |
+| **D** | 1 | `from/salt-lake-city` — `CityLayout` + a `cities` **content-collection entry**, `{city.*}` interpolations, `FaqAccordion` | yes, but FAQ answers route through `bidi-runs.ts` (B-15) |
 | **homepage** | 1 | shape A **plus** the gallery — see §4 | yes |
+
+> **⚠⚠ CORRECTED (batch 3) — THIS TABLE WAS WRITTEN BY HAND AND WAS WRONG TWICE.** It was
+> re-derived mechanically from the English sources before batch 3 authored anything, and two
+> entries did not survive:
+>
+> 1. **`from/salt-lake-city` is NOT shape A.** It has no page-content module at all. It reads a
+>    `cities` collection entry through `getEntry` and renders through `CityLayout` +
+>    `GatewayRoutes` + `FaqAccordion`. That is a **fourth surface**, and it was scheduled into a
+>    shape-A batch purely because the hand-written table said so.
+> 2. **`guides` is shape B, not a shape C.** It carries **2 531 characters** of inline prose;
+>    "HubIndex-driven, almost none" was an assumption. **There is no shape C** — `guides` is
+>    simply the smallest shape B.
+>
+> This is [[inventory-vs-classification]] applied to the plan itself: the *inventory* of 19 routes
+> was right from the start and the *classification* was not, and only the classification decides
+> the work. **Re-derive the surface from source before every batch; do not read it off this
+> table.** The audit is four lines of `grep` over `src/pages/**` — cheaper than one mixed batch.
 
 There is no frontmatter anywhere in Phase F. There is no `title`/`description` schema budget,
 no RelatedArticles card, and therefore no per-card lock ceiling and no Assertion C. Those checks
@@ -56,12 +73,23 @@ which checks that surface does not carry.
 1. **Batch 1 — shape A calibration:** `atv-trails-vernal-utah` + `jeep-trails-vernal-utah`.
    The two smallest modules, near-identical to each other, no gallery, no `HubIndex`, no
    homepage coupling. First contact with the `.ts` surface at minimum blast radius.
-2. **Batch 2+ — shape A, the site pages:** `about`, `booking`, `faq`, `privacy-policy`,
-   `safety-guidelines`, `from/salt-lake-city`, `best-restaurants-vernal-utah`, `utv`,
-   `dinosaur-national-monument`, `things-to-do`.
-3. **Shape B — the five inline hub pillars.**
-4. **Shape C — `guides`.**
-5. **The homepage, last.**
+2. **Batch 2 — shape A, site pages:** `about`, `booking`, `safety-guidelines`.
+3. **Batch 3 — shape A, site pages:** `faq`, `privacy-policy`.
+4. **Shape A, the hub indexes:** `utv`, `dinosaur-national-monument`, `things-to-do`, and the
+   standalone `things-to-do/best-restaurants-vernal-utah`.
+5. **Shape B — the inline `.astro` pillars:** `hiking`, `fishing`, `camping`, `scenic-drives`,
+   `itineraries`, `guides`.
+6. **Shape D — `from/salt-lake-city`,** its own first-contact batch. It is one page, but it is
+   the only page on its surface, and a surface met for the first time inside a batch of another
+   surface is a batch with no attribution.
+7. **The homepage, last.**
+
+⚠ **The route count in this document was wrong by one in batches 1 and 2** — recorded as 59/77
+and 62/77, corrected to **60/77** and **63/77**. The running total was computed as "57 spokes +
+the statics this phase has added" and silently omitted `cancellation-policy`, the AR-1 pilot,
+which was already a registered static route. **14 routes remain, not 15.** The check that catches
+it is arithmetic on `AR_SLUGS` itself rather than on a running tally — the registry is the fact,
+a tally is a memory of it.
 
 The ordering is not a preference. The homepage combines three first-contact variables at once —
 the largest module (27 304 chars), the escaped-backtick extraction hazard (34 of them, and
@@ -201,7 +229,7 @@ deliverable each time. `preflight-ar.mjs` checks the right one per surface:
 
 ## 5.2 Batch 1 — `atv-trails-vernal-utah` + `jeep-trails-vernal-utah`, CLOSED
 
-**59 of 77 ar routes · 679 site routes · 60 `ar` pages · whole suite green on the first build.**
+**60 of 77 ar routes · 679 site routes · 60 `ar` pages · whole suite green on the first build.**
 **Gate 4n returned ZERO findings on first contact** — the first Phase F batch, on a surface the
 project had never authored Arabic into.
 
@@ -302,7 +330,7 @@ count. **No rule invented — this is what was done, once, in one place.**
 
 ## 5.3 Batch 2 — `about` + `booking` + `safety-guidelines`, CLOSED
 
-**62 of 77 ar routes · 682 site routes · 63 `ar` pages · gate 4n ZERO findings for the second
+**63 of 77 ar routes · 682 site routes · 63 `ar` pages · gate 4n ZERO findings for the second
 Phase F batch running.** The first build was **RED at gate 4m**; the cause was a repository
 contract, not authoring, and no prose was edited to clear it.
 
