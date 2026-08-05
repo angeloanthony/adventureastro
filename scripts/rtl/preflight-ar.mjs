@@ -133,9 +133,42 @@ function arModuleBlock(src) {
   const start = open.index + open[0].length;
   for (let i = start; i < src.length; i++) {
     if (src[i] === '\\') { i++; continue; }
-    if (src[i] === '`') return src.slice(start, i);
+    if (src[i] === '`') return notRendered(src.slice(start, i));
   }
   return false;
+}
+
+/**
+ * Source that is not rendered text, removed before any flank scan.
+ *
+ * ⚠ ADDED IN PHASE F BATCH 2, AND THE ASYMMETRY WAS MINE. Batch 1 gave the `.astro` surface
+ * a `<script>`/`<style>` exclusion (on `rendered-text.mjs:109-112`'s authority — every gate
+ * strips both before it sees a page) and did not give the MODULE surface the same one. A
+ * page-content module can carry a script just as an `.astro` template can, and `booking.ts`
+ * does: the Cal.com embed. On first contact it produced **10 findings inside JavaScript**
+ * (`ar[0]`, `p(cal, [L, …])`) plus 2 on `${…}` interpolation delimiters — 12 findings, all
+ * false, none fixable, in a file whose prose was clean.
+ *
+ * That is the NOISY-NEGATIVE failure this script's own header describes, reproduced by the
+ * commit that described it. The cost is not the noise; it is that an author who triages 12
+ * false findings has been trained to triage the thirteenth.
+ *
+ * Two exclusions, both the same principle already applied to tags, attributes and markdown
+ * link delimiters — *source syntax that is not a rendered text node is not a direction
+ * change*:
+ *   1. `<script>` / `<style>` — stripped by every gate's extractor before it sees a page.
+ *   2. `${…}` — a template-literal interpolation. The VALUE it produces is rendered, but the
+ *      `${` and `}` never are, and the value is not knowable from source. That limit is
+ *      correct rather than regrettable: this script reads source and can only catch what is
+ *      decidable in source (file header), while gate 4n reads `dist/` and sees the real
+ *      value. Leaving the delimiters in does not measure the value — it measures punctuation
+ *      that no reader will ever see.
+ */
+function notRendered(text) {
+  return text
+    .replace(/<script[\s\S]*?<\/script>/gi, '\n')
+    .replace(/<style[\s\S]*?<\/style>/gi, '\n')
+    .replace(/\$\{[\s\S]*?\}/g, '\n');
 }
 
 /**
@@ -149,11 +182,12 @@ function arModuleBlock(src) {
  * there"), which is why the existing attribute exclusion below is already aligned with
  * it. Scanning the fence would report every `(` in an import path or a schema literal.
  */
+// ⚠ Both surfaces go through `notRendered` — the SAME function, not two copies of the same
+// intent. Batch 2 is the record of what two copies cost: the `.astro` side had the script
+// exclusion and the module side did not, and nothing said so until a module carried a script.
 function astroTemplate(src) {
   const m = src.match(/^---\r?\n[\s\S]*?\r?\n---\r?\n([\s\S]*)$/);
-  return (m ? m[1] : src)
-    .replace(/<script[\s\S]*?<\/script>/gi, '\n')
-    .replace(/<style[\s\S]*?<\/style>/gi, '\n');
+  return notRendered(m ? m[1] : src);
 }
 
 /** `src/pages/ar/utv/index.astro` → `utv`; `…/ar/index.astro` → `''`; `…/ar/about.astro` → `about`. */
