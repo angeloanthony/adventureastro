@@ -528,6 +528,13 @@ const AR_SLUGS = new Set<string>([
   // FLOOR AS ENFORCING. Filed as a framework finding; until it is fixed, this note is the guard.
   'faq', // AR-2 Phase F batch 3
   'privacy-policy', // AR-2 Phase F batch 3
+  // AR-2 Phase F batch 4 — the four remaining shape-A pages: three hub roots plus the standalone
+  // restaurant guide. Registering the hub roots is what lets HubIndex surface the Arabic spokes
+  // that Track E already translated, so these four close shape A entirely.
+  'utv', // AR-2 Phase F batch 4
+  'dinosaur-national-monument', // AR-2 Phase F batch 4
+  'things-to-do', // AR-2 Phase F batch 4
+  'things-to-do/best-restaurants-vernal-utah', // AR-2 Phase F batch 4
   'utv/best-utv-trails-vernal', // AR-2 Track E, E-1 — first prose spoke
   'utv/backcountry-tours-vernal-utah', // AR-2 Track E, E-2
   'utv/side-by-side-rentals-vernal-utah', // AR-2 Track E, E-2

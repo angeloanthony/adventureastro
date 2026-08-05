@@ -1,0 +1,83 @@
+---
+// ar/utv/index.astro — Arabic UTV landing page (AR-2 Phase F batch 4).
+// Mirrors src/pages/utv/index.astro.
+//
+// The Arabic UTV spoke articles all exist by the time this pillar lands (Track E, E-1/E-2), so
+// HubIndex's `utv` collection read surfaces Arabic titles and links here with no change to
+// HubIndex itself — the same property every locale before this one relied on.
+//
+// ⚠ This page carries 24 iframes / 21 distinct videos, so it needs an `i18n-gates/4m-media.json`
+// `pages` entry (§5.1 deliverable 3). Gate 4m is blind to a new route by design.
+//
+// §4: `/` keeps its English path — the homepage is not translated and is scheduled last.
+import { getBodyHtml } from '../../../page-content/utv';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE } from '../../../config/site';
+import Header from '../../../components/layout/Header.astro';
+import Footer from '../../../components/layout/Footer.astro';
+import Seo from '../../../components/seo/Seo.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import HubIndex from '../../../components/content/HubIndex.astro';
+import TourDecisionGuide from '../../../components/content/TourDecisionGuide.astro';
+import { getLangFromUrl } from '../../../lib/i18n';
+import { t } from '../../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `
+  {
+    "@context": "https://schema.org",
+    "@type": "TouristAttraction",
+    "name": "جولات UTV مُرشَدة على المسارات — Adventure Tours Vernal",
+    "description": "جولات UTV مُرشَدة قرب Vernal بولاية يوتا. تشمل المسارات Doc's Beach وMoonshine Arch وAshley Gorge وOutlaw Trail وAsphalt Ridge. نقوش صخرية وحياة برّية تضمّ العقاب الذهبي والعقاب الأصلع والغزلان وأسد الجبل، ومطلّات مفتوحة على المدى.",
+    "url": "https://adventuretoursvernal.com/ar/utv/",
+    "image": "https://adventuretoursvernal.com/images/Docs%20Beach.webp",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Adventure Tours Vernal",
+      "telephone": "+1-435-219-9447",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1935 S 1500 E",
+        "addressLocality": "Vernal",
+        "addressRegion": "UT",
+        "postalCode": "84078",
+        "addressCountry": "US"
+      }
+    }
+  }
+`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="جولات UTV مُرشَدة في Vernal بولاية يوتا | Adventure Tours Vernal"
+      description="استكشف جولات UTV المُرشَدة بمركبات Kawasaki KRX 1000 قرب Vernal بولاية يوتا — مسارات Doc's Beach وMoonshine Arch وAshley Gorge وOutlaw Trail وAsphalt Ridge. اتصل على (435) 219-9447."
+      path="/ar/utv/"
+      type="website"
+      image="https://adventuretoursvernal.com/images/Docs%20Beach.webp"
+      ogTitle="جولات UTV مُرشَدة على المسارات | Adventure Tours Vernal"
+      ogDescription="خمسة مسارات UTV مُرشَدة قرب Vernal بولاية يوتا. عقبان ونقوش صخرية وأخاديد ومشاهد تخطف الأنفاس. اتصل على (435) 219-9447."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="trails" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.trails', lang) }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <TourDecisionGuide slot="body" />
+  <HubIndex slot="body" collection="utv" heading="كل أدلّة مسارات UTV" />
+  <Footer
+    slot="body"
+    trails={{
+      heading: t('footer.ourTrails', lang),
+      // Trail names are place names — kept verbatim, never translated.
+      links: [
+        { href: '/ar/utv/', label: "Doc's Beach" },
+        { href: '/ar/utv/', label: 'Moonshine Arch' },
+        { href: '/ar/utv/', label: 'Ashley Gorge' },
+        { href: '/ar/utv/', label: 'Outlaw Trail' },
+        { href: '/ar/utv/', label: 'Asphalt Ridge' },
+      ],
+    }}
+    contact={{ heading: t('footer.contactInfo', lang) }}
+  />
+</BaseLayout>

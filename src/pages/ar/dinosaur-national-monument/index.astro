@@ -1,0 +1,41 @@
+---
+// ar/dinosaur-national-monument/index.astro — Arabic DNM hub pillar
+// (AR-2 Phase F batch 4). Mirrors src/pages/dinosaur-national-monument/index.astro.
+//
+// Both Arabic spoke articles for this hub already exist (visiting-dinosaur-national-monument and
+// petroglyphs-rock-art-vernal — Track E), so HubIndex renders Arabic titles and links directly.
+//
+// The Article + FAQPage JSON-LD mirrors the visible Arabic FAQ verbatim. It is a frontmatter
+// surface: no <bdi> is available inside structured data, so the price is spelled out with an
+// Arabic unit noun exactly as the body does.
+import { getBodyHtml } from '../../../page-content/dnm';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE } from '../../../config/site';
+import Header from '../../../components/layout/Header.astro';
+import Footer from '../../../components/layout/Footer.astro';
+import Seo from '../../../components/seo/Seo.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import HubIndex from '../../../components/content/HubIndex.astro';
+import { getLangFromUrl } from '../../../lib/i18n';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"جولات UTV قرب Dinosaur National Monument","description":"استكشف جولات UTV المُرشَدة عبر المناطق النائية المحيطة بـDinosaur National Monument في Vernal بولاية يوتا.","author":{"@type":"Organization","name":"Adventure Tours Vernal"},"publisher":{"@type":"Organization","name":"Adventure Tours Vernal","logo":{"@type":"ImageObject","url":"https://adventuretoursvernal.com/images/logo.webp"}},"datePublished":"2026-04-08","dateModified":"2026-04-08","mainEntityOfPage":"https://adventuretoursvernal.com/ar/dinosaur-national-monument/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"هل تتوفّر جولات UTV قرب Dinosaur National Monument؟","acceptedAnswer":{"@type":"Answer","text":"نعم. تنظّم شركة Adventure Tours Vernal جولات مُرشَدة بمركبات Kawasaki KRX 1000 عبر المناطق النائية المحيطة بالنصب. ولا يُسمح بدخول المركبات الآلية داخل النصب نفسه، لكن المسارات الوعرة المجاورة له مباشرة تضمّ تضاريس الأخاديد نفسها والنقوش الصخرية والتكوينات الجيولوجية ذاتها."}},{"@type":"Question","name":"كم تبعد شركة Adventure Tours Vernal عن Dinosaur National Monument؟","acceptedAnswer":{"@type":"Answer","text":"يقع مقرّ شركة Adventure Tours Vernal في Vernal بولاية يوتا، على بعد نحو 20 دقيقة غرب قاعة Quarry Exhibit Hall في النصب. وكثير من الزوّار يجمعون بين جولة UTV وزيارة النصب في الرحلة نفسها."}},{"@type":"Question","name":"ما أفضل طريقة للجمع بين جولة UTV وزيارة Dinosaur National Monument؟","acceptedAnswer":{"@type":"Answer","text":"احجز جولة UTV صباحية وزر النصب بعد الظهر، أو العكس. فجولة مُرشَدة مدتها 3 ساعات مع نصف يوم في النصب تصنع يومًا كاملًا من استكشاف أرض الديناصورات."}}]}]}`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="جولات UTV قرب Dinosaur National Monument | Adventure Tours"
+      description="استمتع بجولات UTV مُرشَدة قرب Dinosaur National Monument في Vernal بولاية يوتا. استكشف الأخاديد والنقوش الصخرية القديمة وتضاريس الصحراء على بعد دقائق من النصب. مركبات Kawasaki KRX 1000، 3 ساعات، 349 دولارًا للمركبة. احجز اليوم."
+      path="/ar/dinosaur-national-monument/"
+      type="article"
+      ogTitle="جولات UTV قرب Dinosaur National Monument"
+      ogDescription="جولات مُرشَدة بمركبات Kawasaki KRX 1000 عبر المناطق النائية المحيطة بـDinosaur National Monument — أخاديد ونقوش صخرية ومغامرة صحراوية."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="dinosaur-national-monument" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: 'جولات نصب الديناصورات' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <HubIndex slot="body" collection="dinosaur-national-monument" heading="كل أدلّة نصب الديناصورات" />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

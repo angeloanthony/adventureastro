@@ -118,7 +118,10 @@
       "Bash(rm -rf __TRACKED_VAR__/dist-stripped)",
       "Bash(cp -r dist __TRACKED_VAR__/dist-stripped)",
       "Bash(node \"C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/2eee831b-88ac-4ea2-aa7c-67631940e761/scratchpad/remaining.mjs\")",
-      "Bash(node \"C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/2eee831b-88ac-4ea2-aa7c-67631940e761/scratchpad/links.mjs\")"
+      "Bash(node \"C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-adventureastro/2eee831b-88ac-4ea2-aa7c-67631940e761/scratchpad/links.mjs\")",
+      "Bash(node scripts/rtl/preflight-ar.mjs src/page-content/dnm.ts src/page-content/things-to-do.ts)",
+      "Bash(node scripts/rtl/preflight-ar.mjs src/page-content/best-restaurants.ts)",
+      "Bash(node __TRACKED_VAR__/utv-ar.mjs __TRACKED_VAR__/utv-ar.txt)"
     ],
     "additionalDirectories": [
       "\\tmp",

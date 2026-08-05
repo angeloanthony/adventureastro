@@ -219,7 +219,14 @@ const reader = (needles) => `
   //   13,000-foot  comma magnitude (safe) + hyphen + word
   //   $349/machine currency (reverses) + slash + word
   //   ~15–20       approximation tilde (reverses) + en-dash range (reverses) compounded
-  const F4_NEEDLES = ['US-191', '3-hour', '90s°F', '1,500+', '13,000-foot', '$349/machine', '~15–20'];
+  //
+  // ⚠ 7-11 Ranch is a CONFLICT BETWEEN TWO RULES, not just another shape. §2.2 keeps a
+  // restaurant name Latin and verbatim because a reader has to match it against a sign, and
+  // this particular name IS a bare digit-separator-digit run — the founding defect class. If it
+  // reverses, the site would print a real business name wrong, and no gate can see it. Measured
+  // bare and isolated, because the remedy has to be known before the name is written.
+  const F4_NEEDLES = ['US-191', '3-hour', '90s°F', '1,500+', '13,000-foot', '$349/machine', '~15–20',
+                      '7-11 Ranch', '7-11'];
 
   // Not rendered text. Walking these cost 35% of every run and produced nothing but
   // exclusions — CSS rgba literals and the JSON-LD copy of prose measured elsewhere.
@@ -454,6 +461,8 @@ const reader = (needles) => `
     '<p id="f4-magnitude-word">تبلغ القمة 13,000-foot فوق سطح البحر.</p>' +
     '<p id="f4-price-slash">تبدأ الأسعار من $349/machine لكل جولة.</p>' +
     '<p id="f4-tilde-range">تستغرق الرحلة ~15–20 دقيقة بالسيارة.</p>' +
+    '<p id="f4-name-bare">يقدّم مطعم 7-11 Ranch وجبات غربية دسمة.</p>' +
+    '<p id="f4-name-bdi">يقدّم مطعم <bdi>7-11 Ranch</bdi> وجبات غربية دسمة.</p>' +
     '<p id="f3-falsify-l-left">يفتح المكتب من 7am–7 طوال الأسبوع.</p>' +
     '<p id="f3-falsify-l-right">يفتح المكتب من 7–7pm طوال الأسبوع.</p>' +
     // POSITIVE CONTROL FOR THE UNREACHABLE CHECK. Full width, zero height, prose inside —
@@ -486,7 +495,8 @@ const reader = (needles) => `
     for (const r of scan(document.getElementById(id), id, F3_NEEDLES)) synthetic.push(r);
   }
   for (const id of ['f4-hwy-letter-first', 'f4-hyphen-letter-second', 'f4-deg-letter-before',
-                    'f4-magnitude-plus', 'f4-magnitude-word', 'f4-price-slash', 'f4-tilde-range']) {
+                    'f4-magnitude-plus', 'f4-magnitude-word', 'f4-price-slash', 'f4-tilde-range',
+                    'f4-name-bare', 'f4-name-bdi']) {
     for (const r of scan(document.getElementById(id), id, F4_NEEDLES)) synthetic.push(r);
   }
   for (const id of ['f2-time', 'f2-time-spelled', 'f2-pct', 'f2-pct-spelled', 'f2-spf',

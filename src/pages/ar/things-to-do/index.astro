@@ -1,0 +1,71 @@
+---
+// ar/things-to-do/index.astro — Arabic Things to Do hub pillar (AR-2 Phase F batch 4).
+// Mirrors src/pages/things-to-do/index.astro.
+//
+// NOTE: like its ZH/JA/DE/PT/FR/IT/ES siblings, this route file is NOT locale-agnostic
+// boilerplate — it carries its own per-locale Seo title/description/ogDescription and
+// Article+FAQPage JSON-LD, authored directly rather than copied, because copying would have
+// shipped another locale's meta tags and schema on an Arabic URL.
+//
+// The FAQPage mirrors the visible Arabic FAQ verbatim. It is a frontmatter surface: no <bdi>
+// is available inside structured data, so every measured reversing shape is spelled out.
+import { getBodyHtml } from '../../../page-content/things-to-do';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE } from '../../../config/site';
+import Header from '../../../components/layout/Header.astro';
+import Footer from '../../../components/layout/Footer.astro';
+import Seo from '../../../components/seo/Seo.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import HubIndex from '../../../components/content/HubIndex.astro';
+import { getLangFromUrl } from '../../../lib/i18n';
+import { t } from '../../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `{
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "أنشطة في Vernal بولاية يوتا — الدليل المحلي الكامل",
+        "description": "خطة محلي كاملة للأنشطة في Vernal بولاية يوتا — Dinosaur National Monument وجولات UTV المُرشَدة والنقوش الصخرية والطرق السياحية وحدائق الولاية والمطاعم والنصائح الموسمية وبرامج رحلات جاهزة.",
+        "author": {"@type": "Organization", "name": "Adventure Tours Vernal"},
+        "publisher": {"@type": "Organization", "name": "Adventure Tours Vernal", "logo": {"@type": "ImageObject", "url": "https://adventuretoursvernal.com/images/logo.webp"}},
+        "datePublished": "2026-04-08",
+        "dateModified": "2026-07-10",
+        "mainEntityOfPage": "https://adventuretoursvernal.com/ar/things-to-do/"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type": "Question", "name": "ما أفضل الأنشطة في Vernal بولاية يوتا؟", "acceptedAnswer": {"@type": "Answer", "text": "أفضل الأنشطة في Vernal هي جولة UTV مُرشَدة في المناطق النائية، وزيارة Dinosaur National Monument وجدار العظام فيه، ومشاهدة نقوش Fremont في McConkie Ranch وDry Fork Canyon، والسير على مسارات آثار الديناصورات في Red Fleet State Park، وحديقة ديناصورات متحف Utah Field House of Natural History، والصيد أو الإبحار في Steinaker وRed Fleet وFlaming Gorge."}},
+          {"@type": "Question", "name": "كم يومًا تحتاج في Vernal بولاية يوتا؟", "acceptedAnswer": {"@type": "Answer", "text": "يومان إلى ثلاثة هي المدة المثلى. يوم لـDinosaur National Monument والنقوش الصخرية، ويوم لجولة UTV مُرشَدة وحدائق الولاية، ويوم ثالث اختياري لـFlaming Gorge أو الصيد أو المشي في جبال Uinta. أما يوم واحد فلا يتّسع إلا للنصب أو لنشاط بارز آخر."}},
+          {"@type": "Question", "name": "هل تستحق Vernal بولاية يوتا الزيارة؟", "acceptedAnswer": {"@type": "Answer", "text": "نعم. Vernal هي بوابة Dinosaur National Monument، وتحشد أحافير ديناصورات حقيقية وفنونًا صخرية قديمة وأخاديد من الصخر الأحمر وتاريخ الغرب القديم وترفيهًا في الهواء الطلق من الطراز العالمي في نطاق صغير غير مزدحم. وتقدّم كثيرًا مما يجذب الناس إلى جنوب يوتا دون زحامه."}},
+          {"@type": "Question", "name": "ما النشاط الأول الذي لا يُفوّت في Vernal؟", "acceptedAnswer": {"@type": "Answer", "text": "جولة UTV مُرشَدة في المناطق النائية مع شركة Adventure Tours Vernal هي أعمق الأنشطة انغماسًا، فهي تجمع مغامرة الطرق الوعرة والنقوش الصخرية والأقواس الطبيعية ومشاهد الأخاديد التي لا تبلغها من طريق معبّد، في تجربة واحدة مدتها 3 ساعات. أما Dinosaur National Monument فهو المعلم الأول الذي لا يُفوّت."}},
+          {"@type": "Question", "name": "هل Vernal بولاية يوتا مناسبة للعائلات التي معها أطفال؟", "acceptedAnswer": {"@type": "Answer", "text": "مناسبة جدًا. يستطيع الأطفال لمس أحافير ديناصورات حقيقية في Dinosaur National Monument، والوقوف عند آثار أقدام الديناصورات في Red Fleet State Park، واستكشاف حديقة ديناصورات Utah Field House، والمشاركة في جولة UTV مُرشَدة ركابًا من عمر سنتين مع أحد الوالدين. ومعظم المعالم لا يتطلّب سوى مسير قصير."}},
+          {"@type": "Question", "name": "ما أفضل وقت في العام لزيارة Vernal بولاية يوتا؟", "acceptedAnswer": {"@type": "Answer", "text": "أواخر الربيع من مايو إلى يونيو وأوائل الخريف من سبتمبر إلى أكتوبر يقدّمان أكثر درجات الحرارة راحة وحياة برّية نشطة وزحامًا أخفّ. والصيف دافئ ومفتوح بالكامل وأنسب للأنشطة المائية. والشتاء هادئ وخلاب لكنه بارد، مع إغلاق بعض المرافق والطرق الموسمية."}},
+          {"@type": "Question", "name": "كم تبعد Vernal عن سولت ليك سيتي؟", "acceptedAnswer": {"@type": "Answer", "text": "تبعد Vernal نحو ثلاث ساعات بالسيارة شرق سولت ليك سيتي عبر US-40، ومطار سولت ليك سيتي هو أقرب مطار رئيسي. ويتسلّق الطريق السياحي جبال Uinta ويمرّ بمنطقتَي Daniels Summit وStrawberry Reservoir."}},
+          {"@type": "Question", "name": "بماذا تشتهر Vernal بولاية يوتا؟", "acceptedAnswer": {"@type": "Answer", "text": "تشتهر Vernal بأنها أرض الديناصورات في يوتا. فهي تقع على حافة Dinosaur National Monument في منطقة Uintah Basin، وتحيط بها أخاديد من الصخر الأحمر ونقوش Fremont وUte وتاريخ الخارجين عن القانون في الغرب القديم وترفيه في الهواء الطلق على أراضٍ عامة."}},
+          {"@type": "Question", "name": "هل تحتاج إلى سيارة لزيارة Vernal؟", "acceptedAnswer": {"@type": "Answer", "text": "نعم. فمعالم Vernal موزّعة على الريف المحيط، إذ يبعد النصب 20 دقيقة شرقًا، وتبعد حدائق الولاية والأخاديد من 5 إلى 60 دقيقة، ولا توجد شبكة نقل عام شاملة بينها، فالسيارة الخاصة ضرورية. أما جولات UTV المُرشَدة فتوفّر التنقّل بعد وصولك إلى المسار."}},
+          {"@type": "Question", "name": "هل Vernal بديل جيد عن Moab؟", "acceptedAnswer": {"@type": "Answer", "text": "لكثير من المسافرين، نعم. تقدّم Vernal أخاديد من الصخر الأحمر ومغامرة على الطرق الوعرة ومشاهد مهيبة قريبة في روحها من Moab، لكن بزحام أقلّ بكثير، وتضيف أحافير ديناصورات ونقوشًا صخرية لا تضاهيها Moab فيها. وهي خيار قوي لمن يريد المغامرة دون الاكتظاظ."}}
+        ]
+      }
+    ]
+  }`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="أنشطة في Vernal بولاية يوتا | أبرز الفعاليات والمعالم"
+      description="أنشطة في Vernal بولاية يوتا يعرّفك بها مرشد محلي. جولات UTV مُرشَدة وDinosaur National Monument ومشي وصيد ونقوش صخرية وطرق سياحية وحدائق ولاية، مع توصيات موسمية وبرامج ليومين إلى ثلاثة. خطّط لمغامرتك اليوم."
+      path="/ar/things-to-do/"
+      type="article"
+      ogDescription="اكتشف أفضل الأنشطة في Vernal بولاية يوتا — من جولات UTV المُرشَدة إلى أحافير الديناصورات والنقوش الصخرية والترفيه في الهواء الطلق في Uintah Basin."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="things-to-do" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('hub.things-to-do', lang) }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <HubIndex slot="body" collection="things-to-do" heading="كل أدلّة الأنشطة في Vernal" />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>
