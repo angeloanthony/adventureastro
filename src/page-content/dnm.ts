@@ -602,6 +602,90 @@ const ZH = `
   </main>
 `;
 
+// AR — AR-2 Phase F batch 4. Every class, style attribute and image is preserved verbatim;
+// only visible text and the figure alt/caption are translated.
+//
+// PROBE SLOT 1 decided three shapes on this page, negative controls red in the same pass:
+// $349/machine renders machine/349$ and 3-hour renders hour-3, so both are written out with
+// Arabic unit nouns; 20 minutes / 3 hours / 5.0 are bare digits beside Arabic words and are safe.
+// FOX 2.5 was measured safe in batch 1 and stays Latin.
+//
+// ⚠ This page renders a <main>, unlike every batch-2 and batch-3 page. It therefore RE-ENTERS
+// the criterion-5 prose-deletion population that §5.4 recorded as stuck at 59 pages.
+const AR = `
+
+
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    تقدّم شركة Adventure Tours Vernal جولات UTV قرب Dinosaur National Monument بمركبات Kawasaki KRX 1000 مُرشَدة بمقعدين. وتستكشف خمسة أنظمة من المسارات المناطق النائية المحيطة بالنصب، بما فيها الأخاديد والنقوش الصخرية والأقواس الطبيعية وتضاريس الصحراء. ومقرّ الشركة في Vernal بولاية يوتا، على بعد 20 دقيقة من النصب. السعر 349 دولارًا للمركبة لمدة 3 ساعات. اتصل على <bdi>(435) 219-9447</bdi>.
+  </p>
+
+  <main class="article-page">
+    <header class="article-header">
+      <div class="article-breadcrumb"><a href="/">الرئيسية</a><span class="sep">›</span><span>جولات نصب الديناصورات</span></div>
+      <h1 class="article-title">جولات UTV قرب Dinosaur National Monument</h1>
+      <p class="article-meta">آخر تحديث: أبريل 2026 · Adventure Tours Vernal</p>
+      <p style="display:inline-flex;align-items:center;gap:8px;margin:12px 0;padding:7px 15px;border:1px solid rgba(212,118,78,0.5);border-radius:999px;background:#ffffff;box-shadow:0 1px 4px rgba(0,0,0,0.08);font-size:0.95rem;color:#4a4139;"><span aria-hidden="true" style="color:#e6a817;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count} مراجعة على Google</span></p>
+    </header>
+
+    <div class="article-body">
+      <div class="article-summary-box">
+        يجتذب Dinosaur National Monument زوّارًا من كل أنحاء العالم لمشاهدة أحافير العصر الجوراسي، غير أن المناطق النائية المحيطة بالنصب تحمل طبقة أخرى من المغامرة تختلف عنه تمامًا. فجولات UTV المُرشَدة تضعك في قلب تضاريس الأخاديد والنقوش الصخرية القديمة والمشاهد الصحراوية التي يمرّ بجانبها معظم زوّار النصب دون أن يتوقّفوا.
+      </div>
+
+      <div class="article-tip"><strong>ابدأ من هنا:</strong> هل تخطّط لزيارة النصب لأول مرة؟ اقرأ <a href="/ar/dinosaur-national-monument/visiting-dinosaur-national-monument/">دليلنا الشامل لزيارة Dinosaur National Monument</a> — الخطة الكاملة التي تغطّي الأحافير والنقوش الصخرية والطرق السياحية ومسارات المشي وأفضل وقت للزيارة.</div>
+
+      <h2>المناطق النائية خارج حدود النصب</h2>
+      <p>لا يُسمح بدخول المركبات الآلية داخل Dinosaur National Monument، لكن أراضي هيئة BLM والمناطق النائية المحيطة بالنصب تضمّ التكوينات الجيولوجية نفسها وأنظمة الأخاديد ذاتها والفنون الصخرية القديمة، وتضيف إليها مسارات وعرة تتوغّل بك في تضاريس لا تستطيع الطرق السياحية داخل النصب أن تلمّح إليها إلا تلميحًا.</p>
+      <p>تدير شركة Adventure Tours Vernal خمسة أنظمة من المسارات عبر هذه المنطقة. فمسار Outlaw Trail يتبع طرقًا تاريخية سلكتها عصابة Wild Bunch بقيادة Butch Cassidy عبر أراضي الأخاديد النائية. ومسار Moonshine Arch يتلوّى بين أخاديد الصخر الأحمر وصولًا إلى قوس رملي طبيعي مخبّأ. أما مسار Ashley Gorge فيمرّ عبر ممرّ مهيب تحفّه جدران شاهقة. والتضاريس والجيولوجيا هنا امتداد متّصل لما تراه داخل النصب، فأنت تقود عبر المشهد القديم نفسه.</p>
+
+      <h2>النقوش الصخرية والفنون القديمة والتاريخ العريق</h2>
+      <p>شعوب Fremont وUte التي تركت النقوش والرسوم الصخرية داخل النصب تركت مثلها في أنحاء المناطق النائية المحيطة به. وتمرّ عدة مسارات لدى شركة Adventure Tours Vernal بمحاذاة ألواح صخرية لا يمكن الوصول إليها من أي طريق معبّد، وهي مواقع لن تجدها أبدًا دون مرشد يعرف أين ينظر. والصلة بين التاريخ الثقافي للنصب والمشهد الحيّ المحيط به من أكثر ما يشدّ الانتباه في الجولة المُرشَدة.</p>
+
+      <h2>الجمع بين جولة UTV وزيارتك للنصب</h2>
+      <p>أكثر الترتيبات شيوعًا هو حجز جولة UTV صباحية وزيارة Quarry Exhibit Hall بعد الظهر، أو العكس. ويقع مقرّ شركة Adventure Tours Vernal على بعد 20 دقيقة غرب المدخل الرئيسي للنصب، فتصبح الترتيبات يسيرة. وجولة مُرشَدة مدتها 3 ساعات مع نصف يوم في المحجر تصنع يومًا كاملًا من استكشاف أرض الديناصورات يغطّي السجلّ الأحفوري والمناطق النائية الحيّة معًا.</p>
+      <p>أما لمن يزور المنطقة عدة أيام، فإضافة جولة UTV إلى برنامج زيارة النصب تحوّل رحلة اعتيادية إلى حديقة وطنية إلى تجربة أبقى في الذاكرة. وسيتذكّر الأطفال جولة UTV مدة أطول بكثير مما يتذكّرون مركز الزوّار.</p>
+
+      <p>ومن المفيد أن تعرف كيف يتوزّع النصب نفسه. فهو في حقيقته منطقتان: جانب الأحافير في طرف يوتا قرب Vernal، وهو الجانب الذي تجمع بينه وبين الجولة، وجانب الأخاديد عبر حدود الولاية في كولورادو، وهو رحلة قائمة بذاتها.</p>
+
+      <figure style="margin:2.5rem auto;max-width:820px;text-align:center;">
+        <img src="/images/maps/dinosaur-national-monument-orientation.svg" alt="خريطة تخطيطية توضّح منطقتَي Dinosaur National Monument. جانب الأحافير قرب Vernal بولاية يوتا — ويضمّ Quarry Exhibit Hall وWall of Bones، وطريق Cub Creek Road ونقوشه الصخرية، وكوخ Josie Morris، وجبل Split Mountain — هو الجانب الذي يقترن طبيعيًا بجولة UTV تنطلق من Vernal. أما جانب الأخاديد في كولورادو قرب بلدة Dinosaur فيضمّ طريق Harpers Corner Scenic Drive وأخاديد نهرَي Green وYampa ومنطقة Echo Park، وهو رحلة منفصلة لا أحافير فيها. وتشكّل المنطقتان نصبًا واحدًا يُدخل إليه من مداخل مختلفة، والرسم يوضّح العلاقات وحدها وليس مرسومًا بمقياس أو مسافة أو اتجاه." width="1600" height="1200" loading="lazy" decoding="async" />
+        <figcaption style="margin-top:0.75rem;font-size:0.9rem;line-height:1.6;color:#6E655C;">كيف يتوزّع النصب: جانب الأحافير قرب Vernal هو الذي تجمع بينه وبين جولة UTV، أما جانب الأخاديد في كولورادو فرحلة قائمة بذاتها. رسم توضيحي للعلاقات وليس بمقياس رسم.</figcaption>
+      </figure>
+
+      <h2>ما تشمله الجولة</h2>
+      <p>مركبات Kawasaki KRX 1000 بمقعدين مزوّدة بمعلّقات FOX 2.5 PODIUM LSC، وخوذات ومعدّات سلامة ومرشدون خبراء. ويرافق Dave and Trudy Wilson مجموعتك على متن مركبتيهما الخاصتين. المدة 3 ساعات، والسعر 349 دولارًا للمركبة الواحدة التي تتّسع لراكبين اثنين. ونرحّب بجميع المستويات، فلا تُشترط أي خبرة سابقة بالقيادة على الطرق الوعرة.</p>
+
+      <div class="article-tip">
+        <strong>نصيحة بشأن التوقيت:</strong> إن كنت تزور النصب في عطلة نهاية الأسبوع أو في يوم عطلة رسمية، فاحجز جولة UTV صباحًا لأن المحجر يزدحم مع منتصف النهار. أما في أيام الأسبوع فالترتيبان مناسبان. اتصل بـDave على <bdi>(435) 219-9447</bdi> وسيساعدك على التخطيط بما يوافق برنامج زيارتك للنصب.
+      </div>
+
+      <div class="article-faq">
+        <h2>الأسئلة الشائعة</h2>
+        <div class="faq-item"><h3>هل تتوفّر جولات UTV قرب Dinosaur National Monument؟</h3><p>نعم. تنظّم شركة Adventure Tours Vernal جولات مُرشَدة عبر المناطق النائية المحيطة بالنصب، بما فيها الأخاديد والنقوش الصخرية وجيولوجيا مشابهة.</p></div>
+        <div class="faq-item"><h3>كم تبعد شركة Adventure Tours Vernal عن النصب؟</h3><p>نحو 20 دقيقة. فمقرّها في Vernal بولاية يوتا، إلى الغرب مباشرة من مدخل Quarry Exhibit Hall.</p></div>
+        <div class="faq-item"><h3>ما أفضل طريقة للجمع بين الجولة وزيارة النصب؟</h3><p>جولة UTV صباحية مع زيارة النصب بعد الظهر، أو العكس، تصنع يومًا كاملًا من مغامرة أرض الديناصورات.</p></div>
+      </div>
+
+      <div class="article-cta">
+        <h3>أضف المغامرة إلى رحلتك للنصب</h3>
+        <p>جولات مُرشَدة بمركبات KRX 1000 · 349 دولارًا للمركبة · 20 دقيقة من النصب · تقييم 5.0 نجوم</p>
+        <a href="/ar/booking/" class="cta-btn">احجز جولتك</a>
+        <a href="tel:435-219-9447" class="cta-phone">📞 <bdi>(435) 219-9447</bdi></a>
+      </div>
+    </div>
+
+    <div class="related-articles">
+      <h3>خطّط لزيارتك</h3>
+      <div class="related-grid">
+        <a href="/ar/things-to-do/" class="related-card"><h4>أنشطة في Vernal</h4><p>دليل كامل لما بعد النصب.</p></a>
+        <a href="/ar/things-to-do/vernal-utah-attractions/" class="related-card"><h4>أبرز معالم Vernal</h4><p>كل المشاهد التي لا تُفوّت في المنطقة.</p></a>
+        <a href="/ar/dinosaur-national-monument/petroglyphs-rock-art-vernal/" class="related-card"><h4>النقوش والفنون الصخرية</h4><p>مواقع فنية قديمة على المسارات وخارجها.</p></a>
+        <a href="/ar/things-to-do/best-restaurants-vernal-utah/" class="related-card"><h4>أين تأكل في Vernal</h4><p>تزوّد بالطاقة بعد مغامرتك.</p></a>
+      </div>
+    </div>
+  </main>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3B). Every
  * locale without a committed variant falls back to English. Callers that
@@ -615,5 +699,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'de') return DE;
   if (locale === 'zh') return ZH;
   if (locale === 'ja') return JA;
+  if (locale === 'ar') return AR;
   return bodyHtml;
 }

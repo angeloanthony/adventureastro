@@ -619,6 +619,29 @@ a content commit.
    reporting the `)` flanked `L … R` and correctly staying silent on the `(`, which sits between
    two Arabic words.
 
+### ⚠⚠ Finding 2 is LIVE IN COMMITTED SOURCE, and the undercount is silent
+
+Re-derived after the batch closed, to enumerate the remaining routes. The naive extraction —
+*any single-quoted run* — applied to the other locale registries:
+
+| block | naive | slug-shaped | |
+|---|---:|---:|---|
+| `AR_SLUGS` | 65 | 65 | clean (batch 3 fixed its own comment) |
+| `ZH_SLUGS` | 76 entries, **19 junk** | 76 | **57 real slugs recovered instead of 76** |
+| `JA_SLUGS` | 76 entries, **19 junk** | 76 | same |
+
+`ZH_SLUGS` and `JA_SLUGS` **already carry apostrophes in their comments today.** No instrument
+parses them this way yet, so the live blast radius is zero — but any future locale-parsing
+instrument that copies `measure-prose-window.mjs` inherits a population that is **19 routes short
+with no error raised**. That is the silent direction §2.1 names, demonstrated rather than feared.
+
+**The fix is the one this project has applied three times already** — character list →
+`\p{Bidi_Mirrored}`; the page name `cancellation-policy` → *a slug is a spoke iff a translated
+collection file backs it*; duplicated parsers → one shared function. **Name the property, never
+the delimiter.** Matching slug *shape* — lowercase segments joined by `-` and `/` — extracts all
+three registries correctly, because no English comment can satisfy it. ➡ Filed for an instrument
+commit; not changed here.
+
 **M9 / M10, recorded rather than invented.** M9: zero places where masculine-unmarked read wrong;
 both pages are impersonal by nature — a policy document and an FAQ — and the register never
 strained. M10: one dual, `راكبين اثنين` for "2 riders", which is the same choice batch 1 made for

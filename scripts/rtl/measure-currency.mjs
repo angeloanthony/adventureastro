@@ -197,6 +197,29 @@ const reader = (needles) => `
   // this project would otherwise be about to generalise from a single green reading.
   const F3_NEEDLES = ['7:00', '12:00', 'CCPA', '7am–7pm', '01', 'adventuretoursvernal.com', '5.0',
                       '7am–7', '7–7pm'];
+  // AR-2 Phase F batch 4 (utv / dnm / things-to-do / best-restaurants). Shapes taken from the four
+  // English blocks by extracting every digit-bearing token and grouping by shape, not by guessing.
+  // The batch-3 falsifier established that a strong Latin letter BEFORE a digit anchors the run
+  // (UAX #9 W7) while one AFTER it does not. That is now a rule with predictions, so slot 1 is
+  // built to TEST it on two neutrals it has never been tried on, each as an asymmetric pair:
+  //
+  //   US-191   letter FIRST, hyphen  -> predicted LTR       (already on record as safe)
+  //   3-hour   letter SECOND, hyphen -> predicted REVERSED  (the mirror; never measured)
+  //
+  //   90s°F    letter BEFORE the degree sign -> predicted LTR
+  //   95°F     letter AFTER it (built-in control) -> known REVERSED
+  //
+  // The second pair is the sharper one: it predicts that inserting a single letter turns a
+  // measured defect into a safe run, on a shape the project has only ever seen reverse. If both
+  // pairs split as predicted on two different neutrals, the rule has survived a test it could
+  // have failed twice. If either does not, the rule is wrong and slot 1 caught it before prose.
+  //
+  // Genuinely undecided combinations, measured because neither operand predicts the pair:
+  //   1,500+       comma magnitude (safe) + trailing plus (reverses)
+  //   13,000-foot  comma magnitude (safe) + hyphen + word
+  //   $349/machine currency (reverses) + slash + word
+  //   ~15–20       approximation tilde (reverses) + en-dash range (reverses) compounded
+  const F4_NEEDLES = ['US-191', '3-hour', '90s°F', '1,500+', '13,000-foot', '$349/machine', '~15–20'];
 
   // Not rendered text. Walking these cost 35% of every run and produced nothing but
   // exclusions — CSS rgba literals and the JSON-LD copy of prose measured elsewhere.
@@ -423,6 +446,14 @@ const reader = (needles) => `
     '<p id="f3-index">القسم 01 يشرح شروط الحجز بالتفصيل.</p>' +
     '<p id="f3-domain">تجد التفاصيل كاملة على adventuretoursvernal.com في أي وقت.</p>' +
     '<p id="f3-rating">يبلغ متوسط التقييم 5.0 من خمس نجوم.</p>' +
+    // AR-2 Phase F batch 4 synthetic controls — see F4_NEEDLES above.
+    '<p id="f4-hwy-letter-first">يمر المسار بمحاذاة طريق US-191 السريع.</p>' +
+    '<p id="f4-hyphen-letter-second">تستغرق الجولة 3-hour عبر الوادي.</p>' +
+    '<p id="f4-deg-letter-before">ترتفع الحرارة إلى 90s°F في الصيف.</p>' +
+    '<p id="f4-magnitude-plus">تضم المنطقة 1,500+ موقعًا أثريًا.</p>' +
+    '<p id="f4-magnitude-word">تبلغ القمة 13,000-foot فوق سطح البحر.</p>' +
+    '<p id="f4-price-slash">تبدأ الأسعار من $349/machine لكل جولة.</p>' +
+    '<p id="f4-tilde-range">تستغرق الرحلة ~15–20 دقيقة بالسيارة.</p>' +
     '<p id="f3-falsify-l-left">يفتح المكتب من 7am–7 طوال الأسبوع.</p>' +
     '<p id="f3-falsify-l-right">يفتح المكتب من 7–7pm طوال الأسبوع.</p>' +
     // POSITIVE CONTROL FOR THE UNREACHABLE CHECK. Full width, zero height, prose inside —
@@ -453,6 +484,10 @@ const reader = (needles) => `
                     'f3-range-ampm-spelled', 'f3-index', 'f3-domain', 'f3-rating',
                     'f3-falsify-l-left', 'f3-falsify-l-right']) {
     for (const r of scan(document.getElementById(id), id, F3_NEEDLES)) synthetic.push(r);
+  }
+  for (const id of ['f4-hwy-letter-first', 'f4-hyphen-letter-second', 'f4-deg-letter-before',
+                    'f4-magnitude-plus', 'f4-magnitude-word', 'f4-price-slash', 'f4-tilde-range']) {
+    for (const r of scan(document.getElementById(id), id, F4_NEEDLES)) synthetic.push(r);
   }
   for (const id of ['f2-time', 'f2-time-spelled', 'f2-pct', 'f2-pct-spelled', 'f2-spf',
                     'f2-money', 'f2-money-spelled', 'f2-agefloor']) {
