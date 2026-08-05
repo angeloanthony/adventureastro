@@ -114,6 +114,16 @@ const reader = (needles) => `
   // contain would report "0 found" as if that were a clean reading.
   const TEMP_NEEDLES = ['95°F', '90–100°F', '95 درجة فهرنهايت'];
   const RANGE_NEEDLES = ['10–11', '10-11', 'من 10 إلى 11'];
+  // AR-2 batch 7c. The last batch's hubs (itineraries road trips + things-to-do) bring four
+  // shapes the corpus has never carried. Three are NEW to the project and none is decidable
+  // by reading UAX #9 — 6a's ASCII-hyphen hypothesis is the standing reminder of why:
+  //   ~3       a TILDE before a digit  (an approximation marker, from a comparison table)
+  //   2+       a digit followed by PLUS (an age floor, "ages 2 and up")
+  //   1,500 / 210,000   comma-grouped magnitudes LARGER than the two measured in 7b
+  //   I-80     an interstate designator; 7a measured I-70 and US-40, not this one
+  // Measured HERE because the corpus cannot contain them yet — the reading decides the
+  // authoring, which is the whole point of slot 1.
+  const B7C_NEEDLES = ['~3', '2+', '1,500', '210,000', 'I-80', 'KRX 1000'];
 
   // Not rendered text. Walking these cost 35% of every run and produced nothing but
   // exclusions — CSS rgba literals and the JSON-LD copy of prose measured elsewhere.
@@ -309,6 +319,13 @@ const reader = (needles) => `
     '<p id="neg-range-hyphen">' + AR_RANGE + '10-11 ميلًا.</p>' +
     '<p id="pos-range-endash">' + AR_RANGE + '<bdi>10–11</bdi> ميلًا.</p>' +
     '<p id="alt-range-spelled">' + AR_RANGE + 'من 10 إلى 11 ميلًا.</p>' +
+    // AR-2 batch 7c synthetic controls — see B7C_NEEDLES above.
+    '<p id="b7c-tilde">' + AR_RANGE + '~3 ساعات.</p>' +
+    '<p id="b7c-plus">تقبل الجولة الركاب من عمر 2+ سنوات.</p>' +
+    '<p id="b7c-mag-small">يرتفع الجبل نحو 1,500 متر.</p>' +
+    '<p id="b7c-mag-large">تمتد المحمية على 210,000 فدان.</p>' +
+    '<p id="b7c-hwy">يمر الطريق عبر I-80 ثم US-40.</p>' +
+    '<p id="b7c-latin">تنطلق الجولات على مركبات KRX 1000 المُرشَدة.</p>' +
     // POSITIVE CONTROL FOR THE UNREACHABLE CHECK. Full width, zero height, prose inside —
     // the shape of the FAQ regression, minus the FAQ. If this does not come back
     // kind="unreachable" the check has stopped firing, and a clean run above means nothing.
@@ -326,6 +343,9 @@ const reader = (needles) => `
   }
   for (const id of ['neg-range-endash', 'neg-range-hyphen', 'pos-range-endash', 'alt-range-spelled']) {
     for (const r of scan(document.getElementById(id), id, RANGE_NEEDLES)) synthetic.push(r);
+  }
+  for (const id of ['b7c-tilde', 'b7c-plus', 'b7c-mag-small', 'b7c-mag-large', 'b7c-hwy', 'b7c-latin']) {
+    for (const r of scan(document.getElementById(id), id, B7C_NEEDLES)) synthetic.push(r);
   }
   host.remove();
 
