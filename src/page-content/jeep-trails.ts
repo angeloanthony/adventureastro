@@ -514,10 +514,79 @@ const ZH = `
   </main>
 `;
 
+// AR — AR-2 Phase F batch 1, authored alongside atv-trails.ts against the same brief.
+// `4x4` appears three times here and is written bare on the strength of probe slot 1
+// (visual = logical, measured before authoring, negative controls red in the same run).
+// §4: `/`, `/utv/` and `/booking/` keep their English paths; every related-card target is
+// a registered ar spoke. `atv-trails-vernal-utah` is registered by this same batch.
+const AR = `
+
+
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    تشمل مسارات Jeep ومسارات الطرق الوعرة قرب Vernal في يوتا طرق المناطق النائية التابعة لهيئة BLM وخمسة أنظمة مسارات UTV مُرشَدة تشغّلها شركة Adventure Tours Vernal بمركبات Kawasaki KRX 1000. تتميّز المسارات بالأخاديد والمجاري الصحراوية والنقوش الصخرية وطرق الغرب الأمريكي القديم التاريخية. وتقدّم Vernal تضاريس شبيهة بتضاريس Moab مع زحام أقل بكثير. السعر <bdi>$349</bdi> للمركبة الواحدة في جولات مُرشَدة مدتها 3 ساعات. للحجز اتصل على <bdi>(435) 219-9447</bdi>.
+  </p>
+
+  <main class="article-page">
+    <header class="article-header">
+      <div class="article-breadcrumb"><a href="/">الرئيسية</a><span class="sep">›</span><a href="/utv/">المسارات</a><span class="sep">›</span><span>مسارات Jeep</span></div>
+      <h1 class="article-title">مسارات Jeep قرب Vernal في يوتا</h1>
+      <p class="article-meta">حُدِّث في أبريل 2026 · Adventure Tours Vernal</p>
+    </header>
+
+    <div class="article-body">
+      <div class="article-summary-box">
+        تقع Vernal في قلب بعض من أفضل تضاريس الطرق الوعرة في يوتا — بلاد الأخاديد نفسها والمجاري الصحراوية وطرق المناطق النائية التي صنعت شهرة Moab، لكن دون الزحام ودون الأسعار المرتفعة. وسواء أحضرت مركبة Jeep خاصة بك أم أردت خوض المسارات في جولة UTV مُرشَدة، إليك ما تجده هناك.
+      </div>
+
+      <h2>تضاريس الطرق الوعرة حول Vernal</h2>
+      <p>تحيط بمنطقة Uintah Basin أراضي هيئة BLM بشبكة من الطرق غير المعبّدة والمسارات التي تتراوح بين حصى ممهّد ومسالك صخرية تقنية. أما التضاريس الواقعة جنوب البلدة وشرقها — باتجاه Dinosaur National Monument ومنحدرات Book Cliffs — فهي حيث تبدأ أكثر مشاهد الأخاديد والهضاب إثارة. وتمنح التشكيلات الصخرية الحمراء والمجاري العميقة والألواح الصخرية الملساء وطرق الهضاب النائية سائقي Jeep ومركبات 4x4 تنوّعًا وفيرًا.</p>
+      <p>وإلى الشمال من البلدة، تتّسم الطرق الصاعدة إلى غابة Ashley National Forest وجبال Uinta بطابع مختلف — طرق تابعة لدائرة الغابات تمرّ بين أشجار الحور الرجراج والصنوبر مع إطلالات جبلية ومعابر جداول موسمية. وتحظى منطقة Diamond Mountain بشعبية لدى محبّي التخييم بمركبات Jeep ورحلات الترحال الطويلة.</p>
+
+      <h2>جولات UTV المُرشَدة — دون الحاجة إلى Jeep</h2>
+      <p>إذا لم تكن تملك مركبة 4x4 أو أردت الوصول إلى مسارات تتطلّب معرفة محلية، فإنّ شركة Adventure Tours Vernal تسيّر جولات مُرشَدة بمركبات Kawasaki KRX 1000 عبر خمسة أنظمة مسارات تغطي أفضل ما في المناطق النائية حول Vernal. وتتعامل مركبة KRX 1000 مع تضاريس تتحدّى معظم مركبات Jeep القياسية — من المجاري الرملية إلى التسلّقات الصخرية والممرات الأخدودية الضيقة — ويعرف Dave and Trudy Wilson كل منعطف وكل لوحة نقوش صخرية وكل مطلّ.</p>
+      <p>ويحجز كثير من عشّاق Jeep جولة UTV مُرشَدة بوصفها مهمة استطلاعية — فيقودون مع Dave أولًا ويتعرّفون على المنطقة، ثم يعودون بمركباتهم الخاصة ليمضوا أبعد. وهو نهج ذكي في منطقة لا تكون فيها أفضل المسارات معلَّمة وتضعف فيها تغطية GPS.</p>
+
+      <h2>Vernal مقابل Moab في قيادة الطرق الوعرة</h2>
+      <p>تملك Moab شهرة الاسم، لكنّ Vernal تقدّم تضاريس بالمستوى نفسه بجزء يسير من التكلفة والازدحام. لن تنتظر في طابور للوصول إلى المسارات هنا، ولن تزاحم أحدًا على موقع تخييم. كما أنّ المشهد — جدران الأخاديد والأقواس الطبيعية والنقوش الصخرية وتاريخ الخارجين على القانون — لا يقلّ إثارة. والمقايضة الأساسية هي قلّة الخدمات؛ فـVernal لا تملك بنية التأجير نفسها التي تملكها Moab، ولهذا تسدّ الجولات المُرشَدة تلك الفجوة بفاعلية.</p>
+
+      <h2>التخطيط لرحلتك على الطرق الوعرة</h2>
+      <p>إذا كنت ستحضر مركبة Jeep خاصة بك، فبإمكان مكتب هيئة BLM الميداني في Vernal تزويدك بالخرائط الحالية وأحوال الطرق. وتنقطع تغطية الهاتف سريعًا بمجرد مغادرة الطريق المعبّد، لذا نزّل الخرائط للاستخدام دون اتصال قبل الانطلاق. واملأ الوقود في البلدة — فلا شيء بعدها في المناطق النائية. والربيع والخريف أفضل المواسم؛ أما الصيف فصالح للقيادة لكنه حارّ، وتُغلق بعض الطرق خلال موسم الثلج والوحل الشتوي.</p>
+
+      <div class="article-tip">
+        <strong>نصيحة لمالكي Jeep:</strong> احجز جولة UTV مُرشَدة في اليوم الأول لاستطلاع المنطقة. وبإمكان Dave أن يدلّك على أفضل الطرق المناسبة لمركبات Jeep بحسب قدرات مركبتك وما تريد رؤيته. وهي أسرع وسيلة للتعرّف على منطقة طرق وعرة جديدة.
+      </div>
+
+      <div class="article-faq">
+        <h2>الأسئلة الشائعة</h2>
+        <div class="faq-item"><h3>هل توجد مسارات Jeep قرب Vernal؟</h3><p>نعم — طرق واسعة في المناطق النائية التابعة لهيئة BLM إضافة إلى خمسة أنظمة مسارات UTV مُرشَدة. وتتراوح التضاريس بين حصى ممهّد وطرق أخاديد وهضاب تقنية.</p></div>
+        <div class="faq-item"><h3>هل يمكنني حجز جولة مُرشَدة بدل قيادة مركبتي؟</h3><p>نعم. توفّر شركة Adventure Tours Vernal مركبات KRX 1000 والمرشدين والمعدات بسعر <bdi>$349</bdi> للمركبة الواحدة لمدة 3 ساعات عبر خمسة أنظمة مسارات.</p></div>
+        <div class="faq-item"><h3>كيف تُقارن Vernal بـMoab؟</h3><p>جودة تضاريس مماثلة، وزحام أقل بكثير، وأسعار تنافسية. غير أنّ بنية التأجير أقل، ولهذا تكون الجولات المُرشَدة هي الخيار الأمثل.</p></div>
+      </div>
+
+      <div class="article-cta">
+        <h3>استطلع المسارات مع مرشد</h3>
+        <p>جولات مُرشَدة بمركبات KRX 1000 · <bdi>$349</bdi> للمركبة · 5 أنظمة مسارات · خبرة محلية</p>
+        <a href="/booking/" class="cta-btn">احجز جولة</a>
+        <a href="tel:435-219-9447" class="cta-phone">📞 <bdi>(435) 219-9447</bdi></a>
+      </div>
+    </div>
+
+    <div class="related-articles">
+      <h3>مزيد من أدلة الطرق الوعرة</h3>
+      <div class="related-grid">
+        <a href="/ar/atv-trails-vernal-utah/" class="related-card"><h4>مسارات ATV قرب Vernal</h4><p>أنظمة مسارات UTV الخمسة كلها مع تفصيل التضاريس.</p></a>
+        <a href="/ar/guides/moab-utv-tours/" class="related-card"><h4>Vernal: البديل عن Moab</h4><p>لماذا تتفوّق Vernal على Moab في مغامرات الطرق الوعرة.</p></a>
+        <a href="/ar/utv/backcountry-tours-vernal-utah/" class="related-card"><h4>جولات المناطق النائية</h4><p>تجارب UTV مُرشَدة في عمق المناطق النائية.</p></a>
+        <a href="/ar/utv/best-utv-trails-vernal/" class="related-card"><h4>أفضل مسارات UTV</h4><p>دليل مسارًا بمسار لكل المستويات.</p></a>
+      </div>
+    </div>
+  </main>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3D; Italian
  * populated P6; French populated P8-P6; German populated inline-pages batch;
- * Japanese populated P10K).
+ * Japanese populated P10K; Arabic populated AR-2 Phase F batch 1).
  * Every locale without a committed variant falls back to English. Callers
  * that don't need locale awareness keep importing `bodyHtml` directly.
  */
@@ -529,5 +598,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'de') return DE;
   if (locale === 'zh') return ZH;
   if (locale === 'ja') return JA;
+  if (locale === 'ar') return AR;
   return bodyHtml;
 }

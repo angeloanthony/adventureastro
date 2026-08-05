@@ -571,10 +571,93 @@ const ZH = `
   </main>
 `;
 
+// AR — AR-2 Phase F batch 1. Modern Standard Arabic, direct 2nd person masculine
+// unmarked, Western digits only (policy §3). Latin wayfinding names are verbatim per
+// §2.2 and carry an Arabic classifier noun where one reads naturally (§3.4).
+//
+// Internal links follow §4: `/`, `/utv/` and `/booking/` are NOT yet translated, so they
+// keep their ENGLISH paths; every related-card target below is a registered ar spoke and
+// switches to `/ar/`. `jeep-trails-vernal-utah` is registered by this same batch.
+//
+// Numeric shapes were settled by probe slot 1 BEFORE authoring, not after: `4x4`, `2.5`,
+// `FOX 2.5` and `360` all measured visual = logical bare, on a run whose negative controls
+// went red ($349 -> 349$, (435) 219-9447 -> 9447-219 )435(). The month ranges are written
+// `من … إلى …` rather than with an en dash because §3.6 measured `10–11` rendering `11–10`.
+const AR = `
+
+
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    تشمل مسارات ATV وUTV قرب Vernal في يوتا كلًّا من مسار Doc's Beach ومسار Moonshine Arch ومسار Ashley Gorge ومسار Outlaw Trail ومسار Asphalt Ridge. تقدّم شركة Adventure Tours Vernal جولات مُرشَدة بمركبات Kawasaki KRX 1000 عبر أنظمة المسارات الخمسة كلها. السعر <bdi>$349</bdi> للمركبة الواحدة لمدة 3 ساعات، وتتّسع لراكبين اثنين. تشمل الجولة الخوذ ومعدات السلامة ومرشدين خبراء. للحجز اتصل على <bdi>(435) 219-9447</bdi>.
+  </p>
+
+  <main class="article-page">
+    <header class="article-header">
+      <div class="article-breadcrumb">
+        <a href="/">الرئيسية</a><span class="sep">›</span><a href="/utv/">المسارات</a><span class="sep">›</span><span>مسارات ATV في Vernal</span>
+      </div>
+      <h1 class="article-title">مسارات ATV قرب Vernal في يوتا</h1>
+      <p class="article-meta">حُدِّث في أبريل 2026 · Adventure Tours Vernal</p>
+    </header>
+
+    <div class="article-body">
+      <div class="article-summary-box">
+        تضمّ منطقة Uintah Basin المحيطة بـVernal بعضًا من أفضل تضاريس الطرق الوعرة في يوتا — أخاديد من الصخر الأحمر، ومجاري رملية صحراوية، وإطلالات بانورامية من قمم الحواف، ومسارات تاريخية في المناطق النائية لا يراها معظم الزوّار. وفي ما يلي كيف تصل إليها كلها عبر جولات UTV المُرشَدة، دون أن تحتاج إلى مركبة ATV خاصة بك.
+      </div>
+
+      <h2>لماذا تختار Vernal لقيادة ATV وUTV</h2>
+      <p>يحظى جنوب يوتا بالعناوين الرئيسية، لكن المناطق النائية حول Vernal تقدّم تضاريس بالمستوى نفسه مع جزء يسير من الزحام. تمتدّ القيادة هنا من سهول رملية مفتوحة على امتداد ممر Green River إلى منعطفات ضيقة داخل الأخاديد ومسارات على القمم بإطلالة 360 درجة على الجبال. ولأنّ المكان أقل تجارية من Moab أو Sand Hollow، ستجد المسارات لك وحدك في أغلب الأوقات.</p>
+      <p>وتضيف المنطقة شيئًا يعجز عن مجاراته معظم وجهات ATV: نقوش صخرية قديمة تعود إلى شعبَي Fremont وUte، ومخابئ لخارجين على القانون من عصر الغرب الأمريكي القديم، وأقواس رملية طبيعية منتشرة عبر أنظمة المسارات، بما يحوّل كل جولة إلى مغامرة ودرس في التاريخ معًا.</p>
+
+      <h2>أنظمة المسارات الخمسة</h2>
+      <p><strong>Doc's Beach</strong> — مجارٍ رملية صحراوية وتضاريس مفتوحة على امتداد ممر Green River. مسار واسع وسريع ومناسب لكل المستويات، وهو الأكثر شعبية لمن يقود لأول مرة.</p>
+      <p><strong>Moonshine Arch</strong> — أخاديد من الصخر الأحمر تقود إلى قوس رملي طبيعي مخبّأ. تضاريس متنوّعة وبديعة المنظر مع وجهة تستحقّ الوصول، وهو مفضّل لدى المصوّرين والعائلات.</p>
+      <p><strong>Ashley Gorge</strong> — ممر أخدودي مهيب بجدران رملية شاهقة ومناظر وادي النهر. تضاريس أضيق تمنحك إحساسًا بالانغماس والإحاطة بأجمل صورة ممكنة.</p>
+      <p><strong>Outlaw Trail</strong> — مسار تاريخي في المناطق النائية استخدمته عصابة Butch Cassidy and the Wild Bunch. تضاريس وعرة وتاريخ خارجين على القانون ومشاهد أخاديد نائية، وهو الخيار الأكثر مغامرة.</p>
+      <p><strong>Asphalt Ridge</strong> — مسار على قمة الحافة بإطلالات بانورامية على أرض الديناصورات وجبال Uinta. الارتفاع هنا يمنحك تصوّرًا عن اتّساع الحوض كاملًا.</p>
+
+      <h2>الجولات المُرشَدة مقابل القيادة الذاتية</h2>
+      <p>إذا أحضرت مركبة ATV أو UTV خاصة بك، ففي أراضي هيئة BLM المحيطة بـVernal مناطق قيادة مفتوحة ومسارات محدّدة. غير أنّ أفضل المسارات — تلك التي تضمّ الفن الصخري والأقواس ومداخل الأخاديد — يُفضَّل أن تُقطع بصحبة مرشد محلي يعرف الطرق والتاريخ وأحوال التضاريس.</p>
+      <p>توفّر شركة Adventure Tours Vernal كل شيء: مركبات Kawasaki KRX 1000 بمقعدين ومزوّدة بمعلّقات FOX 2.5 PODIUM LSC، إضافة إلى الخوذ وإحاطة السلامة ومرشدين خبراء. ويقود كل من Dave and Trudy Wilson مركبته الخاصة، فيرافقان مجموعتك طوال الجولة التي تمتدّ 3 ساعات.</p>
+
+      <h2>ما ينبغي أن تعرفه قبل القيادة</h2>
+      <p>تعمل الجولات على مدار العام، بحسب أحوال الطقس. ويُعدّ الربيع (من أبريل إلى مايو) والخريف (من سبتمبر إلى أكتوبر) أفضل المواسم — حرارة معتدلة ومسارات جافة وضوء ذهبي. أما جولات الصيف فتنطلق باكرًا تفاديًا للحر، والقيادة الشتوية متاحة في الأيام الصافية بمشهد مختلف تمامًا.</p>
+      <p>لا تلزم خبرة سابقة في القيادة على الطرق الوعرة. فمركبة KRX 1000 مزوّدة بمقود معزّز وناقل حركة أوتوماتيكي وقفص حماية كامل. ويضبط Dave وTrudy إيقاع الجولة على مستوى راحة مجموعتك، من تجوال هادئ بين المناظر إلى قيادة أكثر جرأة في المناطق النائية.</p>
+
+      <div class="article-tip">
+        <strong>نصيحة لاختيار المسار:</strong> إن كانت هذه تجربتك الأولى، فابدأ بمسار Doc's Beach أو مسار Moonshine Arch. وإن أردت التجربة الأكثر بُعدًا ووعورة، فاطلب مسار Outlaw Trail. وسيساعدك Dave على الاختيار بحسب مجموعتك عند الحجز.
+      </div>
+
+      <div class="article-faq">
+        <h2>الأسئلة الشائعة</h2>
+        <div class="faq-item"><h3>هل توجد مسارات ATV قرب Vernal في يوتا؟</h3><p>نعم — خمسة أنظمة مسارات متمايزة تشمل الأخاديد والمجاري الصحراوية ومسارات القمم، وكلها متاحة عبر جولات UTV المُرشَدة.</p></div>
+        <div class="faq-item"><h3>هل يمكن قيادة ATV قرب Dinosaur National Monument؟</h3><p>ليس داخل النصب التذكاري نفسه، لكن المناطق النائية المحيطة تضمّ أنظمة مسارات UTV واسعة عبر تضاريس مشابهة مع إمكانية الوصول المُرشَد.</p></div>
+        <div class="faq-item"><h3>هل أحتاج إلى مركبة ATV خاصة بي لقيادة المسارات قرب Vernal؟</h3><p>لا. توفّر شركة Adventure Tours Vernal مركبات Kawasaki KRX 1000 والخوذ والمعدات والمرشدين. السعر <bdi>$349</bdi> للمركبة الواحدة لمدة 3 ساعات.</p></div>
+      </div>
+
+      <div class="article-cta">
+        <h3>انطلق إلى المسارات</h3>
+        <p>جولات مُرشَدة بمركبات Kawasaki KRX 1000 · <bdi>$349</bdi> للمركبة · 5 أنظمة مسارات · لكل المستويات</p>
+        <a href="/booking/" class="cta-btn">احجز جولة</a>
+        <a href="tel:435-219-9447" class="cta-phone">📞 <bdi>(435) 219-9447</bdi></a>
+      </div>
+    </div>
+
+    <div class="related-articles">
+      <h3>مزيد من أدلة المسارات</h3>
+      <div class="related-grid">
+        <a href="/ar/utv/best-utv-trails-vernal/" class="related-card"><h4>أفضل مسارات UTV قرب Vernal</h4><p>تفصيل كامل لأنظمة المسارات الخمسة.</p></a>
+        <a href="/ar/jeep-trails-vernal-utah/" class="related-card"><h4>مسارات Jeep قرب Vernal</h4><p>خيارات الطرق الوعرة لعشّاق Jeep ومركبات 4x4.</p></a>
+        <a href="/ar/utv/side-by-side-rentals-vernal-utah/" class="related-card"><h4>الجولات المُرشَدة مقابل التأجير</h4><p>لماذا تتفوّق الجولات المُرشَدة على التأجير الذاتي.</p></a>
+        <a href="/ar/guides/what-to-wear-utv-tour/" class="related-card"><h4>ما ترتديه</h4><p>دليل الملابس والمعدات لقيادة UTV في الصحراء.</p></a>
+      </div>
+    </div>
+  </main>
+`;
+
 /**
- * Locale-aware accessor (P2D pattern; Spanish populated P3D). Every
- * locale without a committed variant falls back to English. Callers that
- * don't need locale awareness keep importing `bodyHtml` directly.
+ * Locale-aware accessor (P2D pattern; Spanish populated P3D; Arabic populated
+ * AR-2 Phase F batch 1). Every locale without a committed variant falls back to
+ * English. Callers that don't need locale awareness keep importing `bodyHtml` directly.
  */
 export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'es') return ES;
@@ -584,5 +667,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'de') return DE;
   if (locale === 'zh') return ZH;
   if (locale === 'ja') return JA;
+  if (locale === 'ar') return AR;
   return bodyHtml;
 }

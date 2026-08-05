@@ -1,0 +1,38 @@
+---
+// ar/atv-trails-vernal-utah.astro — Arabic ATV trails landing page (AR-2 Phase F
+// batch 1). Mirrors src/pages/atv-trails-vernal-utah.astro; only the Seo copy, the
+// schema name/description fields and the breadcrumb label differ. Business identity
+// fields (name, url root, telephone, logo) stay byte-identical to the English page —
+// same business entity, not page-specific copy.
+//
+// The breadcrumb href stays `/utv/`: the utv hub index is not translated yet, and §4
+// forbids a `/ar/` path that outruns its AR_SLUGS entry.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getBodyHtml } from '../../page-content/atv-trails';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"مسارات ATV قرب Vernal في يوتا","description":"دليل مسارات ATV وUTV قرب Vernal في يوتا، بما فيها الجولات المُرشَدة بمركبات Kawasaki KRX 1000 عبر خمسة أنظمة مسارات.","author":{"@type":"Organization","name":"Adventure Tours Vernal"},"publisher":{"@type":"Organization","name":"Adventure Tours Vernal","logo":{"@type":"ImageObject","url":"https://adventuretoursvernal.com/images/logo.webp"}},"datePublished":"2026-04-08","dateModified":"2026-04-08","mainEntityOfPage":"https://adventuretoursvernal.com/ar/atv-trails-vernal-utah/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"هل توجد مسارات ATV قرب Vernal في يوتا؟","acceptedAnswer":{"@type":"Answer","text":"نعم. تضمّ منطقة Uintah Basin المحيطة بـVernal أنظمة مسارات واسعة في المناطق النائية، منها مسار Doc's Beach ومسار Moonshine Arch ومسار Ashley Gorge ومسار Outlaw Trail ومسار Asphalt Ridge، وكلها متاحة عبر جولات UTV مُرشَدة مع شركة Adventure Tours Vernal."}},{"@type":"Question","name":"هل يمكن قيادة ATV قرب Dinosaur National Monument؟","acceptedAnswer":{"@type":"Answer","text":"لا يُسمح بدخول المركبات الآلية إلى Dinosaur National Monument نفسه، لكنّ مسارات المناطق النائية المحيطة بـVernal وبمنطقة النصب التذكاري تتيح قيادة UTV واسعة عبر تضاريس أخاديد وصحراء مشابهة مع إمكانية الوصول المُرشَد."}},{"@type":"Question","name":"هل أحتاج إلى مركبة ATV خاصة بي لقيادة المسارات قرب Vernal؟","acceptedAnswer":{"@type":"Answer","text":"لا. توفّر شركة Adventure Tours Vernal مركبات Kawasaki KRX 1000 والخوذ ومعدات السلامة ومرشدين خبراء. وتبلغ تكلفة الجولة 349 دولارًا للمركبة الواحدة لمدة 3 ساعات، وتتّسع لراكبين اثنين في كل مركبة."}}]}]}`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="مسارات ATV قرب Vernal في يوتا | جولات UTV مُرشَدة"
+      description="اكتشف أفضل مسارات ATV وUTV قرب Vernal في يوتا. جولات مُرشَدة بمركبات Kawasaki KRX 1000 عبر الأخاديد والمجاري الصحراوية والمناطق النائية. احجز اليوم."
+      path="/ar/atv-trails-vernal-utah/"
+      type="article"
+      ogTitle="مسارات ATV قرب Vernal في يوتا | جولات UTV مُرشَدة"
+      ogDescription="أفضل مسارات ATV وUTV قرب Vernal — جولات مُرشَدة بمركبات Kawasaki KRX 1000 عبر الأخاديد ومواقع الفن الصخري والمناطق النائية."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.trails', lang), href: '/utv/' }, { label: 'مسارات ATV في Vernal' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

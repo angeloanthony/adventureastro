@@ -1,0 +1,38 @@
+---
+// ar/jeep-trails-vernal-utah.astro — Arabic Jeep trails landing page (AR-2 Phase F
+// batch 1). Mirrors src/pages/jeep-trails-vernal-utah.astro; only the Seo copy, the
+// schema name/description fields and the breadcrumb label differ. Business identity
+// fields stay byte-identical to the English page.
+//
+// The breadcrumb href stays `/utv/` — the utv hub index is not translated yet (§4).
+// `4x4` is written bare in the schema and the prose on the strength of probe slot 1,
+// which measured it visual = logical with the negative controls red in the same run.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import { getBodyHtml } from '../../page-content/jeep-trails';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"مسارات Jeep قرب Vernal في يوتا","description":"دليل مسارات Jeep والطرق الوعرة قرب Vernal في يوتا، بما فيها طرق المناطق النائية وخيارات جولات UTV المُرشَدة.","author":{"@type":"Organization","name":"Adventure Tours Vernal"},"publisher":{"@type":"Organization","name":"Adventure Tours Vernal","logo":{"@type":"ImageObject","url":"https://adventuretoursvernal.com/images/logo.webp"}},"datePublished":"2026-04-08","dateModified":"2026-04-08","mainEntityOfPage":"https://adventuretoursvernal.com/ar/jeep-trails-vernal-utah/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"هل توجد مسارات Jeep قرب Vernal في يوتا؟","acceptedAnswer":{"@type":"Answer","text":"نعم. تضمّ أراضي هيئة BLM والمناطق النائية المحيطة بـVernal طرقًا وعرة واسعة تناسب مركبات Jeep ومركبات 4x4، إضافة إلى خمسة أنظمة مسارات UTV مُرشَدة متاحة عبر شركة Adventure Tours Vernal."}},{"@type":"Question","name":"هل يمكنني حجز جولة مُرشَدة على الطرق الوعرة بدل قيادة مركبتي؟","acceptedAnswer":{"@type":"Answer","text":"نعم. تقدّم شركة Adventure Tours Vernal جولات UTV مُرشَدة بمركبات Kawasaki KRX 1000 عبر خمسة أنظمة مسارات مع مرشدين خبراء، فلا تحتاج إلى مركبة خاصة بك. وتبلغ التكلفة 349 دولارًا للمركبة الواحدة لمدة 3 ساعات."}},{"@type":"Question","name":"كيف تُقارن Vernal بـMoab في قيادة الطرق الوعرة؟","acceptedAnswer":{"@type":"Answer","text":"تقدّم Vernal تضاريس أخاديد وصحراء مشابهة مع زحام أقل بكثير. فالمسارات أقل تجارية، والمناطق النائية أبعد، وأسعار الجولات المُرشَدة تنافس أسعار مشغّلي Moab أو تتفوّق عليها."}}]}]}`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="مسارات Jeep قرب Vernal في يوتا | دليل الطرق الوعرة"
+      description="مسارات Jeep وطرق القيادة الوعرة قرب Vernal في يوتا. اكتشف أخاديد المناطق النائية والتضاريس الصحراوية والمسارات التاريخية بمركبتك أو في جولة UTV مُرشَدة."
+      path="/ar/jeep-trails-vernal-utah/"
+      type="article"
+      ogTitle="مسارات Jeep قرب Vernal في يوتا | دليل الطرق الوعرة"
+      ogDescription="طرق وعرة قرب Vernal لمركبات Jeep ومركبات 4x4 وجولات UTV المُرشَدة عبر بلاد الأخاديد والمناطق النائية."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.trails', lang), href: '/utv/' }, { label: 'مسارات Jeep' }]} />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

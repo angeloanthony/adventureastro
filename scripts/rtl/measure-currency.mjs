@@ -124,6 +124,18 @@ const reader = (needles) => `
   // Measured HERE because the corpus cannot contain them yet — the reading decides the
   // authoring, which is the whole point of slot 1.
   const B7C_NEEDLES = ['~3', '2+', '1,500', '210,000', 'I-80', 'KRX 1000'];
+  // AR-2 Phase F batch 1 (atv-trails / jeep-trails). Three shapes the corpus cannot yet
+  // contain, all of them digit runs whose separator or neighbour carries the meaning —
+  // the class 7b/7c established, arriving from a fourth construction:
+  //   4x4      a digit-LETTER-digit vehicle class. A Latin x between two AN digits, and
+  //            §4.2 keeps it Latin, so it is neither a range nor a plain Latin run.
+  //   2.5      a DECIMAL point between digits. The project has measured comma grouping
+  //            (1,500) but never a decimal separator, and W4 treats CS and ES alike
+  //            only for EN — the same trap 6a's ASCII-hyphen hypothesis fell into.
+  //   FOX 2.5  the same decimal INSIDE a Latin run, which may or may not shield it.
+  // 360 is a bare magnitude next to an Arabic unit word — expected safe, measured anyway,
+  // because "expected safe" is what shipped the reversed range in batch 5.
+  const F1_NEEDLES = ['4x4', '2.5', 'FOX 2.5', '360'];
 
   // Not rendered text. Walking these cost 35% of every run and produced nothing but
   // exclusions — CSS rgba literals and the JSON-LD copy of prose measured elsewhere.
@@ -326,6 +338,12 @@ const reader = (needles) => `
     '<p id="b7c-mag-large">تمتد المحمية على 210,000 فدان.</p>' +
     '<p id="b7c-hwy">يمر الطريق عبر I-80 ثم US-40.</p>' +
     '<p id="b7c-latin">تنطلق الجولات على مركبات KRX 1000 المُرشَدة.</p>' +
+    // AR-2 Phase F batch 1 synthetic controls — see F1_NEEDLES above.
+    '<p id="f1-4x4">تناسب الدروب سائقي مركبات 4x4 من كل المستويات.</p>' +
+    '<p id="f1-4x4-bdi">تناسب الدروب سائقي مركبات <bdi>4x4</bdi> من كل المستويات.</p>' +
+    '<p id="f1-decimal">يبلغ ارتفاع المعلّق نحو 2.5 بوصة.</p>' +
+    '<p id="f1-decimal-latin">تعمل المركبة بمعلّقات FOX 2.5 PODIUM المتطورة.</p>' +
+    '<p id="f1-magnitude">تكشف القمة إطلالة بزاوية 360 درجة على الحوض.</p>' +
     // POSITIVE CONTROL FOR THE UNREACHABLE CHECK. Full width, zero height, prose inside —
     // the shape of the FAQ regression, minus the FAQ. If this does not come back
     // kind="unreachable" the check has stopped firing, and a clean run above means nothing.
@@ -346,6 +364,9 @@ const reader = (needles) => `
   }
   for (const id of ['b7c-tilde', 'b7c-plus', 'b7c-mag-small', 'b7c-mag-large', 'b7c-hwy', 'b7c-latin']) {
     for (const r of scan(document.getElementById(id), id, B7C_NEEDLES)) synthetic.push(r);
+  }
+  for (const id of ['f1-4x4', 'f1-4x4-bdi', 'f1-decimal', 'f1-decimal-latin', 'f1-magnitude']) {
+    for (const r of scan(document.getElementById(id), id, F1_NEEDLES)) synthetic.push(r);
   }
   host.remove();
 

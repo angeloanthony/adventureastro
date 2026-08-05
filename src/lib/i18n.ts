@@ -498,6 +498,13 @@ const ZH_SLUGS = new Set<string>([
 // alone has mis-tagged a locale as complete before (see MULTILINGUAL_HANDOFF §7).
 const AR_SLUGS = new Set<string>([
   'cancellation-policy', // AR-1 pilot page
+  // AR-2 Phase F batch 1 — the first STATIC pages since the AR-1 pilot. These carry no
+  // content-collection file, which is exactly what makes them static: the measurement
+  // instruments classify a slug as a spoke iff `src/content/<slug>.ar.mdx` backs it, so
+  // adding a page here without such a file correctly keeps it out of the spoke window
+  // and out of the settled-ceiling sum.
+  'atv-trails-vernal-utah', // AR-2 Phase F batch 1
+  'jeep-trails-vernal-utah', // AR-2 Phase F batch 1
   'utv/best-utv-trails-vernal', // AR-2 Track E, E-1 — first prose spoke
   'utv/backcountry-tours-vernal-utah', // AR-2 Track E, E-2
   'utv/side-by-side-rentals-vernal-utah', // AR-2 Track E, E-2
