@@ -160,7 +160,43 @@ const reader = (needles) => `
   //   CCPA        a bare Latin initialism in Arabic prose, as privacy.ts requires it to stay.
   //               A control: pure-Latin runs are expected LTR, and an expectation that is
   //               never checked is the thing this instrument exists to replace.
-  const F3_NEEDLES = ['7:00', '12:00', 'CCPA'];
+  //   7am–7pm     ⚠ THE GAP BATCH 2 NAMED. §5.3 measured 7am and 7pm as separate runs, read
+  //               them LTR, and recorded in the same breath that "the dashed range joining them
+  //               was never measured" — then spelled the pair out anyway, so the question was
+  //               deferred rather than answered. faq.ts carries 7am–7pm TWICE. The two halves
+  //               being individually safe says nothing: 10 and 11 are each safe and 10–11 is
+  //               the class's founding defect. Measured here rather than assumed from its
+  //               operands, which is the exact inference batch 5 shipped a live defect on.
+  //   01          a LEADING-ZERO two-digit index, standing alone in its own <span> with Arabic
+  //               after it. Every digit run measured so far has been a magnitude, a range or a
+  //               decimal; this one is an ordinal label, and the leading zero means it cannot be
+  //               a number the way the others are. 15 such runs ship on this page.
+  //   adventuretoursvernal.com   a dotted Latin DOMAIN mid-clause. 2.5 measured a CS between two
+  //               digits; this is the same separator between two Latin letters, twice, in a run
+  //               long enough to wrap. Expected LTR — and "expected safe" is the phrase in front
+  //               of every defect this instrument has found.
+  //   5.0         the decimal the rating line actually renders. F1 measured 2.5 and this is the
+  //               same shape, re-run rather than carried over: a control that is not re-run is
+  //               an assumption wearing a measurement's clothes (§F2).
+  // GDPR and ISP are NOT listed. They are the same class as CCPA — a bare Latin initialism in
+  // Arabic prose — and one control per class is the claim; adding two more spellings of it
+  // would inflate the green count without testing anything the first does not.
+  //
+  // ⚠ THE LAST TWO ARE FALSIFIERS, NOT AUTHORING CANDIDATES. Neither shape will be written.
+  // 7am–7pm measured LTR while 10–11 — the SAME en dash — reverses, so "the rule is about the
+  // shape, not the character" (§3.6) does not separate them and something else must. The
+  // candidate mechanism is UAX #9 W7: a strong L before a later digit retypes that digit EN->L,
+  // which anchors the whole run LTR, whereas a bare digit run in Arabic prose has been retyped
+  // AN by W2 and its neutral resolves R under N1. If that is the mechanism, then moving the
+  // letters to ONE SIDE of the dash must produce OPPOSITE results:
+  //   7am–7   letters BEFORE the second operand -> W7 sees L -> predicted LTR
+  //   7–7pm   letters AFTER it, so W7's backward search hits R first -> predicted REVERSED
+  // Same characters, same dash, same length; only the side the letters sit on differs. A model
+  // that survives that is a model, and one that does not is a curve through six points. This is
+  // the check that can come out either way -- [[observable-is-not-the-thing]] applied to a rule
+  // this project would otherwise be about to generalise from a single green reading.
+  const F3_NEEDLES = ['7:00', '12:00', 'CCPA', '7am–7pm', '01', 'adventuretoursvernal.com', '5.0',
+                      '7am–7', '7–7pm'];
 
   // Not rendered text. Walking these cost 35% of every run and produced nothing but
   // exclusions — CSS rgba literals and the JSON-LD copy of prose measured elsewhere.
@@ -382,6 +418,13 @@ const reader = (needles) => `
     '<p id="f3-time-short">يفتح المكتب عند 7:00 صباحًا كل يوم.</p>' +
     '<p id="f3-time-long">يغلق المكتب عند 12:00 ظهرًا يوم الجمعة.</p>' +
     '<p id="f3-initialism">ينطبق قانون CCPA على سكان كاليفورنيا.</p>' +
+    '<p id="f3-range-ampm">يفتح المكتب من 7am–7pm طوال الأسبوع.</p>' +
+    '<p id="f3-range-ampm-spelled">يفتح المكتب من 7 صباحًا حتى 7 مساءً طوال الأسبوع.</p>' +
+    '<p id="f3-index">القسم 01 يشرح شروط الحجز بالتفصيل.</p>' +
+    '<p id="f3-domain">تجد التفاصيل كاملة على adventuretoursvernal.com في أي وقت.</p>' +
+    '<p id="f3-rating">يبلغ متوسط التقييم 5.0 من خمس نجوم.</p>' +
+    '<p id="f3-falsify-l-left">يفتح المكتب من 7am–7 طوال الأسبوع.</p>' +
+    '<p id="f3-falsify-l-right">يفتح المكتب من 7–7pm طوال الأسبوع.</p>' +
     // POSITIVE CONTROL FOR THE UNREACHABLE CHECK. Full width, zero height, prose inside —
     // the shape of the FAQ regression, minus the FAQ. If this does not come back
     // kind="unreachable" the check has stopped firing, and a clean run above means nothing.
@@ -406,7 +449,9 @@ const reader = (needles) => `
   for (const id of ['f1-4x4', 'f1-4x4-bdi', 'f1-decimal', 'f1-decimal-latin', 'f1-magnitude']) {
     for (const r of scan(document.getElementById(id), id, F1_NEEDLES)) synthetic.push(r);
   }
-  for (const id of ['f3-time-short', 'f3-time-long', 'f3-initialism']) {
+  for (const id of ['f3-time-short', 'f3-time-long', 'f3-initialism', 'f3-range-ampm',
+                    'f3-range-ampm-spelled', 'f3-index', 'f3-domain', 'f3-rating',
+                    'f3-falsify-l-left', 'f3-falsify-l-right']) {
     for (const r of scan(document.getElementById(id), id, F3_NEEDLES)) synthetic.push(r);
   }
   for (const id of ['f2-time', 'f2-time-spelled', 'f2-pct', 'f2-pct-spelled', 'f2-spf',
