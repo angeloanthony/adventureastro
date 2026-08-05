@@ -102,6 +102,79 @@ ambitions widened. Every entry above started as a measurement taken for a differ
 
 ---
 
+## 6. A verifier's own interface became something to test, not to read
+
+Added at batch 7c, and it is the sharpest instance of §3 rather than a new idea.
+
+`preflight-ar.mjs` printed its findings and **exited 0 unconditionally**. Its header says its
+whole job is to "fail the cheap way before `npm run build` fails the expensive way", and
+[`AR2-E4-phase2-tight-ceiling.md`](AR2-E4-phase2-tight-ceiling.md) §11.2 lists it as criterion 0,
+*a check that fails*. It could report; it could not fail. Nobody noticed for four batches because
+the script is run by a human who reads its stdout — the output was correct, so the interface was
+never questioned.
+
+**What found it was running a positive control on the exit code rather than on the output.** The
+finding text was right there and had been right there all along; the observable that a build (or a
+`&&` chain, or a future CI wiring) would actually consume was the one nobody had exercised.
+
+This is the same defect `b698d0e` fixed one level over — that commit gave the *checked-nothing*
+case an exit code and left the *checked-something-and-it-failed* case at 0 — which is why the
+entry is about the interface as a category and not about one script:
+
+> **A verifier has two outputs: what it says and what it returns. Only one of them is read by
+> anything other than a person, and it is not the one you are looking at.**
+
+Both are now proven by control at every run of the batch procedure: 0 clean / 1 findings /
+2 never reached a verdict, the B-5b milestone-1 convention.
+
+## 7. "The rule was right and the tool had not been brought along" is now a recurring failure, not an incident
+
+Three occurrences, all in `preflight-ar.mjs`, all with the same shape: the brief was corrected,
+the correction was real, and the instrument implemented a narrower version of it.
+
+| batch | the brief said | the tool did |
+|---|---|---|
+| 6b | the discriminator is the **flanks** | looked **inside** the brackets |
+| 7b | formatter coverage is per-**component** | exempted the phone per-**surface** |
+| 7c | mirrored character at a direction change | tested `(` and `)` **only** |
+
+Batch 7c is the one that names the cure, because its fix is not "add guillemets to the list" —
+it is to stop keeping a list. The check now reads `\p{Bidi_Mirrored}`, the same **property** gate
+4n reads, so the two cannot diverge by omission again.
+
+> **Where a tool must agree with a gate, encode the property the gate encodes — never an
+> enumeration of its current members.** An enumeration can silently fall behind; a property
+> cannot.
+
+The generalisable diagnostic: when a check and a gate are supposed to overlap, compare their
+**alphabets** as well as their logic. 7c's flank logic was a strict superset of the gate's the
+whole time, which is exactly why it read as thorough.
+
+## 8. A diagnostic's confirming print can confirm the wrong thing
+
+Batch 7c, the floor proof. The throwaway prose-stripper was written through a shell heredoc that
+collapsed `\\b` to `\b` — **U+0008 BACKSPACE** rather than a word boundary — so every
+`extractBlock` call silently failed to match and the run deleted two kept blocks along with the
+prose. The proof still held (deleting more than prose only makes it stricter), but the
+corroborating count was not comparable.
+
+The entry is not about escaping. It is about the check that was performed and did not work:
+printing the constructed pattern with `JSON.stringify` to verify it. **`JSON.stringify` renders
+U+0008 as `"\b"` — byte-identical to a literal backslash-b.** The verification step returned the
+same string for the correct pattern and the broken one, so it could not discriminate, and it
+looked like confirmation.
+
+What located it was bisecting the pattern until one component flipped: `<section` matched,
+`<section\b` did not. Same lesson as §3 and the enforceability falsifier — a check that cannot
+come out both ways is decoration — reached here from the least expected direction, a `printf`
+of a regex.
+
+Standing consequence: **diagnostics that carry regexes are written with the file tools, not
+through a shell heredoc**, and the rewritten stripper self-checks that its kept-block counts are
+non-zero rather than trusting that its selectors matched.
+
+---
+
 ## Not yet entries
 
 Recorded so the next session does not re-derive them as new:

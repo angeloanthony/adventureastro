@@ -468,6 +468,114 @@ matches the instrument's predicted `survives` (129 / 54) **exactly** for the sec
 **Framework held under measurement.** No rule was falsified, no instrument changed, and no
 implementation outside the three translated pages and their registry entries was touched.
 
+### 1.49 Batch 7c — `itineraries` closes 9/9 + `things-to-do` 2/2, THE LAST BATCH, CLOSED
+
+**57 of 57 spokes · 677 routes · 58 `ar` pages · whole suite green.** Files: the three
+`weekend-road-trip-from-*` road trips and both `things-to-do` pages. Floors re-frozen
+**423 → 497** and **500 → 509**. Track E's corpus work is complete.
+
+⚠ **THE BATCH WAS FIVE FILES, NOT FOUR.** Batch 7b's own commit message said "only 2 spokes remain
+in this hub", but `itineraries` is 9 and 6 had shipped — 3 remained, plus 2 in `things-to-do`.
+52 + 5 = 57 is what reconciles. The wrong number was carried forward in the handoff notes and was
+caught by counting the registry against the spoke total, not by reading the prose.
+
+**⚠ GATE 4n DID NOT CLEAR ON FIRST CONTACT. The five-batch run ends here**, at one finding:
+
+```
+"«" in <li>  flanked L … R
+    مسافرًا من Front Range «أنهى» الممرات المعتادة
+```
+
+This is §3.2's batch-5 correction verbatim — a guillemet pair around **Arabic** whose preceding
+run is **Latin**. The rule was right, on record, and in the brief. Two things follow.
+
+**⚠⚠ THE PRE-FLIGHT'S FLANK LOGIC WAS A SUPERSET OF THE GATE'S AND ITS CHARACTER ALPHABET WAS A
+STRICT SUBSET.** `preflight-ar.mjs` scanned `(` and `)` only; gate 4n has always read
+`\p{Bidi_Mirrored}`. Batch 6b generalized this check to the FLANKS — citing batch 5, whose
+correction was *about guillemets* — and implemented the generalized rule on parentheses. So the
+script reported **clean** and the first build stopped at 4n.
+
+**Third recurrence in this one file of "the rule was right and the tool had not been brought
+along"** (6b: looked inside the brackets · 7b: the phone exemption's surface scope · 7c: the
+character class). The fix names the **property** instead of a character list, so there is no
+longer a list here that can fall behind the gate's. Widening also required rule 5 to drop *both*
+markdown-link delimiters rather than only the target's parentheses — invisible while the test
+was `()`-only, two spurious direction changes per link the moment it was not.
+
+Controls, the batch-6a standard: **POSITIVE** reproduces gate 4n's finding exactly on the pre-fix
+file · **FALSE-POSITIVE** 0 findings across all 52 previously-shipped `.ar.mdx` sources, a corpus
+4n passes.
+
+**⚠⚠ THE PRE-FLIGHT COULD NOT FAIL — IT PRINTED FINDINGS AND EXITED 0.** Discovered by running a
+positive control on its exit code rather than on its output. The header states the script's whole
+job is to "fail the cheap way before `npm run build` fails the expensive way", and §11.2 lists it
+as criterion 0, *a check that fails*. It had no failure exit. Same shape as the defect `b698d0e`
+fixed one level over: that commit gave the **checked-nothing** case an exit code and left the
+**checked-something-and-it-failed** case at 0. Now 0/1/2 on the B-5b milestone-1 convention, all
+three proven. This is not cosmetic: a §2.3 lock phrase twice in one card raises the settled ceiling
+by 4 per page and unsounds every `ar` floor, **and this script is the only thing that reports it** —
+gate 4i enforces a minimum, so a raised ceiling never turns it red.
+
+⚠ **SLOT 1 CAUGHT TWO NEW DEFECTS BEFORE AUTHORING, AND BOTH HID UNDER THE IGNORED LABEL.**
+
+| shape | label | visual | verdict |
+|---|---|---|---|
+| `~3` | `RTL` | **`3~`** | ✘ approximation marker trails the digit |
+| `2+` | `RTL` | **`+2`** | ✘ reads "plus two", not "2 and up" |
+| `1,500` · `210,000` · `I-80` · `KRX 1000` | `LTR` | as written | ✔ safe bare |
+
+**§3.6.2 is a CLASS, not an observation about ranges.** Batch 7b found `1–2` presenting as
+`rtl-reversed` and inferred the mechanism was single-character operands; `~3` and `2+` are two
+*different* shapes — an approximation marker and a plus — confirming it. Authored around: `نحو 3
+ساعات`, and spelled ordinals for age floors. Slot 2 then found 67 measurable readings across the
+five pages, **all LTR**, negative controls red, and independently rediscovered `1,500`,
+`210,000`, `13,528`, `5,000`, `2.5` — slot 1's predictions confirmed on rendered pages.
+
+⚠ **`Grand Junction` IS IN NEITHER FROZEN LIST** — not a §2.1 exonym, not a §2.2 Latin-verbatim
+name — while both other gateway cities have exonyms (`دنفر`, `سولت ليك سيتي`). Transliterated
+`غراند جنكشن` by analogy, since it is a place reference a reader never matches against a sign or a
+booking system. **Filed for the §5 challenge window as a decision made, not a rule found.**
+
+**ADR-12 was a MEASURED no-op.** All four link forms across all five English sources: **0**
+in-page anchors, with a positive control confirming the same patterns find 7b's two. Recorded as a
+measured exclusion.
+
+Advisory deltas, per §6.3 — the first build was red, so the hidden gates were run directly against
+the same `dist/` bytes **before** any remediation:
+
+| | batch 7b | batch 7c | attribution |
+|---|---|---|---|
+| 4f | 56 | **64** | +8, all on the two `things-to-do` pages, 4 each, 0 on the road trips — the accepted §2.2 class (`UTV`/`Vernal` in an Arabic heading, 2 of them RelatedArticles card headings). 56+8=64 exactly, so nothing was displaced and cancelled |
+| 4h | 1922 | **1922** | see below — this steady number is not what it looks like |
+| 4i | 4 locks / 20 occ | **identical** | no drift, 5th batch running; all 4 are `es`, unrelated to `ar` |
+| 4g | 47650 / 566 | 48169 / 610 | link-dense new pages; anchor identities, advisory |
+| 4q | ar 1 564 039 | ar 1 687 758 | the five authored pages (+123 719) |
+| 4s | 2824 | 2849 | +25 fragments, 0 unresolved |
+
+⚠⚠ **4h HELD AT 1922 BECAUSE NOTHING IS WATCHING ARABIC SEAMS.** Its *page* count moved 592 → 597
+(7 LTR locales × 77, plus 58 `ar`), so `ar` is genuinely in scope. Its *locked-phrase* count could
+not move, because `i18n-gates/4h-seams.json` gives `ar` **0 locks** — the Arabic seam rule
+(B-8b / E-6) is authorized and deferred. "4h identical" is therefore **not** evidence of no seam
+drift in Arabic; it is evidence that no instrument would report any. A steady number was
+attributed to its cause rather than read as a result, which is what batch 7b's 4f lesson asks for.
+
+Guard 1 identical on EOL-normalised content (53 facts). Guard 2 **51 unchanged / 2 up / 0 down**.
+Both floors **PROVEN** on a prose-deleted tree: `gate-4i <dist>` exits **1** at observed 186/497
+and 62/509 while the control on untouched bytes exits **0**, and observed-under-deletion matches
+the instrument's predicted `survives` (186 / 62) **exactly**, for the third batch running.
+
+> ⚠ **THE FLOOR PROOF'S FIRST RUN WAS WRONG, AND ITS OWN DIAGNOSTIC PRINT CONFIRMED THE ERROR.**
+> The throwaway stripper was written through a shell heredoc that collapsed `\\b` to `\b` —
+> **U+0008 BACKSPACE**, not a word boundary — so every `extractBlock` call silently failed and the
+> run deleted `related-articles` and `tour-cta` along with the prose. Observed came back 76/58
+> against a predicted 186/62. The trap is that **`JSON.stringify` renders a backspace as `"\b"`,
+> identical to a literal backslash-b**, so printing the pattern to check it *confirmed* the broken
+> regex. What actually located it was bisecting the pattern until `<section` matched and
+> `<section\b` did not. The gate still failed, because deleting more than prose only makes the
+> proof stricter — but the corroborating number was not comparable until the stripper was rewritten
+> without a shell in the path, and it now self-checks that its kept-block counts are non-zero.
+> `measure-prose-window.mjs` was never affected; the defect was entirely in the diagnostic.
+
 ### 1.5 ⚠ A trend to watch — `dinosaur-country` headroom is narrowing
 
 The settled ceiling grows **6.00/page** while the whole-page count grows **5.25/page**, because
@@ -690,6 +798,13 @@ census. It produced **2 gate-4n findings** in the pilot (E-2 §2.2).
 > boundary where the direction change is** — and it is now a third place that one rule applies.
 > The original claim was measured over guillemets in all-Arabic context and generalised; rule 18,
 > in a brief, for the second time in this same section.
+>
+> **⚠⚠ BATCH 7c SHIPPED THIS EXACT DEFECT ANYWAY, AND THE PRE-FLIGHT SAID CLEAN.** `مسافرًا من
+> Front Range «أنهى» الممرات` — `«` preceded by Latin, flanked `L … R`, one gate-4n finding, one
+> red build. The rule above was already correct and already written down; what was missing was that
+> `preflight-ar.mjs` scanned **`(` and `)` only** while gate 4n reads `\p{Bidi_Mirrored}`. It now
+> reads the property, so guillemets, square brackets and angle brackets are all covered by the same
+> flank test. Fixed at §3.7 and recorded at §1.49.
 
 `→` (U+2192) is `Bidi_Mirrored=No` and stays pointing the wrong way. There were **0** in the
 pilot's English sources; do not introduce one.
@@ -930,6 +1045,24 @@ reader would see the intended sequence. The classification is supporting evidenc
 thing to optimise. `13,528` and `5,000` are re-confirmed safe bare, so the discriminator
 remains the *separator*, not the digit count.
 
+> **⚠⚠ CONFIRMED AS A CLASS (batch 7c) — IT IS NOT ABOUT RANGES.** 7b saw this on `1–2` and
+> reasoned that the mechanism was a single-character operand leaving no interior structure to
+> scramble. Slot 1 in 7c measured two shapes that are **not ranges at all** and both behaved
+> identically — labelled `RTL`, visually wrong:
+>
+> | shape | label | visual | intended reading |
+> |---|---|---|---|
+> | `~3` | `RTL (visual = reversed logical)` | **`3~`** | "approximately 3" |
+> | `2+` | `RTL (visual = reversed logical)` | **`+2`** | "2 and up" |
+>
+> So the class is *any short bare run whose leading marker carries the meaning* — an
+> approximation tilde, a plus, a separator. Two independent shapes reaching the same label from
+> a different construction is what turns 7b's inference into a measured class. Authored around:
+> `نحو 3 ساعات` for approximation, spelled ordinals for an age floor.
+>
+> **The operational rule is unchanged and is the whole point: read the `visual` line, never the
+> label.** An author who had refined the taxonomy instead would still have shipped both of these.
+
 ### 3.7 ⚠⚠ NEW — the bracket rule is the FLANKS, and the pre-flight now decides it that way
 
 §3.3 and §3.5 are two instances of **one** rule, and batch 5 already said so about guillemets:
@@ -963,6 +1096,22 @@ markdown link targets, HTML attributes and tag names are not text nodes at all.
 a bare year within a few characters of each other, and all five of batch 6b's findings were in
 table cells while several hundred body parentheticals passed. Prefer a comma to a parenthesis in
 a table cell.
+
+> **⚠⚠ CORRECTED (batch 7c) — "BRACKET" IS THE `Bidi_Mirrored` PROPERTY, NOT A LIST OF TWO
+> CHARACTERS.** The paragraph above was true of the *logic* and false of the *alphabet*: this
+> script tested `(` and `)` only, so its flank rule was a superset of gate 4n's and its character
+> set a strict subset. A guillemet walked straight through it into a red build (§1.49). The check
+> now uses `\p{Bidi_Mirrored}` — the same property the gate uses — which covers `« »`, `‹ ›`,
+> `[ ]`, `{ }`, `< >` and every other mirrored character at once.
+>
+> Widening it forced a second correction that had been latent: exclusion rule 5 used to collapse
+> `](/path/)` to `]`, removing the target's parentheses and **leaving both square brackets
+> standing**. Harmless while the test was `()`-only; two spurious direction changes per markdown
+> link the moment it was not. It now keeps the link TEXT and drops both delimiters, which is what
+> actually renders — the same principle as the tag and attribute exclusions.
+>
+> **The durable form of the lesson: name the property, never the characters.** A list in the tool
+> can fall behind the gate's; a property cannot.
 
 ## 4. Links — gate 4b allow-list
 
