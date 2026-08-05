@@ -160,6 +160,21 @@ for (const path of INPUTS) {
   //   POSITIVE — reproduces gate 4n's 5 findings exactly on the reconstructed pre-fix files.
   //   FALSE-POSITIVE — 0 findings across all 46 `.ar.mdx` sources, a corpus gate 4n passes.
   // The false-positive control is what found the two exclusions below; neither was predicted.
+  // ⚠ THE CHARACTER CLASS IS THE PROPERTY, NOT A LIST — AND BATCH 7c IS WHY. Until 7c this
+  // scanned `(` and `)` only, while gate 4n has always read `\p{Bidi_Mirrored}`. So the flank
+  // LOGIC was a superset of the gate's and the flank ALPHABET was a strict subset, and the
+  // script reported clean on a batch whose first build then stopped at 4n on a guillemet:
+  //
+  //     مسافرًا من Front Range «أنهى» الممرات      "«" preceded by LATIN -> flanked L … R
+  //
+  // The brief had already been corrected on this exact character. Batch 5 rewrote §3.2 —
+  // "a «» pair around Arabic fails just as hard when the character before it is Latin" — and
+  // batch 6b then generalized the rule here to the FLANKS while implementing it only for
+  // parentheses. THIRD recurrence in this one file of "the rule was right and the tool had
+  // not been brought along" (6b: inside-the-brackets; 7b: the phone's surface scope; 7c: the
+  // character class). Naming the property instead of the characters is what stops a fourth:
+  // there is no longer a list here that can fall behind the gate's.
+  const MIRRORED = /\p{Bidi_Mirrored}/u;
   const ARABIC_L = /\p{Script=Arabic}/u, LATIN_L = /\p{Script=Latin}/u, DIGIT_L = /\p{Nd}/u;
   const dirClass = (ch) => !ch ? null
     : ARABIC_L.test(ch) ? 'R' : LATIN_L.test(ch) ? 'L' : DIGIT_L.test(ch) ? 'N' : null;
@@ -174,7 +189,7 @@ for (const path of INPUTS) {
   const bracketFlankFindings = (t) => {
     const out = [];
     for (let i = 0; i < t.length; i++) {
-      if (t[i] !== '(' && t[i] !== ')') continue;
+      if (!MIRRORED.test(t[i])) continue;
       const before = flankOf(t, i, -1), after = flankOf(t, i, +1);
       // A missing flank is a text-run edge, not a direction change. R…R / L…L / N…N are not
       // changes either. Everything else is what gate 4n reports, in the gate's own vocabulary.
@@ -227,11 +242,20 @@ for (const path of INPUTS) {
       // DOES reverse (E-1b, `349$` via a RelatedArticles description) is a different surface
       // reached by a different component, and it is already covered above.
       .replace(/\$[\d,]+/g, 'ـ')
-      // 5. MARKDOWN LINK TARGETS. `[نصّ](/some/path/)` renders as an anchor whose href is
-      //    never a text node, so those parentheses are not brackets in rendered prose. Left
-      //    in, they produced 19 findings across 2 files that no gate could agree with — the
-      //    batch-6a `style="…"` class in a second syntax, found by the false-positive control.
-      .replace(/\]\([^()\s]*\)/g, ']')
+      // 5. MARKDOWN LINKS — TARGET **AND** DELIMITERS. `[نصّ](/some/path/)` renders as an
+      //    anchor: the href is never a text node, and neither are the square brackets. Only
+      //    the link TEXT renders, so that is what the scan must keep. Left in, the target's
+      //    parentheses produced 19 findings across 2 files that no gate could agree with —
+      //    the batch-6a `style="…"` class in a second syntax, found by the false-positive
+      //    control.
+      //
+      //    ⚠ WIDENED IN BATCH 7c. This rule used to collapse `](/path/)` to `]`, which
+      //    removed the parentheses and left BOTH square brackets standing in the scan. That
+      //    was invisible while the flank test only looked at `(` and `)`; the moment the test
+      //    became the Bidi_Mirrored property below, every markdown link in the corpus turned
+      //    into two spurious direction changes. Same principle as rules 4 and 6 — a source
+      //    delimiter that is not rendered text is not a bracket in rendered prose.
+      .replace(/\[([^\]]*)\]\([^()\s]*\)/g, '$1')
       // 6. TAGS BECOME NEUTRALS, NOT LETTERS. A tag's own name is not rendered text, so
       //    `)</td>` must not read as flanked-by-Latin. Replacing the tag with whitespace
       //    keeps the scan crossing element boundaries, which is what gate 4n itself does —
@@ -261,3 +285,23 @@ for (const path of INPUTS) {
   }
 }
 console.log(bad ? `\n${bad} finding(s)` : '\nclean');
+
+// EXIT CODES (AR-2 batch 7c). Three values, the B-5b milestone-1 convention:
+//   0  checked, and every check passed
+//   1  checked, and something failed
+//   2  never reached a verdict (no input files — b698d0e)
+//
+// ⚠ Until batch 7c this file printed its findings and exited 0 unconditionally, so the header's
+// own statement of purpose — "fail the cheap way before `npm run build` fails the expensive way"
+// — was not implemented: it could report, but it could not fail. `AR2-E4-phase2-tight-ceiling.md`
+// §11.2 lists this script as criterion 0, a check that FAILS on a schema budget, a §3.3/§3.5
+// class, an unregistered slug, or a §2.3 lock phrase twice in one card.
+//
+// That last one is why this is not cosmetic. A lock phrase appearing twice across title +
+// description raises the real settled ceiling by 4 per page and unsounds every `ar` glossary
+// floor, and NOTHING downstream reports it — gate 4i enforces a minimum, so a raised ceiling
+// never turns it red. This script is the only guard, and a guard that exits 0 is advisory.
+//
+// Same shape as the defect b698d0e fixed one level over: that commit gave the "checked nothing"
+// case an exit code and left the "checked something and it failed" case at 0.
+process.exit(bad ? 1 : 0);

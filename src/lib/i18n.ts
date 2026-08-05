@@ -550,6 +550,11 @@ const AR_SLUGS = new Set<string>([
   'itineraries/3-day-adventure-itinerary', // AR-2 Track E, batch 7b
   'itineraries/weekend-fishing-trip-vernal', // AR-2 Track E, batch 7b
   'itineraries/photography-weekend-vernal', // AR-2 Track E, batch 7b
+  'itineraries/weekend-road-trip-from-denver', // AR-2 Track E, batch 7c
+  'itineraries/weekend-road-trip-from-grand-junction', // AR-2 Track E, batch 7c
+  'itineraries/weekend-road-trip-from-salt-lake-city', // AR-2 Track E, batch 7c
+  'things-to-do/fun-things-to-do-vernal-utah-kids', // AR-2 Track E, batch 7c
+  'things-to-do/vernal-utah-attractions', // AR-2 Track E, batch 7c
 ]);
 
 const LOCALE_SLUGS: Partial<Record<Locale, ReadonlySet<string>>> = {
