@@ -149,6 +149,18 @@ const reader = (needles) => `
   // 18+ and 2+ are re-measured rather than assumed: 7c measured 2+ on a different page,
   // and a control that is not re-run is an assumption wearing a measurement's clothes.
   const F2_NEEDLES = ['7am', '7pm', '100%', 'SPF 30', '$1,000', '18+'];
+  // AR-2 Phase F batch 3 (faq / privacy-policy). Two shapes, one genuinely new:
+  //   7:00 12:00  a COLON-separated time. 2.5 measured safe with a period (CS absorbed by W4
+  //               between two numbers of one type) and 10-11 measured BROKEN with a hyphen
+  //               (ES, absorbed only between EN, and W2 already retyped these to AN). A colon
+  //               is also CS, so the period result predicts safe and the hyphen result predicts
+  //               broken — the rules give two answers, which is precisely when to measure.
+  //               Both widths are injected so the RTL-vs-REORDERED label difference (7c's 2+
+  //               against batch 2's 18+) can be read again rather than assumed.
+  //   CCPA        a bare Latin initialism in Arabic prose, as privacy.ts requires it to stay.
+  //               A control: pure-Latin runs are expected LTR, and an expectation that is
+  //               never checked is the thing this instrument exists to replace.
+  const F3_NEEDLES = ['7:00', '12:00', 'CCPA'];
 
   // Not rendered text. Walking these cost 35% of every run and produced nothing but
   // exclusions — CSS rgba literals and the JSON-LD copy of prose measured elsewhere.
@@ -366,6 +378,10 @@ const reader = (needles) => `
     '<p id="f2-money">تبلغ قيمة التأمين $1,000 لكل مركبة.</p>' +
     '<p id="f2-money-spelled">تبلغ قيمة التأمين 1,000 دولار لكل مركبة.</p>' +
     '<p id="f2-agefloor">تشترط الجولة أن يكون السائق 18+ عامًا.</p>' +
+    // AR-2 Phase F batch 3 synthetic controls — see F3_NEEDLES above.
+    '<p id="f3-time-short">يفتح المكتب عند 7:00 صباحًا كل يوم.</p>' +
+    '<p id="f3-time-long">يغلق المكتب عند 12:00 ظهرًا يوم الجمعة.</p>' +
+    '<p id="f3-initialism">ينطبق قانون CCPA على سكان كاليفورنيا.</p>' +
     // POSITIVE CONTROL FOR THE UNREACHABLE CHECK. Full width, zero height, prose inside —
     // the shape of the FAQ regression, minus the FAQ. If this does not come back
     // kind="unreachable" the check has stopped firing, and a clean run above means nothing.
@@ -389,6 +405,9 @@ const reader = (needles) => `
   }
   for (const id of ['f1-4x4', 'f1-4x4-bdi', 'f1-decimal', 'f1-decimal-latin', 'f1-magnitude']) {
     for (const r of scan(document.getElementById(id), id, F1_NEEDLES)) synthetic.push(r);
+  }
+  for (const id of ['f3-time-short', 'f3-time-long', 'f3-initialism']) {
+    for (const r of scan(document.getElementById(id), id, F3_NEEDLES)) synthetic.push(r);
   }
   for (const id of ['f2-time', 'f2-time-spelled', 'f2-pct', 'f2-pct-spelled', 'f2-spf',
                     'f2-money', 'f2-money-spelled', 'f2-agefloor']) {
