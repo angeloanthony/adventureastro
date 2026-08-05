@@ -159,12 +159,32 @@ function englishPool() {
   return pool;
 }
 
-/** The registered Arabic spokes, from the same registry the routes resolve against. */
+/**
+ * The registered Arabic spokes, from the same registry the routes resolve against.
+ *
+ * ⚠ THE EXCLUSION IS STRUCTURAL, NOT A NAME — AND THIS FILE IS WHERE IT MATTERS MOST.
+ * `tightPerPage()` below adds a bound of up to CARD_LIMIT × AR_MAX_PER_CARD for every page
+ * in this list, because the whole model is "a RelatedArticles card renders the target's
+ * title + description, and at most four render". A page that renders NO RelatedArticles
+ * block contributes no cards and must not contribute a bound. Through Track E the only such
+ * registered page was `cancellation-policy`, so the name and the kind coincided; Phase F
+ * registers 19 more, which under the old string would have added ≈76 of ceiling for a pool
+ * that does not exist — inflating `ceilNP` toward the frozen floor and risking a §11.2
+ * criterion-6 verdict, whose remedy is to DROP a live lock, on a fiction.
+ *
+ * A slug is a spoke iff a translated content-collection file backs it — deliverable 1 of
+ * §1.2, the same file the route emission reads. Proven equivalent to the string it replaces
+ * on the tree at the time of the change (58 registered → 57 backed + `cancellation-policy`).
+ * Mirrored in `measure-prose-window.mjs`; the two must agree or the window and the ceiling
+ * are describing different page sets.
+ */
 function registeredArSpokes() {
   const src = readFileSync(path.join(REPO_ROOT, 'src', 'lib', 'i18n.ts'), 'utf8');
   const block = src.match(/const AR_SLUGS = new Set<string>\(\[([\s\S]*?)\]\);/);
   if (!block) throw new Error('AR_SLUGS block not found in src/lib/i18n.ts');
-  return [...block[1].matchAll(/'([^']+)'/g)].map((m) => m[1]).filter((s) => s !== 'cancellation-policy');
+  return [...block[1].matchAll(/'([^']+)'/g)]
+    .map((m) => m[1])
+    .filter((s) => existsSync(path.join(REPO_ROOT, 'src', 'content', `${s}.ar.mdx`)));
 }
 
 /** Read the two ar locks and pair each with its English source forms. */
@@ -414,28 +434,40 @@ if (ARGS.window) {
     } catch { return {}; }
   })();
   // ⚠ POPULATION. `whole`/`prose` above are summed over the registered SPOKES. The census
-  // freezes over EVERY registered ar route, which additionally includes the chrome-only
-  // `cancellation-policy` page. Comparing the two directly is the §10.2 mismatch that predicted
-  // 32/41 against a frozen 33/42, so the inline page's own counts are added rather than
-  // assumed — and if the window did not emit them, that is stated instead of silently ignored.
-  const inlineT = win.inline?.totals ?? null;
-  if (!inlineT) {
-    process.stdout.write('  ⚠ the window emitted no inline page — figures below are SPOKE-SCOPED and will\n'
-      + '    understate the census by that page\'s contribution. Re-run measure-prose-window.mjs.\n');
+  // freezes over EVERY registered ar route, which additionally includes every STATIC page —
+  // pages that render no RelatedArticles, CTA or byline. Comparing the two directly is the
+  // §10.2 mismatch that predicted 32/41 against a frozen 33/42, so the static pages' own
+  // counts are added rather than assumed — and if the window did not emit them, that is
+  // stated instead of silently ignored.
+  //
+  // ⚠ WAS `win.inline`, A SINGLE PAGE, UNTIL PHASE F. It is read as an ARRAY now because the
+  // static set went from one page to twenty. A window written by the pre-Phase-F script has
+  // no `statics` key at all, and that must not read as "no static pages" — a silent zero here
+  // understates `whole` by every static page's contribution and, because criterion 5 is
+  // `survives = whole − prose < floor`, understates `survives` too, which is the direction
+  // that reports a DEAD floor as enforcing. So an absent key is refused, not defaulted.
+  if (!Array.isArray(win.statics)) {
+    process.stderr.write('  ✘ this window has no `statics` array — it was written by a pre-Phase-F\n'
+      + '    measure-prose-window.mjs, whose static population was a single hardcoded page.\n'
+      + '    Refusing to compute criterion 5 against it. Re-run measure-prose-window.mjs.\n');
+    process.exit(2);
   }
+  /** Sum one term across every static page. */
+  const staticSum = (phrase, comp) =>
+    win.statics.reduce((n, s) => n + (s.totals?.[phrase]?.[comp] ?? 0), 0);
   process.stdout.write('  lock'.padEnd(24) + 'floor'.padStart(7) + 'whole'.padStart(8)
     + 'prose'.padStart(8) + 'survives'.padStart(10) + '   verdict\n');
   for (const lock of locks) {
     const rec = out.locks.find((l) => l.id === lock.id);
-    const it = inlineT?.[lock.phrase] ?? null;
     const floor = frozen[lock.phrase];
-    const wholeC = rec.whole + (it?.whole ?? 0);
-    const proseC = rec.prose + (it?.prose ?? 0);
-    const tmplC = rec.tmpl + ((it?.cta ?? 0) + (it?.byline ?? 0) + (it?.chrome ?? 0));
+    const wholeC = rec.whole + staticSum(lock.phrase, 'whole');
+    const proseC = rec.prose + staticSum(lock.phrase, 'prose');
+    const tmplC = rec.tmpl + staticSum(lock.phrase, 'cta')
+      + staticSum(lock.phrase, 'byline') + staticSum(lock.phrase, 'chrome');
     const survives = wholeC - proseC; // what remains with every word of ar prose gone
     const detects = floor !== undefined && survives < floor;
     Object.assign(rec, {
-      censusPages: registered.length + (win.inline ? 1 : 0),
+      censusPages: registered.length + win.statics.length,
       wholeCensus: wholeC, proseCensus: proseC, tmplCensus: tmplC,
       ceilNPCensus: tmplC + rec.modelB,
       frozenFloor: floor, survivesDeletion: survives, detectsDeletion: detects,

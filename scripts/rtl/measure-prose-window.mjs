@@ -46,10 +46,38 @@ import { fileURLToPath } from 'node:url';
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
-const INLINE = 'cancellation-policy';
+/**
+ * SPOKE OR STATIC — A STRUCTURAL TEST, NOT A NAME (AR-2 Phase F).
+ *
+ * ⚠ THIS REPLACED THE HARDCODED STRING `cancellation-policy`, AND PHASE F IS WHY.
+ * A spoke renders RelatedArticles, a CTA and a byline; `decompose()` below splits a page
+ * into exactly those components, so the component model only describes a spoke. Through
+ * Track E the *only* registered static page was `cancellation-policy`, so excluding it by
+ * name and excluding it by kind were the same operation, and the cheaper one was written.
+ *
+ * Phase F registers 19 more static pages — the homepage, nine hub indexes, six site pages
+ * and three standalone pages. Under the old exclusion every one of them would have been
+ * measured as a spoke: harmless here (a static page's content simply all lands in `prose`,
+ * so `whole` and `prose` stay correct and §11.2 criterion 5 stays sound) but NOT harmless
+ * in `measure-ar-frontmatter-ceiling.mjs`, whose `tightPerPage()` adds a bound of up to
+ * CARD_LIMIT × AR_MAX_PER_CARD per registered page. Nineteen pages that render no card at
+ * all would have added ≈76 of ceiling for a pool that does not exist, pushing `ceilNP`
+ * toward the frozen floor and risking a criterion-6 verdict — whose remedy is to DROP a
+ * lock — on a number that describes nothing.
+ *
+ * The test: a slug is a spoke iff a translated content-collection file backs it. That is
+ * the same file §1.2 calls deliverable 1 and the same one the route emission reads, so it
+ * cannot drift from what actually renders. Proven equivalent to the string it replaces on
+ * the tree at the time of the change: 58 registered, 57 backed, 1 unbacked, and the
+ * unbacked one is `cancellation-policy`.
+ *
+ * Same lesson as §3.7's `Bidi_Mirrored` correction, one layer up: name the property, never
+ * the instance. A list of static pages here could fall behind the registry; a rule cannot.
+ */
+const isSpoke = (slug) => existsSync(path.join(REPO_ROOT, 'src', 'content', `${slug}.ar.mdx`));
 
 /**
- * The registered Arabic prose spokes, plus the AR-1 inline page.
+ * The registered Arabic prose spokes, and separately the registered static pages.
  * Slug → the route under each locale.
  *
  * ⚠ This was a hardcoded list of the nine pilot slugs, and §11.0 of
@@ -65,16 +93,15 @@ const INLINE = 'cancellation-policy';
  * same registry the census and the routes resolve against, and it is the one
  * §1.2 of the rollout brief calls the second deliverable of every file.
  */
-function registeredArSpokes() {
+function registeredAr() {
   const src = readFileSync(path.join(REPO_ROOT, 'src', 'lib', 'i18n.ts'), 'utf8');
   const block = src.match(/const AR_SLUGS = new Set<string>\(\[([\s\S]*?)\]\);/);
   if (!block) throw new Error('AR_SLUGS block not found in src/lib/i18n.ts');
-  return [...block[1].matchAll(/'([^']+)'/g)]
-    .map((m) => m[1])
-    .filter((slug) => slug !== INLINE);
+  const all = [...block[1].matchAll(/'([^']+)'/g)].map((m) => m[1]);
+  return { spokes: all.filter(isSpoke), statics: all.filter((s) => !isSpoke(s)) };
 }
 
-const PILOT = registeredArSpokes();
+const { spokes: PILOT, statics: STATICS } = registeredAr();
 
 /**
  * B-11 floor candidates.
@@ -264,9 +291,12 @@ function readPages(root, locale) {
 
 function measureTree(root) {
   const pages = readPages(root, 'ar');
-  const inlinePath = path.join(root, 'ar', INLINE, 'index.html');
-  const inline = existsSync(inlinePath)
-    ? { slug: INLINE, parts: decompose(readFileSync(inlinePath, 'utf8')) } : null;
+  // Every registered STATIC page, decomposed separately from the spoke window for the
+  // reason `isSpoke` states. Missing routes are skipped, not faked — same rule as readPages.
+  const statics = STATICS.map((slug) => {
+    const p = path.join(root, 'ar', slug, 'index.html');
+    return existsSync(p) ? { slug, parts: decompose(readFileSync(p, 'utf8')) } : null;
+  }).filter(Boolean);
 
   const totals = {};
   for (const cand of CANDIDATES) {
@@ -282,7 +312,7 @@ function measureTree(root) {
       totals[term].perPageProse.push(count(parts.prose, forms));
     }
   }
-  return { pages, inline, totals };
+  return { pages, statics, totals };
 }
 
 const args = parseArgs(process.argv.slice(2));
@@ -464,29 +494,34 @@ if (args.baseline) {
 if (args.json) {
   // ⚠ POPULATION, emitted rather than left to be rediscovered.
   //
-  // `totals` covers the registered SPOKES only: `cancellation-policy` is decomposed separately
-  // because it renders no RelatedArticles, no CTA and no byline, so averaging it into a window
-  // built out of those components would be a category error. The census, however, counts EVERY
-  // registered ar route. A consumer that compares a figure from here against a frozen census
-  // figure is therefore comparing two page sets — precisely the mismatch that produced 32/41
-  // against a frozen 33/42 (AR2-E4-phase2 §10.2). So emit the inline page's own per-term counts
-  // and the spoke list: the correction becomes an addition the consumer performs explicitly,
-  // and its absence becomes visible instead of silent.
-  const inlineTotals = {};
-  if (current.inline) {
+  // `totals` covers the registered SPOKES only: static pages are decomposed separately
+  // because they render no RelatedArticles, no CTA and no byline, so averaging them into a
+  // window built out of those components would be a category error. The census, however,
+  // counts EVERY registered ar route. A consumer that compares a figure from here against a
+  // frozen census figure is therefore comparing two page sets — precisely the mismatch that
+  // produced 32/41 against a frozen 33/42 (AR2-E4-phase2 §10.2). So emit each static page's
+  // own per-term counts and the spoke list: the correction becomes an addition the consumer
+  // performs explicitly, and its absence becomes visible instead of silent.
+  //
+  // ⚠ `inline` (a single object, always `cancellation-policy`) BECAME `statics` (an array) in
+  // Phase F. It is renamed rather than kept as an alias so that a consumer written against the
+  // old field fails loudly on a missing key instead of silently reading one static page's
+  // contribution where there are now twenty. Both consumers were updated in the same commit.
+  const staticsOut = current.statics.map(({ slug, parts }) => {
+    const totals = {};
     for (const cand of CANDIDATES) {
       const forms = formsOf(cand);
-      const { parts } = current.inline;
-      inlineTotals[cand.term] = Object.fromEntries(COMPONENTS.map((c) => [c, count(parts[c], forms)]));
-      inlineTotals[cand.term].whole = count(parts.whole, forms);
+      totals[cand.term] = Object.fromEntries(COMPONENTS.map((c) => [c, count(parts[c], forms)]));
+      totals[cand.term].whole = count(parts.whole, forms);
     }
-  }
+    return { slug, totals };
+  });
   writeFileSync(args.json, JSON.stringify({
     root: args.root,
     candidates: CANDIDATES,
     totals: current.totals,
     spokes: current.pages.map((p) => p.slug),
-    inline: current.inline ? { slug: current.inline.slug, totals: inlineTotals } : null,
+    statics: staticsOut,
   }, null, 2) + '\n', 'utf8');
   process.stdout.write(`\nwrote ${args.json}\n`);
 }

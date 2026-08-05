@@ -70,6 +70,99 @@ function cardCount(src, forms) {
 
 let bad = 0;
 const say = (f, msg) => { console.log(`  ${f}: ${msg}`); bad++; };
+/** A coverage statement, not a finding. Never increments `bad`. See SURFACES below. */
+const note = (f, msg) => { console.log(`  ${f}: · ${msg}`); };
+
+/**
+ * SURFACES — WHAT THIS SCRIPT IS POINTED AT (AR-2 Phase F, Arabic locale parity).
+ *
+ * ⚠ FOURTH RECURRENCE OF ONE PATTERN, AND THE FIRST FOUND BEFORE IT COST A BUILD.
+ * Three times this file has been a correct rule aimed at too small a set — batch 6b
+ * (inside-the-brackets, not the flanks), 7b (the phone exempted on both surfaces),
+ * 7c (`(` and `)` instead of `\p{Bidi_Mirrored}`). Each was found by a red build.
+ * This one was found by a control run before any Phase F prose existed: the same
+ * §3.5 defect sentence was put on all three Phase F surfaces and only two reported it.
+ *
+ * Track E was MDX. Phase F's 19 remaining routes are not: their Arabic prose lives in
+ * an `.astro` template and in a `const AR = \`…\`` literal inside a page-content
+ * module. Measured on the pre-change script:
+ *
+ *   .ar.mdx  →  §3.5 finding reported            ✔
+ *   .astro   →  §3.5 finding reported            ✔  (+ 3 findings that do not apply)
+ *   .ts      →  skipped at `no frontmatter`      ✘  BLIND — the flank scan never ran
+ *
+ * FALSE NEGATIVES AND NOISY NEGATIVES ARE DIFFERENT FAILURES, AND THIS FILE HAD BOTH.
+ * The `.ts` case is a false negative: no flank check ran, over ~219 000 characters of
+ * prose. The `.astro` case is worse in a way a finding count hides — it reported
+ * `no title`, `no description` and `not in AR_SLUGS`, all three correct statements
+ * about a parser and none of them a statement about the author's task. A page template
+ * HAS no frontmatter card and is not a spoke, so those are not defects to fix; they are
+ * noise to learn to ignore. An author who learns that lesson has also learned to skim
+ * past the one real §3.5 finding sitting between them. Coverage and trustworthiness fail
+ * together: a check that cannot be read is not a check, so this file now states which
+ * surface it detected and which checks that surface does not carry (`note`, not `say`)
+ * instead of reporting an inapplicable check as a finding.
+ *
+ * FAIL CLOSED ON AN UNRECOGNISED SURFACE. Same principle as the no-input case below:
+ * a file this script cannot classify has not been checked, and must not read as clean.
+ */
+const SURFACES = {
+  mdx:    'MDX spoke — frontmatter card + body prose',
+  astro:  'Astro page template — no frontmatter card, prose in the template',
+  module: 'page-content module — no frontmatter card, prose in the AR literal',
+};
+
+function classifySurface(p) {
+  const n = p.replace(/\\/g, '/');
+  if (/\.ar\.mdx$/.test(n)) return 'mdx';
+  if (/\.astro$/.test(n)) return 'astro';
+  if (/(^|\/)src\/page-content\/[^/]+\.ts$/.test(n)) return 'module';
+  return null;
+}
+
+/**
+ * The AR block of a page-content module. Scanned for an UNESCAPED closing backtick
+ * because these literals legitimately contain escaped ones — `home.ts` interpolates a
+ * whole inline <script> — so a non-greedy regex would end the block at the first of them
+ * and silently scan a fraction of the prose. Returns null for absent, false for
+ * unterminated; the caller distinguishes them because they are different defects.
+ */
+function arModuleBlock(src) {
+  const open = src.match(/\bconst\s+AR\s*(?::\s*string\s*)?=\s*`/);
+  if (!open) return null;
+  const start = open.index + open[0].length;
+  for (let i = start; i < src.length; i++) {
+    if (src[i] === '\\') { i++; continue; }
+    if (src[i] === '`') return src.slice(start, i);
+  }
+  return false;
+}
+
+/**
+ * The rendered surface of an .astro page: the template after the component fence.
+ *
+ * The fence itself is excluded because it is not rendered text — it is imports and the
+ * JSON-LD `schema` string, and gate 4n reads neither. <script> and <style> are dropped
+ * for the same reason and on the gate's own authority, not a judgement call here:
+ * `rendered-text.mjs:109-112` strips both before any gate sees a page, and gate 4n's
+ * header states it does not cover <title> either ("markup isolation is impossible
+ * there"), which is why the existing attribute exclusion below is already aligned with
+ * it. Scanning the fence would report every `(` in an import path or a schema literal.
+ */
+function astroTemplate(src) {
+  const m = src.match(/^---\r?\n[\s\S]*?\r?\n---\r?\n([\s\S]*)$/);
+  return (m ? m[1] : src)
+    .replace(/<script[\s\S]*?<\/script>/gi, '\n')
+    .replace(/<style[\s\S]*?<\/style>/gi, '\n');
+}
+
+/** `src/pages/ar/utv/index.astro` → `utv`; `…/ar/index.astro` → `''`; `…/ar/about.astro` → `about`. */
+function staticSlugOf(p) {
+  const n = p.replace(/\\/g, '/');
+  const m = n.match(/(^|\/)src\/pages\/ar\/(.*)\.astro$/);
+  if (!m) return null;
+  return m[2].replace(/(^|\/)index$/, '');
+}
 
 // FAIL CLOSED ON NO INPUT. This script takes paths as argv, so a bare invocation used to
 // loop zero times and print "clean" — a verifier reporting success for checking nothing,
@@ -85,11 +178,50 @@ if (INPUTS.length === 0) {
 for (const path of INPUTS) {
   const file = path.split(/[\\/]/).pop();
   const src = readFileSync(path, 'utf8');
-  const m = src.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
-  if (!m) { say(file, 'no frontmatter'); continue; }
-  const [, fm, body] = m;
+
+  const surface = classifySurface(path);
+  if (!surface) {
+    say(file, 'unrecognised surface — expected a .ar.mdx spoke, an .astro page, or a '
+      + 'src/page-content/*.ts module. NOTHING in this file was checked.');
+    continue;
+  }
+
+  // `fm` is null on every surface that has no frontmatter card. Every check below that
+  // reads a card is guarded on it and ANNOUNCES the skip, because a silently skipped
+  // check and a passing check are indistinguishable in this script's output.
+  let fm = null, body = null;
+  if (surface === 'mdx') {
+    const m = src.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+    if (!m) { say(file, 'no frontmatter'); continue; }
+    [, fm, body] = m;
+  } else if (surface === 'astro') {
+    body = astroTemplate(src);
+  } else {
+    const block = arModuleBlock(src);
+    if (block === null) {
+      say(file, 'no `const AR = `…`` block — this module carries no Arabic prose yet, so '
+        + 'NOTHING was checked. Author the AR block before running the pre-flight.');
+      continue;
+    }
+    if (block === false) {
+      say(file, 'the `const AR = `…`` literal is unterminated — refusing to scan a partial block');
+      continue;
+    }
+    body = block;
+  }
+  note(file, `surface: ${SURFACES[surface]}`);
+
+  // The whole-file scans below are scoped to the AUTHORED text, not the file. On a
+  // page-content module the file also holds the EN/ES/IT/PT/FR/DE/ZH/JA blocks, and
+  // flagging another locale's arrow or digit as an Arabic finding is the same
+  // trained-to-ignore failure the SURFACES note describes.
+  const authored = surface === 'mdx' ? src : body;
 
   // schema, §2.4 — fails before any gate runs, so check it first.
+  if (fm === null) {
+    note(file, 'not applicable on this surface: §2.4 title/description budgets, the §2.3 '
+      + 'per-card lock ceiling, Assertion C — this page renders no RelatedArticles card');
+  } else {
   // The title cap is NOT in the brief; batch 2b's first build found it at 69/65.
   const title = fm.match(/^title:\s*"([\s\S]*?)"\s*$/m);
   if (!title) say(file, 'no title');
@@ -129,14 +261,15 @@ for (const path of INPUTS) {
       }
     }
   }
+  }
 
-  // policy §3 — no exception, anywhere
-  if (ARABIC_INDIC.test(src)) say(file, 'Arabic-Indic digit present');
-  if (src.includes('→')) say(file, 'U+2192 arrow present (gate 4o)');
+  // policy §3 — no exception, anywhere. Scoped to `authored`: see the note above.
+  if (ARABIC_INDIC.test(authored)) say(file, 'Arabic-Indic digit present');
+  if (authored.includes('→')) say(file, 'U+2192 arrow present (gate 4o)');
   // policy §5.2 — the isolate is <bdi>, never a control character
-  if (/[‎‏⁦-⁩]/.test(src)) say(file, 'bidi control character present');
+  if (/[‎‏⁦-⁩]/.test(authored)) say(file, 'bidi control character present');
   // frontmatter is not markup-processed; bidi-runs.ts isolates named runs only
-  if (/<bdi>/.test(fm)) say(file, '<bdi> in frontmatter — it will render literally');
+  if (fm !== null && /<bdi>/.test(fm)) say(file, '<bdi> in frontmatter — it will render literally');
 
   // §3.3 / §3.5 / §3.7 — the bracket classes, decided the way GATE 4n decides them: by the
   // FLANKS. In frontmatter there is no <bdi> available, so any of these is unfixable by
@@ -201,7 +334,11 @@ for (const path of INPUTS) {
   // Frontmatter is scanned PER QUOTED SCALAR. Its YAML keys (`a:`, `q:`) are Latin letters
   // that never reach a text node, so scanning the block whole would let one FAQ answer's
   // closing bracket take its flank from the next answer's key.
-  const fmScalars = (fm.match(/"(?:[^"\\]|\\.)*"/g) || []).join('\n');
+  const fmScalars = fm === null ? '' : (fm.match(/"(?:[^"\\]|\\.)*"/g) || []).join('\n');
+  // `fixable` is "is <bdi> available on this surface". It is true for MDX body prose and
+  // for both Phase F surfaces — an .astro template and an AR literal are both HTML, so the
+  // §3.5 markup remedy applies unchanged there. It is false only in MDX frontmatter, which
+  // no formatter reaches and where the remedy is always to rephrase.
   for (const [where, text, fixable] of [['frontmatter', fmScalars, false], ['body', body, true]]) {
     // Three things are not direction changes to the text around them, and scanning
     // them produces false positives rather than findings:
@@ -272,16 +409,40 @@ for (const path of INPUTS) {
     }
   }
 
-  // §1.2 deliverable 2 — the silent-divergence failure mode
-  const slug = file.replace(/\.ar\.mdx$/, '');
-  const hub = path.split(/[\\/]/).slice(-2)[0];
-  // Scope to the AR_SLUGS block: every other locale registry holds the same slug
-  // strings, so an unscoped search reports every unregistered page as registered.
+  // §1.2 deliverable 2 — the silent-divergence failure mode.
+  //
+  // EVERY SURFACE HAS A SECOND DELIVERABLE; THEY ARE JUST NOT THE SAME ONE. For a spoke
+  // it is the AR_SLUGS entry. For a Phase F page it is also an AR_SLUGS entry, but the
+  // slug is the STATIC route (`utv`, `about`, `''` for the homepage), not `hub/base-id`.
+  // For a page-content module it is not a route at all — the module emits nothing on its
+  // own, and the way it diverges silently is an authored AR block that `getBodyHtml` never
+  // dispatches to, which renders the ENGLISH fallback on a page that looks translated in
+  // source. That is §1.2's failure mode exactly, one surface over.
   const i18n = readFileSync('src/lib/i18n.ts', 'utf8');
-  const arBlock = i18n.match(/const AR_SLUGS = new Set<string>\(\[([\s\S]*?)\]\);/);
-  if (!arBlock) say(file, 'AR_SLUGS block not found in i18n.ts');
-  else if (!arBlock[1].includes(`'${hub}/${slug}'`)) {
-    say(file, `not in AR_SLUGS — route will not emit as ${hub}/${slug}`);
+  const arSlugBlock = i18n.match(/const AR_SLUGS = new Set<string>\(\[([\s\S]*?)\]\);/);
+  if (!arSlugBlock) say(file, 'AR_SLUGS block not found in i18n.ts');
+  else if (surface === 'mdx') {
+    // Scope to the AR_SLUGS block: every other locale registry holds the same slug
+    // strings, so an unscoped search reports every unregistered page as registered.
+    const slug = file.replace(/\.ar\.mdx$/, '');
+    const hub = path.split(/[\\/]/).slice(-2)[0];
+    if (!arSlugBlock[1].includes(`'${hub}/${slug}'`)) {
+      say(file, `not in AR_SLUGS — route will not emit as ${hub}/${slug}`);
+    }
+  } else if (surface === 'astro') {
+    const slug = staticSlugOf(path);
+    if (slug === null) {
+      note(file, 'not under src/pages/ar/ — no route registration to check');
+    } else if (!arSlugBlock[1].includes(`'${slug}'`)) {
+      say(file, `not in AR_SLUGS — /ar/${slug}${slug && '/'} will build, but the language `
+        + `switcher and hreflang stay silent on it and localeHref() keeps sending links to English`);
+    }
+  } else {
+    const dispatch = /if\s*\(\s*locale\s*===\s*'ar'\s*\)\s*return\s+AR\s*;/.test(src);
+    if (!dispatch) {
+      say(file, "an AR block exists but getBodyHtml() has no `if (locale === 'ar') return AR;` "
+        + 'line — every ar page reading this module will silently render the ENGLISH fallback');
+    }
   }
 }
 console.log(bad ? `\n${bad} finding(s)` : '\nclean');
