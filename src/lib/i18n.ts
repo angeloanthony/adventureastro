@@ -543,6 +543,10 @@ const AR_SLUGS = new Set<string>([
   'guides', // AR-2 Phase F batch 6a
   'hiking', // AR-2 Phase F batch 6a
   'fishing', // AR-2 Phase F batch 6a
+  // AR-2 Phase F batch 6b — the second half of shape B, closing the surface.
+  'camping', // AR-2 Phase F batch 6b
+  'scenic-drives', // AR-2 Phase F batch 6b
+  'itineraries', // AR-2 Phase F batch 6b
   'utv/best-utv-trails-vernal', // AR-2 Track E, E-1 — first prose spoke
   'utv/backcountry-tours-vernal-utah', // AR-2 Track E, E-2
   'utv/side-by-side-rentals-vernal-utah', // AR-2 Track E, E-2
