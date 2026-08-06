@@ -535,6 +535,8 @@ const AR_SLUGS = new Set<string>([
   'dinosaur-national-monument', // AR-2 Phase F batch 4
   'things-to-do', // AR-2 Phase F batch 4
   'things-to-do/best-restaurants-vernal-utah', // AR-2 Phase F batch 4
+  // AR-2 Phase F batch 5 — the only shape D page: CityLayout + a cities collection entry.
+  'from/salt-lake-city', // AR-2 Phase F batch 5
   'utv/best-utv-trails-vernal', // AR-2 Track E, E-1 — first prose spoke
   'utv/backcountry-tours-vernal-utah', // AR-2 Track E, E-2
   'utv/side-by-side-rentals-vernal-utah', // AR-2 Track E, E-2

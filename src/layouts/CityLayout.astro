@@ -35,23 +35,40 @@ interface Props {
   /** Localized override for the English-only `routeSummary` collection field.
    *  The `cities` collection is English-only by design (P3D), so a localized
    *  page passes its own route sentence here; road numbers and place names
-   *  stay English per the frozen never-translate list. `nearestAirport` needs
-   *  no override — an airport's official name is a proper noun in every
-   *  locale's shipped prose. */
+   *  stay English per the frozen never-translate list. */
   routeSummary?: string;
+  /** ⚠ THIS OVERRIDE EXISTS BECAUSE THE COMMENT ABOVE USED TO SAY IT WAS UNNECESSARY.
+   *
+   *  The original claim was: "`nearestAirport` needs no override — an airport's official name
+   *  is a proper noun in every locale's shipped prose." That is true of the NAME and false of
+   *  the STRING, and the difference only becomes visible in an RTL locale.
+   *
+   *  `QuickFacts` renders each value as a bare `<dd>{value}</dd>` with no isolation, and the
+   *  shipped English value ends in a parenthetical — `Salt Lake City International Airport
+   *  (SLC)`. In an RTL page that closing bracket sits between a Latin run and the paragraph
+   *  direction, which is ADR-10's invariant exactly. Measured before any Arabic prose existed,
+   *  by injecting the value alone into a built `ar` page: gate 4n reports
+   *  `")" in <dd> flanked L … R` and EXITS 1. It is a build blocker, not an advisory.
+   *
+   *  Authoring cannot reach it — the string is in the collection, not the page — so the fix has
+   *  to be a prop, and it mirrors `routeSummary` exactly. Every locale that does not pass it
+   *  keeps `city.nearestAirport` byte-for-byte, so this adds a capability and changes no
+   *  existing output. An assumption that held for eight locales expired at the RTL boundary;
+   *  same shape as the two recorded in AR2-PhaseF-plan.md §3. */
+  nearestAirport?: string;
   /** Curated links to relevant existing spokes/pillars — every city page
    *  supplies its own (RelatedArticles isn't reusable here: cities aren't
    *  a hub collection, so there's no tag-matching entry to key off). */
   relatedLinks?: RelatedLink[];
 }
-const { title, description, path, heroImage, breadcrumbs, city, routeSummary, relatedLinks = [] } = Astro.props;
+const { title, description, path, heroImage, breadcrumbs, city, routeSummary, nearestAirport, relatedLinks = [] } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 
 const quickFacts = [
   { label: t('city.driveTime', lang), value: t('city.driveTimeValue', lang, { n: city.driveTimeHours }) },
   { label: t('city.distance', lang), value: t('city.distanceValue', lang, { n: city.driveMiles }) },
   { label: t('city.route', lang), value: routeSummary ?? city.routeSummary },
-  ...(city.nearestAirport ? [{ label: t('city.nearestAirport', lang), value: city.nearestAirport }] : []),
+  ...(nearestAirport ?? city.nearestAirport ? [{ label: t('city.nearestAirport', lang), value: nearestAirport ?? city.nearestAirport }] : []),
 ];
 ---
 <BaseLayout>

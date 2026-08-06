@@ -390,6 +390,28 @@ for (const path of INPUTS) {
       //    form does not match (it needs `=` immediately before the quote), so frontmatter
       //    FAQ answers are untouched.
       .replace(/\s[a-zA-Z-]+="[^"]*"/g, ' ')
+      // 5. ASTRO / JSX EXPRESSION CONTAINERS IN BODY POSITION. `{` and `}` are
+      //    `Bidi_Mirrored=Yes`, so widening this check to the Unicode property (batch 7c)
+      //    correctly picked them up — and on an `.astro` body they are TEMPLATE SYNTAX that
+      //    never reaches a text node, exactly like the tags and attributes above. Shape D is
+      //    the first page to interpolate in body position (`{city.driveMiles}`,
+      //    `{SITE.phoneDisplay}`); batches 3 and 4 never tripped it because all their
+      //    expressions sat in attribute position, which rule 4 already covered. Eight findings,
+      //    all syntax. Second half of the same lesson as 7c: naming the PROPERTY was right, and
+      //    the exclusion list has to keep up with it.
+      //
+      //    ⚠ REPLACED WITH A SPACE, DELIBERATELY NOT WITH A TATWEEL. A `<bdi>` collapses to a
+      //    tatweel below because it genuinely isolates whatever is inside it. An expression
+      //    isolates nothing — its rendered value could be a digit run, a Latin name or a bare
+      //    phone — and a source scanner cannot know which. Collapsing it to an Arabic-script
+      //    character would make its flanks LOOK Arabic and would have hidden the real defect
+      //    sitting underneath these eight (an uninsulated `{SITE.phoneDisplay}` in Arabic
+      //    prose). A space lets the flank scan reach the genuine neighbours instead.
+      //
+      //    So this check no longer asserts anything about interpolated VALUES, and it should
+      //    not: gate 4n reads rendered output and remains the authority for them. This is a
+      //    source-side pre-flight, and its job is to stop reporting syntax as a defect.
+      .replace(/\{(?!\/\*)[^{}]*\}/g, ' ')
       .replace(/<bdi>[\s\S]*?<\/bdi>/g, 'ـ')
       // ⚠ THE NAMED-RUN EXEMPTIONS ARE SURFACE-SCOPED, AND BATCH 7b IS WHY. `bidi-runs.ts`
       // coverage is per-COMPONENT, not per-surface: FAQ frontmatter reaches the formatter

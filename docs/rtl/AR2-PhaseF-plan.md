@@ -659,6 +659,132 @@ rather than padded.
 
 ---
 
+## 5.5 Batch 4 — `utv` + `dinosaur-national-monument` + `things-to-do` + `things-to-do/best-restaurants-vernal-utah`, CLOSED
+
+**69 of 77 ar routes · 688 site routes · 69 `ar` pages · SHAPE A IS COMPLETE.**
+**Gate 4n returned ZERO findings for the fourth Phase F batch running.**
+First build **RED at gate 4m, predicted in advance** — the contract, not a regression.
+
+### Probe slot 1 was built to try to BREAK the rule, on two neutrals it had never met
+
+§5.4 closed with a rule that had survived one asymmetric test. This batch built two more, each a
+pair differing only in **which side the Latin letter sits on**, on a different neutral:
+
+| pair | shape | predicted | visual | |
+|---|---|---|---|---|
+| hyphen | `US-191` — letter FIRST | LTR | `US-191` | ✔ |
+| | `3-hour` — letter SECOND | reversed | **`hour-3`** | ✔ |
+| degree | `90s°F` — letter BEFORE `°` | LTR | `90s°F` | ✔ |
+| | `95°F` — built-in control | reversed | **`F°95`** | ✔ |
+
+The degree pair is the sharp one: **inserting a single `s` turns a measured defect into a safe
+run.** The project had only ever seen `°` reverse. Two independent pairs, on two neutrals, both
+splitting as predicted, is as much as a rule of this kind can be asked for — and it remains a
+rule for *predicting what to measure*, not a licence to skip slot 1.
+
+Also measured and authored around: `1,500+`→`+1,500`, `13,000-foot`→`foot-13,000`,
+`$349/machine`→`machine/349$`, `~15–20`→`20–15~`.
+
+### ⚠⚠ A NEW FINDING CLASS — TWO FROZEN RULES COLLIDE ON A BUSINESS NAME
+
+`7-11 Ranch Restaurant` is simultaneously:
+
+- a **§2.2 name** — Latin, verbatim, because a reader matches it against a sign; and
+- a **§3.6 shape** — a bare digit-separator-digit run, the founding defect class.
+
+Measured, negative controls red in the same pass:
+
+| authored | visual | |
+|---|---|---|
+| `7-11 Ranch` bare | **`Ranch 11-7`** | ✘ a real business name, printed backwards |
+| `<bdi>7-11 Ranch</bdi>` | `7-11 Ranch` | ✔ |
+
+**Following §2.2 alone would have shipped it, and no gate in this repository can see it** — gate
+4n reads `\p{Bidi_Mirrored}` and a hyphen is not mirrored. Every previous finding of this kind
+was a *number*; this is an **identity**. The resolution satisfies both contracts rather than
+making an exception to either: the string is unchanged and the rendering is corrected.
+
+> **Where the remedy is unavailable, the fix moves into the markup.** The coupon modal writes
+> restaurant names with `textContent`, where no markup reaches — and policy §5.2 forbids
+> `U+200E/U+200F/U+2066–2069`, closing the usual escape hatch. Fixed by moving the id one element
+> in: `modalRestaurant` and `modalCode` are now `<bdi>` elements *inside* their containers, so
+> `getElementById(...).textContent = r` still resolves to the same id and the value lands
+> isolated. `modalDiscount` is deliberately NOT isolated — its string is Arabic.
+>
+> ⚠ And the ItemList/Restaurant JSON-LD carrying the same name is **not** isolated either.
+> Structured data is parser-consumed and never laid out, so there is no visual order to get
+> wrong and a `<bdi>` there would be literal markup inside a string. **Isolate what renders,
+> never what is parsed** — the same line batch 3 drew for the phone number in the FAQ schema.
+
+### The asserted transform — a method, not a shortcut
+
+`utv.ts` is ~200 lines of near-identical embed markup around a little prose. Its AR block was
+**built by transforming the English literal**, with every replacement required to match a stated
+occurrence count or the transform refuses to run, followed by structural proof that the carousel
+survived byte-identical: **24 iframes, 21 dots, identical YouTube id sequence,
+`${DOCS_BEACH_CAROUSEL_JS}` intact.** The same was done for the restaurant page's 110-line CSS
+block and its 12-entry business-data array.
+
+**It caught a real defect immediately:** a `'` escape landed literally as `Doc's Beach`.
+Retyped by hand that reads as a translation typo; asserted, it is a failed check. Transcription
+is where silent divergence hides, and this converts transcription into an assertion with a
+stated expected input and a refusal on mismatch.
+
+### Advisory movements, every one attributed
+
+| number | batch 3 | batch 4 | attribution |
+|---|---:|---:|---|
+| routes | 684 | 688 | the four new pages |
+| 4n rtl pages | 65 | 69 | +4, **0 findings** |
+| 4o in-scope files | 99 | 103 | the four new `.astro` files |
+| 4f advisory | 71 | **80** | exactly 9 — `/ar/utv/` 1, `/ar/dinosaur-national-monument/` 3, `/ar/things-to-do/` 2, `/ar/…/best-restaurants-vernal-utah/` 3. All the §2.2 licensed `UTV` class |
+| 4g review candidates | 623 | **672** | exactly 49. Set-difference against all 65 pre-existing `ar` pages finds **50** fresh anchor texts; the one the gate does not count is `📞 (435) 781-0099`, which contains **no letters at all** — the `ar` approved list is entirely pure-Latin place names, no phones |
+| 4g approved identities | 301 | 301 | **steady** |
+| 4m pages / references | 34 / 312 | **35 / 336** | +1 page, **+24 references** = the iframe count, not the video count |
+| 4m distinct videos | 30 | 30 | **steady** — all 21 ids on the new page already existed in the corpus |
+| 4i advisory | 20 / 4 locks | 20 / 4 locks | **steady** |
+| 4s fragments | 2862 | 2862 | **steady**, 0 unresolved — confirms the pre-authoring enumeration, which found zero fragment hrefs in all four modules |
+
+**Links.** 16 targets switched to `/ar/`, 7 kept English (`/`, `/camping/`, `/fishing/`,
+`/from/salt-lake-city/`, `/guides/`, `/itineraries/`, `/scenic-drives/`) — all resolved
+mechanically against `AR_SLUGS` before authoring, not by eye.
+
+### Gate 4m — predicted, then handled exactly as §5.3 prescribes
+
+The first build failed with **exactly one** violation: `ar/utv/index.html` carries 21 videos but
+is not in the baseline. Per §6.3 the eight gates hidden behind 4m by the `&&` chain were run
+individually **against the same `dist/` before the merge**, so "no regressions" is a measurement:
+all eight green, and every number above was frozen from that pre-merge run.
+
+The merge asserted **parity first, add-only second**: every `ar` video route exists in English
+(the only en-only entry is `index.html`, the untranslated homepage), then 1 added, **0 changed, 0
+removed**, with `$doc`, `state`, `divergent` and `refCounts` all preserved.
+
+### Census and floors
+
+GUARD 1 clean. GUARD 2: **2 increased, 51 steady, 0 decreased, 0 disappeared.** Floors re-frozen
+**505 → 514** and **545 → 566**; the increases (+9, +21) equal the four pages' own rendered counts
+exactly — `utv` 2+8, `dnm` 2+4, `things-to-do` 5+5, `best-restaurants` 0+4. Criterion 6:
+`ceilNP` 371 < 514 and 320 < 566. Criterion 5 proven by experiment — 62 pages stripped,
+1 486 268 Arabic characters deleted from `<main>`, **2 violations, exit 1**; real tree green;
+`npm run gates:dist` green end to end afterwards.
+
+> ### ⚠ A PREDICTION THAT CAME OUT WRONG BY ONE, AND WHY IT MATTERS
+>
+> Batch 4 was predicted to raise the criterion-5 population from 59 to **63** — four new pages,
+> all rendering `<main>`. Measured: **62**, and 7 `ar` pages now render no `<main>` rather than 6.
+>
+> **`utv` uses `<div class="trail-main">`, not a `<main>` element.** Three of the four joined the
+> measured population; the fourth joined the 100%-chrome class instead. The prediction came from
+> the page *category* — "hub pillars are article pages, article pages have `<main>`" — and the
+> category was not the variable. That is the same error §5.2 and §5.3 already record twice, from
+> a third direction, and it is exactly why §5.3 says **measure it at every re-freeze, do not
+> project it.** The margin arithmetic is unaffected (309/449 before the refresh, 318/470 after),
+> and nothing about the verdicts changes — but a prediction stated in advance and falsified by
+> measurement is worth more on the record than a number that was merely read off.
+
+---
+
 ## 6. Known deferred items, unchanged
 
 Tracked backlog, not Phase F translation work. Do not implement without the trigger:

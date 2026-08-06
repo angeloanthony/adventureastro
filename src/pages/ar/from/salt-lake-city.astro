@@ -1,0 +1,127 @@
+---
+// ar/from/salt-lake-city.astro — Arabic city landing page (AR-2 Phase F batch 5).
+// Mirrors src/pages/from/salt-lake-city.astro. FIRST AND ONLY SHAPE D PAGE.
+//
+// SHAPE D, characterized before a word was authored:
+//   CityLayout + a `cities` content-collection entry via getEntry() + QuickFacts +
+//   GatewayRoutes + FaqAccordion. There is NO page-content module — prose lives in the default
+//   slot, and the structured facts come from the collection.
+//
+// ⚠ THE COLLECTION IS ENGLISH-ONLY BY DESIGN (P3D) AND IS NOT MODIFIED HERE. A localized page
+// reuses the locale-neutral numerics (driveTimeHours, driveMiles) and passes translated strings
+// as PROPS. `title`/`description` are hardcoded Arabic literals rather than city.title/.description.
+//
+// ⚠⚠ `nearestAirport` NEEDED A NEW PROP, AND THAT WAS A BUILD BLOCKER FOUND BEFORE AUTHORING.
+// QuickFacts renders `<dd>{value}</dd>` with no isolation, and the shipped English value ends in
+// a parenthetical — `Salt Lake City International Airport (SLC)`. Injected alone into a built
+// `ar` page, gate 4n reports `")" in <dd> flanked L … R` and EXITS 1. Authoring cannot reach a
+// string that lives in the collection, so CityLayout gained a `nearestAirport?` override that
+// mirrors `routeSummary?`. The Arabic value below ends on an Arabic word and carries no mirrored
+// character at all.
+//
+// §2.1 vs §4.2, BOTH IN THE SAME SENTENCE ON THIS PAGE: `Salt Lake City` is a frozen exonym
+// (`سولت ليك سيتي`) when it names the place, and stays LATIN inside the institution name
+// `Salt Lake City International Airport`. §4.2 wins inside a proper name — the third recorded
+// instance of that overlap, and the first where both readings appear in one paragraph.
+// `Heber City`, `Duchesne`, `Roosevelt` and `Silver Creek Junction` stay Latin: they are route
+// waypoints a reader matches against a road sign, which is §2.2's own test, not place references.
+//
+// PROBE SLOT 1 (negative controls red in the same pass): `I-80 E`, `US-40 E`, `SLC` and `175`
+// all measured LTR bare and are written bare.
+//
+// §4: `/guides/` keeps its English path — the guides hub is shape B and not yet translated.
+import CityLayout from '../../../layouts/CityLayout.astro';
+import GatewayRoutes from '../../../components/content/GatewayRoutes.astro';
+import FaqAccordion from '../../../components/content/FaqAccordion.astro';
+import { getEntry } from 'astro:content';
+import { SITE } from '../../../config/site';
+
+const cityEntry = await getEntry('cities', 'salt-lake-city');
+if (!cityEntry) throw new Error('cities/salt-lake-city.json entry not found');
+const city = cityEntry.data;
+
+const faq = [
+  {
+    q: 'كم تبعد Vernal في يوتا عن سولت ليك سيتي؟',
+    a: `تقع Vernal على بعد نحو ${city.driveTimeHours} ساعات شرق سولت ليك سيتي، أي ما يقارب ${city.driveMiles} ميلًا، عبر I-80 E ثم US-40 E. ويمرّ الطريق بمدن Heber City وDuchesne وRoosevelt قبل الوصول إلى Vernal.`,
+  },
+  {
+    q: 'إلى أي مطار ينبغي أن أطير لحضور جولة UTV في Vernal؟',
+    a: 'مطار Salt Lake City International Airport، ورمزه SLC، هو أقرب مطار رئيسي تتوفّر فيه رحلات تجارية منتظمة. ومنه تكون القيادة إلى Vernal شرقًا عبر I-80 ثم US-40 مباشرة وواضحة، إذ لا يوجد مطار تجاري في Vernal نفسها.',
+  },
+  {
+    q: 'هل يمكنني خوض جولة UTV في Vernal في رحلة يوم واحد من سولت ليك سيتي؟',
+    a: `ذلك ممكن لكنه مرهق، فمع نحو ${city.driveTimeHours} ساعات من القيادة في كل اتجاه إضافة إلى جولة مُرشَدة مدتها 3 ساعات، يفضّل معظم الزوّار القادمين من سولت ليك سيتي المبيت ليلة في Vernal تفاديًا ليوم طويل جدًا على الطريق.`,
+  },
+];
+---
+<CityLayout
+  title="جولات UTV قرب Vernal في يوتا — دليل الزائر القادم من سولت ليك سيتي"
+  description="من سولت ليك سيتي إلى Vernal في يوتا لخوض جولة UTV مُرشَدة بمركبات Kawasaki KRX 1000. الطريق شرقًا عبر I-80 وUS-40، ومدة القيادة والمسافة، وتخطيط الرحلة انطلاقًا من مطار SLC، وما ينبغي تأكيده قبل المغادرة."
+  path="/ar/from/salt-lake-city/"
+  breadcrumbs={[{ label: 'Salt Lake City' }]}
+  city={city}
+  routeSummary="I-80 E ثم US-40 E عبر Heber City وDuchesne وRoosevelt"
+  nearestAirport="مطار Salt Lake City International Airport، ورمزه SLC"
+  relatedLinks={[
+    {
+      title: 'أفضل مسارات UTV قرب Vernal',
+      description: 'أنظمة المسارات المُرشَدة الخمسة كلها، مع تضاريس كل مسار ودرجة صعوبته.',
+      href: '/ar/utv/best-utv-trails-vernal/',
+    },
+    {
+      title: 'دليل طقس Vernal في يوتا',
+      description: 'الأحوال شهرًا بشهر لمساعدتك على اختيار موعد سفرك.',
+      href: '/ar/guides/vernal-weather-guide/',
+    },
+    {
+      title: 'ماذا تحضر معك في جولة UTV',
+      description: 'قائمة تحضير كاملة ليوم جولتك.',
+      href: '/ar/guides/what-to-bring/',
+    },
+    {
+      title: 'جولات UTV قرب Dinosaur National Monument',
+      description: 'اجمع بين جولتك وزيارة قاعة Quarry Exhibit Hall.',
+      href: '/ar/dinosaur-national-monument/',
+    },
+  ]}
+>
+  <h1>جولات UTV قرب Vernal في يوتا — دليل الزائر القادم من سولت ليك سيتي</h1>
+
+  <div class="article-summary-box">
+    هل ستقود من سولت ليك سيتي؟ تقع Vernal على بعد نحو {city.driveTimeHours} ساعات شرقًا عبر I-80 وUS-40، في طريق خلاب يمرّ بمدن Heber City وDuchesne وRoosevelt وصولًا إلى أرض الديناصورات في يوتا. وتنظّم شركة Adventure Tours Vernal جولات مُرشَدة بمركبات Kawasaki KRX 1000 بمقعدين عبر المناطق النائية المحيطة بـDinosaur National Monument.
+  </div>
+
+  <h2>القيادة شرقًا</h2>
+  <p>
+    من سولت ليك سيتي يتبع الطريق إلى Vernal مسار I-80 E حتى Silver Creek Junction، ثم US-40 E عبر Heber City وDuchesne وRoosevelt قبل الوصول إلى Vernal. والمسافة نحو {city.driveMiles} ميلًا و{city.driveTimeHours} ساعات من القيادة، معظمها عبر صحراء يوتا المرتفعة المفتوحة ومشاهد الجبال، فهي رحلة يوم واحد يسيرة شرقًا من مدينة المطار، أو المرحلة الأولى من رحلة أطول في منطقة Uintah Basin.
+  </p>
+
+  <h2>لماذا يختار زوّار سولت ليك سيتي وجهة Vernal</h2>
+  <p>
+    مطار Salt Lake City International Airport، ورمزه SLC، هو أقرب مطار رئيسي إلى Vernal تتوفّر فيه رحلات تجارية منتظمة، ما يجعل Vernal إضافة سهلة لبرنامج القادمين جوًّا إلى يوتا. وحين تصل إلى Vernal تقدّم لك شركة Adventure Tours Vernal خمسة أنظمة من المسارات المُرشَدة — Doc's Beach وMoonshine Arch وAshley Gorge وOutlaw Trail وAsphalt Ridge — مع وصول ميسّر إلى <a href="/ar/dinosaur-national-monument/">Dinosaur National Monument</a> على بعد 20 دقيقة من البلدة. وإن كان لديك يوم إضافي فيستحقّ الأمر أن تمدّ الرحلة ساعة شمالًا إلى <a href="/ar/guides/ultimate-guide-to-flaming-gorge/">Flaming Gorge</a> لصيد الأسماك في البحيرة والإبحار والطرق السياحية بين الأخاديد الحمراء.
+  </p>
+  <p>
+    ويقود كل جولة المالكان Dave and Trudy Wilson على متن مركبات Kawasaki KRX 1000 بمقعدين المزوّدة بممتصّات FOX 2.5 PODIUM LSC. ولا تُشترط أي خبرة سابقة بمركبات UTV، فالتعليمات الكاملة للسلامة وجميع معدّات الأمان مشمولة. <a href="/ar/booking/">تحقّق من المواعيد واحجز جولتك</a> متى كنت مستعدًّا، أو اطّلع على <a href="/guides/">أدلّة السفر</a> لمعرفة ما ترتديه وما تحزمه وطقس كل موسم قبل أن تنطلق.
+  </p>
+
+  <h2>قبل أن تتّجه شرقًا</h2>
+  <p>
+    إن كان Dinosaur National Monument ضمن برنامجك فاقرأ <a href="/ar/dinosaur-national-monument/visiting-dinosaur-national-monument/">دليلنا الشامل لزيارة Dinosaur National Monument</a> قبل مغادرتك سولت ليك سيتي. فهو يشرح كم من الوقت ينبغي أن تخصّص، وأفضل الطرق السياحية ومحطات النقوش الصخرية، وكيف تجمع بين زيارة النصب وجولة UTV مُرشَدة.
+  </p>
+
+  <div class="article-tip">
+    <strong>نصيحة للتخطيط:</strong> اتصل بـDave أو Trudy على <bdi><a href={SITE.phoneHrefDash}>{SITE.phoneDisplay}</a></bdi> للتأكّد من أحوال المسارات والتوقيت قبل أن تقطع الطريق من سولت ليك سيتي، وبخاصة خارج ذروة الموسم، ويمكنك الاطّلاع كذلك على <a href="/ar/guides/vernal-weather-guide/">دليل طقس Vernal</a>.
+  </div>
+
+  <!-- TODO (owner input): Salt-Lake-specific visitor tips (e.g. best
+       departure time to avoid I-80/US-40 traffic, recommended overnight
+       stop) and original photography of the drive route are not yet
+       available. Add once supplied — do not invent. Mirrors the English
+       source's TODO verbatim; not user-facing. -->
+
+  <GatewayRoutes />
+
+  <h2>الأسئلة الشائعة</h2>
+  <FaqAccordion faq={faq} />
+</CityLayout>

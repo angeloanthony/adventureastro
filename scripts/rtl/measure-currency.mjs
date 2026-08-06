@@ -225,6 +225,11 @@ const reader = (needles) => `
   // this particular name IS a bare digit-separator-digit run — the founding defect class. If it
   // reverses, the site would print a real business name wrong, and no gate can see it. Measured
   // bare and isolated, because the remedy has to be known before the name is written.
+  // AR-2 Phase F batch 5 (from/salt-lake-city, shape D first contact). Constructs unique to a
+  // city landing page. I-80 measured LTR in 7c, but never with a TRAILING standalone direction
+  // letter, which is the shape the route sentence actually uses; SLC is the initialism class
+  // (CCPA) re-run rather than assumed. 175 and 3 are bare magnitudes beside Arabic unit nouns.
+  const F5_NEEDLES = ['I-80 E', 'US-40 E', 'SLC', '175', '3 ساعات'];
   const F4_NEEDLES = ['US-191', '3-hour', '90s°F', '1,500+', '13,000-foot', '$349/machine', '~15–20',
                       '7-11 Ranch', '7-11'];
 
@@ -463,6 +468,9 @@ const reader = (needles) => `
     '<p id="f4-tilde-range">تستغرق الرحلة ~15–20 دقيقة بالسيارة.</p>' +
     '<p id="f4-name-bare">يقدّم مطعم 7-11 Ranch وجبات غربية دسمة.</p>' +
     '<p id="f4-name-bdi">يقدّم مطعم <bdi>7-11 Ranch</bdi> وجبات غربية دسمة.</p>' +
+    '<p id="f5-hwy-e">يتبع الطريق I-80 E ثم US-40 E شرقًا.</p>' +
+    '<p id="f5-slc">يقع مطار SLC على بعد ساعات.</p>' +
+    '<p id="f5-quickfacts">المسافة 175 ميل ومدة القيادة 3 ساعات.</p>' +
     '<p id="f3-falsify-l-left">يفتح المكتب من 7am–7 طوال الأسبوع.</p>' +
     '<p id="f3-falsify-l-right">يفتح المكتب من 7–7pm طوال الأسبوع.</p>' +
     // POSITIVE CONTROL FOR THE UNREACHABLE CHECK. Full width, zero height, prose inside —
@@ -498,6 +506,9 @@ const reader = (needles) => `
                     'f4-magnitude-plus', 'f4-magnitude-word', 'f4-price-slash', 'f4-tilde-range',
                     'f4-name-bare', 'f4-name-bdi']) {
     for (const r of scan(document.getElementById(id), id, F4_NEEDLES)) synthetic.push(r);
+  }
+  for (const id of ['f5-hwy-e', 'f5-slc', 'f5-quickfacts']) {
+    for (const r of scan(document.getElementById(id), id, F5_NEEDLES)) synthetic.push(r);
   }
   for (const id of ['f2-time', 'f2-time-spelled', 'f2-pct', 'f2-pct-spelled', 'f2-spf',
                     'f2-money', 'f2-money-spelled', 'f2-agefloor']) {
