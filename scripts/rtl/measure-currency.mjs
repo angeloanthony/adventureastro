@@ -230,6 +230,10 @@ const reader = (needles) => `
   // letter, which is the shape the route sentence actually uses; SLC is the initialism class
   // (CCPA) re-run rather than assumed. 175 and 3 are bare magnitudes beside Arabic unit nouns.
   const F5_NEEDLES = ['I-80 E', 'US-40 E', 'SLC', '175', '3 ساعات'];
+  // AR-2 Phase F batch 6a (shape B: guides / hiking / fishing). One genuinely new shape in the
+  // three pages: a range COMPOUNDED with a trailing plus. Both operands are separately measured
+  // reversing (10-11 and 2+), so the compound is predictable — and predictable is not measured.
+  const F6_NEEDLES = ['30–90+'];
   const F4_NEEDLES = ['US-191', '3-hour', '90s°F', '1,500+', '13,000-foot', '$349/machine', '~15–20',
                       '7-11 Ranch', '7-11'];
 
@@ -471,6 +475,7 @@ const reader = (needles) => `
     '<p id="f5-hwy-e">يتبع الطريق I-80 E ثم US-40 E شرقًا.</p>' +
     '<p id="f5-slc">يقع مطار SLC على بعد ساعات.</p>' +
     '<p id="f5-quickfacts">المسافة 175 ميل ومدة القيادة 3 ساعات.</p>' +
+    '<p id="f6-range-plus">ترى الطيور بأعداد 30–90+ في الموسم.</p>' +
     '<p id="f3-falsify-l-left">يفتح المكتب من 7am–7 طوال الأسبوع.</p>' +
     '<p id="f3-falsify-l-right">يفتح المكتب من 7–7pm طوال الأسبوع.</p>' +
     // POSITIVE CONTROL FOR THE UNREACHABLE CHECK. Full width, zero height, prose inside —
@@ -509,6 +514,9 @@ const reader = (needles) => `
   }
   for (const id of ['f5-hwy-e', 'f5-slc', 'f5-quickfacts']) {
     for (const r of scan(document.getElementById(id), id, F5_NEEDLES)) synthetic.push(r);
+  }
+  for (const id of ['f6-range-plus']) {
+    for (const r of scan(document.getElementById(id), id, F6_NEEDLES)) synthetic.push(r);
   }
   for (const id of ['f2-time', 'f2-time-spelled', 'f2-pct', 'f2-pct-spelled', 'f2-spf',
                     'f2-money', 'f2-money-spelled', 'f2-agefloor']) {

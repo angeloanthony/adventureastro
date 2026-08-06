@@ -537,6 +537,12 @@ const AR_SLUGS = new Set<string>([
   'things-to-do/best-restaurants-vernal-utah', // AR-2 Phase F batch 4
   // AR-2 Phase F batch 5 — the only shape D page: CityLayout + a cities collection entry.
   'from/salt-lake-city', // AR-2 Phase F batch 5
+  // AR-2 Phase F batch 6a — first contact with shape B, prose inline in the .astro template.
+  // Split from 6b by SIZE, not surface: guides is ~2.5k chars and scenic-drives ~40.5k, and one
+  // attribution window covering both would make any new finding much harder to localize.
+  'guides', // AR-2 Phase F batch 6a
+  'hiking', // AR-2 Phase F batch 6a
+  'fishing', // AR-2 Phase F batch 6a
   'utv/best-utv-trails-vernal', // AR-2 Track E, E-1 — first prose spoke
   'utv/backcountry-tours-vernal-utah', // AR-2 Track E, E-2
   'utv/side-by-side-rentals-vernal-utah', // AR-2 Track E, E-2

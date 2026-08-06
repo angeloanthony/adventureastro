@@ -1,0 +1,102 @@
+---
+// ar/guides/index.astro — Arabic guides hub pillar (AR-2 Phase F batch 6a).
+// Mirrors src/pages/guides/index.astro. FIRST CONTACT WITH SHAPE B — prose inline in the
+// template, no page-content module and no content-collection read on the page itself.
+//
+// SHAPE B, derived mechanically before authoring: BaseLayout + TrustBadge + Header + Footer +
+// Seo + Breadcrumbs + HubIndex, with the prose sitting directly in the `.astro` body. `guides`
+// is the calibration page at ~2 531 characters — the smallest of the six by more than an order
+// of magnitude, which is why it goes first.
+//
+// ⚠ `TrustBadge` is one of the shared components B-2's bidi formatter already covers, so its
+// values are isolated for us. Nothing on this page needs to re-do that work.
+//
+// PROBE SLOT 1 governed two rewrites, negative controls red in the same pass:
+//   30–40°F   the range-plus-unit class (90–100°F measured F°100–90) -> spelled out
+//   5,331     a comma-grouped magnitude, measured LTR bare -> written bare
+// The phone is a Latin run at a clause boundary and is isolated per §3.1.
+//
+// §4: ALL eleven internal targets on this page are registered `ar` routes, so every one switches.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import TrustBadge from '../../../components/content/TrustBadge.astro';
+import Header from '../../../components/layout/Header.astro';
+import Footer from '../../../components/layout/Footer.astro';
+import Seo from '../../../components/seo/Seo.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import HubIndex from '../../../components/content/HubIndex.astro';
+import { getLangFromUrl } from '../../../lib/i18n';
+import { t } from '../../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const schema = `{
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "أدلّة السفر إلى Vernal بولاية يوتا — خطّط لرحلة UTV",
+        "description": "أدلّة تخطيط الرحلات إلى Vernal بولاية يوتا: نظرة عامة على الوجهة، وماذا ترتدي، وماذا تحضر معك، والطقس الموسمي، ومقارنة بين Vernal وMoab، وأدلّة معمّقة لـFlaming Gorge وRed Fleet State Park وSteinaker State Park وAshley National Forest.",
+        "author": {"@type": "Organization", "name": "Adventure Tours Vernal"},
+        "publisher": {"@type": "Organization", "name": "Adventure Tours Vernal", "logo": {"@type": "ImageObject", "url": "https://adventuretoursvernal.com/images/logo.webp"}},
+        "datePublished": "2026-07-10",
+        "dateModified": "2026-07-11",
+        "mainEntityOfPage": "https://adventuretoursvernal.com/ar/guides/"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type": "Question", "name": "ما الأدلّة التي تقدّمها شركة Adventure Tours Vernal لتخطيط الرحلة؟", "acceptedAnswer": {"@type": "Answer", "text": "تنشر شركة Adventure Tours Vernal تسعة أدلّة لتخطيط الرحلات: نظرة عامة كاملة على وجهة Vernal، ودليلًا للطقس الموسمي، ودليلًا لما ترتديه، وقائمة تحضير لما تحضره معك، ودليل مقارنة للقادمين من Moab، وأربعة أدلّة معمّقة لوجهات قريبة هي Flaming Gorge وRed Fleet State Park وSteinaker State Park وAshley National Forest. ويغطّي كلٌّ منها ما تحتاج معرفته قبل جولة UTV مُرشَدة بمركبات Kawasaki KRX 1000 قرب Vernal."}},
+          {"@type": "Question", "name": "هل يلزمني قراءة هذه الأدلّة قبل حجز جولة UTV؟", "acceptedAnswer": {"@type": "Answer", "text": "لا يلزم، لكنها تساعدك على الاستعداد. فمعظم الضيوف لا يحتاجون سوى حذاء مغلق من الأمام ورخصة قيادة سارية، وتوفّر شركة Adventure Tours Vernal الخوذات ومعدّات السلامة. وتغطّي الأدلّة الملابس والتحضير والطقس الموسمي والتعريف بالوجهة ومقارنة جولة Vernal بمثيلتها في Moab."}}
+        ]
+      }
+    ]
+  }`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="أدلّة السفر إلى Vernal بولاية يوتا | Adventure Tours Vernal"
+      description="أدلّة تخطيط الرحلات إلى Vernal بولاية يوتا — ماذا ترتدي وماذا تحضر معك والطقس الموسمي وكيف تُقارن جولة UTV المُرشَدة قرب Vernal بمثيلتها في Moab. خطّط لزيارتك."
+      path="/ar/guides/"
+      type="article"
+      ogTitle="أدلّة السفر إلى Vernal بولاية يوتا | Adventure Tours Vernal"
+      ogDescription="كل ما تحتاجه لتخطيط جولة UTV مُرشَدة قرب Vernal بولاية يوتا — الملابس والتحضير والطقس الموسمي ومقارنة بـMoab."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="guides" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('nav.guides', lang) }]} />
+  <main class="article-page" slot="body">
+    <header class="article-header">
+      <h1 class="article-title">أدلّة السفر إلى Vernal بولاية يوتا</h1>
+      <p class="article-meta">Adventure Tours Vernal</p>
+      <TrustBadge align="left" />
+    </header>
+    <div class="article-body">
+      <div class="article-summary-box">
+        الاستعداد لجولة UTV مُرشَدة بمركبات Kawasaki KRX 1000 أمر يسير، فمعظم الضيوف لا يحتاجون سوى رخصة قيادة سارية وحذاء مغلق من الأمام. وتغطّي هذه الأدلّة ما تبقّى: ماذا ترتدي، وماذا تحزم، وكيف يتغيّر طقس الصحراء المرتفعة في Vernal من موسم إلى آخر، وكيف تُقارن جولة Vernal بمثيلتها إن كنت تفاضل بينها وبين Moab.
+      </div>
+
+      <div class="article-tip"><strong>هل تخطّط لزيارتك الأولى؟</strong> اقرأ <a href="/ar/dinosaur-national-monument/visiting-dinosaur-national-monument/">الدليل الشامل لزيارة Dinosaur National Monument</a> — خطة كاملة تغطّي الأحافير والنقوش الصخرية والطرق السياحية ومسارات المشي وأفضل وقت في العام للزيارة.</div>
+
+      <h2>ابدأ بالوجهة نفسها</h2>
+      <p>هل Vernal جديدة عليك تمامًا؟ يغطّي <a href="/ar/guides/ultimate-guide-to-vernal-utah/">الدليل الشامل لـVernal في يوتا</a> الأساسيات التي يحتاجها كل زائر لأول مرة: أين تقع Vernal، وكيف صارت أرض الديناصورات، وكيف تصل إليها وتتنقّل فيها، وأين تقيم وتأكل، وكيف تبني رحلة حول أبرز معالم المنطقة. ابدأ من هناك، ثم استعن بالأدلّة أدناه للاستعداد للمسار.</p>
+
+      <h2>الاستعداد لجولتك</h2>
+      <p>قبل أن تحجز، يفيدك أن تعرف كيف تبدو التضاريس والمناخ حول Vernal على أرض الواقع. فدليل <a href="/ar/guides/what-to-wear-utv-tour/">ماذا ترتدي في جولة UTV صحراوية</a> يغطّي الأحذية والطبقات والوقاية من الشمس في جولة مدتها 3 ساعات على متن مركبة مكشوفة بمقعدين. وتكمّل قائمة <a href="/ar/guides/what-to-bring/">ماذا تحضر معك</a> ما يلزم حزمه: ما هو مطلوب، وما نوفّره نحن، وما الأفضل أن تتركه في البيت.</p>
+
+      <h2>اختيار توقيت زيارتك</h2>
+      <p>تقع Vernal على ارتفاع 5,331 قدمًا في صحراء يوتا المرتفعة، حيث قد يتباعد الصباح والأصيل بفارق يتراوح من 30 إلى 40 درجة فهرنهايت. ويفصّل <a href="/ar/guides/vernal-weather-guide/">دليل طقس Vernal</a> الأحوال موسمًا بموسم لتختار أنسب نافذة لرحلتك، ولتعرف ما تتوقّعه إن كانت جولتك في ذروة الصيف أو على حافة الشتاء.</p>
+
+      <h2>مقارنة Vernal بـMoab</h2>
+      <p>إن كنت تفاضل بين Vernal وجولة UTV في Moab، فدليل <a href="/ar/guides/moab-utv-tours/">البديل عن جولات UTV في Moab</a> يعرض المقارنة بصدق: ازدحام المسارات، وحرارة الصيف، والأسعار، والمسارات والمعالم التي تنفرد بها Vernal ولا تجدها في Moab، مثل Moonshine Arch وDinosaur National Monument.</p>
+
+      <h2>استكشف وجهات المنطقة</h2>
+      <p>هل أنت مستعدّ للتعمّق في أين تقضي أيامك؟ أربعة أدلّة معمّقة تغطّي الأرض التي تتفرّع من Vernal: <a href="/ar/guides/ultimate-guide-to-flaming-gorge/">الدليل الشامل لـFlaming Gorge</a>، و<a href="/ar/guides/ultimate-guide-to-red-fleet-state-park/">الدليل الشامل لـRed Fleet State Park</a>، و<a href="/ar/guides/ultimate-guide-to-steinaker-state-park/">الدليل الشامل لـSteinaker State Park</a>، و<a href="/ar/guides/ultimate-guide-to-ashley-national-forest/">الدليل الشامل لغابة Ashley National Forest</a> — ولكلٍّ منها مشاهده ومياهه ومساراته على مقربة يسيرة من البلدة.</p>
+
+      <div class="article-tip">
+        <strong>لست متأكّدًا من أين تبدأ؟</strong> اتصل بـDave أو Trudy على <a href="tel:435-219-9447"><bdi>(435) 219-9447</bdi></a> ليشرحا لك ما تتوقّعه بحسب مواعيد سفرك وحجم مجموعتك. أو <a href="/ar/booking/">تحقّق من المواعيد واحجز عبر الإنترنت</a> متى كنت مستعدًّا.
+      </div>
+    </div>
+  </main>
+  <HubIndex slot="body" collection="guides" heading="كل الأدلّة" />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

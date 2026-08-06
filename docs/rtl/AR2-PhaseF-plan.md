@@ -785,6 +785,183 @@ exactly — `utv` 2+8, `dnm` 2+4, `things-to-do` 5+5, `best-restaurants` 0+4. Cr
 
 ---
 
+## 5.6 Batch 5 — `from/salt-lake-city`, SHAPE D, CLOSED
+
+**70 of 77 ar routes · 689 site routes · GREEN on the first build · gate 4n ZERO findings, fifth
+batch running.** One page, and it produced the most first-contact findings of any Phase F batch —
+which is the argument for giving a lone surface its own attribution window.
+
+**The surface**: `CityLayout` + a `cities` collection entry via `getEntry()` + `QuickFacts` +
+`GatewayRoutes` + `FaqAccordion`. No page-content module; prose lives in the default slot. The
+collection is **English-only by design** — a locale reuses the locale-neutral numerics and passes
+translated strings as props.
+
+### ⚠⚠ A BUILD BLOCKER FOUND BEFORE A WORD WAS AUTHORED — and the component said it could not exist
+
+`QuickFacts` renders `<dd>{value}</dd>` with **no isolation**, and `nearestAirport` had **no
+override prop**. Its shipped value ends in a parenthetical: `Salt Lake City International Airport
+(SLC)`. Injected alone into a built `ar` page, gate 4n reports `")" in <dd> flanked L … R` and
+**exits 1**.
+
+`CityLayout`'s own comment had ruled the override unnecessary: *"an airport's official name is a
+proper noun in every locale's shipped prose."* **That is true of the NAME and false of the
+STRING.** A proper noun with a trailing parenthetical is a mixed-direction rendering object, and
+the difference is invisible until an RTL locale renders it. Authoring cannot reach a string that
+lives in the collection, so the fix is a `nearestAirport?` prop mirroring the existing
+`routeSummary?`. **Every locale that does not pass it keeps `city.nearestAirport` byte-for-byte:
+this adds a capability and changes no existing output.** It introduces no RTL special case — a
+repository improvement, not an Arabic workaround. Third assumption to expire at the RTL boundary
+after §3.1 and §3.2.
+
+### ⚠⚠ THE CONTROL THAT NEARLY PRODUCED A FALSE FINDING — gate 4n ignores a positional argument
+
+The first three gate-4n controls came back green, **including one carrying a known §3.5 defect**,
+which read as *"gate 4n is blind to `<dd>`."* It is not. **`gate-4n-isolation.mjs` takes its root
+from `host.routes.output` and silently ignores a positional `dist` argument — where
+`gate-4i-glossary.mjs` accepts one.** All three runs scanned the real `dist/`, not the copy. The
+interface of one gate had been generalised to another.
+
+Re-run against the real tree (with backup and verified restore) it fired immediately, and
+`(SLC)` **alone** produces the finding. **A fifth mechanism for the one symptom** — after *no
+arguments*, *wrong surface*, *unparseable surface*, *parser narrower than the language* — and a
+new one: **the detector ignored the target it was given**. Same verification failure, different
+implementation bug. See [[silence-is-not-evidence]].
+
+### Pre-flight: eight false positives sitting on one true positive
+
+All eight findings were `{` and `}` — Astro expression delimiters in **body text position**.
+They are `Bidi_Mirrored=Yes`, so 7c's widening to the Unicode property picked them up correctly;
+what had not kept up was the **exclusion list**. Batches 3 and 4 never tripped it because all
+their expressions sat in attribute position, which exclusion rule 4 already covered. Second half
+of 7c's own lesson: naming the property was right, and the exclusions must follow it.
+
+> **⚠ THE EXPRESSION IS REPLACED WITH A SPACE, DELIBERATELY NOT WITH A TATWEEL.** A `<bdi>`
+> collapses to a tatweel because it genuinely isolates its contents. **An expression isolates
+> nothing** — its rendered value could be a digit run, a Latin name or a bare phone, and a source
+> scanner cannot know which. Collapsing it would assert bidi properties the scanner cannot
+> observe, and would have **hidden the real defect underneath these eight**: an uninsulated
+> `{SITE.phoneDisplay}` interpolated straight into Arabic prose, now wrapped in `<bdi>`.
+> A space says *"an unknown rendering occupies this position"* and lets the flank scan reach the
+> genuine neighbours. This check no longer asserts anything about interpolated values, and should
+> not: **gate 4n reads rendered output and remains the authority for them.**
+
+Verified after the change: clean on all 13 authored files across batches 3–5, and a control
+carrying a real §3.5 defect on this same surface still fires.
+
+### Terminology — §2.1 and §4.2 in one paragraph, for the first time
+
+`Salt Lake City` is a frozen exonym (`سولت ليك سيتي`) as a place reference **and stays Latin
+inside `Salt Lake City International Airport`**, an institution name. Both readings appear in the
+same paragraph here. `Heber City`, `Duchesne`, `Roosevelt`, `Silver Creek Junction` stay Latin:
+they are route waypoints a reader matches against a road sign, which is §2.2's own test.
+
+### Attribution, all exact
+
+| number | batch 4 | batch 5 | attribution |
+|---|---:|---:|---|
+| routes | 688 | 689 | the one new page |
+| 4n rtl pages | 69 | 70 | +1, **0 findings** |
+| 4f advisory | 80 | **84** | exactly 4, all on `/ar/from/salt-lake-city/` |
+| 4g review candidates | 672 | **682** | exactly 10 — matches the set-difference against all 69 pre-existing `ar` pages with nothing left over |
+| 4s fragments | 2862 | **2867** | exactly 5 — the `GatewayRoutes` links into `/ar/utv/best-utv-trails-vernal/#N-…`, **all resolving** |
+| 4g approved · 4m · 4i | — | — | **steady** |
+
+**Slot 1**: `I-80 E`, `US-40 E`, `SLC`, `175` all measured **LTR bare**, negative controls red in
+the same pass. ⚠ `3 ساعات` returned `RTL (visual = reversed logical)` — the instrument's
+**documented non-classifiable case** (a mixed Arabic-plus-digit phrase is correctly RTL with a
+digit island inside it). Recorded **UNMEASURED**, not green and not a defect.
+
+**Census.** GUARD 1 clean; GUARD 2 2 increased, 51 steady, **0 decreased**. Floors **514 → 516**
+and **566 → 570**, the increases (+2, +4) equal the page's own counts exactly. Criterion 6:
+`ceilNP` 372 < 516 and 321 < 570. **Criterion 5 population rose 62 → 63 as predicted** — Shape D
+renders `<main class="city-page">` — proven by experiment: 63 pages stripped, 1 488 996 characters
+deleted, **2 violations, exit 1**; real tree green; full suite green afterwards.
+
+---
+
+## 5.7 A STANDING RULE — the instrument has THREE outcomes, and they are not on one scale
+
+Recorded because it has now been needed in three separate batches and is easy to lose:
+
+| outcome | meaning |
+|---|---|
+| **green** | measured safe |
+| **red** | measured defect |
+| **unmeasured** | the instrument could not distinguish |
+
+**`unmeasured` is not halfway between green and red — it is off the scale entirely.** It carries
+no evidence in either direction, and the one thing that must never happen is folding it into
+"no findings."
+
+Phase F has produced it three times, each from a different cause:
+- **batch 3** — slot 2 read nothing inside any FAQ answer, because the instrument opens
+  `<details>` and that page uses a checkbox disclosure;
+- **batch 5** — `3 ساعات` is a construct the visual-order instrument states it cannot classify;
+- **batch 5** — three gate-4n control runs that scanned a tree they were not pointed at.
+
+The first two are honest limits of an instrument, declared in its own header. The third is a bug.
+**All three produce the identical symptom**, which is why the outcome has to be named rather than
+inferred from a count. See [[silence-is-not-evidence]].
+
+---
+
+## 5.8 Batch 6a — ⚠ PARTIAL: `guides` only. `hiking` and `fishing` NOT AUTHORED.
+
+**71 of 77 ar routes · 690 site routes · green build · gate 4n ZERO findings, sixth batch
+running · floors re-frozen 516 → 518 and 570 → 573 · criterion 5 proven (64 stripped, exit 1).**
+
+⚠⚠ **THIS IS AN INCOMPLETE BATCH, CLOSED IN A CONSISTENT STATE RATHER THAN LEFT MID-FLIGHT.**
+6a was scoped as `guides` + `hiking` + `fishing`. Only `guides` — the ~2 531-character calibration
+page — was authored. `hiking` (~35 920 chars) and `fishing` (~31 125 chars) remain **English and
+unregistered**. Everything recorded below is verified; nothing is projected.
+
+> **The registry was rolled back mid-batch on purpose.** All three slugs were added to `AR_SLUGS`
+> up front, which would have left two registered routes with no page — `localeHref()` emitting
+> links to two 404s and `validate-site` failing. They were removed the moment it became clear the
+> batch would not finish, and the invariant was then checked mechanically: **every registered slug
+> is backed by a page file or a translated collection file, 71 of 71.** A partial batch is
+> acceptable; an inconsistent registry is not.
+
+### Shape B, characterized — the surface work is DONE and carries to `hiking`/`fishing`/6b
+
+Derived mechanically from source, identical across all six pages:
+`BaseLayout + TrustBadge + Header + Footer + Seo + Breadcrumbs + HubIndex`, prose **inline in the
+`.astro` body**, no page-content module and no collection read on the page itself.
+
+- **`TrustBadge` is already covered by B-2's bidi formatter**, so its values arrive isolated; no
+  page needs to redo that work.
+- **ADR-12 is vacuous for these page BODIES.** Mechanical enumeration found **zero** element ids
+  and **zero** fragment hrefs across all three. Confirmed post-build: 4s stayed at **2867 with 0
+  unresolved**.
+- **Links resolved before authoring:** 15 of 17 targets switch to `/ar/`; only `/camping/` and
+  `/scenic-drives/` stay English, and both are 6b.
+- **Pre-flight discriminates on this surface** — a §3.5 defect injected into the authored page
+  fires; it also correctly reported `not in AR_SLUGS` before registration, which is deliverable 2
+  doing its job.
+
+**Slot 1.** The three pages carry 27 distinct digit-bearing tokens, of which all but one fall into
+classes already measured (comma magnitudes safe; `~N`, `$349`, `N–N°F`, and digit-hyphen-word all
+measured reversing). One was genuinely new — a range compounded with a trailing plus — and it
+behaved as the rule predicts:
+
+| shape | visual | |
+|---|---|---|
+| `30–90+` | **`+90–30`** | ✘ reworded |
+
+**Authoring on `guides`:** `5,331` written bare (measured LTR); `30–40°F` spelled out; the phone
+isolated per §3.1; all eleven internal targets switched to `/ar/`.
+
+**Attribution.** routes 689 → 690 · 4n 70 → 71, **0 findings** · 4g candidates 682 → **697** ·
+**4f advisory steady at 84** — `guides` introduced no §2.2 licensed heading, the first Phase F
+page not to · 4s, 4m, 4i, 4g approved all **steady**. Floors +2/+3 equal the page's own counts
+(2 and 3) exactly. GUARD 1 clean; GUARD 2 2 increased, 51 steady, **0 decreased**.
+
+➡ **To resume:** author `hiking` and `fishing`, register both, one build, re-freeze once. The
+surface characterization above does not need repeating — only the per-page slot-1 shapes and the
+link resolution, both of which are already recorded here for all three pages.
+
+---
+
 ## 6. Known deferred items, unchanged
 
 Tracked backlog, not Phase F translation work. Do not implement without the trigger:
