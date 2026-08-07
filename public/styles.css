@@ -126,7 +126,7 @@
  .mobile-menu-toggle span { display: block; width: 25px; height: 3px; background: var(--charcoal); margin: 5px 0; transition: var(--transition-smooth); }
 
 /* ===== HERO SECTION ===== */
- .hero { position: relative; height: auto; min-height: 100vh; padding: 30px 0 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; background: linear-gradient(135deg, #87CEEB 0%, #F4A460 50%, #D2691E 100%); }
+ .hero { position: relative; height: auto; min-height: 85vh; padding: 30px 0 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; background: linear-gradient(135deg, #87CEEB 0%, #F4A460 50%, #D2691E 100%); }
  .hero-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
 
   .hero-background{
@@ -177,9 +177,9 @@
  .scroll-indicator span::before { content: ''; position: absolute; top: 10px; left: 50%; width: 6px; height: 6px; background: var(--charcoal); border-radius: 50%; transform: translateX(-50%); animation: scrollDown 2s infinite; }
 
 /* ===== HERO VIDEO ===== */
-.hero-video-wrapper { position: relative; z-index: 10; max-width: 1400px; width: 100%; margin: 40px auto 0; padding: 0 20px; }
+.hero-video-wrapper { position: relative; z-index: 10; max-width: 1280px; width: 100%; margin: 80px auto 0; padding: 0 20px; }
 .hero .hero-content { margin-bottom: 0; }
-.hero .scroll-indicator { margin-top: 40px; }
+.hero .scroll-indicator { margin-top: 28px; }
 
 /* ===== SECTIONS BASE ===== */
  section { padding: var(--section-padding); position: relative; }
