@@ -1,7 +1,24 @@
 # AR-2 Phase F — Arabic locale parity
 
-**Status:** active. Track E is closed and is not reopened here; this document governs the work
-that brings the `ar` locale from 58 routes to the 77 every other locale has.
+> ## ✅ CLOSED — 2026-08-06, commit `8033883`. The Arabic localization rollout is finished.
+>
+> **77/77 `ar` routes · 696 total · registry↔page parity 77↔77 · full suite green.**
+> The final batch registered the homepage and activated gate 4j's deferred gallery check
+> (105 × 9 = 945 entries). Gate 4n closed at **zero findings for nine consecutive batches**;
+> gate 4s at 0 unresolved fragments; floors re-frozen once at 611 / 650 over 77 pages, both
+> proven to fail on a prose-deleted tree.
+>
+> **Nothing after `8033883` is rollout work.** The framework was not redesigned in any Phase F
+> batch, which is the outcome [`rollout-execution-mode`](AR2-rollout-batch-brief.md) existed to
+> produce — and it is why this document closes rather than absorbing the remaining findings.
+> Deferred instrumentation, coverage and cleanup items live in
+> [`AR2-post-rollout-hardening.md`](AR2-post-rollout-hardening.md), a separate milestone with its
+> own entry conditions. An item moving there is not an open rollout task; treating it as one is
+> exactly the failure mode that denies a finished project its completion point.
+
+**Status:** ~~active~~ **CLOSED** (see the banner above). Track E is closed and is not reopened
+here; this document governed the work that brought the `ar` locale from 58 routes to the 77
+every other locale has.
 
 It supersedes nothing. `AR1-arabic-policy.md` and `AR2-rollout-batch-brief.md` §2–§5 (the frozen
 terminology, the isolation rules, the challenge window) apply unchanged — **what changes in
