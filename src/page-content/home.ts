@@ -13,7 +13,7 @@
 // eight homepages is byte-identical to the pre-refactor build. Locale
 // dictionaries are P32; translations are P33.
 import { SITE } from "../config/site";
-import { DEFAULT_LOCALE } from "../lib/i18n";
+import { affordanceArrow, DEFAULT_LOCALE } from "../lib/i18n";
 import { renderGallery } from "./home-gallery";
 
 // The homepage carousel, hoisted out of the eight locale blocks (B-5a).
@@ -3279,6 +3279,16 @@ ${HOME_CAROUSEL_JS}
 </script>
 `;
 
+// The onward affordance for the Arabic block — "read on", "book this".
+//
+// ⚠ Gate 4o scopes src/components, src/layouts and src/pages/<rtl>/ only, so it does NOT
+// read this file: a literal `→` in the block below would ship pointing the wrong way and
+// every gate would stay green. B-6 §8 left exactly this open ("the moment one appears in
+// shared chrome or Arabic content it is caught") and the scope is what does not reach here.
+// Routed through the same helper the components use, so the glyph is derived from the
+// locale's direction rather than retyped. Brief §3.2.
+const AR_ONWARD = affordanceArrow("ar");
+
 const ZH = `
 
   <!-- AI Summary Block -->
@@ -3735,6 +3745,477 @@ ${HOME_CAROUSEL_JS}
 </script>
 `;
 
+// Arabic (AR-2 Phase F, the final batch — 77/77 locale parity).
+//
+// Built from `bodyHtml` by asserted transform: 128 replacements, each of which had to
+// match a stated occurrence count or the transform refused, then the element skeleton was
+// proved byte-identical to English with `<bdi>` removed. That is what caught
+// "📅 Book Your Adventure" matching twice — it is a substring of the "… Online" line once
+// the differing indentation is consumed, so ordering the table is load-bearing.
+//
+// Nine `<bdi>` isolates, all on runs §3.6 measured as reversing bare: the two prices, the
+// three phone numbers, the discount percentage and the promo code. Captions and `alt` are
+// NOT among them — they come from home-gallery.ts through `escapeHtml()`, where `<bdi>`
+// would render as literal text, so that surface is isolation-free and was authored to carry
+// no mirrored character and no bare digit-plus-unit run at all.
+//
+// The HTML section comments stay English, byte-identical to the other seven blocks.
+const AR = `
+
+  <!-- AI Summary Block -->
+  <p class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">
+    تقدّم شركة Adventure Tours Vernal جولات UTV مُرشَدة بمركبات Kawasaki KRX 1000 المتجاورة في Vernal بولاية يوتا. تشمل المسارات Doc's Beach وMoonshine Arch وAshley Gorge وOutlaw Trail وAsphalt Ridge. تمرّ الجولات على نقوش صخرية وفنون صخرية وأطلال قديمة. سعر المركبة الواحدة <bdi>$349</bdi> لجولة مُرشَدة مدتها 3 ساعات تتّسع لراكبين. ومرافقة أحد المرشدين في مركبته بـ<bdi>$125</bdi> للشخص. الحد الأدنى 3 أشخاص. تستوعب الجولة حتى 12 ضيفًا على 6 مركبات. وهي الشركة الأعلى تقييمًا لجولات UTV في يوتا بتقييم 5.0 من 82 مراجعة على Google. مفتوحة يوميًا من 7 صباحًا حتى 7 مساءً. للحجز اتصل على <bdi>(435) 219-9447</bdi>.
+  </p>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="trail-hero-video-bg">
+  <iframe
+    src="https://www.youtube.com/embed/BHOABkrNnnE?autoplay=1&mute=1&loop=1&playlist=BHOABkrNnnE&controls=0&showinfo=0&rel=0&playsinline=1"
+    frameborder="0"
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+  </iframe>
+</div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-video-wrapper">
+      <div class="video-frame-3d">
+        <div class="video-frame-inner">
+          <div class="video-play-overlay" id="videoPlayOverlay" onclick="playHeroVideo()">
+            <img src="https://img.youtube.com/vi/eFfvKxkiyzU/maxresdefault.jpg" alt="شاهد Adventure Tours Vernal على أرض الواقع — جولات UTV مُرشَدة في Vernal بولاية يوتا" class="video-thumbnail">
+            <div class="play-overlay-content">
+              <div class="play-icon-circle">▶</div>
+              <span class="play-overlay-text">اضغط لمشاهدة الفيديو</span>
+            </div>
+          </div>
+          <div id="heroVideoContainer"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-content">
+      <h1 class="hero-title" style="font-size:clamp(1.8rem,4vw,3rem);font-weight:800;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,0.5);margin-bottom:0.5rem;">
+        جولات UTV مُرشَدة في Vernal بولاية يوتا
+      </h1>
+      <p class="hero-subtitle">عِش إثارة المنطقة الخلفية في يوتا مع مغامرات مُرشَدة بمركبات Kawasaki KRX 1000 المتجاورة</p>
+      <div style="margin-top:14px;"><span style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border:1px solid rgba(255,255,255,0.5);border-radius:999px;background:rgba(0,0,0,0.35);font-size:0.95rem;color:#fff;"><span aria-hidden="true" style="color:#f5c451;letter-spacing:1px;">★★★★★</span> <span><strong>${SITE.rating.value}</strong> &middot; ${SITE.rating.count} مراجعة على Google</span></span></div>
+    </div>
+
+    <div class="scroll-indicator"><span></span></div>
+  </div>
+
+    <!-- PRICING CARDS -->
+    <div class="pricing-section">
+      <h2>أسعار بسيطة وواضحة</h2>
+      <p>لا رسوم خفية — مغامرة خالصة. الحد الأدنى 3 أشخاص لكل جولة.</p>
+      <div class="pricing-grid">
+        <div class="pricing-card featured">
+          <div class="pricing-label">لكل مركبة</div>
+          <div class="pricing-title">راكب أو راكبان في مركبة KRX 1000 واحدة</div>
+          <div class="pricing-amount"><bdi>$349</bdi></div>
+          <div class="pricing-per">لكل مركبة في جولة مُرشَدة مدتها 3 ساعات</div>
+          <ul class="pricing-features">
+            <li>مركبة Kawasaki KRX 1000 بمقعدين</li>
+            <li>حتى راكبين في كل مركبة</li>
+            <li>إرشاد محلي خبير من Dave and Trudy</li>
+            <li>اختيار من 5 منظومات مسارات</li>
+            <li>ممتصات صدمات FOX 2.5 PODIUM LSC</li>
+            <li>إحاطة أمان كاملة ومعدات متكاملة</li>
+          </ul>
+          <a href="/ar/booking/" class="tour-book-btn" style="display:block;text-align:center;text-decoration:none;">احجز الآن</a>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-label">إضافة المرافقة</div>
+          <div class="pricing-title">اركب مع Dave أو Trudy</div>
+          <div class="pricing-amount"><bdi>$125</bdi></div>
+          <div class="pricing-per">لكل مرافق في جولة مُرشَدة مدتها 3 ساعات</div>
+          <ul class="pricing-features">
+            <li>أضف شخصًا ثالثًا إلى مجموعتك</li>
+            <li>يركب مرافقًا مع أحد المرشدين</li>
+            <li>يتطلب استئجار مركبة واحدة على الأقل</li>
+            <li>مقعدا مرافقة متاحان في كل جولة</li>
+            <li>كل المغامرة دون الحاجة إلى القيادة</li>
+          </ul>
+          <a href="/ar/booking/" class="tour-book-btn" style="display:block;text-align:center;text-decoration:none;">احجز الآن</a>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-label">المجموعات</div>
+          <div class="pricing-title">حتى 12 ضيفًا</div>
+          <div class="pricing-amount">اتصل بنا</div>
+          <div class="pricing-per">تسعير مخصص للمجموعات</div>
+          <ul class="pricing-features">
+            <li>حتى 6 مركبات متاحة</li>
+            <li>10 ضيوف في 5 مركبات مع مقعدَي مرافقة</li>
+            <li>يقود Dave and Trudy الجولة معًا</li>
+            <li>مثالية للعائلات ولقاءات الأقارب</li>
+            <li>99 دولارًا للساعة لكل مركبة مقابل وقت إضافي</li>
+          </ul>
+          <a href="tel:435-219-9447" class="tour-book-btn" style="display:block;text-align:center;text-decoration:none;">📞 <bdi>(435) 219-9447</bdi></a>
+        </div>
+      </div>
+    </div>
+
+      <!-- Single Book Button below all trails -->
+      <div style="text-align:center;margin-top:50px;">
+        <a href="/ar/booking/" class="btn btn-primary" style="font-size:1.25rem;padding:22px 70px;">
+          📅 احجز مغامرتك
+        </a>
+        <p style="margin-top:14px;font-size:0.95rem;color:var(--charcoal);opacity:0.65;font-family:var(--font-body);">
+          ستختار مسارك أثناء الحجز — مفتوح يوميًا من 7 صباحًا حتى 7 مساءً
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Why Vernal Section -->
+  <section id="why-vernal">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">لماذا تختار Vernal؟</h2>
+        <p class="section-subtitle">اكتشف ما يجعل هذا الركن من يوتا جنة للقيادة على الطرق الوعرة</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-image" style="background:#000;">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/PoCN4Lo9Lkk?si=CMj5hK0r2l5GeKFM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="display:block;width:100%;height:100%;border:0;"></iframe>
+          </div>
+          <div class="feature-content">
+            <h3 class="feature-title">Dinosaur National Monument</h3>
+            <p class="feature-description">انطلق عبر مشاهد ما قبل التاريخ في أرض الديناصورات حيث جالت العمالقة القديمة، مع وصول إلى مواقع أحافير عالمية المستوى. <a href="/ar/dinosaur-national-monument/" style="color:var(--burnt-orange);font-weight:600;">جولات UTV قرب النصب ${AR_ONWARD}</a></p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-image" style="background:#000;">
+            <iframe title="Video Embed" src="https://www.nps.gov/media/video/embed.htm?id=CD297DBD-5955-4AA8-BC53-1798793EC221" width="480" height="306" frameborder="0" scrolling="auto" allowfullscreen style="display:block;width:100%;height:100%;border:0;"></iframe>
+          </div>
+          <div class="feature-content">
+            <h3 class="feature-title">آثار حضارة قديمة</h3>
+            <p class="feature-description">اكتشف النقوش الصخرية والفنون الصخرية والأطلال — آلاف السنين من تاريخ السكان الأصليين محفوظة في صخور منطقة Uintah Basin وأخاديدها. <a href="/ar/dinosaur-national-monument/petroglyphs-rock-art-vernal/" style="color:var(--burnt-orange);font-weight:600;">استكشف مواقع الفنون الصخرية ${AR_ONWARD}</a></p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-image" style="background:#000;">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/2fdxwBHky_Y?si=Mio585KlceDKRTHT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="display:block;width:100%;height:100%;border:0;"></iframe>
+          </div>
+          <div class="feature-content">
+            <h3 class="feature-title">مسارات خفية</h3>
+            <p class="feature-description">ادخل إلى طرق سرية ومواقع مفضلة لا يعرفها إلا أهل Vernal — مشاهد لن تجدها في أي مكان آخر. <a href="/ar/utv/backcountry-tours-vernal-utah/" style="color:var(--burnt-orange);font-weight:600;">تفاصيل جولة المنطقة الخلفية ${AR_ONWARD}</a></p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-image" style="background:#000;">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/hmKWG8GZBiw?si=Nq5dULfRSYvpRsAQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="display:block;width:100%;height:100%;border:0;"></iframe>
+          </div>
+          <div class="feature-content">
+            <h3 class="feature-title">أقواس صخرية خلابة</h3>
+            <p class="feature-description">اكتشف أقواسًا وتكوينات طبيعية من الحجر الرملي تضاهي أشهر متنزهات يوتا، دون زحام. <a href="/ar/utv/best-utv-trails-vernal/" style="color:var(--burnt-orange);font-weight:600;">شاهد منظومات المسارات الخمس ${AR_ONWARD}</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vehicles Section -->
+  <section id="vehicles">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">أسطولنا</h2>
+        <p class="section-subtitle">6 مركبات Kawasaki KRX 1000 متاحة — تخضع للصيانة من أجل الأمان والأداء</p>
+      </div>
+      <div class="vehicles-grid">
+        <div class="vehicle-card">
+          <div class="vehicle-image" data-bg="/images/9.webp"></div>
+          <div class="vehicle-content">
+            <h3 class="vehicle-name">Kawasaki KRX 1000</h3>
+            <ul class="vehicle-specs">
+              <li><span class="spec-label">حجم الأسطول:</span><span class="spec-value">6 مركبات متاحة</span></li>
+              <li><span class="spec-label">الركاب:</span><span class="spec-value">مقعدان</span></li>
+              <li><span class="spec-label">نظام التعليق:</span><span class="spec-value">ممتصات FOX 2.5 PODIUM LSC</span></li>
+              <li><span class="spec-label">الأنسب لـ:</span><span class="spec-value">الزحف على الصخور والراحة</span></li>
+              <li><span class="spec-label">الأمان:</span><span class="spec-value">قفص حماية كامل ومقود معزّز</span></li>
+              <li><span class="spec-label">السعة:</span><span class="spec-value">حتى 12 ضيفًا في الجولة</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ <!-- Gallery Section -->
+  <section id="gallery">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">معرض الصور</h2>
+        <p class="section-subtitle">شاهد المغامرة التي تنتظرك</p>
+      </div>
+      <div class="carousel-container">
+        <div class="carousel-main">
+          <button class="carousel-btn carousel-prev" aria-label="الصورة السابقة"><span>‹</span></button>
+          <div class="carousel-track-container">
+            <div class="carousel-track">
+${renderGallery("ar")}
+            </div>
+          </div>
+          <button class="carousel-btn carousel-next" aria-label="الصورة التالية"><span>›</span></button>
+        </div>
+        <div class="carousel-indicators"></div>
+        <div class="carousel-thumbnails"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Section -->
+  <section id="booking">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">هل أنت مستعد للمغامرة؟</h2>
+        <p class="section-subtitle">احجز عبر الإنترنت فورًا أو اتصل بنا — نحن هنا يوميًا من 7 صباحًا حتى 7 مساءً</p>
+      </div>
+      <div class="booking-container">
+        <div class="phone-cta-wrapper">
+
+          <!-- Online Booking Button -->
+          <div style="margin-bottom:35px;">
+            <a href="/ar/booking/" class="btn btn-primary" style="font-size:1.2rem;padding:20px 60px;">
+              📅 احجز مغامرتك عبر الإنترنت
+            </a>
+            <p style="margin-top:12px;font-size:0.95rem;color:var(--charcoal);opacity:0.7;font-family:var(--font-body);">
+              اختر مسارك وتاريخك ووقتك — تأكيد فوري
+            </p>
+          </div>
+
+          <!-- Divider -->
+          <div style="display:flex;align-items:center;gap:20px;margin:10px 0 30px;">
+            <div style="flex:1;height:1px;background:rgba(212,118,78,0.15);"></div>
+            <span style="font-family:var(--font-heading);font-weight:700;color:var(--charcoal);opacity:0.5;font-size:0.9rem;">أو اتصل بنا</span>
+            <div style="flex:1;height:1px;background:rgba(212,118,78,0.15);"></div>
+          </div>
+
+          <!-- Phone -->
+          <div class="phone-icon">📞</div>
+          <h3 class="phone-cta-title">اتصل لحجز جولتك</h3>
+          <a href="tel:435-219-9447" class="phone-number-display"><bdi>(435) 219-9447</bdi></a>
+          <p class="phone-cta-subtitle">مفتوح يوميًا • من 7 صباحًا حتى 7 مساءً بتوقيت الجبال</p>
+
+          <div class="phone-benefits">
+            <div class="phone-benefit"><span class="benefit-icon">✓</span><span>تأكيد فوري</span></div>
+            <div class="phone-benefit"><span class="benefit-icon">✓</span><span>مرشدون محليون خبراء</span></div>
+            <div class="phone-benefit"><span class="benefit-icon">✓</span><span>مواعيد مرنة</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About CTA Section -->
+  <section id="about">
+    <div class="container">
+      <div class="about-cta-simple">
+        <h2 class="section-title">تعرّف على عائلة Wilson</h2>
+        <p class="section-subtitle">شركة محلية تركّز على الأمان وتعيش المغامرة منذ اليوم الأول</p>
+        <p>تعرّف على قصتنا وشغفنا بمنطقة Uintah Basin ولماذا تُعدّ شركة Adventure Tours Vernal الشركة الرائدة لجولات UTV في Vernal بولاية يوتا.</p>
+        <a href="/ar/about/" class="cta-button primary">تعرّف على قصتنا</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="about-features">
+    <div class="about-feature">
+      <div class="about-feature-icon">✅</div>
+      <span class="about-feature-text">مرشدون محليون خبراء بمعرفة عميقة</span>
+    </div>
+    <div class="about-feature">
+      <div class="about-feature-icon">🏅</div>
+      <span class="about-feature-text">تدريب ومعدات أمان احترافية</span>
+    </div>
+    <div class="about-feature">
+      <div class="about-feature-icon">🛡️</div>
+      <span class="about-feature-text">نرحّب بجميع مستويات الخبرة</span>
+    </div>
+    <div class="about-feature">
+      <div class="about-feature-icon">🌟</div>
+      <span class="about-feature-text">مرخّصة ومؤمّنة بالكامل</span>
+    </div>
+  </div>
+  <div class="about-image"></div>
+
+  <!-- Explore Vernal Guides Section -->
+  <section id="explore-guides" style="padding:var(--section-padding);background:var(--light-sand);">
+    <div class="container" style="max-width:var(--container-max);margin:0 auto;">
+      <div class="section-header">
+        <h2 class="section-title">استكشف Vernal</h2>
+        <p class="section-subtitle">خطّط لرحلتك مع أدلتنا المحلية — كل ما تحتاج معرفته عن Vernal بولاية يوتا</p>
+      </div>
+      <div class="related-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;max-width:1000px;margin:0 auto;">
+        <a href="/ar/things-to-do/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+          <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">أنشطة في Vernal</h4>
+          <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">الدليل الكامل للأنشطة والمعالم.</p>
+        </a>
+        <a href="/ar/things-to-do/vernal-utah-attractions/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+          <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">أبرز معالم Vernal</h4>
+          <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">مشاهد لا تفوّت وأماكن تستحق الزيارة.</p>
+        </a>
+        <a href="/ar/things-to-do/fun-things-to-do-vernal-utah-kids/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+          <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">أنشطة عائلية</h4>
+          <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">أنشطة ممتعة مع الأطفال في Vernal.</p>
+        </a>
+        <a href="/ar/things-to-do/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+          <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">أنشطة في الهواء الطلق</h4>
+          <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">المشي وصيد الأسماك وجولات UTV والمزيد.</p>
+        </a>
+        <a href="/ar/atv-trails-vernal-utah/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+          <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">مسارات ATV قرب Vernal</h4>
+          <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">منظومات المسارات الوعرة ودليل التضاريس.</p>
+        </a>
+        <a href="/ar/utv/side-by-side-rentals-vernal-utah/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+          <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">الجولات بالمركبات المتجاورة مقابل التأجير</h4>
+          <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">لماذا تتفوّق الجولات المُرشَدة على التأجير الذاتي.</p>
+        </a>
+        <a href="/ar/dinosaur-national-monument/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+          <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">جولات أرض الديناصورات</h4>
+          <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">جولات UTV قرب النصب.</p>
+        </a>
+        <a href="/ar/dinosaur-national-monument/visiting-dinosaur-national-monument/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+          <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">الدليل الشامل إلى Dinosaur National Monument</h4>
+          <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">دليل التخطيط الكامل للرحلة — أحافير ونقوش صخرية وطرق ذات مناظر والمزيد.</p>
+        </a>
+        <a href="/ar/utv/group-utv-tours-vernal/" class="related-card" style="background:white;border-radius:14px;padding:20px;text-decoration:none;border:1px solid rgba(212,118,78,0.1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);display:block;">
+          <h4 style="font-family:var(--font-heading);font-size:0.95rem;font-weight:700;color:var(--burnt-orange);margin-bottom:6px;">جولات جماعية وخاصة</h4>
+          <p style="font-size:0.88rem;color:var(--charcoal);opacity:0.7;line-height:1.5;margin:0;">العائلات ولقاءات الأقارب ورحلات الشركات.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mobile Sticky CTA -->
+  <div class="mobile-sticky-cta">
+    <button onclick="location.href='/ar/booking/'">احجز جولتك الآن</button>
+  </div>
+
+  <script is:inline src="https://player.vimeo.com/api/player.js"></script>
+  <script is:inline>
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Background images from data attributes
+    document.querySelectorAll('[data-bg]').forEach(element => {
+      element.style.backgroundImage = \`url('\${element.getAttribute('data-bg')}')\`;
+      element.style.backgroundSize = 'cover';
+      element.style.backgroundPosition = 'center';
+    });
+
+    // Scroll indicator fade
+    window.addEventListener('scroll', () => {
+      const scrollIndicator = document.querySelector('.scroll-indicator');
+      if (scrollIndicator) scrollIndicator.style.opacity = window.pageYOffset > 100 ? '0' : '1';
+    });
+
+    // Carousel
+${HOME_CAROUSEL_JS}
+
+    // Floating video
+    function closeFloatingVideo() {
+      document.getElementById('floatingVideo').style.display = 'none';
+    }
+    window.addEventListener('scroll', () => {
+      const floatingVideo = document.getElementById('floatingVideo');
+      if (window.pageYOffset > 300 && floatingVideo) floatingVideo.classList.add('visible');
+    });
+
+    // Scroll spy
+    function updateActiveNavLink() {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-menu > li > a[href^="#"]:not(.dropdown-toggle)');
+      let currentSection = '';
+      const scrollPosition = window.pageYOffset + 200;
+      sections.forEach(section => {
+        if (scrollPosition >= section.offsetTop && scrollPosition < section.offsetTop + section.offsetHeight) {
+          currentSection = section.getAttribute('id');
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === \`#\${currentSection}\`) link.classList.add('active');
+      });
+    }
+    window.addEventListener('scroll', updateActiveNavLink);
+    window.addEventListener('load', updateActiveNavLink);
+
+    // Hero video play
+    function playHeroVideo() {
+      document.getElementById('videoPlayOverlay').classList.add('hidden');
+      document.getElementById('heroVideoContainer').innerHTML = '<iframe src="https://www.youtube.com/embed/eFfvKxkiyzU?si=rAXO-MccKZ1-6GgK&autoplay=1" title="Adventure Tours Vernal — Guided UTV Tours in Vernal Utah" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+    }
+  </script>
+
+
+  <!-- Best Western Lodging Promo -->
+  <a href="https://bestwesternvernal.com" target="_blank" rel="noopener" class="bw-promo-badge" id="bwPromoBadge">
+    <div class="bw-promo-badge-inner">
+      <button class="bw-badge-close" onclick="event.preventDefault();event.stopPropagation();dismissBwBadge();return false;" aria-label="إغلاق العرض">&times;</button>
+      <div class="bw-badge-text-wrap">
+        <div class="bw-badge-eyebrow">
+          <span class="pulse-dot"></span>
+          عرض الإقامة والجولة
+        </div>
+        <div class="bw-badge-offer">
+          <span class="highlight">خصم <bdi>10%</bdi></span> على الإقامة
+        </div>
+        <p class="bw-badge-detail">
+          احجز في <strong>Best Western Vernal</strong> &mdash; واستخدم رمز الخصم <strong><bdi>ROCCO</bdi></strong> عند الحجز.
+        </p>
+        <div class="bw-badge-cta-row">
+          <span class="bw-badge-button">احجز الإقامة ${AR_ONWARD}</span>
+          <span class="bw-badge-logo-text">bestwesternvernal.com</span>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <!-- High Class Limousine Promo -->
+  <a href="https://highclasslimousineservices.com/" target="_blank" rel="noopener" class="hcl-promo-badge" id="hclPromoBadge">
+    <div class="hcl-promo-badge-inner">
+      <button class="hcl-badge-close" onclick="event.preventDefault();event.stopPropagation();dismissHclBadge();return false;" aria-label="إغلاق العرض">&times;</button>
+      <div class="hcl-badge-text-wrap">
+        <div class="hcl-badge-eyebrow">
+          <span class="pulse-dot"></span>
+          وصول بأناقة
+        </div>
+        <div class="hcl-badge-offer">
+          <span class="highlight">High Class</span> Limousine
+        </div>
+        <p class="hcl-badge-detail">
+          حفلات زفاف وحفلات تخرّج ونقل من المطار وسهرات في أنحاء منطقة Uintah Basin. <strong>الأناقة لم تنقرض.</strong>
+        </p>
+        <div class="hcl-badge-cta-row">
+          <span class="hcl-badge-button">اركب بأناقة ${AR_ONWARD}</span>
+          <span class="hcl-badge-logo-text">highclasslimousineservices.com</span>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <script is:inline>
+    // Dismiss badge for this session
+    function dismissBwBadge() {
+  var badge = document.getElementById('bwPromoBadge');
+  if (badge) badge.classList.add('dismissed');
+}
+    function dismissHclBadge() {
+  var badge = document.getElementById('hclPromoBadge');
+  if (badge) badge.classList.add('dismissed');
+}
+</script>
+`;
+
 /**
  * Locale-aware accessor (P2D pattern; Spanish populated P3A). Every
  * locale without a committed variant falls back to English. Callers that
@@ -3748,5 +4229,6 @@ export function getBodyHtml(locale: string = DEFAULT_LOCALE): string {
   if (locale === 'de') return DE;
   if (locale === 'zh') return ZH;
   if (locale === 'ja') return JA;
+  if (locale === 'ar') return AR;
   return bodyHtml;
 }

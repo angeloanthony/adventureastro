@@ -1118,6 +1118,114 @@ const GALLERY_TEXT_ZH: GalleryDictionary = {
   "slide-105": { alt: "犹他州沙漠荒野深处，暮色中行驶在山脊线上的并排越野车", caption: "暮色中的山脊线" },
 };
 
+const GALLERY_TEXT_AR: GalleryDictionary = {
+  "slide-001": { alt: "مركبة UTV متجاورة متوقفة في تجويف من الحجر الرملي خلال جولة UTV مع Adventure Tours Vernal", caption: "استكشاف تجويف من الحجر الرملي" },
+  "slide-002": { alt: "صف من مركبات Kawasaki KRX 1000 المتجاورة جاهزة قبل جولة UTV مُرشَدة في Vernal بولاية يوتا", caption: "اصطفاف مركبات UTV قبل الانطلاق" },
+  "slide-003": { alt: "مركبة UTV متجاورة زرقاء تثير الغبار على مسار صحراوي قرب Vernal في يوتا", caption: "إثارة الغبار" },
+  "slide-004": { alt: "مجموعة تقود مركبات UTV متجاورة على مسار في المنطقة الخلفية قرب Vernal في يوتا", caption: "المجموعة على المسار" },
+  "slide-005": { alt: "ركّاب يستريحون تحت نتوء من الحجر الرملي عند الغروب خلال جولة UTV مع Adventure Tours Vernal", caption: "نتوء صخري عند الغروب" },
+  "slide-006": { alt: "إطلالة من داخل كهف من الحجر الرملي في جولة UTV مُرشَدة قرب Vernal في يوتا", caption: "داخل كهف من الحجر الرملي" },
+  "slide-007": { alt: "عائلة تلتقط صورة داخل كهف من الحجر الرملي خلال جولة UTV مع Adventure Tours Vernal", caption: "صورة عائلية داخل الكهف" },
+  "slide-008": { alt: "إطار مركبة UTV على حافة أخدود تطل على Ashley Gorge قرب Vernal في يوتا", caption: "على حافة الأخدود" },
+  "slide-009": { alt: "أراضٍ صحراوية وعرة عند الغروب في جولة UTV إلى المنطقة الخلفية قرب Vernal في يوتا", caption: "غروب فوق الأراضي الوعرة" },
+  "slide-010": { alt: "مركبة UTV متجاورة تتسلق حيدًا من الصخر الأملس في جولة مُرشَدة قرب Vernal في يوتا", caption: "تسلق حيد من الصخر الأملس" },
+  "slide-011": { alt: "مركبة UTV متجاورة زرقاء تنطلق مسرعة عبر الصحراء المرتفعة قرب Vernal في يوتا", caption: "انطلاق سريع عبر الصحراء" },
+  "slide-012": { alt: "مركبات Kawasaki KRX 1000 المتجاورة مصطفة تحت نتوء صخري قرب Vernal في يوتا", caption: "اصطفاف تحت النتوء الصخري" },
+  "slide-013": { alt: "مجموعة تتوقف بمركباتها UTV المتجاورة على مسار في المنطقة الخلفية قرب Vernal في يوتا", caption: "توقف المجموعة على جانب المسار" },
+  "slide-014": { alt: "مركبة UTV متجاورة بجوار مشهد أخدود من الصخر الأملس في جولة مُرشَدة قرب Vernal في يوتا", caption: "مشهد أخدود الصخر الأملس" },
+  "slide-015": { alt: "مركبة UTV متجاورة متوقفة داخل كهف من الحجر الرملي قرب Vernal في يوتا", caption: "مركبة UTV داخل الكهف" },
+  "slide-016": { alt: "جدار كهف شاهق من الحجر الرملي في جولة إلى المنطقة الخلفية مع Adventure Tours Vernal", caption: "جدار الكهف الشاهق" },
+  "slide-017": { alt: "أحد الركّاب يقفز من جرف إلى الماء في نزهة مع Adventure Tours Vernal قرب Vernal في يوتا", caption: "قفزة من الجرف إلى الماء" },
+  "slide-018": { alt: "قافلة من مركبات UTV المتجاورة على مسار جبلي خلال جولة مُرشَدة قرب Vernal في يوتا", caption: "قافلة على المسار الجبلي" },
+  "slide-019": { alt: "مركبة UTV متجاورة على الصخر الأملس عند الغسق قرب Dinosaur National Monument في Vernal بولاية يوتا", caption: "جولة صحراوية عند الغسق" },
+  "slide-020": { alt: "ثلاث مركبات Kawasaki KRX 1000 متجاورة تظهر بأطياف سوداء أمام توهّج الشمس عند الغروب قرب Vernal في يوتا", caption: "ثلاثي عند الغروب" },
+  "slide-021": { alt: "ركّاب يقفون فوق الصخر الأملس بجانب مركبات Kawasaki KRX 1000 المتجاورة قرب Vernal في يوتا", caption: "ركّاب فوق الصخر الأملس" },
+  "slide-022": { alt: "مركبتا UTV متجاورتان متوقفتان على الصخر الأملس قرب Vernal في يوتا", caption: "مركبتا UTV على الصخر الأملس" },
+  "slide-023": { alt: "مركبات UTV متجاورة مغطاة بالطين على الصخر الأملس بعد جولة مُرشَدة قرب Vernal في يوتا", caption: "مركبات UTV موحلة على الصخر" },
+  "slide-024": { alt: "مركبة UTV متجاورة موحلة فوق قبة صخرية عند مطل قرب Vernal في يوتا", caption: "مركبة UTV موحلة عند المطل" },
+  "slide-025": { alt: "مركبة UTV متجاورة زرقاء على الصخر الأملس عاليًا فوق الأخدود قرب Vernal في يوتا", caption: "مركبة UTV زرقاء على الصخر الأملس" },
+  "slide-026": { alt: "مركبات UTV متجاورة تظهر بأطياف سوداء عند الغروب في جولة مُرشَدة قرب Vernal في يوتا", caption: "مركبات UTV عند الغروب" },
+  "slide-027": { alt: "مركبة UTV متجاورة أمام توهّج الشمس في جولة عند الغروب عبر المنطقة الخلفية الصحراوية في يوتا", caption: "طيف أمام توهّج الشمس" },
+  "slide-028": { alt: "مركبتا UTV متجاورتان فوق صخرة ضخمة في جولة إلى المنطقة الخلفية قرب Vernal في يوتا", caption: "مركبتان فوق صخرة ضخمة" },
+  "slide-029": { alt: "متنزهون يستكشفون قوسًا من الحجر الرملي في نزهة مع Adventure Tours Vernal في Vernal بولاية يوتا", caption: "متنزهون عند قوس الحجر الرملي" },
+  "slide-030": { alt: "مركبات UTV متجاورة فوق صخرة ضخمة مع إطلالة صحراوية قرب Vernal في يوتا", caption: "مركبات UTV فوق الصخرة الضخمة" },
+  "slide-031": { alt: "مركبات UTV متجاورة موحلة تطل على الوادي على مسار في المنطقة الخلفية قرب Vernal في يوتا", caption: "مركبات UTV موحلة أمام الإطلالة" },
+  "slide-032": { alt: "مركبات UTV متجاورة على قمة حيد عند الغسق قرب Vernal في يوتا", caption: "مركبات UTV على قمة الحيد عند الغسق" },
+  "slide-033": { alt: "مركبات UTV متجاورة على تكوين صخري ممتد في جولة مُرشَدة في Vernal بولاية يوتا", caption: "مركبات UTV على الحيد الصخري" },
+  "slide-034": { alt: "مركبات UTV متجاورة في الصحراء المرتفعة خلال جولة إلى المنطقة الخلفية قرب Vernal في يوتا", caption: "مركبات UTV في الصحراء المرتفعة" },
+  "slide-035": { alt: "مركبة UTV متجاورة عند مطل فوق قبة من الصخر الأملس قرب Vernal في يوتا", caption: "مطل قبة الصخر الأملس" },
+  "slide-036": { alt: "مطل على منطقة الأخاديد في جولة UTV إلى المنطقة الخلفية قرب Vernal في يوتا", caption: "مطل على منطقة الأخاديد" },
+  "slide-037": { alt: "مركبة UTV متجاورة تتسلق الصخر الأملس في جولة مُرشَدة قرب Vernal في يوتا", caption: "تسلق الصخر الأملس" },
+  "slide-038": { alt: "مركبة UTV متجاورة تهبط واجهة صخرية شديدة الانحدار في جولة مُرشَدة قرب Vernal في يوتا", caption: "هبوط المركبة عن الصخر" },
+  "slide-039": { alt: "مركبة UTV متجاورة تعتلي الصخور الضخمة على مسار في المنطقة الخلفية قرب Vernal في يوتا", caption: "اعتلاء الصخور الضخمة" },
+  "slide-040": { alt: "مركبة UTV متجاورة خضراء على مسار صحراوي قرب Vernal في يوتا", caption: "مركبة UTV خضراء على المسار" },
+  "slide-041": { alt: "مركبات UTV متجاورة تتسلق الصخر الأملس في جولة مُرشَدة قرب Vernal في يوتا", caption: "مركبات UTV تتسلق الصخر الأملس" },
+  "slide-042": { alt: "مركبات UTV متجاورة على الصخر الأملس في جولة إلى المنطقة الخلفية قرب Vernal في يوتا", caption: "مركبات UTV على الصخر الأملس" },
+  "slide-043": { alt: "مركبات UTV متجاورة تتسلق حيدًا من الحجر الرملي قرب Vernal في يوتا", caption: "تسلق حيد من الحجر الرملي" },
+  "slide-044": { alt: "مركبة UTV متجاورة متوقفة تحت هضبة صحراوية منعزلة قرب Vernal في يوتا", caption: "توقف عند الهضبة المنعزلة" },
+  "slide-045": { alt: "منظر عبر قوس صخري نحو هضبة صحراوية منعزلة قرب Vernal في يوتا", caption: "عبر القوس الصخري" },
+  "slide-046": { alt: "مركبة UTV متجاورة موحلة تتسلق الصخور في جولة إلى المنطقة الخلفية قرب Vernal في يوتا", caption: "تسلق المركبة الموحلة" },
+  "slide-047": { alt: "مركبات UTV متجاورة متوقفة تحت قوس صخري طبيعي قرب Vernal في يوتا", caption: "مركبات متجاورة تحت القوس" },
+  "slide-048": { alt: "مركبتا UTV متجاورتان على مسار في أخدود عبر المنطقة الخلفية في يوتا", caption: "مركبتان على مسار الأخدود" },
+  "slide-049": { alt: "مركبة UTV متجاورة في هبوط شديد الانحدار على الصخر الأملس قرب Vernal في يوتا", caption: "هبوط شديد على الصخر الأملس" },
+  "slide-050": { alt: "زحف على الصخور بمركبة UTV متجاورة مُرشَدة عبر مجرى من الحجر الرملي قرب Vernal في يوتا", caption: "زحف مُرشَد على الصخور" },
+  "slide-051": { alt: "مطل صحراوي عند الغسق في جولة UTV إلى المنطقة الخلفية قرب Vernal في يوتا", caption: "المطل عند الغسق" },
+  "slide-052": { alt: "مركبة UTV متجاورة تجتاز شقًا عميقًا على مسار في المنطقة الخلفية قرب Vernal في يوتا", caption: "اجتياز الشق العميق" },
+  "slide-053": { alt: "مركبة UTV متجاورة تعبر النهر وسط رذاذ الماء قرب Vernal في يوتا", caption: "عبور النهر وسط الرذاذ" },
+  "slide-054": { alt: "لافتة مدخل مسار Doc's Beach في جولة UTV مع Adventure Tours Vernal قرب Vernal في يوتا", caption: "مسارات Doc's Beach" },
+  "slide-055": { alt: "أسطول من مركبات Kawasaki KRX 1000 المتجاورة جاهز لجولة مُرشَدة في Vernal بولاية يوتا", caption: "اصطفاف الأسطول قبل الانطلاق" },
+  "slide-056": { alt: "مجموعة الجولة تتوقف بمركبات UTV المتجاورة قرب Vernal في يوتا", caption: "توقف المجموعة على المسار" },
+  "slide-057": { alt: "مجموعة الجولة مع مركبات Kawasaki KRX 1000 المتجاورة على حيد قرب Vernal في يوتا", caption: "صورة مجموعة الجولة" },
+  "slide-058": { alt: "صف طويل من مركبات UTV المتجاورة جاهز لجولة مُرشَدة قرب Vernal في يوتا", caption: "مصطفة وجاهزة" },
+  "slide-059": { alt: "أسطول من مركبات UTV المتجاورة على قمة تل قرب Vernal في يوتا", caption: "الأسطول على قمة التل" },
+  "slide-060": { alt: "مركبة UTV متجاورة تندفع عبر مسار موحل في المنطقة الخلفية قرب Vernal في يوتا", caption: "اندفاع عبر المسار الموحل" },
+  "slide-061": { alt: "مركبة Kawasaki UTV متجاورة خضراء تعبر شقًا موحلًا قرب Vernal في يوتا", caption: "المركبة الخضراء في الطين" },
+  "slide-062": { alt: "مجموعة الجولة تتجمع تحت نتوء صخري مع مركبات UTV المتجاورة قرب Vernal في يوتا", caption: "المجموعة تحت النتوء الصخري" },
+  "slide-063": { alt: "مركبات UTV متجاورة متوقفة عند جرف في جولة مُرشَدة قرب Vernal في يوتا", caption: "مركبات UTV عند الجرف" },
+  "slide-064": { alt: "مشهد مسار صخري في جولة UTV إلى المنطقة الخلفية قرب Vernal في يوتا", caption: "مشهد المسار الصخري" },
+  "slide-065": { alt: "أحد الركّاب يقفز من جرف للتبرّد في نزهة مع Adventure Tours Vernal قرب Vernal في يوتا", caption: "قفزة الجرف للتبرّد" },
+  "slide-066": { alt: "مركبات UTV متجاورة متوقفة أسفل قبة من الصخر الأملس قرب Vernal في يوتا", caption: "مركبات UTV في الأسفل" },
+  "slide-067": { alt: "مركبة UTV متجاورة زرقاء تعتلي قبة من الصخر الأملس بصحبة مرشد قرب Vernal في يوتا", caption: "اعتلاء الصخر الأملس" },
+  "slide-068": { alt: "ثلاث مركبات UTV متجاورة تزحف على الصخور عبر المنطقة الخلفية في يوتا", caption: "ثلاثي الزحف على الصخور" },
+  "slide-069": { alt: "ركّاب يستكشفون مساكن الجروف في جولة UTV مع Adventure Tours Vernal", caption: "استكشاف مساكن الجروف" },
+  "slide-070": { alt: "قوس طبيعي كبير من الحجر الرملي فوق الوادي في جولة UTV مُرشَدة قرب Vernal في يوتا", caption: "قوس طبيعي من الحجر الرملي" },
+  "slide-071": { alt: "مجموعة الجولة عند قوس صخري وقت الغروب قرب Vernal في يوتا", caption: "المجموعة عند القوس وقت الغروب" },
+  "slide-072": { alt: "داخل كهف من الحجر الرملي في جولة إلى المنطقة الخلفية مع Adventure Tours Vernal", caption: "داخل الكهف" },
+  "slide-073": { alt: "مركبة UTV متجاورة في تسلق نحو قمة من الصخر الأملس قرب Vernal في يوتا", caption: "تسلق قمة الصخر الأملس" },
+  "slide-074": { alt: "مركبة UTV متجاورة في مغامرة عبور النهر قرب Vernal في يوتا", caption: "مغامرة عبور النهر" },
+  "slide-075": { alt: "مركبة UTV متجاورة متوقفة عند مطل على الأخدود قرب Vernal في يوتا", caption: "المركبة المتوقفة من الجانب" },
+  "slide-076": { alt: "مركبة UTV متجاورة تنطلق فوق كثيب رملي قرب Vernal في يوتا", caption: "انطلاقة فوق الكثيب الرملي" },
+  "slide-077": { alt: "مركبة UTV متجاورة متوقفة بجوار قوس من الحجر الرملي قرب Vernal في يوتا", caption: "توقف عند القوس" },
+  "slide-078": { alt: "قوس ذهبي من الحجر الرملي في جولة UTV إلى المنطقة الخلفية قرب Vernal في يوتا", caption: "القوس الصخري الذهبي" },
+  "slide-079": { alt: "فتحة تشبه النافذة في كهف من الحجر الرملي قرب Vernal في يوتا", caption: "نافذة كهف الحجر الرملي" },
+  "slide-080": { alt: "مسار بمحاذاة جدار أخدود شاهق قرب Vernal في يوتا", caption: "مسار جدار الأخدود" },
+  "slide-081": { alt: "مركبات UTV متجاورة متوقفة تحت قوس من الحجر الرملي قرب Vernal في يوتا", caption: "مركبات UTV تحت القوس" },
+  "slide-082": { alt: "داخل كهف من الحجر الرملي في جولة مع Adventure Tours Vernal قرب Vernal في يوتا", caption: "منظر داخل الكهف" },
+  "slide-083": { alt: "نتوء صخري شاهق في جولة UTV إلى المنطقة الخلفية قرب Vernal في يوتا", caption: "نتوء صخري شاهق" },
+  "slide-084": { alt: "ثلاث مركبات UTV متجاورة على حافة الأخدود قرب Vernal في يوتا", caption: "ثلاث مركبات UTV على حافة الأخدود" },
+  "slide-085": { alt: "ثنائي يلتقط صورة عند حافة جرف تطل على الأخدود قرب Vernal في يوتا", caption: "ثنائي عند حافة الجرف" },
+  "slide-086": { alt: "مطل خريفي على الأخدود من مسار UTV في المنطقة الخلفية قرب Vernal في يوتا", caption: "مطل الأخدود في الخريف" },
+  "slide-087": { alt: "مركبة UTV متجاورة على مسار تحفّه أشجار الحور الرجراج قرب Vernal في يوتا", caption: "جولة بين أشجار الحور الرجراج" },
+  "slide-088": { alt: "مركبة UTV متجاورة في هبوط على الصخر الأملس قرب Vernal في يوتا", caption: "هبوط على الصخر الأملس" },
+  "slide-089": { alt: "مسار ذهبي بين أشجار الحور الرجراج في مغامرة مُرشَدة بمركبة متجاورة قرب Vernal في يوتا", caption: "مسار الحور الرجراج الذهبي" },
+  "slide-090": { alt: "مركبات UTV متجاورة فوق الأخدود في جولة إلى المنطقة الخلفية قرب Vernal في يوتا", caption: "مركبات UTV فوق الأخدود" },
+  "slide-091": { alt: "منظر عبر قوس من الحجر الرملي في جولة مع Adventure Tours Vernal قرب Vernal في يوتا", caption: "عبر القوس" },
+  "slide-092": { alt: "مركبات UTV متجاورة على الصخر الأملس تحت سماء عاصفة قرب Vernal في يوتا", caption: "الصخر الأملس تحت العاصفة" },
+  "slide-093": { alt: "مركبة UTV متجاورة زرقاء تثير الغبار على مسار صحراوي قرب Vernal في يوتا", caption: "غبار المسار الصحراوي" },
+  "slide-094": { alt: "من داخل كهف من الحجر الرملي عبر فتحة تشبه النافذة قرب Vernal في يوتا", caption: "داخل كهف من الحجر الرملي" },
+  "slide-095": { alt: "مركبات UTV متجاورة عند نقطة انطلاق على قمة الجبل قرب Vernal في يوتا", caption: "نقطة الانطلاق على قمة الجبل" },
+  "slide-096": { alt: "ثلاث مركبات UTV متجاورة مصطفة في جولة مُرشَدة قرب Vernal في يوتا", caption: "ثلاث مركبات UTV مصطفة" },
+  "slide-097": { alt: "منظر حيد من الصخر الأملس في جولة UTV إلى المنطقة الخلفية قرب Vernal في يوتا", caption: "منظر حيد الصخر الأملس" },
+  "slide-098": { alt: "مركبة UTV متجاورة تتسلق الصخر الأملس قرب Vernal في يوتا", caption: "تسلق الصخر الأملس" },
+  "slide-099": { alt: "مركبة UTV متجاورة في تسلق على الصخر الأملس تحت سماء عاصفة قرب Vernal في يوتا", caption: "تسلق الصخر الأملس تحت العاصفة" },
+  "slide-100": { alt: "مركبة UTV متجاورة تنثر الغبار على مسار صحراوي قرب Vernal في يوتا", caption: "الغبار المتطاير على المسار" },
+  "slide-101": { alt: "مركبة UTV متجاورة في تسلق حافة صخرية شديدة الانحدار قرب Vernal في يوتا", caption: "تسلق الحافة شديدة الانحدار" },
+  "slide-102": { alt: "مركبة UTV متجاورة تنثر الرمال في منعطف قرب Vernal في يوتا", caption: "منعطف ينثر الرمال" },
+  "slide-103": { alt: "مركبة UTV متجاورة ترفع العلم الأمريكي أثناء التوقف قرب Vernal في يوتا", caption: "مركبة UTV بالعلم الأمريكي" },
+  "slide-104": { alt: "مركبة UTV متجاورة عند حافة جرف وقت الغسق قرب Vernal في يوتا", caption: "حافة الجرف عند الغسق" },
+  "slide-105": { alt: "مركبة UTV متجاورة على خط حيد وقت الشفق في المنطقة الخلفية الصحراوية في يوتا", caption: "خط الحيد وقت الشفق" },
+};
+
 /**
  * Locale dictionaries — one per registered locale that RENDERS the gallery
  * (P32 registered them empty, P33 populated them, AR-2 B-0 made the map partial).
@@ -1155,6 +1263,7 @@ const GALLERY_TEXT: Partial<Readonly<Record<Locale, GalleryDictionary>>> = {
   de: GALLERY_TEXT_DE,
   ja: GALLERY_TEXT_JA,
   zh: GALLERY_TEXT_ZH,
+  ar: GALLERY_TEXT_AR,
 };
 
 /**
@@ -1173,12 +1282,22 @@ const GALLERY_TEXT: Partial<Readonly<Record<Locale, GalleryDictionary>>> = {
  *
  * An entry here is therefore load-bearing in both directions. Delete it when the
  * locale gains a homepage; the build will tell you the moment you forget.
+ *
+ * ── EMPTY as of AR-2 Phase F, the final batch ────────────────────────────────
+ * `ar` was the only entry this map ever carried, and it named its own removal
+ * condition: *"Remove this entry together with the phase that adds an /ar/
+ * homepage, and add GALLERY_TEXT_AR in the same change."* That is exactly what
+ * happened — `src/pages/ar/index.astro` now exists, so `renderGallery('ar')` is
+ * reachable and the throw above it would have fired on the first build if the
+ * dictionary had not landed with it. The claim was falsifiable and it was
+ * falsified on schedule.
+ *
+ * The map stays. It is empty, not deleted: `Partial<…>` on GALLERY_TEXT means
+ * absence is legal in the type system, and this map plus gate 4j is the only
+ * thing that makes absence *declared* rather than silent. Deleting it would put
+ * the P34 defect back the day a tenth locale registers.
  */
-export const GALLERY_EXEMPT: Readonly<Record<string, string>> = {
-  ar: 'AR-1 pilot locale: the only Arabic route is /ar/cancellation-policy/, so no ' +
-      'page calls renderGallery("ar"). Remove this entry together with the phase ' +
-      'that adds an /ar/ homepage, and add GALLERY_TEXT_AR in the same change.',
-};
+export const GALLERY_EXEMPT: Readonly<Record<string, string>> = {};
 
 /** Indentation of a slide element inside `<div class="carousel-track">`. */
 const SLIDE_INDENT = " ".repeat(14);

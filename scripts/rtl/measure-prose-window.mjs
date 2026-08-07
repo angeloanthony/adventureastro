@@ -97,7 +97,20 @@ function registeredAr() {
   const src = readFileSync(path.join(REPO_ROOT, 'src', 'lib', 'i18n.ts'), 'utf8');
   const block = src.match(/const AR_SLUGS = new Set<string>\(\[([\s\S]*?)\]\);/);
   if (!block) throw new Error('AR_SLUGS block not found in src/lib/i18n.ts');
-  const all = [...block[1].matchAll(/'([^']+)'/g)].map((m) => m[1]);
+  // ⚠ `[^']*`, NOT `[^']+`. A slug is any single-quoted string in this block, and the
+  // EMPTY string is a legal slug — it is the homepage, the route every locale registers as
+  // `''`. With `+` the engine cannot match `''`, so it starts from that entry's CLOSING
+  // quote and pairs it with the next entry's OPENING quote, mispairing every slug after it.
+  // Loud here — the homepage sits mid-array, so the corruption reached the spokes and the
+  // instrument exited with "no Arabic pilot routes found". It would have been SILENT had
+  // the entry been last, and §3.2 records which way that errs: a smaller `whole` yields a
+  // smaller `survives`, which reports a DEAD FLOOR AS ENFORCING.
+  //
+  // Second input class to break this same extractor; the first was an apostrophe in a
+  // comment (batch 3, filed as a framework finding). Both are the same mistake — matching
+  // a delimiter instead of naming the property. `[^']*` states the property: a slug is a
+  // quoted string, and it may be empty.
+  const all = [...block[1].matchAll(/'([^']*)'/g)].map((m) => m[1]);
   return { spokes: all.filter(isSpoke), statics: all.filter((s) => !isSpoke(s)) };
 }
 

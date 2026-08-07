@@ -1,0 +1,181 @@
+---
+// ar/index.astro — Arabic homepage (AR-2 Phase F, the final batch: 77/77 locale parity).
+// Mirrors src/pages/index.astro and follows zh/index.astro's shape exactly; only the Seo
+// copy, the descriptive schema fields and the page-content locale differ. `lang` is
+// URL-derived, same as every other page — no new routing or lang-prop mechanism.
+//
+// ⚠ THIS FILE IS THE ACTIVATION POINT FOR GATE 4j's DEFERRED GALLERY CHECK. Until it
+// existed, `renderGallery('ar')` was unreachable and `ar` sat in GALLERY_EXEMPT with a
+// stated reason. The moment this route builds, the AR block in home.ts calls
+// renderGallery("ar") and the throw in home-gallery.ts fires unless GALLERY_TEXT_AR (105
+// slides) landed in the same change. It did; the exemption is gone and 4j now measures
+// 105 x 9 = 945 entries.
+//
+// Schema: descriptive fields (jobTitle, description, OfferCatalog names and descriptions)
+// are page copy and are translated. Identity fields — name, url root, address, geo,
+// telephone, aggregateRating — stay byte-identical to the English page: same business
+// entity, not page-specific copy. Nothing here is isolated, because JSON-LD is
+// parser-consumed and never laid out (batch 4: isolate what renders, never what is parsed).
+import { getBodyHtml } from '../../page-content/home';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+const bodyHtml = getBodyHtml(lang);
+const schema = `
+  {
+    "@context": "https://schema.org",
+    "@type": "TouristInformationCenter",
+    "name": "Adventure Tours Vernal",
+    "image": "https://adventuretoursvernal.com/images/logo.webp",
+    "telephone": "+1-435-219-9447",
+    "email": "adventuretoursvernal@gmail.com",
+    "url": "https://adventuretoursvernal.com",
+    "priceRange": "$$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1935 S 1500 E",
+      "addressLocality": "Vernal",
+      "addressRegion": "UT",
+      "postalCode": "84078",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 40.4555,
+      "longitude": -109.5287
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"
+      ],
+      "opens": "07:00",
+      "closes": "19:00"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "82",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "employee": {
+      "@type": "Person",
+      "name": "Dave Wilson",
+      "jobTitle": "المالك والمرشد الرئيسي",
+      "description": "Dave Wilson هو مالك شركة Adventure Tours Vernal ومرشدها الرئيسي، وهي شركة محلية لجولات UTV تخدم منطقة Uintah Basin. يمتلك Dave معرفة عميقة بمسارات المنطقة الخلفية حول Vernal وبـDinosaur National Monument وبتضاريس الصحراء المرتفعة في يوتا.",
+      "url": "https://adventuretoursvernal.com/ar/about/"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "جولات UTV مُرشَدة بمركبات متجاورة — Vernal بولاية يوتا",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "جولة Doc's Beach بمركبات UTV",
+            "description": "مغامرة مُرشَدة بمركبة متجاورة إلى Doc's Beach، تشمل مسارات وعرة وتضاريس صحراوية رملية وإطلالات واسعة على منطقة Uintah Basin قرب Vernal في يوتا.",
+            "provider": { "@type": "LocalBusiness", "name": "Adventure Tours Vernal" },
+            "areaServed": "Vernal, Utah"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "جولة Moonshine Arch بمركبات UTV",
+            "description": "جولة مُرشَدة بمركبات Kawasaki KRX 1000 إلى Moonshine Arch، تتلوّى عبر أخاديد الصخر الأحمر وهضاب الصحراء المرتفعة في يوتا قرب Vernal.",
+            "provider": { "@type": "LocalBusiness", "name": "Adventure Tours Vernal" },
+            "areaServed": "Vernal, Utah"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "جولة Ashley Gorge بمركبات UTV",
+            "description": "جولة مُرشَدة بمركبة متجاورة عبر ممر أخدود Ashley Gorge المهيب، بجدران من الحجر الرملي شاهقة ومشاهد وادي النهر قرب Vernal في يوتا.",
+            "provider": { "@type": "LocalBusiness", "name": "Adventure Tours Vernal" },
+            "areaServed": "Vernal, Utah"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "جولة Outlaw Trail بمركبات UTV",
+            "description": "جولة UTV مُرشَدة في المنطقة الخلفية تتبع مسار Outlaw Trail التاريخي في يوتا عبر تضاريس أخاديد وعرة استخدمتها عصابة Butch Cassidy المعروفة باسم Wild Bunch قرب Vernal في يوتا.",
+            "provider": { "@type": "LocalBusiness", "name": "Adventure Tours Vernal" },
+            "areaServed": "Vernal, Utah"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "جولة Asphalt Ridge بمركبات UTV",
+            "description": "جولة مُرشَدة بمركبات Kawasaki KRX 1000 على قمة Asphalt Ridge مع إطلالات بانورامية على أرض الديناصورات وجبال Uintah Mountains قرب Vernal في يوتا.",
+            "provider": { "@type": "LocalBusiness", "name": "Adventure Tours Vernal" },
+            "areaServed": "Vernal, Utah"
+          }
+        }
+      ]
+    }
+  }
+`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="جولات UTV مُرشَدة في أرض الديناصورات بولاية يوتا | Adventure Tours Vernal"
+      description="تقدّم شركة Adventure Tours Vernal جولات مُرشَدة بمركبات Kawasaki KRX 1000 المتجاورة عبر أرض الديناصورات في يوتا. تقييم خمس نجوم. مفتوحة يوميًا من 7 صباحًا حتى 7 مساءً. اتصل على (435) 219-9447."
+      path="/ar/"
+      type="website"
+      ogTitle="Adventure Tours Vernal | جولات UTV في أرض الديناصورات بولاية يوتا"
+      ogDescription="جولات مُرشَدة بمركبات Kawasaki KRX 1000 المتجاورة عبر المنطقة الخلفية حول Vernal. تقييم 5.0 من 82 مراجعة. اتصل على (435) 219-9447."
+      twitterTitle="Adventure Tours Vernal | جولات UTV في يوتا"
+      twitterDescription="جولات مُرشَدة بمركبات Kawasaki KRX 1000 المتجاورة عبر المنطقة الخلفية حول Vernal. تقييم 5.0 من 82 مراجعة."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" active="home" />
+  <Fragment slot="body" set:html={bodyHtml} />
+  <Footer
+    slot="body"
+    trails={{
+      heading: t('footer.ourTrails', lang),
+      links: [
+        { href: '/ar/utv/best-utv-trails-vernal/#1-docs-beach', label: "Doc's Beach" },
+        { href: '/ar/utv/best-utv-trails-vernal/#2-moonshine-arch', label: 'Moonshine Arch' },
+        { href: '/ar/utv/best-utv-trails-vernal/#3-ashley-gorge', label: 'Ashley Gorge' },
+        { href: '/ar/utv/best-utv-trails-vernal/#4-outlaw-trail', label: 'Outlaw Trail' },
+        { href: '/ar/utv/best-utv-trails-vernal/#5-asphalt-ridge', label: 'Asphalt Ridge' },
+        { href: '/ar/booking/', label: t('cta.bookNow', lang), class: 'nav-book-btn' },
+      ],
+    }}
+    contact={{ emailAsLink: true }}
+    info={{
+      heading: t('footer.information', lang),
+      links: [
+        { href: '/ar/cancellation-policy/', label: t('nav.cancellationPolicy', lang) },
+        { href: '/ar/privacy-policy/', label: t('nav.privacyPolicy', lang) },
+        { href: '/ar/faq/', label: t('nav.faq', lang) },
+        { href: '/ar/safety-guidelines/', label: t('nav.safetyGuidelines', lang) },
+        { href: '/ar/guides/what-to-bring/', label: t('nav.whatToBring', lang) },
+      ],
+      secondHeading: t('section.exploreVernal', lang),
+      secondLinks: [
+        { href: '/ar/utv/', label: t('footer.link.utvTrailsTours', lang) },
+        { href: '/ar/things-to-do/', label: t('footer.link.thingsToDo', lang) },
+        { href: '/ar/dinosaur-national-monument/', label: t('footer.link.dinosaurNationalMonument', lang) },
+        { href: '/ar/guides/', label: t('footer.link.guides', lang) },
+        { href: '/ar/from/salt-lake-city/', label: t('footer.link.visitingFromSLC', lang) },
+      ],
+    }}
+  />
+</BaseLayout>

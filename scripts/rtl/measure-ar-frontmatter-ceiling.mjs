@@ -182,7 +182,12 @@ function registeredArSpokes() {
   const src = readFileSync(path.join(REPO_ROOT, 'src', 'lib', 'i18n.ts'), 'utf8');
   const block = src.match(/const AR_SLUGS = new Set<string>\(\[([\s\S]*?)\]\);/);
   if (!block) throw new Error('AR_SLUGS block not found in src/lib/i18n.ts');
-  return [...block[1].matchAll(/'([^']+)'/g)]
+  // ⚠ `[^']*`, NOT `[^']+` — see the note on the mirrored extractor in
+  // `measure-prose-window.mjs`. The homepage registers as the EMPTY slug `''`, which `+`
+  // cannot match, and the mispairing that follows silently changes the population this
+  // instrument sums the ceiling over. The two extractors must agree or the window and the
+  // ceiling describe different page sets, so this fix lands in both or in neither.
+  return [...block[1].matchAll(/'([^']*)'/g)]
     .map((m) => m[1])
     .filter((s) => existsSync(path.join(REPO_ROOT, 'src', 'content', `${s}.ar.mdx`)));
 }

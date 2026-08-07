@@ -547,6 +547,17 @@ const AR_SLUGS = new Set<string>([
   'camping', // AR-2 Phase F batch 6b
   'scenic-drives', // AR-2 Phase F batch 6b
   'itineraries', // AR-2 Phase F batch 6b
+  // AR-2 Phase F, the final batch — the homepage. The empty string is the static route
+  // convention every other locale already uses, and it is what takes ar to 77 of 77.
+  //
+  // Registering it is the largest retro-switch this registry has ever done, because
+  // Header, Footer and the language switcher all resolve the site root through
+  // localeHref: the wordmark and the home link on all 76 existing ar pages move to
+  // /ar/ on the same build. Six pages carried a HAND-WRITTEN /#vehicles, /#gallery or
+  // / that localeHref never touched, because they were typed as literals back when no
+  // Arabic homepage existed; those were switched by hand in this batch, matching what
+  // es, it, pt, fr, de, ja and zh have always done.
+  '', // AR-2 Phase F final batch — the homepage
   'utv/best-utv-trails-vernal', // AR-2 Track E, E-1 — first prose spoke
   'utv/backcountry-tours-vernal-utah', // AR-2 Track E, E-2
   'utv/side-by-side-rentals-vernal-utah', // AR-2 Track E, E-2
