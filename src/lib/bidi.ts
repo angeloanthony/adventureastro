@@ -150,3 +150,32 @@ export function currencyDisplay(value: string): string {
 export function brandRun(value: string): string {
   return isolate(value);
 }
+
+/**
+ * A measured quantity as displayed: `72°F`, `12 mph`, `18%`, `10 mi`, `4 km`.
+ *
+ * ADDED FOR THE HEADER WEATHER STRIP, AND UNLIKE `brandRun` IT IS NOT A CAUTION
+ * CASE — the reordering is derivable from the algorithm, not feared:
+ *
+ *   `72°F` in an RTL paragraph, next to an Arabic label, resolves as
+ *   AN (W2 retypes the digits after the Arabic strong type) + ET (U+00B0) +
+ *   L (`F`). An AN run and an L run adjacent in an RTL paragraph are two
+ *   different levels, and the reader gets `°F 72` — the unit on the wrong side
+ *   of its own number. Nothing about this is a judgement call.
+ *
+ *   `18%` is the same shape one step weaker: W5 folds an ET into an adjacent
+ *   EN run, but the digits here are AN, not EN, so the `%` stays ON and N2
+ *   resolves it to paragraph direction — off the right-hand end of its number.
+ *
+ * This is why the strip does not rely on its flex-item boxes for the same
+ * effect. A flex item establishes its own formatting context and would
+ * incidentally produce the right answer today, but that is a layout side effect
+ * standing in for a text decision: restyle the strip and the correctness goes
+ * with it, silently, in the one locale nobody is reading. The isolation is
+ * stated instead.
+ *
+ * A no-op in the eight LTR locales, so this changes no rendered byte outside `ar`.
+ */
+export function measurementDisplay(value: string): string {
+  return isolate(value);
+}

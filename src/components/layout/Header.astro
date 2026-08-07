@@ -12,6 +12,14 @@ import LanguageSwitcher from './LanguageSwitcher.astro';
 // has no Arabic in it at all — the hazard comes from <html dir="rtl">, not from what is
 // next to it. Isolation is the formatter's decision, never this component's.
 import Bidi from '../Bidi.astro';
+// The live conditions strip renders INSIDE `.navbar`, not after it. `.navbar`
+// is `position: fixed`, so a sibling placed after it would sit at y=0 behind
+// the header, and pinning it independently would mean hardcoding the nav's
+// height — which changes with viewport, with menu wrapping, and with the 300px
+// logo. As the last child of the fixed block it is always flush under the nav
+// row with no measurement at all, and `.nav-menu`'s `top: 100%` mobile drawer
+// keeps opening below the whole header for the same reason.
+import WeatherTicker from './WeatherTicker.astro';
 import { getLangFromUrl, localeHref } from '../../lib/i18n';
 import { t } from '../../lib/ui';
 
@@ -60,6 +68,7 @@ const bookingHref = nav('booking');
       <span></span><span></span><span></span>
     </button>
   </div>
+  <WeatherTicker />
 </nav>
 
 <script is:inline>

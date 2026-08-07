@@ -1,0 +1,528 @@
+---
+// WeatherTicker.astro — the live conditions strip that sits directly under the
+// nav, on every page, in all nine locales.
+//
+// ─────────────────────────────────────────────────────────────────────────────
+// WHY OPEN-METEO, AND WHY THE FETCH IS IN THE BROWSER
+// ─────────────────────────────────────────────────────────────────────────────
+// `astro.config.mjs` declares no adapter: this is a static build, and there is
+// no server at runtime to proxy an API or hold a secret. A strip whose whole
+// claim is "live" therefore has to fetch from the client, which rules out every
+// provider that authenticates with a key — embedding one in a public bundle is
+// publishing it. Open-Meteo needs no key, and returns all eight stations in a
+// SINGLE request via comma-separated coordinates, so the entire board costs one
+// round-trip. If a paid provider is ever required, only `buildUrl()` in the
+// client module below changes; nothing else here knows who the source is.
+//
+// ─────────────────────────────────────────────────────────────────────────────
+// WHAT THE GATES CAN AND CANNOT SEE HERE  (read this before trusting a green run)
+// ─────────────────────────────────────────────────────────────────────────────
+// The dist/ gates — 4h, 4i, 4k, 4n, 4q, 4s — read built HTML. Everything this
+// component renders WITH DATA is injected by the client at runtime, so none of
+// it is in dist/ and none of those gates can observe it. That is unmeasured
+// state, not a pass: a green 4n run says nothing whatsoever about the Arabic
+// correctness of a rendered station.
+//
+// The response is to remove the need for the measurement rather than to claim
+// one, and every RTL decision below is made structurally so that it cannot be
+// wrong at runtime:
+//
+//   1. NO TEXT SEPARATORS. The reference design pipes its fields apart with
+//      `|`. A neutral character between an Arabic label and a digit run is
+//      precisely the N2 case that reorders, and it would reorder in the one
+//      place no gate is looking. The separators here are `border-inline-start`
+//      — a logical property, correct in both directions, and not text at all.
+//   2. NO LITERAL ARROW GLYPHS, IN CODE OR IN COMMENTS. The wind bearing is an
+//      inline SVG needle rotated by an absolute compass angle. A rotation is
+//      immune to direction (it is a physical bearing, not a UI affordance —
+//      gate 4o's distinction), where a glyph would need a mirroring decision.
+//   3. MEASURED VALUES ARE ISOLATED BY NAME, through `measurementDisplay()` in
+//      `src/lib/bidi.ts`. The reasoning for why `72°F` reorders lives there,
+//      with the module that owns isolation, not here.
+//   4. DIRECTION IS NEVER BRANCHED ON IN JS. The strip is a flex row; the
+//      document's `dir` orders it. The only rtl-specific rule in the whole file
+//      is one line of CSS reversing the scroll travel.
+//
+// ─────────────────────────────────────────────────────────────────────────────
+// UNITS FOLLOW THE READER, NOT THE PLACE
+// ─────────────────────────────────────────────────────────────────────────────
+// Vernal is in Utah, so `en` gets °F / mph / miles. Every other locale is an
+// inbound international reader and gets °C / km/h / km. The request itself is
+// always metric and the conversion happens at render time, which means the
+// localStorage payload is unit-neutral and one cache serves a reader who
+// switches language mid-visit.
+import { WEATHER_STATIONS } from '../../config/weather-locations';
+import { getLangFromUrl, getLocaleMeta, isRtl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+
+interface Props {
+  /** Override the URL-derived locale. */
+  lang?: string;
+  /** Scroll travel in pixels per second. Lower is calmer. */
+  speed?: number;
+  /** Client refresh cadence, minutes. */
+  refreshMinutes?: number;
+}
+const { lang: langProp, speed = 55, refreshMinutes = 10 } = Astro.props;
+const lang = langProp ?? getLangFromUrl(Astro.url);
+const rtl = isRtl(lang);
+
+// Station names resolve on the server so the client never carries a locale
+// rule. Only `Vernal` has a localized form and only in Japanese; everything
+// else is Latin verbatim in all nine locales (see weather-locations.ts).
+const stations = WEATHER_STATIONS.map((s) => ({
+  lat: s.lat,
+  lon: s.lon,
+  name: lang === 'ja' && s.jaName ? s.jaName : s.name,
+}));
+
+const config = {
+  stations,
+  speed,
+  refreshMs: refreshMinutes * 60 * 1000,
+  // Imperial for the domestic locale only. See header note.
+  imperial: lang === 'en',
+  // The BCP-47 tag gate 4p guarantees resolves to numbering system `latn`, so
+  // the Arabic strip carries Western digits like the rest of the Arabic corpus.
+  intl: getLocaleMeta(lang).intl,
+  s: {
+    error: t('wx.error', lang),
+    feelsLike: t('wx.feelsLike', lang),
+    wind: t('wx.wind', lang),
+    humidity: t('wx.humidity', lang),
+    precip: t('wx.precip', lang),
+    visibility: t('wx.visibility', lang),
+  },
+  cond: {
+    clear: t('wx.cond.clear', lang),
+    mainlyClear: t('wx.cond.mainlyClear', lang),
+    partly: t('wx.cond.partly', lang),
+    overcast: t('wx.cond.overcast', lang),
+    fog: t('wx.cond.fog', lang),
+    drizzle: t('wx.cond.drizzle', lang),
+    rain: t('wx.cond.rain', lang),
+    freezingRain: t('wx.cond.freezingRain', lang),
+    snow: t('wx.cond.snow', lang),
+    showers: t('wx.cond.showers', lang),
+    snowShowers: t('wx.cond.snowShowers', lang),
+    thunder: t('wx.cond.thunder', lang),
+  },
+  // Indexed N, NE, E, SE, S, SW, W, NW — the order the client's bearing
+  // arithmetic produces. Spanish, Italian, Portuguese and French diverge from
+  // English on every westward point, and German on east; the dictionary holds
+  // that, this component does not know about it.
+  dirs: [
+    t('wx.dir.n', lang), t('wx.dir.ne', lang), t('wx.dir.e', lang), t('wx.dir.se', lang),
+    t('wx.dir.s', lang), t('wx.dir.sw', lang), t('wx.dir.w', lang), t('wx.dir.nw', lang),
+  ],
+};
+---
+
+<section class="wx" aria-label={t('wx.region', lang)} data-wx data-rtl={rtl ? '' : undefined}>
+  {/* A data island, not code: `is:inline` is stated so it is a decision rather
+      than a consequence of carrying an attribute. Astro would treat it as
+      inline either way, and the bundled module below reads it from here — which
+      is what keeps that module cacheable and free of `define:vars`. */}
+  <script is:inline type="application/json" data-wx-config set:html={JSON.stringify(config)} />
+
+  <div class="wx-live" aria-hidden="true">
+    <span class="wx-pulse"></span>{t('wx.live', lang)}
+  </div>
+
+  <div class="wx-viewport">
+    <div class="wx-track" data-wx-track>
+      <p class="wx-status" data-wx-status>{t('wx.loading', lang)}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* The strip is a child of the fixed `.navbar`, so it inherits the header's
+     pinning for free and needs no measurement of the nav's height — which
+     varies with viewport, wrapping and the 300px logo. */
+  .wx {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    overflow: hidden;
+    /* styles.css:185 gives every `section` the page's `--section-padding`
+       (80px block). Measured, not assumed: without this reset the strip
+       renders 193px tall instead of 32px and swallows the top of the page.
+       No gate reads geometry, so nothing but a render would have caught it. */
+    padding: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(245, 237, 227, 0.95) 100%);
+    border-top: 1px solid rgba(212, 118, 78, 0.18);
+    color: var(--charcoal, #333);
+    font-family: var(--font-body, system-ui, sans-serif);
+    font-size: 0.82rem;
+    line-height: 1;
+    user-select: none;
+    contain: content;
+  }
+
+  /* Status plate on the reading-start side. Flex order does that; there is no
+     left/right anywhere in this file. */
+  .wx-live {
+    position: relative;
+    z-index: 2;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding-inline: clamp(0.75rem, 3vw, 1.1rem) 0.8rem;
+    font-weight: 800;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    color: var(--rust-red, #c1440e);
+    background: linear-gradient(to right, rgba(250, 246, 240, 0.98) 78%, rgba(250, 246, 240, 0));
+  }
+  .wx-pulse {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: var(--burnt-orange, #d4764e);
+    animation: wx-pulse 2.4s ease-out infinite;
+  }
+  @keyframes wx-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(212, 118, 78, 0.55); }
+    70% { box-shadow: 0 0 0 6px rgba(212, 118, 78, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(212, 118, 78, 0); }
+  }
+
+  .wx-viewport {
+    position: relative;
+    flex: 1 1 auto;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 2.5%, #000 97.5%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 2.5%, #000 97.5%, transparent);
+  }
+
+  /* The belt. Width is intrinsic; the client sets the duration from the
+     measured width of one copy, so travel speed is identical on a phone and on
+     a 4K monitor. translateX(-50%) is exactly one of the two copies. */
+  .wx-track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    will-change: transform;
+    animation: wx-scroll var(--wx-duration, 60s) linear infinite;
+  }
+  @keyframes wx-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* THE ONLY DIRECTION BRANCH IN THE COMPONENT. In an rtl document the reader
+     starts at the right edge, so the item being read has to travel rightward
+     and new stations arrive from the left. Reversing the same keyframe does
+     exactly that; the two copies are identical, so the loop stays seamless. */
+  .wx[data-rtl] .wx-track { animation-direction: reverse; }
+
+  .wx:hover .wx-track,
+  .wx:focus-within .wx-track { animation-play-state: paused; }
+
+  /* Injected at runtime, so every rule below has to be :global. */
+  .wx :global(.wx-station) {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    padding-inline-end: clamp(1.25rem, 4vw, 2.5rem);
+    font-variant-numeric: tabular-nums;
+  }
+  .wx :global(.wx-place) {
+    font-weight: 700;
+    color: var(--burnt-orange, #d4764e);
+    padding-inline: 0.7rem;
+  }
+  .wx :global(.wx-f) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding-block: 0.55rem;
+    padding-inline: 0.7rem;
+    color: rgba(51, 51, 51, 0.75);
+  }
+  /* The field separator. A logical border, never a `|` — a neutral character
+     between an Arabic label and a digit run reorders under rule N2. */
+  .wx :global(.wx-f + .wx-f) { border-inline-start: 1px solid rgba(212, 118, 78, 0.22); }
+  .wx :global(.wx-f b) { font-weight: 700; color: var(--charcoal, #333); }
+  .wx :global(.wx-temp) { font-weight: 800; color: var(--charcoal, #333); font-size: 0.9rem; }
+  .wx :global(.wx-ico) { font-size: 0.95em; line-height: 1; }
+  .wx :global(.wx-needle) { color: var(--burnt-orange, #d4764e); flex: 0 0 auto; }
+  /* Labels that are visual icons for sighted readers still have to be read
+     aloud, so each carries its localized name in the accessibility tree. */
+  .wx :global(.wx-sr) {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .wx-status {
+    margin: 0;
+    padding-block: 0.62rem;
+    padding-inline: 0.8rem;
+    white-space: nowrap;
+    color: rgba(51, 51, 51, 0.7);
+  }
+  .wx[data-state='error'] .wx-status { color: var(--rust-red, #c1440e); }
+  .wx[data-state='error'] .wx-pulse { animation: none; background: rgba(51, 51, 51, 0.35); }
+
+  /* Belt stops; the board becomes a manually scrollable list instead of
+     disappearing. */
+  @media (prefers-reduced-motion: reduce) {
+    .wx-track { animation: none; }
+    .wx-viewport { overflow-x: auto; scrollbar-width: none; }
+    .wx-viewport::-webkit-scrollbar { display: none; }
+    .wx-pulse { animation: none; }
+  }
+
+  @media (max-width: 768px) {
+    .wx { font-size: 0.76rem; }
+    .wx-live { padding-inline: 0.6rem 0.6rem; }
+  }
+</style>
+
+<script>
+  import { measurementDisplay } from '../../lib/bidi';
+
+  interface Station { name: string; lat: number; lon: number }
+  interface Cfg {
+    stations: Station[];
+    speed: number;
+    refreshMs: number;
+    imperial: boolean;
+    intl: string;
+    s: Record<string, string>;
+    cond: Record<string, string>;
+    dirs: string[];
+  }
+  interface Row { current: any; precipProb: number | null }
+
+  // Bump when the cached payload's SHAPE changes (a station added or removed
+  // does not change the shape; a field added to the request does).
+  const CACHE_KEY = 'atv-wx-v1';
+
+  // ── WMO weather code -> one of the twelve dictionary groups ───────────────
+  // Open-Meteo can return 28 distinct codes. Collapsing them to twelve labels
+  // is this component's decision, which is why the dictionary holds groups and
+  // not codes: a translator never has to know what 86 means.
+  function codeInfo(code: number, isDay: boolean) {
+    const byTime = (day: string, night: string) => (isDay ? day : night);
+    if (code === 0) return { key: 'clear', icon: byTime('☀️', '🌙') };
+    if (code === 1) return { key: 'mainlyClear', icon: byTime('🌤️', '🌙') };
+    if (code === 2) return { key: 'partly', icon: byTime('⛅', '☁️') };
+    if (code === 3) return { key: 'overcast', icon: '☁️' };
+    if (code === 45 || code === 48) return { key: 'fog', icon: '🌫️' };
+    if (code >= 51 && code <= 57) return { key: 'drizzle', icon: '🌦️' };
+    if (code >= 61 && code <= 65) return { key: 'rain', icon: '🌧️' };
+    if (code === 66 || code === 67) return { key: 'freezingRain', icon: '🌧️' };
+    if (code >= 71 && code <= 77) return { key: 'snow', icon: '🌨️' };
+    if (code >= 80 && code <= 82) return { key: 'showers', icon: '🌦️' };
+    if (code === 85 || code === 86) return { key: 'snowShowers', icon: '🌨️' };
+    if (code >= 95) return { key: 'thunder', icon: '⛈️' };
+    return { key: 'overcast', icon: '☁️' };
+  }
+
+  const C_TO_F = (c: number) => c * 9 / 5 + 32;
+  const KMH_TO_MPH = (k: number) => k / 1.609344;
+  const M_TO_MI = (m: number) => m / 1609.344;
+
+  function esc(s: string) {
+    return String(s).replace(/[&<>"]/g, (c) =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c] as string);
+  }
+
+  // Every number a reader sees goes through Intl on the locale's registry tag,
+  // which gate 4p certifies resolves to numbering system `latn`.
+  function makeNum(intl: string) {
+    let fmt: Intl.NumberFormat;
+    try { fmt = new Intl.NumberFormat(intl, { maximumFractionDigits: 0 }); }
+    catch { fmt = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }); }
+    return (n: number) => fmt.format(n);
+  }
+
+  // A number and its unit, isolated as one run. The DECISION to isolate lives
+  // in src/lib/bidi.ts; this only names the run.
+  const measure = (text: string) => measurementDisplay(esc(text));
+
+  // Wind bearing. `wind_direction_10m` is the compass point the wind blows
+  // FROM, which is the meteorological convention and the one the label states.
+  // The needle is drawn pointing north and rotated by that same bearing, so
+  // the needle and the letters always agree. An absolute rotation cannot be
+  // mirrored by document direction, which is the whole reason it is not a glyph.
+  function bearing(deg: number, cfg: Cfg) {
+    const i = ((Math.round(deg / 45) % 8) + 8) % 8;
+    return { label: cfg.dirs[i] ?? '', deg };
+  }
+  function needleSvg(deg: number) {
+    return `<svg class="wx-needle" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" ` +
+      `style="transform:rotate(${deg}deg)"><path d="M12 2 19 21 12 16.4 5 21Z" fill="currentColor"/></svg>`;
+  }
+
+  function field(inner: string) { return `<span class="wx-f">${inner}</span>`; }
+  function srLabel(text: string) { return `<span class="wx-sr">${esc(text)}</span>`; }
+  function icon(glyph: string) { return `<span class="wx-ico" aria-hidden="true">${glyph}</span>`; }
+
+  function stationHtml(st: Station, row: Row, cfg: Cfg, num: (n: number) => string) {
+    const c = row.current;
+    const info = codeInfo(c.weather_code, c.is_day === 1);
+    const imp = cfg.imperial;
+
+    const temp = imp ? C_TO_F(c.temperature_2m) : c.temperature_2m;
+    const feels = imp ? C_TO_F(c.apparent_temperature) : c.apparent_temperature;
+    const wind = imp ? KMH_TO_MPH(c.wind_speed_10m) : c.wind_speed_10m;
+    const tUnit = imp ? '°F' : '°C';
+    const wUnit = imp ? 'mph' : 'km/h';
+    const b = bearing(c.wind_direction_10m, cfg);
+
+    const parts: string[] = [];
+    parts.push(`<span class="wx-place">${esc(st.name)}</span>`);
+    parts.push(field(
+      `${icon(info.icon)}<span>${esc(cfg.cond[info.key] ?? '')}</span>` +
+      `<b class="wx-temp">${measure(num(temp) + tUnit)}</b>`));
+    parts.push(field(
+      `<span>${esc(cfg.s.feelsLike)}</span><b>${measure(num(feels) + tUnit)}</b>`));
+    parts.push(field(
+      `${srLabel(cfg.s.wind)}${needleSvg(b.deg)}<b>${measure(num(wind) + ' ' + wUnit)}</b>` +
+      `<span>${esc(b.label)}</span>`));
+    parts.push(field(
+      `${srLabel(cfg.s.humidity)}${icon('💧')}<b>${measure(num(c.relative_humidity_2m) + '%')}</b>`));
+
+    if (row.precipProb != null) {
+      parts.push(field(
+        `${srLabel(cfg.s.precip)}${icon('☔')}<b>${measure(num(row.precipProb) + '%')}</b>`));
+    }
+    if (c.visibility != null) {
+      const vis = imp ? M_TO_MI(c.visibility) : c.visibility / 1000;
+      parts.push(field(
+        `${srLabel(cfg.s.visibility)}${icon('👁️')}` +
+        `<b>${measure(num(vis) + (imp ? ' mi' : ' km'))}</b>`));
+    }
+
+    return `<span class="wx-station" role="listitem">${parts.join('')}</span>`;
+  }
+
+  function buildUrl(cfg: Cfg) {
+    const lat = cfg.stations.map((s) => s.lat).join(',');
+    const lon = cfg.stations.map((s) => s.lon).join(',');
+    // Always requested metric; the reader's units are applied at render time so
+    // one cached payload serves every locale.
+    return `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}` +
+      `&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,` +
+      `weather_code,wind_speed_10m,wind_direction_10m,visibility` +
+      `&hourly=precipitation_probability&forecast_days=1&timezone=auto` +
+      `&temperature_unit=celsius&wind_speed_unit=kmh`;
+  }
+
+  async function fetchRows(cfg: Cfg): Promise<Row[]> {
+    const res = await fetch(buildUrl(cfg), { headers: { Accept: 'application/json' } });
+    if (!res.ok) throw new Error(`open-meteo ${res.status}`);
+    const data = await res.json();
+    // A multi-coordinate request answers with an array; a single one with an
+    // object. Eight stations always yields the array, but the site is one
+    // config edit away from one station.
+    const rows = Array.isArray(data) ? data : [data];
+    return rows.map((r: any) => {
+      // Precipitation probability lives in the hourly block, not `current`, so
+      // the current hour has to be matched by timestamp rather than assumed to
+      // be index 0 — it is only index 0 at midnight local time.
+      let precipProb: number | null = null;
+      const hours: string[] = r.hourly?.time ?? [];
+      const probs: number[] = r.hourly?.precipitation_probability ?? [];
+      const nowHour = String(r.current?.time ?? '').slice(0, 13);
+      let i = hours.findIndex((h) => h.slice(0, 13) === nowHour);
+      if (i < 0) i = 0;
+      if (probs[i] != null) precipProb = probs[i];
+      return { current: r.current, precipProb };
+    });
+  }
+
+  function readCache(cfg: Cfg): Row[] | null {
+    try {
+      const raw = localStorage.getItem(CACHE_KEY);
+      if (!raw) return null;
+      const { ts, rows, n } = JSON.parse(raw);
+      // A station list edit invalidates the cache: rows are positional.
+      if (n !== cfg.stations.length) return null;
+      if (Date.now() - ts > cfg.refreshMs) return null;
+      return rows;
+    } catch { return null; }
+  }
+  function writeCache(cfg: Cfg, rows: Row[]) {
+    try {
+      localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), rows, n: cfg.stations.length }));
+    } catch { /* quota, or private mode: the strip simply refetches */ }
+  }
+
+  function showStatus(root: HTMLElement, msg: string, isError: boolean) {
+    const track = root.querySelector<HTMLElement>('[data-wx-track]');
+    if (!track) return;
+    track.innerHTML = '<p class="wx-status" data-wx-status></p>';
+    const p = track.querySelector('[data-wx-status]');
+    if (p) p.textContent = msg;
+    if (isError) root.setAttribute('data-state', 'error');
+    else root.removeAttribute('data-state');
+  }
+
+  function render(root: HTMLElement, cfg: Cfg, rows: Row[]) {
+    const track = root.querySelector<HTMLElement>('[data-wx-track]');
+    if (!track) return;
+    const num = makeNum(cfg.intl);
+    const items = cfg.stations
+      .map((s, i) => (rows[i] && rows[i].current ? stationHtml(s, rows[i], cfg, num) : ''))
+      .filter(Boolean)
+      .join('');
+    if (!items) { showStatus(root, cfg.s.error, true); return; }
+
+    // Two copies make the loop seamless; the duplicate is hidden from the
+    // accessibility tree so each station is announced once.
+    track.innerHTML =
+      `<span class="wx-list" role="list" style="display:inline-flex;align-items:center">${items}</span>` +
+      `<span class="wx-list" aria-hidden="true" style="display:inline-flex;align-items:center">${items}</span>`;
+    root.removeAttribute('data-state');
+
+    requestAnimationFrame(() => {
+      const oneCopy = track.scrollWidth / 2;
+      track.style.setProperty('--wx-duration', `${Math.max(20, oneCopy / cfg.speed)}s`);
+    });
+  }
+
+  async function update(root: HTMLElement, cfg: Cfg) {
+    try {
+      const rows = await fetchRows(cfg);
+      writeCache(cfg, rows);
+      render(root, cfg, rows);
+    } catch {
+      // Stale data beats no data; the error line is only for having neither.
+      const cached = readCache(cfg);
+      if (cached) render(root, cfg, cached);
+      else showStatus(root, cfg.s.error, true);
+    }
+  }
+
+  function init(root: HTMLElement) {
+    const el = root.querySelector('[data-wx-config]');
+    if (!el) return;
+    let cfg: Cfg;
+    try { cfg = JSON.parse(el.textContent || '{}'); } catch { return; }
+    if (!cfg.stations || !cfg.stations.length) return;
+
+    // Paint fresh cache immediately: on the second page of a visit the strip
+    // has data before the network is touched, and never flashes "loading".
+    const cached = readCache(cfg);
+    if (cached) render(root, cfg, cached);
+
+    update(root, cfg);
+    setInterval(() => update(root, cfg), cfg.refreshMs);
+    // A tab left open overnight holds a stale board until it is looked at again.
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && !readCache(cfg)) update(root, cfg);
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-wx]').forEach(init);
+</script>
