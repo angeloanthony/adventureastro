@@ -480,7 +480,27 @@
 
 @media (max-width: 1280px) {
   .nav-menu { display: none; }
-  .mobile-menu-toggle { display: block; margin-inline-start: auto; }
+  /* The language switcher is hoisted out of the drawer into the header bar by
+     Header.astro, so it is visible beside the hamburger without opening the menu.
+     flex-end keeps the pair together at the inline end; the hamburger takes a fixed
+     gap rather than `auto`, which would otherwise absorb the free space and strand
+     the switcher at the far side of the bar. */
+  .nav-container { justify-content: flex-end; }
+  .mobile-menu-toggle { display: block; margin-inline-start: 14px; }
+  .nav-lang-bar { display: flex; align-items: center; list-style: none; margin: 0; padding: 0; }
+  .nav-lang-bar .lang-toggle { padding: 10px 6px; font-size: 0.95rem; }
+  /* In the bar the panel must float, not push the header open the way the in-drawer
+     accordion below does. Two classes outrank the generic mobile .lang-menu rule
+     regardless of source order. */
+  .nav-lang-bar .lang-menu {
+    position: absolute; top: 100%; inset-inline-end: 0; min-width: 170px;
+    max-height: none; overflow: visible;
+    background: var(--off-white); box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    border-radius: 8px; padding: 10px 0; margin-top: 12px;
+    opacity: 0; visibility: hidden; transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease; z-index: 1200;
+  }
+  .nav-lang-bar .lang-switcher.open .lang-menu { opacity: 1; visibility: visible; transform: translateY(0); max-height: none; }
   .dropdown-menu { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; background: rgba(212,118,78,0.05); margin: 10px 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
   .nav-dropdown.active .dropdown-menu { max-height: 400px; }
   .lang-menu { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; background: rgba(212,118,78,0.05); margin: 6px 0 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }

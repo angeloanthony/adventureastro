@@ -119,3 +119,40 @@ const bookingHref = nav('booking');
     }
   });
 </script>
+
+<script is:inline>
+  // The language switcher is authored ONCE, inside `.nav-menu` (LanguageSwitcher.astro).
+  // On desktop that is where it belongs. Below the existing 1280px breakpoint `.nav-menu`
+  // becomes the hamburger drawer, which buries the switcher behind a tap — so the single
+  // node is REPARENTED into a small list in the header bar beside the hamburger, and moved
+  // back on the way up.
+  //
+  // Reparented, never duplicated. A second instance would double the id `lang-switcher-menu`
+  // and duplicate every locale <a lang dir> on all 695 routes — markup the dist gates (4k
+  // direction, 4s fragments) already baseline. Because the move is client-side, the built
+  // HTML they read is unchanged. The switcher's own listeners are bound after parse and
+  // survive the move, so nothing needs rebinding.
+  (function () {
+    var container = document.querySelector('.nav-container');
+    var toggle = document.querySelector('.mobile-menu-toggle');
+    var sw = document.querySelector('.lang-switcher');
+    // No switcher on single-locale pages (getAvailableLocales() <= 1) — nothing to hoist.
+    if (!container || !toggle || !sw) return;
+    var home = sw.parentElement;        // ul.nav-menu
+    var anchor = sw.nextElementSibling; // the "Book Now" li — restores the exact desktop slot
+    var bar = document.createElement('ul');
+    bar.className = 'nav-lang-bar';
+    container.insertBefore(bar, toggle);
+    var mq = window.matchMedia('(max-width: 1280px)');
+    function place() {
+      if (mq.matches) {
+        if (sw.parentElement !== bar) bar.appendChild(sw);
+      } else if (sw.parentElement !== home) {
+        home.insertBefore(sw, anchor);
+      }
+    }
+    place();
+    if (mq.addEventListener) mq.addEventListener('change', place);
+    else mq.addListener(place);
+  })();
+</script>
