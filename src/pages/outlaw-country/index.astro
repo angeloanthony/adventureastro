@@ -1,0 +1,217 @@
+---
+// /outlaw-country/ — Outlaw Country hub PILLAR (Story Hub cluster, wave 1).
+// Cornerstone: "Outlaw Country: The Real Places Behind the Wild West."
+// Follows the hiking/camping/fishing pillar pattern: content written directly
+// as Astro markup + Article/FAQPage JSON-LD; HubIndex lists spokes as they are
+// added. Author kept as Organization to match the other pillars' entity.
+//
+// EDITORIAL CONTRACT for this hub — every page under /outlaw-country/ must:
+//  1. Label each substantive historical claim DOCUMENTED / ASSOCIATED / LEGEND.
+//     Browns Park does not need embellishment; the differentiator is that we
+//     say which is which. Never present an unevidenced local tradition as fact.
+//  2. State honest distance from Vernal. Browns Park is ours; Robbers Roost
+//     (~5 hrs south) and Hole-in-the-Wall (Wyoming) are NOT. Claiming local
+//     authority over them inverts the E-E-A-T signal this cluster exists for.
+//  3. Disambiguate the tour product from the history. "Outlaw Trail" is also
+//     the name of one of the five guided UTV trail systems (see /utv/). It is
+//     named for the character of the country, NOT the historic corridor, and
+//     no page may imply the 3-hour tour rides the multi-state route.
+//  4. Mark every changing fact VERIFY WITH OFFICIAL SOURCE — BLM (John Jarvie
+//     Historic Ranch), USFWS (Browns Park NWR), NPS (Josie Morris cabin).
+//
+// No invented dates, mileages, drive times, hours, fees, or site access.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TrustBadge from '../../components/content/TrustBadge.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Seo from '../../components/seo/Seo.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import HubIndex from '../../components/content/HubIndex.astro';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+const lang = getLangFromUrl(Astro.url);
+
+const schema = `{
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "Outlaw Country: The Real Places Behind the Wild West",
+        "description": "The Wild West you have seen in films was not entirely invented. A researched guide to the real outlaw history of northeastern Utah — Browns Park, the Outlaw Trail, Butch Cassidy and the Wild Bunch — with every claim labeled documented, associated, or legend.",
+        "author": {"@type": "Organization", "name": "Adventure Tours Vernal"},
+        "publisher": {"@type": "Organization", "name": "Adventure Tours Vernal", "logo": {"@type": "ImageObject", "url": "https://adventuretoursvernal.com/images/logo.webp"}},
+        "datePublished": "2026-08-28",
+        "dateModified": "2026-08-28",
+        "mainEntityOfPage": "https://adventuretoursvernal.com/outlaw-country/"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type": "Question", "name": "Can you actually visit the real Wild West?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, though not in the way films suggest. There is no preserved outlaw town to walk through. What survives is landscape and a handful of real sites on public land — the valleys, rivers, canyons, and remote ranches that the history actually happened in. In northeastern Utah the best of these is Browns Park, the Green River valley at the Utah, Colorado, and Wyoming corner, where the Bureau of Land Management preserves the John Jarvie Historic Ranch with original buildings still standing. It is genuinely remote and takes a full day from Vernal. Verify current access, routes, and hours with the managing agency before you go."}},
+          {"@type": "Question", "name": "Where did Butch Cassidy hide?", "acceptedAnswer": {"@type": "Answer", "text": "Historians describe a corridor of remote refuges rather than a single hideout. The three most often named are Hole-in-the-Wall in Johnson County, Wyoming; Browns Park at the Utah, Colorado, and Wyoming corner; and Robbers Roost in far southeastern Utah near Hanksville. Browns Park is the one within reach of Vernal, and it is well documented in Cassidy's movements in the 1890s. Robbers Roost is roughly a five-hour drive south of Vernal and Hole-in-the-Wall is farther still, so treat those as separate trips rather than day outings from here."}},
+          {"@type": "Question", "name": "Was the Outlaw Trail a real trail?", "acceptedAnswer": {"@type": "Answer", "text": "Not as a marked route. Nobody in the 1890s set out to ride the Outlaw Trail — the name was applied afterward, most influentially by Charles Kelly's 1938 book and again by Robert Redford's 1976 one. What was real is the corridor: a chain of remote valleys with grass, water, and a friendly reception, spaced roughly a hard ride apart, running from Wyoming through Browns Park and down into southern Utah. It is more accurate, and more interesting, to think of it as a network of refuges than as a road."}},
+          {"@type": "Question", "name": "How do you know which outlaw stories are true?", "acceptedAnswer": {"@type": "Answer", "text": "Much of what is written about Western outlaws is embellished, and the places with the loudest claims often have the least evidence behind them. Every substantive historical claim across this section is labeled one of three ways. Documented means it is supported by primary records, contemporary accounts, or the consensus of published historians. Associated means the place or person is firmly connected to the era and the story, but the specific link is inferred rather than proven. Legend means it is local tradition or a later retelling — worth knowing, not worth repeating as fact."}},
+          {"@type": "Question", "name": "What outlaw history can you see near Vernal, Utah?", "acceptedAnswer": {"@type": "Answer", "text": "Three things, in ascending order of effort. The easiest is the Josie Bassett Morris cabin at the end of the Cub Creek road inside Dinosaur National Monument, about twenty minutes from Vernal: Josie grew up on the Bassett ranch in Browns Park, and her homestead is preserved by the National Park Service. Next is the landscape itself — the canyons and sage country around Vernal are the same terrain riders moved through. The most committed is Browns Park itself, a full day north with unpaved road and no services, where the John Jarvie Historic Ranch preserves the valley's frontier commercial center."}},
+          {"@type": "Question", "name": "Is Vernal a good base for Wild West history?", "acceptedAnswer": {"@type": "Answer", "text": "For Browns Park and the northern end of the Outlaw Trail corridor, yes — Vernal is the nearest town with fuel, lodging, food, and services, and it is the practical staging point for the valley. It is also the base for Dinosaur National Monument, which holds the Josie Morris homestead. It is not a base for Robbers Roost or Hole-in-the-Wall, which have their own nearest towns hours away. Plan Vernal as the gateway to the northern station, and treat the southern ones as separate trips."}},
+          {"@type": "Question", "name": "Is the Outlaw Trail UTV tour the historic Outlaw Trail?", "acceptedAnswer": {"@type": "Answer", "text": "No, and we want to be clear about it. One of the five guided UTV trail systems at Adventure Tours Vernal is called the Outlaw Trail, named for the character of the backcountry it crosses — the same canyons and sage flats that riders moved through. It is a three-hour guided route near Vernal. It is not the historic multi-state corridor from Wyoming to southern Utah, and we do not claim that it is. Both are worth your time; they are simply different things sharing a name."}}
+        ]
+      }
+    ]
+  }`;
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <Seo
+      title="Outlaw Country: Real Wild West Places in Utah"
+      description="The real outlaw history of northeastern Utah — Browns Park, the Outlaw Trail, Butch Cassidy and the Wild Bunch. Every claim labeled documented, associated, or legend."
+      path="/outlaw-country/"
+      type="article"
+      ogTitle="Outlaw Country: The Real Places Behind the Wild West"
+      ogDescription="Browns Park, the Outlaw Trail, Butch Cassidy and the Wild Bunch — the real history of Utah's outlaw country, and which parts of it you can actually go and stand in."
+    />
+    <script type="application/ld+json" set:html={schema} />
+  </Fragment>
+  <Header slot="body" />
+  <Breadcrumbs slot="body" schemaOnly items={[{ label: t('hub.outlaw-country', lang) }]} />
+
+  <p slot="body" class="page-summary" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="false">Outlaw Country is a researched guide to the real outlaw history of northeastern Utah and the landscape it happened in, based in Vernal, Utah. It covers Browns Park, historically Brown's Hole, the Green River valley at the corner where Utah, Colorado, and Wyoming meet; the corridor later named the Outlaw Trail and its three way stations, Hole-in-the-Wall in Wyoming, Browns Park, and Robbers Roost in southeastern Utah; Butch Cassidy, born Robert LeRoy Parker; the Sundance Kid, Harry Longabaugh; the Wild Bunch; the Bassett family of Browns Park, including Ann Bassett and Josie Bassett Morris, whose homestead cabin stands at Cub Creek in Dinosaur National Monument; John Jarvie and the Bureau of Land Management's John Jarvie Historic Ranch; and the stock detective Tom Horn and the 1900 killings of Matt Rash and Isom Dart. Every substantive historical claim in this section is labeled documented, historically associated, or legend, and the difference between the movie Wild West and the historical record is treated as the subject rather than glossed over. Vernal is the gateway to Browns Park; Robbers Roost is roughly a five-hour drive south and Hole-in-the-Wall is in Wyoming, and neither is a day trip from Vernal. Site hours, tours, staffing, road conditions, unpaved-route status, seasonal access, refuge regulations, and fees change and are set by the Bureau of Land Management, the U.S. Fish and Wildlife Service, and the National Park Service — verify with official sources. Adventure Tours Vernal offers guided UTV tours for $349 per machine, up to 2 riders, 3 hours. Call (435) 219-9447.</p>
+
+  <main class="article-page" slot="body">
+    <header class="article-header">
+      <h1 class="article-title">Outlaw Country: The Real Places Behind the Wild West</h1>
+      <p class="article-meta">Updated August 2026 · Adventure Tours Vernal</p>
+      <TrustBadge align="left" />
+    </header>
+
+    <div class="article-body">
+
+      <div class="article-summary-box"><strong>Quick Answer:</strong> The Wild West you have seen in films was not entirely invented. Across Utah, Colorado, and Wyoming, the valleys, rivers, canyons, and remote ranches where that history actually happened are still here — and a surprising number of them are public land you can walk on. This section is a researched guide to the real ones. It centers on <a href="/outlaw-country/browns-park-outlaw-history/"><strong>Browns Park</strong></a>, the Green River valley at the three-state corner north of <a href="/guides/ultimate-guide-to-vernal-utah/">Vernal, Utah</a>, which sheltered <strong>Butch Cassidy and the Wild Bunch</strong> and is the northern station on the corridor later named the <strong>Outlaw Trail</strong>. We label every substantive claim <strong>documented</strong>, <strong>associated</strong>, or <strong>legend</strong> — because the difference between the evidence and the mythology is the most interesting part of the story, and because you deserve to know which one you are driving four hours to stand in.</div>
+
+      <div class="key-takeaways">
+        <h2>Key Takeaways</h2>
+        <ul>
+          <li><strong>The places are real, and many are public.</strong> There is no preserved outlaw town to tour, but there is landscape, and there are genuine sites on BLM, National Park Service, and Fish and Wildlife Service land.</li>
+          <li><strong>Browns Park is the one Vernal can claim.</strong> The valley where Utah, Colorado, and Wyoming meet is well documented in the Wild Bunch story, and Vernal is its nearest town. Robbers Roost is roughly five hours south; Hole-in-the-Wall is in Wyoming. We will not pretend otherwise.</li>
+          <li><strong>Geography explains everything.</strong> Three jurisdictions within a day's ride, good winter grass, one river, and few approaches. The refuge worked for reasons you can still see on the ground.</li>
+          <li><strong>"The Outlaw Trail" was named in retrospect.</strong> Nobody rode it under that name in the 1890s — Charles Kelly's 1938 book and Robert Redford's 1976 one fixed the phrase. The corridor was real; the road was not.</li>
+          <li><strong>Every claim is labeled.</strong> Documented, associated, or legend. No rock gets a famous name here unless the evidence earns it.</li>
+          <li><strong>The easiest way in is twenty minutes from town.</strong> The Josie Bassett Morris cabin in <a href="/dinosaur-national-monument/visiting-dinosaur-national-monument/">Dinosaur National Monument</a> belonged to a woman who grew up in the outlaw valley — and most visitors never learn it.</li>
+        </ul>
+      </div>
+
+      <h2>Why This Section Exists</h2>
+
+      <p>People all over the world already carry an image of the American West: the bank robbery, the posse, the horses going hard through canyon country, the men who vanished into a landscape too big to search. Most of that image arrived through films, and most people assume it is fiction.</p>
+
+      <p>It is not, entirely. <strong>Butch Cassidy was a real man named Robert LeRoy Parker, born in Beaver, Utah in 1866.</strong> The Wild Bunch robbed real trains. And the country they used to disappear into is largely still here — not preserved behind glass, but out in the open, mostly unfenced, and in several cases managed as public land you can drive to.</p>
+
+      <p>What is missing from almost everything written about it is <em>discipline</em>. The outlaw story attracts embellishment the way few subjects do, and there is a strong commercial incentive to attach a famous name to any old cabin. So this section does something simple and, as far as we can tell, unusual: <strong>it tells you what the evidence supports.</strong></p>
+
+      <h2>How We Label Every Claim</h2>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Label</th><th>What it means</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span style="display:inline-block;background:rgba(184,197,168,0.4);border:1px solid #B8C5A8;border-radius:999px;padding:2px 11px;font-size:0.8rem;font-weight:700;letter-spacing:0.04em;">DOCUMENTED</span></td><td>Supported by primary records, contemporary accounts, or the consensus of published historians. You can look it up.</td></tr>
+            <tr><td><span style="display:inline-block;background:rgba(218,165,32,0.28);border:1px solid #DAA520;border-radius:999px;padding:2px 11px;font-size:0.8rem;font-weight:700;letter-spacing:0.04em;">ASSOCIATED</span></td><td>The place or person is firmly connected to the era and the story, but the specific link is inferred rather than proven.</td></tr>
+            <tr><td><span style="display:inline-block;background:rgba(193,68,14,0.22);border:1px solid #C1440E;border-radius:999px;padding:2px 11px;font-size:0.8rem;font-weight:700;letter-spacing:0.04em;">LEGEND</span></td><td>Local tradition, a later retelling, or a good story. Worth knowing. Not worth repeating as fact.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>We think this makes the history <em>more</em> compelling, not less. A valley that demonstrably sheltered the Wild Bunch is a better destination than a hundred rocks with unverifiable stories attached.</p>
+
+      <h2>The Outlaw Trail: A Corridor, Not a Road</h2>
+
+      <p>The single most repeated error about this history is treating the Outlaw Trail as a route you could follow. There was no marked track and no one rode it under that name. The phrase came later — from <strong>Charles Kelly's 1938 <em>The Outlaw Trail: A History of Butch Cassidy and His Wild Bunch</em></strong>, and then from <strong>Robert Redford's 1976 <em>The Outlaw Trail: A Journey Through Time</em></strong>, which carried it worldwide.</p>
+
+      <p>The corridor, though, was real: a chain of remote refuges, spaced about a hard ride apart, running north to south down the western interior.</p>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Station</th><th>Where</th><th>Character</th><th>From Vernal</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Hole-in-the-Wall</td><td>Johnson County, Wyoming</td><td>A red-wall notch guarding a valley; the northern refuge</td><td>A long drive north into Wyoming — a separate trip</td></tr>
+            <tr><td><strong>Browns Park</strong></td><td>Utah / Colorado / Wyoming corner</td><td>River valley, winter range, working ranches, three jurisdictions</td><td><strong>Ours — a full day from Vernal</strong></td></tr>
+            <tr><td>Robbers Roost</td><td>Southeastern Utah, near Hanksville</td><td>Waterless slickrock and canyon maze; the southern refuge</td><td>Roughly five hours south — not a day trip from here</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="article-tip"><strong>Where we do and do not claim expertise.</strong> Vernal is the gateway to <strong>Browns Park</strong>, and that is the country we know. Robbers Roost and Hole-in-the-Wall are real, significant, and have their own nearest towns hours from here. We will describe them honestly as part of the corridor; we will not present them as things you can see from Vernal.</div>
+
+      <h2>Start Here</h2>
+
+      <p><strong>If you are planning a trip from outside the United States</strong>, begin with the practical page — it answers the question most people actually arrive with, including what does <em>not</em> survive:</p>
+
+      <p><strong><a href="/outlaw-country/visit-the-real-wild-west/">Can You Visit the Real Wild West? →</a></strong><br />
+      What survived and what did not, where it is, how to reach it from Salt Lake City, how many days it takes, and an honest account of what you will and will not find.</p>
+
+      <p><strong>If you want the history itself</strong>, the cornerstone of this section is the valley:</p>
+
+      <p><strong><a href="/outlaw-country/browns-park-outlaw-history/">Browns Park: The Valley Where Outlaws Disappeared →</a></strong><br />
+      Why the geography worked, who was actually there, what remains today, and how to reach it — with the Bassett family, the 1900 killings that ended the era, and honest advice on the drive.</p>
+
+      <p><strong><a href="/outlaw-country/john-jarvie-historic-ranch/">John Jarvie Historic Ranch: The Store at the Edge of the Law →</a></strong><br />
+      The store, post office, and Green River ferry that made one crossing the whole valley's hub — and the unresolved 1909 murder that ended it.</p>
+
+      <p><strong><a href="/outlaw-country/josie-bassett-morris/">Josie Bassett Morris: Fifty Years Alone at Cub Creek →</a></strong><br />
+      Raised in the outlaw valley, she homesteaded a canyon in what is now Dinosaur National Monument and stayed for half a century. Her cabin is twenty minutes from Vernal, and it is the most accessible piece of this history.</p>
+
+      <h2>The Piece of This Story You Can Reach Today</h2>
+
+      <p>If Browns Park is more trip than you have time for, there is a shortcut that almost nobody takes advantage of. <strong>Josie Bassett Morris</strong> grew up on the Bassett ranch in Browns Park during its wildest years. Decades later she homesteaded a box canyon at <strong>Cub Creek</strong>, and her cabin still stands at the end of the <a href="/scenic-drives/cub-creek-road-tour-of-the-tilted-rocks/">Cub Creek road</a> in <a href="/dinosaur-national-monument/visiting-dinosaur-national-monument/">Dinosaur National Monument</a> — about twenty minutes from Vernal, preserved by the National Park Service, on a road thousands of visitors already drive for the dinosaur quarry and the petroglyphs.</p>
+
+      <p>Most of them stop, take a photograph of a pretty homestead, and drive away without knowing whose it was. Read the Browns Park guide first and that stop becomes something else entirely.</p>
+
+      <h2>Riding the Country Itself</h2>
+
+      <p>No exhibit conveys the <em>scale</em> of this landscape — how much broken, empty, beautiful country there is out here, and how completely it could swallow a rider who wanted to be swallowed. The backcountry around Vernal is the same terrain: the same canyons, the same sage flats, the same distances.</p>
+
+      <p>Our <a href="/utv/">guided UTV tours</a> run five trail systems out of Vernal, one of which we call the <strong>Outlaw Trail</strong> for the character of the country it crosses. To be explicit, since this whole section is about being explicit: <strong>that is a three-hour guided route near Vernal, not the historic multi-state corridor.</strong> It is named for the kind of ground it covers. Dave and Trudy will happily tell you which stories about this country are documented and which are just good — which, if you have read this far, is presumably how you like it.</p>
+
+      <div class="article-tip"><strong>Before you go:</strong> site hours, guided-tour availability, staffing, seasonal opening and closure, road conditions and unpaved-route status, fees, and access regulations for every place in this section are set by the <strong>Bureau of Land Management</strong>, the <strong>U.S. Fish and Wildlife Service</strong>, and the <strong>National Park Service</strong>, and they change year to year. The history holds; the logistics shift. <strong>VERIFY WITH OFFICIAL SOURCE</strong> before you make the drive.</div>
+
+      <div class="article-faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+          <h3>Can you actually visit the real Wild West?</h3>
+          <p>Yes, though not in the way films suggest. There is no preserved outlaw town to walk through. What survives is landscape and a handful of real sites on public land — the valleys, rivers, canyons, and remote ranches the history actually happened in. In northeastern Utah the best of these is Browns Park, the Green River valley at the Utah, Colorado, and Wyoming corner, where the Bureau of Land Management preserves the John Jarvie Historic Ranch with original buildings still standing. It is genuinely remote and takes a full day from Vernal. Verify current access, routes, and hours with the managing agency before you go.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Where did Butch Cassidy hide?</h3>
+          <p>Historians describe a corridor of remote refuges rather than a single hideout. The three most often named are Hole-in-the-Wall in Johnson County, Wyoming; Browns Park at the Utah, Colorado, and Wyoming corner; and Robbers Roost in far southeastern Utah near Hanksville. Browns Park is the one within reach of Vernal, and it is well documented in Cassidy's movements in the 1890s. Robbers Roost is roughly a five-hour drive south of Vernal and Hole-in-the-Wall is farther still, so treat those as separate trips rather than day outings from here.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Was the Outlaw Trail a real trail?</h3>
+          <p>Not as a marked route. Nobody in the 1890s set out to ride the Outlaw Trail — the name was applied afterward, most influentially by Charles Kelly's 1938 book and again by Robert Redford's 1976 one. What was real is the corridor: a chain of remote valleys with grass, water, and a friendly reception, spaced roughly a hard ride apart, running from Wyoming through Browns Park and down into southern Utah. It is more accurate, and more interesting, to think of it as a network of refuges than as a road.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How do you know which outlaw stories are true?</h3>
+          <p>Much of what is written about Western outlaws is embellished, and the places with the loudest claims often have the least evidence behind them. Every substantive historical claim across this section is labeled one of three ways. Documented means it is supported by primary records, contemporary accounts, or the consensus of published historians. Associated means the place or person is firmly connected to the era and the story, but the specific link is inferred rather than proven. Legend means it is local tradition or a later retelling — worth knowing, not worth repeating as fact.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What outlaw history can you see near Vernal, Utah?</h3>
+          <p>Three things, in ascending order of effort. The easiest is the Josie Bassett Morris cabin at the end of the Cub Creek road inside Dinosaur National Monument, about twenty minutes from Vernal: Josie grew up on the Bassett ranch in Browns Park, and her homestead is preserved by the National Park Service. Next is the landscape itself — the canyons and sage country around Vernal are the same terrain riders moved through. The most committed is Browns Park itself, a full day north with unpaved road and no services, where the John Jarvie Historic Ranch preserves the valley's frontier commercial center.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is Vernal a good base for Wild West history?</h3>
+          <p>For Browns Park and the northern end of the Outlaw Trail corridor, yes — Vernal is the nearest town with fuel, lodging, food, and services, and it is the practical staging point for the valley. It is also the base for Dinosaur National Monument, which holds the Josie Morris homestead. It is not a base for Robbers Roost or Hole-in-the-Wall, which have their own nearest towns hours away. Plan Vernal as the gateway to the northern station, and treat the southern ones as separate trips.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is the Outlaw Trail UTV tour the historic Outlaw Trail?</h3>
+          <p>No, and we want to be clear about it. One of the five guided UTV trail systems at Adventure Tours Vernal is called the Outlaw Trail, named for the character of the backcountry it crosses — the same canyons and sage flats that riders moved through. It is a three-hour guided route near Vernal. It is not the historic multi-state corridor from Wyoming to southern Utah, and we do not claim that it is. Both are worth your time; they are simply different things sharing a name.</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <HubIndex slot="body" collection="outlaw-country" heading="All Outlaw Country Guides" />
+  <Footer slot="body" variant="compact" />
+</BaseLayout>

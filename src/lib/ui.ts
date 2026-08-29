@@ -154,6 +154,7 @@ const EN: Dict = {
   'hub.fishing': 'Fishing',
   'hub.scenic-drives': 'Scenic Drives',
   'hub.guides': 'Destination Guides',
+  'hub.outlaw-country': 'Outlaw Country',
 
   // — Header weather strip (WeatherTicker) —
   // Station NAMES are deliberately absent: they are proper nouns and live in
@@ -314,6 +315,7 @@ const ES: Dict = {
   'hub.fishing': 'Pesca',
   'hub.scenic-drives': 'Rutas Panorámicas',
   'hub.guides': 'Guías del Destino',
+  'hub.outlaw-country': 'Tierra de Forajidos',
 
   // — Franja meteorológica del encabezado —
   'wx.region': 'Clima en vivo en Vernal y la región de los dinosaurios',
@@ -470,6 +472,7 @@ const IT: Dict = {
   'hub.fishing': 'Pesca',
   'hub.scenic-drives': 'Strade Panoramiche',
   'hub.guides': 'Guide sulla Destinazione',
+  'hub.outlaw-country': 'Terra dei Fuorilegge',
 
   // — Striscia meteo dell'intestazione —
   'wx.region': 'Meteo in tempo reale a Vernal e nella terra dei dinosauri',
@@ -628,6 +631,7 @@ const PT: Dict = {
   'hub.fishing': 'Pesca',
   'hub.scenic-drives': 'Estradas Panorâmicas',
   'hub.guides': 'Guias do Destino',
+  'hub.outlaw-country': 'Terra dos Fora da Lei',
 
   // — Faixa meteorológica do cabeçalho —
   'wx.region': 'Meteorologia em direto em Vernal e na terra dos dinossauros',
@@ -787,6 +791,7 @@ const FR: Dict = {
   'hub.fishing': 'Pêche',
   'hub.scenic-drives': 'Routes Panoramiques',
   'hub.guides': 'Guides de Destination',
+  'hub.outlaw-country': 'Le Pays des Hors-la-loi',
 
   // — Bandeau météo de l'en-tête —
   'wx.region': 'Météo en direct à Vernal et au pays des dinosaures',
@@ -951,6 +956,7 @@ const DE: Dict = {
   'hub.fishing': 'Angeln',
   'hub.scenic-drives': 'Panoramastraßen',
   'hub.guides': 'Guides',
+  'hub.outlaw-country': 'Land der Gesetzlosen',
 
   // — Wetterband im Kopfbereich —
   // Kein Eintrag spricht die Leserin oder den Leser an, daher stellt sich die
@@ -1112,6 +1118,7 @@ const JA: Dict = {
   'hub.fishing': '釣り',
   'hub.scenic-drives': '絶景ドライブ',
   'hub.guides': 'ガイド',
+  'hub.outlaw-country': '無法者の地',
 
   // — ヘッダーの気象ストリップ —
   // 地名は訳さない（JA の地名方針どおり、バーナルのみ例外）。
@@ -1293,6 +1300,7 @@ const ZH: Dict = {
   'hub.fishing': '钓鱼',
   'hub.scenic-drives': '景观自驾',
   'hub.guides': '攻略',
+  'hub.outlaw-country': '西部亡命之地',
 
   // — 页眉实时天气条 —
   // 地名保持拉丁字母原样，与 'hub.dinosaur-national-monument' 一致。
@@ -1509,6 +1517,7 @@ const AR: Dict = {
   'hub.fishing': 'صيد الأسماك',
   'hub.scenic-drives': 'الطرق الخلابة',
   'hub.guides': 'الأدلة',
+  'hub.outlaw-country': 'أرض الخارجين عن القانون',
 
   // — شريط الطقس في الترويسة —
   // أسماء المواقع تبقى باللاتينية حرفيًا، مثل 'hub.dinosaur-national-monument'.

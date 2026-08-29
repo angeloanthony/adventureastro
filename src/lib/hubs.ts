@@ -28,6 +28,7 @@ export const HUB_SLUGS = [
   'fishing',
   'scenic-drives',
   'guides',
+  'outlaw-country', // Story Hub cluster — Outlaw Trail / Browns Park history
 ] as const;
 
 import { parseEntryLocale, localizedPath } from './i18n';
@@ -55,6 +56,7 @@ export const HUBS: Record<HubSlug, { name: string }> = {
   fishing: { name: 'Fishing' },
   'scenic-drives': { name: 'Scenic Drives' },
   guides: { name: 'Destination Guides' },
+  'outlaw-country': { name: 'Outlaw Country' },
 };
 
 /** Root-relative href of a spoke article page. Accepts any LinkCollection so
