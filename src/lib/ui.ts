@@ -89,6 +89,12 @@ const EN: Dict = {
   // — TrustBadge (social proof) —
   'reviews.googleReviews': 'Google reviews',
   'reviews.ratedAria': 'Rated {value} out of 5 from {count} Google reviews',
+  // Google write-a-review link (GoogleReviewBadge in the header, GoogleReviewCta on the homepage).
+  'reviews.badgeLabel': 'Review us on Google',
+  'reviews.leaveLabel': 'Leave a Google review',
+  'reviews.leaveAria': 'Leave a Google review (opens in a new tab)',
+  'reviews.badgeAria': 'Review us on Google (opens in a new tab)',
+  'reviews.ctaPrompt': 'Rode with Dave & Trudy? Tell the next crew how it went.',
 
   // — AuthorByline + AuthorLayout —
   'author.writtenBy': 'Written by',
@@ -258,6 +264,11 @@ const ES: Dict = {
 
   'reviews.googleReviews': 'reseñas de Google',
   'reviews.ratedAria': 'Calificado con {value} de 5 según {count} reseñas de Google',
+  'reviews.badgeLabel': 'Califíquenos en Google',
+  'reviews.leaveLabel': 'Deje una reseña en Google',
+  'reviews.leaveAria': 'Deje una reseña en Google (se abre en una pestaña nueva)',
+  'reviews.badgeAria': 'Califíquenos en Google (se abre en una pestaña nueva)',
+  'reviews.ctaPrompt': '¿Recorrió los senderos con Dave y Trudy? Cuéntele al próximo grupo cómo le fue.',
 
   'author.writtenBy': 'Escrito por',
   'author.updated': 'Actualizado',
@@ -415,6 +426,11 @@ const IT: Dict = {
 
   'reviews.googleReviews': 'recensioni Google',
   'reviews.ratedAria': 'Valutato {value} su 5 in base a {count} recensioni Google',
+  'reviews.badgeLabel': 'Ci valuti su Google',
+  'reviews.leaveLabel': 'Lasci una recensione su Google',
+  'reviews.leaveAria': 'Lasci una recensione su Google (si apre in una nuova scheda)',
+  'reviews.badgeAria': 'Ci valuti su Google (si apre in una nuova scheda)',
+  'reviews.ctaPrompt': "Ha percorso i sentieri con Dave e Trudy? Racconti al prossimo gruppo com'è andata.",
 
   'author.writtenBy': 'Scritto da',
   'author.updated': 'Aggiornato',
@@ -574,6 +590,11 @@ const PT: Dict = {
 
   'reviews.googleReviews': 'avaliações do Google',
   'reviews.ratedAria': 'Classificação de {value} em 5 com base em {count} avaliações do Google',
+  'reviews.badgeLabel': 'Avalia-nos no Google',
+  'reviews.leaveLabel': 'Deixa uma avaliação no Google',
+  'reviews.leaveAria': 'Deixa uma avaliação no Google (abre num novo separador)',
+  'reviews.badgeAria': 'Avalia-nos no Google (abre num novo separador)',
+  'reviews.ctaPrompt': 'Andaste pelos trilhos com o Dave e a Trudy? Conta ao próximo grupo como correu.',
 
   'author.writtenBy': 'Escrito por',
   'author.updated': 'Atualizado',
@@ -734,6 +755,11 @@ const FR: Dict = {
 
   'reviews.googleReviews': 'avis Google',
   'reviews.ratedAria': "Noté {value} sur 5 d'après {count} avis Google",
+  'reviews.badgeLabel': 'Notez-nous sur Google',
+  'reviews.leaveLabel': 'Laissez un avis Google',
+  'reviews.leaveAria': "Laissez un avis Google (s'ouvre dans un nouvel onglet)",
+  'reviews.badgeAria': "Notez-nous sur Google (s'ouvre dans un nouvel onglet)",
+  'reviews.ctaPrompt': "Vous avez roulé avec Dave et Trudy ? Racontez au prochain groupe comment ça s'est passé.",
 
   'author.writtenBy': 'Écrit par',
   'author.updated': 'Mis à jour',
@@ -899,6 +925,11 @@ const DE: Dict = {
 
   'reviews.googleReviews': 'Google-Bewertungen',
   'reviews.ratedAria': 'Bewertet mit {value} von 5 basierend auf {count} Google-Bewertungen',
+  'reviews.badgeLabel': 'Bewerte uns auf Google',
+  'reviews.leaveLabel': 'Hinterlass eine Google-Bewertung',
+  'reviews.leaveAria': 'Hinterlass eine Google-Bewertung (öffnet sich in einem neuen Tab)',
+  'reviews.badgeAria': 'Bewerte uns auf Google (öffnet sich in einem neuen Tab)',
+  'reviews.ctaPrompt': 'Mit Dave und Trudy unterwegs gewesen? Erzähl der nächsten Gruppe, wie es war.',
 
   'author.writtenBy': 'Geschrieben von',
   'author.updated': 'Aktualisiert',
@@ -1061,6 +1092,11 @@ const JA: Dict = {
 
   'reviews.googleReviews': 'Googleレビュー',
   'reviews.ratedAria': 'Googleレビュー{count}件で、5段階中{value}の評価',
+  'reviews.badgeLabel': 'Googleでレビューを書く',
+  'reviews.leaveLabel': 'Googleにレビューを投稿',
+  'reviews.leaveAria': 'Googleにレビューを投稿（新しいタブで開きます）',
+  'reviews.badgeAria': 'Googleでレビューを書く（新しいタブで開きます）',
+  'reviews.ctaPrompt': 'Dave & Trudyのツアーはいかがでしたか？次に参加される方のために、ぜひ感想をお聞かせください。',
 
   'author.writtenBy': '執筆',
   'author.updated': '更新',
@@ -1243,6 +1279,11 @@ const ZH: Dict = {
 
   'reviews.googleReviews': 'Google 评价',
   'reviews.ratedAria': '根据 {count} 条 Google 评价，评分为 5 分中的 {value} 分',
+  'reviews.badgeLabel': '在 Google 上评价我们',
+  'reviews.leaveLabel': '在 Google 上写评价',
+  'reviews.leaveAria': '在 Google 上写评价（在新标签页中打开）',
+  'reviews.badgeAria': '在 Google 上评价我们（在新标签页中打开）',
+  'reviews.ctaPrompt': '参加过 Dave & Trudy 的行程？把你的体验分享给下一批旅客吧。',
 
   'author.writtenBy': '作者',
   'author.updated': '更新于',
@@ -1454,6 +1495,11 @@ const AR: Dict = {
   // — TrustBadge —
   'reviews.googleReviews': 'تقييمات Google',
   'reviews.ratedAria': 'حصلت على {value} من 5 بناءً على {count} تقييماً على Google',
+  'reviews.badgeLabel': 'قيّمنا على Google',
+  'reviews.leaveLabel': 'اكتب تقييماً على Google',
+  'reviews.leaveAria': 'اكتب تقييماً على Google (يُفتح في علامة تبويب جديدة)',
+  'reviews.badgeAria': 'قيّمنا على Google (يُفتح في علامة تبويب جديدة)',
+  'reviews.ctaPrompt': 'هل استمتعت بجولتك معنا؟ شارك تجربتك مع المسافرين القادمين.',
 
   // — AuthorByline + AuthorLayout —
   'author.writtenBy': 'بقلم',

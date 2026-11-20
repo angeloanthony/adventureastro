@@ -1,0 +1,108 @@
+---
+// GoogleReviewBadge.astro — "★★★★★ Review us on Google" link in the header.
+//
+// Sits at the reading-END of the live-weather strip (Header.astro wraps the two
+// in `.nav-util`), so it never competes with the nav row or the oversized logo,
+// which hangs over the strip's reading-START side.
+//
+// Deliberately shows NO rating figure or review count: it is an invitation to
+// write a review, not a claim. SITE.rating stays untouched for TrustBadge and
+// the JSON-LD.
+//
+// Motion: the stars run a reading-order chase three times shortly after load
+// (finished by ~4s) and replay once on hover/focus. All of it lives inside
+// `prefers-reduced-motion: no-preference`. The chase runs in DOM order, which a
+// flex row lays out in the document's direction, so it travels right-to-left
+// in Arabic with no direction branch here.
+import { SITE } from '../../config/site';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const stars = [0, 1, 2, 3, 4];
+---
+<a
+  class="greview-badge"
+  href={SITE.googleWriteReview}
+  target="_blank"
+  rel="noopener"
+  aria-label={t('reviews.badgeAria', lang)}
+>
+  <span class="greview-badge__stars" aria-hidden="true">
+    {stars.map((i) => <span class="greview-badge__star" style={`--i:${i}`}><span>★</span></span>)}
+  </span>
+  <span class="greview-badge__text">{t('reviews.badgeLabel', lang)}</span>
+</a>
+
+<style>
+  /* Same surface and top rule as the weather strip (WeatherTicker `.wx`), so the
+     two read as one bar; a logical border separates them in either direction. */
+  .greview-badge {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding-block: 0.3rem;
+    padding-inline: 0.75rem clamp(0.75rem, 3vw, 1.1rem);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(245, 237, 227, 0.95) 100%);
+    border-top: 1px solid rgba(212, 118, 78, 0.18);
+    border-inline-start: 1px solid rgba(212, 118, 78, 0.22);
+    color: var(--charcoal, #3a3a3a);
+    font-family: var(--font-heading, 'Montserrat', sans-serif);
+    font-size: 0.76rem;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: color 0.2s ease, background-color 0.2s ease;
+  }
+  .greview-badge:hover,
+  .greview-badge:focus-visible {
+    color: var(--burnt-orange, #b85c38);
+    background-color: rgba(212, 118, 78, 0.08);
+  }
+  .greview-badge:focus-visible {
+    outline: 2px solid var(--burnt-orange, #b85c38);
+    outline-offset: -3px;
+  }
+
+  .greview-badge__stars {
+    display: inline-flex;
+    gap: 1px;
+    color: #e6a817; /* TrustBadge's star gold */
+    font-size: 0.78rem;
+  }
+  .greview-badge__star,
+  .greview-badge__star > span {
+    display: inline-block;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* Load: three reading-order sweeps, done by ~4s. */
+    .greview-badge__star {
+      animation: greview-badge-chase 0.9s ease-in-out calc(0.8s + var(--i) * 0.09s) 3 both;
+    }
+    /* Hover/focus: one sweep on the INNER span, so leaving does not restart the
+       load animation on the outer one. */
+    .greview-badge:hover .greview-badge__star > span,
+    .greview-badge:focus-visible .greview-badge__star > span {
+      animation: greview-badge-pop 0.6s ease-out calc(var(--i) * 0.07s) 1 both;
+    }
+  }
+  @keyframes greview-badge-chase {
+    0%, 60%, 100% { transform: none; text-shadow: none; }
+    25% { transform: translateY(-1px) scale(1.35); text-shadow: 0 0 6px rgba(230, 168, 23, 0.85); }
+  }
+  @keyframes greview-badge-pop {
+    0%, 100% { transform: none; text-shadow: none; }
+    40% { transform: translateY(-2px) scale(1.4); text-shadow: 0 0 6px rgba(230, 168, 23, 0.85); }
+  }
+
+  @media (max-width: 768px) {
+    .greview-badge { font-size: 0.7rem; gap: 0.3rem; padding-inline: 0.55rem 0.6rem; }
+    .greview-badge__stars { font-size: 0.68rem; gap: 0; }
+  }
+  @media (max-width: 360px) {
+    .greview-badge { font-size: 0.66rem; letter-spacing: -0.01em; }
+  }
+</style>

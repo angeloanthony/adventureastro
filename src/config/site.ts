@@ -29,6 +29,11 @@ export const SITE = {
 
   rating: { value: '5.0', count: '82' },
 
+  // Opens Google's "write a review" dialog for the Business Profile directly.
+  // Used by the header badge (GoogleReviewBadge) and the homepage review
+  // button (GoogleReviewCta). Neither shows a rating figure.
+  googleWriteReview: 'https://g.page/r/CfY0UEWljaxiEAI/review',
+
   // PRICING — CONFIRMED by owner 2026-07-10 (resolves the $349/$125 vs.
   // $299/$100/$99 conflict noted in PROJECT_STATE.md; see "Rules"). Final:
   // $349/machine, up to 2 riders included, 3-hour guided tour. Ride-along

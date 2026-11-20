@@ -20,6 +20,8 @@ import Bidi from '../Bidi.astro';
 // row with no measurement at all, and `.nav-menu`'s `top: 100%` mobile drawer
 // keeps opening below the whole header for the same reason.
 import WeatherTicker from './WeatherTicker.astro';
+// The Google write-a-review badge shares the weather strip's row, at its reading end.
+import GoogleReviewBadge from './GoogleReviewBadge.astro';
 import { getLangFromUrl, localeHref } from '../../lib/i18n';
 import { t } from '../../lib/ui';
 
@@ -68,8 +70,25 @@ const bookingHref = nav('booking');
       <span></span><span></span><span></span>
     </button>
   </div>
-  <WeatherTicker />
+  <div class="nav-util">
+    <WeatherTicker />
+    <GoogleReviewBadge />
+  </div>
 </nav>
+
+<style>
+  /* Utility row under the nav: weather strip + review badge. The strip takes the
+     remaining width (it is overflow:hidden, so it can shrink below its content). */
+  .nav-util {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+  }
+  .nav-util > :global(.wx) {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+</style>
 
 <script is:inline>
   document.querySelector('.mobile-menu-toggle')?.addEventListener('click', function () {

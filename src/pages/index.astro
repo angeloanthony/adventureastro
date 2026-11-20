@@ -3,6 +3,7 @@ import { bodyHtml } from "../page-content/home";
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
+import GoogleReviewCta from '../components/content/GoogleReviewCta.astro';
 import Seo from '../components/seo/Seo.astro';
 import { SITE } from '../config/site';
 import { getLangFromUrl } from '../lib/i18n';
@@ -130,6 +131,7 @@ const schema = `
   </Fragment>
   <Header slot="body" active="home" />
   <Fragment slot="body" set:html={bodyHtml} />
+  <GoogleReviewCta slot="body" />
   <Footer
     slot="body"
     trails={{

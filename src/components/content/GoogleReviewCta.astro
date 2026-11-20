@@ -1,0 +1,224 @@
+---
+// GoogleReviewCta.astro — animated "Leave a Google review" button for the
+// homepage (all nine locales), rendered after the body content and before the
+// footer. The homepage has no testimonials block to sit beside, so it closes
+// the page instead.
+//
+// Pill in the site's booking-button gradient (burnt orange -> rust), white
+// circle with the Google "G", label, five stars that turn gold one after
+// another on hover/focus, a periodic shine sweep, a soft desert-gold halo, and
+// a small star burst on click (the link still opens normally). Every bit of
+// motion is off under prefers-reduced-motion; the stars drop out under 420px
+// so the pill fits a phone. Ported from the vernalmedicareastro review button.
+//
+// No rating figure is shown. Strings come from ui.ts (reviews.*).
+import { SITE } from '../../config/site';
+import { getLangFromUrl } from '../../lib/i18n';
+import { t } from '../../lib/ui';
+
+const lang = getLangFromUrl(Astro.url);
+---
+<div class="greview-cta">
+  <p class="greview-cta__prompt">{t('reviews.ctaPrompt', lang)}</p>
+  <a
+    class="greview-btn"
+    href={SITE.googleWriteReview}
+    target="_blank"
+    rel="noopener"
+    aria-label={t('reviews.leaveAria', lang)}
+    data-greview-btn
+  >
+    <span class="greview-btn__g" aria-hidden="true">
+      <svg viewBox="0 0 48 48" width="22" height="22" focusable="false"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+    </span>
+    <span class="greview-btn__label">{t('reviews.leaveLabel', lang)}</span>
+    <span class="greview-btn__stars" aria-hidden="true">
+      <i>★</i><i>★</i><i>★</i><i>★</i><i>★</i>
+    </span>
+  </a>
+</div>
+
+<style>
+  .greview-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 56px 20px 64px;
+    text-align: center;
+    background: var(--off-white, #faf8f5);
+    border-top: 1px solid rgba(212, 118, 78, 0.15);
+  }
+  .greview-cta__prompt {
+    margin: 0;
+    max-width: 36rem;
+    font-family: var(--font-heading, 'Montserrat', sans-serif);
+    font-weight: 700;
+    font-size: 1.05rem;
+    line-height: 1.45;
+    color: var(--charcoal, #3a3a3a);
+  }
+
+  .greview-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 100%;
+    padding-block: 11px;
+    padding-inline: 12px 22px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--burnt-orange, #b85c38) 0%, var(--rust-red, #b85c3e) 100%);
+    color: #fff;
+    font-family: var(--font-heading, 'Montserrat', sans-serif);
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.2;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(212, 118, 78, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    isolation: isolate;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+  /* Shine sweep, clipped to the pill by inheriting its radius. */
+  .greview-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.4) 50%, transparent 70%) no-repeat;
+    background-size: 250% 100%;
+    background-position: 150% 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+  /* Soft pulsing halo in the site's desert gold. */
+  .greview-btn::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: inherit;
+    border: 2px solid rgba(218, 165, 32, 0.7);
+    opacity: 0;
+    z-index: -2;
+    pointer-events: none;
+  }
+  .greview-btn__g {
+    display: grid;
+    place-items: center;
+    flex: 0 0 32px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .greview-btn__g svg { display: block; }
+  .greview-btn__stars {
+    display: inline-flex;
+    gap: 1px;
+    font-size: 0.95rem;
+  }
+  .greview-btn__stars i {
+    display: inline-block;
+    font-style: normal;
+    color: rgba(255, 255, 255, 0.45);
+    transition: color 0.2s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .greview-btn:hover,
+  .greview-btn:focus-visible {
+    background: linear-gradient(135deg, var(--rust-red, #b85c3e) 0%, var(--canyon-red, #c1440e) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(212, 118, 78, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  .greview-btn:focus-visible {
+    outline: 3px solid var(--charcoal, #3a3a3a);
+    outline-offset: 3px;
+  }
+  .greview-btn:active { transform: translateY(0) scale(0.97); }
+  .greview-btn:hover .greview-btn__g,
+  .greview-btn:focus-visible .greview-btn__g { transform: rotate(-12deg) scale(1.1); }
+
+  /* Stars light up one after another (in reading order) on hover/focus. */
+  .greview-btn:hover .greview-btn__stars i,
+  .greview-btn:focus-visible .greview-btn__stars i {
+    color: #f5c451;
+    transform: scale(1.25);
+  }
+  .greview-btn__stars i:nth-child(2) { transition-delay: 0.06s; }
+  .greview-btn__stars i:nth-child(3) { transition-delay: 0.12s; }
+  .greview-btn__stars i:nth-child(4) { transition-delay: 0.18s; }
+  .greview-btn__stars i:nth-child(5) { transition-delay: 0.24s; }
+
+  /* Star burst on click. The sparks are created by the script below, so the
+     rule has to reach them unscoped — the class name is namespaced instead. */
+  :global(.greview-btn__spark) {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    color: #f5c451;
+    font-size: 14px;
+    line-height: 1;
+    pointer-events: none;
+    text-shadow: 0 0 6px rgba(218, 165, 32, 0.6);
+    animation: greview-spark 0.7s ease-out forwards;
+  }
+  @keyframes greview-spark {
+    from { transform: translate(-50%, -50%) scale(0.6); opacity: 1; }
+    to { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.1) rotate(180deg); opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .greview-btn::before { animation: greview-shine 4s ease-in-out 1.5s infinite; }
+    .greview-btn::after { animation: greview-halo 2.8s ease-out infinite; }
+    .greview-btn:hover::before { animation-duration: 1.2s; animation-delay: 0s; }
+  }
+  @keyframes greview-shine {
+    0%, 60% { background-position: 150% 0; }
+    100% { background-position: -50% 0; }
+  }
+  @keyframes greview-halo {
+    0% { transform: scale(0.96); opacity: 0.8; }
+    100% { transform: scale(1.12); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .greview-btn,
+    .greview-btn__g,
+    .greview-btn__stars i { transition: none; }
+    .greview-btn:hover,
+    .greview-btn:focus-visible,
+    .greview-btn:active { transform: none; }
+    .greview-btn:hover .greview-btn__g,
+    .greview-btn:focus-visible .greview-btn__g,
+    .greview-btn:hover .greview-btn__stars i,
+    .greview-btn:focus-visible .greview-btn__stars i { transform: none; }
+  }
+  @media (max-width: 420px) {
+    .greview-cta { padding: 44px 16px 52px; }
+    .greview-cta__prompt { font-size: 0.98rem; }
+    .greview-btn { font-size: 0.92rem; padding-block: 10px; padding-inline: 10px 16px; gap: 8px; }
+    .greview-btn__stars { display: none; }
+  }
+</style>
+
+<script>
+  // Star burst on click. The link still navigates normally (new tab).
+  const btn = document.querySelector<HTMLAnchorElement>('[data-greview-btn]');
+  if (btn && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    btn.addEventListener('click', () => {
+      for (let i = 0; i < 10; i++) {
+        const s = document.createElement('span');
+        s.className = 'greview-btn__spark';
+        s.setAttribute('aria-hidden', 'true');
+        s.textContent = '★';
+        const angle = (Math.PI * 2 * i) / 10 + Math.random() * 0.4;
+        const dist = 40 + Math.random() * 30;
+        s.style.setProperty('--dx', `${Math.cos(angle) * dist}px`);
+        s.style.setProperty('--dy', `${Math.sin(angle) * dist}px`);
+        btn.appendChild(s);
+        s.addEventListener('animationend', () => s.remove());
+        setTimeout(() => s.remove(), 1000); // fallback if animations are paused
+      }
+    });
+  }
+</script>
